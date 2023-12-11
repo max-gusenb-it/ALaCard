@@ -1,0 +1,7 @@
+{
+  "name": "ALaCard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
