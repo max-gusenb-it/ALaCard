@@ -1,0 +1,16 @@
+#button {
+    @apply rounded transition-all;
+}
+
+.big-button {
+    @apply h-12 px-3
+}
+
+.small-button {
+    @apply h-9 px-3
+}
+
+#primary-button {
+    @extend #button;
+    @apply bg-primary-500 hover:bg-primary-300 text-neutral-950;
+}

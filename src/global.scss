@@ -1,20 +1,59 @@
-/* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+:root {
+    --primary-900: #FFA105;
+    --primary-700: #FFAE0A;
+    --primary-500: #FFC311;
+    --primary-300: #FFDD7A;
+    --primary-200: #FFE79F;
+    --primary-100: #FEF6DF;
+    --primary-000: #F9F8F1;
 
-/* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+    --neutral-1000: #1E2025;
+    --neutral-900: #2A2D34;
+    --neutral-800: #404246;
+    --neutral-700: #5D5E60;
+    --neutral-600: #7C7D80;
+    --neutral-500: #979899;
+    --neutral-400: #BABABA;
+    --neutral-300: #E2E2E2;
+    --neutral-200: #F7F7F7;
+}
 
+* {
+    font-family: 'Inter';
+}
+
+heading {
+    font-family: 'Lato';
+    line-height: 125%;
+    font-weight: bold;
+}
 
 h1 {
-    
+    @extend heading;
+    font-size: 40px;
 }
+
+h2 {
+    @extend heading;
+    font-size: 32px;
+}
+
+h3 {
+    @extend heading;
+    font-size: 24px;
+}
+
+h4 {
+    @extend heading;
+    font-size: 18px;
+}
+
+h5 {
+    @extend heading;
+    font-size: 14px;
+}
+
