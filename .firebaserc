@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "alacard-de849": {
+      "hosting": {
+        "app": [
+          "alacard-de849"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "alacard-de849"
+  }
+}
