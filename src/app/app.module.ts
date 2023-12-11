@@ -14,6 +14,11 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
+import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
+import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,7 +31,18 @@ import { environment } from 'src/environments/environment';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ScreenTrackingService, UserTrackingService],
+  providers: [
+    { provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['http://localhost:9099'] : undefined },
+    { provide: USE_FIRESTORE_EMULATOR, useValue: !environment.production ? ['localhost', 8080] : undefined },
+    { provide: USE_STORAGE_EMULATOR, useValue: !environment.production ? ['localhost', 9199] : undefined },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase.config },
+    { 
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    }, 
+    ScreenTrackingService, 
+    UserTrackingService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
