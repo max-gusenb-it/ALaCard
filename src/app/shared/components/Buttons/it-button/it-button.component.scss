@@ -1,16 +1,62 @@
 #button {
-    @apply rounded transition-all;
+    @apply font-semibold rounded-xl transition-all duration-300 flex-1;
+}
+
+#button-states {
+    @apply hover:shadow-md active:shadow-none;
 }
 
 .big-button {
-    @apply h-12 px-3
+    @apply h-12 px-3 text-sm;
 }
 
 .small-button {
-    @apply h-9 px-3
+    @apply h-9 px-3 text-xs;
 }
 
 #primary-button {
     @extend #button;
-    @apply bg-primary-500 hover:bg-primary-300 text-neutral-950;
+    @extend #button-states;
+    @apply bg-primary-500 text-neutral-950;
+}
+
+#secondary-button {
+    @extend #button;
+    @extend #button-states;
+    @apply bg-neutral-900 text-white;
+}
+
+#tertiary-button {
+    @extend #button;
+    @apply bg-transparent text-neutral-950 border-2 border-primary-500 active:border-primary-500 hover:border-primary-900;
+}
+
+#quaternary-button {
+    @extend #button;
+    @extend #button-states;
+    @apply bg-primary-200 text-neutral-950; 
+}
+
+#red-button {
+    @extend #button;
+    @extend #button-states;
+    @apply bg-red-500 text-white; 
+}
+
+#blue-button {
+    @extend #button;
+    @extend #button-states;
+    @apply bg-blue-500 text-white; 
+}
+
+#green-button {
+    @extend #button;
+    @extend #button-states;
+    @apply bg-green-500 text-white; 
+}
+
+#orange-button {
+    @extend #button;
+    @extend #button-states;
+    @apply bg-orange-500 text-white; 
 }

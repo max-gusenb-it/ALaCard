@@ -7,18 +7,37 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h1>Aa — Find the stuff you’ll love.</h1>
-  <h2>Aa — Find the stuff you’ll love.</h2>
-  <h3>Aa — Find the stuff you’ll love.</h3>
-  <h4>Aa — Find the stuff you’ll love.</h4>
-  <h5>Aa — Find the stuff you’ll love.</h5>
+  <form class="p-10 flex flex-col space-y-4" #colorForm="ngForm" (ngSubmit)="setColor(colorForm.value['color'])">
+    <select name="color" ngModel required #colorCtrl="ngModel">
+      <option *ngFor="let color of colors">{{color}}</option>
+    </select>
 
-  <it-button type="primary" size="big">
-    oida Heast hawara
-  </it-button>
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-  
+    <it-button class="flex" color="primary" size="big">
+      Change Color
+    </it-button>
+    
+    <it-button class="flex" color="tertiary" size="big">
+      Tertiary
+    </it-button>
+    
+    <it-button class="flex" color="quaternary" size="big">
+      Quaternary
+    </it-button>
+    
+    <it-button class="flex" color="red" size="big">
+      Button
+    </it-button>
+    
+    <it-button class="flex" color="blue" size="big">
+      Button
+    </it-button>
+    
+    <it-button class="flex" color="orange" size="big">
+      Button
+    </it-button>
+    
+    <it-button class="flex" color="green" size="big">
+      Button
+    </it-button>
+  </form>
 </ion-content>
