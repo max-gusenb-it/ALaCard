@@ -11,6 +11,8 @@
     <select name="color" ngModel required #colorCtrl="ngModel">
       <option *ngFor="let color of colors">{{color}}</option>
     </select>
+    
+    <it-input></it-input>
 
     <it-button class="flex" color="primary" size="big">
       Change Color

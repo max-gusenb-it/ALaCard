@@ -17,7 +17,7 @@ module.exports = {
           0o0: "var(--primary-000)"
         },
         neutral: {
-          950: "var(--neutral-1000)",
+          950: "var(--neutral-950)",
           900: "var(--neutral-900)",
           800: "var(--neutral-800)",
           700: "var(--neutral-700)",

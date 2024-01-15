@@ -1,0 +1,18 @@
+// added here because tailwind.css transition property creates weird effect on focus 
+input {
+    transition: border 300ms;
+}
+
+// Change background color when autofill feature is used
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--primary-200) inset !important;
+}
+
+// Change text color when autofill feature is used
+input:-webkit-autofill{
+    -webkit-text-fill-color: var(--neutral-950) !important;
+    caret-color: var(--neutral-950) !important;
+}
