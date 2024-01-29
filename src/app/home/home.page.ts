@@ -12,7 +12,8 @@ export class HomePage {
   myInput: string = "";
 
   formGroup = new FormGroup({
-    input: new FormControl({value: "", disabled: false}, [Validators.minLength(5)]),
+    name: new FormControl({value: "", disabled: false}),
+    password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
     color: new FormControl({value: null, disabled: false})
   });
 
@@ -23,8 +24,7 @@ export class HomePage {
     "violet",
     "pink",
     "amber",
-    "yellow",
-    "yellow-own"
+    "yellow"
   ];
 
   constructor() {

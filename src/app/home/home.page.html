@@ -9,14 +9,27 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="formGroup" class="p-10 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">
     <it-input
-      label="Hello"
+      label="Name"
       id="name"
-      formControlName="input"
+      formControlName="name"
     />
 
+    <it-input
+      label="Password"
+      id="password"
+      formControlName="password"
+      type="password"
+    >
+      {{ '10 / ' + formGroup.controls['password'].value?.length + ' Signs' }}
+    </it-input>
+    
     <select name="color" formControlName="color">
       <option *ngFor="let color of colors">{{color}}</option>
     </select>
+
+    <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
+      Submit
+    </it-button>
 
     <it-button class="flex" color="primary" size="big">
       Change Color
@@ -44,10 +57,6 @@
     
     <it-button class="flex" color="green" size="big">
       Button
-    </it-button>
-
-    <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
-      Submit
     </it-button>
   </form>
 </ion-content>
