@@ -3,6 +3,17 @@ input {
     transition: border 300ms;
 }
 
+label {
+    margin-bottom: 4px;
+    font-weight: 600;
+
+    &.required {
+    &:after {
+        content: "*";
+    }
+    }
+}
+
 // Change background color when autofill feature is used
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

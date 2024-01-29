@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  @ViewChild('colorForm') public colorForm: NgForm = null as any;
+  
+  myInput: string = "";
+
+  formGroup = new FormGroup({
+    input: new FormControl({value: "", disabled: false}, [Validators.minLength(5)]),
+    color: new FormControl({value: null, disabled: false})
+  });
+
   colors: string[] = [
     "red",
     "blue",
@@ -17,7 +27,8 @@ export class HomePage {
     "yellow-own"
   ];
 
-  constructor() {}
+  constructor() {
+  }
 
   setColor(color: string) {
     if (!!color) {

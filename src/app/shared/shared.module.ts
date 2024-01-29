@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ItButtonComponent } from './components/Buttons/it-button/it-button.component';
-import { ItInputComponent } from './components/Inputs/it-input/it-input.component';
+import { ItButtonComponent } from './components/buttons/it-button/it-button.component';
+import { ControlValueAccessorDirective } from './directives/control-value-accessor.directive';
+import { ItInputComponent } from './components/inputs/it-input/it-input.component';
 
 @NgModule({
   declarations: [
     ItButtonComponent,
-    ItInputComponent
+    ItInputComponent,
+    ControlValueAccessorDirective
   ],
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import { ItInputComponent } from './components/Inputs/it-input/it-input.componen
   ],
   exports: [
     FormsModule,
+    ReactiveFormsModule,
     ItButtonComponent,
     ItInputComponent
   ],

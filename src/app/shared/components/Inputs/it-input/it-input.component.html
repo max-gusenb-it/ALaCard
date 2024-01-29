@@ -1,7 +1,8 @@
-<div class="relative">
-  <input 
-    id="floating_filled"
+<div class="relative" *ngIf="control">
+  <input
+    [required]="isRequired"
     [type]="type"
+    [id]="getId()"
     [formControl]="control"
     class="
       block
@@ -12,16 +13,21 @@
       w-full
       text-base text-neutral-950 font-normal
       bg-primary-200
+      appearance-none
+      cursor-text
       border-2 border-primary-200
       hover:border-b-primary-500
       focus:outline-none focus:border-2 focus:border-primary-500
-      appearance-none
-      cursor-text
+      disabled:bg-primary-100 disabled:border-b-primary-200
+      invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500
       peer
     "
-    placeholder=" " />
+    placeholder=" "
+  />
   <label
-    for="floating_filled"
+    [for]="getId()"
+    *ngIf="label"
+    [class.required]="isRequired"
     style="inset-inline-start: 1.1rem"
     class="
       absolute
@@ -37,6 +43,6 @@
       peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto
     "
   >
-    {{getLabel()}}
+    {{ label }}
   </label>
 </div>

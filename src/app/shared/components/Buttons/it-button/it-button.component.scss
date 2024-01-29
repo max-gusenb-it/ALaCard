@@ -1,9 +1,9 @@
 #button {
-    @apply font-semibold rounded-xl transition-all duration-300 flex-1;
+    @apply font-semibold rounded-xl transition-all duration-300 flex-1 disabled:bg-neutral-300;
 }
 
 #button-states {
-    @apply hover:drop-shadow-md active:drop-shadow-none;
+    @apply hover:drop-shadow-md active:drop-shadow-none disabled:drop-shadow-none;
 }
 
 .big-button {
@@ -28,7 +28,7 @@
 
 #tertiary-button {
     @extend #button;
-    @apply bg-transparent text-neutral-950 border-2 border-primary-500 active:border-primary-500 hover:border-primary-900;
+    @apply bg-transparent text-neutral-950 border-2 border-primary-500 active:border-primary-500 hover:border-primary-900 disabled:border-none;
 }
 
 #quaternary-button {

@@ -9,7 +9,8 @@ export class ItButtonComponent  implements OnInit {
 
   @Input() color: "primary" | "secondary" | "tertiary" | "quaternary" | "red" | "blue" | "orange" | "green" = "primary";
   @Input() size: "big" | "small" = "big";
-  @Input() type: "submit" = "submit";
+  @Input() type: "submit" | "button" = "submit";
+  @Input() disabled = false;
 
   constructor() { }
 
