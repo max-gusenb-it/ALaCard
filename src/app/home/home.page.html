@@ -20,9 +20,13 @@
       formControlName="password"
       type="password"
     >
-      {{ '10 / ' + formGroup.controls['password'].value?.length + ' Signs' }}
+      {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
     </it-input>
-    
+
+    <it-icon-button>
+      
+    </it-icon-button>
+
     <select name="color" formControlName="color">
       <option *ngFor="let color of colors">{{color}}</option>
     </select>

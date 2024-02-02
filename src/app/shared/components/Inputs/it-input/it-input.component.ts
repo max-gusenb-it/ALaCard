@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, forwardRef } from '@angular/co
 import { ControlValueAccessorDirective } from '../../../directives/control-value-accessor.directive';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-type InputType = 'text' | 'number' | 'email' | 'password';
+type InputType = "text" | "number" | "email" | "password";
 
 @Component({
   selector: 'it-input',
@@ -20,8 +20,10 @@ export class ItInputComponent<T> extends ControlValueAccessorDirective<T> implem
   @Input() id = "";
   @Input() label = "Label";
   @Input() type: InputType = "text";
+  isPassword: boolean = false;
 
   override ngOnInit(): void {
+    this.isPassword = this.type === "password";
     super.ngOnInit();
   }
 
@@ -40,5 +42,9 @@ export class ItInputComponent<T> extends ControlValueAccessorDirective<T> implem
 
   getId() {
     return `${this.id}-input-element`
+  }
+
+  toggleVisibility() {
+    this.type = this.type === "password" ? "text" : "password";
   }
 }
