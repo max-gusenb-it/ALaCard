@@ -13,6 +13,7 @@ export class HomePage {
 
   formGroup = new FormGroup({
     name: new FormControl({value: "", disabled: false}),
+    number: new FormControl({value: "", disabled: false}),
     password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
     color: new FormControl({value: null, disabled: false})
   });

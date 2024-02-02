@@ -20,11 +20,12 @@ export class ItInputComponent<T> extends ControlValueAccessorDirective<T> implem
   @Input() id = "";
   @Input() label = "Label";
   @Input() type: InputType = "text";
+  @Input() icon: string = "";
   isPassword: boolean = false;
 
   override ngOnInit(): void {
-    this.isPassword = this.type === "password";
     super.ngOnInit();
+    this.isPassword = this.type === "password";
   }
 
   ngAfterViewInit(): void {
@@ -44,7 +45,17 @@ export class ItInputComponent<T> extends ControlValueAccessorDirective<T> implem
     return `${this.id}-input-element`
   }
 
-  toggleVisibility() {
-    this.type = this.type === "password" ? "text" : "password";
+  toggleInputType() {
+    if (this.isPassword) {
+      this.type = this.type === "password" ? "text" : "password";
+    }
+  }
+
+  getIconName() {
+    if (this.isPassword) {
+      return this.type === "password" ? "visibility" : "visibility_off"
+    } else {
+      return this.icon;
+    }
   }
 }
