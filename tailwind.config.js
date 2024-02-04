@@ -7,29 +7,28 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          900: "var(--primary-900)",
-          700: "var(--primary-700)",
-          600: "var(--primary-600)",
-          500: "var(--primary-500)",
-          300: "var(--primary-300)",
-          200: "var(--primary-200)",
-          100: "var(--primary-100)",
-          0o0: "var(--primary-000)"
+          900: "rgb(var(--primary-900) / <alpha-value>)",
+          700: "rgb(var(--primary-700) / <alpha-value>)",
+          600: "rgb(var(--primary-600) / <alpha-value>)",
+          500: "rgb(var(--primary-500) / <alpha-value>)",
+          300: "rgb(var(--primary-300) / <alpha-value>)",
+          200: "rgb(var(--primary-200) / <alpha-value>)",
+          100: "rgb(var(--primary-100) / <alpha-value>)",
+          0o0: "rgb(var(--primary-000) / <alpha-value>)"
         },
         neutral: {
-          950: "var(--neutral-950)",
-          900: "var(--neutral-900)",
-          800: "var(--neutral-800)",
-          700: "var(--neutral-700)",
-          600: "var(--neutral-600)",
-          500: "var(--neutral-500)",
-          400: "var(--neutral-400)",
-          300: "var(--neutral-300)",
-          200: "var(--neutral-200)",
+          950: "rgb(var(--neutral-950) / <alpha-value>)",
+          900: "rgb(var(--neutral-900) / <alpha-value>)",
+          800: "rgb(var(--neutral-800) / <alpha-value>)",
+          700: "rgb(var(--neutral-700) / <alpha-value>)",
+          600: "rgb(var(--neutral-600) / <alpha-value>)",
+          500: "rgb(var(--neutral-500) / <alpha-value>)",
+          400: "rgb(var(--neutral-400) / <alpha-value>)",
+          300: "rgb(var(--neutral-300) / <alpha-value>)",
+          200: "rgb(var(--neutral-200) / <alpha-value>)",
         }
       }
     },
   },
   plugins: [],
 }
-

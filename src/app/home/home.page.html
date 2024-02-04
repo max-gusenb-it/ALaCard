@@ -31,9 +31,27 @@
       {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
     </it-input>
 
-    <it-icon-button>
-      
+    <it-icon-button type="tertiary">
+      playing_cards
     </it-icon-button>
+
+    <it-icon-button type="secondary">
+      playing_cards
+    </it-icon-button>
+
+    <it-icon-button>
+      playing_cards
+    </it-icon-button>
+
+    <it-icon-button
+      size="big"
+    >
+      playing_cards
+    </it-icon-button>
+
+    <it-icon>
+      playing_cards
+    </it-icon>
 
     <select name="color" formControlName="color">
       <option *ngFor="let color of colors">{{color}}</option>

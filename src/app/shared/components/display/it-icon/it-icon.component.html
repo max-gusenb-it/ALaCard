@@ -1,7 +1,12 @@
-<span 
+<div 
   class="
     material-symbols-rounded
     text-neutral-900
-  ">
+  "
+  [ngClass]="{
+    'text-neutral-900': color === 'dark',
+    'text-neutral-100': color === 'white',
+    'text-primary-500': color === 'primary'
+  }">
   <ng-content/>
-</span>
+</div>

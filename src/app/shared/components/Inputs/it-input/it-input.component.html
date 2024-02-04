@@ -49,8 +49,7 @@
   </label>
   <it-icon
     *ngIf="isPassword || icon !== ''"
-    [ngClass]="{'cursor-pointer': isPassword}"
-    [ngClass]="{'cursor-default': !isPassword && icon !== ''}"
+    [ngClass]="{'cursor-default': !isPassword && icon !== '', 'cursor-pointer': isPassword}"
     class="
       absolute
       top-4

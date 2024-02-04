@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IconColor } from 'src/app/shared/models/components/IconColor';
+
+type ButtonType = "primary" | "secondary" | "tertiary";
+type ButtonSize = "small" | "big";
 
 @Component({
   selector: 'it-icon-button',
@@ -6,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./it-icon-button.component.scss'],
 })
 export class ItIconButtonComponent  implements OnInit {
+  @Input() type: ButtonType = "primary";
+  @Input() size: ButtonSize = "small";
+  @Input() color: IconColor = null as any;
 
   constructor() { }
 
   ngOnInit() {}
+
+  getColor() {
+    if (this.color === null) {
+      return this.type !== 'secondary' ? 'dark' : 'white'
+    } else {
+      return this.color;
+    }
+  }
 
 }
