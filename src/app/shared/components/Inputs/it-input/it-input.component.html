@@ -48,18 +48,30 @@
     {{ label }}
   </label>
   <it-icon
-    *ngIf="isPassword || icon !== ''"
-    [ngClass]="{'cursor-default': !isPassword && icon !== '', 'cursor-pointer': isPassword}"
+    *ngIf="icon !== ''"
     class="
       absolute
       top-4
       right-4
       text-right
+      cursor-default
+    "
+  >
+    {{icon}}
+  </it-icon>
+  <it-icon-button
+    *ngIf="isPassword"
+    type="tertiary"
+    class="
+      absolute
+      top-2
+      right-2
+      text-right
     "
     (click)="toggleInputType()"
   >
     {{getIconName()}}
-  </it-icon>
+  </it-icon-button>
   <div
     class="
       text-xs text-neutral-950
