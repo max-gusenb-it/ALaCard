@@ -18,11 +18,7 @@ export class ItButtonComponent  implements OnInit {
 
   ngOnInit() {}
 
-  getButtonId() {
-    return `${this.color}-button`
-  }
-
   getButtonClass() {
-    return `${this.size}-button`;
+    return `${this.size}-button ${this.color}-button`;
   }
 }

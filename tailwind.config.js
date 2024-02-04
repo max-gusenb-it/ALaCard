@@ -27,6 +27,9 @@ module.exports = {
           300: "rgb(var(--neutral-300) / <alpha-value>)",
           200: "rgb(var(--neutral-200) / <alpha-value>)",
         }
+      },
+      brightness: {
+        80: '.8'
       }
     },
   },
