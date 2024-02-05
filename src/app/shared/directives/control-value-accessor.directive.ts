@@ -1,11 +1,12 @@
-import { Directive, Inject, Injector, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Directive, Inject, Injector, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, Validators, NgControl, FormControlName, FormGroupDirective, FormControlDirective } from '@angular/forms';
 import { Subject, takeUntil, startWith, distinctUntilChanged, tap } from 'rxjs';
 
 @Directive({
   selector: '[appControlValueAccessor]'
 })
-export class ControlValueAccessorDirective<T> implements ControlValueAccessor, OnInit {
+export class ControlValueAccessorDirective<T> implements ControlValueAccessor, OnInit, AfterViewInit {
+  @Input() id = "";
   control: FormControl | undefined;
   isRequired = false;
   private isDisabled = false;
@@ -18,6 +19,28 @@ export class ControlValueAccessorDirective<T> implements ControlValueAccessor, O
   ngOnInit() {
     this.setFormControl();
     this.isRequired = this.control?.hasValidator(Validators.required) ?? false;
+  }
+
+  /**
+   * Listens to changes and sets Error message, when control is not valid
+   */
+  ngAfterViewInit(): void {
+    const input: any = document.getElementById(this.getId());
+
+    if (input.nodeName === "SELECT" || input.nodeName === "INPUT") {
+      this.control?.valueChanges
+        .subscribe(v => {
+          if (!this.control?.valid) {
+            input.setCustomValidity("You gotta fill this out, yo!");
+          } else {
+            input.setCustomValidity("");
+          }
+      });
+    }
+  }
+
+  getId() {
+    return this.id;
   }
 
   setFormControl() {

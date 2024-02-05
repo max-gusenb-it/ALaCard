@@ -17,7 +17,6 @@ type InputType = "text" | "number" | "email" | "password";
   ],
 })
 export class ItInputComponent<T> extends ControlValueAccessorDirective<T> implements OnInit, AfterViewInit {
-  @Input() id = "";
   @Input() label = "Label";
   @Input() type: InputType = "text";
   @Input() icon: string = "";
@@ -28,20 +27,7 @@ export class ItInputComponent<T> extends ControlValueAccessorDirective<T> implem
     this.isPassword = this.type === "password";
   }
 
-  ngAfterViewInit(): void {
-    const input: any = document.getElementById(this.getId());
-
-    this.control?.valueChanges
-      .subscribe(v => {
-        if (!this.control?.valid) {
-          input.setCustomValidity("You gotta fill this out, yo!");
-        } else {
-          input.setCustomValidity("");
-        }
-    });
-  }
-
-  getId() {
+  override getId() {
     return `${this.id}-input-element`
   }
 

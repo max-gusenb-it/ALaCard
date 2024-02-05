@@ -41,6 +41,10 @@
       {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
     </it-input>
 
+    <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
+      Submit
+    </it-button>
+
     <it-icon-button type="tertiary">
       playing_cards
     </it-icon-button>
@@ -62,10 +66,6 @@
     <it-icon>
       playing_cards
     </it-icon>
-
-    <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
-      Submit
-    </it-button>
 
     <it-button class="flex" color="primary" size="big">
       Change Color

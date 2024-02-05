@@ -14,26 +14,12 @@ import { ControlValueAccessorDirective } from 'src/app/shared/directives/control
     },
   ],
 })
-export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> implements AfterViewInit {
-  @Input() id = "";
+export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
   @Input() icon: string = null as any;
   @Input() defaultValue: string = null as any;
   @Input() label = "Label";
 
-  ngAfterViewInit(): void {
-    const input: any = document.getElementById(this.getId());
-
-    this.control?.valueChanges
-      .subscribe(v => {
-        if (!this.control?.valid) {
-          input.setCustomValidity("You gotta fill this out, yo!");
-        } else {
-          input.setCustomValidity("");
-        }
-    });
-  }
-
-  getId() {
-    return `${this.id}-input-element`
+  override getId() {
+    return `${this.id}-select-element`
   }
 }
