@@ -1,16 +1,16 @@
 <div class="relative" *ngIf="control">
-  <input
-    [required]="isRequired"
-    [type]="type"
+  <textarea
     [id]="getId()"
     [formControl]="control"
+    [required]="isRequired"
     placeholder=" "
     class="
       block
       rounded-lg
-      h-14
+      min-h-14
       box-border
       px-4 pb-1 pt-5
+      overflow-hidden
       w-full
       text-base text-neutral-950 font-normal
       bg-primary-200
@@ -22,9 +22,9 @@
       disabled:bg-primary-100 disabled:border-b-primary-200
       invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500
       peer
+      resize-none
     "
-    [ngStyle]="{'padding-right': isPassword || icon !== '' ? '3rem' : '1rem'}"
-  />
+  ></textarea>
   <label
     [for]="getId()"
     [class.required]="isRequired"
@@ -44,33 +44,8 @@
       peer-focus:scale-75 peer-focus:-translate-y-3
     "
   >
-    {{ label }}
+    {{label}}
   </label>
-  <it-icon
-    *ngIf="icon !== ''"
-    class="
-      absolute
-      top-4
-      right-4
-      text-right
-      pointer-events-none
-    "
-  >
-    {{icon}}
-  </it-icon>
-  <it-icon-button
-    *ngIf="isPassword"
-    type="tertiary"
-    class="
-      absolute
-      top-2
-      right-2
-      text-right
-    "
-    (click)="toggleInputType()"
-  >
-    {{getIconName()}}
-  </it-icon-button>
   <div
     id="ng-content-wrapper"
     class="

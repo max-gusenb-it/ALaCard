@@ -1,0 +1,17 @@
+// added here because tailwind.css transition property creates weird effect on focus 
+textarea {
+    transition: border 300ms;
+}
+
+label {
+    &.required {
+    &:after {
+        content: "*";
+    }
+    }
+}
+
+// hide wrapper if empty
+#ng-content-wrapper:is(:empty) {
+    display: none;
+}

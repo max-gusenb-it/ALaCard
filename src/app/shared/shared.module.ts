@@ -8,6 +8,7 @@ import { ItInputComponent } from './components/inputs/it-input/it-input.componen
 import { ItIconButtonComponent } from './components/buttons/it-icon-button/it-icon-button.component';
 import { ItIconComponent } from './components/display/it-icon/it-icon.component';
 import { ItSelectComponent } from './components/inputs/it-select/it-select.component';
+import { ItTextAreaComponent } from './components/inputs/it-text-area/it-text-area.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ItSelectComponent } from './components/inputs/it-select/it-select.compo
     ItButtonComponent,
     ItIconButtonComponent,
     ItInputComponent,
+    ItTextAreaComponent,
     ItSelectComponent,
     ItIconComponent,
   ],
@@ -28,6 +30,7 @@ import { ItSelectComponent } from './components/inputs/it-select/it-select.compo
     ItButtonComponent,
     ItIconButtonComponent,
     ItInputComponent,
+    ItTextAreaComponent,
     ItSelectComponent,
     ItIconComponent
   ],

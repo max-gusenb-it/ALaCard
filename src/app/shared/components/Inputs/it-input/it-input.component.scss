@@ -11,6 +11,11 @@ label {
     }
 }
 
+// hide wrapper if empty
+#ng-content-wrapper:is(:empty) {
+    display: none;
+}
+
 // Change background color when autofill feature is used
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

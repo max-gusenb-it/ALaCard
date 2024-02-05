@@ -13,33 +13,39 @@
       name="color"
       id="color"
       formControlName="color"
-      defaultValue
     >
       <option *ngFor="let color of colors">{{color}}</option>
     </it-select>
 
     <it-input
-      label="Name"
       id="name"
+      label="Name"
       formControlName="name"
       icon="face"
     />
 
     <it-input
-      label="Phone Number"
       id="number"
+      label="Phone Number"
       formControlName="number"
       icon="phone"
     />
 
     <it-input
-      label="Password"
       id="password"
+      label="Password"
       formControlName="password"
       type="password"
     >
       {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
     </it-input>
+
+    <it-text-area
+      id="description"
+      label="Description"
+      formControlName="description"
+    >
+    </it-text-area>
 
     <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
       Submit
