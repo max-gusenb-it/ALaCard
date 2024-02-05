@@ -7,7 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="formGroup" class="p-10 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">
+  <form [formGroup]="formGroup" class="p-10 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
+    <it-select
+      label="Color"
+      name="color"
+      id="color"
+      formControlName="color"
+    >
+      <option *ngFor="let color of colors">{{color}}</option>
+    </it-select>
+
     <it-input
       label="Name"
       id="name"
@@ -53,10 +62,6 @@
       playing_cards
     </it-icon>
 
-    <select name="color" formControlName="color">
-      <option *ngFor="let color of colors">{{color}}</option>
-    </select>
-
     <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
       Submit
     </it-button>
@@ -65,7 +70,7 @@
       Change Color
     </it-button>
     
-    <it-button class="flex" color="secondary" size="big">
+    <it-button class="flex" color="secondary" size="big" (click)="test()">
       Secondary
     </it-button>
     

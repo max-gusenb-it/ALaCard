@@ -7,6 +7,7 @@ import { ControlValueAccessorDirective } from './directives/control-value-access
 import { ItInputComponent } from './components/inputs/it-input/it-input.component';
 import { ItIconButtonComponent } from './components/buttons/it-icon-button/it-icon-button.component';
 import { ItIconComponent } from './components/display/it-icon/it-icon.component';
+import { ItSelectComponent } from './components/inputs/it-select/it-select.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ItIconComponent } from './components/display/it-icon/it-icon.component'
     ItButtonComponent,
     ItIconButtonComponent,
     ItInputComponent,
+    ItSelectComponent,
     ItIconComponent,
   ],
   imports: [
@@ -26,6 +28,7 @@ import { ItIconComponent } from './components/display/it-icon/it-icon.component'
     ItButtonComponent,
     ItIconButtonComponent,
     ItInputComponent,
+    ItSelectComponent,
     ItIconComponent
   ],
   providers: [

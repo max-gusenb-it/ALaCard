@@ -15,7 +15,7 @@ export class HomePage {
     name: new FormControl({value: "", disabled: false}),
     number: new FormControl({value: "", disabled: false}),
     password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
-    color: new FormControl({value: null, disabled: false})
+    color: new FormControl({value: null, disabled: false}, Validators.required)
   });
 
   colors: string[] = [
@@ -38,8 +38,22 @@ export class HomePage {
       ];
       const root = document.documentElement;
       colorShades.forEach(shade => {
-        root.style.setProperty(`--primary-${shade}`, `var(--${color}-${shade})`);
+        const rgb = this.hexToRgb(getComputedStyle(document.documentElement).getPropertyValue(`--${color}-${shade}`))!;
+        root.style.setProperty(`--primary-${shade}`, `${rgb.r} ${rgb.g} ${rgb.b}`);
       });
     }
+  }
+
+  hexToRgb(hex: string) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  test() {
+    console.log (this.formGroup);
   }
 }

@@ -1,0 +1,16 @@
+// added here because tailwind.css transition property creates weird effect on focus 
+select {
+    transition: border 300ms;
+}
+
+label {
+    &.required {
+    &:after {
+        content: "*";
+    }
+    }
+}
+
+.test {
+    @apply scale-75 -translate-y-3;
+}

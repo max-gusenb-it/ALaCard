@@ -1,7 +1,5 @@
 <div class="relative" *ngIf="control">
-  <input
-    [required]="isRequired"
-    [type]="type"
+  <select
     [id]="getId()"
     [formControl]="control"
     class="
@@ -14,7 +12,7 @@
       text-base text-neutral-950 font-normal
       bg-primary-200
       appearance-none
-      cursor-text
+      cursor-pointer
       border-2 border-primary-200
       hover:border-b-primary-500
       focus:outline-none focus:border-2 focus:border-primary-500
@@ -22,33 +20,34 @@
       invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500
       peer
     "
-    [ngStyle]="{'padding-right': isPassword || icon !== '' ? '3rem' : '1rem'}"
     placeholder=" "
-  />
+  >
+    <option *ngIf="defaultValue" selected></option>
+    <ng-content></ng-content>
+  </select>
   <label
     [for]="getId()"
     *ngIf="label"
     [class.required]="isRequired"
-    style="inset-inline-start: 1.1rem"
+    [ngClass]="{'test': control.value !== null && control.value !== ''}"
     class="
       absolute
       text-base text-neutral-950 font-semibold
       duration-300
       transform
-      -translate-y-3
-      scale-75
+      translate-y-0 
+      scale-100
       top-4
-      z-10
-      cursor-text
+      left-4
+      cursor-pointer
       origin-[0]
-      peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0
       peer-focus:scale-75 peer-focus:-translate-y-3
     "
   >
-    {{ label }}
+    {{label}}
   </label>
+  <!-- *ngIf="icon !== ''" -->
   <it-icon
-    *ngIf="icon !== ''"
     class="
       absolute
       top-4
@@ -57,28 +56,6 @@
       pointer-events-none
     "
   >
-    {{icon}}
+    {{'expand_more'}}
   </it-icon>
-  <it-icon-button
-    *ngIf="isPassword"
-    type="tertiary"
-    class="
-      absolute
-      top-2
-      right-2
-      text-right
-    "
-    (click)="toggleInputType()"
-  >
-    {{getIconName()}}
-  </it-icon-button>
-  <div
-    class="
-      text-xs text-neutral-950
-      w-full text-end
-      pt-1
-    "
-  >
-    <ng-content></ng-content>
-  </div>
 </div>
