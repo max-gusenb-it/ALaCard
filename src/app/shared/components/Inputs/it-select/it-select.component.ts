@@ -16,7 +16,8 @@ import { ControlValueAccessorDirective } from 'src/app/shared/directives/control
 })
 export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> implements AfterViewInit {
   @Input() id = "";
-  @Input() defaultValue: boolean = false;
+  @Input() icon: string = null as any;
+  @Input() defaultValue: string = null as any;
   @Input() label = "Label";
 
   ngAfterViewInit(): void {

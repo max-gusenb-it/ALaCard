@@ -22,7 +22,7 @@
     "
     placeholder=" "
   >
-    <option *ngIf="defaultValue" selected></option>
+    <option *ngIf="defaultValue !== null" selected></option>
     <ng-content></ng-content>
   </select>
   <label
@@ -46,7 +46,6 @@
   >
     {{label}}
   </label>
-  <!-- *ngIf="icon !== ''" -->
   <it-icon
     class="
       absolute
@@ -56,6 +55,6 @@
       pointer-events-none
     "
   >
-    {{'expand_more'}}
+    {{icon === null ? 'expand_more' : icon}}
   </it-icon>
 </div>
