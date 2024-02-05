@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="formGroup" class="p-10 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
+  <form [formGroup]="formGroup" class="p-10 pb-20 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
     <it-select
       label="Color"
       name="color"
@@ -64,7 +64,7 @@
     </it-icon-button>
 
     <it-icon-button
-      size="big"
+      size="medium"
     >
       playing_cards
     </it-icon-button>

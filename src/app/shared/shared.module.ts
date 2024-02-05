@@ -9,12 +9,16 @@ import { ItIconButtonComponent } from './components/buttons/it-icon-button/it-ic
 import { ItIconComponent } from './components/display/it-icon/it-icon.component';
 import { ItSelectComponent } from './components/inputs/it-select/it-select.component';
 import { ItTextAreaComponent } from './components/inputs/it-text-area/it-text-area.component';
+import { ItNavigationComponent } from './components/buttons/it-navigation/it-navigation.component';
+import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-item/it-nav-item.component';
 
 @NgModule({
   declarations: [
     ControlValueAccessorDirective,
     ItButtonComponent,
     ItIconButtonComponent,
+    ItNavigationComponent,
+    ItNavItemComponent,
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,
@@ -29,6 +33,7 @@ import { ItTextAreaComponent } from './components/inputs/it-text-area/it-text-ar
     ReactiveFormsModule,
     ItButtonComponent,
     ItIconButtonComponent,
+    ItNavigationComponent,
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,

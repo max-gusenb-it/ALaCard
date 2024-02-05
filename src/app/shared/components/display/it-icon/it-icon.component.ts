@@ -6,12 +6,7 @@ import { IconColor } from 'src/app/shared/models/components/IconColor';
   templateUrl: './it-icon.component.html',
   styleUrls: ['./it-icon.component.scss']
 })
-export class ItIconComponent  implements OnInit {
-
+export class ItIconComponent {
   @Input() color: IconColor = "dark";
-
-  constructor() { }
-
-  ngOnInit() {}
-
+  @Input() size: number = 24;
 }

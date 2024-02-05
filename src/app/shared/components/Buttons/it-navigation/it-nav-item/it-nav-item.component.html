@@ -1,0 +1,20 @@
+<div
+  class="
+    flex flex-col space-y-1
+  "
+>
+  <it-icon
+    [color]="!isActive ? 'white' : 'primary'"
+    class="m-auto"
+  >
+    {{icon}}
+  </it-icon>
+  <p
+    class="text-xs transition-all"
+    [ngClass]="{
+      'text-primary-500': isActive
+    }"
+  >
+    {{label}}
+  </p>
+</div>

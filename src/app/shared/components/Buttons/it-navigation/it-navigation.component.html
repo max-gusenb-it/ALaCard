@@ -1,0 +1,42 @@
+<div
+  class="
+    absolute bottom-0 right-0 left-0
+    mx-2 mb-2
+    px-6 py-3
+    bg-neutral-900
+    flex flex-row justify-between items-center
+    rounded-lg
+    drop-shadow-xl
+  "
+>
+  <it-nav-item
+    label="Home"
+    icon="home"
+    [isActive]="activeTab === 'home'"
+    (click)="setActiveTab('home')"
+  />
+  <it-nav-item
+    label="Decks"
+    icon="playing_cards"
+    [isActive]="activeTab === 'playing_cards'"
+    (click)="setActiveTab('playing_cards')"
+  />
+  <it-icon-button
+    size="large"
+    (click)="setActiveTab('room')"
+  >
+    play_arrow
+  </it-icon-button>
+  <it-nav-item
+    label="Store"
+    icon="search"
+    [isActive]="activeTab === 'search'"
+    (click)="setActiveTab('search')"
+  />
+  <it-nav-item
+    label="Profile"
+    icon="person"
+    [isActive]="activeTab === 'person'"
+    (click)="setActiveTab('person')"
+  />
+</div>

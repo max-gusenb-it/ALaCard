@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IconColor } from 'src/app/shared/models/components/IconColor';
 
 type ButtonType = "primary" | "secondary" | "tertiary";
-type ButtonSize = "small" | "big";
+type ButtonSize = "small" | "medium" | "large";
 
 @Component({
   selector: 'it-icon-button',
