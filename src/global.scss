@@ -144,3 +144,14 @@ h5 {
     'GRAD' 0,
     'opsz' 24
 }
+
+// remove blue highlight when clicking on mobile
+input,
+textarea,
+button,
+select,
+it-icon,
+it-nav-item,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
