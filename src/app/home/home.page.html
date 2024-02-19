@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-20 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
+  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-20 flex flex-col space-y-4 h-full" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
     <it-select
       label="Color"
       name="color"
@@ -87,9 +87,23 @@
       id="age_restriction"
       formControlName="age_restriction"
       label="Are you older than 18?"
-    >
+    />
 
-    </it-checkbox>
+    <it-checkbox-heading
+      heading="Want to register?"
+      formControlName="register"
+    >
+      <div content>
+        Create a account so you never loose your data and get more features like downloading new decks from the store 
+      </div>
+      <it-input
+        collapsible
+        id="number"
+        label="Phone Number"
+        formControlName="number"
+        icon="phone"
+      />
+    </it-checkbox-heading>
     
     <it-button class="flex" color="secondary" size="big" (click)="test()">
       Secondary

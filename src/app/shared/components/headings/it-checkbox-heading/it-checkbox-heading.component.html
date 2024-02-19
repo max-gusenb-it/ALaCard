@@ -1,0 +1,25 @@
+<div *ngIf="control" class="flex flex-col">
+  <div 
+    class="flex flex-row justify-between items-center cursor-pointer pb-2"
+    (click)="toggleHeading()"
+  >
+    <h4>{{heading}}</h4>
+    <it-checkbox
+      [formControl]="control"
+      class="pointer-events-none"
+    ></it-checkbox>
+  </div>
+  <ng-content 
+    select="[content]"
+  ></ng-content>
+  <div
+    id="content"
+    class="
+      transition-all overflow-hidden duration-700 max-h-0 ease-in-out
+    "
+  >
+    <!-- Using div instead of padding/margin so antimation is displayed correct -->
+    <div class="h-4"></div>
+    <ng-content select="[collapsible]"></ng-content>
+  </div>
+</div>

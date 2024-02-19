@@ -104,6 +104,7 @@
 
 * {
     font-family: 'Inter';
+    @apply text-neutral-950;
 }
 
 heading {
@@ -152,6 +153,7 @@ button,
 select,
 it-icon,
 it-nav-item,
+it-checkbox-heading,
 a {
     -webkit-tap-highlight-color: transparent;
 }

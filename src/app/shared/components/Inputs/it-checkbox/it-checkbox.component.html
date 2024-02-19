@@ -7,19 +7,24 @@
   />
   <div class="relative h-6 w-6">
     <it-icon
-      class="cursor-pointer absolute left-0 top-0 transition-all"
+      class="cursor-pointer absolute left-0 top-0 transition-all duration-200"
       [ngClass]="{'opacity-0': !control.value}"
       (click)="toggleValue()"
     >
       check_box
     </it-icon>
     <it-icon
-      class="cursor-pointer absolute left-0 top-0 transition-all"
+      class="cursor-pointer absolute left-0 top-0 transition-all duration-200"
       [ngClass]="{'opacity-0': control.value}"
       (click)="toggleValue()"
     >
       check_box_outline_blank
     </it-icon>
   </div>
-  <p class="text-neutral-950 text-sm mx-2">{{label}}</p>
+  <p
+    *ngIf="label !== ''" 
+    class="text-neutral-950 text-sm mx-2"
+  >
+    {{label}}
+  </p>
 </div>

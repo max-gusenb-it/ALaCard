@@ -12,12 +12,14 @@ import { ItTextAreaComponent } from './components/inputs/it-text-area/it-text-ar
 import { ItNavigationComponent } from './components/buttons/it-navigation/it-navigation.component';
 import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-item/it-nav-item.component';
 import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox.component';
+import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-heading/it-checkbox-heading.component';
 
 @NgModule({
   declarations: [
     ControlValueAccessorDirective,
     ItButtonComponent,
     ItIconButtonComponent,
+    ItCheckboxHeadingComponent,
     ItNavigationComponent,
     ItNavItemComponent,
     ItCheckboxComponent,
@@ -35,6 +37,7 @@ import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox
     ReactiveFormsModule,
     ItButtonComponent,
     ItIconButtonComponent,
+    ItCheckboxHeadingComponent,
     ItNavigationComponent,
     ItCheckboxComponent,
     ItInputComponent,
