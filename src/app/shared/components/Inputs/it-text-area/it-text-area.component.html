@@ -25,6 +25,16 @@
       resize-none
     "
   ></textarea>
+  <!-- Hides Text below label when text area is focused -->
+  <div
+    class="
+      absolute
+      left-0.5 right-0.5 top-0.5 h-6
+      rounded-t-lg
+      bg-primary-200
+    "
+  >
+  </div>
   <label
     [for]="getId()"
     [class.required]="isRequired"
