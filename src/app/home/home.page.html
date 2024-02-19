@@ -17,6 +17,10 @@
       <option *ngFor="let color of colors">{{color}}</option>
     </it-select>
 
+    <it-button class="flex" color="primary" size="big">
+      Change Color
+    </it-button>
+
     <it-input
       id="name"
       label="Name"
@@ -72,10 +76,6 @@
     <it-icon>
       playing_cards
     </it-icon>
-
-    <it-button class="flex" color="primary" size="big">
-      Change Color
-    </it-button>
     
     <it-button class="flex" color="secondary" size="big" (click)="test()">
       Secondary
