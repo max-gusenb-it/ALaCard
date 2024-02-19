@@ -17,6 +17,7 @@ export class HomePage {
     password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
     color: new FormControl({value: null, disabled: false}, Validators.required),
     description: new FormControl({value: "", disabled: false}, [Validators.required, Validators.maxLength(100)]),
+    age_restriction: new FormControl({value: false, disabled: false}),
   });
 
   colors: string[] = [
@@ -55,6 +56,6 @@ export class HomePage {
   }
 
   test() {
-    console.log (this.formGroup);
+    console.log (this.formGroup.controls["age_restriction"].value);
   }
 }

@@ -55,27 +55,41 @@
       Submit
     </it-button>
 
-    <it-icon-button type="tertiary">
-      playing_cards
-    </it-icon-button>
-
-    <it-icon-button type="secondary">
-      playing_cards
-    </it-icon-button>
-
-    <it-icon-button>
-      playing_cards
-    </it-icon-button>
-
-    <it-icon-button
-      size="medium"
+    <div
+      class="
+        flex flex-row justify-between
+      "
     >
-      playing_cards
-    </it-icon-button>
+      <it-icon-button type="tertiary">
+        playing_cards
+      </it-icon-button>
 
-    <it-icon>
-      playing_cards
-    </it-icon>
+      <it-icon-button type="secondary">
+        playing_cards
+      </it-icon-button>
+
+      <it-icon-button>
+        playing_cards
+      </it-icon-button>
+
+      <it-icon-button
+        size="medium"
+      >
+        playing_cards
+      </it-icon-button>
+
+      <it-icon>
+        playing_cards
+      </it-icon>
+    </div>
+
+    <it-checkbox
+      id="age_restriction"
+      formControlName="age_restriction"
+      label="Are you older than 18?"
+    >
+
+    </it-checkbox>
     
     <it-button class="flex" color="secondary" size="big" (click)="test()">
       Secondary

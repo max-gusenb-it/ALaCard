@@ -11,6 +11,7 @@ import { ItSelectComponent } from './components/inputs/it-select/it-select.compo
 import { ItTextAreaComponent } from './components/inputs/it-text-area/it-text-area.component';
 import { ItNavigationComponent } from './components/buttons/it-navigation/it-navigation.component';
 import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-item/it-nav-item.component';
+import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-it
     ItIconButtonComponent,
     ItNavigationComponent,
     ItNavItemComponent,
+    ItCheckboxComponent,
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,
@@ -34,6 +36,7 @@ import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-it
     ItButtonComponent,
     ItIconButtonComponent,
     ItNavigationComponent,
+    ItCheckboxComponent,
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,

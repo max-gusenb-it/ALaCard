@@ -1,0 +1,25 @@
+<div *ngIf="control" class="flex flex-row items-center">
+  <input
+    type="checkbox"
+    [id]="getId()"
+    [formControl]="control"
+    class="hidden"
+  />
+  <div class="relative h-6 w-6">
+    <it-icon
+      class="cursor-pointer absolute left-0 top-0 transition-all"
+      [ngClass]="{'opacity-0': !control.value}"
+      (click)="toggleValue()"
+    >
+      check_box
+    </it-icon>
+    <it-icon
+      class="cursor-pointer absolute left-0 top-0 transition-all"
+      [ngClass]="{'opacity-0': control.value}"
+      (click)="toggleValue()"
+    >
+      check_box_outline_blank
+    </it-icon>
+  </div>
+  <p class="text-neutral-950 text-sm mx-2">{{label}}</p>
+</div>

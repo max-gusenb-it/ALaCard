@@ -27,6 +27,11 @@ export class ControlValueAccessorDirective<T> implements ControlValueAccessor, O
   ngAfterViewInit(): void {
     const input: any = document.getElementById(this.getId());
 
+    if (input == null) {
+      console.warn("HTML Element not found");
+      return;
+    }
+
     if (input.nodeName === "SELECT" || input.nodeName === "INPUT" || input.nodeName === "TEXTAREA") {
       this.control?.valueChanges
         .subscribe(v => {
@@ -69,7 +74,6 @@ export class ControlValueAccessorDirective<T> implements ControlValueAccessor, O
    */
   writeValue(value: T): void {
     if(this.control?.value === value) return;
-    console.log (this.control?.errors);
     this.control
       ? this.control.setValue(value)
       : (this.control = new FormControl(value));
