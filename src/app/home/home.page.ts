@@ -23,12 +23,20 @@ export class HomePage {
 
   colors: string[] = [
     "red",
-    "blue",
+    "orange",
+    "amber",
+    "yellow",
+    "lime",
+    "green",
     "emerald",
+    "teal",
+    "cyan",
+    "sky",
+    "blue",
+    "indigo",
     "violet",
     "pink",
-    "amber",
-    "yellow"
+    "rose"
   ];
 
   constructor() {

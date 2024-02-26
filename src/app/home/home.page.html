@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title class="text-white">
+      Demo Components
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-20 flex flex-col space-y-4 h-full" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
+  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-36 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
     <it-select
       label="Color"
       name="color"
