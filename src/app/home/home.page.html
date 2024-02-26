@@ -7,7 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-36 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">    
+  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-36 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">
+    <it-drawing-board>
+
+    </it-drawing-board>
+
     <it-select
       label="Color"
       name="color"
@@ -19,6 +23,10 @@
 
     <it-button class="flex" color="primary" size="big">
       Change Color
+    </it-button>
+    
+    <it-button class="flex" color="secondary" size="big" (click)="test()">
+      Secondary
     </it-button>
 
     <it-input
@@ -98,16 +106,12 @@
       </div>
       <it-input
         collapsible
-        id="number"
+        id="test-number"
         label="Phone Number"
         formControlName="number"
         icon="phone"
       />
     </it-checkbox-heading>
-    
-    <it-button class="flex" color="secondary" size="big" (click)="test()">
-      Secondary
-    </it-button>
     
     <it-button class="flex" color="tertiary" size="big">
       Tertiary

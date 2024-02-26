@@ -13,6 +13,7 @@ import { ItNavigationComponent } from './components/buttons/it-navigation/it-nav
 import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-item/it-nav-item.component';
 import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox.component';
 import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-heading/it-checkbox-heading.component';
+import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it-drawing-board.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-he
     ItButtonComponent,
     ItIconButtonComponent,
     ItCheckboxHeadingComponent,
+    ItDrawingBoardComponent,
     ItNavigationComponent,
     ItNavItemComponent,
     ItCheckboxComponent,
@@ -38,6 +40,7 @@ import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-he
     ItButtonComponent,
     ItIconButtonComponent,
     ItCheckboxHeadingComponent,
+    ItDrawingBoardComponent,
     ItNavigationComponent,
     ItCheckboxComponent,
     ItInputComponent,

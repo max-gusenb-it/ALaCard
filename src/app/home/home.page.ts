@@ -65,6 +65,6 @@ export class HomePage {
   }
 
   test() {
-    console.log (this.formGroup.controls["number"].value);
+    console.log (window.innerWidth);
   }
 }
