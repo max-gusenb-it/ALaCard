@@ -13,7 +13,6 @@
     [formGroup]="formGroup"
     (ngSubmit)="setColor(formGroup.controls['color']!.value!)"
     class="p-5 sm:p-10 flex flex-col justify-center space-y-4"
-    style="min-height: 800px;"
   >
     <it-drawing-board *ngIf="viewCount == 0" class="w-full">
 

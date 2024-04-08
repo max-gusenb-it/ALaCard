@@ -192,11 +192,21 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   }
 
   startDrawing(event: Event) {
+    // set overscroll behavior to contain so swipe down to refresh on mobile does not work
+    let elements = [document.getElementsByTagName("html")[0], document.getElementsByTagName("body")[0]];
+    elements.forEach(element => {
+      element.style.overscrollBehavior = "contain";
+    });
     this.painting = true;
     this.draw(event);
   }
 
   endDrawing() {
+    // rest overscroll behavior
+    let elements = [document.querySelector("html"), document.querySelector("body")];
+    elements.forEach(element => {
+      element!.style.removeProperty("overscroll-behavior");
+    });
     this.painting = false;
     // Reset cursor coordinates so touch lines do not connect to each other
     this.resetCursorCoordinates();
@@ -292,4 +302,19 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     img.src = image;
   }
 
+  image: string = "";
+
+  exportImage() {
+    this.image = this.canvas.toDataURL('image/png');
+    console.log (this.image);
+  }
+
+  importImage() {
+    let image = new Image();
+    image.onload = function() {
+      const canvas = <HTMLCanvasElement> document.querySelector('#canvas');
+      canvas.getContext("2d")?.drawImage(image, 0, 0);
+    };
+    image.src = this.image;
+  }
 }
