@@ -34,6 +34,10 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   /** Canvas position and dimension have to be transformed to css pixel (form canvas pixel). Afterwards the values are saved here */
   canvasPosition: CanvasPosition = null as any;
 
+  /** Tracks number of how often the pointer down event was called */
+  pointerdownCounter: number = 0;
+  prevPointerdownCounter: number = 0;
+
   /** When the user stops drawing, the whole painting is saved in this array so when he wants to revert his changes, we can use these urls */
   drawingUrls: string[] = [];
   
@@ -99,7 +103,10 @@ export class ItDrawingBoardComponent implements AfterViewInit {
       this.onResize();
     });
 
-    this.canvas.addEventListener('pointerdown', this.startDrawing.bind(this));
+    this.canvas.addEventListener('pointerdown', (ev) => {
+      this.pointerdownCounter += 1;
+      this.startDrawing(ev);
+    });
 
     window.addEventListener("mouseup", this.endDrawing.bind(this));
     this.canvas.addEventListener("mouseleave", this.resetCursorCoordinates.bind(this));
@@ -259,10 +266,17 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.context.stroke();
   }
 
+  /**
+   * Add's a drawing url to the drawing url array if checks succeed
+   * 
+   * pointerdownCounter check ensures, that no url's are added on revert button click when using mobile. (Revert button fires touch end event)
+   * @date 4/8/2024 - 2:18:00 PM
+   */
   addDrawingUrl() {
     const url = this.canvas.toDataURL();
-    if (!!url && url !== this.drawingUrls[this.drawingUrls.length - 1]) {
+    if (!!url && url !== this.drawingUrls[this.drawingUrls.length - 1] && this.pointerdownCounter !== this.prevPointerdownCounter) {
       this.drawingUrls.push(url);
+      this.prevPointerdownCounter = this.pointerdownCounter; 
     }
   }
 
