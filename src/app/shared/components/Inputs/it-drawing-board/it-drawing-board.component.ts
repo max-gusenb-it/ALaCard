@@ -36,8 +36,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
 
   /** When the user stops drawing, the whole painting is saved in this array so when he wants to revert his changes, we can use these urls */
   drawingUrls: string[] = [];
-  /** Index that is used to identify, which drawing is currently showing when cycling through url's with back and forward. -1 means that, no url is currently looked at */
-  urlIndex: number = -1;
   
   lineWidth = 8;
   lineWidths = [8, 16, 24];
@@ -101,12 +99,12 @@ export class ItDrawingBoardComponent implements AfterViewInit {
       this.onResize();
     });
 
-    this.canvas.addEventListener("mousedown", this.startDrawing.bind(this));
+    this.canvas.addEventListener('pointerdown', this.startDrawing.bind(this));
+
     window.addEventListener("mouseup", this.endDrawing.bind(this));
     this.canvas.addEventListener("mouseleave", this.resetCursorCoordinates.bind(this));
     this.canvas.addEventListener("mousemove", this.draw.bind(this));
 
-    this.canvas.addEventListener("touchstart", this.startDrawing.bind(this));
     window.addEventListener("touchend", this.endDrawing.bind(this));
     window.addEventListener("touchcancel", this.endDrawing.bind(this));
     this.canvas.addEventListener("touchmove", this.draw.bind(this));
@@ -192,22 +190,22 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   }
 
   startDrawing(event: Event) {
+    this.painting = true;
     // set overscroll behavior to contain so swipe down to refresh on mobile does not work
     let elements = [document.getElementsByTagName("html")[0], document.getElementsByTagName("body")[0]];
     elements.forEach(element => {
       element.style.overscrollBehavior = "contain";
     });
-    this.painting = true;
     this.draw(event);
   }
 
   endDrawing() {
+    this.painting = false;
     // rest overscroll behavior
     let elements = [document.querySelector("html"), document.querySelector("body")];
     elements.forEach(element => {
       element!.style.removeProperty("overscroll-behavior");
     });
-    this.painting = false;
     // Reset cursor coordinates so touch lines do not connect to each other
     this.resetCursorCoordinates();
     this.addDrawingUrl();
@@ -261,6 +259,13 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.context.stroke();
   }
 
+  addDrawingUrl() {
+    const url = this.canvas.toDataURL();
+    if (!!url && url !== this.drawingUrls[this.drawingUrls.length - 1]) {
+      this.drawingUrls.push(url);
+    }
+  }
+
   clearCanvas() {
     this.fillCanvas(this.white);
   }
@@ -278,13 +283,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.context.fillRect(0, 0, 10000, 10000);
   }
 
-  addDrawingUrl() {
-    const url = this.canvas.toDataURL();
-    if (!!url && url !== this.drawingUrls[this.drawingUrls.length - 1]) {
-      this.drawingUrls.push(url);
-    }
-  }
-
   revert() {
     this.clearCanvas();
     this.drawingUrls.pop();
@@ -296,25 +294,17 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   setCanvasImage(image: string) {
     let img = new Image(); 
     let canvas = this.context;
-    img.onload = function(){
+    img.onload = function() {
       canvas.drawImage(img, 0, 0);
     };
     img.src = image;
   }
 
-  image: string = "";
-
   exportImage() {
-    this.image = this.canvas.toDataURL('image/png');
-    console.log (this.image);
+    return this.canvas.toDataURL('image/png');
   }
 
-  importImage() {
-    let image = new Image();
-    image.onload = function() {
-      const canvas = <HTMLCanvasElement> document.querySelector('#canvas');
-      canvas.getContext("2d")?.drawImage(image, 0, 0);
-    };
-    image.src = this.image;
+  importImage(image: string) {
+    this.setCanvasImage(image);
   }
 }
