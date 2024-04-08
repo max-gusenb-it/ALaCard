@@ -7,20 +7,6 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  @ViewChild('colorForm') public colorForm: NgForm = null as any;
-  
-  myInput: string = "";
-
-  formGroup = new FormGroup({
-    name: new FormControl({value: "", disabled: false}),
-    number: new FormControl({value: "", disabled: false}, Validators.maxLength(10)),
-    password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
-    color: new FormControl({value: null, disabled: false}, Validators.required),
-    description: new FormControl({value: "", disabled: false}, [Validators.required, Validators.maxLength(100)]),
-    age_restriction: new FormControl({value: false, disabled: false}),
-    register: new FormControl(false)
-  });
-
   colors: string[] = [
     "red",
     "orange",
@@ -38,6 +24,21 @@ export class HomePage {
     "pink",
     "rose"
   ];
+
+  @ViewChild('colorForm') public colorForm: NgForm = null as any;
+  
+  myInput: string = "";
+  viewCount: number = 0;
+
+  formGroup = new FormGroup({
+    name: new FormControl({value: "", disabled: false}),
+    number: new FormControl({value: "", disabled: false}, Validators.maxLength(10)),
+    password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
+    color: new FormControl({value: null, disabled: false}, Validators.required),
+    description: new FormControl({value: "", disabled: false}, [Validators.required, Validators.maxLength(100)]),
+    age_restriction: new FormControl({value: false, disabled: false}),
+    register: new FormControl(false)
+  });
 
   constructor() {
   }
@@ -62,6 +63,14 @@ export class HomePage {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
+  }
+
+  toggleView() {
+    if (this.viewCount < 1) {
+      this.viewCount += 1;
+    } else {
+      this.viewCount = 0;
+    }
   }
 
   test() {

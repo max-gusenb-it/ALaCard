@@ -1,4 +1,4 @@
-<div *ngIf="control" class="flex flex-row items-center">
+<div *ngIf="control" class="flex flex-row items-center cursor-pointer" (click)="toggleValue()">
   <input
     type="checkbox"
     [id]="getId()"
@@ -7,16 +7,14 @@
   />
   <div class="relative h-6 w-6">
     <it-icon
-      class="cursor-pointer absolute left-0 top-0 transition-all duration-200"
+      class="absolute left-0 top-0 transition-all duration-200"
       [ngClass]="{'opacity-0': !control.value}"
-      (click)="toggleValue()"
     >
       check_box
     </it-icon>
     <it-icon
-      class="cursor-pointer absolute left-0 top-0 transition-all duration-200"
+      class="absolute left-0 top-0 transition-all duration-200"
       [ngClass]="{'opacity-0': control.value}"
-      (click)="toggleValue()"
     >
       check_box_outline_blank
     </it-icon>

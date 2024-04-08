@@ -8,13 +8,49 @@
   </canvas>
   <div
     id="controls"
-    class="w-full bg-green-300 flex flex-col"
+    class="w-full bg-neutral-900 flex flex-col"
   >
-    <div class=""></div>
-    <div></div>
-    <div></div>
-    <button (click)="clearCanvas()">Clear</button>
-    <button (click)="fillCanvas()">Fill</button>
-    <button (click)="revert()">Revert</button>
+
+    <div class="flex" *ngFor="let colorContainer of colors">
+      <div
+        *ngFor="let colorTone of colorContainer"
+        class="flex-grow aspect-square flex items-center justify-center"
+        [ngStyle]="{'background-color': colorTone}"
+        (click)="setColor(colorTone)"
+      >
+        <span
+          class="rounded-full w-2 h-2 absolute transition-all duration-200"
+          [ngClass]="{'bg-neutral-950': colorTone !== black, 'bg-neutral-50': colorTone === black, 'opacity-0': colorTone != color}"
+        >
+        </span>
+      </div>
+    </div>
+    <div
+      class="flex flex-grow justify-between"
+    >
+      <div class="flex">
+        <it-icon-button
+          *ngFor="let width of lineWidths; index as i"
+          type="tertiary"
+          [color]="lineWidth == width ? 'text-primary-200' : 'text-neutral-100'"
+          (click)="setLineWidth(width)"
+        >
+          {{"counter_" + (i + 1)}}
+        </it-icon-button>
+      </div>
+      <div class="flex">
+        <it-icon-button type="tertiary" color="text-neutral-100" (click)="revert()">
+          undo
+        </it-icon-button>
+        <it-icon-button type="tertiary" color="text-neutral-100" (click)="fillCanvas()">
+          filter_hdr
+        </it-icon-button>
+        <it-icon-button type="tertiary" color="text-neutral-100" (click)="clearCanvas()">
+          delete
+        </it-icon-button>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Check how to export and import image -->

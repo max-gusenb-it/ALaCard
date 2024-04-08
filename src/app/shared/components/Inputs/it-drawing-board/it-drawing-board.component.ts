@@ -33,20 +33,61 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   };
   /** Canvas position and dimension have to be transformed to css pixel (form canvas pixel). Afterwards the values are saved here */
   canvasPosition: CanvasPosition = null as any;
-  
-  color: string = "";
+
   /** When the user stops drawing, the whole painting is saved in this array so when he wants to revert his changes, we can use these urls */
   drawingUrls: string[] = [];
   /** Index that is used to identify, which drawing is currently showing when cycling through url's with back and forward. -1 means that, no url is currently looked at */
   urlIndex: number = -1;
+  
+  lineWidth = 8;
+  lineWidths = [8, 16, 24];
+
+  black: string = "#000000";
+  white: string = "#FFFFFF";
+  color: string = this.black;
+  colors: string[][] = [
+    [
+      this.black,
+      "#844204",
+      "#FF2929",
+      "#FF7B06",
+      "#FFE10A",
+      "#37FFDB",
+      "#4DBFFF",
+      "#0070FF",
+      "#952BFF",
+      "#3EE500"
+    ],
+    [
+      this.white,
+      "#633000",
+      "#DA2323",
+      "#E67007",
+      "#EED100",
+      "#0FCCAA",
+      "#2C94CF",
+      "#0260D8",
+      "#6005BB",
+      "#3ACA05"
+    ]
+  ];
 
   get context() {
     return this.canvas.getContext("2d")!;
   }
+  
+  /**
+   * Returns the amount of buttons a row contains
+   * @date 4/1/2024 - 3:13:39 PM
+   *
+   * @readonly
+   * @type {number}
+   */
+  get controlButtonCount() {
+    return 0;
+  }
 
   ngAfterViewInit() {
-    this.setColor("blue");
-
     this.canvas = <HTMLCanvasElement> document.querySelector('#canvas');
     if (!!!this.canvas || this.context === null) {
       console.error("Canvas not found");
@@ -72,12 +113,14 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   }
 
   /**
-   * Wrapper for everything that need's to be done on resizen
+   * Wrapper for everything that need's to be done on resize
    * @param callCount callCount passed on to setCanvasSize to control how often the method is called on fail
    */
-  onResize(callCount?: number) {
+    onResize(callCount?: number) {
     this.setCanvasSize(callCount).then(() => {
       this.canvasPosition = this.getCanvasSizeInCSSPixels();
+    
+      this.clearCanvas();
     }).catch(() => {
       console.error ("Could not set size of canvas. Please try to refresh the application");
     });
@@ -190,7 +233,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     if (!this.painting) return;
 
     this.context.lineCap = "round";
-    this.context.lineWidth = 10;
+    this.context.lineWidth = this.lineWidth;
     this.context.strokeStyle = this.color;
 
     // Calculate scaled coordinates so line starts to draw directly below the cursor
@@ -209,15 +252,19 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   }
 
   clearCanvas() {
-    this.context.clearRect(0, 0, 10000, 10000);
+    this.fillCanvas(this.white);
   }
 
   setColor(color: string) {
     this.color = color;
   }
 
-  fillCanvas() {
-    this.context.fillStyle = this.color;
+  setLineWidth(width: number) {
+    this.lineWidth = width;
+  }
+
+  fillCanvas(color?: string) {
+    this.context.fillStyle = color ?? this.color;
     this.context.fillRect(0, 0, 10000, 10000);
   }
 

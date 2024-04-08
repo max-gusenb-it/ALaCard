@@ -1,15 +1,10 @@
 <div 
   class="
     material-symbols-rounded
-    text-neutral-900
     transition-all
   "
-  [ngStyle]="{'font-size.px': size}"
-  [ngClass]="{
-    'text-neutral-900': color === 'dark',
-    'text-neutral-100': color === 'white',
-    'text-primary-500': color === 'primary'
-  }"
+  [ngStyle]="{'font-size.rem': size}"
+  [ngClass]="color"
 >
   <ng-content/>
 </div>

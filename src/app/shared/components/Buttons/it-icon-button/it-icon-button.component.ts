@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IconColor } from 'src/app/shared/models/components/IconColor';
 
 type ButtonType = "primary" | "secondary" | "tertiary";
 type ButtonSize = "small" | "medium" | "large";
@@ -12,15 +11,15 @@ type ButtonSize = "small" | "medium" | "large";
 export class ItIconButtonComponent  implements OnInit {
   @Input() type: ButtonType = "primary";
   @Input() size: ButtonSize = "small";
-  @Input() color: IconColor = null as any;
+  @Input() color: string = "";
 
   constructor() { }
 
   ngOnInit() {}
 
   getColor() {
-    if (this.color === null) {
-      return this.type !== 'secondary' ? 'dark' : 'white'
+    if (!!!this.color) {
+      return this.type !== 'secondary' ? 'text-neutral-900' : 'text-neutral-100'
     } else {
       return this.color;
     }

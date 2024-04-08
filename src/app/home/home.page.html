@@ -1,140 +1,156 @@
-<ion-header [translucent]="true">
+<!-- <ion-header >
   <ion-toolbar>
     <ion-title class="text-white">
       Demo Components
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<!-- Header messes up the padding set in app component that is needed for navigation - find a better solution so you can use the header -->
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="formGroup" class="p-5 sm:p-10 pb-36 flex flex-col space-y-4" (ngSubmit)="setColor(formGroup.controls['color']!.value!)">
-    <it-drawing-board>
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="setColor(formGroup.controls['color']!.value!)"
+    class="p-5 sm:p-10 flex flex-col justify-center space-y-4"
+    style="min-height: 800px;"
+  >
+    <it-drawing-board *ngIf="viewCount == 0" class="w-full">
 
     </it-drawing-board>
 
-    <it-select
-      label="Color"
-      name="color"
-      id="color"
-      formControlName="color"
-    >
-      <option *ngFor="let color of colors">{{color}}</option>
-    </it-select>
-
-    <it-button class="flex" color="primary" size="big">
-      Change Color
-    </it-button>
-    
-    <it-button class="flex" color="secondary" size="big" (click)="test()">
-      Secondary
-    </it-button>
-
-    <it-input
-      id="name"
-      label="Name"
-      formControlName="name"
-      icon="face"
-    />
-
-    <it-input
-      id="number"
-      label="Phone Number"
-      formControlName="number"
-      icon="phone"
-    />
-
-    <it-input
-      id="password"
-      label="Password"
-      formControlName="password"
-      type="password"
-    >
-      {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
-    </it-input>
-
-    <it-text-area
-      id="description"
-      label="Description"
-      formControlName="description"
-    >
-    </it-text-area>
-
-    <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
-      Submit
-    </it-button>
-
     <div
-      class="
-        flex flex-row justify-between
-      "
+      *ngIf="viewCount == 1"
+      class="flex flex-col space-y-4"
     >
-      <it-icon-button type="tertiary">
-        playing_cards
-      </it-icon-button>
-
-      <it-icon-button type="secondary">
-        playing_cards
-      </it-icon-button>
-
-      <it-icon-button>
-        playing_cards
-      </it-icon-button>
-
-      <it-icon-button
-        size="medium"
+      <it-select
+        label="Color"
+        name="color"
+        id="color"
+        formControlName="color"
       >
-        playing_cards
-      </it-icon-button>
-
-      <it-icon>
-        playing_cards
-      </it-icon>
-    </div>
-
-    <it-checkbox
-      id="age_restriction"
-      formControlName="age_restriction"
-      label="Are you older than 18?"
-    />
-
-    <it-checkbox-heading
-      heading="Want to register?"
-      formControlName="register"
-    >
-      <div content>
-        Create a account so you never loose your data and get more features like downloading new decks from the store 
-      </div>
+        <option *ngFor="let color of colors">{{color}}</option>
+      </it-select>
+  
+      <it-button class="flex" color="primary" size="big">
+        Change Color
+      </it-button>
+      
+      <it-button class="flex" color="secondary" size="big" (click)="test()">
+        Secondary
+      </it-button>
+  
       <it-input
-        collapsible
-        id="test-number"
+        id="name"
+        label="Name"
+        formControlName="name"
+        icon="face"
+      />
+  
+      <it-input
+        id="number"
         label="Phone Number"
         formControlName="number"
         icon="phone"
       />
-    </it-checkbox-heading>
+  
+      <it-input
+        id="password"
+        label="Password"
+        formControlName="password"
+        type="password"
+      >
+        {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
+      </it-input>
+  
+      <it-text-area
+        id="description"
+        label="Description"
+        formControlName="description"
+      >
+      </it-text-area>
+  
+      <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
+        Submit
+      </it-button>
+  
+      <div
+        class="
+          flex flex-row justify-between
+        "
+      >
+        <it-icon-button type="tertiary">
+          playing_cards
+        </it-icon-button>
+  
+        <it-icon-button type="secondary">
+          playing_cards
+        </it-icon-button>
+  
+        <it-icon-button>
+          playing_cards
+        </it-icon-button>
+  
+        <it-icon-button
+          size="medium"
+        >
+          playing_cards
+        </it-icon-button>
+  
+        <it-icon>
+          playing_cards
+        </it-icon>
+      </div>
+  
+      <it-checkbox
+        id="age_restriction"
+        formControlName="age_restriction"
+        label="Are you older than 18?"
+      />
+  
+      <it-checkbox-heading
+        heading="Want to register?"
+        formControlName="register"
+      >
+        <div content>
+          Create a account so you never loose your data and get more features like downloading new decks from the store 
+        </div>
+        <it-input
+          collapsible
+          id="test-number"
+          label="Phone Number"
+          formControlName="number"
+          icon="phone"
+        />
+      </it-checkbox-heading>
+      
+      <it-button class="flex" color="tertiary" size="big">
+        Tertiary
+      </it-button>
+      
+      <it-button class="flex" color="quaternary" size="big">
+        Quaternary
+      </it-button>
+      
+      <it-button class="flex" color="red" size="big">
+        Button
+      </it-button>
+      
+      <it-button class="flex" color="blue" size="big">
+        Button
+      </it-button>
+      
+      <it-button class="flex" color="orange" size="big">
+        Button
+      </it-button>
+      
+      <it-button class="flex" color="green" size="big">
+        Button
+      </it-button>
+    </div>
     
-    <it-button class="flex" color="tertiary" size="big">
-      Tertiary
-    </it-button>
-    
-    <it-button class="flex" color="quaternary" size="big">
-      Quaternary
-    </it-button>
-    
-    <it-button class="flex" color="red" size="big">
-      Button
-    </it-button>
-    
-    <it-button class="flex" color="blue" size="big">
-      Button
-    </it-button>
-    
-    <it-button class="flex" color="orange" size="big">
-      Button
-    </it-button>
-    
-    <it-button class="flex" color="green" size="big">
-      Button
+    <it-button class="flex" color="quaternary" size="big" (click)="toggleView()">
+      Switch View
     </it-button>
   </form>
 </ion-content>

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IconColor } from 'src/app/shared/models/components/IconColor';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'it-icon',
@@ -7,6 +6,6 @@ import { IconColor } from 'src/app/shared/models/components/IconColor';
   styleUrls: ['./it-icon.component.scss']
 })
 export class ItIconComponent {
-  @Input() color: IconColor = "dark";
-  @Input() size: number = 24;
+  @Input() color: string = "text-neutral-900";
+  @Input() size: number = 1.5;
 }

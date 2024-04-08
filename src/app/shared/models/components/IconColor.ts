@@ -1,1 +1,0 @@
-export type IconColor = "dark" | "white" | "primary";
