@@ -32,7 +32,7 @@
         <it-icon-button
           *ngFor="let width of lineWidths; index as i"
           type="tertiary"
-          [color]="lineWidth == width ? 'text-primary-200' : 'text-neutral-100'"
+          [iconColor]="lineWidth == width ? 'text-primary-200' : 'text-neutral-100'"
           (click)="setLineWidth(width)"
         >
           {{"counter_" + (i + 1)}}

@@ -28,7 +28,7 @@ export class HomePage {
   @ViewChild('colorForm') public colorForm: NgForm = null as any;
   
   myInput: string = "";
-  viewCount: number = 0;
+  viewCount: number = 1;
 
   formGroup = new FormGroup({
     name: new FormControl({value: "", disabled: false}),

@@ -14,12 +14,14 @@ import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-it
 import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox.component';
 import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-heading/it-checkbox-heading.component';
 import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it-drawing-board.component';
+import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-menu-button.component';
 
 @NgModule({
   declarations: [
     ControlValueAccessorDirective,
     ItButtonComponent,
     ItIconButtonComponent,
+    ItMenuButtonComponent,
     ItCheckboxHeadingComponent,
     ItDrawingBoardComponent,
     ItNavigationComponent,
@@ -39,6 +41,7 @@ import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it
     ReactiveFormsModule,
     ItButtonComponent,
     ItIconButtonComponent,
+    ItMenuButtonComponent,
     ItCheckboxHeadingComponent,
     ItDrawingBoardComponent,
     ItNavigationComponent,

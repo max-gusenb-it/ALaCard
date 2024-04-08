@@ -14,12 +14,8 @@
     (ngSubmit)="setColor(formGroup.controls['color']!.value!)"
     class="p-5 sm:p-10 flex flex-col justify-center space-y-4"
   >
-    <it-drawing-board *ngIf="viewCount == 0" class="w-full">
-
-    </it-drawing-board>
-
     <div
-      *ngIf="viewCount == 1"
+      *ngIf="viewCount == 0"
       class="flex flex-col space-y-4"
     >
       <it-select
@@ -147,6 +143,32 @@
         Button
       </it-button>
     </div>
+
+    <div
+      *ngIf="viewCount == 1"
+      class="flex flex-col space-y-4"
+    >
+      <it-drawing-board class="w-full">
+
+      </it-drawing-board>
+      
+      <it-button class="flex" color="quaternary" size="big">
+        I am useless :)
+      </it-button>
+      <it-button class="flex" color="quaternary" size="big">
+        Me too :)
+      </it-button>
+      <div class="flex space-x-4">
+        <it-button class="flex grow" color="quaternary" size="big">
+          same
+        </it-button>
+  
+        <it-menu-button>
+          playing_cards
+        </it-menu-button>
+      </div>
+    </div>
+
     
     <it-button class="flex" color="quaternary" size="big" (click)="toggleView()">
       Switch View

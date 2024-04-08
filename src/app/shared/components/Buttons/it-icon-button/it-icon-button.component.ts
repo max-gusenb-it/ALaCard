@@ -11,17 +11,17 @@ type ButtonSize = "small" | "medium" | "large";
 export class ItIconButtonComponent  implements OnInit {
   @Input() type: ButtonType = "primary";
   @Input() size: ButtonSize = "small";
-  @Input() color: string = "";
+  @Input() iconColor: string = "";
 
   constructor() { }
 
   ngOnInit() {}
 
   getColor() {
-    if (!!!this.color) {
+    if (!!!this.iconColor) {
       return this.type !== 'secondary' ? 'text-neutral-900' : 'text-neutral-100'
     } else {
-      return this.color;
+      return this.iconColor;
     }
   }
 
