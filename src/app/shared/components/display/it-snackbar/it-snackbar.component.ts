@@ -5,7 +5,7 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 import { ISnackbarData } from 'src/app/shared/models/interfaces/snackbar/ISnackbarData';
 
 @Component({
-  selector: 'app-it-snackbar',
+  selector: 'it-snackbar',
   templateUrl: './it-snackbar.component.html',
   styleUrls: ['./it-snackbar.component.scss'],
 })

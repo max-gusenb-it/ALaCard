@@ -148,6 +148,8 @@
       *ngIf="viewCount == 1"
       class="flex flex-col space-y-4"
     >
+      <it-button-heading icon="home">Drawing board</it-button-heading>
+
       <it-drawing-board class="w-full">
 
       </it-drawing-board>
@@ -163,7 +165,6 @@
         <it-menu-button (menuItemClicked)="test($event)" [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
       </div>
     </div>
-
     
     <it-button class="flex" color="quaternary" size="big" (click)="toggleView()">
       Switch View
