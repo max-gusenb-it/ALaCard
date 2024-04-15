@@ -84,6 +84,10 @@ export class HomePage {
     });
   }
 
+  openSnackbar() {
+    this.dialog.openSnackbar("No button to continue? Swipe to the left side to resume the game", "home", true);
+  }
+
   test(input?: number) {
     console.log (input ?? window.innerWidth);
   }

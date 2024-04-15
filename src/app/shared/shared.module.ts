@@ -15,8 +15,9 @@ import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox
 import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-heading/it-checkbox-heading.component';
 import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it-drawing-board.component';
 import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-menu-button.component';
-import { DialogModule } from '@angular/cdk/dialog';
+import { ItSnackbarComponent } from './components/display/it-snackbar/it-snackbar.component';
 import { ExampleComponent } from './components/display/example/example.component';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ExampleComponent } from './components/display/example/example.component
     ItTextAreaComponent,
     ItSelectComponent,
     ItIconComponent,
+    ItSnackbarComponent,
     ExampleComponent
   ],
   imports: [
@@ -54,6 +56,7 @@ import { ExampleComponent } from './components/display/example/example.component
     ItTextAreaComponent,
     ItSelectComponent,
     ItIconComponent,
+    ItSnackbarComponent,
     ExampleComponent
   ],
   providers: [
