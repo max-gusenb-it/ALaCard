@@ -121,7 +121,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
    * Wrapper for everything that need's to be done on resize
    * @param callCount callCount passed on to setCanvasSize to control how often the method is called on fail
    */
-    onResize(callCount?: number) {
+  onResize(callCount?: number) {
     this.setCanvasSize(callCount).then(() => {
       this.canvasPosition = this.getCanvasSizeInCSSPixels();
     
@@ -275,13 +275,22 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   addDrawingUrl() {
     const url = this.canvas.toDataURL();
     if (!!url && url !== this.drawingUrls[this.drawingUrls.length - 1] && this.pointerdownCounter !== this.prevPointerdownCounter) {
-      this.drawingUrls.push(url);
-      this.prevPointerdownCounter = this.pointerdownCounter; 
+      this.forceAddDrawingUrl(url);
     }
   }
 
+  forceAddDrawingUrl(url: string) {
+    this.drawingUrls.push(url);
+    this.prevPointerdownCounter = this.pointerdownCounter;
+  }
+  
+  /**
+   * Method used to clear canvas without adding a data url
+   * @date 4/15/2024 - 7:52:26 AM
+   */
   clearCanvas() {
-    this.fillCanvas(this.white);
+    this.context.fillStyle = this.white;
+    this.context.fillRect(0, 0, 10000, 10000);
   }
 
   setColor(color: string) {
@@ -295,6 +304,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   fillCanvas(color?: string) {
     this.context.fillStyle = color ?? this.color;
     this.context.fillRect(0, 0, 10000, 10000);
+    this.forceAddDrawingUrl(this.canvas.toDataURL());
   }
 
   revert() {
