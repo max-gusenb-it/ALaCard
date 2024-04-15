@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ExampleComponent } from '../shared/components/display/example/example.component';
+import { DialogService } from '../shared/services/dialog.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
 export class HomePage {
   colors: string[] = [
@@ -40,8 +42,7 @@ export class HomePage {
     register: new FormControl(false)
   });
 
-  constructor() {
-  }
+  constructor(private dialog: DialogService) {}
 
   setColor(color: string) {
     if (!!color) {
@@ -71,6 +72,16 @@ export class HomePage {
     } else {
       this.viewCount = 0;
     }
+  }
+
+  openDialog() {
+    const ref = this.dialog.open(
+      ExampleComponent
+    );
+
+    ref.closed.subscribe(() => {
+      console.log ("closed");
+    });
   }
 
   test(input?: number) {

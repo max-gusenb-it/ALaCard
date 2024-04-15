@@ -26,8 +26,6 @@ export class ItMenuButtonComponent implements OnInit {
                 if (this.active) this.toggleActive();
             }
         });
-        
-        console.log(this.menuItemIcons);
     }
 
     toggleActive() {

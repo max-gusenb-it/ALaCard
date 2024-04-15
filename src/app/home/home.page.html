@@ -156,8 +156,8 @@
         I am useless :)
       </it-button>
       <div class="flex space-x-4">
-        <it-button class="flex grow" color="quaternary" size="big">
-          Me too :)
+        <it-button (click)="openDialog()" class="flex grow" color="quaternary" size="big">
+          Open Dialog
         </it-button>
   
         <it-menu-button (menuItemClicked)="test($event)" [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>

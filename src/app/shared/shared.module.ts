@@ -15,6 +15,8 @@ import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox
 import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-heading/it-checkbox-heading.component';
 import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it-drawing-board.component';
 import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-menu-button.component';
+import { DialogModule } from '@angular/cdk/dialog';
+import { ExampleComponent } from './components/display/example/example.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,12 @@ import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-me
     ItTextAreaComponent,
     ItSelectComponent,
     ItIconComponent,
+    ExampleComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule
   ],
   exports: [
     FormsModule,
@@ -49,7 +53,8 @@ import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-me
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,
-    ItIconComponent
+    ItIconComponent,
+    ExampleComponent
   ],
   providers: [
   ]

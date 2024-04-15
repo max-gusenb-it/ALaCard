@@ -1,0 +1,17 @@
+:host {
+    @apply bg-primary-0;
+    display: block;
+    border-radius: 0.625rem 0.625rem 0 0;
+    padding: 1rem;
+    animation: custom-dialog-enter 0.3s ease !important;
+}
+
+@keyframes custom-dialog-enter {
+    from {
+      transform: translateY(100%);
+    }
+  
+    to {
+      transform: none;
+    }
+}
