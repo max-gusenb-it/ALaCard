@@ -160,9 +160,7 @@
           Me too :)
         </it-button>
   
-        <it-menu-button>
-          playing_cards
-        </it-menu-button>
+        <it-menu-button (menuItemClicked)="test($event)" [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
       </div>
     </div>
 

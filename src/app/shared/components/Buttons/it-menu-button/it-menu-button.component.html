@@ -2,16 +2,13 @@
     <it-icon-button class="absolute z-10" size="medium" type="secondary" iconColor="text-primary-500" (click)="toggleActive()">
         {{active ? 'close' : 'menu'}}
     </it-icon-button>
-    <div 
-        class="h-7 w-7 rounded-full absolute left-2.5 top-0 transition-all duration-[0.2s] ease-out bg-primary-0 flex items-center justify-center shadow-md cursor-pointer"
-        [ngClass]="{'-translate-y-10': active, 'pointer-events-none': !active}"
+    <div
+        *ngFor="let icon of menuItemIcons; index as i"
+        class="h-7 w-7 rounded-full absolute left-2.5 top-0 transition-all duration-[0.3s] ease-out bg-primary-0 flex items-center justify-center shadow-lg cursor-pointer"
+        [ngClass]="{'pointer-events-none': !active}"
+        [ngStyle]="active ? {'transform': 'translateY(' + -(2.5 * (i + 1)) + 'rem)'} : {}"
+        (click)="onMenuItemClick(i)"
     >
-        <it-icon [size]="1.25">menu</it-icon>
-    </div>
-    <div 
-        class="h-7 w-7 rounded-full absolute left-2.5 top-0 transition-all duration-[0.2s] ease-out bg-primary-0 flex items-center justify-center shadow-md cursor-pointer"
-        [ngClass]="{'-translate-y-20': active, 'pointer-events-none': !active}"
-    >
-        <it-icon [size]="1.25">menu</it-icon>
+        <it-icon [size]="1.25">{{ icon }}</it-icon>
     </div>
 </div>

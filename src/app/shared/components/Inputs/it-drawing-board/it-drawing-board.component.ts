@@ -77,17 +77,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   get context() {
     return this.canvas.getContext("2d")!;
   }
-  
-  /**
-   * Returns the amount of buttons a row contains
-   * @date 4/1/2024 - 3:13:39 PM
-   *
-   * @readonly
-   * @type {number}
-   */
-  get controlButtonCount() {
-    return 0;
-  }
 
   ngAfterViewInit() {
     this.canvas = <HTMLCanvasElement> document.querySelector('#canvas');

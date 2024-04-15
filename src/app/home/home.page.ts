@@ -73,7 +73,7 @@ export class HomePage {
     }
   }
 
-  test() {
-    console.log (window.innerWidth);
+  test(input?: number) {
+    console.log (input ?? window.innerWidth);
   }
 }
