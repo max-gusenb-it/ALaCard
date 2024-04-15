@@ -18,6 +18,8 @@
       *ngIf="viewCount == 0"
       class="flex flex-col space-y-4"
     >
+      <it-button-heading icon="home">Home</it-button-heading>
+
       <it-select
         label="Color"
         name="color"
@@ -148,7 +150,13 @@
       *ngIf="viewCount == 1"
       class="flex flex-col space-y-4"
     >
-      <it-button-heading icon="home">Drawing board</it-button-heading>
+      <it-detail-heading
+        heading="Create your user"
+        subheading="Design your own profile image"
+        headingType="h3"
+        subheadingType="sm"
+        detail="Scheiß die nd au heast, zeichne hoid wos guads"
+      />
 
       <it-drawing-board class="w-full">
 

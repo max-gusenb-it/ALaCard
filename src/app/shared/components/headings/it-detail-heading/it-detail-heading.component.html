@@ -1,0 +1,18 @@
+<div class="flex flex-col space-y-2">
+  <div class="flex flex-row space-x-2 items-center">
+    <img src="assets/images/Icon.png">
+    <div class="flex flex-col space-y-1">
+      <h3 *ngIf="showHeading('h3')">{{ heading }}</h3>
+      <h4 *ngIf="showHeading('h4')">{{ heading }}</h4>
+      <p
+        [ngClass]="{
+          'text-xs': isSubheadingType('xs'),
+          'text-sm': isSubheadingType('sm')
+        }"
+      >
+        {{ subheading }}
+      </p>
+    </div>
+  </div>
+  <div *ngIf="detail" class="text-base">{{ detail }}</div>
+</div>

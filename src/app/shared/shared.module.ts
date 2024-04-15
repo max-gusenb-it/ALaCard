@@ -12,6 +12,7 @@ import { ItTextAreaComponent } from './components/inputs/it-text-area/it-text-ar
 import { ItNavigationComponent } from './components/buttons/it-navigation/it-navigation.component';
 import { ItNavItemComponent } from './components/buttons/it-navigation/it-nav-item/it-nav-item.component';
 import { ItCheckboxComponent } from './components/inputs/it-checkbox/it-checkbox.component';
+import { ItDetailHeadingComponent } from './components/headings/it-detail-heading/it-detail-heading.component';
 import { ItButtonHeadingComponent } from './components/headings/it-button-heading/it-button-heading.component';
 import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-heading/it-checkbox-heading.component';
 import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it-drawing-board.component';
@@ -28,6 +29,7 @@ import { DialogModule } from '@angular/cdk/dialog';
     ItMenuButtonComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
+    ItDetailHeadingComponent,
     ItDrawingBoardComponent,
     ItNavigationComponent,
     ItNavItemComponent,
@@ -52,6 +54,7 @@ import { DialogModule } from '@angular/cdk/dialog';
     ItMenuButtonComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
+    ItDetailHeadingComponent,
     ItDrawingBoardComponent,
     ItNavigationComponent,
     ItCheckboxComponent,
