@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 
 interface CursorCoordinates {
   x: number;
@@ -21,9 +21,11 @@ interface CanvasPosition {
   templateUrl: './it-drawing-board.component.html'
 })
 export class ItDrawingBoardComponent implements AfterViewInit {
+  @ViewChild("container", { read: ElementRef }) container?: ElementRef<HTMLDivElement>;
+
   canvas: HTMLCanvasElement = null as any;
   /** When canvas size can not be set, this number defines how oft it should be tried again before throwing an error */
-  maxCallCount = 3;
+  maxCallCount = 4;
   painting: boolean = false;
   cursorCoordinates: CursorCoordinates = {
     x: null as any,
@@ -78,6 +80,8 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     return this.canvas.getContext("2d")!;
   }
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
   ngAfterViewInit() {
     this.canvas = <HTMLCanvasElement> document.querySelector('#canvas');
     if (!!!this.canvas || this.context === null) {
@@ -87,7 +91,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
 
     setTimeout(() => {
       addEventListener("resize", () => {
-        this.onResize(2);
+        this.onResize();
       });
       this.onResize();
     });
@@ -121,32 +125,32 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   }
 
   /**
-   * Get's and sets the size of the canvas by using an measurement div
+   * Get's and sets the size of the canvas by using the container div
    * @param callCount Number of times the method called itself
    * @returns Promise that is resolved when the function has completed "calling itself" 
    */
   setCanvasSize(callCount: number = 1) : Promise<any> {
-    const widthMeasurement = document.getElementById("width-measurement");
-    if (widthMeasurement === null || widthMeasurement.offsetWidth === 0) {
+    if (!!!this.container || this.container.nativeElement.offsetWidth === 0) {
       // If measurement element was not found try again, if maxCallCount was not exceeded
-      console.warn("Trying to get width-measurement again. Call count: ", callCount);
+      console.warn("Trying to get container element again. Call count: ", callCount);
       if (this.maxCallCount > callCount) {
+        this.changeDetectorRef.detectChanges();
         return new Promise((resolve) => setTimeout(() => {
           resolve(this.setCanvasSize(callCount + 1));
         }, (callCount + 1) * 5));
       } else {
         console.error(
-          widthMeasurement === null ?
-          "Could not get width-measurement element" :
-          "Width-measurement element width was 0"
+          this.container === null ?
+          "Could not get container element" :
+          "Container element width was 0"
         );
         return Promise.reject();
       }
     }
     
     // Aspect Ratio 24 : 13 (Calculated width figma design)
-    this.context.canvas.width = widthMeasurement.offsetWidth;
-    this.context.canvas.height = (widthMeasurement.offsetWidth / 24) * 13;
+    this.context.canvas.width = this.container!.nativeElement.offsetWidth;
+    this.context.canvas.height = (this.container!.nativeElement.offsetWidth / 24) * 13;
     return Promise.resolve();
   }
 
