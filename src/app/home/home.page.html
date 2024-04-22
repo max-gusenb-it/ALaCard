@@ -80,11 +80,13 @@
           playing_cards
         </it-icon-button>
   
-        <it-icon-button type="secondary">
+        <it-icon-button type="secondary" size="small">
           playing_cards
         </it-icon-button>
   
-        <it-icon-button>
+        <it-icon-button
+          size="large"
+        >
           playing_cards
         </it-icon-button>
   
@@ -106,6 +108,7 @@
       />
   
       <it-checkbox-heading
+        id="register-checkbox-heading"
         heading="Want to register?"
         formControlName="register"
       >
@@ -172,6 +175,44 @@
   
         <it-menu-button (menuItemClicked)="test($event)" [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
       </div>
+    </div>
+    
+    <div
+      *ngIf="viewCount == 2"
+      class="flex flex-col space-y-4"
+    >
+      <it-accord
+        heading="How To Play?"
+      >
+        <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+      </it-accord>
+
+      <it-button class="flex" color="red" size="big">
+        Button
+      </it-button>
+
+      <it-accordion #accordion>
+        <it-accord [id]="1" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+          heading="How To Play?"
+        >
+          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+        </it-accord>
+        <it-accord [id]="2" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+          heading="Room"
+        >
+          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+        </it-accord>
+        <it-accord [id]="3" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+          heading="Card Types"
+        >
+          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+        </it-accord>
+        <it-accord [id]="4" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+          heading="Setting"
+        >
+          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+        </it-accord>
+      </it-accordion>
     </div>
     
     <it-button class="flex" color="quaternary" size="big" (click)="toggleView()">

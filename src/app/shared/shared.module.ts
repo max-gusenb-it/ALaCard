@@ -20,6 +20,8 @@ import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-me
 import { ItSnackbarComponent } from './components/display/it-snackbar/it-snackbar.component';
 import { ExampleComponent } from './components/display/example/example.component';
 import { DialogModule } from '@angular/cdk/dialog';
+import { ItAccordComponent } from './components/display/it-accord/it-accord.component';
+import { ItAccordionComponent } from './components/display/it-accordion/it-accordion.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,
+    ItAccordComponent,
+    ItAccordionComponent,
     ItIconComponent,
     ItSnackbarComponent,
     ExampleComponent
@@ -61,6 +65,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     ItInputComponent,
     ItTextAreaComponent,
     ItSelectComponent,
+    ItAccordComponent,
+    ItAccordionComponent,
     ItIconComponent,
     ItSnackbarComponent,
     ExampleComponent

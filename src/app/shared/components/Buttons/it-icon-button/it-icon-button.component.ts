@@ -12,6 +12,7 @@ export class ItIconButtonComponent  implements OnInit {
   @Input() type: ButtonType = "primary";
   @Input() size: ButtonSize = "small";
   @Input() iconColor: string = "";
+  @Input() iconSize: number = 0;
 
   constructor() { }
 

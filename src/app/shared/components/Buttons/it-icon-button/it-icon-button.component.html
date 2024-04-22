@@ -16,10 +16,11 @@
   <!-- size => 30 px : 24 px -->
   <it-icon
     [color]="getColor()"
-    [size]="size === 'large' ? 1.875 : 1.5"
+    [size]="!!iconSize ? iconSize : 1.5"
     [ngClass]="{
-      'p-2': size === 'small' || size === 'large', 
-      'p-3': size === 'medium'
+      'p-1.5': size === 'small',
+      'p-2': size === 'medium',
+      'p-3': size === 'large'
     }"
   >
     <ng-content/>

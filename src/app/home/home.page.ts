@@ -30,7 +30,7 @@ export class HomePage {
   @ViewChild('colorForm') public colorForm: NgForm = null as any;
   
   myInput: string = "";
-  viewCount: number = 1;
+  viewCount: number = 2;
 
   formGroup = new FormGroup({
     name: new FormControl({value: "", disabled: false}),
@@ -67,7 +67,7 @@ export class HomePage {
   }
 
   toggleView() {
-    if (this.viewCount < 1) {
+    if (this.viewCount < 2) {
       this.viewCount += 1;
     } else {
       this.viewCount = 0;
