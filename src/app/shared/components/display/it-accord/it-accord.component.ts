@@ -9,8 +9,9 @@ export class ItAccordComponent implements AfterViewInit {
 
   @ViewChild("content") div?: ElementRef<HTMLDivElement>;
 
-  @Input() id: number = 0;
   @Input() heading: string = "";
+  @Input() icon?: string;
+  @Input() id: number = 0;
   @Input() set openedAccordId(value: number) {
     this._openedAccordId = value;
     if (value != this.id) this.close();
@@ -40,7 +41,7 @@ export class ItAccordComponent implements AfterViewInit {
 
   animateToggle() {
     if (this.div == null) {
-      console.error("it-checkbox-heading: content element not found!");
+      console.error("it-accord: content element not found!");
     }
 
     if (this.opened) {

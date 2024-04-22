@@ -5,12 +5,13 @@
   >
     <h4>{{heading}}</h4>
     <it-icon
-      class="transition-all"
+      class="transition-all ease-out"
       [ngClass]="{
-        'rotate-180': opened
+        'rotate-180': opened && !!!icon
       }"
+      [filled]="!!icon && !opened"
     >
-      expand_more
+      {{ !!icon ? icon : 'expand_more' }}
     </it-icon>
   </div>
   <div

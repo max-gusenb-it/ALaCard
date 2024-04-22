@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class ItIconComponent {
   @Input() color: string = "text-neutral-900";
   @Input() size: number = 1.5;
+  @Input() filled: boolean = true;
 }

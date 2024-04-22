@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, forwardRef, } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, forwardRef, } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorDirective } from 'src/app/shared/directives/control-value-accessor.directive';
 
@@ -14,6 +14,8 @@ import { ControlValueAccessorDirective } from 'src/app/shared/directives/control
   ]
 })
 export class ItCheckboxHeadingComponent extends ControlValueAccessorDirective<boolean> implements AfterViewInit {
+  @ViewChild("content") content?: ElementRef<HTMLDivElement>;
+
   @Input() heading: string = "";
 
   override ngAfterViewInit(): void {
@@ -32,20 +34,15 @@ export class ItCheckboxHeadingComponent extends ControlValueAccessorDirective<bo
 
   animateToggle() {
     if (!!this.control) {
-      const element = document.getElementById("content");
-      if (element == null) {
+      if (this.content == null) {
         console.error("it-checkbox-heading: content element not found!");
       }
   
       if (this.control.value) {
-        element!.style.maxHeight = element!.scrollHeight + "px";
+        this.content!.nativeElement.style.maxHeight = this.content!.nativeElement.scrollHeight + "px";
       } else {
-        element!.style.maxHeight = "0px";
+        this.content!.nativeElement.style.maxHeight = "0px";
       }
     }
-  }
-
-  test() {
-    document.getElementById("content")?.scrollHeight;
   }
 }

@@ -4,6 +4,7 @@
     transition-all
   "
   [ngStyle]="{'font-size.rem': size}"
+  [class.unfilled]="!filled"
   [ngClass]="color"
 >
   <ng-content/>
