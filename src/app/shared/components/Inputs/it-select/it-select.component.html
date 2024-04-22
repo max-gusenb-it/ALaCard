@@ -22,6 +22,8 @@
     "
     placeholder=" "
   >
+    <!-- Default option that disables safari from auto selecting the first option -->
+    <option style="display:none"></option>
     <option *ngIf="defaultValue !== null" selected></option>
     <ng-content></ng-content>
   </select>
