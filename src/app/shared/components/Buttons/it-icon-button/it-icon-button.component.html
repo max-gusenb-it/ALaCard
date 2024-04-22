@@ -1,7 +1,4 @@
-<!-- size => 30 px : 24 px -->
-<it-icon
-  [color]="getColor()"
-  [size]="size === 'large' ? 1.875 : 1.5"
+<button
   class="
     cursor-pointer
     rounded-full
@@ -11,12 +8,20 @@
     active:bg-neutral-500/30
   "
   [ngClass]="{
-    'p-2': size === 'small' || size === 'large', 
-    'p-3': size === 'medium',
     'bg-primary-500 hover:brightness-90 active:brightness-75': type === 'primary',
     'bg-neutral-900 hover:brightness-125 active:brightness-100': type === 'secondary',
     'hover:bg-neutral-400/20 active:bg-neutral-500/30': type === 'tertiary'
   }"
+>
+  <!-- size => 30 px : 24 px -->
+  <it-icon
+    [color]="getColor()"
+    [size]="size === 'large' ? 1.875 : 1.5"
+    [ngClass]="{
+      'p-2': size === 'small' || size === 'large', 
+      'p-3': size === 'medium'
+    }"
   >
-  <ng-content/>
-</it-icon>
+    <ng-content/>
+  </it-icon>
+</button>
