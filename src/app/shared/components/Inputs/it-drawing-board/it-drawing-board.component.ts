@@ -187,24 +187,28 @@ export class ItDrawingBoardComponent implements AfterViewInit {
 
   startDrawing(event: Event) {
     this.painting = true;
-    // set overscroll behavior to contain so swipe down to refresh on mobile does not work
-    let elements = [document.getElementsByTagName("html")[0], document.getElementsByTagName("body")[0]];
-    elements.forEach(element => {
-      element.style.overscrollBehavior = "contain";
-    });
+    this.disableScrolling();
     this.draw(event);
+  }
+
+  disableScrolling() {
+    document.body.addEventListener('touchmove', this.preventScrollingHandler, { passive: false });
   }
 
   endDrawing() {
     this.painting = false;
-    // rest overscroll behavior
-    let elements = [document.querySelector("html"), document.querySelector("body")];
-    elements.forEach(element => {
-      element!.style.removeProperty("overscroll-behavior");
-    });
+    this.enableSrolling();
     // Reset cursor coordinates so touch lines do not connect to each other
     this.resetCursorCoordinates();
     this.addDrawingUrl();
+  }
+
+  enableSrolling() {
+    document.body.removeEventListener('touchmove', this.preventScrollingHandler);
+  }
+
+  preventScrollingHandler(e: TouchEvent) {
+    e.preventDefault();
   }
 
   resetCursorCoordinates() {
