@@ -21,6 +21,8 @@ export class DialogService {
       .global()
       .bottom()
       .centerHorizontally();
+    // Set autofocus to element that does no exist to prevent iOS blue focus border
+    config.autoFocus = config.autoFocus ?? "__";
     return this.dialog.open(component, config);
   }
 
@@ -37,7 +39,8 @@ export class DialogService {
         .global()
         .bottom("1.5rem")
         .centerHorizontally(),
-      hasBackdrop: false
+      hasBackdrop: false,
+      autoFocus: "__"
     })
   }
 }
