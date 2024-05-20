@@ -7,9 +7,9 @@
     <it-icon
       class="transition-all ease-out"
       [ngClass]="{
-        'rotate-180': opened && !!!icon
+        'rotate-180': active && !!!icon
       }"
-      [filled]="!!icon && !opened"
+      [filled]="!!icon && !active"
     >
       {{ !!icon ? icon : 'expand_more' }}
     </it-icon>

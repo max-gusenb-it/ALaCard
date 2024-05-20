@@ -208,22 +208,22 @@
       </it-button>
 
       <it-accordion #accordion>
-        <it-accord [id]="1" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
           heading="How To Play?"
         >
           <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
         </it-accord>
-        <it-accord [id]="2" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
           heading="Room"
         >
           <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
         </it-accord>
-        <it-accord [id]="3" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
           heading="Card Types"
         >
           <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
         </it-accord>
-        <it-accord [id]="4" [openedAccordId]="accordion.openedAccordId" (accordOpened)="accordion.onAccordOpen($event)"
+        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
           heading="Setting"
         >
           <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
