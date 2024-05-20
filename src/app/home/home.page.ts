@@ -88,6 +88,14 @@ export class HomePage {
     this.dialog.openSnackbar("No button to continue? Swipe to the left side to resume the game", "home", true);
   }
 
+  tabsChanged(event: boolean) {
+    if (event) {
+      console.log ("Tabs are finished :)");
+    } else {
+      console.log ("Tabs were cancelled :(");
+    }
+  }
+
   test(input?: number) {
     console.log (input ?? window.innerWidth);
   }

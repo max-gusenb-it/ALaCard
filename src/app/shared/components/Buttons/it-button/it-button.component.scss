@@ -1,5 +1,5 @@
 #button {
-    @apply font-semibold rounded-xl transition-all duration-300 flex-1 disabled:bg-neutral-300;
+    @apply font-semibold rounded-xl transition-all duration-300 flex-1 disabled:bg-neutral-300 flex justify-center items-center;
 }
 
 .button-states {

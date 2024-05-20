@@ -22,6 +22,8 @@ import { ExampleComponent } from './components/display/example/example.component
 import { DialogModule } from '@angular/cdk/dialog';
 import { ItAccordComponent } from './components/display/it-accord/it-accord.component';
 import { ItAccordionComponent } from './components/display/it-accordion/it-accordion.component';
+import { ItTabGroupComponent } from './components/display/it-tab-group/it-tab-group.component';
+import { ItTabComponent } from './components/display/it-tab/it-tab.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { ItAccordionComponent } from './components/display/it-accordion/it-accor
     ItAccordionComponent,
     ItIconComponent,
     ItSnackbarComponent,
+    ItTabGroupComponent,
+    ItTabComponent,
     ExampleComponent
   ],
   imports: [
@@ -69,6 +73,8 @@ import { ItAccordionComponent } from './components/display/it-accordion/it-accor
     ItAccordionComponent,
     ItIconComponent,
     ItSnackbarComponent,
+    ItTabGroupComponent,
+    ItTabComponent,
     ExampleComponent
   ],
   providers: [

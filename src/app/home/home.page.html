@@ -181,6 +181,21 @@
       *ngIf="viewCount == 2"
       class="flex flex-col space-y-4"
     >
+      <it-tab-group [advanceControlsEnabled]="true" (onStatusChange)="tabsChanged($event)">
+        <it-tab title="Deck">
+          <h1>Content 1</h1>
+          <p>Hello</p>
+        </it-tab>
+        <it-tab title="Settings">
+          <h1>Content 2</h1>
+          <p>Hello</p>
+        </it-tab>
+        <it-tab title="Types">
+          <h1>Content 3</h1>
+          <p>Hello</p>
+        </it-tab>
+      </it-tab-group>
+
       <it-accord
         heading="How To Play?"
         icon="emoji_events"
