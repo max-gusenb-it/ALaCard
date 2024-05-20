@@ -42,6 +42,18 @@ export class HomePage {
     register: new FormControl(false)
   });
 
+  chips = [
+    { title: "All cards", selected: false },
+    { title: "Answer Creation", selected: false },
+    { title: "Quiz", selected: false },
+    { title: "Topic Voting", selected: false },
+    { title: "Player Voting", selected: false },
+    { title: "Free Text", selected: false },
+    { title: "Truth or dare", selected: false },
+    { title: "Never have i ever", selected: false },
+    { title: "Would you rather", selected: false },
+  ];
+
   constructor(private dialog: DialogService) {}
 
   setColor(color: string) {

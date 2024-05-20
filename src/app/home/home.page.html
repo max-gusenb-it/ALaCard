@@ -12,11 +12,11 @@
   <form
     [formGroup]="formGroup"
     (ngSubmit)="setColor(formGroup.controls['color']!.value!)"
-    class="p-5 sm:p-10 flex flex-col justify-center space-y-4"
+    class="p-5 sm:p-10 flex flex-col justify-center gap-y-4"
   >
     <div
       *ngIf="viewCount == 0"
-      class="flex flex-col space-y-4"
+      class="flex flex-col gap-y-4"
     >
       <it-button-heading icon="home">Home</it-button-heading>
 
@@ -151,7 +151,7 @@
 
     <div
       *ngIf="viewCount == 1"
-      class="flex flex-col space-y-4"
+      class="flex flex-col gap-y-4"
     >
       <it-detail-heading
         heading="Create your user"
@@ -168,7 +168,7 @@
       <it-button (click)="openSnackbar()" class="flex" color="quaternary" size="big">
         Open Snackbar
       </it-button>
-      <div class="flex space-x-4">
+      <div class="flex gap-x-4">
         <it-button (click)="openDialog()" class="flex grow" color="quaternary" size="big">
           Open Dialog
         </it-button>
@@ -179,7 +179,7 @@
     
     <div
       *ngIf="viewCount == 2"
-      class="flex flex-col space-y-4"
+      class="flex flex-col gap-y-4"
     >
       <it-tab-group [advanceControlsEnabled]="true" (onStatusChange)="tabsChanged($event)">
         <it-tab title="Deck">
@@ -229,6 +229,10 @@
           <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
         </it-accord>
       </it-accordion>
+      <div class="flex flex-wrap gap-1">
+        <it-chip *ngFor="let chip of chips" [selectable]="true" [selected]="chip.selected">{{ chip.title }}</it-chip>
+      </div>
+      <it-chip>Chip</it-chip>
     </div>
     
     <it-button class="flex" color="quaternary" size="big" (click)="toggleView()">

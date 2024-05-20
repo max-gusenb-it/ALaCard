@@ -24,11 +24,13 @@ import { ItAccordComponent } from './components/display/it-accord/it-accord.comp
 import { ItAccordionComponent } from './components/display/it-accordion/it-accordion.component';
 import { ItTabGroupComponent } from './components/display/it-tab-group/it-tab-group.component';
 import { ItTabComponent } from './components/display/it-tab/it-tab.component';
+import { ItChipComponent } from './components/buttons/it-chip/it-chip.component';
 
 @NgModule({
   declarations: [
     ControlValueAccessorDirective,
     ItButtonComponent,
+    ItChipComponent,
     ItIconButtonComponent,
     ItMenuButtonComponent,
     ItButtonHeadingComponent,
@@ -58,6 +60,7 @@ import { ItTabComponent } from './components/display/it-tab/it-tab.component';
     FormsModule,
     ReactiveFormsModule,
     ItButtonComponent,
+    ItChipComponent,
     ItIconButtonComponent,
     ItMenuButtonComponent,
     ItButtonHeadingComponent,

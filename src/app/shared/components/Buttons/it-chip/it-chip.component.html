@@ -1,0 +1,11 @@
+<button
+  (click)="toggleState()"
+  class="text-sm p-1.5 rounded-2xl bg-primary-500 transition-all"
+  [ngClass]="{
+    'bg-primary-500': getState() === 'default',
+    'bg-neutral-300': getState() === 'unselected',
+    'bg-primary-300': getState() === 'selected'
+  }"
+>
+  <ng-content></ng-content>
+</button>

@@ -15,7 +15,7 @@
     </div>
   </div>
   <ng-content></ng-content>
-  <div *ngIf="!hideControls" class="flex space-x-2">
+  <div *ngIf="!hideControls" class="flex gap-x-2">
     <it-button color="secondary" class="flex flex-grow" (click)="previousTab()">
       
       <it-icon color="text-white">{{ isFirstTab() ? "close" : "keyboard_arrow_left"}}</it-icon>
