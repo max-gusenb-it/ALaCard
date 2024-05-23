@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ExampleComponent } from '../../shared/components/display/example/example.component';
-import { DialogService } from '../../shared/services/dialog.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
   selector: 'app-test',

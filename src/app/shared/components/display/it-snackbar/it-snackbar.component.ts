@@ -1,8 +1,8 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
 import { takeUntil, timer } from 'rxjs';
+import { ISnackbarData } from 'src/app/core/models/interfaces';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { ISnackbarData } from 'src/app/shared/models/interfaces/snackbar/ISnackbarData';
 
 @Component({
   selector: 'it-snackbar',

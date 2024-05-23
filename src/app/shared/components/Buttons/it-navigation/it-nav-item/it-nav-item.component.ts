@@ -7,5 +7,10 @@ import { Component, Input } from '@angular/core';
 export class ItNavItemComponent {
   @Input() label: string = "label"; 
   @Input() icon: string = "home";
-  @Input() isActive: boolean = false;
+  @Input() activeRoute: string = "";
+  @Input() route: string = "";
+
+  isActive() {
+    return this.route === this.activeRoute;
+  }
 }

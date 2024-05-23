@@ -26,6 +26,7 @@ import { ItTabComponent } from './components/display/it-tab/it-tab.component';
 import { ItChipComponent } from './components/buttons/it-chip/it-chip.component';
 import { ItDeckComponent } from './components/buttons/it-deck/it-deck.component';
 import { ItSelectionListComponent } from './components/display/it-selection-list/it-selection-list.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ItSelectionListComponent } from './components/display/it-selection-list
     ItDrawingBoardComponent,
     ItNavigationComponent,
     ItNavItemComponent,
+    ItNavigationComponent,
     ItCheckboxComponent,
     ItInputComponent,
     ItTextAreaComponent,
@@ -56,7 +58,8 @@ import { ItSelectionListComponent } from './components/display/it-selection-list
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    IonicModule.forRoot()
   ],
   exports: [
     FormsModule,
@@ -70,6 +73,7 @@ import { ItSelectionListComponent } from './components/display/it-selection-list
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
     ItDrawingBoardComponent,
+    ItNavigationComponent,
     ItNavigationComponent,
     ItCheckboxComponent,
     ItInputComponent,

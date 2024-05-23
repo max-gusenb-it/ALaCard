@@ -4,7 +4,7 @@
   "
 >
   <it-icon
-    [color]="!isActive ? 'text-neutral-100' : 'text-primary-500'"
+    [color]="!isActive() ? 'text-neutral-100' : 'text-primary-500'"
     class="m-auto"
   >
     {{icon}}
@@ -12,8 +12,8 @@
   <p
     class="text-xs transition-all"
     [ngClass]="{
-      'text-primary-500': isActive,
-      'text-white': !isActive
+      'text-primary-500': isActive(),
+      'text-white': !isActive()
     }"
   >
     {{label}}

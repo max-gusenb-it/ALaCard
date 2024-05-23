@@ -6,9 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ItButtonHeadingComponent {
 
-  @Input() icon: string = "close";
+  @Input() icon: string = "";
 
-  @Output() clicked = new EventEmitter<any>();
+  @Output() click = new EventEmitter<any>();
 
   constructor() { }
 
