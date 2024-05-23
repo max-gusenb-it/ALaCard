@@ -12,231 +12,218 @@
   <form
     [formGroup]="formGroup"
     (ngSubmit)="setColor(formGroup.controls['color']!.value!)"
-    class="p-5 sm:p-10 flex flex-col justify-center gap-y-4"
+    class="p-5 sm:p-10 flex flex-col gap-y-4 min-h-full"
   >
-    <div
-      *ngIf="viewCount == 0"
-      class="flex flex-col gap-y-4"
-    >
-      <it-button-heading icon="home">Home</it-button-heading>
+    <it-tab-group (onStatusChange)="tabsChanged($event)" class="flex flex-grow">
+      <it-tab title="Controls">
+        <div 
+          class="flex flex-col gap-y-4"
+        >
+          <it-button-heading icon="home">Home</it-button-heading>
 
-      <it-select
-        label="Color"
-        name="color"
-        id="color"
-        formControlName="color"
-      >
-        <option *ngFor="let color of colors">{{color}}</option>
-      </it-select>
-  
-      <it-button class="flex" color="primary" size="big">
-        Change Color
-      </it-button>
+          <it-select
+            label="Color"
+            name="color"
+            id="color"
+            formControlName="color"
+          >
+            <option *ngFor="let color of colors">{{color}}</option>
+          </it-select>
       
-      <it-button class="flex" color="secondary" size="big" (click)="test()">
-        Secondary
-      </it-button>
-  
-      <it-input
-        id="name"
-        label="Name"
-        formControlName="name"
-        icon="face"
-      />
-  
-      <it-input
-        id="number"
-        label="Phone Number"
-        formControlName="number"
-        icon="phone"
-      />
-  
-      <it-input
-        id="password"
-        label="Password"
-        formControlName="password"
-        type="password"
-      >
-        {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
-      </it-input>
-  
-      <it-text-area
-        id="description"
-        label="Description"
-        formControlName="description"
-      >
-      </it-text-area>
-  
-      <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
-        Submit
-      </it-button>
-  
-      <div
-        class="
-          flex flex-row justify-between
-        "
-      >
-        <it-icon-button type="tertiary">
-          playing_cards
-        </it-icon-button>
-  
-        <it-icon-button type="secondary" size="small">
-          playing_cards
-        </it-icon-button>
-  
-        <it-icon-button
-          size="large"
-        >
-          playing_cards
-        </it-icon-button>
-  
-        <it-icon-button
-          size="medium"
-        >
-          playing_cards
-        </it-icon-button>
-  
-        <it-icon>
-          playing_cards
-        </it-icon>
-      </div>
-  
-      <it-checkbox
-        id="age_restriction"
-        formControlName="age_restriction"
-        label="Are you older than 18?"
-      />
-  
-      <it-checkbox-heading
-        id="register-checkbox-heading"
-        heading="Want to register?"
-        formControlName="register"
-      >
-        <div content>
-          Create a account so you never loose your data and get more features like downloading new decks from the store 
+          <it-button class="flex" color="primary" size="big">
+            Change Color
+          </it-button>
+          
+          <it-button class="flex" color="secondary" size="big" (click)="test()">
+            Secondary
+          </it-button>
+      
+          <it-input
+            id="name"
+            label="Name"
+            formControlName="name"
+            icon="face"
+          />
+      
+          <it-input
+            id="number"
+            label="Phone Number"
+            formControlName="number"
+            icon="phone"
+          />
+      
+          <it-input
+            id="password"
+            label="Password"
+            formControlName="password"
+            type="password"
+          >
+            {{ formGroup.controls['password'].value?.length + ' / 10 Signs' }}
+          </it-input>
+      
+          <it-text-area
+            id="description"
+            label="Description"
+            formControlName="description"
+          >
+          </it-text-area>
+      
+          <it-button class="flex" color="primary" size="big" [disabled]="!formGroup.valid">
+            Submit
+          </it-button>
+      
+          <div
+            class="
+              flex flex-row justify-between
+            "
+          >
+            <it-icon-button type="tertiary">
+              playing_cards
+            </it-icon-button>
+      
+            <it-icon-button type="secondary" size="small">
+              playing_cards
+            </it-icon-button>
+      
+            <it-icon-button
+              size="large"
+            >
+              playing_cards
+            </it-icon-button>
+      
+            <it-icon-button
+              size="medium"
+            >
+              playing_cards
+            </it-icon-button>
+      
+            <it-icon>
+              playing_cards
+            </it-icon>
+          </div>
+      
+          <it-checkbox
+            id="age_restriction"
+            formControlName="age_restriction"
+            label="Are you older than 18?"
+          />
+      
+          <it-checkbox-heading
+            id="register-checkbox-heading"
+            heading="Want to register?"
+            formControlName="register"
+          >
+            <div content>
+              Create a account so you never loose your data and get more features like downloading new decks from the store 
+            </div>
+            <it-input
+              collapsible
+              id="test-number"
+              label="Phone Number"
+              formControlName="number"
+              icon="phone"
+            />
+          </it-checkbox-heading>
+          
+          <it-button class="flex" color="tertiary" size="big">
+            Tertiary
+          </it-button>
+          
+          <it-button class="flex" color="quaternary" size="big">
+            Quaternary
+          </it-button>
+          
+          <it-button class="flex" color="red" size="big">
+            Button
+          </it-button>
+          
+          <it-button class="flex" color="blue" size="big">
+            Button
+          </it-button>
+          
+          <it-button class="flex" color="orange" size="big">
+            Button
+          </it-button>
+          
+          <it-button class="flex" color="green" size="big">
+            Button
+          </it-button>
         </div>
-        <it-input
-          collapsible
-          id="test-number"
-          label="Phone Number"
-          formControlName="number"
-          icon="phone"
-        />
-      </it-checkbox-heading>
-      
-      <it-button class="flex" color="tertiary" size="big">
-        Tertiary
-      </it-button>
-      
-      <it-button class="flex" color="quaternary" size="big">
-        Quaternary
-      </it-button>
-      
-      <it-button class="flex" color="red" size="big">
-        Button
-      </it-button>
-      
-      <it-button class="flex" color="blue" size="big">
-        Button
-      </it-button>
-      
-      <it-button class="flex" color="orange" size="big">
-        Button
-      </it-button>
-      
-      <it-button class="flex" color="green" size="big">
-        Button
-      </it-button>
-    </div>
-
-    <div
-      *ngIf="viewCount == 1"
-      class="flex flex-col gap-y-4"
-    >
-      <it-detail-heading
-        heading="Create your user"
-        subheading="Design your own profile image"
-        headingType="h3"
-        subheadingType="sm"
-        detail="Scheiß die nd au heast, zeichne hoid wos guads"
-      />
-
-      <it-drawing-board class="w-full">
-
-      </it-drawing-board>
-      
-      <it-button (click)="openSnackbar()" class="flex" color="quaternary" size="big">
-        Open Snackbar
-      </it-button>
-      <div class="flex gap-x-4">
-        <it-button (click)="openDialog()" class="flex grow" color="quaternary" size="big">
-          Open Dialog
-        </it-button>
-  
-        <it-menu-button (menuItemClicked)="test($event)" [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
-      </div>
-    </div>
-    
-    <div
-      *ngIf="viewCount == 2"
-      class="flex flex-col gap-y-4"
-    >
-      <it-tab-group [advanceControlsEnabled]="true" (onStatusChange)="tabsChanged($event)">
-        <it-tab title="Deck">
-          <h1>Content 1</h1>
-          <p>Hello</p>
-        </it-tab>
-        <it-tab title="Settings">
-          <h1>Content 2</h1>
-          <p>Hello</p>
-        </it-tab>
-        <it-tab title="Types">
-          <h1>Content 3</h1>
-          <p>Hello</p>
-        </it-tab>
-      </it-tab-group>
-
-      <it-accord
-        heading="How To Play?"
-        icon="emoji_events"
-      >
-        <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
-      </it-accord>
-
-      <it-button class="flex" color="red" size="big">
-        Button
-      </it-button>
-
-      <it-accordion #accordion>
-        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
-          heading="How To Play?"
+      </it-tab>
+      <it-tab title="Drawing" [active]="true">
+        <div
+          class="flex flex-col gap-y-4"
         >
-          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
-        </it-accord>
-        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
-          heading="Room"
+          <it-detail-heading
+            heading="Create your user"
+            subheading="Design your own profile image"
+            headingType="h3"
+            subheadingType="sm"
+            detail="Scheiß die nd au heast, zeichne hoid wos guads"
+          />
+
+          <it-drawing-board class="w-full">
+
+          </it-drawing-board>
+          
+          <it-button (click)="openSnackbar()" class="flex" color="quaternary" size="big">
+            Open Snackbar
+          </it-button>
+          <div class="flex gap-x-4">
+            <it-button (click)="openDialog()" class="flex grow" color="quaternary" size="big">
+              Open Dialog
+            </it-button>
+      
+            <it-menu-button (menuItemClicked)="test($event)" [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
+          </div>
+        </div>
+      </it-tab>
+      <it-tab title="Display">
+        <div
+          class="flex flex-col gap-y-4"
         >
-          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
-        </it-accord>
-        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
-          heading="Card Types"
-        >
-          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
-        </it-accord>
-        <it-accord (accordActivated)="accordion.onAccordActivated($event)"
-          heading="Setting"
-        >
-          <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
-        </it-accord>
-      </it-accordion>
-      <div class="flex flex-wrap gap-1">
-        <it-chip *ngFor="let chip of chips" [selectable]="true" [selected]="chip.selected">{{ chip.title }}</it-chip>
-      </div>
-      <it-chip>Chip</it-chip>
-    </div>
-    
-    <it-button class="flex" color="quaternary" size="big" (click)="toggleView()">
-      Switch View
-    </it-button>
+          <it-accord
+            heading="How To Play?"
+            icon="emoji_events"
+          >
+            <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+          </it-accord>
+
+          <it-button class="flex" color="red" size="big">
+            Button
+          </it-button>
+
+          <it-accordion #accordion>
+            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+              heading="How To Play?"
+            >
+              <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+            </it-accord>
+            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+              heading="Room"
+            >
+              <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+            </it-accord>
+            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+              heading="Card Types"
+            >
+              <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+            </it-accord>
+            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+              heading="Setting"
+            >
+              <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+            </it-accord>
+          </it-accordion>
+          <div class="flex flex-wrap gap-1">
+            <it-chip *ngFor="let chip of chips" [selectable]="true" [selected]="chip.selected">{{ chip.title }}</it-chip>
+          </div>
+          <it-chip>Chip</it-chip>
+        </div>
+      </it-tab>
+      <it-tab title="Cards">
+
+      </it-tab>
+    </it-tab-group>
   </form>
 </ion-content>

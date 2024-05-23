@@ -30,7 +30,6 @@ export class HomePage {
   @ViewChild('colorForm') public colorForm: NgForm = null as any;
   
   myInput: string = "";
-  viewCount: number = 2;
 
   formGroup = new FormGroup({
     name: new FormControl({value: "", disabled: false}),
@@ -76,14 +75,6 @@ export class HomePage {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
-  }
-
-  toggleView() {
-    if (this.viewCount < 2) {
-      this.viewCount += 1;
-    } else {
-      this.viewCount = 0;
-    }
   }
 
   openDialog() {
