@@ -1,14 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ExampleComponent } from '../shared/components/display/example/example.component';
-import { DialogService } from '../shared/services/dialog.service';
+import { ExampleComponent } from '../../shared/components/display/example/example.component';
+import { DialogService } from '../../shared/services/dialog.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  selector: 'app-test',
+  templateUrl: 'test.page.html'
 })
-export class HomePage {
+export class TestPage {
   colors: string[] = [
     "red",
     "orange",
