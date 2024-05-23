@@ -189,9 +189,7 @@
             <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
           </it-accord>
 
-          <it-button class="flex" color="red" size="big">
-            Button
-          </it-button>
+          <it-chip>Chip</it-chip>
 
           <it-selection-list #accordion>
             <it-accord (selectionEmitter)="accordion.onSelectionChanged($event)"
@@ -218,10 +216,9 @@
           <div class="flex flex-wrap gap-1">
             <it-chip *ngFor="let chip of chips" [selectable]="true" [selected]="chip.selected">{{ chip.title }}</it-chip>
           </div>
-          <it-chip>Chip</it-chip>
         </div>
       </it-tab>
-      <it-tab title="Cards" [active]="true">
+      <it-tab title="Cards">
         <it-selection-list #selectionList>
           <it-deck 
             *ngFor="let deck of decks"
