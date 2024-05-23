@@ -1,6 +1,4 @@
 <ion-app>
-  <ion-router-outlet
-    style="padding-bottom: 4.875rem;"
-  ></ion-router-outlet>
+  <ion-router-outlet class="bg-primary-100" [ngStyle]="{'padding-bottom': getNavigationHeight() + 'px'}"></ion-router-outlet>
   <it-navigation></it-navigation>
 </ion-app>
