@@ -30,6 +30,9 @@ module.exports = {
       },
       brightness: {
         80: '.8'
+      },
+      dropShadow: {
+        'card': '0 0 6px rgba(0, 0, 0, 0.25)'
       }
     },
   },
