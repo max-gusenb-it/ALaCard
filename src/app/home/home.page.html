@@ -193,36 +193,46 @@
             Button
           </it-button>
 
-          <it-accordion #accordion>
-            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+          <it-selection-list #accordion>
+            <it-accord (selectionEmitter)="accordion.onSelectionChanged($event)"
               heading="How To Play?"
             >
               <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
             </it-accord>
-            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+            <it-accord (selectionEmitter)="accordion.onSelectionChanged($event)"
               heading="Room"
             >
               <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
             </it-accord>
-            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+            <it-accord (selectionEmitter)="accordion.onSelectionChanged($event)"
               heading="Card Types"
             >
               <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
             </it-accord>
-            <it-accord (accordActivated)="accordion.onAccordActivated($event)"
+            <it-accord (selectionEmitter)="accordion.onSelectionChanged($event)"
               heading="Setting"
             >
               <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
             </it-accord>
-          </it-accordion>
+          </it-selection-list>
           <div class="flex flex-wrap gap-1">
             <it-chip *ngFor="let chip of chips" [selectable]="true" [selected]="chip.selected">{{ chip.title }}</it-chip>
           </div>
           <it-chip>Chip</it-chip>
         </div>
       </it-tab>
-      <it-tab title="Cards">
-
+      <it-tab title="Cards" [active]="true">
+        <it-selection-list #selectionList>
+          <it-deck 
+            *ngFor="let deck of decks"
+            [title]="deck.title"
+            [cardCount]="deck.cardCount"
+            [description]="deck.description"
+            [icon]="deck.icon"
+            [flags]="deck.flags"
+            (selectionEmitter)="selectionList.onSelectionChanged($event)"
+          ></it-deck>
+        </it-selection-list>
       </it-tab>
     </it-tab-group>
   </form>

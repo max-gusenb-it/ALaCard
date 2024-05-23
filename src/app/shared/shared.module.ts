@@ -21,16 +21,18 @@ import { ItSnackbarComponent } from './components/display/it-snackbar/it-snackba
 import { ExampleComponent } from './components/display/example/example.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ItAccordComponent } from './components/display/it-accord/it-accord.component';
-import { ItAccordionComponent } from './components/display/it-accordion/it-accordion.component';
 import { ItTabGroupComponent } from './components/display/it-tab-group/it-tab-group.component';
 import { ItTabComponent } from './components/display/it-tab/it-tab.component';
 import { ItChipComponent } from './components/buttons/it-chip/it-chip.component';
+import { ItDeckComponent } from './components/buttons/it-deck/it-deck.component';
+import { ItSelectionListComponent } from './components/display/it-selection-list/it-selection-list.component';
 
 @NgModule({
   declarations: [
     ControlValueAccessorDirective,
     ItButtonComponent,
     ItChipComponent,
+    ItDeckComponent,
     ItIconButtonComponent,
     ItMenuButtonComponent,
     ItButtonHeadingComponent,
@@ -44,8 +46,8 @@ import { ItChipComponent } from './components/buttons/it-chip/it-chip.component'
     ItTextAreaComponent,
     ItSelectComponent,
     ItAccordComponent,
-    ItAccordionComponent,
     ItIconComponent,
+    ItSelectionListComponent,
     ItSnackbarComponent,
     ItTabGroupComponent,
     ItTabComponent,
@@ -61,6 +63,7 @@ import { ItChipComponent } from './components/buttons/it-chip/it-chip.component'
     ReactiveFormsModule,
     ItButtonComponent,
     ItChipComponent,
+    ItDeckComponent,
     ItIconButtonComponent,
     ItMenuButtonComponent,
     ItButtonHeadingComponent,
@@ -73,8 +76,8 @@ import { ItChipComponent } from './components/buttons/it-chip/it-chip.component'
     ItTextAreaComponent,
     ItSelectComponent,
     ItAccordComponent,
-    ItAccordionComponent,
     ItIconComponent,
+    ItSelectionListComponent,
     ItSnackbarComponent,
     ItTabGroupComponent,
     ItTabComponent,

@@ -1,27 +1,17 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
+import { Selectable } from 'src/app/shared/models/interfaces/display/Selectable';
 
 @Component({
   selector: 'it-accord',
-  templateUrl: './it-accord.component.html'
+  templateUrl: './it-accord.component.html',
+  providers: [{provide: Selectable, useExisting: forwardRef(() => ItAccordComponent)}]
 })
-export class ItAccordComponent implements AfterViewInit {
-  private _activeAccordId: number = 0;
+export class ItAccordComponent extends Selectable implements AfterViewInit {
 
   @ViewChild("content") div?: ElementRef<HTMLDivElement>;
 
   @Input() heading: string = "";
   @Input() icon?: string;
-  @Input() id: number = 0;
-  @Input() set activeAccordId(value: number) {
-    this._activeAccordId = value;
-    if (value != this.id) this.deactivate();
-  }
-
-  @Output() accordActivated = new EventEmitter<number>();
-
-  active: boolean = false;
-
-  constructor() {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -29,13 +19,13 @@ export class ItAccordComponent implements AfterViewInit {
     });
   }
 
-  deactivate() {
-    if (this.active) this.toggleAccord();
+  override unselect(): void {
+    super.unselect();
+    this.animateToggle();  
   }
 
-  toggleAccord() {
-    this.active = !this.active;
-    if (this.active) this.accordActivated.emit(this.id);
+  override select(): void {
+    super.select();
     this.animateToggle();
   }
 
@@ -44,7 +34,7 @@ export class ItAccordComponent implements AfterViewInit {
       console.error("it-accord: content element not found!");
     }
 
-    if (this.active) {
+    if (this.selected) {
       this.div!.nativeElement.style.maxHeight = this.div!.nativeElement.scrollHeight + "px";
     } else {
       this.div!.nativeElement.style.maxHeight = "0px";

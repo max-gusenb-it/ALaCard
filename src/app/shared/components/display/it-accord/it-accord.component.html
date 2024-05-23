@@ -1,15 +1,15 @@
 <div class="flex flex-col">
   <div 
     class="flex flex-row justify-between items-center cursor-pointer"
-    (click)="toggleAccord()"
+    (click)="toggleState()"
   >
     <h4>{{heading}}</h4>
     <it-icon
       class="transition-all ease-out"
       [ngClass]="{
-        'rotate-180': active && !!!icon
+        'rotate-180': selected && !!!icon
       }"
-      [filled]="!!icon && !active"
+      [filled]="!!icon && !selected"
     >
       {{ !!icon ? icon : 'expand_more' }}
     </it-icon>
@@ -18,7 +18,7 @@
     #content
     id="content"
     class="
-      transition-all overflow-hidden duration-700 max-h-0 ease-in-out
+      overflow-hidden max-h-0 transition-all duration-700 ease-in-out
     "
   >
     <!-- Using div instead of padding/margin so antimation is displayed correct -->
