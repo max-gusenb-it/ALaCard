@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { NgxsModule } from '@ngxs/store';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -27,6 +28,9 @@ import { SharedModule } from './shared/shared.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     SharedModule,
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase.config)),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()), 
