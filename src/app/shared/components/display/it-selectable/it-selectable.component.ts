@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 @Component({
     template: ''
 })
-export abstract class Selectable {
+export abstract class ItSelectableComponent {
     @Input() selected: boolean = false;
 
     @Output() selectionEmitter: EventEmitter<number> = new EventEmitter();

@@ -1,12 +1,12 @@
 import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
-import { Selectable } from 'src/app/shared/models/interfaces/display/Selectable';
+import { ItSelectableComponent } from 'src/app/shared/components/display/it-selectable/it-selectable.component';
 
 @Component({
   selector: 'it-selection-list',
   templateUrl: './it-selection-list.component.html'
 })
 export class ItSelectionListComponent implements AfterContentInit {
-  @ContentChildren(Selectable) selectables: QueryList<Selectable> = null as any;
+  @ContentChildren(ItSelectableComponent) selectables: QueryList<ItSelectableComponent> = null as any;
   
   /**
    * Should user only be able to selct one object from the list

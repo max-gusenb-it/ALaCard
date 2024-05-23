@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
-import { Selectable } from 'src/app/shared/models/interfaces/display/Selectable';
+import { ItSelectableComponent } from 'src/app/shared/components/display/it-selectable/it-selectable.component';
 
 @Component({
   selector: 'it-accord',
   templateUrl: './it-accord.component.html',
-  providers: [{provide: Selectable, useExisting: forwardRef(() => ItAccordComponent)}]
+  providers: [{provide: ItSelectableComponent, useExisting: forwardRef(() => ItAccordComponent)}]
 })
-export class ItAccordComponent extends Selectable implements AfterViewInit {
+export class ItAccordComponent extends ItSelectableComponent implements AfterViewInit {
 
   @ViewChild("content") div?: ElementRef<HTMLDivElement>;
 

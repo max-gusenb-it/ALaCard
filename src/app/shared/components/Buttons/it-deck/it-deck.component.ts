@@ -1,12 +1,12 @@
 import { Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
-import { Selectable } from 'src/app/shared/models/interfaces/display/Selectable';
+import { ItSelectableComponent } from 'src/app/shared/components/display/it-selectable/it-selectable.component';
 
 @Component({
   selector: 'it-deck',
   templateUrl: './it-deck.component.html',
-  providers: [{provide: Selectable, useExisting: forwardRef(() => ItDeckComponent)}],
+  providers: [{provide: ItSelectableComponent, useExisting: forwardRef(() => ItDeckComponent)}],
 })
-export class ItDeckComponent extends Selectable {
+export class ItDeckComponent extends ItSelectableComponent {
   @ViewChild("chipContainer") chipContainer?: ElementRef<HTMLDivElement>;
 
   @Input() title: string = null as any;
