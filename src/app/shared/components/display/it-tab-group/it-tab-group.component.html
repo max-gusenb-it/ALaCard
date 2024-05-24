@@ -5,10 +5,13 @@
     <button
       *ngFor="let tab of tabs"
       (click)="selectTab(tab)"
-      [ngClass]="{'border-opacity-100': tab.active === true}"
-      class="border-b-2 border-neutral-950 border-opacity-0 transition-all duration-150"
     >
-      <h4>{{ tab.title }}</h4>
+      <h4
+        [ngClass]="{'border-transparent': !tab.active}"
+        class="border-b-2 border-neutral-950 transition-all"
+      >
+        {{ tab.title }}
+      </h4>
     </button>
   </div>
   <ng-content class="h-full"></ng-content>
