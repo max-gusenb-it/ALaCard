@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NoAccountComponent } from './no-account/no-account.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     HomePageRoutingModule,
     SharedModule
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage,
+    NoAccountComponent
+  ]
 })
 export class HomePageModule {}
