@@ -27,6 +27,7 @@ import { ItChipComponent } from './components/buttons/it-chip/it-chip.component'
 import { ItDeckComponent } from './components/buttons/it-deck/it-deck.component';
 import { ItSelectionListComponent } from './components/display/it-selection-list/it-selection-list.component';
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -59,11 +60,13 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     ReactiveFormsModule,
     DialogModule,
-    IonicModule.forRoot()
+    IonicModule.forRoot(),
+    TranslateModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
     ItButtonComponent,
     ItChipComponent,
     ItDeckComponent,

@@ -1,0 +1,24 @@
+{
+    "features": {
+        "home": {
+            "home": "Home",
+            "no-account": {
+                "title": "Let’s get started",
+                "description": "You can login or register to unlock more features. Create a room as a guest to start playing immediately!",
+                "login": "Login",
+                "new-account": "Create new account",
+                "create-guest-room": "Create room as guest"
+            }
+        }
+    },
+    "shared": {
+        "components": {
+            "navigation": {
+                "home": "Home",
+                "decks": "Decks",
+                "store": "Store",
+                "profile": "Profile"
+            }
+        }
+    }
+}

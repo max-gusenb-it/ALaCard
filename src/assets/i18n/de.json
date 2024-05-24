@@ -1,0 +1,24 @@
+{
+  "features": {
+    "home": {
+      "home": "Home",
+      "no-account": {
+        "create-guest-room": "Raum als Gast erstellen",
+        "description": "Du kannst dich anmelden oder registrieren, um weitere Funktionen freizuschalten. Erstelle einen Raum als Gast und fang sofort zum Spielen an!",
+        "login": "Login",
+        "new-account": "Neuen Account erstellen",
+        "title": "Let’s get started"
+      }
+    }
+  },
+  "shared": {
+    "components": {
+      "navigation": {
+        "decks": "Decks",
+        "store": "Store",
+        "home": "Home",
+        "profile": "Profil"
+      }
+    }
+  }
+}

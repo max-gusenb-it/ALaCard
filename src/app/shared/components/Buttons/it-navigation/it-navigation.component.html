@@ -2,7 +2,7 @@
   <ion-tab-bar slot="bottom" *ngIf="displayNavigation()">
     <it-nav-item
       #home
-      label="Home"
+      [label]="'shared.components.navigation.home' | translate"
       icon="home"
       route="/home"
       [activeRoute]="router.routerState.snapshot.url"
@@ -10,7 +10,7 @@
     />
     <it-nav-item
       #decks
-      label="Decks"
+      [label]="'shared.components.navigation.decks' | translate"
       icon="playing_cards"
       route="/test"
       [activeRoute]="router.routerState.snapshot.url"
@@ -25,7 +25,7 @@
     </it-icon-button>
     <it-nav-item
       #store
-      label="Store"
+      [label]="'shared.components.navigation.store' | translate"
       icon="search"
       route="/store"
       [activeRoute]="router.routerState.snapshot.url"
@@ -33,7 +33,7 @@
     />
     <it-nav-item
       #profile
-      label="Profile"
+      [label]="'shared.components.navigation.profile' | translate"
       icon="person"
       route="/profile"
       [activeRoute]="router.routerState.snapshot.url"
