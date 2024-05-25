@@ -9,15 +9,14 @@
             id="email"
             [label]="'features.home.login.email' | translate"
             formControlName="email"
+            type="email"
         />
         <it-input 
             id="password"
             [label]="'features.home.login.password' | translate"
             formControlName="password"
             type="password"
-        >
-            {{ loginForm.controls['password'].value?.length + ' / 10 Signs' }}
-        </it-input>
+        />
     </div>
     <it-button 
         class="flex"
