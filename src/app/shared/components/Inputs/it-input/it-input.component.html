@@ -1,5 +1,6 @@
 <div class="relative" *ngIf="control">
   <input
+    [autocomplete]="type === 'password' ? 'on' : 'off'"
     [required]="isRequired"
     [type]="type"
     [id]="getId()"
