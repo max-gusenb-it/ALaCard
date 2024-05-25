@@ -8,5 +8,7 @@
     [label]="'shared.component.profile-editor.username' | translate"
     formControlName="username"
   />
-  <it-drawing-board></it-drawing-board>
+  <it-drawing-board
+    (drawingChanged)="setProfilePicture($event)"
+  />
 </form>

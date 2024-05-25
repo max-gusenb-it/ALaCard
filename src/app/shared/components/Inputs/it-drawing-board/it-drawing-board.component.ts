@@ -21,6 +21,8 @@ interface CanvasPosition {
   templateUrl: './it-drawing-board.component.html'
 })
 export class ItDrawingBoardComponent implements AfterViewInit {
+  private readonly whiteFillAction: string = "fill-#ffffff";
+
   @ViewChild("container", { read: ElementRef }) container?: ElementRef<HTMLDivElement>;
 
   @Output() drawingChanged: EventEmitter<string> = new EventEmitter();
@@ -43,7 +45,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   prevPointerdownCounter: number = 0;
 
   /** When the user stops drawing, the whole painting is saved in this array so when he wants to revert his changes, we can use these urls */
-  drawingUrls: string[] = [];
+  drawingUrls: { drawingUrl: string, action: string }[] = [];
   
   lineWidth = 8;
   lineWidths = [8, 16, 24];
@@ -117,14 +119,13 @@ export class ItDrawingBoardComponent implements AfterViewInit {
    * @param callCount callCount passed on to setCanvasSize to control how often the method is called on fail
    */
   onResize(callCount?: number) {
-    this.setCanvasSize(callCount).then(() => {
-      this.canvasPosition = this.getCanvasSizeInCSSPixels();
-
-      console.log (this.canvasPosition);
-    
-      this.clearCanvas();
-    }).catch(() => {
-      console.error ("Could not set size of canvas. Please try to refresh the application");
+    this.setCanvasSize(callCount)
+      .then(() => {
+        this.canvasPosition = this.getCanvasSizeInCSSPixels();
+      })
+      .finally(() => this.initiateCanvas())
+      .catch(() => {
+        console.error ("Could not set size of canvas. Please try to refresh the application");
     });
   }
 
@@ -190,6 +191,13 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     return Number(px.replace("px",""));
   }
 
+  initiateCanvas() {
+    this.clearCanvas();
+    if (this.drawingUrls.length !== 0) {
+      this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1].drawingUrl);
+    }
+  }
+
   startDrawing(event: Event) {
     this.painting = true;
     this.disableScrolling();
@@ -201,11 +209,12 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   }
 
   endDrawing() {
-    this.painting = false;
-    this.enableSrolling();
     // Reset cursor coordinates so touch lines do not connect to each other
     this.resetCursorCoordinates();
-    this.addDrawingUrl();
+    if (!this.painting) return;
+    this.painting = false;
+    this.enableSrolling();
+    this.addDrawingUrl("draw");
     this.drawingChanged.emit(this.exportImage());
   }
 
@@ -271,15 +280,18 @@ export class ItDrawingBoardComponent implements AfterViewInit {
    * pointerdownCounter check ensures, that no url's are added on revert button click when using mobile. (Revert button fires touch end event)
    * @date 4/8/2024 - 2:18:00 PM
    */
-  addDrawingUrl() {
+  addDrawingUrl(action: string) {
     const url = this.canvas.toDataURL();
-    if (!!url && url !== this.drawingUrls[this.drawingUrls.length - 1] && this.pointerdownCounter !== this.prevPointerdownCounter) {
-      this.forceAddDrawingUrl(url);
+    if (!!url && (this.drawingUrls.length === 0 || url !== this.drawingUrls[this.drawingUrls.length - 1].drawingUrl) && this.pointerdownCounter !== this.prevPointerdownCounter) {
+      this.forceAddDrawingUrl(url, action);
     }
   }
 
-  forceAddDrawingUrl(url: string) {
-    this.drawingUrls.push(url);
+  forceAddDrawingUrl(url: string, action: string) {
+    this.drawingUrls.push({
+      drawingUrl: url,
+      action: action
+    });
     this.prevPointerdownCounter = this.pointerdownCounter;
   }
   
@@ -290,6 +302,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   clearCanvas() {
     this.context.fillStyle = this.white;
     this.context.fillRect(0, 0, 10000, 10000);
+    this.drawingChanged.emit("");
   }
 
   setColor(color: string) {
@@ -303,14 +316,21 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   fillCanvas(color?: string) {
     this.context.fillStyle = color ?? this.color;
     this.context.fillRect(0, 0, 10000, 10000);
-    this.forceAddDrawingUrl(this.canvas.toDataURL());
+    this.forceAddDrawingUrl(this.canvas.toDataURL(), "fill-" + this.context.fillStyle);
+    if (this.context.fillStyle.toLocaleLowerCase() === this.white.toLocaleLowerCase()) this.drawingChanged.emit("");
+    else this.drawingChanged.emit(this.exportImage());
   }
 
   revert() {
     this.clearCanvas();
     this.drawingUrls.pop();
     if (this.drawingUrls.length >= 1) {
-      this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1]);
+      this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1].drawingUrl);
+      if (this.drawingUrls[this.drawingUrls.length - 1].action !== this.whiteFillAction) {
+        this.drawingChanged.emit(this.exportImage());
+      } else {
+        this.drawingChanged.emit("");
+      }
     }
   }
   

@@ -15,6 +15,7 @@ export class ItProfileEditorComponent extends AngularLifecycle {
   profileForm = new FormGroup({
     username: new FormControl({value: "", disabled: false}, [Validators.required]),
   });
+  profilePicture: string = "";
 
   constructor() {
     super();
@@ -22,13 +23,20 @@ export class ItProfileEditorComponent extends AngularLifecycle {
       .pipe(
         takeUntil(this.destroyed$)
       )
-      .subscribe(c => {
-        this.profileFormChanged.emit({
-          username: c.username,
-          profilePicture: null,
-          valid: this.profileForm.valid
-        });
-    });
+      .subscribe(() => this.emitProfileChanges());
+  }
+
+  setProfilePicture(drawing: string) {
+    this.profilePicture = drawing;
+    this.emitProfileChanges();
+  }
+
+  emitProfileChanges() {
+    this.profileFormChanged.emit({
+      username: this.profileForm.controls['username'].value,
+      profilePicture: this.profilePicture,
+      valid: this.profileForm.valid && !!this.profilePicture
+    })
   }
 
 }
