@@ -9,7 +9,8 @@ type ButtonSize = "small" | "medium" | "large";
   styleUrls: ['./it-icon-button.component.scss'],
 })
 export class ItIconButtonComponent  implements OnInit {
-  @Input() type: ButtonType = "primary";
+  @Input() type: "button" | "menu" | "reset" | "submit" = "button";
+  @Input() color: ButtonType = "primary";
   @Input() size: ButtonSize = "small";
   @Input() iconColor: string = "";
   @Input() iconSize: number = 0;
@@ -20,7 +21,7 @@ export class ItIconButtonComponent  implements OnInit {
 
   getColor() {
     if (!!!this.iconColor) {
-      return this.type !== 'secondary' ? 'text-neutral-900' : 'text-neutral-100'
+      return this.color !== 'secondary' ? 'text-neutral-900' : 'text-neutral-100'
     } else {
       return this.iconColor;
     }

@@ -7,10 +7,11 @@
     hover:bg-neutral-400/20
     active:bg-neutral-500/30
   "
+  [type]="type"
   [ngClass]="{
-    'bg-primary-500 hover:brightness-90 active:brightness-75': type === 'primary',
-    'bg-neutral-900 hover:brightness-125 active:brightness-100': type === 'secondary',
-    'hover:bg-neutral-400/20 active:bg-neutral-500/30': type === 'tertiary'
+    'bg-primary-500 hover:brightness-90 active:brightness-75': color === 'primary',
+    'bg-neutral-900 hover:brightness-125 active:brightness-100': color === 'secondary',
+    'hover:bg-neutral-400/20 active:bg-neutral-500/30': color === 'tertiary'
   }"
 >
   <!-- size => 30 px : 24 px -->
