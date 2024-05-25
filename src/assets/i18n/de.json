@@ -8,6 +8,11 @@
         "login": "Login",
         "new-account": "Neuen Account erstellen",
         "title": "Let’s get started"
+      },
+      "login": {
+        "login": "Login",
+        "email": "E-Mail",
+        "password": "Passwort"
       }
     }
   },

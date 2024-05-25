@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'no-account',
@@ -6,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class NoAccountComponent {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
+
+  async openLoginModal() {
+    const modal = await this.modalCtrl.create({
+      component: LoginComponent
+    });
+    modal.present();
+  }
 
 }

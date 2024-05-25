@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NoAccountComponent } from './no-account/no-account.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { NoAccountComponent } from './no-account/no-account.component';
   ],
   declarations: [
     HomePage,
+    LoginComponent,
     NoAccountComponent
   ]
 })

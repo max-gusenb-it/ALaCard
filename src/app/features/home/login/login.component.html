@@ -1,0 +1,28 @@
+<form
+    [formGroup]="loginForm"
+    class="h-full flex flex-col p-6 justify-between"
+>
+    <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
+    <div class="flex flex-col gap-4">
+        <h3>{{'features.home.login.login' | translate}}</h3>
+        <it-input
+            id="email"
+            [label]="'features.home.login.email' | translate"
+            formControlName="email"
+        />
+        <it-input 
+            id="password"
+            [label]="'features.home.login.password' | translate"
+            formControlName="password"
+            type="password"
+        >
+            {{ loginForm.controls['password'].value?.length + ' / 10 Signs' }}
+        </it-input>
+    </div>
+    <it-button 
+        class="flex"
+        [disabled]="!loginForm.valid"
+    >
+        {{'features.home.login.login' | translate}}
+    </it-button>
+</form>
