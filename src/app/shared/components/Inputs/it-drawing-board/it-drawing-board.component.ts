@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 interface CursorCoordinates {
   x: number;
@@ -22,6 +22,8 @@ interface CanvasPosition {
 })
 export class ItDrawingBoardComponent implements AfterViewInit {
   @ViewChild("container", { read: ElementRef }) container?: ElementRef<HTMLDivElement>;
+
+  @Output() drawingChanged: EventEmitter<string> = new EventEmitter();
 
   canvas: HTMLCanvasElement = null as any;
   /** When canvas size can not be set, this number defines how oft it should be tried again before throwing an error */
@@ -117,6 +119,8 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   onResize(callCount?: number) {
     this.setCanvasSize(callCount).then(() => {
       this.canvasPosition = this.getCanvasSizeInCSSPixels();
+
+      console.log (this.canvasPosition);
     
       this.clearCanvas();
     }).catch(() => {
@@ -166,9 +170,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     left  = this.convertPxToNum(canStyle.paddingLeft);
     left += this.convertPxToNum(canStyle.borderLeftWidth);
     
-    top  = this.convertPxToNum(canStyle.paddingTop);
-    top += this.convertPxToNum(canStyle.borderTopWidth);
-    
     right  = this.convertPxToNum(canStyle.paddingRight);
     right += this.convertPxToNum(canStyle.borderRightWidth);
     
@@ -176,12 +177,12 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     bottom += this.convertPxToNum(canStyle.borderBottomWidth);       
     
     return {
-        top: bounds.top + top  + scrollY,
+        top: this.canvas.offsetTop,
         bottom: bounds.bottom + bottom + scrollY,
         left: bounds.left + left  + scrollX,
         right: bounds.right + right + scrollX,
         width: bounds.width - left - right,
-        height: bounds.height - top - bottom,
+        height: this.canvas.clientHeight,
     };
   }
 
@@ -205,6 +206,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     // Reset cursor coordinates so touch lines do not connect to each other
     this.resetCursorCoordinates();
     this.addDrawingUrl();
+    this.drawingChanged.emit(this.exportImage());
   }
 
   enableSrolling() {
