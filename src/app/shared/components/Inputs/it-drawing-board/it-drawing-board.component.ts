@@ -195,6 +195,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.clearCanvas();
     if (this.drawingUrls.length !== 0) {
       this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1].drawingUrl);
+      this.drawingChanged.emit(this.exportImage());
     }
   }
 
