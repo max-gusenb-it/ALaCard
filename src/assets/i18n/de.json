@@ -9,7 +9,7 @@
         "new-account": "Neuen Account erstellen",
         "title": "Let’s get started"
       },
-      "login": {
+      "login-modal": {
         "login": "Login",
         "email": "E-Mail",
         "password": "Passwort"
@@ -24,6 +24,15 @@
         "home": "Home",
         "profile": "Profil"
       }
+    },
+    "component": {
+      "profile-editor": {
+        "create-profile": "Erstelle dein Profil",
+        "username": "Benutzername"
+      }
     }
+  },
+  "actions": {
+    "continue": "Weiter"
   }
 }

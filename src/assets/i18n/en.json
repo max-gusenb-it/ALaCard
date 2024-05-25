@@ -9,7 +9,7 @@
         "new-account": "Create new account",
         "create-guest-room": "Create room as guest"
       },
-      "login": {
+      "login-modal": {
         "login": "Login",
         "email": "E-Mail",
         "password": "Password"
@@ -24,6 +24,15 @@
         "store": "Store",
         "profile": "Profile"
       }
+    },
+    "component": {
+      "profile-editor": {
+        "create-profile": "Create your profile",
+        "username": "Username"
+      }
     }
+  },
+  "actions": {
+    "continue": "Continue"
   }
 }

@@ -4,16 +4,16 @@
 >
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
     <div class="flex flex-col gap-4">
-        <h3>{{'features.home.login.login' | translate}}</h3>
+        <h3>{{'features.home.login-modal.login' | translate}}</h3>
         <it-input
             id="email"
-            [label]="'features.home.login.email' | translate"
+            [label]="'features.home.login-modal.email' | translate"
             formControlName="email"
             type="email"
         />
         <it-input 
             id="password"
-            [label]="'features.home.login.password' | translate"
+            [label]="'features.home.login-modal.password' | translate"
             formControlName="password"
             type="password"
         />
@@ -22,6 +22,6 @@
         class="flex"
         [disabled]="!loginForm.valid"
     >
-        {{'features.home.login.login' | translate}}
+        {{'features.home.login-modal.login' | translate}}
     </it-button>
 </form>

@@ -3,7 +3,7 @@ import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { BasePortalOutlet } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { ItSnackbarComponent } from 'src/app/shared/components/display/it-snackbar/it-snackbar.component';
-import { ISnackbarData } from '../models/interfaces/components/snackbar/ISnackbarData';
+import { ISnackbarData } from '../models/interfaces/components/display/it-snackbar/ISnackbarData';
 
 @Injectable({
   providedIn: 'root'
