@@ -51,7 +51,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   lineWidths = [8, 16, 24];
 
   black: string = "#000000";
-  white: string = "#FFFFFF";
+  white: string = "#ffffff";
   color: string = this.black;
   colors: string[][] = [
     [
@@ -195,7 +195,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.clearCanvas();
     if (this.drawingUrls.length !== 0) {
       this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1].drawingUrl);
-      this.drawingChanged.emit(this.exportImage());
+      this.emitDrawing();
     }
   }
 
@@ -215,8 +215,8 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     if (!this.painting) return;
     this.painting = false;
     this.enableSrolling();
-    this.addDrawingUrl("draw");
-    this.drawingChanged.emit(this.exportImage());
+    this.addDrawingUrl("draw-" + this.color);
+    this.emitDrawing();
   }
 
   enableSrolling() {
@@ -319,7 +319,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.context.fillRect(0, 0, 10000, 10000);
     this.forceAddDrawingUrl(this.canvas.toDataURL(), "fill-" + this.context.fillStyle);
     if (this.context.fillStyle.toLocaleLowerCase() === this.white.toLocaleLowerCase()) this.drawingChanged.emit("");
-    else this.drawingChanged.emit(this.exportImage());
+    else this.emitDrawing();
   }
 
   revert() {
@@ -328,11 +328,27 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     if (this.drawingUrls.length >= 1) {
       this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1].drawingUrl);
       if (this.drawingUrls[this.drawingUrls.length - 1].action !== this.whiteFillAction) {
-        this.drawingChanged.emit(this.exportImage());
+        this.emitDrawing();
       } else {
         this.drawingChanged.emit("");
       }
     }
+  }
+
+  emitDrawing() {
+    if (this.drawingUrls.length !== 0) {
+      let onlyWhite = true;
+      let isFillAction = false;
+      for(let i = this.drawingUrls.length - 1; i >= 0 && onlyWhite && !isFillAction; i--) {
+        isFillAction = this.drawingUrls[i].action.startsWith("fill");
+        onlyWhite = this.drawingUrls[i].action.indexOf(this.white) !== -1;
+      }
+      if (onlyWhite) {
+        this.drawingChanged.emit("");
+        return;
+      }
+    }
+    this.drawingChanged.emit(this.exportImage());
   }
   
   setCanvasImage(image: string) {
