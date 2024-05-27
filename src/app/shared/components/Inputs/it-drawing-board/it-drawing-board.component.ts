@@ -21,6 +21,7 @@ interface CanvasPosition {
   templateUrl: './it-drawing-board.component.html'
 })
 export class ItDrawingBoardComponent implements AfterViewInit {
+  private readonly parentNodeId: string = "drawing-board-parent";
   private readonly whiteFillAction: string = "fill-#ffffff";
 
   @ViewChild("container", { read: ElementRef }) container?: ElementRef<HTMLDivElement>;
@@ -120,7 +121,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
 
     window.addEventListener("touchend", this.endDrawing.bind(this));
     window.addEventListener("touchcancel", this.endDrawing.bind(this));
-    this.canvas.addEventListener("touchmove", this.draw.bind(this));
+    this.canvas.addEventListener("touchmove", this.draw.bind(this), { passive: true });
   }
 
   /**
@@ -172,7 +173,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
    * @returns CanvasPosition
    */
   getCanvasSizeInCSSPixels() : CanvasPosition {
-    var top, left, right, bottom;
+    var left, right, bottom;
     const bounds = this.canvas.getBoundingClientRect();
     const canStyle = getComputedStyle(this.canvas);
     
@@ -183,10 +184,17 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     right += this.convertPxToNum(canStyle.borderRightWidth);
     
     bottom  = this.convertPxToNum(canStyle.paddingBottom);
-    bottom += this.convertPxToNum(canStyle.borderBottomWidth);       
+    bottom += this.convertPxToNum(canStyle.borderBottomWidth);
+    
+    // check if drawing board has a parent (modal) with it's own offset
+    let parentOffest = 0;
+    let parentElement = document.getElementById(this.parentNodeId);
+    if (!!parentElement && parentElement.children.length >= 1) {
+      parentOffest = (parentElement.clientHeight - parentElement.children[0].clientHeight) / 2;
+    }
     
     return {
-        top: this.canvas.offsetTop,
+        top: this.canvas.offsetTop + parentOffest,
         bottom: bounds.bottom + bottom + scrollY,
         left: bounds.left + left  + scrollX,
         right: bounds.right + right + scrollX,

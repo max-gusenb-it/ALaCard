@@ -20,7 +20,9 @@ export class NoAccountComponent {
 
   async openSignUpModal() {
     const modal = await this.modalCtrl.create({
-      component: SignUpModal
+      component: SignUpModal,
+      id: "drawing-board-parent",
+      cssClass: "sign-up-modal"
     });
     modal.present();
   }
