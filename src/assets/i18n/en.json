@@ -13,6 +13,13 @@
         "login": "Login",
         "email": "E-Mail",
         "password": "Password"
+      },
+      "sign-up-modal": {
+        "create-account": {
+          "title": "Create your account",
+          "want-to-register": "Want to register?",
+          "description": "Create a account so you never loose your data and get more features like downloading new decks from the store"
+        }
       }
     }
   },
@@ -23,16 +30,18 @@
         "decks": "Decks",
         "store": "Store",
         "profile": "Profile"
-      }
-    },
-    "component": {
+      },
       "profile-editor": {
         "create-profile": "Create your profile",
         "username": "Username"
+      },
+      "input": {
+        "signs": "Signs"
       }
     }
   },
   "actions": {
-    "continue": "Continue"
+    "continue": "Continue",
+    "back": "Back"
   }
 }

@@ -1,22 +1,57 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { IProfileEditorData } from 'src/app/core/models/interfaces/components/forms/it-profile-editor/IProfileEditorData';
+import { ICreateAccountFormData, IProfileEditorFormData } from 'src/app/core/models/interfaces';
 
 @Component({
   selector: 'sign-up-modal',
   templateUrl: './sign-up-modal.component.html'
 })
 export class SignUpModal {
-  profileData: IProfileEditorData = null as any;
+  stepIndex: number = 0;
 
-  constructor(private modalCtrl: ModalController) { }
+  profileFormData: IProfileEditorFormData = null as any;
+  createAccountFormData: ICreateAccountFormData = null as any;
+
+  constructor(private modalCtrl: ModalController, private changeDetectorRef: ChangeDetectorRef) { }
 
   close() {
     this.modalCtrl.dismiss();
   }
 
-  setProfileData(profileData: IProfileEditorData) {
-    this.profileData = profileData;
+  setProfileFormData(profileFormData: IProfileEditorFormData) {
+    let initialSet = !!!this.profileFormData;
+    this.profileFormData = profileFormData;
+    if (initialSet) this.changeDetectorRef.detectChanges();
+  }
+
+  setCreateAccountFormData(createAccountFormData: ICreateAccountFormData) {
+    this.createAccountFormData = createAccountFormData;
+  }
+
+  formInvalid() {
+    switch(this.stepIndex) {
+      case 0: {
+        return !!!this.profileFormData || !this.profileFormData.valid;
+      };
+      case 1: {
+        return !!!this.createAccountFormData || (!this.createAccountFormData.valid && this.createAccountFormData.register);
+      }
+    }
+    return false;
+  }
+
+  goBack() {
+    this.stepIndex -= 1;
+    this.changeDetectorRef.detectChanges();
+  }
+
+  goForward() {
+    switch(this.stepIndex) {
+      case 0: {
+        this.stepIndex += 1;
+        this.changeDetectorRef.detectChanges();
+      } break;
+    }
   }
 
 }

@@ -2,6 +2,35 @@
     class="h-full flex flex-col p-6 justify-between"
 >
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
-    <it-profile-editor (profileFormChanged)="setProfileData($event)"></it-profile-editor>
-    <it-button class="flex" [disabled]="!!!profileData || !profileData.valid">{{'actions.continue' | translate}}</it-button>
+    <it-profile-editor
+        *ngIf="stepIndex === 0"
+        (profileEditorFormChanged)="setProfileFormData($event)"
+        [profileEditorFormData]="profileFormData"
+    />
+    <create-account
+        *ngIf="stepIndex === 1"
+        (createAccountFormChanges)="setCreateAccountFormData($event)"
+        [createAccountFormData]="createAccountFormData"
+    />
+    <div
+        class="flex flex-col gap-2"
+    >
+        <div class="flex flex-row gap-4">
+            <it-button
+                class="flex flex-grow"
+                color="secondary"
+                *ngIf="stepIndex > 0"
+                (click)="goBack()"
+            >
+                {{'actions.back' | translate}}
+            </it-button>
+            <it-button
+                class="flex flex-grow"
+                [disabled]="formInvalid()"
+                (click)="goForward()"
+            >
+                {{'actions.continue' | translate}}
+            </it-button>
+        </div>
+    </div>
 </div>

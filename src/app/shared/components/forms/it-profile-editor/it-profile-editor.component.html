@@ -2,13 +2,14 @@
   [formGroup]="profileForm"
   class="flex flex-col gap-4"
 >
-  <h3>{{'shared.component.profile-editor.create-profile' | translate}}</h3>
+  <h3>{{'shared.components.profile-editor.create-profile' | translate}}</h3>
   <it-input
     id="username"
-    [label]="'shared.component.profile-editor.username' | translate"
+    [label]="'shared.components.profile-editor.username' | translate"
     formControlName="username"
   />
   <it-drawing-board
     (drawingChanged)="setProfilePicture($event)"
+    [drawingUrl]="profileEditorFormData.profilePicture"
   />
 </form>

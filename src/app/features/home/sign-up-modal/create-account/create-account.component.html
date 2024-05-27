@@ -1,0 +1,34 @@
+<form
+    [formGroup]="createAccountForm"
+    class="flex flex-col gap-4"
+>
+  <h3>{{'features.home.sign-up-modal.create-account.title' | translate }}</h3>
+  <it-checkbox-heading
+    id="register-checkbox-heading"
+    [heading]="'features.home.sign-up-modal.create-account.want-to-register' | translate"
+    formControlName="register"
+  >
+    <div content>
+      {{'features.home.sign-up-modal.create-account.description' | translate }} 
+    </div>
+    <div 
+        collapsible
+        class="flex flex-col gap-4"
+    >
+        <it-input
+            id="email"
+            [label]="'features.home.login-modal.email' | translate"
+            formControlName="email"
+            type="email"
+        />
+        <it-input 
+            id="password"
+            [label]="'features.home.login-modal.password' | translate"
+            formControlName="password"
+            type="password"
+        >
+            {{ createAccountForm.controls['password'].value?.length + ' / 10 ' + ('shared.components.input.signs' | translate) }}
+        </it-input>
+    </div>
+  </it-checkbox-heading>
+</form>

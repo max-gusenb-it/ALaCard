@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NoAccountComponent } from './no-account/no-account.component';
 import { LoginModal } from './login-modal/login-modal.component';
 import { SignUpModal } from './sign-up-modal/sign-up-modal.component';
+import { CreateAccountComponent } from './sign-up-modal/create-account/create-account.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { SignUpModal } from './sign-up-modal/sign-up-modal.component';
     LoginModal,
     SignUpModal,
     NoAccountComponent,
+    CreateAccountComponent
   ]
 })
 export class HomePageModule {}

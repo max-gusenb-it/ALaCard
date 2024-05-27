@@ -13,6 +13,13 @@
         "login": "Login",
         "email": "E-Mail",
         "password": "Passwort"
+      },
+      "sign-up-modal": {
+        "create-account": {
+          "title": "Erstelle deinen Account",
+          "want-to-register": "Möchtest du dich registrieren?",
+          "description": "Erstelle einen Account, damit du deine Daten nicht verlierst und weitere Funktionen wie das Herunterladen neuer Decks aus dem Store nutzen kannst."
+        }
       }
     }
   },
@@ -23,16 +30,18 @@
         "store": "Store",
         "home": "Home",
         "profile": "Profil"
-      }
-    },
-    "component": {
+      },
       "profile-editor": {
         "create-profile": "Erstelle dein Profil",
         "username": "Benutzername"
+      },
+      "input": {
+        "signs": "Zeichen"
       }
     }
   },
   "actions": {
-    "continue": "Weiter"
+    "continue": "Weiter",
+    "back": "Zurück"
   }
 }

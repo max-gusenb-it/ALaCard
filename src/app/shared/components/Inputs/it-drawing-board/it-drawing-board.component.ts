@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 interface CursorCoordinates {
   x: number;
@@ -24,6 +24,8 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   private readonly whiteFillAction: string = "fill-#ffffff";
 
   @ViewChild("container", { read: ElementRef }) container?: ElementRef<HTMLDivElement>;
+
+  @Input() drawingUrl?: string;
 
   @Output() drawingChanged: EventEmitter<string> = new EventEmitter();
 
@@ -93,6 +95,13 @@ export class ItDrawingBoardComponent implements AfterViewInit {
       return;
     }
 
+    if(!!this.drawingUrl) {
+      this.drawingUrls.push({
+        drawingUrl: this.drawingUrl,
+        action: "init"
+      });
+    }
+
     setTimeout(() => {
       addEventListener("resize", () => {
         this.onResize();
@@ -119,7 +128,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
    * @param callCount callCount passed on to setCanvasSize to control how often the method is called on fail
    */
   onResize(callCount?: number) {
-    this.setCanvasSize(callCount)
+    return this.setCanvasSize(callCount)
       .then(() => {
         this.canvasPosition = this.getCanvasSizeInCSSPixels();
       })
@@ -137,7 +146,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   setCanvasSize(callCount: number = 1) : Promise<any> {
     if (!!!this.container || this.container.nativeElement.offsetWidth === 0) {
       // If measurement element was not found try again, if maxCallCount was not exceeded
-      console.warn("Trying to get container element again. Call count: ", callCount);
       if (this.maxCallCount > callCount) {
         this.changeDetectorRef.detectChanges();
         return new Promise((resolve) => setTimeout(() => {
@@ -195,7 +203,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     this.clearCanvas();
     if (this.drawingUrls.length !== 0) {
       this.setCanvasImage(this.drawingUrls[this.drawingUrls.length - 1].drawingUrl);
-      this.emitDrawing();
     }
   }
 
@@ -350,14 +357,19 @@ export class ItDrawingBoardComponent implements AfterViewInit {
     }
     this.drawingChanged.emit(this.exportImage());
   }
+
+  waitForImageToLoad(imageElement: any){
+    return new Promise(resolve => { imageElement.onload = resolve })
+  }
   
   setCanvasImage(image: string) {
     let img = new Image(); 
     let canvas = this.context;
-    img.onload = function() {
-      canvas.drawImage(img, 0, 0);
-    };
     img.src = image;
+    this.waitForImageToLoad(img).then(() => {
+      canvas.drawImage(img, 0, 0);
+      this.emitDrawing();
+    });
   }
 
   exportImage() {
@@ -366,5 +378,6 @@ export class ItDrawingBoardComponent implements AfterViewInit {
 
   importImage(image: string) {
     this.setCanvasImage(image);
+    this.emitDrawing();
   }
 }
