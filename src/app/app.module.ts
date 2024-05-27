@@ -25,8 +25,9 @@ import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/stora
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { SharedModule } from './shared/shared.module';
 import { getLanguage } from './core/utils/language.util';
-import { AuthenticationState } from './core/state/authentication/authentication.state';
+import { AUTHENTICATION_STATE_TOKEN, AuthenticationState } from './core/state/authentication/authentication.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { LoadingState } from './core/state';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,13 +43,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     NgxsModule.forRoot(
       [
-        AuthenticationState
+        AuthenticationState,
+        LoadingState
       ], 
       {
         developmentMode: !environment.production
       }
     ),
-    NgxsStoragePluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot({
+      key: AUTHENTICATION_STATE_TOKEN
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

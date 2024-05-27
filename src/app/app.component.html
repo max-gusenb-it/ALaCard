@@ -1,3 +1,9 @@
-<ion-app>
+<ion-app
+  class="border-8 border-primary-100 transition-all duration-1000"
+  [ngClass]="{
+    'border-primary-200': getBorderLoadingColor() === 1 && (isLoading$ | async),
+    'border-primary-900': getBorderLoadingColor() === 2 && (isLoading$ | async)
+  }"
+>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

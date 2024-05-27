@@ -7,8 +7,9 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 import { Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/data-source/user-source.service';
+import { Loading } from '../loading';
 
-const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
+export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
 @State<AuthenticationStateModel>({
     name: AUTHENTICATION_STATE_TOKEN
@@ -52,12 +53,14 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
 
     @Action(Authentication.SignUpUser)
     async signUpUser(ctx: StateContext<AuthenticationStateModel>, action: Authentication.SignUpUser) {
+        ctx.dispatch(Loading.StartLoading);
+
         let userCredential = await this.authService.createAccount(
             action.createAccountFormData.register,
             action.createAccountFormData.email,
             action.createAccountFormData.password
         );
-        if (!!userCredential.user) {
+        if (!!userCredential?.user) {
             return this.userSourceService.addUser(
                 userCredential.user.uid,
                 {
@@ -65,9 +68,9 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                     profilePicture: action.profileFormData.profilePicture,
                     username: action.profileFormData.username
                 }
-            )
+            );
         }
-        return Promise.resolve();
+        return Promise.resolve(() => ctx.dispatch(Loading.EndLoading));
     }
 
     @Action(Authentication.SetUserCredentials)
