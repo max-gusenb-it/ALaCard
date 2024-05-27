@@ -1,6 +1,9 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { finalize } from 'rxjs';
 import { ICreateAccountFormData, IProfileEditorFormData } from 'src/app/core/models/interfaces';
+import { Authentication } from 'src/app/core/state';
 
 @Component({
   selector: 'sign-up-modal',
@@ -12,7 +15,11 @@ export class SignUpModal {
   profileFormData: IProfileEditorFormData = null as any;
   createAccountFormData: ICreateAccountFormData = null as any;
 
-  constructor(private modalCtrl: ModalController, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private changeDetectorRef: ChangeDetectorRef,
+    private store: Store
+  ) { }
 
   close() {
     this.modalCtrl.dismiss();
@@ -51,6 +58,10 @@ export class SignUpModal {
         this.stepIndex += 1;
         this.changeDetectorRef.detectChanges();
       } break;
+      case 1: {
+        this.store.dispatch(new Authentication.SignUpUser(this.profileFormData, this.createAccountFormData));
+        this.close();
+      }
     }
   }
 

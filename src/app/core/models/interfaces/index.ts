@@ -3,4 +3,7 @@ export { IProfileEditorFormData } from "./components/forms/it-profile-editor/IPr
 
 export { ICreateAccountFormData } from "./features/home/ICreateAccountFormData";
 
+export { IUser } from "./logic/IUser";
+export { IFirestoreBase } from "./logic/IFirestoreBase";
+
 export { IRouteConfig } from "./config/IRouteConfig";

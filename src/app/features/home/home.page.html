@@ -3,8 +3,12 @@
     <it-button-heading>
       {{'features.home.home' | translate}}
     </it-button-heading>
-    <div class="flex flex-grow items-center">
-      <no-account class="flex-grow"></no-account>
+    <div
+      
+      class="flex flex-grow items-center"
+    >
+      <no-account class="flex-grow" *ngIf="!(isAuthenticated$ | async)" ></no-account>
+      <it-button class="flex flex-grow" *ngIf="isAuthenticated$ | async" (click)="signOut()">Sign out</it-button>
     </div>
   </div>
 </ion-content>
