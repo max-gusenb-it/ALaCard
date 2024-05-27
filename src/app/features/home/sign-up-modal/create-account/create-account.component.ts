@@ -17,7 +17,7 @@ export class CreateAccountComponent extends AngularLifecycle implements AfterVie
   createAccountForm = new FormGroup({
     register: new FormControl({value: true, disabled: false}),
     email: new FormControl({value: "", disabled: false}, [Validators.required, Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]),
-    password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(10)]),
+    password: new FormControl({value: "", disabled: false}, [Validators.required, Validators.minLength(6)]),
   });
 
   constructor() {
