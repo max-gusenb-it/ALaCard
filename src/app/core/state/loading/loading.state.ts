@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
-import { ILoadingStateModel } from "./loading.model";
+import { ILoadingError, ILoadingStateModel } from "./loading.model";
 import { Injectable } from "@angular/core";
 import { LoadingStates } from "./ELoadingStates";
 import { Loading } from "./loading.actions";
@@ -17,6 +17,11 @@ export class LoadingState {
     @Selector()
     static isLoading(state: ILoadingStateModel): boolean {
         return state.loadingState === LoadingStates.Loading;
+    }
+    
+    @Selector()
+    static error(state: ILoadingStateModel): ILoadingError | undefined {
+        return state.error;
     }
 
     @Action(Loading.StartLoading)

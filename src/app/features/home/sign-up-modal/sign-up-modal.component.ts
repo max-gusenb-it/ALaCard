@@ -60,11 +60,7 @@ export class SignUpModal {
       } break;
       case 1: {
         this.store.dispatch(new Authentication.SignUpUser(this.profileFormData, this.createAccountFormData))
-          .pipe(
-            finalize(() => {
-              this.close();
-            })
-        );
+          .subscribe(() => this.close());
       }
     }
   }

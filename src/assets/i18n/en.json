@@ -43,5 +43,10 @@
   "actions": {
     "continue": "Continue",
     "back": "Back"
+  },
+  "errors": {
+    "auth/user-not-found": "Corresponding user could not be found",
+    "auth/wrong-password": "Incorrect password",
+    "auth/email-already-in-use": "There is already a account using this e-mail"
   }
 }

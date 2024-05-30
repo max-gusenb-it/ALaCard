@@ -28,9 +28,7 @@ export class SignInModal {
   signInWithEmail() {
     if (this.loginForm.valid) {
       this.store.dispatch(new Authentication.SignInUser(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value))
-        .subscribe(() => {
-          this.close();
-        });
+        .subscribe(() => this.close());
     }
   }
 

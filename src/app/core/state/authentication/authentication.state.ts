@@ -66,7 +66,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                         {
                             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                             profilePicture: action.profileFormData.profilePicture,
-                            username: undefined as any
+                            username: action.profileFormData.username
                         }
                     );
                 } else {
