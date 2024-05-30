@@ -7,7 +7,7 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 import { Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/data-source/user-source.service';
-import { Loading } from '../loading';
+import { LoadingHelperService } from '../../services/loading-helper.service';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
@@ -30,7 +30,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
 
     constructor(
         private authService: AuthService,
-        private userSourceService: UserSourceService
+        private userSourceService: UserSourceService,
+        private loadingHelperService: LoadingHelperService
     ) {
         super();
     }
@@ -53,24 +54,36 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
 
     @Action(Authentication.SignUpUser)
     async signUpUser(ctx: StateContext<AuthenticationStateModel>, action: Authentication.SignUpUser) {
-        ctx.dispatch(Loading.StartLoading);
-
-        let userCredential = await this.authService.createAccount(
-            action.createAccountFormData.register,
-            action.createAccountFormData.email,
-            action.createAccountFormData.password
-        );
-        if (!!userCredential?.user) {
-            return this.userSourceService.addUser(
-                userCredential.user.uid,
-                {
-                    creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
-                    profilePicture: action.profileFormData.profilePicture,
-                    username: action.profileFormData.username
+        return this.loadingHelperService.loadWithLoadingState([
+            this.authService.createAccount(
+                action.createAccountFormData.register,
+                action.createAccountFormData.email,
+                action.createAccountFormData.password
+            ).then(c => {
+                if (!!c?.user) {
+                    return this.userSourceService.addUser(
+                        c.user.uid,
+                        {
+                            creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
+                            profilePicture: action.profileFormData.profilePicture,
+                            username: undefined as any
+                        }
+                    );
+                } else {
+                    return Promise.reject();
                 }
-            );
-        }
-        return Promise.resolve(() => ctx.dispatch(Loading.EndLoading));
+            })
+        ]);
+    }
+
+    @Action(Authentication.SignInUser)
+    signInUser(ctx: StateContext<AuthenticationStateModel>, action: Authentication.SignInUser) {
+        return this.loadingHelperService.loadWithLoadingState([
+            this.authService.signInWithEmailAndPassword(
+                action.email,
+                action.password
+            )
+        ]);
     }
 
     @Action(Authentication.SetUserCredentials)
@@ -97,6 +110,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Action(Authentication.SignOut)
     signOut(ctx: StateContext<AuthenticationStateModel>) {
         this.userSubscription$.unsubscribe();
+        ctx.dispatch(new Authentication.SetUser(undefined));
         return this.authService.signOut();
     }
 }

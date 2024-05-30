@@ -1,16 +1,12 @@
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Injectable } from "@angular/core";
-import { Store } from "@ngxs/store";
-import { Loading } from "../state";
+import { LoadingError } from "../state";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    constructor(
-        private fireAuth: AngularFireAuth,
-        private store: Store
-    ) { }
+    constructor(private fireAuth: AngularFireAuth) { }
 
     getAuthState() {
         return this.fireAuth.authState;
@@ -27,20 +23,30 @@ export class AuthService {
     createEmailAccount(email: string, password: string) {
         return this.fireAuth.createUserWithEmailAndPassword(email, password)
             .catch(error => {
-                this.store.dispatch(new Loading.EndLoading({
-                    location: AuthService.name,
-                    code: error.code
-                }));
+                throw new LoadingError(
+                    error.code,
+                    AuthService.name
+                );
             });
     }
 
     createAnonymousAccount() {
         return this.fireAuth.signInAnonymously()
             .catch(error => {
-                this.store.dispatch(new Loading.EndLoading({
-                    location: AuthService.name,
-                    code: error.code
-                }));
+                throw new LoadingError(
+                    error.code,
+                    AuthService.name
+                );
+            });
+    }
+
+    signInWithEmailAndPassword(email: string, password: string) {
+        return this.fireAuth.signInWithEmailAndPassword(email, password)
+            .catch(error => {
+                throw new LoadingError(
+                    error.code,
+                    AuthService.name
+                );
             });
     }
 

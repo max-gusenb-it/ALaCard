@@ -1,4 +1,4 @@
-import { LoadingError } from "./loading.model";
+import { ILoadingError } from "./loading.model";
 
 export namespace Loading {
     export class StartLoading {
@@ -8,6 +8,6 @@ export namespace Loading {
 
     export class EndLoading {
         static readonly type = "[Loading] Ending Loading";
-        constructor(public error?: LoadingError) {}
+        constructor(public error?: ILoadingError) {}
     }
 }

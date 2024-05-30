@@ -6,6 +6,11 @@ export namespace Authentication {
         constructor(public profileFormData: IProfileEditorFormData, public createAccountFormData: ICreateAccountFormData) {}
     }
 
+    export class SignInUser {
+        static readonly type = '[SignInModal] Sign in';
+        constructor(public email: string, public password: string) {}
+    }
+
     export class SetUserCredentials {
         static readonly type = '[AuthenticationState] Set user credentials';
         constructor(public uid?: string, public isAnonymous?: boolean) {}
@@ -13,7 +18,7 @@ export namespace Authentication {
 
     export class SetUser {
         static readonly type = '[AuthenticationState] Set user';
-        constructor(public user: IUser) {}
+        constructor(public user?: IUser) {}
     }
 
     export class SignOut {
