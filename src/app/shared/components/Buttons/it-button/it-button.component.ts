@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { LoadingState } from 'src/app/core/state';
 
 @Component({
   selector: 'it-button',
@@ -10,6 +13,9 @@ export class ItButtonComponent implements OnInit {
   @Input() size: "big" | "small" = "big";
   @Input() type: "submit" | "button" = "submit";
   @Input() disabled = false;
+  @Input() indicateLoading = false;
+
+  @Select(LoadingState.isLoading) isLoading$!: Observable<boolean>;
 
   constructor() { }
 

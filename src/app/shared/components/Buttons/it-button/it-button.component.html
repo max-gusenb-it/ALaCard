@@ -1,7 +1,7 @@
 <button
   [type]="type"
   [ngClass]="getButtonClass()"
-  [disabled]="disabled"
+  [disabled]="indicateLoading ? ((isLoading$ | async) || disabled) : disabled"
 >
   <ng-content></ng-content>
 </button>

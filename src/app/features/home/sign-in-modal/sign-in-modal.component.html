@@ -27,6 +27,7 @@
     <it-button 
         class="flex"
         [disabled]="!loginForm.valid"
+        [indicateLoading]="true"
         type="submit"
     >
         {{'features.home.login-modal.login' | translate}}

@@ -9,6 +9,7 @@
     <it-button
         class="flex"
         [disabled]="!profileFormData.valid"
+        [indicateLoading]="true"
         (click)="submit()"
     >
         {{'actions.submit' | translate}}

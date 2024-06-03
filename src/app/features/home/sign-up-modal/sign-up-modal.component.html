@@ -19,6 +19,7 @@
             <it-button
                 class="flex flex-grow"
                 color="secondary"
+                [indicateLoading]="true"
                 *ngIf="stepIndex > 0"
                 (click)="goBack()"
             >
@@ -27,6 +28,7 @@
             <it-button
                 class="flex flex-grow"
                 [disabled]="formInvalid()"
+                [indicateLoading]="true"
                 (click)="goForward()"
             >
                 {{'actions.continue' | translate}}
