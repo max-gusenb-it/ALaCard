@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { FirestoreService } from "./firestore.service";
-import { IUser } from "../../models/interfaces/logic/IUser";
+import { IUser } from "../../models/interfaces/logic/user/IUser";
 import { LoadingError } from "../../state";
 
 @Injectable({

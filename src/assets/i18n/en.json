@@ -37,6 +37,14 @@
       "registered-since": "Registered since",
       "edit-profile-modal": {
         "edited-user": "Profile successfully edited!"
+      },
+      "settings": "Settings",
+      "general": "General",
+      "language": "Language",
+      "languages": {
+        "sys": "System default",
+        "en": "English",
+        "de": "German"
       }
     }
   },

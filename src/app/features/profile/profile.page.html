@@ -1,11 +1,10 @@
 <ion-content [fullscreen]="true">
-  <div class="h-full w-full flex flex-col p-6 gap-4">
+  <div class="h-full w-full flex flex-col p-6 gap-4" *ngIf="!!(user$ | async)">
     <it-button-heading>
       {{'features.profile.title' | translate}}
     </it-button-heading>
     <div
       class="flex flex-col bg-primary-0 rounded-xl drop-shadow-card overflow-hidden"
-      *ngIf="!!(user$ | async)"
     >
       <img alt="profile_picture" class="profile-image" [src]="(user$ | async)!.profilePicture" />
       <div class="flex flex-row justify-between p-2.5">
@@ -16,6 +15,24 @@
         <it-icon-button size="large" (click)="editProfile()">edit</it-icon-button>
       </div>
     </div>
-    <it-button class="flex" (click)="signOut()">Sign out</it-button>
+    <form 
+      [formGroup]="settingsForm"
+      class="flex flex-col gap-2"
+    >
+      <h4>{{ 'features.profile.settings' | translate }}</h4>
+      <h5>{{ 'features.profile.general' | translate }}</h5>
+      <it-select
+        [label]="'features.profile.language' | translate"
+        name="language"
+        formControlName="language"
+      >
+        <option *ngFor="let language of getLanguages()" [value]="language">
+          {{ 'features.profile.languages.' + language | translate }}
+        </option>
+      </it-select>
+      <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">Save</it-button>
+    </form>
+    <div class="border-b w-full border-b-neutral-500"></div>
+    <it-button class="flex" (click)="signOut()" size="small">Sign out</it-button>
   </div>
 </ion-content>

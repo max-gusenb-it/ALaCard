@@ -9,6 +9,9 @@ import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/data-source/user-source.service';
 import { LoadingHelperService } from '../../services/loading-helper.service';
 import { IUser } from '../../models/interfaces';
+import { TranslateService } from '@ngx-translate/core';
+import { getBrowserLanguage } from '../../utils/language.util';
+import { systemDefaultLanguage } from '../../constants/languages';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
@@ -34,10 +37,16 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
         return state.user;
     }
 
+    @Selector()
+    static language(state: AuthenticationStateModel): string | undefined {
+        return state.user?.settings.language;
+    }
+
     constructor(
         private authService: AuthService,
         private userSourceService: UserSourceService,
-        private loadingHelperService: LoadingHelperService
+        private loadingHelperService: LoadingHelperService,
+        private translateService: TranslateService
     ) {
         super();
     }
@@ -52,6 +61,10 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                         .pipe(takeUntil(this.destroyed$))
                         .subscribe(u => {
                             ctx.dispatch(new Authentication.SetUser(u));
+                            if (!!u) {
+                                if (u.settings.language !== systemDefaultLanguage) this.translateService.setDefaultLang(u.settings.language);
+                                else this.translateService.setDefaultLang(getBrowserLanguage());
+                            }
                         }
                     );
                 }
@@ -72,7 +85,10 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                         {
                             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                             profilePicture: action.profileFormData.profilePicture,
-                            username: action.profileFormData.username
+                            username: action.profileFormData.username,
+                            settings: {
+                                language: systemDefaultLanguage
+                            }
                         }
                     );
                 } else {
