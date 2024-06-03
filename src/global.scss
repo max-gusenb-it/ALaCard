@@ -244,6 +244,10 @@ h5 {
     font-size: 0.875rem; // 14  px
 }
 
+.firebase-emulator-warning {
+    display: none;
+}
+
 // remove blue highlight when clicking on mobile
 input,
 textarea,
