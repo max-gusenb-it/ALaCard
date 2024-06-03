@@ -31,6 +31,10 @@
         "description": "To host games you will need a room. Create or join one with an invitation!",
         "create-room": "Create room"
       }
+    },
+    "profile": {
+      "title": "Profile",
+      "registered-since": "Registered since"
     }
   },
   "shared": {

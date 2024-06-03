@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, mapToCanActivate } from '@angular/router';
 import { ItNavigationComponent } from './shared/components/buttons/it-navigation/it-navigation.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -9,11 +10,16 @@ export const routes: Routes = [
     children: [
       {
         path: 'test',
-        loadChildren: () => import('./features/test/test.module').then( m => m.TestPageModule)
+        loadChildren: () => import('./features/test/test.module').then(m => m.TestPageModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfilePageModule),
+        canActivate: mapToCanActivate([AuthGuard])
       },
       {
         path: 'home',
-        loadChildren: () => import('./features/home/home.module').then( m => m.HomePageModule)
+        loadChildren: () => import('./features/home/home.module').then(m => m.HomePageModule)
       },
       {
         path: '',
@@ -21,7 +27,7 @@ export const routes: Routes = [
         pathMatch: 'full'
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

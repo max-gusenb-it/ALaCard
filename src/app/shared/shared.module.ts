@@ -29,6 +29,7 @@ import { ItSelectionListComponent } from './components/display/it-selection-list
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor/it-profile-editor.component';
+import { FireDatePipe } from './pipes/fire-date.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ItProfileEditorComponent } from './components/forms/it-profile-editor/i
     ItInputComponent,
     ItSelectComponent,
     ItTextAreaComponent,
-    ExampleComponent
+    ExampleComponent,
+    FireDatePipe
   ],
   imports: [
     CommonModule,
@@ -90,7 +92,8 @@ import { ItProfileEditorComponent } from './components/forms/it-profile-editor/i
     ItInputComponent,
     ItSelectComponent,
     ItTextAreaComponent,
-    ExampleComponent
+    ExampleComponent,
+    FireDatePipe
   ],
   providers: [
   ]

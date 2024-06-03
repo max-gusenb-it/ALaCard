@@ -8,6 +8,7 @@ import { Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/data-source/user-source.service';
 import { LoadingHelperService } from '../../services/loading-helper.service';
+import { IUser } from '../../models/interfaces';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
@@ -26,6 +27,11 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Selector()
     static isAnonymous(state: AuthenticationStateModel): boolean {
         return Boolean(state.isAnonymous);
+    }
+
+    @Selector()
+    static user(state: AuthenticationStateModel): IUser | undefined {
+        return state.user;
     }
 
     constructor(

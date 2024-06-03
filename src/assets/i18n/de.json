@@ -31,6 +31,10 @@
         "description": "Um Spiele zu hosten, brauchst du einen Raum. Erstellen einen oder tritt einem mit einer Einladung bei!",
         "create-room": "Raum erstellen"
       }
+    },
+    "profile": {
+      "title": "Profil",
+      "registered-since": "Registriert seit"
     }
   },
   "shared": {

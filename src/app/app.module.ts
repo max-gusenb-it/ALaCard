@@ -28,6 +28,7 @@ import { getLanguage } from './core/utils/language.util';
 import { AUTHENTICATION_STATE_TOKEN, AuthenticationState } from './core/state/authentication/authentication.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { LoadingState } from './core/state';
+import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -77,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: IonicRouteStrategy
     }, 
     ScreenTrackingService, 
-    UserTrackingService
+    UserTrackingService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })
