@@ -12,6 +12,7 @@ import { NoAccountComponent } from './no-account/no-account.component';
 import { SignInModal } from './sign-in-modal/sign-in-modal.component';
 import { SignUpModal } from './sign-up-modal/sign-up-modal.component';
 import { CreateAccountComponent } from './sign-up-modal/create-account/create-account.component';
+import { ForgotPasswordModal } from './forgot-password-modal/forgot-password-modal.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { CreateAccountComponent } from './sign-up-modal/create-account/create-ac
   ],
   declarations: [
     HomePage,
+    ForgotPasswordModal,
     SignInModal,
     SignUpModal,
     NoAccountComponent,

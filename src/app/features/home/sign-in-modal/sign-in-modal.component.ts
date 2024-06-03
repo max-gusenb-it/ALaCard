@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { finalize } from 'rxjs';
 import { Authentication } from 'src/app/core/state';
+import { ForgotPasswordModal } from '../forgot-password-modal/forgot-password-modal.component';
 
 @Component({
   selector: 'sign-in-modal',
@@ -23,6 +23,13 @@ export class SignInModal {
 
   close() {
     this.modalCtrl.dismiss();
+  }
+
+  async forgotPassword() {
+    const modal = await this.modalCtrl.create({
+      component: ForgotPasswordModal
+    });
+    modal.present();
   }
 
   signInWithEmail() {

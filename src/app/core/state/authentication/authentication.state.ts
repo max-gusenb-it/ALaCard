@@ -87,7 +87,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     }
 
     @Action(Authentication.SetUserCredentials)
-    setUserId(ctx: StateContext<AuthenticationStateModel>, action: Authentication.SetUserCredentials) {
+    setUserCredentials(ctx: StateContext<AuthenticationStateModel>, action: Authentication.SetUserCredentials) {
         const state = ctx.getState();
 
         ctx.patchState({
@@ -95,6 +95,13 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
             uid: action.uid,
             isAnonymous: action.isAnonymous
         });
+    }
+
+    @Action(Authentication.ResetPassword)
+    resetPassword(ctx: StateContext<AuthenticationStateModel>, action: Authentication.ResetPassword) {
+        return this.loadingHelperService.loadWithLoadingState([
+            this.authService.resetPassword(action.email)
+        ]);
     }
 
     @Action(Authentication.SetUser)

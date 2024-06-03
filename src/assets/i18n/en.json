@@ -12,7 +12,8 @@
       "login-modal": {
         "login": "Login",
         "email": "E-Mail",
-        "password": "Password"
+        "password": "Password",
+        "forgot-password": "Forgot your password?"
       },
       "sign-up-modal": {
         "create-account": {
@@ -20,6 +21,10 @@
           "want-to-register": "Want to register?",
           "description": "Create a account so you never loose your data and get more features like downloading new decks from the store"
         }
+      },
+      "forgot-password-modal": {
+        "title": "Forgot your password",
+        "mail-sent": "Reset password mail successfully sent!"
       }
     }
   },
@@ -42,7 +47,8 @@
   },
   "actions": {
     "continue": "Continue",
-    "back": "Back"
+    "back": "Back",
+    "submit": "Submit"
   },
   "errors": {
     "auth/user-not-found": "Corresponding user could not be found",

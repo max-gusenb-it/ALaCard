@@ -12,12 +12,17 @@
             formControlName="email"
             type="email"
         />
-        <it-input 
-            id="password"
-            [label]="'features.home.login-modal.password' | translate"
-            formControlName="password"
-            type="password"
-        />
+        <div class="flex flex-col gap-2">
+            <it-input 
+                id="password"
+                [label]="'features.home.login-modal.password' | translate"
+                formControlName="password"
+                type="password"
+            />
+            <p class="text-xs cursor-pointer" (click)="forgotPassword()">
+                {{"features.home.login-modal.forgot-password" | translate}}
+            </p>
+        </div>
     </div>
     <it-button 
         class="flex"

@@ -11,6 +11,11 @@ export namespace Authentication {
         constructor(public email: string, public password: string) {}
     }
 
+    export class ResetPassword {
+        static readonly type = '[Reset Password Modal] Reset password';
+        constructor(public email: string) {}
+    }
+
     export class SetUserCredentials {
         static readonly type = '[AuthenticationState] Set user credentials';
         constructor(public uid?: string, public isAnonymous?: boolean) {}

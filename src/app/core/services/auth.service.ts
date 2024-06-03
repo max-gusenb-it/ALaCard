@@ -50,6 +50,16 @@ export class AuthService {
             });
     }
 
+    resetPassword(email: string) {
+        return this.fireAuth.sendPasswordResetEmail(email)
+            .catch(error => {
+                throw new LoadingError(
+                    error.code,
+                    AuthService.name
+                );
+            });
+    }
+
     signOut() {
         return this.fireAuth.signOut();
     }
