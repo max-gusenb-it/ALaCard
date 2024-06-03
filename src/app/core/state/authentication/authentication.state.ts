@@ -9,9 +9,8 @@ import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/data-source/user-source.service';
 import { LoadingHelperService } from '../../services/loading-helper.service';
 import { IUser } from '../../models/interfaces';
-import { TranslateService } from '@ngx-translate/core';
-import { getBrowserLanguage } from '../../utils/language.util';
-import { systemDefaultLanguage } from '../../constants/languages';
+import { systemDefaultValue } from '../../constants/systemDefaultValue';
+import { SettingsService } from '../../services/settings.service';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
@@ -46,7 +45,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
         private authService: AuthService,
         private userSourceService: UserSourceService,
         private loadingHelperService: LoadingHelperService,
-        private translateService: TranslateService
+        private settingsService: SettingsService
     ) {
         super();
     }
@@ -62,8 +61,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                         .subscribe(u => {
                             ctx.dispatch(new Authentication.SetUser(u));
                             if (!!u) {
-                                if (u.settings.language !== systemDefaultLanguage) this.translateService.setDefaultLang(u.settings.language);
-                                else this.translateService.setDefaultLang(getBrowserLanguage());
+                                this.settingsService.setAppLanguage(u.settings.language);
+                                this.settingsService.setAppColor(u.settings.color);
                             }
                         }
                     );
@@ -87,7 +86,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                             profilePicture: action.profileFormData.profilePicture,
                             username: action.profileFormData.username,
                             settings: {
-                                language: systemDefaultLanguage
+                                language: systemDefaultValue,
+                                color: systemDefaultValue
                             }
                         }
                     );

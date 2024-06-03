@@ -45,7 +45,27 @@
         "de": "Deutsch",
         "en": "Englisch",
         "sys": "Von System übernehmen"
-      }
+      },
+      "colors": {
+        "sys": "Standard",
+        "red": "Rote",
+        "orange": "Orange",
+        "amber": "Gelborange",
+        "yellow": "Gelb",
+        "lime": "Lindgrün",
+        "green": "Grün",
+        "emerald": "Smaragdgrün",
+        "teal": "Blaugrün",
+        "cyan": "Türkis",
+        "sky": "Himmelblau",
+        "blue": "Blau",
+        "indigo": "Indigoblau",
+        "violet": "Violett",
+        "pink": "Pink",
+        "rose": "Rose"
+      },
+      "sign-out": "Ausloggen",
+      "color-scheme": "App Farbschema"
     }
   },
   "shared": {
@@ -69,7 +89,8 @@
   "actions": {
     "continue": "Weiter",
     "back": "Zurück",
-    "submit": "Bestätigen"
+    "submit": "Bestätigen",
+    "safe": "Speichern"
   },
   "errors": {
     "auth/user-not-found": "Entsprechender Benutzer konnte nicht gefunden werden",

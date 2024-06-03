@@ -45,7 +45,27 @@
         "sys": "System default",
         "en": "English",
         "de": "German"
-      }
+      },
+      "colors": {
+        "sys": "Default",
+        "red": "Red",
+        "orange": "Orange",
+        "amber": "Amber",
+        "yellow": "Yellow",
+        "lime": "Lime",
+        "green": "Green",
+        "emerald": "Emerald",
+        "teal": "Teal",
+        "cyan": "Cyan",
+        "sky": "Sky",
+        "blue": "Blue",
+        "indigo": "Indigo",
+        "violet": "Violet",
+        "pink": "Pink",
+        "rose": "Rose"
+      },
+      "sign-out": "Sign out",
+      "color-scheme": "App color scheme"
     }
   },
   "shared": {
@@ -69,7 +89,8 @@
   "actions": {
     "continue": "Continue",
     "back": "Back",
-    "submit": "Submit"
+    "submit": "Submit",
+    "safe": "Safe"
   },
   "errors": {
     "auth/user-not-found": "Corresponding user could not be found",

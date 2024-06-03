@@ -20,7 +20,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {    
+:root {
+    --sys-900: #ffa105;
+    --sys-800: #fba907;     // sloppy
+    --sys-700: #ffae0a;
+    --sys-600: #fab708;
+    --sys-500: #ffc311;
+    --sys-400: #fec418;     // sloppy
+    --sys-300: #ffdd7a;
+    --sys-200: #ffe79f;
+    --sys-100: #fef6df;
+    --sys-000: #f9f8f1;
+
     --red-900: theme(colors.red.900);
     --red-800: theme(colors.red.800);
     --red-700: theme(colors.red.700);

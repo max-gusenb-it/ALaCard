@@ -30,9 +30,18 @@
           {{ 'features.profile.languages.' + language | translate }}
         </option>
       </it-select>
-      <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">Save</it-button>
+      <it-select
+        [label]="'features.profile.color-scheme' | translate"
+        name="color"
+        formControlName="color"
+      >
+        <option *ngFor="let color of getColors()" [value]="color">
+          {{ 'features.profile.colors.' + color | translate }}
+        </option>
+      </it-select>
+      <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">{{ 'actions.safe' | translate }}</it-button>
     </form>
     <div class="border-b w-full border-b-neutral-500"></div>
-    <it-button class="flex" (click)="signOut()" size="small">Sign out</it-button>
+    <it-button class="flex" (click)="signOut()" size="small">{{ 'features.profile.sign-out' | translate }}</it-button>
   </div>
 </ion-content>

@@ -1,0 +1,1 @@
+export const systemDefaultValue: string = "sys";
