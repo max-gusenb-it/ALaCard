@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
 import { IProfileEditorFormData } from 'src/app/core/models/interfaces/components/forms/it-profile-editor/IProfileEditorFormData';
@@ -14,12 +14,13 @@ export class ItProfileEditorComponent extends AngularLifecycle implements AfterV
 
   @Output() profileEditorFormChanged: EventEmitter<IProfileEditorFormData> = new EventEmitter();
 
+  isRegistered: boolean = false;
   profileForm = new FormGroup({
     username: new FormControl({value: "", disabled: false}, [Validators.required]),
   });
   profilePicture: string = "";
 
-  constructor() {
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
     super();
     this.profileForm.valueChanges
       .pipe(
@@ -29,7 +30,9 @@ export class ItProfileEditorComponent extends AngularLifecycle implements AfterV
   }
 
   ngAfterViewInit(): void {
+    this.isRegistered = !!this.profileEditorFormData.username;
     this.profileForm.controls['username'].setValue(!!this.profileEditorFormData.username ? this.profileEditorFormData.username : null);
+    this.changeDetectorRef.detectChanges();
   }
 
   setProfilePicture(drawing: string) {

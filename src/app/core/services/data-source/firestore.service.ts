@@ -45,7 +45,7 @@ export class FirestoreService<T extends IFirestoreBase> {
         }
     }
 
-    addDocWithId(ref: string, id: string, data: T) {
+    addWithId(ref: string, id: string, data: T) {
         let copy = data;
         delete copy["id"];
         try {
@@ -55,6 +55,18 @@ export class FirestoreService<T extends IFirestoreBase> {
                     ...data,
                 } as T;
             });
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    update(ref: string, id: string, data: T) {
+        let copy = data;
+        delete copy["id"];
+        try {
+            return this.afs.collection<T>(ref).doc(id).update(
+              data
+            ).then(() => data);
         } catch (error) {
             return Promise.reject(error);
         }

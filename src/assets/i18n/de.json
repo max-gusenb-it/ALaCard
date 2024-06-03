@@ -34,7 +34,10 @@
     },
     "profile": {
       "title": "Profil",
-      "registered-since": "Registriert seit"
+      "registered-since": "Registriert seit",
+      "edit-profile-modal": {
+        "edited-user": "Profil erfolgreich bearbeitet!"
+      }
     }
   },
   "shared": {
@@ -47,7 +50,8 @@
       },
       "profile-editor": {
         "create-profile": "Erstelle dein Profil",
-        "username": "Benutzername"
+        "username": "Benutzername",
+        "edit-profile": "Profil bearbeiten"
       },
       "input": {
         "signs": "Zeichen"

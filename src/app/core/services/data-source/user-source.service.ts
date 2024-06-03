@@ -16,11 +16,20 @@ export class UserSourceService {
     }
 
     addUser(id: string, user: IUser) {
-        return this.firestoreService.addDocWithId(
+        return this.firestoreService.addWithId(
             this.ref,
             id,
             user
         ).catch(error => {
+            return Promise.reject(new LoadingError(
+                error.code,
+                UserSourceService.name
+            ));
+        });
+    }
+
+    updateUser(id: string, user: IUser) {
+        return this.firestoreService.update(this.ref, id, user).catch(error => {
             return Promise.reject(new LoadingError(
                 error.code,
                 UserSourceService.name

@@ -2,7 +2,8 @@
   [formGroup]="profileForm"
   class="flex flex-col gap-4"
 >
-  <h3>{{'shared.components.profile-editor.create-profile' | translate}}</h3>
+  <h3 *ngIf="!isRegistered">{{'shared.components.profile-editor.create-profile' | translate}}</h3>
+  <h3 *ngIf="isRegistered">{{'shared.components.profile-editor.edit-profile' | translate}}</h3>
   <it-input
     id="username"
     [label]="'shared.components.profile-editor.username' | translate"

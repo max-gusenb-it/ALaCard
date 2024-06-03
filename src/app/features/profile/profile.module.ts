@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
+import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,9 @@ import { ProfilePage } from './profile.page';
     ProfilePageRoutingModule,
     SharedModule
   ],
-  declarations: [ProfilePage]
+  declarations: [
+    ProfilePage,
+    EditProfileModal
+  ]
 })
 export class ProfilePageModule {}
