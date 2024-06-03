@@ -46,13 +46,9 @@ export class AppComponent extends AngularLifecycle {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(e => {
         if (!!e) {
-          if (e instanceof LoadingError) {
-            this.dialogService.openSnackbar(
-              this.translateService.instant("errors." + e.code)
-            );
-          } else {
-            console.error (e);
-          }
+          this.dialogService.openSnackbar(
+            this.translateService.instant("errors." + e.code)
+          );
         }
       });
   }
