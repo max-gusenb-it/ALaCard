@@ -25,6 +25,11 @@
       "forgot-password-modal": {
         "title": "Passwort vergessen",
         "mail-sent": "E-Mail zum Passwort ändern erfolgreich gesendet!"
+      },
+      "no-room": {
+        "title": "Erstelle deinen Raum",
+        "description": "Um Spiele zu hosten, brauchst du einen Raum. Erstellen einen oder tritt einem mit einer Einladung bei!",
+        "create-room": "Raum erstellen"
       }
     }
   },

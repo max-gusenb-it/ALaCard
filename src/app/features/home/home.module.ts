@@ -13,6 +13,7 @@ import { SignInModal } from './sign-in-modal/sign-in-modal.component';
 import { SignUpModal } from './sign-up-modal/sign-up-modal.component';
 import { CreateAccountComponent } from './sign-up-modal/create-account/create-account.component';
 import { ForgotPasswordModal } from './forgot-password-modal/forgot-password-modal.component';
+import { NoRoomComponent } from './no-room/no-room.component';
 
 @NgModule({
   imports: [
@@ -25,9 +26,10 @@ import { ForgotPasswordModal } from './forgot-password-modal/forgot-password-mod
   declarations: [
     HomePage,
     ForgotPasswordModal,
+    NoAccountComponent,
+    NoRoomComponent,
     SignInModal,
     SignUpModal,
-    NoAccountComponent,
     CreateAccountComponent
   ]
 })

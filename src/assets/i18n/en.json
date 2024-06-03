@@ -25,6 +25,11 @@
       "forgot-password-modal": {
         "title": "Forgot your password",
         "mail-sent": "Reset password mail successfully sent!"
+      },
+      "no-room": {
+        "title": "Create your room",
+        "description": "To host games you will need a room. Create or join one with an invitation!",
+        "create-room": "Create room"
       }
     }
   },
