@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { IUser } from 'src/app/core/models/interfaces/logic/user/IUser';
 import { Authentication, AuthenticationState } from 'src/app/core/state';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
@@ -10,13 +10,13 @@ import { supportedLanguages } from 'src/app/core/constants/languages';
 import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
 import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
 import { supportedColors } from 'src/app/core/constants/color';
-import { systemDefaultValue } from 'src/app/core/constants/systemDefaultValue';
+import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'profile',
   templateUrl: './profile.page.html'
 })
-export class ProfilePage {
+export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   @Select(AuthenticationState.user) user$!: Observable<IUser>;
 
   settingsForm: FormGroup = new FormGroup({
@@ -31,7 +31,15 @@ export class ProfilePage {
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
   ) {
+    super();
+  }
+
+  ngAfterViewInit() {
+    // Code in afterViewInit so markAsPristine works when not starting at profile page
     this.user$
+      .pipe(
+        takeUntil(this.destroyed$)
+      )
       .subscribe(u => {
         if (!!u) {
           this.settingsForm.controls['language'].setValue(u.settings.language);
@@ -55,10 +63,7 @@ export class ProfilePage {
   }
 
   getLanguages() {
-    return [
-      systemDefaultValue,
-      ...supportedLanguages
-    ]
+    return supportedLanguages;
   }
 
   getColors() {
