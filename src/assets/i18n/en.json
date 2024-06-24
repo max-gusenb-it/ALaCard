@@ -96,6 +96,7 @@
     "auth/user-not-found": "Corresponding user could not be found",
     "auth/wrong-password": "Incorrect password",
     "auth/email-already-in-use": "There is already a account using this e-mail",
-    "auth/network-request-failed": "Could not establish connection"
+    "auth/network-request-failed": "Could not establish connection",
+    "auth/invalid-credential": "Wrong password or username"
   }
 }

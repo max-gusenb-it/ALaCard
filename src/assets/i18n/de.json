@@ -96,6 +96,7 @@
     "auth/user-not-found": "Entsprechender Benutzer konnte nicht gefunden werden",
     "auth/wrong-password": "Passwort stimmt nicht überein",
     "auth/email-already-in-use": "Es gibt bereits einen Account mit dieser E-Mail-Adresse",
-    "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden"
+    "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden",
+    "auth/invalid-credential": "Passwort oder Benutzername nicht korrekt"
   }
 }
