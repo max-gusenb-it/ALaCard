@@ -26,6 +26,11 @@ export namespace Authentication {
         constructor(public user?: IUser) {}
     }
 
+    export class SetUserRoomId {
+        static readonly type = '[RoomState] Update room id of user';
+        constructor(public roomId: string) {}
+    }
+
     export class SignOut {
         static readonly type = '[HomePage] Sign out';
     }

@@ -41,6 +41,11 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
         return state.user?.settings.language;
     }
 
+    @Selector()
+    static ownsRoom(state: AuthenticationStateModel): boolean {
+        return state.user?.roomId != null;
+    }
+
     constructor(
         private authService: AuthService,
         private userSourceService: UserSourceService,
@@ -85,6 +90,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                             profilePicture: action.profileFormData.profilePicture,
                             username: action.profileFormData.username,
+                            roomId: null,
                             settings: {
                                 language: systemDefaultValue,
                                 color: systemDefaultValue
@@ -134,6 +140,19 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
             ...state,
             user: action.user
         });
+    }
+
+    @Action(Authentication.SetUserRoomId)
+    setUserRoomId(ctx: StateContext<AuthenticationStateModel>, action: Authentication.SetUserRoomId) {
+        const state = ctx.getState();
+
+        return this.userSourceService.updateUser(
+            state.uid!,
+            {
+                ...state.user!,
+                roomId: action.roomId
+            }
+        );
     }
 
     @Action(Authentication.SignOut)

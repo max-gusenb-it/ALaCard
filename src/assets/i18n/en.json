@@ -30,6 +30,12 @@
         "title": "Create your room",
         "description": "To host games you will need a room. Create or join one with an invitation!",
         "create-room": "Create room"
+      },
+      "create-room-modal": {
+        "title": "Create your room",
+        "create-room": "Create room",
+        "name": "Name",
+        "description": "Description"
       }
     },
     "profile": {
@@ -97,6 +103,7 @@
     "auth/wrong-password": "Incorrect password",
     "auth/email-already-in-use": "There is already a account using this e-mail",
     "auth/network-request-failed": "Could not establish connection",
-    "auth/invalid-credential": "Wrong password or username"
+    "auth/invalid-credential": "Wrong password or username",
+    "room-source-service.room-not-found": "Room was not found"
   }
 }

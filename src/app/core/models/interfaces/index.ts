@@ -3,6 +3,9 @@ export { IProfileEditorFormData } from "./components/forms/it-profile-editor/IPr
 
 export { ICreateAccountFormData } from "./features/home/ICreateAccountFormData";
 
+export { IRoom } from "./logic/room/IRoom";
+export { IPlayer } from "./logic/room/IPlayer";
+
 export { IUser } from "./logic/user/IUser";
 export { ISettings } from "./logic/user/ISettings";
 export { IFirestoreBase } from "./logic/IFirestoreBase";

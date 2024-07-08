@@ -30,6 +30,12 @@
         "title": "Erstelle deinen Raum",
         "description": "Um Spiele zu hosten, brauchst du einen Raum. Erstellen einen oder tritt einem mit einer Einladung bei!",
         "create-room": "Raum erstellen"
+      },
+      "create-room-modal": {
+        "title": "Erstelle deinen Raum",
+        "create-room": "Raum erstellen",
+        "name": "Name",
+        "description": "Beschreibung"
       }
     },
     "profile": {
@@ -97,6 +103,7 @@
     "auth/wrong-password": "Passwort stimmt nicht überein",
     "auth/email-already-in-use": "Es gibt bereits einen Account mit dieser E-Mail-Adresse",
     "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden",
-    "auth/invalid-credential": "Passwort oder Benutzername nicht korrekt"
+    "auth/invalid-credential": "Passwort oder Benutzername nicht korrekt",
+    "room-source-service.room-not-found": "Raum konnte nicht gefunden werden"
   }
 }

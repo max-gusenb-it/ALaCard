@@ -29,6 +29,7 @@ import { AUTHENTICATION_STATE_TOKEN, AuthenticationState } from './core/state/au
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { LoadingState } from './core/state';
 import { DatePipe } from '@angular/common';
+import { ROOM_STATE_TOKEN, RoomState } from './core/state/room/room.state';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -45,14 +46,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxsModule.forRoot(
       [
         AuthenticationState,
-        LoadingState
+        LoadingState,
+        RoomState
       ], 
       {
         developmentMode: !environment.production
       }
     ),
     NgxsStoragePluginModule.forRoot({
-      key: AUTHENTICATION_STATE_TOKEN
+      key: [AUTHENTICATION_STATE_TOKEN, ROOM_STATE_TOKEN]
     }),
     TranslateModule.forRoot({
       loader: {

@@ -1,0 +1,27 @@
+<form
+    [formGroup]="roomForm"
+    class="h-full flex flex-col p-6 justify-between"
+    (submit)="createRoom()"
+>
+    <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
+    <div class="flex flex-col gap-4">
+      <h3>{{"features.home.create-room-modal.title" | translate}}</h3>
+      <it-input
+        id="name"
+        [label]="'features.home.create-room-modal.name' | translate"
+        formControlName="name"
+        type="text"
+      >
+        {{ roomForm.controls['name'].value?.length }} / 30 Signs
+      </it-input>
+      <it-input
+        id="description"
+        [label]="'features.home.create-room-modal.description' | translate"
+        formControlName="description"
+        type="text"
+      >
+        {{ roomForm.controls['description'].value?.length }} / 60 Signs
+      </it-input>
+    </div>
+    <it-button class="flex" type="submit" [indicateLoading]="true" [disabled]="!roomForm.valid">{{"features.home.create-room-modal.create-room" | translate}}</it-button>
+</form>
