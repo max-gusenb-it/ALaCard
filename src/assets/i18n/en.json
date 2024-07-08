@@ -83,7 +83,8 @@
         "home": "Home",
         "decks": "Decks",
         "store": "Store",
-        "profile": "Profile"
+        "profile": "Profile",
+        "no-room-owned": "You have to create a room first"
       },
       "profile-editor": {
         "create-profile": "Create your profile",

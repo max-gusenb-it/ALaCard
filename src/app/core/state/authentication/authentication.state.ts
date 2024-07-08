@@ -37,6 +37,11 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     }
 
     @Selector()
+    static roomId(state: AuthenticationStateModel): string | undefined {
+        return !!state.user?.roomId ? state.user.roomId : undefined;
+    }
+
+    @Selector()
     static language(state: AuthenticationStateModel): string | undefined {
         return state.user?.settings.language;
     }

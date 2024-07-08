@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { CreateRoomModal } from '../create-room-modal/create-room-modal.component';
-import { Store } from '@ngxs/store';
-import { Room } from 'src/app/core/state';
 
 @Component({
   selector: 'no-room',
@@ -12,7 +10,7 @@ export class NoRoomComponent {
 
   constructor(
     private modalCtrl: ModalController,
-    private store: Store
+    private navController: NavController
   ) { }
 
   async openCreateRoomModal() {
@@ -22,7 +20,7 @@ export class NoRoomComponent {
     modal.present();
     modal.onDidDismiss().then(modalResponse => {
       if (modalResponse.data.roomId != null) {
-        this.store.dispatch(new Room.JoinRoom(modalResponse.data.roomId));
+        this.navController.navigateForward(`room/${modalResponse.data.roomId}`);
       }
     });
   }
