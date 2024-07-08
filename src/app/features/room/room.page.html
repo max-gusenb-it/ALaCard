@@ -1,0 +1,18 @@
+<ion-content [fullscreen]="true">
+  <div class="h-full w-full flex flex-col p-6 gap-4 justify-between" *ngIf="!!(room$ | async)">
+    <it-detail-heading
+      [heading]="(room$ | async)!.name"
+      [subheading]="('features.room.created' | translate) + ' ' + ((room$ | async)?.creationDate | fireDate)"
+      headingType="h3"
+      subheadingType="sm"
+      [detail]="(room$ | async)!.description"
+    />
+    <div class="flex gap-x-4">
+      <it-button class="flex grow" size="big">
+        Start Game
+      </it-button>
+  
+      <it-menu-button [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
+    </div>
+  </div>
+</ion-content>

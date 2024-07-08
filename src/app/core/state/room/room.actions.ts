@@ -16,11 +16,18 @@ export namespace Room {
 
     export class JoinRoom {
         static readonly type = '[Home] Join room';
-        constructor(public roomId: string) {}
+        constructor(public roomId: string, public userId?: string) {}
     }
 
     export class SetRoom {
         static readonly type = '[Room State] Set room';
-        constructor(public room: IRoom) {}
+        /**
+         * Creates an instance of SetRoom.
+         *
+         * @constructor
+         * @param {IRoom} room
+         * @param {?string} [userId] Optional id of user that owns the room. If null, room is owned by currently signed in user
+         */
+        constructor(public room: IRoom, public userId?: string) {}
     }
 }

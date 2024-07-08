@@ -28,6 +28,10 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'room/:connectionData',
+    loadChildren: () => import('./features/room/room.module').then( m => m.RoomPageModule)
+  },
 ];
 
 @NgModule({

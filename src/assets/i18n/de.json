@@ -72,6 +72,9 @@
       },
       "sign-out": "Ausloggen",
       "color-scheme": "App Farbschema"
+    },
+    "room": {
+      "created": "Erstellt am"
     }
   },
   "shared": {
@@ -104,6 +107,7 @@
     "auth/email-already-in-use": "Es gibt bereits einen Account mit dieser E-Mail-Adresse",
     "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden",
     "auth/invalid-credential": "Passwort oder Benutzername nicht korrekt",
-    "room-source-service.room-not-found": "Raum konnte nicht gefunden werden"
+    "room-source-service.get-room.no-user": "Kein Nutzer gefunden für den ein Raum erstellt werden kann",
+    "room-source-service.get-room.room-not-found": "Raum konnte nicht gefunden werden"
   }
 }

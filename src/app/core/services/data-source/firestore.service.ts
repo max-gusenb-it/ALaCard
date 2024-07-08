@@ -2,17 +2,20 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Observable, map } from "rxjs";
 import { IFirestoreBase } from "../../models/interfaces";
-import { Store } from "@ngxs/store";
-import { Loading } from "../../state";
+import { doc, getFirestore, updateDoc } from "@angular/fire/firestore";
+import { initializeApp } from "@angular/fire/app";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FirestoreService<T extends IFirestoreBase> {
     constructor(
-        private afs: AngularFirestore,
-        private store: Store
+        private afs: AngularFirestore
     ) { }
+    
+    app = initializeApp(environment.firebase.config);
+    firestore = getFirestore(this.app);
 
     getDocWithId$(
         ref: string,
@@ -24,7 +27,7 @@ export class FirestoreService<T extends IFirestoreBase> {
             map((data: any) => {
                 var keys = Object.keys(data);
                 if (keys.length === 1 && keys[0] === 'id') {
-                    return undefined;
+                    throw new Error();
                 } else {
                     return data;
                 }
@@ -70,5 +73,11 @@ export class FirestoreService<T extends IFirestoreBase> {
         } catch (error) {
             return Promise.reject(error);
         }
+    }
+
+    updateField(ref: string, id: string, fieldRef: string, data: any) {
+        return this.afs.collection(ref).doc(id).update({
+            [fieldRef]: data
+        });
     }
 }

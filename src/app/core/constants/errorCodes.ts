@@ -1,3 +1,4 @@
 export namespace RoomSourceServiceErrors {
-    export const roomNotFound = "room-source-service.room-not-found";
+    export const noUser = "room-source-service.get-room.no-user";
+    export const roomNotFound = "room-source-service.get-room.room-not-found";
 }

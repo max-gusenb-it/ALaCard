@@ -1,13 +1,16 @@
-import { Action, State, StateContext, StateToken } from "@ngxs/store";
+import { Action, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
 import { RoomStateModel } from "./room.model";
 import { Injectable } from "@angular/core";
 import { Room } from "./room.actions";
 import { RoomSourceService } from "../../services/data-source/room-source.service";
 import { LoadingHelperService } from "../../services/loading-helper.service";
-import { Authentication } from "../authentication";
-import { Subscription, firstValueFrom } from "rxjs";
+import { Authentication, AuthenticationState } from "../authentication";
+import { Subscription, firstValueFrom, takeUntil } from "rxjs";
 import { Loading, LoadingError } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
+import { NavController } from "@ionic/angular";
+import { RoomUtils } from "../../utils/room.utils";
+import { IRoom } from "../../models/interfaces";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -18,9 +21,16 @@ export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 export class RoomState extends AngularLifecycle {
     roomSubscription$: Subscription = null as any;
 
+    @Selector()
+    static room(state: RoomStateModel): IRoom | undefined {
+        return state.room;
+    }
+
     constructor(
+        private navController: NavController,
         private roomSourceService: RoomSourceService,
-        private loadingHelperService: LoadingHelperService
+        private loadingHelperService: LoadingHelperService,
+        private store: Store
     ) {
         super();
     }
@@ -41,22 +51,47 @@ export class RoomState extends AngularLifecycle {
             this.roomSubscription$.unsubscribe();
         }
         ctx.dispatch(new Loading.StartLoading);
-        let roomObservable = this.roomSourceService.getRoom$(action.roomId);
+        let roomObservable = this.roomSourceService.getRoom$(action.roomId, action.userId);
         // check if room exists
         firstValueFrom(roomObservable)
             .then(
                 r => {
-                    ctx.dispatch(new Loading.EndLoading);
-                    ctx.dispatch(new Room.SetRoom(r));
+                    return r;
                 },
                 e => {
                     if (e instanceof LoadingError) {
                         ctx.dispatch(new Loading.EndLoading(e.exportError()));
                     } else {
+                        ctx.dispatch(new Loading.EndLoading());
                         console.error(e);
                     }
+                    this.navController.navigateBack('home');
+                    return Promise.reject(e);
                 }
-            );
+            ).then(r => {
+                // Add user to room
+                const newPlayer = RoomUtils.generatePlayerForRoom(r, this.store.selectSnapshot(AuthenticationState.user)!);
+                if (!!newPlayer) {
+                    return this.roomSourceService.updatePlayer(
+                        r.id!,
+                        newPlayer.id,
+                        newPlayer,
+                        action.userId
+                    );
+                } else {
+                    return Promise.resolve();
+                }
+            }).then(() => {
+                // Subscribe to room changes
+                this.roomSubscription$ = roomObservable
+                    .pipe(
+                        takeUntil(this.destroyed$)
+                    )
+                    .subscribe(r => {
+                        ctx.dispatch(new Room.SetRoom(r, action.userId))
+                });
+                ctx.dispatch(new Loading.EndLoading());
+        });
     }
 
     @Action(Room.SetRoom)
@@ -65,7 +100,10 @@ export class RoomState extends AngularLifecycle {
 
         ctx.patchState({
             ...state,
-            roomId: action.room.id!,
+            roomConnectionData: {
+                roomId: action.room.id!,
+                userId: action.userId
+            },
             room: action.room
         });
     }
