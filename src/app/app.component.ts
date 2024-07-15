@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { ILoadingError, LoadingState } from './core/state';
 import { Observable, interval, takeUntil } from 'rxjs';
 import { AngularLifecycle } from './shared/helper/angular-lifecycle.helper';
-import { PopupService } from './core/services/dialog.service';
+import { PopupService } from './core/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

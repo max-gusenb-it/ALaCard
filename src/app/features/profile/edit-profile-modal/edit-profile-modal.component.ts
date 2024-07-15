@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { IProfileEditorFormData, IUser } from 'src/app/core/models/interfaces';
 import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
-import { PopupService } from 'src/app/core/services/dialog.service';
+import { PopupService } from 'src/app/core/services/popup.service';
 import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
 
 @Component({
