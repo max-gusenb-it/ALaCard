@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ExampleComponent } from '../../shared/components/display/example/example.component';
-import { DialogService } from 'src/app/core/services/dialog.service';
+import { PopupService } from 'src/app/core/services/dialog.service';
 
 @Component({
   selector: 'app-test',
@@ -83,7 +83,7 @@ export class TestPage {
     },
   ]
 
-  constructor(private dialog: DialogService) {}
+  constructor(private popupService: PopupService) {}
 
   setColor(color: string) {
     if (!!color) {
@@ -108,7 +108,7 @@ export class TestPage {
   }
 
   openDialog() {
-    const ref = this.dialog.open(
+    const ref = this.popupService.openDialog(
       ExampleComponent
     );
 
@@ -118,7 +118,7 @@ export class TestPage {
   }
 
   openSnackbar() {
-    this.dialog.openSnackbar("No button to continue? Swipe to the left side to resume the game", "home", true);
+    this.popupService.openSnackbar("No button to continue? Swipe to the left side to resume the game", "home", true);
   }
 
   tabsChanged(event: boolean) {

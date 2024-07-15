@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { IProfileEditorFormData, IUser } from 'src/app/core/models/interfaces';
 import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
-import { DialogService } from 'src/app/core/services/dialog.service';
+import { PopupService } from 'src/app/core/services/dialog.service';
 import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class EditProfileModal implements OnInit {
     private modalCtrl: ModalController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
-    private dialogService: DialogService,
+    private popupService: PopupService,
     private translateService: TranslateService
   ) {}
 
@@ -50,7 +50,7 @@ export class EditProfileModal implements OnInit {
       this.userSourceService.updateUser(userCopy.id!, userCopy)
     ]).then(() => {
       this.close();
-      this.dialogService.openSnackbar(this.translateService.instant("features.profile.edit-profile-modal.edited-user"))
+      this.popupService.openSnackbar(this.translateService.instant("features.profile.edit-profile-modal.edited-user"))
     })
   }
 }

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { DialogService } from 'src/app/core/services/dialog.service';
+import { PopupService } from 'src/app/core/services/dialog.service';
 import { Authentication } from 'src/app/core/state';
 
 @Component({
@@ -18,7 +18,7 @@ export class ForgotPasswordModal {
 
   constructor(
     private modalCtrl: ModalController,
-    private dialogService: DialogService,
+    private popupService: PopupService,
     private translateService: TranslateService,
     private store: Store
   ) { }
@@ -30,7 +30,7 @@ export class ForgotPasswordModal {
   submit() {
     this.store.dispatch(new Authentication.ResetPassword(this.forgotPasswordForm.controls['email'].value))
       .subscribe(() => {
-        this.dialogService.openSnackbar(
+        this.popupService.openSnackbar(
           this.translateService.instant("features.home.forgot-password-modal.mail-sent")
         );
         this.close();

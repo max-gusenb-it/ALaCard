@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { ILoadingError, LoadingState } from './core/state';
 import { Observable, interval, takeUntil } from 'rxjs';
 import { AngularLifecycle } from './shared/helper/angular-lifecycle.helper';
-import { DialogService } from './core/services/dialog.service';
+import { PopupService } from './core/services/dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent extends AngularLifecycle {
   interval$ = interval(1000).pipe(takeUntil(this.destroyed$));
 
   constructor(
-    private dialogService: DialogService,
+    private popupService: PopupService,
     private translateService: TranslateService
   ) {
     super();
@@ -27,7 +27,7 @@ export class AppComponent extends AngularLifecycle {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(e => {
         if (!!e) {
-          this.dialogService.openSnackbar(
+          this.popupService.openSnackbar(
             this.translateService.instant("errors." + e.code)
           );
         }

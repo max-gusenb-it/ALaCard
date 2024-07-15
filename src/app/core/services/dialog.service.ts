@@ -8,11 +8,14 @@ import { ISnackbarData } from '../models/interfaces/components/display/it-snackb
 @Injectable({
   providedIn: 'root'
 })
-export class DialogService {
+export class PopupService {
 
-  constructor(private dialog: Dialog, public overlay: Overlay) { }
+  constructor(
+    private dialog: Dialog,
+    public overlay: Overlay
+  ) { }
 
-  open(component: ComponentType<unknown>, config?: DialogConfig<unknown, DialogRef<unknown, unknown>, BasePortalOutlet> | undefined) {
+  openDialog(component: ComponentType<unknown>, config?: DialogConfig<unknown, DialogRef<unknown, unknown>, BasePortalOutlet> | undefined) {
     if (config == null) {
       config = {};
     }
