@@ -10,12 +10,12 @@ export class ItMenuButtonComponent implements OnInit {
     @Input() menuItemIcons: string[] = [];
     
     /**
-     * When menu item is clicked, id of menu item is emitted
+     * When menu item is clicked, icon text of menu item is emitted
      * @date 4/15/2024 - 8:11:13 AM
      *
-     * @type {number}
+     * @type {string}
      */
-    @Output() menuItemClicked = new EventEmitter<number>();
+    @Output() menuItemClicked = new EventEmitter<string>();
 
     constructor(private elementRef: ElementRef) {}
 
@@ -32,8 +32,8 @@ export class ItMenuButtonComponent implements OnInit {
         this.active = !this.active;
     }
 
-    onMenuItemClick(index: number) {
+    onMenuItemClick(action: string) {
         this.toggleActive();
-        this.menuItemClicked.emit(index);
+        this.menuItemClicked.emit(action);
     }
 }

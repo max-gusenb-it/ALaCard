@@ -21,16 +21,34 @@ export namespace RoomUtils {
             existingPlayer = playersArray.find(p => p.id === user.id);
         }
         if (!!existingPlayer) {
-        // if player state is already active do nothing
-        if (existingPlayer.state !== EPlayerState.active) {
-            newPlayer = existingPlayer;
-            newPlayer.state = EPlayerState.active;
-        } else {
-            return null;
-        }
+            // if player state is already active do nothing
+            if (existingPlayer.state !== EPlayerState.active) {
+                newPlayer = existingPlayer;
+                newPlayer.state = EPlayerState.active;
+            } else {
+                return null;
+            }
         } else {
             newPlayer = UserUtils.exportUserToPlayer(user, playersArray.length !== 0 ? playersArray.length : 0);
         }
         return newPlayer;
+    }
+
+    
+    /**
+     * Generates a player that looks like he left the room from an existing room and an player id
+     *
+     * @param {IRoom} room 
+     * @param {string} playerId
+     * @returns {(IPlayer | null)} The updated player or null if the player is not found
+     */
+    export function generateLeftPlayer(room: IRoom, playerId: string) : IPlayer | null {
+        if (!!room.players[playerId]) {
+            return {
+                ...room.players[playerId],
+                state: EPlayerState.left
+            };
+        }
+        return null;
     }
 }

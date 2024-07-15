@@ -30,4 +30,9 @@ export namespace Room {
          */
         constructor(public room: IRoom, public userId?: string) {}
     }
+
+    export class LeaveRoom {
+        static readonly type = '[Room] Leave room';
+        constructor() {}
+    }
 }

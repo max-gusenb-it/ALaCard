@@ -129,7 +129,7 @@ export class TestPage {
     }
   }
 
-  test(input?: number) {
+  test(input?: string) {
     console.log (input ?? window.innerWidth);
   }
 }

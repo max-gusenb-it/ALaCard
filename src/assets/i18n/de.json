@@ -74,7 +74,11 @@
       "color-scheme": "App Farbschema"
     },
     "room": {
-      "created": "Erstellt am"
+      "created": "Erstellt am",
+      "leave-dialog": {
+        "title": "Willst du den Raum wirklich verlassen?",
+        "leave-room": "Raum verlassen"
+      }
     }
   },
   "shared": {
@@ -100,7 +104,8 @@
     "continue": "Weiter",
     "back": "Zurück",
     "submit": "Bestätigen",
-    "safe": "Speichern"
+    "safe": "Speichern",
+    "cancel": "Abbrechen"
   },
   "errors": {
     "auth/user-not-found": "Entsprechender Benutzer konnte nicht gefunden werden",

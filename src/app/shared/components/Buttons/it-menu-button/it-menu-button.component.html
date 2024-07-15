@@ -13,7 +13,7 @@
         "
         [ngClass]="{'pointer-events-none': !active}"
         [ngStyle]="active ? {'transform': 'translateY(' + -(2.5 * (i + 1)) + 'rem)'} : {}"
-        (click)="onMenuItemClick(i)"
+        (click)="onMenuItemClick(icon)"
     >
         <it-icon [size]="1.25">{{ icon }}</it-icon>
     </button>

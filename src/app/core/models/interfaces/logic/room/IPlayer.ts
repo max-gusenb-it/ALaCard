@@ -15,5 +15,6 @@ export interface IPlayer {
 
 export enum EPlayerState {
     active,
-    inactive
+    inactive,
+    left
 }

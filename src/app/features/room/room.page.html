@@ -12,7 +12,7 @@
         Start Game
       </it-button>
   
-      <it-menu-button [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']"/>
+      <it-menu-button [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']" (menuItemClicked)="handleMenuAction($event)"/>
     </div>
   </div>
 </ion-content>

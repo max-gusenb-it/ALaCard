@@ -16,8 +16,7 @@
   </div>
   <ng-content class="h-full"></ng-content>
   <div *ngIf="!hideControls" class="flex gap-x-2 pt-4">
-    <it-button color="secondary" class="flex flex-grow" (click)="previousTab()">
-      
+    <it-button class="flex flex-grow" color="secondary" (click)="previousTab()">
       <it-icon color="text-white">{{ isFirstTab() ? "close" : "keyboard_arrow_left"}}</it-icon>
     </it-button>
     <it-button class="flex flex-grow" (click)="finishTabs()" [disabled]="!advanceControlsEnabled">
