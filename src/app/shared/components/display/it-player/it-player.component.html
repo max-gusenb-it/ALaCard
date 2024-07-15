@@ -1,0 +1,9 @@
+<div class="flex flex-row w-full items-center gap-2">
+  <div id="image-container" class="rounded-full overflow-hidden" style="width: 3.25rem; height: 3.25rem;">
+    <img id="rect-img" [src]="profilePicture" />
+  </div>
+  <div class="flex flex-col">
+    <p class="font-medium">{{ username }}</p>
+    <p *ngIf="state !== null" class="text-sm">{{ getStateTranslation(state) }}</p>
+  </div>
+</div>

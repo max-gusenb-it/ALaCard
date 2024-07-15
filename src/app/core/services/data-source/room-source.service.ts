@@ -25,7 +25,7 @@ export class RoomSourceService {
             const id = this.store.selectSnapshot(AuthenticationState.user)?.id;
             if (!!!id) {
                 throw new LoadingError(
-                    RoomSourceServiceErrors.noUser,
+                    RoomSourceServiceErrors.getRoomNoUser,
                     RoomSourceService.name
                 );
             }

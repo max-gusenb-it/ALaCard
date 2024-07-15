@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { IRoom } from 'src/app/core/models/interfaces';
+import { IPlayer, IRoom } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { Room, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
@@ -51,6 +51,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
         );
         break;
     }
+  }
+
+  mapPlayersToArray(players: { [key: string]: IPlayer }) {
+    return Object.values(players);
   }
 
 }

@@ -78,6 +78,12 @@
       "leave-dialog": {
         "title": "Willst du den Raum wirklich verlassen?",
         "leave-room": "Raum verlassen"
+      },
+      "players": "Spieler",
+      "playerStates": {
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "left": "Verlassen"
       }
     }
   },
@@ -113,7 +119,9 @@
     "auth/email-already-in-use": "Es gibt bereits einen Account mit dieser E-Mail-Adresse",
     "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden",
     "auth/invalid-credential": "Passwort oder Benutzername nicht korrekt",
-    "room-source-service.get-room.no-user": "Kein Nutzer gefunden für den ein Raum erstellt werden kann",
-    "room-source-service.get-room.room-not-found": "Raum konnte nicht gefunden werden"
+    "room-source-service.get-room.no-user-found": "Kein Nutzer gefunden für den ein Raum erstellt werden kann",
+    "room-source-service.get-room.room-not-found": "Raum konnte nicht gefunden werden",
+    "room-state.join-room.no-user-found": "Du musst einen Nutzer erstellen, bevor du einen Raum beitretten kannst",
+    "room-state.join-room.cant-join-room-when-offline": "Wenn du offline bist, kannst du nur deinen eigenen Raum beitretten"
   }
 }

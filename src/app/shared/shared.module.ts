@@ -30,6 +30,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor/it-profile-editor.component';
 import { FireDatePipe } from './pipes/fire-date.pipe';
+import { ItPlayerComponent } from './components/display/it-player/it-player.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FireDatePipe } from './pipes/fire-date.pipe';
     ItNavItemComponent,
     ItAccordComponent,
     ItIconComponent,
+    ItPlayerComponent,
     ItSelectionListComponent,
     ItSnackbarComponent,
     ItTabComponent,
@@ -79,6 +81,7 @@ import { FireDatePipe } from './pipes/fire-date.pipe';
     ItNavItemComponent,
     ItAccordComponent,
     ItIconComponent,
+    ItPlayerComponent,
     ItSelectionListComponent,
     ItSnackbarComponent,
     ItTabComponent,
