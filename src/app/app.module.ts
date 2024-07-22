@@ -64,14 +64,14 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: getBrowserLanguage()
     }),
+    AngularFirestoreModule.enablePersistence()
+  ],
+  providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase.config)),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()), 
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    AngularFirestoreModule.enablePersistence()
-  ],
-  providers: [
     { provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['http://localhost:9099'] : undefined },
     { provide: USE_FIRESTORE_EMULATOR, useValue: !environment.production ? ['localhost', 8080] : undefined },
     { provide: USE_STORAGE_EMULATOR, useValue: !environment.production ? ['localhost', 9199] : undefined },
