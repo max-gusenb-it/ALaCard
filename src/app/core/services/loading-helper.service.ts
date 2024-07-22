@@ -19,7 +19,7 @@ export class LoadingHelperService {
     loadWithLoadingState(
         loadPredicates: Promise<unknown>[]
     ): Promise<unknown[]> {
-        this.store.dispatch(new Loading.StartLoading());
+        if (navigator.onLine) this.store.dispatch(new Loading.StartLoading());
         return Promise.all(loadPredicates)
             .catch(error => {
                 if (error instanceof LoadingError) {
