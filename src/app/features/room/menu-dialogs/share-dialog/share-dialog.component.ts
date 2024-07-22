@@ -1,5 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, Input } from '@angular/core';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-share-dialog',
@@ -15,11 +16,12 @@ export class ShareDialogComponent {
   ) { }
 
   shareLink() {
-    
+    Share.share({
+      url: this.data
+    }).then(() => this.close());
   }
 
   close() {
-    console.log(this.data)
     this.dialogRef.close();
   }
 
