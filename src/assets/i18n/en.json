@@ -88,6 +88,10 @@
       "join-room-offline-dialog": {
         "title": "Do you want to join your room in offline mode?",
         "subtitle": "Your current game data will be lost in this process."
+      },
+      "share-dialog": {
+        "title": "Sharing",
+        "share-link": "Share Join Link"
       }
     }
   },
@@ -116,7 +120,8 @@
     "submit": "Submit",
     "safe": "Safe",
     "cancel": "Cancel",
-    "join": "Join"
+    "join": "Join",
+    "close": "Close"
   },
   "errors": {
     "auth/user-not-found": "Corresponding user could not be found",

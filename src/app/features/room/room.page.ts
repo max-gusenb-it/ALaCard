@@ -9,6 +9,8 @@ import { Room, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItOptionDialogComponent } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ShareDialogComponent } from './menu-dialogs/share-dialog/share-dialog.component';
+import { RoomUtils } from 'src/app/core/utils/room.utils';
 
 @Component({
   selector: 'app-room',
@@ -61,6 +63,17 @@ export class RoomPage extends AngularLifecycle implements OnInit {
           }
         );
         break;
+      case("share"):
+        const room = this.store.selectSnapshot(RoomState.room);
+        if (!!room) {
+          this.popupService.openDialog(
+            ShareDialogComponent,
+            {
+              data: RoomUtils.generateJoinLink(room)
+            }
+          );
+        }
+        break;  
     }
   }
 

@@ -1,3 +1,4 @@
+import { environment } from "src/environments/environment";
 import { IPlayer, IRoom, IUser } from "../models/interfaces";
 import { EPlayerState } from "../models/interfaces/logic/room/IPlayer";
 import { UserUtils } from "./user.utils";
@@ -53,5 +54,18 @@ export namespace RoomUtils {
             };
         }
         return null;
+    }
+
+    export function getRoomCreator(room: IRoom) : IPlayer {
+        return Object.values(room.players).sort((p1, p2) => p1.joinOrder - p2.joinOrder)[0];
+    }
+
+    export function generateJoinLink(room: IRoom) : string {
+        const creator = getRoomCreator(room);
+        if (environment.production) {
+            return `https://alacard-de849.web.app/room/${room.id}-${creator.id}`;
+        } else {
+            return `http://localhost:8100/room/${room.id}-${creator.id}`;
+        }
     }
 }

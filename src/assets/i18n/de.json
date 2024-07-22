@@ -88,6 +88,10 @@
       "join-room-offline-dialog": {
         "title": "Möchtest du deinen Raum im Offline Modus beitretten?",
         "subtitle": "Deine aktuellen Spieldaten gehen dabei verloren"
+      },
+      "share-dialog": {
+        "title": "Teilen",
+        "share-link": "Einladung teilen"
       }
     }
   },
@@ -116,7 +120,8 @@
     "submit": "Bestätigen",
     "safe": "Speichern",
     "cancel": "Abbrechen",
-    "join": "Beitretten"
+    "join": "Beitretten",
+    "close": "Schließen"
   },
   "errors": {
     "auth/user-not-found": "Entsprechender Benutzer konnte nicht gefunden werden",

@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-2">
+  <it-button-heading
+    [icon]="'close'"
+    (click)="close()"
+  >
+    {{ 'features.room.share-dialog.title' | translate }}
+  </it-button-heading>
+  <qrcode [qrdata]="data" [width]="290" [errorCorrectionLevel]="'M'"></qrcode>
+  <div class="flex gap-4">
+    <!-- Use basis-0 to create items with equal width -->
+    <it-button class="flex grow basis-0" size="small" color="secondary" (click)="close()">{{ 'actions.close' | translate }}</it-button>
+    <it-button class="flex grow basis-0" size="small" (click)="close()">{{ 'features.room.share-dialog.share-link' | translate }}</it-button>
+  </div>
+</div>
