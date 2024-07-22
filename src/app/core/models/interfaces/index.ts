@@ -1,5 +1,6 @@
 export { ISnackbarData } from "./components/display/it-snackbar/ISnackbarData";
 export { IProfileEditorFormData } from "./components/forms/it-profile-editor/IProfileEditorFormData";
+export { IOptionDialogData } from "./components/forms/it-option-dialog/IOptionDialogData";
 
 export { ICreateAccountFormData } from "./features/home/ICreateAccountFormData";
 

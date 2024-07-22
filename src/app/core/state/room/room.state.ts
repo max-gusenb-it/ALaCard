@@ -13,6 +13,7 @@ import { RoomUtils } from "../../utils/room.utils";
 import { IRoom } from "../../models/interfaces";
 import { RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/popup.service";
+import { TranslateService } from "@ngx-translate/core";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -32,6 +33,7 @@ export class RoomState extends AngularLifecycle {
         private navController: NavController,
         private roomSourceService: RoomSourceService,
         private loadingHelperService: LoadingHelperService,
+        private translateService: TranslateService,
         private store: Store,
         private zone: NgZone,
         private popupService: PopupService
@@ -49,7 +51,7 @@ export class RoomState extends AngularLifecycle {
     }
 
     @Action(Room.JoinRoom)
-    joinRoom(ctx: StateContext<RoomStateModel>, action: Room.JoinRoom) {
+    async joinRoom(ctx: StateContext<RoomStateModel>, action: Room.JoinRoom) {
         if (this.roomSubscription$ != null && !this.roomSubscription$.closed) {
             // ask user if he wants to leave current room
             this.roomSubscription$.unsubscribe();
@@ -63,7 +65,7 @@ export class RoomState extends AngularLifecycle {
                 throw new LoadingError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
 
-            // check if online
+            // If user is not online he can only join his own room 
             if (!navigator.onLine) {
                 if (action.userId !== undefined && action.userId !== user.id) {
                     throw new LoadingError(RoomStateErrors.joinRoomOffline, RoomState.name);
@@ -71,8 +73,9 @@ export class RoomState extends AngularLifecycle {
             }
 
             let roomObservable = this.roomSourceService.getRoom$(action.roomId, action.userId);
+
             // check if room exists
-            return firstValueFrom(roomObservable)
+            let initialRoom = await firstValueFrom(roomObservable)
                 .then(
                     r => {
                         return r;
@@ -86,34 +89,49 @@ export class RoomState extends AngularLifecycle {
                         }
                         this.navController.navigateBack('home');
                         return Promise.reject(e);
-                    }
-                ).then(r => {
-                    // Subscribe to room changes
-                    this.roomSubscription$ = roomObservable
-                        .pipe(
-                            takeUntil(this.destroyed$)
-                        )
-                        .subscribe(r => {
-                            ctx.dispatch(new Room.SetRoom(r, action.userId))
-                    });
-                    return r;
-                }).then(r => {
-                    // Add user to room
-                    const newPlayer = RoomUtils.generatePlayerForRoom(r, user);
-                    if (!!newPlayer) {
-                        this.roomSourceService.updatePlayer(
-                            r.id!,
-                            newPlayer.id,
-                            newPlayer,
-                            action.userId
-                        );
-                    }
-                    ctx.dispatch(new Loading.EndLoading());
-                    return Promise.resolve();
+                }
+            );
+            
+            // ToDo: Check if room is already in offline mode
+            if (!navigator.onLine) {
+                // If user is offline, ask him if eh wants to join his room in offline mode
+                let joinOffline = await firstValueFrom(this.popupService.openOptionDialog(
+                    this.translateService.instant("features.room.join-room-offline-dialog.title"),
+                    this.translateService.instant("actions.cancel"),
+                    this.translateService.instant("actions.join"),
+                    this.translateService.instant("features.room.join-room-offline-dialog.subtitle")
+                ).closed);
+                if (!joinOffline) {
+                    throw new Error();
+                }
+            }
+
+            this.roomSubscription$ = roomObservable
+                .pipe(
+                    takeUntil(this.destroyed$)
+                )
+                .subscribe(r => {
+                    ctx.dispatch(new Room.SetRoom(r, action.userId))
             });
+
+            // Add user to room
+            // ToDo: If user joins in offline mode -> update room to offline mode
+            const newPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
+            if (!!newPlayer) {
+                this.roomSourceService.updatePlayer(
+                    initialRoom.id!,
+                    newPlayer.id,
+                    newPlayer,
+                    action.userId
+                );
+            }
+            ctx.dispatch(new Loading.EndLoading());
+            return Promise.resolve();
         } catch(error) {
             if (error instanceof LoadingError) {
                 ctx.dispatch(new Loading.EndLoading(error.exportError()));
+            } else {
+                ctx.dispatch(new Loading.EndLoading);
             }
             this.navController.navigateBack('home');
             return;

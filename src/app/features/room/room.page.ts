@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { IPlayer, IRoom } from 'src/app/core/models/interfaces';
+import { IOptionDialogData, IPlayer, IRoom } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { Room, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { LeaveDialogComponent } from './menu-dialogs/leave-dialog/leave-dialog.component';
+import { ItOptionDialogComponent } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room',
@@ -20,7 +21,8 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private store: Store,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private popupService: PopupService
+    private popupService: PopupService,
+    private translateService: TranslateService
   ) {
     super();
   }
@@ -41,10 +43,19 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   handleMenuAction(actionType: string) {
     switch(actionType) {
       case("exit_to_app"):
-        const ref = this.popupService.openDialog(LeaveDialogComponent);
+        const ref = this.popupService.openDialog(
+          ItOptionDialogComponent, 
+          {
+            data: { 
+              title: this.translateService.instant("features.room.leave-dialog.title"),
+              optionOne: this.translateService.instant("actions.cancel"),
+              optionTwo: this.translateService.instant("features.room.leave-dialog.leave-room")
+            } as IOptionDialogData 
+          }
+        );
         firstValueFrom(ref.closed)
           .then((data: any) => {
-            if (data.leaveRoom) {
+            if (data) {
               this.store.dispatch(new Room.LeaveRoom());
             }
           }

@@ -21,11 +21,14 @@ export namespace RoomUtils {
             existingPlayer = playersArray.find(p => p.id === user.id);
         }
         if (!!existingPlayer) {
-            // if player state is already active do nothing
             if (existingPlayer.state !== EPlayerState.active) {
+                // set state to active and update user information 
                 newPlayer = existingPlayer;
                 newPlayer.state = EPlayerState.active;
+                if(newPlayer.username != user.username) newPlayer.username = user.username;
+                if(newPlayer.profilePicture != user.profilePicture) newPlayer.profilePicture = user.profilePicture;
             } else {
+                // if player state is already active do nothing
                 return null;
             }
         } else {

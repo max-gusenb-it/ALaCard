@@ -8,7 +8,6 @@ import { RoomPageRoutingModule } from './room-routing.module';
 
 import { RoomPage } from './room.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { LeaveDialogComponent } from './menu-dialogs/leave-dialog/leave-dialog.component';
 
 @NgModule({
   imports: [
@@ -19,8 +18,7 @@ import { LeaveDialogComponent } from './menu-dialogs/leave-dialog/leave-dialog.c
     SharedModule
   ],
   declarations: [
-    RoomPage,
-    LeaveDialogComponent
+    RoomPage
   ]
 })
 export class RoomPageModule {}

@@ -31,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor/it-profile-editor.component';
 import { FireDatePipe } from './pipes/fire-date.pipe';
 import { ItPlayerComponent } from './components/display/it-player/it-player.component';
+import { ItOptionDialogComponent } from './components/forms/it-option-dialog/it-option-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ItPlayerComponent } from './components/display/it-player/it-player.comp
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
+    ItOptionDialogComponent,
     ItProfileEditorComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
@@ -86,6 +88,7 @@ import { ItPlayerComponent } from './components/display/it-player/it-player.comp
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
+    ItOptionDialogComponent,
     ItProfileEditorComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
