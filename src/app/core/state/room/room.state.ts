@@ -14,6 +14,7 @@ import { IRoom } from "../../models/interfaces";
 import { RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/popup.service";
 import { TranslateService } from "@ngx-translate/core";
+import { UserUtils } from "../../utils/user.utils";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -91,16 +92,20 @@ export class RoomState extends AngularLifecycle {
                         return Promise.reject(e);
                 }
             );
+
+            if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
+                throw new LoadingError(RoomStateErrors.joinRoomInOffline, RoomState.name);
+            }
             
-            // ToDo: Check if room is already in offline mode
-            if (!navigator.onLine) {
+            let joinOffline = false;
+            if (!navigator.onLine && !initialRoom.settings.singleDeviceMode) {
                 // If user is offline, ask him if eh wants to join his room in offline mode
-                let joinOffline = await firstValueFrom(this.popupService.openOptionDialog(
+                joinOffline = await firstValueFrom(this.popupService.openOptionDialog(
                     this.translateService.instant("features.room.join-room-offline-dialog.title"),
                     this.translateService.instant("actions.cancel"),
                     this.translateService.instant("actions.join"),
                     this.translateService.instant("features.room.join-room-offline-dialog.subtitle")
-                ).closed);
+                ).closed) as boolean;
                 if (!joinOffline) {
                     throw new Error();
                 }
@@ -114,17 +119,29 @@ export class RoomState extends AngularLifecycle {
                     ctx.dispatch(new Room.SetRoom(r, action.userId))
             });
 
-            // Add user to room
-            // ToDo: If user joins in offline mode -> update room to offline mode
-            const newPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
-            if (!!newPlayer) {
-                this.roomSourceService.updatePlayer(
-                    initialRoom.id!,
-                    newPlayer.id,
-                    newPlayer,
-                    action.userId
+            if (joinOffline) {
+                // Convert room to offline room
+                initialRoom.players = {
+                    [user.id!]: UserUtils.exportUserToPlayer(user, 0)
+                };
+                initialRoom.settings.singleDeviceMode = true;
+                this.roomSourceService.updateRoom(
+                    initialRoom,
+                    initialRoom.id!
                 );
+            } else {
+                // Add user to room
+                const newPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
+                if (!!newPlayer) {
+                    this.roomSourceService.updatePlayer(
+                        initialRoom.id!,
+                        newPlayer.id,
+                        newPlayer,
+                        action.userId
+                    );
+                }
             }
+
             ctx.dispatch(new Loading.EndLoading());
             return Promise.resolve();
         } catch(error) {

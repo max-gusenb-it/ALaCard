@@ -132,6 +132,7 @@
     "room-source-service.get-room.no-user-found": "No user found for whom a room can be created",
     "room-source-service.get-room.room-not-found": "Room was not found",
     "room-state.join-room.no-user-found": "You must create a user before you can join a room",
-    "room-state.join-room.cant-join-room-when-offline": "You can only join your own room when you are offline"
+    "room-state.join-room.cant-join-room-when-offline": "You can only join your own room when you are offline",
+    "room-state.join-room.cant-join-offline-room": "Can't join room in single device mode"
   }
 }

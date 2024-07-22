@@ -55,12 +55,19 @@ export class RoomSourceService {
                     creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                     name: name,
                     description: description,
-                    players: {}
+                    players: {},
+                    settings: {
+                        singleDeviceMode: false
+                    }
                 }
             );
         } else {
             return Promise.reject();
         }
+    }
+
+    updateRoom(room: IRoom, roomId: string, userId?: string) {
+        return this.firestoreService.update(`${this.ref(userId)}`, roomId, room);
     }
 
     updatePlayer(roomId: string, userId: string, player: IPlayer, roomOwnerId?: string) {

@@ -78,7 +78,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   mapPlayersToArray(players: { [key: string]: IPlayer }) {
-    return Object.values(players);
+    return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
   }
 
 }
