@@ -1,8 +1,7 @@
 <div class="flex flex-col gap-2">
-  <!-- ToDo: Change close Button to copy link and close button -->
   <it-button-heading
-    [icon]="'close'"
-    (click)="close()"
+    [icon]="'content_copy'"
+    (click)="copyToClipboard()"
   >
     {{ 'features.room.share-dialog.title' | translate }}
   </it-button-heading>

@@ -1,6 +1,7 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Share } from '@capacitor/share';
+import { copyTextToClipboard } from 'src/app/core/utils/clipboard.utils';
 
 @Component({
   selector: 'app-share-dialog',
@@ -19,6 +20,10 @@ export class ShareDialogComponent {
     Share.share({
       url: this.data
     }).then(() => this.close());
+  }
+
+  copyToClipboard() {
+    copyTextToClipboard(this.data).then(() => this.close());
   }
 
   close() {
