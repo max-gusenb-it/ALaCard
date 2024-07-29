@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ItSignInDialog } from 'src/app/shared/components/forms/it-sign-in-dialog/it-sign-in-dialog.component';
-import { ItSignUpDialog } from 'src/app/shared/components/forms/sign-up-dialog/it-sign-up-dialog.component';
+import { ItSignUpDialog } from 'src/app/shared/components/forms/it-sign-up-dialog/it-sign-up-dialog.component';
 
 @Component({
   selector: 'no-account',

@@ -34,8 +34,8 @@ import { ItPlayerComponent } from './components/display/it-player/it-player.comp
 import { ItOptionDialog } from './components/forms/it-option-dialog/it-option-dialog.component';
 import { ItForgotPasswordDialog } from './components/forms/it-forgot-password-dialog/it-forgot-password-dialog.component';
 import { ItSignInDialog } from './components/forms/it-sign-in-dialog/it-sign-in-dialog.component';
-import { ItSignUpDialog } from './components/forms/sign-up-dialog/it-sign-up-dialog.component';
-import { CreateAccountComponent } from './components/forms/sign-up-dialog/create-account/create-account.component';
+import { ItSignUpDialog } from './components/forms/it-sign-up-dialog/it-sign-up-dialog.component';
+import { CreateAccountComponent } from './components/forms/it-sign-up-dialog/create-account/create-account.component';
 
 @NgModule({
   declarations: [
