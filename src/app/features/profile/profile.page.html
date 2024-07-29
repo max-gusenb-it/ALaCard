@@ -42,6 +42,13 @@
       <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">{{ 'actions.safe' | translate }}</it-button>
     </form>
     <div class="border-b w-full border-b-neutral-500"></div>
-    <it-button class="flex" (click)="signOut()" size="small">{{ 'features.profile.sign-out' | translate }}</it-button>
+    <div 
+    class="flex flex-col gap-2"
+    >
+      <h5>{{ 'features.profile.account' | translate }}</h5>
+      <it-button *ngIf="(isAnonymous$ | async)" class="flex" size="small">{{ 'features.profile.register' | translate }}</it-button>
+      <it-button *ngIf="(isAnonymous$ | async)" class="flex" size="small">{{ 'features.profile.log-in' | translate }}</it-button>
+      <it-button *ngIf="!(isAnonymous$ | async)" class="flex" (click)="signOut()" size="small">{{ 'features.profile.sign-out' | translate }}</it-button>
+    </div>
   </div>
 </ion-content>

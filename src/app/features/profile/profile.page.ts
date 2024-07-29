@@ -18,6 +18,7 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 })
 export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   @Select(AuthenticationState.user) user$!: Observable<IUser>;
+  @Select(AuthenticationState.isAnonymous) isAnonymous$!: Observable<boolean>;
 
   settingsForm: FormGroup = new FormGroup({
     language: new FormControl({value: "", disabled: false}),

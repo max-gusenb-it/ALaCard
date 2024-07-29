@@ -71,7 +71,10 @@
         "rose": "Rose"
       },
       "sign-out": "Sign out",
-      "color-scheme": "App color scheme"
+      "color-scheme": "App color scheme",
+      "account": "Account",
+      "register": "Register",
+      "log-in": "Log in"
     },
     "room": {
       "created": "Created",
@@ -127,7 +130,7 @@
     "auth/user-not-found": "Corresponding user could not be found",
     "auth/wrong-password": "Incorrect password",
     "auth/email-already-in-use": "There is already a account using this e-mail",
-    "auth/network-request-failed": "Could not establish connection",
+    "auth/network-request-failed": "Could not establish connection. Looks like you are offline.",
     "auth/invalid-credential": "Wrong password or username",
     "room-source-service.get-room.no-user-found": "No user found for whom a room can be created",
     "room-source-service.get-room.room-not-found": "Room was not found",

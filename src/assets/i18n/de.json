@@ -71,7 +71,10 @@
         "rose": "Rose"
       },
       "sign-out": "Ausloggen",
-      "color-scheme": "App Farbschema"
+      "color-scheme": "App Farbschema",
+      "account": "Account",
+      "register": "Registrieren",
+      "log-in": "Einloggen"
     },
     "room": {
       "created": "Erstellt am",
@@ -127,7 +130,7 @@
     "auth/user-not-found": "Entsprechender Benutzer konnte nicht gefunden werden",
     "auth/wrong-password": "Passwort stimmt nicht überein",
     "auth/email-already-in-use": "Es gibt bereits einen Account mit dieser E-Mail-Adresse",
-    "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden",
+    "auth/network-request-failed": "Es konnte keine Verbindung hergestellt werden. Überprüfe deine Internet Verbindung",
     "auth/invalid-credential": "Passwort oder Benutzername nicht korrekt",
     "room-source-service.get-room.no-user-found": "Kein Nutzer gefunden für den ein Raum erstellt werden kann",
     "room-source-service.get-room.room-not-found": "Raum konnte nicht gefunden werden",
