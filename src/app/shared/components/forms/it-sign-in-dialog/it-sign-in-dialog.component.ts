@@ -21,8 +21,8 @@ export class ItSignInDialog {
     private store: Store
   ) { }
 
-  close() {
-    this.modalCtrl.dismiss();
+  close(succeeded: boolean = false) {
+    this.modalCtrl.dismiss(succeeded);
   }
 
   async forgotPassword() {
@@ -34,8 +34,12 @@ export class ItSignInDialog {
 
   signInWithEmail() {
     if (this.loginForm.valid) {
-      this.store.dispatch(new Authentication.SignInUser(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value))
-        .subscribe(() => this.close());
+      this.store.dispatch(
+        new Authentication.SignInUser(
+          this.loginForm.controls['email'].value,
+          this.loginForm.controls['password'].value
+        )
+      ).subscribe(() => this.close(true));
     }
   }
 

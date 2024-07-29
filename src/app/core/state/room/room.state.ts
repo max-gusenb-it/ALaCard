@@ -8,7 +8,7 @@ import { Authentication, AuthenticationState } from "../authentication";
 import { Subscription, firstValueFrom, takeUntil } from "rxjs";
 import { Loading } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
-import { NavController } from "@ionic/angular";
+import { ModalController, NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
 import { IRoom } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
@@ -17,6 +17,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { UserUtils } from "../../utils/user.utils";
 import { ItError } from "../../models/classes";
 import { ErrorMonitor } from "../error-monitor";
+import { ItAuthenticateDialog } from "src/app/shared/components/forms/it-authenticate-dialog/it-authenticate-dialog.component";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -39,7 +40,8 @@ export class RoomState extends AngularLifecycle {
         private translateService: TranslateService,
         private store: Store,
         private zone: NgZone,
-        private popupService: PopupService
+        private popupService: PopupService,
+        private modalCtrl: ModalController
     ) {
         super();
     }
@@ -59,15 +61,21 @@ export class RoomState extends AngularLifecycle {
             // ask user if he wants to leave current room
             this.roomSubscription$.unsubscribe();
         }
-        ctx.dispatch(new Loading.StartLoading);
 
         // check if user exists
         try {
-            const user = this.store.selectSnapshot(AuthenticationState.user);
+            let user = this.store.selectSnapshot(AuthenticationState.user);
             if (!!!user) {
-                // ToDo: ask user to register
-                throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
+                const modal = await this.modalCtrl.create({
+                    component: ItAuthenticateDialog
+                });
+                modal.present();
+                await modal.onDidDismiss();
+                user = this.store.selectSnapshot(AuthenticationState.user);
+                if (!!!user) throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
+
+            ctx.dispatch(new Loading.StartLoading);
 
             // If user is not online he can only join his own room 
             if (!navigator.onLine) {

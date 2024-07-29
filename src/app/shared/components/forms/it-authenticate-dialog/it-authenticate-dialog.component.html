@@ -1,0 +1,17 @@
+<div class="h-full flex flex-col p-6 ">
+  <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
+  <div class="h-full flex flex-col gap-3 justify-center">
+    <div class="flex flex-col gap-1 items-center">
+      <!-- Div to keep image original size -->
+      <div>
+        <img src="assets/images/logo.png">
+      </div>
+      <h2>{{"shared.components.forms.it-authenticate-dialog.title" | translate}}</h2>
+      <p class="text-base text-center">
+        {{"shared.components.forms.it-authenticate-dialog.description" | translate}}
+      </p>
+    </div>
+    <it-button class="flex" size="small" color="quaternary" (click)="openSignInModal()">{{"actions.signIn" | translate}}</it-button>
+    <it-button class="flex" size="small" color="quaternary" (click)="openSignUpModal()">{{"actions.register" | translate}}</it-button>
+  </div>
+</div>

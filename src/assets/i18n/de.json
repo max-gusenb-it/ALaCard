@@ -114,6 +114,12 @@
       },
       "input": {
         "signs": "Zeichen"
+      },
+      "forms": {
+        "it-authenticate-dialog": {
+          "title": "Let’s get started",
+          "description": "Um einem Raum beizutreten, musst du dich zuerst anmelden oder registrieren. Du kannst dich auch als Gast registrieren, wenn du keinen Account erstellen möchten."
+        }
       }
     }
   },
@@ -124,7 +130,10 @@
     "safe": "Speichern",
     "cancel": "Abbrechen",
     "join": "Beitretten",
-    "close": "Schließen"
+    "close": "Schließen",
+    "signIn": "Login",
+    "signUp": "Registrieren",
+    "register": "Registrieren"
   },
   "errors": {
     "auth/user-not-found": "Entsprechender Benutzer konnte nicht gefunden werden",

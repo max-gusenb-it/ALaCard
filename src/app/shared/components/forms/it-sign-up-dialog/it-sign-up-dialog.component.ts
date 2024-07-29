@@ -20,8 +20,8 @@ export class ItSignUpDialog {
     private store: Store
   ) { }
 
-  close() {
-    this.modalCtrl.dismiss();
+  close(succeeded: boolean = false) {
+    this.modalCtrl.dismiss(succeeded);
   }
 
   setProfileFormData(profileFormData: IProfileEditorFormData) {
@@ -59,7 +59,7 @@ export class ItSignUpDialog {
       } break;
       case 1: {
         this.store.dispatch(new Authentication.SignUpUser(this.profileFormData, this.createAccountFormData))
-          .subscribe(() => this.close());
+          .subscribe(() => this.close(true));
       }
     }
   }

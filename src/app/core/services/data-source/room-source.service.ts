@@ -8,6 +8,7 @@ import { RoomSourceServiceErrors } from '../../constants/errorCodes';
 import { catchError } from 'rxjs';
 import { IPlayer } from '../../models/interfaces';
 import { ItError } from '../../models/classes';
+import { UserUtils } from '../../utils/user.utils';
 
 @Injectable({
     providedIn: 'root'
@@ -50,13 +51,16 @@ export class RoomSourceService {
     createRoom(name: string, description: string) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!user && !!user.id) {
+            const player = UserUtils.exportUserToPlayer(user, 0);
             return this.firestoreService.add(
                 this.ref(user.id),
                 {
                     creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                     name: name,
                     description: description,
-                    players: {},
+                    players: {
+                        [player.id]: player
+                    },
                     settings: {
                         singleDeviceMode: false
                     }

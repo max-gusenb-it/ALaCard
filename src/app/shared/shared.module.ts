@@ -36,6 +36,7 @@ import { ItForgotPasswordDialog } from './components/forms/it-forgot-password-di
 import { ItSignInDialog } from './components/forms/it-sign-in-dialog/it-sign-in-dialog.component';
 import { ItSignUpDialog } from './components/forms/it-sign-up-dialog/it-sign-up-dialog.component';
 import { CreateAccountComponent } from './components/forms/it-sign-up-dialog/create-account/create-account.component';
+import { ItAuthenticateDialog } from './components/forms/it-authenticate-dialog/it-authenticate-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CreateAccountComponent } from './components/forms/it-sign-up-dialog/cre
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
+    ItAuthenticateDialog,
     ItForgotPasswordDialog,
     ItOptionDialog,
     ItProfileEditorComponent,
@@ -96,6 +98,7 @@ import { CreateAccountComponent } from './components/forms/it-sign-up-dialog/cre
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
+    ItAuthenticateDialog,
     ItForgotPasswordDialog,
     ItOptionDialog,
     ItProfileEditorComponent,
