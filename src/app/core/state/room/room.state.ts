@@ -6,15 +6,17 @@ import { RoomSourceService } from "../../services/data-source/room-source.servic
 import { LoadingHelperService } from "../../services/loading-helper.service";
 import { Authentication, AuthenticationState } from "../authentication";
 import { Subscription, firstValueFrom, takeUntil } from "rxjs";
-import { Loading, LoadingError } from "../loading";
+import { Loading } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
 import { IRoom } from "../../models/interfaces";
-import { RoomStateErrors } from "../../constants/errorCodes";
+import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/popup.service";
 import { TranslateService } from "@ngx-translate/core";
 import { UserUtils } from "../../utils/user.utils";
+import { ItError } from "../../models/classes";
+import { ErrorMonitor } from "../error/error-monitor.actions";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -63,13 +65,13 @@ export class RoomState extends AngularLifecycle {
         try {
             const user = this.store.selectSnapshot(AuthenticationState.user);
             if (!!!user) {
-                throw new LoadingError(RoomStateErrors.joinRoomNoUser, RoomState.name);
+                throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
 
             // If user is not online he can only join his own room 
             if (!navigator.onLine) {
                 if (action.userId !== undefined && action.userId !== user.id) {
-                    throw new LoadingError(RoomStateErrors.joinRoomOffline, RoomState.name);
+                    throw new ItError(RoomStateErrors.joinRoomOffline, RoomState.name);
                 }
             }
 
@@ -82,19 +84,12 @@ export class RoomState extends AngularLifecycle {
                         return r;
                     },
                     e => {
-                        if (e instanceof LoadingError) {
-                            ctx.dispatch(new Loading.EndLoading(e.exportError()));
-                        } else {
-                            ctx.dispatch(new Loading.EndLoading());
-                            console.error(e);
-                        }
-                        this.navController.navigateBack('home');
-                        return Promise.reject(e);
+                        throw e;
                 }
             );
 
             if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
-                throw new LoadingError(RoomStateErrors.joinRoomInOffline, RoomState.name);
+                throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
             }
             
             let joinOffline = false;
@@ -145,10 +140,17 @@ export class RoomState extends AngularLifecycle {
             ctx.dispatch(new Loading.EndLoading());
             return Promise.resolve();
         } catch(error) {
-            if (error instanceof LoadingError) {
-                ctx.dispatch(new Loading.EndLoading(error.exportError()));
+            ctx.dispatch(new Loading.EndLoading);
+            if (error instanceof ItError) {
+                ctx.dispatch(new ErrorMonitor.SetError(error.exportError()));
             } else {
-                ctx.dispatch(new Loading.EndLoading);
+                console.error(error);
+                ctx.dispatch(
+                    new ErrorMonitor.SetError({
+                        code: SharedErrors.unknownError,
+                        location: RoomState.name
+                    })
+                );
             }
             this.navController.navigateBack('home');
             return;

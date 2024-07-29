@@ -8,3 +8,7 @@ export namespace RoomStateErrors {
     export const joinRoomOffline = "room-state.join-room.cant-join-room-when-offline";
     export const joinRoomInOffline = "room-state.join-room.cant-join-offline-room";
 }
+
+export namespace SharedErrors {
+    export const unknownError = "unknown-error";
+}

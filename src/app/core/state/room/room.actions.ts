@@ -10,17 +10,17 @@ export namespace Room {
      * @typedef {CreateRoom}
      */
     export class CreateRoom {
-        static readonly type = '[No-Room] Create room';
+        static readonly type = '[No-Room] CreateRoom';
         constructor(public name: string, public description: string) {}
     }
 
     export class JoinRoom {
-        static readonly type = '[Home] Join room';
+        static readonly type = '[Home] JoinRoom';
         constructor(public roomId: string, public userId?: string) {}
     }
 
     export class SetRoom {
-        static readonly type = '[Room State] Set room';
+        static readonly type = '[Room State] SetRoom';
         /**
          * Creates an instance of SetRoom.
          *
@@ -32,7 +32,7 @@ export namespace Room {
     }
 
     export class LeaveRoom {
-        static readonly type = '[Room] Leave room';
+        static readonly type = '[Room] LeaveRoom';
         constructor() {}
     }
 }

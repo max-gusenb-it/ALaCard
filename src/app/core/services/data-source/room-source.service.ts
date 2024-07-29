@@ -3,10 +3,11 @@ import { Injectable } from "@angular/core";
 import { IRoom } from "../../models/interfaces/logic/room/IRoom";
 import { FirestoreService } from "./firestore.service";
 import { Store } from "@ngxs/store";
-import { AuthenticationState, LoadingError } from "../../state";
+import { AuthenticationState } from "../../state";
 import { RoomSourceServiceErrors } from '../../constants/errorCodes';
 import { catchError } from 'rxjs';
 import { IPlayer } from '../../models/interfaces';
+import { ItError } from '../../models/classes';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,7 @@ export class RoomSourceService {
         if (!!!userId) {
             const id = this.store.selectSnapshot(AuthenticationState.user)?.id;
             if (!!!id) {
-                throw new LoadingError(
+                throw new ItError(
                     RoomSourceServiceErrors.getRoomNoUser,
                     RoomSourceService.name
                 );
@@ -38,7 +39,7 @@ export class RoomSourceService {
         return this.firestoreService.getDocWithId$(this.ref(userId), roomId)
             .pipe(
                 catchError(() => {
-                    throw new LoadingError(
+                    throw new ItError(
                         RoomSourceServiceErrors.roomNotFound,
                         RoomSourceService.name
                     );

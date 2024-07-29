@@ -4,6 +4,8 @@ export { IOptionDialogData } from "./components/forms/it-option-dialog/IOptionDi
 
 export { ICreateAccountFormData } from "./features/home/ICreateAccountFormData";
 
+export { IItError } from "./logic/error-monitor/IItError";
+
 export { IRoom } from "./logic/room/IRoom";
 export { IPlayer } from "./logic/room/IPlayer";
 

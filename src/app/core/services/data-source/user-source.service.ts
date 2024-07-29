@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { FirestoreService } from "./firestore.service";
 import { IUser } from "../../models/interfaces/logic/user/IUser";
-import { LoadingError } from "../../state";
+import { ItError } from "../../models/classes";
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +21,7 @@ export class UserSourceService {
             id,
             user
         ).catch(error => {
-            return Promise.reject(new LoadingError(
+            return Promise.reject(new ItError(
                 error.code,
                 UserSourceService.name
             ));
@@ -30,7 +30,7 @@ export class UserSourceService {
 
     updateUser(id: string, user: IUser) {
         return this.firestoreService.update(this.ref, id, user).catch(error => {
-            return Promise.reject(new LoadingError(
+            return Promise.reject(new ItError(
                 error.code,
                 UserSourceService.name
             ));

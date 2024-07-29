@@ -1,6 +1,6 @@
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Injectable } from "@angular/core";
-import { LoadingError } from "../state";
+import { ItError } from "../models/classes";
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class AuthService {
     createEmailAccount(email: string, password: string) {
         return this.fireAuth.createUserWithEmailAndPassword(email, password)
             .catch(error => {
-                throw new LoadingError(
+                throw new ItError(
                     error.code,
                     AuthService.name
                 );
@@ -33,7 +33,7 @@ export class AuthService {
     createAnonymousAccount() {
         return this.fireAuth.signInAnonymously()
             .catch(error => {
-                throw new LoadingError(
+                throw new ItError(
                     error.code,
                     AuthService.name
                 );
@@ -43,7 +43,7 @@ export class AuthService {
     signInWithEmailAndPassword(email: string, password: string) {
         return this.fireAuth.signInWithEmailAndPassword(email, password)
             .catch(error => {
-                throw new LoadingError(
+                throw new ItError(
                     error.code,
                     AuthService.name
                 );
@@ -53,7 +53,7 @@ export class AuthService {
     resetPassword(email: string) {
         return this.fireAuth.sendPasswordResetEmail(email)
             .catch(error => {
-                throw new LoadingError(
+                throw new ItError(
                     error.code,
                     AuthService.name
                 );
