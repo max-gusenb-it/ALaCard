@@ -9,10 +9,6 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { NoAccountComponent } from './no-account/no-account.component';
-import { SignInModal } from './sign-in-modal/sign-in-modal.component';
-import { SignUpModal } from './sign-up-modal/sign-up-modal.component';
-import { CreateAccountComponent } from './sign-up-modal/create-account/create-account.component';
-import { ForgotPasswordModal } from './forgot-password-modal/forgot-password-modal.component';
 import { NoRoomComponent } from './no-room/no-room.component';
 import { CreateRoomModal } from './create-room-modal/create-room-modal.component';
 
@@ -27,12 +23,8 @@ import { CreateRoomModal } from './create-room-modal/create-room-modal.component
   declarations: [
     HomePage,
     CreateRoomModal,
-    ForgotPasswordModal,
     NoAccountComponent,
     NoRoomComponent,
-    SignInModal,
-    SignUpModal,
-    CreateAccountComponent
   ]
 })
 export class HomePageModule {}

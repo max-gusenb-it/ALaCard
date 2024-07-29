@@ -74,7 +74,7 @@
       "color-scheme": "App color scheme",
       "account": "Account",
       "register": "Register",
-      "log-in": "Log in"
+      "sign-in": "Sign in"
     },
     "room": {
       "created": "Created",

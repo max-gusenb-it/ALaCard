@@ -16,7 +16,7 @@ import { PopupService } from "../../services/popup.service";
 import { TranslateService } from "@ngx-translate/core";
 import { UserUtils } from "../../utils/user.utils";
 import { ItError } from "../../models/classes";
-import { ErrorMonitor } from "../error/error-monitor.actions";
+import { ErrorMonitor } from "../error-monitor";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -65,6 +65,7 @@ export class RoomState extends AngularLifecycle {
         try {
             const user = this.store.selectSnapshot(AuthenticationState.user);
             if (!!!user) {
+                // ToDo: ask user to register
                 throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
 

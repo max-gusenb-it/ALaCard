@@ -87,6 +87,10 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     ]);
   }
 
+  signIn() {
+    
+  }
+
   signOut() {
     this.store.dispatch(new Authentication.SignOut())
       .subscribe(() => {

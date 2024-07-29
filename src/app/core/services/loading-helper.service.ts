@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Loading } from "../state";
 import { Store } from "@ngxs/store";
 import { ItError } from "../models/classes";
-import { ErrorMonitor } from "../state/error/error-monitor.actions";
 import { SharedErrors } from "../constants/errorCodes";
+import { ErrorMonitor } from "../state/error-monitor";
 
 @Injectable({
     providedIn: 'root'

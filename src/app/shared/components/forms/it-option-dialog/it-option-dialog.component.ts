@@ -7,7 +7,7 @@ import { IOptionDialogData } from 'src/app/core/models/interfaces';
   templateUrl: './it-option-dialog.component.html',
   styleUrls: ['./it-option-dialog.component.scss']
 })
-export class ItOptionDialogComponent {
+export class ItOptionDialog {
 
   constructor(
     @Inject(DIALOG_DATA) public data: IOptionDialogData,

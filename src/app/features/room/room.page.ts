@@ -7,7 +7,7 @@ import { IOptionDialogData, IPlayer, IRoom } from 'src/app/core/models/interface
 import { PopupService } from 'src/app/core/services/popup.service';
 import { Room, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { ItOptionDialogComponent } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
+import { ItOptionDialog } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareDialogComponent } from './menu-dialogs/share-dialog/share-dialog.component';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
@@ -46,7 +46,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     switch(actionType) {
       case("exit_to_app"):
         const ref = this.popupService.openDialog(
-          ItOptionDialogComponent, 
+          ItOptionDialog, 
           {
             data: { 
               title: this.translateService.instant("features.room.leave-dialog.title"),

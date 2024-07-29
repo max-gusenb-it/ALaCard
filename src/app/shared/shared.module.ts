@@ -31,7 +31,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor/it-profile-editor.component';
 import { FireDatePipe } from './pipes/fire-date.pipe';
 import { ItPlayerComponent } from './components/display/it-player/it-player.component';
-import { ItOptionDialogComponent } from './components/forms/it-option-dialog/it-option-dialog.component';
+import { ItOptionDialog } from './components/forms/it-option-dialog/it-option-dialog.component';
+import { ItForgotPasswordDialog } from './components/forms/it-forgot-password-dialog/it-forgot-password-dialog.component';
+import { ItSignInDialog } from './components/forms/it-sign-in-dialog/it-sign-in-dialog.component';
+import { ItSignUpDialog } from './components/forms/sign-up-dialog/it-sign-up-dialog.component';
+import { CreateAccountComponent } from './components/forms/sign-up-dialog/create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +54,12 @@ import { ItOptionDialogComponent } from './components/forms/it-option-dialog/it-
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
-    ItOptionDialogComponent,
+    ItForgotPasswordDialog,
+    ItOptionDialog,
     ItProfileEditorComponent,
+    ItSignInDialog,
+    ItSignUpDialog,
+    CreateAccountComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
@@ -88,8 +96,12 @@ import { ItOptionDialogComponent } from './components/forms/it-option-dialog/it-
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
-    ItOptionDialogComponent,
+    ItForgotPasswordDialog,
+    ItOptionDialog,
     ItProfileEditorComponent,
+    ItSignInDialog,
+    ItSignUpDialog,
+    CreateAccountComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,

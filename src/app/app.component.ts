@@ -5,8 +5,8 @@ import { Observable, interval, takeUntil } from 'rxjs';
 import { AngularLifecycle } from './shared/helper/angular-lifecycle.helper';
 import { PopupService } from './core/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ErrorMonitorState } from './core/state/error/error-monitor.state';
 import { IItError } from './core/models/interfaces';
+import { ErrorMonitorState } from './core/state/error-monitor';
 
 @Component({
   selector: 'app-root',

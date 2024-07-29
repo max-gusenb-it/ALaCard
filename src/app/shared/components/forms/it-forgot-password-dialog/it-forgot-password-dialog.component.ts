@@ -7,10 +7,10 @@ import { PopupService } from 'src/app/core/services/popup.service';
 import { Authentication } from 'src/app/core/state';
 
 @Component({
-  selector: 'forgot-password-modal',
-  templateUrl: './forgot-password-modal.component.html'
+  selector: 'it-forgot-password-modal',
+  templateUrl: './it-forgot-password-dialog.component.html'
 })
-export class ForgotPasswordModal {
+export class ItForgotPasswordDialog {
 
   forgotPasswordForm: FormGroup = new FormGroup({
     email: new FormControl({value: "", disabled: false}, [Validators.required, Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')])

@@ -1,15 +1,14 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { finalize } from 'rxjs';
 import { ICreateAccountFormData, IProfileEditorFormData } from 'src/app/core/models/interfaces';
 import { Authentication } from 'src/app/core/state';
 
 @Component({
-  selector: 'sign-up-modal',
-  templateUrl: './sign-up-modal.component.html'
+  selector: 'it-sign-up-dialog',
+  templateUrl: './it-sign-up-dialog.component.html'
 })
-export class SignUpModal {
+export class ItSignUpDialog {
   stepIndex: number = 0;
 
   profileFormData: IProfileEditorFormData = null as any;
