@@ -58,7 +58,7 @@ export class ItSignUpModal {
         this.changeDetectorRef.detectChanges();
       } break;
       case 1: {
-        this.store.dispatch(new AuthenticationActions.SignUpUser(this.profileFormData, this.createAccountFormData))
+        this.store.dispatch(new AuthenticationActions.SignUpUser(this.createAccountFormData, this.profileFormData))
           .subscribe(() => this.close(true));
       }
     }

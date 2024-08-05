@@ -9,12 +9,14 @@
     <it-icon
       class="absolute left-0 top-0 transition-all duration-200"
       [ngClass]="{'opacity-0': !control.value}"
+      [color]="!control.disabled ? 'text-neutral-900' : 'text-neutral-800'"
     >
       check_box
     </it-icon>
     <it-icon
       class="absolute left-0 top-0 transition-all duration-200"
       [ngClass]="{'opacity-0': control.value}"
+      [color]="!control.disabled ? 'text-neutral-900' : 'text-neutral-800'"
     >
       check_box_outline_blank
     </it-icon>

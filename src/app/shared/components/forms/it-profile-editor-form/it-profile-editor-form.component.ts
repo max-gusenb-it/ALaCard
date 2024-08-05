@@ -6,7 +6,7 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 
 @Component({
   selector: 'it-profile-editor',
-  templateUrl: './it-profile-editor.component.html'
+  templateUrl: './it-profile-editor-form.component.html'
 })
 export class ItProfileEditorComponent extends AngularLifecycle implements AfterViewInit {
 

@@ -5,11 +5,12 @@ import { CreateAccountFormData } from 'src/app/core/models/interfaces/features/h
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
-  selector: 'create-account',
-  templateUrl: './create-account.component.html'
+  selector: 'it-create-account',
+  templateUrl: './it-create-account.component.html'
 })
 export class CreateAccountComponent extends AngularLifecycle implements AfterViewInit {
 
+  @Input() registerMandatory: boolean = false;
   @Input() createAccountFormData: CreateAccountFormData = null as any;
 
   @Output() createAccountFormChanges: EventEmitter<CreateAccountFormData> = new EventEmitter();
@@ -39,6 +40,10 @@ export class CreateAccountComponent extends AngularLifecycle implements AfterVie
       this.createAccountForm.controls['register'].setValue(this.createAccountFormData.register);
       this.createAccountForm.controls['email'].setValue(this.createAccountFormData.email);
       this.createAccountForm.controls['password'].setValue(this.createAccountFormData.password);
+    }
+    if (this.registerMandatory) {
+      this.createAccountForm.controls['register'].setValue(true);
+      this.createAccountForm.controls['register'].disable();
     }
   }
 

@@ -9,7 +9,7 @@ export class ItDetailHeadingComponent {
   @Input() heading: string = "";
   @Input() subheading: string = "";
   @Input() detail: string | undefined;
-  @Input() image: string = "";
+  @Input() imageUrl: string = "";
   @Input() headingType: "h3" | "h4" = "h3";
   @Input() subheadingType: "xs" | "sm" = "xs";
 

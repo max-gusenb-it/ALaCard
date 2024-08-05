@@ -9,6 +9,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
+import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.compon
   ],
   declarations: [
     ProfilePage,
-    EditProfileModal
+    EditProfileModal,
+    DeleteAccountBottomSheetComponent
   ]
 })
 export class ProfilePageModule {}

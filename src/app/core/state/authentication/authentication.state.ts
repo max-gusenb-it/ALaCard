@@ -70,6 +70,17 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
 
     @Action(AuthenticationActions.SignUpUser)
     async signUpUser(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SignUpUser) {
+        if (!!!action.profileFormData) {
+            const state = ctx.getState();
+            
+            if (!!!state.user) return Promise.reject();
+            action.profileFormData = {
+                username: state.user.username,
+                profilePicture: state.user.profilePicture,
+                valid: true
+            };
+        }
+
         return this.loadingHelperService.loadWithLoadingState([
             this.authService.createAccount(
                 action.createAccountFormData.register,
@@ -81,8 +92,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                         c.user.uid,
                         {
                             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
-                            profilePicture: action.profileFormData.profilePicture,
-                            username: action.profileFormData.username,
+                            profilePicture: action.profileFormData!.profilePicture,
+                            username: action.profileFormData!.username,
                             roomId: null,
                             settings: {
                                 language: systemDefaultValue,

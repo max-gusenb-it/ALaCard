@@ -28,15 +28,16 @@ import { ItDeckComponent } from './components/buttons/it-deck/it-deck.component'
 import { ItSelectionListComponent } from './components/display/it-selection-list/it-selection-list.component';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ItProfileEditorComponent } from './components/forms/it-profile-editor/it-profile-editor.component';
+import { ItProfileEditorComponent } from './components/forms/it-profile-editor-form/it-profile-editor-form.component';
 import { FireDatePipe } from './pipes/fire-date.pipe';
 import { ItPlayerComponent } from './components/display/it-player/it-player.component';
 import { ItOptionBottomSheet } from './components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { ItForgotPasswordModal } from './components/forms/it-forgot-password-modal/it-forgot-password-modal.component';
 import { ItSignInModal } from './components/forms/it-sign-in-modal/it-sign-in-modal.component';
 import { ItSignUpModal } from './components/forms/it-sign-up-modal/it-sign-up-modal.component';
-import { CreateAccountComponent } from './components/forms/it-sign-up-modal/create-account/create-account.component';
+import { CreateAccountComponent } from './components/forms/it-create-account/it-create-account.component';
 import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it-authenticate-modal.component';
+import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-add-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
+    ItAddAccountModal,
     ItAuthenticateModal,
     ItForgotPasswordModal,
     ItOptionBottomSheet,
@@ -98,6 +100,7 @@ import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
+    ItAddAccountModal,
     ItAuthenticateModal,
     ItForgotPasswordModal,
     ItOptionBottomSheet,

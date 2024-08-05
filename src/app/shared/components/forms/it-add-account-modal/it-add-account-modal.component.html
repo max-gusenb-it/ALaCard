@@ -1,0 +1,18 @@
+<div
+    class="h-full flex flex-col p-6 justify-between"
+>
+    <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
+    <it-create-account
+        (createAccountFormChanges)="setCreateAccountFormData($event)"
+        [createAccountFormData]="createAccountFormData"
+        [registerMandatory]="false"
+    />
+    <it-button 
+        class="flex"
+        [disabled]="!!!this.createAccountFormData || !this.createAccountFormData.valid"
+        [indicateLoading]="true"
+        (click)="signUp()"
+    >
+        {{'actions.signUp' | translate}}
+    </it-button>
+</div>

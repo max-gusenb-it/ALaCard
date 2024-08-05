@@ -12,6 +12,9 @@ import { UserSourceService } from 'src/app/core/services/data-source/user-source
 import { supportedColors } from 'src/app/core/constants/color';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
+import { ItAddAccountModal } from 'src/app/shared/components/forms/it-add-account-modal/it-add-account-modal.component';
+import { PopupService } from 'src/app/core/services/popup.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'profile',
@@ -32,6 +35,8 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     private navCtrl: NavController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
+    private popupService: PopupService,
+    private translateService: TranslateService
   ) {
     super();
   }
@@ -88,11 +93,26 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     ]);
   }
 
+  async signUp() {
+    const modal = await this.modalCtrl.create({
+      component: ItAddAccountModal
+    });
+    modal.present();
+  }
+
   async signIn() {
     const modal = await this.modalCtrl.create({
       component: ItSignInModal
     });
     modal.present();
+  }
+
+  deleteAccount() {
+    this.popupService.openOptionBottomSheet(
+      this.translateService.instant("features.profile.want-to-delete-account"),
+      this.translateService.instant("actions.cancel"),
+      this.translateService.instant("actions.submit")
+    )
   }
 
   signOut() {

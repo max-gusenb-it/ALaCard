@@ -21,6 +21,7 @@ export class ItCheckboxComponent<T> extends ControlValueAccessorDirective<boolea
   }
 
   toggleValue() {
+    if (this.control?.disabled) return;
     this.writeValue(!this.control?.value);
   }
 }

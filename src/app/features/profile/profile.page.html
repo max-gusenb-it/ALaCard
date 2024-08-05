@@ -22,6 +22,7 @@
       <h4>{{ 'features.profile.settings' | translate }}</h4>
       <h5>{{ 'features.profile.general' | translate }}</h5>
       <it-select
+        id="language"
         [label]="'features.profile.language' | translate"
         name="language"
         formControlName="language"
@@ -31,6 +32,7 @@
         </option>
       </it-select>
       <it-select
+        id="color"
         [label]="'features.profile.color-scheme' | translate"
         name="color"
         formControlName="color"
@@ -46,9 +48,10 @@
     class="flex flex-col gap-2"
     >
       <h5>{{ 'features.profile.account' | translate }}</h5>
-      <it-button *ngIf="(isAnonymous$ | async)" class="flex" size="small">{{ 'actions.signUp' | translate }}</it-button>
+      <it-button *ngIf="(isAnonymous$ | async)" (click)="signUp()" class="flex" size="small">{{ 'actions.signUp' | translate }}</it-button>
       <it-button *ngIf="(isAnonymous$ | async)" (click)="signIn()" class="flex" size="small">{{ 'actions.signIn' | translate }}</it-button>
       <it-button *ngIf="!(isAnonymous$ | async)" (click)="signOut()"  class="flex" size="small">{{ 'actions.signOut' | translate }}</it-button>
+      <it-button *ngIf="(isAnonymous$ | async)" (click)="deleteAccount()"  class="flex" size="small" color="secondary">{{ 'features.profile.delete-account' | translate }}</it-button>
       <!-- ToDo: add delete profile -->
     </div>
   </div>

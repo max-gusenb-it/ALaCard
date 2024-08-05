@@ -26,7 +26,7 @@ export class ItCheckboxHeadingComponent extends ControlValueAccessorDirective<bo
   }
 
   toggleHeading() {
-    if (!!this.control) {
+    if (!!this.control && !this.control.disabled) {
       this.control.setValue(!this.control.value);
       this.animateToggle();
     }

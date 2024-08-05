@@ -53,7 +53,11 @@
         "rose": "Rose"
       },
       "color-scheme": "App color scheme",
-      "account": "Account"
+      "account": "Account",
+      "delete-account": "Delete account",
+      "delete-account-bottom-sheet": {
+        "title": "Do you really want to delete your account?"
+      }
     },
     "room": {
       "created": "Created",

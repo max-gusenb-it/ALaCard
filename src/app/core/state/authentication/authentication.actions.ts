@@ -3,7 +3,7 @@ import { CreateAccountFormData, ProfileEditorFormData, User } from "../../models
 export namespace AuthenticationActions {
     export class SignUpUser {
         static readonly type = '[SignUpModal] SignUp';
-        constructor(public profileFormData: ProfileEditorFormData, public createAccountFormData: CreateAccountFormData) {}
+        constructor(public createAccountFormData: CreateAccountFormData, public profileFormData?: ProfileEditorFormData) {}
     }
 
     export class SignInUser {
