@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Observable, map } from "rxjs";
-import { IFirestoreBase } from "../../models/interfaces";
-import { doc, getFirestore, updateDoc } from "@angular/fire/firestore";
+import { FirestoreBase } from "../../models/interfaces";
+import { getFirestore } from "@angular/fire/firestore";
 import { initializeApp } from "@angular/fire/app";
 import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
-export class FirestoreService<T extends IFirestoreBase> {
+export class FirestoreService<T extends FirestoreBase> {
     constructor(
         private afs: AngularFirestore
     ) { }

@@ -1,7 +1,7 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
 import { takeUntil, timer } from 'rxjs';
-import { ISnackbarData } from 'src/app/core/models/interfaces';
+import { SnackbarData } from 'src/app/core/models/interfaces';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -13,7 +13,7 @@ export class ItSnackbarComponent extends AngularLifecycle {
 
   constructor(
     public dialog: DialogRef,
-    @Inject(DIALOG_DATA) public data: ISnackbarData
+    @Inject(DIALOG_DATA) public data: SnackbarData
   ) {
     super();
 

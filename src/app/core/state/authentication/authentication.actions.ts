@@ -1,9 +1,9 @@
-import { ICreateAccountFormData, IProfileEditorFormData, IUser } from "../../models/interfaces";
+import { CreateAccountFormData, ProfileEditorFormData, User } from "../../models/interfaces";
 
-export namespace Authentication {
+export namespace AuthenticationActions {
     export class SignUpUser {
         static readonly type = '[SignUpModal] SignUp';
-        constructor(public profileFormData: IProfileEditorFormData, public createAccountFormData: ICreateAccountFormData) {}
+        constructor(public profileFormData: ProfileEditorFormData, public createAccountFormData: CreateAccountFormData) {}
     }
 
     export class SignInUser {
@@ -23,7 +23,7 @@ export namespace Authentication {
 
     export class SetUser {
         static readonly type = '[AuthenticationState] SetUser';
-        constructor(public user?: IUser) {}
+        constructor(public user?: User) {}
     }
 
     export class SetUserRoomId {

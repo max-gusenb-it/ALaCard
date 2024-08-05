@@ -1,6 +1,6 @@
-import { IRoom } from "../../models/interfaces";
+import { Room } from "../../models/interfaces";
 
-export namespace Room {
+export namespace RoomActions {
     
     /**
      * Creates room and saves room id to user 
@@ -25,10 +25,10 @@ export namespace Room {
          * Creates an instance of SetRoom.
          *
          * @constructor
-         * @param {IRoom} room
+         * @param {Room} room
          * @param {?string} [userId] Optional id of user that owns the room. If null, room is owned by currently signed in user
          */
-        constructor(public room: IRoom, public userId?: string) {}
+        constructor(public room: Room, public userId?: string) {}
     }
 
     export class LeaveRoom {

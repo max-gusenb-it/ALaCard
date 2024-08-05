@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
-import { IProfileEditorFormData } from 'src/app/core/models/interfaces/components/forms/it-profile-editor/IProfileEditorFormData';
+import { ProfileEditorFormData } from 'src/app/core/models/interfaces/components/forms/it-profile-editor/ProfileEditorFormData';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -10,9 +10,9 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 })
 export class ItProfileEditorComponent extends AngularLifecycle implements AfterViewInit {
 
-  @Input() profileEditorFormData: IProfileEditorFormData = null as any;
+  @Input() profileEditorFormData: ProfileEditorFormData = null as any;
 
-  @Output() profileEditorFormChanged: EventEmitter<IProfileEditorFormData> = new EventEmitter();
+  @Output() profileEditorFormChanged: EventEmitter<ProfileEditorFormData> = new EventEmitter();
 
   isRegistered: boolean = false;
   profileForm = new FormGroup({

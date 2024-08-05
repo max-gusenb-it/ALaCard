@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { ICreateAccountFormData, IProfileEditorFormData } from 'src/app/core/models/interfaces';
-import { Authentication } from 'src/app/core/state';
+import { CreateAccountFormData, ProfileEditorFormData } from 'src/app/core/models/interfaces';
+import { AuthenticationActions } from 'src/app/core/state';
 
 @Component({
   selector: 'it-sign-up-dialog',
@@ -11,8 +11,8 @@ import { Authentication } from 'src/app/core/state';
 export class ItSignUpDialog {
   stepIndex: number = 0;
 
-  profileFormData: IProfileEditorFormData = null as any;
-  createAccountFormData: ICreateAccountFormData = null as any;
+  profileFormData: ProfileEditorFormData = null as any;
+  createAccountFormData: CreateAccountFormData = null as any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -24,13 +24,13 @@ export class ItSignUpDialog {
     this.modalCtrl.dismiss(succeeded);
   }
 
-  setProfileFormData(profileFormData: IProfileEditorFormData) {
+  setProfileFormData(profileFormData: ProfileEditorFormData) {
     let initialSet = !!!this.profileFormData;
     this.profileFormData = profileFormData;
     if (initialSet) this.changeDetectorRef.detectChanges();
   }
 
-  setCreateAccountFormData(createAccountFormData: ICreateAccountFormData) {
+  setCreateAccountFormData(createAccountFormData: CreateAccountFormData) {
     this.createAccountFormData = createAccountFormData;
   }
 
@@ -58,7 +58,7 @@ export class ItSignUpDialog {
         this.changeDetectorRef.detectChanges();
       } break;
       case 1: {
-        this.store.dispatch(new Authentication.SignUpUser(this.profileFormData, this.createAccountFormData))
+        this.store.dispatch(new AuthenticationActions.SignUpUser(this.profileFormData, this.createAccountFormData))
           .subscribe(() => this.close(true));
       }
     }

@@ -1,16 +1,14 @@
-export { ISnackbarData } from "./components/display/it-snackbar/ISnackbarData";
-export { IProfileEditorFormData } from "./components/forms/it-profile-editor/IProfileEditorFormData";
-export { IOptionDialogData } from "./components/forms/it-option-dialog/IOptionDialogData";
+export { SnackbarData } from "./components/display/it-snackbar/SnackbarData";
+export { ProfileEditorFormData } from "./components/forms/it-profile-editor/ProfileEditorFormData";
+export { OptionDialogData } from "./components/forms/it-option-dialog/OptionDialogData";
 
-export { ICreateAccountFormData } from "./features/home/ICreateAccountFormData";
+export { CreateAccountFormData } from "./features/home/CreateAccountFormData";
 
 export { IItError } from "./logic/error-monitor/IItError";
 
-export { IRoom } from "./logic/room/IRoom";
-export { IPlayer } from "./logic/room/IPlayer";
+export { Room } from "./logic/room/Room";
+export { Player } from "./logic/room/Player";
 
-export { IUser } from "./logic/user/IUser";
-export { ISettings } from "./logic/user/ISettings";
-export { IFirestoreBase } from "./logic/IFirestoreBase";
-
-export { IRouteConfig } from "./config/IRouteConfig";
+export { User } from "./logic/user/User";
+export { Settings } from "./logic/user/Settings";
+export { FirestoreBase } from "./logic/FirestoreBase";

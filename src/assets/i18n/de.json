@@ -5,12 +5,10 @@
       "no-account": {
         "create-guest-room": "Raum als Gast erstellen",
         "description": "Du kannst dich anmelden oder registrieren, um weitere Funktionen freizuschalten. Erstelle einen Raum als Gast und fang sofort zum Spielen an!",
-        "login": "Login",
         "new-account": "Neuen Account erstellen",
         "title": "Let’s get started"
       },
       "login-modal": {
-        "login": "Login",
         "email": "E-Mail",
         "password": "Passwort",
         "forgot-password": "Passwort vergessen?"
@@ -70,11 +68,8 @@
         "pink": "Pink",
         "rose": "Rose"
       },
-      "sign-out": "Ausloggen",
       "color-scheme": "App Farbschema",
-      "account": "Account",
-      "register": "Registrieren",
-      "sign-in": "Einloggen"
+      "account": "Account"
     },
     "room": {
       "created": "Erstellt am",
@@ -127,7 +122,7 @@
     "continue": "Weiter",
     "back": "Zurück",
     "submit": "Bestätigen",
-    "safe": "Speichern",
+    "save": "Speichern",
     "cancel": "Abbrechen",
     "join": "Beitretten",
     "close": "Schließen",

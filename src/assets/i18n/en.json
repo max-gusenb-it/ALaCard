@@ -5,12 +5,10 @@
       "no-account": {
         "title": "Let’s get started",
         "description": "You can login or register to unlock more features. Create a room as a guest to start playing immediately!",
-        "login": "Login",
         "new-account": "Create new account",
         "create-guest-room": "Create room as guest"
       },
       "login-modal": {
-        "login": "Login",
         "email": "E-Mail",
         "password": "Password",
         "forgot-password": "Forgot your password?"
@@ -70,11 +68,8 @@
         "pink": "Pink",
         "rose": "Rose"
       },
-      "sign-out": "Sign out",
       "color-scheme": "App color scheme",
-      "account": "Account",
-      "register": "Register",
-      "sign-in": "Sign in"
+      "account": "Account"
     },
     "room": {
       "created": "Created",
@@ -127,12 +122,13 @@
     "continue": "Continue",
     "back": "Back",
     "submit": "Submit",
-    "safe": "Safe",
+    "save": "Save",
     "cancel": "Cancel",
     "join": "Join",
     "close": "Close",
     "signIn": "Sign In",
     "signUp": "Sign Up",
+    "signOut": "Sign out",
     "register": "Register"
   },
   "errors": {

@@ -1,6 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
-import { IOptionDialogData } from 'src/app/core/models/interfaces';
+import { OptionDialogData } from 'src/app/core/models/interfaces';
 
 @Component({
   selector: 'it-option-dialog',
@@ -10,7 +10,7 @@ import { IOptionDialogData } from 'src/app/core/models/interfaces';
 export class ItOptionDialog {
 
   constructor(
-    @Inject(DIALOG_DATA) public data: IOptionDialogData,
+    @Inject(DIALOG_DATA) public data: OptionDialogData,
     private dialogRef: DialogRef
   ) { }
 

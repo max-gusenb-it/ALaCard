@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { ILoadingStateModel } from "./loading.model";
 import { Injectable } from "@angular/core";
 import { LoadingStates } from "./ELoadingStates";
-import { Loading } from "./loading.actions";
+import { LoadingActions } from "./loading.actions";
 
 const LOADING_STATE_TOKEN = new StateToken<ILoadingStateModel>('loading');
 
@@ -19,7 +19,7 @@ export class LoadingState {
         return state.loadingState === LoadingStates.Loading;
     }
 
-    @Action(Loading.StartLoading)
+    @Action(LoadingActions.StartLoading)
     startLoading(ctx: StateContext<ILoadingStateModel>) {
         const state = ctx.getState();
         if (state.loadingState === LoadingStates.Loading) return;
@@ -30,7 +30,7 @@ export class LoadingState {
         });
     }
     
-    @Action(Loading.EndLoading)
+    @Action(LoadingActions.EndLoading)
     endLoading(ctx: StateContext<ILoadingStateModel>) {
         const state = ctx.getState();
         if (state.loadingState !== LoadingStates.Loading) return

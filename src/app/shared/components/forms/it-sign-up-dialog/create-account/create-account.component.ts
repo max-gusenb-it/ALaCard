@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
-import { ICreateAccountFormData } from 'src/app/core/models/interfaces/features/home/ICreateAccountFormData';
+import { CreateAccountFormData } from 'src/app/core/models/interfaces/features/home/CreateAccountFormData';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -10,9 +10,9 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 })
 export class CreateAccountComponent extends AngularLifecycle implements AfterViewInit {
 
-  @Input() createAccountFormData: ICreateAccountFormData = null as any;
+  @Input() createAccountFormData: CreateAccountFormData = null as any;
 
-  @Output() createAccountFormChanges: EventEmitter<ICreateAccountFormData> = new EventEmitter();
+  @Output() createAccountFormChanges: EventEmitter<CreateAccountFormData> = new EventEmitter();
 
   createAccountForm = new FormGroup({
     register: new FormControl({value: true, disabled: false}),

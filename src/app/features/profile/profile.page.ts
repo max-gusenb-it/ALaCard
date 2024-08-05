@@ -2,8 +2,8 @@ import { AfterViewInit, Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
-import { IUser } from 'src/app/core/models/interfaces/logic/user/IUser';
-import { Authentication, AuthenticationState } from 'src/app/core/state';
+import { User } from 'src/app/core/models/interfaces/logic/user/User';
+import { AuthenticationActions, AuthenticationState } from 'src/app/core/state';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { supportedLanguages } from 'src/app/core/constants/languages';
@@ -17,7 +17,7 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
   templateUrl: './profile.page.html'
 })
 export class ProfilePage extends AngularLifecycle implements AfterViewInit {
-  @Select(AuthenticationState.user) user$!: Observable<IUser>;
+  @Select(AuthenticationState.user) user$!: Observable<User>;
   @Select(AuthenticationState.isAnonymous) isAnonymous$!: Observable<boolean>;
 
   settingsForm: FormGroup = new FormGroup({
@@ -92,7 +92,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   }
 
   signOut() {
-    this.store.dispatch(new Authentication.SignOut())
+    this.store.dispatch(new AuthenticationActions.SignOut())
       .subscribe(() => {
         this.navCtrl.navigateBack("/home");
       });

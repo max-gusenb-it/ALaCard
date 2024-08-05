@@ -1,7 +1,7 @@
-import { IFirestoreBase } from "../IFirestoreBase";
-import { IPlayer } from "./IPlayer";
+import { FirestoreBase } from "../FirestoreBase";
+import { Player } from "./Player";
 
-export interface IRoom extends IFirestoreBase {
+export interface Room extends FirestoreBase {
     name: string;
     description: string;
     settings: {
@@ -11,6 +11,6 @@ export interface IRoom extends IFirestoreBase {
      * Players that joined the room. Saved this way so players can be updated individually
      */
     players: {
-      [key: string]: IPlayer;
+      [key: string]: Player;
     };
 }

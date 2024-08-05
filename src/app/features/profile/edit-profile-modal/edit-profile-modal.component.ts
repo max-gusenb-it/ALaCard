@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { IProfileEditorFormData, IUser } from 'src/app/core/models/interfaces';
+import { ProfileEditorFormData, User } from 'src/app/core/models/interfaces';
 import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
@@ -12,8 +12,8 @@ import { LoadingHelperService } from 'src/app/core/services/loading-helper.servi
 })
 export class EditProfileModal implements OnInit {
 
-  user: IUser | undefined;
-  profileFormData: IProfileEditorFormData = {
+  user: User | undefined;
+  profileFormData: ProfileEditorFormData = {
     profilePicture: "",
     username: "",
     valid: false
@@ -32,7 +32,7 @@ export class EditProfileModal implements OnInit {
     this.profileFormData.profilePicture = this.user!.profilePicture;
   }
 
-  setProfileFormData(formData: IProfileEditorFormData) {
+  setProfileFormData(formData: ProfileEditorFormData) {
     this.profileFormData = formData;
   }
 
@@ -41,7 +41,7 @@ export class EditProfileModal implements OnInit {
   }
 
   submit() {
-    let userCopy: IUser = {
+    let userCopy: User = {
       ...this.user!,
       profilePicture: this.profileFormData.profilePicture,
       username: this.profileFormData.username

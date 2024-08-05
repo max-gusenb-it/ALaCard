@@ -3,9 +3,9 @@ import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { BasePortalOutlet } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { ItSnackbarComponent } from 'src/app/shared/components/display/it-snackbar/it-snackbar.component';
-import { ISnackbarData } from '../models/interfaces/components/display/it-snackbar/ISnackbarData';
+import { SnackbarData } from '../models/interfaces/components/display/it-snackbar/SnackbarData';
 import { ItOptionDialog } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
-import { IOptionDialogData } from '../models/interfaces';
+import { OptionDialogData } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -45,13 +45,13 @@ export class PopupService {
           optionOne: optionOne,
           optionTwo: optionTwo,
           subtitle: subtitle
-        } as IOptionDialogData
+        } as OptionDialogData
       }
     )
   }
 
   openSnackbar(text: string, icon?: string, autoClose: boolean = true) {
-    let snackbarData: ISnackbarData = {
+    let snackbarData: SnackbarData = {
       text,
       icon,
       autoClose

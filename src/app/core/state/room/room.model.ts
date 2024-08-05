@@ -1,11 +1,11 @@
-import { IRoom } from "../../models/interfaces/logic/room/IRoom";
+import { Room } from "../../models/interfaces/logic/room/Room";
 
 export interface RoomStateModel {
     /**
      * Id's of room that user is currently in
      */
     roomConnectionData: RoomConnectionData;
-    room: IRoom;
+    room: Room;
 }
 
 export interface RoomConnectionData {

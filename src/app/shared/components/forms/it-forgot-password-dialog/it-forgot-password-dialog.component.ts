@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { PopupService } from 'src/app/core/services/popup.service';
-import { Authentication } from 'src/app/core/state';
+import { AuthenticationActions } from 'src/app/core/state';
 
 @Component({
   selector: 'it-forgot-password-modal',
@@ -28,7 +28,7 @@ export class ItForgotPasswordDialog {
   }
 
   submit() {
-    this.store.dispatch(new Authentication.ResetPassword(this.forgotPasswordForm.controls['email'].value))
+    this.store.dispatch(new AuthenticationActions.ResetPassword(this.forgotPasswordForm.controls['email'].value))
       .subscribe(() => {
         this.popupService.openSnackbar(
           this.translateService.instant("features.home.forgot-password-modal.mail-sent")

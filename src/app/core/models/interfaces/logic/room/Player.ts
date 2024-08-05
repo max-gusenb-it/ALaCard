@@ -2,18 +2,18 @@
  * Player that is saved in room. Holds the same information as user but in more minimalistic way
  *
  * @export
- * @interface IPlayer
- * @typedef {IPlayer}
+ * @interface Player
+ * @typedef {Player}
  */
-export interface IPlayer {
+export interface Player {
     id: string;
-    state: EPlayerState;
+    state: PlayerState;
     username: string;
     profilePicture: string;
     joinOrder: number;
 }
 
-export enum EPlayerState {
+export enum PlayerState {
     active,
     inactive,
     left

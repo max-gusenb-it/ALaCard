@@ -39,16 +39,16 @@
           {{ 'features.profile.colors.' + color | translate }}
         </option>
       </it-select>
-      <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">{{ 'actions.safe' | translate }}</it-button>
+      <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">{{ 'actions.save' | translate }}</it-button>
     </form>
     <div class="border-b w-full border-b-neutral-500"></div>
     <div 
     class="flex flex-col gap-2"
     >
       <h5>{{ 'features.profile.account' | translate }}</h5>
-      <it-button *ngIf="(isAnonymous$ | async)" class="flex" size="small">{{ 'features.profile.register' | translate }}</it-button>
-      <it-button *ngIf="(isAnonymous$ | async)" (click)="signIn()" class="flex" size="small">{{ 'features.profile.sign-in' | translate }}</it-button>
-      <it-button (click)="signOut()"  class="flex" size="small">{{ 'features.profile.sign-out' | translate }}</it-button>
+      <it-button *ngIf="(isAnonymous$ | async)" class="flex" size="small">{{ 'actions.signUp' | translate }}</it-button>
+      <it-button *ngIf="(isAnonymous$ | async)" (click)="signIn()" class="flex" size="small">{{ 'actions.signIn' | translate }}</it-button>
+      <it-button (click)="signOut()"  class="flex" size="small">{{ 'actions.signOut' | translate }}</it-button>
       <!-- ToDo: add delete profile -->
     </div>
   </div>

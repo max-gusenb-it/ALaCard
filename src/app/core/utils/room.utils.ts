@@ -1,6 +1,6 @@
 import { environment } from "src/environments/environment";
-import { IPlayer, IRoom, IUser } from "../models/interfaces";
-import { EPlayerState } from "../models/interfaces/logic/room/IPlayer";
+import { Player, Room, User } from "../models/interfaces";
+import { PlayerState } from "../models/interfaces/logic/room/Player";
 import { UserUtils } from "./user.utils";
 
 export namespace RoomUtils {
@@ -9,23 +9,23 @@ export namespace RoomUtils {
      * Generates a newPlayer for a room from a given user. When the player is already added in the room and active null is returned
      *
      * @export
-     * @param {IRoom} room room that the player should be added to
-     * @param {IUser} user user from which the player should be created
-     * @returns {(IPlayer | null)} Player that should be added to the room. Null, when the player is already in active state in the room
+     * @param {Room} room room that the player should be added to
+     * @param {User} user user from which the player should be created
+     * @returns {(Player | null)} Player that should be added to the room. Null, when the player is already in active state in the room
      */
-    export function generatePlayerForRoom(room: IRoom, user: IUser) : IPlayer | null {
+    export function generatePlayerForRoom(room: Room, user: User) : Player | null {
         // check if player already exists
-        let newPlayer: IPlayer;
-        let existingPlayer: IPlayer | undefined;
+        let newPlayer: Player;
+        let existingPlayer: Player | undefined;
         let playersArray = Object.values(room.players);
         if (playersArray.length !== 0) {
             existingPlayer = playersArray.find(p => p.id === user.id);
         }
         if (!!existingPlayer) {
-            if (existingPlayer.state !== EPlayerState.active) {
+            if (existingPlayer.state !== PlayerState.active) {
                 // set state to active and update user information 
                 newPlayer = existingPlayer;
-                newPlayer.state = EPlayerState.active;
+                newPlayer.state = PlayerState.active;
                 if(newPlayer.username != user.username) newPlayer.username = user.username;
                 if(newPlayer.profilePicture != user.profilePicture) newPlayer.profilePicture = user.profilePicture;
             } else {
@@ -42,25 +42,25 @@ export namespace RoomUtils {
     /**
      * Generates a player that looks like he left the room from an existing room and an player id
      *
-     * @param {IRoom} room 
+     * @param {Room} room 
      * @param {string} playerId
-     * @returns {(IPlayer | null)} The updated player or null if the player is not found
+     * @returns {(Player | null)} The updated player or null if the player is not found
      */
-    export function generateLeftPlayer(room: IRoom, playerId: string) : IPlayer | null {
+    export function generateLeftPlayer(room: Room, playerId: string) : Player | null {
         if (!!room.players[playerId]) {
             return {
                 ...room.players[playerId],
-                state: EPlayerState.left
+                state: PlayerState.left
             };
         }
         return null;
     }
 
-    export function getRoomCreator(room: IRoom) : IPlayer {
+    export function getRoomCreator(room: Room) : Player {
         return Object.values(room.players).sort((p1, p2) => p1.joinOrder - p2.joinOrder)[0];
     }
 
-    export function generateJoinLink(room: IRoom) : string {
+    export function generateJoinLink(room: Room) : string {
         const creator = getRoomCreator(room);
         if (environment.production) {
             return `https://alacard-de849.web.app/room/${room.id}-${creator.id}`;

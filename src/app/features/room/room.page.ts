@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { IOptionDialogData, IPlayer, IRoom } from 'src/app/core/models/interfaces';
+import { OptionDialogData, Player, Room } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/popup.service';
-import { Room, RoomState } from 'src/app/core/state';
+import { RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItOptionDialog } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,7 +17,7 @@ import { RoomUtils } from 'src/app/core/utils/room.utils';
   templateUrl: './room.page.html'
 })
 export class RoomPage extends AngularLifecycle implements OnInit {
-  @Select(RoomState.room) room$!: Observable<IRoom>;
+  @Select(RoomState.room) room$!: Observable<Room>;
 
   constructor(
     private store: Store,
@@ -35,7 +35,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       .subscribe((paramMap) => {
         const joinInfos =  paramMap.get("connectionData")?.split("-");
         if (joinInfos != null && (joinInfos?.length == 1 || joinInfos?.length == 2)) {
-          this.store.dispatch(new Room.JoinRoom(joinInfos[0], joinInfos[1]));
+          this.store.dispatch(new RoomActions.JoinRoom(joinInfos[0], joinInfos[1]));
         } else {
           this.navCtrl.navigateBack("home");
         }
@@ -52,13 +52,13 @@ export class RoomPage extends AngularLifecycle implements OnInit {
               title: this.translateService.instant("features.room.leave-dialog.title"),
               optionOne: this.translateService.instant("actions.cancel"),
               optionTwo: this.translateService.instant("features.room.leave-dialog.leave-room")
-            } as IOptionDialogData 
+            } as OptionDialogData 
           }
         );
         firstValueFrom(ref.closed)
           .then((data: any) => {
             if (data) {
-              this.store.dispatch(new Room.LeaveRoom());
+              this.store.dispatch(new RoomActions.LeaveRoom());
             }
           }
         );
@@ -77,7 +77,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     }
   }
 
-  mapPlayersToArray(players: { [key: string]: IPlayer }) {
+  mapPlayersToArray(players: { [key: string]: Player }) {
     return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
   }
 

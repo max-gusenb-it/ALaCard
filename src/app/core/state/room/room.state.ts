@@ -1,22 +1,22 @@
 import { Action, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
 import { RoomStateModel } from "./room.model";
 import { Injectable, NgZone } from "@angular/core";
-import { Room } from "./room.actions";
+import { RoomActions } from "./room.actions";
 import { RoomSourceService } from "../../services/data-source/room-source.service";
 import { LoadingHelperService } from "../../services/loading-helper.service";
-import { Authentication, AuthenticationState } from "../authentication";
+import { AuthenticationActions, AuthenticationState } from "../authentication";
 import { Subscription, firstValueFrom, takeUntil } from "rxjs";
-import { Loading } from "../loading";
+import { LoadingActions } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { ModalController, NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
-import { IRoom } from "../../models/interfaces";
+import { Room } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/popup.service";
 import { TranslateService } from "@ngx-translate/core";
 import { UserUtils } from "../../utils/user.utils";
 import { ItError } from "../../models/classes";
-import { ErrorMonitor } from "../error-monitor";
+import { ErrorMonitorActions } from "../error-monitor";
 import { ItAuthenticateDialog } from "src/app/shared/components/forms/it-authenticate-dialog/it-authenticate-dialog.component";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
@@ -29,7 +29,7 @@ export class RoomState extends AngularLifecycle {
     roomSubscription$: Subscription = null as any;
 
     @Selector()
-    static room(state: RoomStateModel): IRoom | undefined {
+    static room(state: RoomStateModel): Room | undefined {
         return state.room;
     }
 
@@ -46,17 +46,17 @@ export class RoomState extends AngularLifecycle {
         super();
     }
 
-    @Action(Room.CreateRoom)
-    createRoom(ctx: StateContext<RoomStateModel>, action: Room.CreateRoom) {
+    @Action(RoomActions.CreateRoom)
+    createRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.CreateRoom) {
         return this.loadingHelperService.loadWithLoadingState([
             this.roomSourceService.createRoom(action.name, action.description)
         ]).then(r => {
-            return ctx.dispatch(new Authentication.SetUserRoomId(r[0].id!));
+            return ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!));
         });
     }
 
-    @Action(Room.JoinRoom)
-    async joinRoom(ctx: StateContext<RoomStateModel>, action: Room.JoinRoom) {
+    @Action(RoomActions.JoinRoom)
+    async joinRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.JoinRoom) {
         if (this.roomSubscription$ != null && !this.roomSubscription$.closed) {
             // ask user if he wants to leave current room
             this.roomSubscription$.unsubscribe();
@@ -75,7 +75,7 @@ export class RoomState extends AngularLifecycle {
                 if (!!!user) throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
 
-            ctx.dispatch(new Loading.StartLoading);
+            ctx.dispatch(new LoadingActions.StartLoading);
 
             // If user is not online he can only join his own room 
             if (!navigator.onLine) {
@@ -120,7 +120,7 @@ export class RoomState extends AngularLifecycle {
                     takeUntil(this.destroyed$)
                 )
                 .subscribe(r => {
-                    ctx.dispatch(new Room.SetRoom(r, action.userId))
+                    ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
             });
 
             if (joinOffline) {
@@ -146,16 +146,16 @@ export class RoomState extends AngularLifecycle {
                 }
             }
 
-            ctx.dispatch(new Loading.EndLoading());
+            ctx.dispatch(new LoadingActions.EndLoading());
             return Promise.resolve();
         } catch(error) {
-            ctx.dispatch(new Loading.EndLoading);
+            ctx.dispatch(new LoadingActions.EndLoading);
             if (error instanceof ItError) {
-                ctx.dispatch(new ErrorMonitor.SetError(error.exportError()));
+                ctx.dispatch(new ErrorMonitorActions.SetError(error.exportError()));
             } else {
                 console.error(error);
                 ctx.dispatch(
-                    new ErrorMonitor.SetError({
+                    new ErrorMonitorActions.SetError({
                         code: SharedErrors.unknownError,
                         location: RoomState.name
                     })
@@ -166,8 +166,8 @@ export class RoomState extends AngularLifecycle {
         }
     }
 
-    @Action(Room.SetRoom)
-    setRoom(ctx: StateContext<RoomStateModel>, action: Room.SetRoom) {
+    @Action(RoomActions.SetRoom)
+    setRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.SetRoom) {
         const state = ctx.getState();
 
         ctx.patchState({
@@ -180,8 +180,8 @@ export class RoomState extends AngularLifecycle {
         });
     }
 
-    @Action(Room.LeaveRoom)
-    leaveRoom(ctx: StateContext<RoomStateModel>, action: Room.LeaveRoom) {
+    @Action(RoomActions.LeaveRoom)
+    leaveRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.LeaveRoom) {
         if (this.roomSubscription$ == null || this.roomSubscription$.closed) {
             this.navController.navigateBack("home");
             return Promise.resolve();
@@ -201,7 +201,7 @@ export class RoomState extends AngularLifecycle {
         this.zone.run(() => {
             this.navController.navigateBack("home");
         });
-        if (!navigator.onLine) ctx.dispatch(new Loading.EndLoading);
+        if (!navigator.onLine) ctx.dispatch(new LoadingActions.EndLoading);
         return;
     }
 }

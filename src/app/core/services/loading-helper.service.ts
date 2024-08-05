@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Loading } from "../state";
+import { LoadingActions } from "../state";
 import { Store } from "@ngxs/store";
 import { ItError } from "../models/classes";
 import { SharedErrors } from "../constants/errorCodes";
-import { ErrorMonitor } from "../state/error-monitor";
+import { ErrorMonitorActions } from "../state/error-monitor";
 
 @Injectable({
     providedIn: 'root'
@@ -22,15 +22,15 @@ export class LoadingHelperService {
     loadWithLoadingState(
         loadPredicates: Promise<unknown>[]
     ): Promise<unknown[]> {
-        if (navigator.onLine) this.store.dispatch(new Loading.StartLoading());
+        if (navigator.onLine) this.store.dispatch(new LoadingActions.StartLoading());
         return Promise.all(loadPredicates)
             .catch(error => {
                 if (error instanceof ItError) {
-                    this.store.dispatch(new ErrorMonitor.SetError(error.exportError()));
+                    this.store.dispatch(new ErrorMonitorActions.SetError(error.exportError()));
                 } else {
                     console.error(error);
                     this.store.dispatch(
-                        new ErrorMonitor.SetError({
+                        new ErrorMonitorActions.SetError({
                             code: SharedErrors.unknownError,
                             location: LoadingHelperService.name
                         })
@@ -39,7 +39,7 @@ export class LoadingHelperService {
                 return Promise.reject(error);
             })
             .finally(() => {
-                this.store.dispatch(new Loading.EndLoading());
+                this.store.dispatch(new LoadingActions.EndLoading());
             });
     }
 }

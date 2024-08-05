@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
-import { Room } from 'src/app/core/state';
+import { RoomActions } from 'src/app/core/state';
 
 @Component({
   selector: 'app-create-room-modal',
@@ -26,7 +26,7 @@ export class CreateRoomModal {
   }
 
   createRoom() {
-    firstValueFrom(this.store.dispatch(new Room.CreateRoom(
+    firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
       this.roomForm.controls["name"].value,
       this.roomForm.controls["description"].value
     ))).then(s => {

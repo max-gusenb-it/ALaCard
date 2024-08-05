@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EPlayerState } from 'src/app/core/models/interfaces/logic/room/IPlayer';
+import { PlayerState } from 'src/app/core/models/interfaces/logic/room/Player';
 
 @Component({
   selector: 'it-player',
@@ -11,19 +11,19 @@ export class ItPlayerComponent {
 
   @Input() profilePicture: string = "";
   @Input() username: string = "";
-  @Input() state: EPlayerState = null as any;
+  @Input() state: PlayerState = null as any;
 
   constructor(
     private translateService: TranslateService 
   ) { }
 
-  getStateTranslation(state: EPlayerState) {
+  getStateTranslation(state: PlayerState) {
     switch(state) {
-      case(EPlayerState.active): 
+      case(PlayerState.active): 
         return this.translateService.instant("features.room.playerStates.active");
-      case(EPlayerState.inactive): 
+      case(PlayerState.inactive): 
       return this.translateService.instant("features.room.playerStates.inactive");
-      case(EPlayerState.left): 
+      case(PlayerState.left): 
       return this.translateService.instant("features.room.playerStates.left");
     }
   }

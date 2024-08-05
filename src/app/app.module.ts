@@ -36,6 +36,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+// ToDo: refactor dialog and modal naming of components
+// ToDo: refactor interface names
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

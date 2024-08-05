@@ -1,4 +1,4 @@
-export interface ICreateAccountFormData {
+export interface CreateAccountFormData {
     register: boolean;
     email: string;
     password: string;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { Authentication } from 'src/app/core/state';
+import { AuthenticationActions } from 'src/app/core/state';
 import { ItForgotPasswordDialog } from '../it-forgot-password-dialog/it-forgot-password-dialog.component';
 
 @Component({
@@ -35,7 +35,7 @@ export class ItSignInDialog {
   signInWithEmail() {
     if (this.loginForm.valid) {
       this.store.dispatch(
-        new Authentication.SignInUser(
+        new AuthenticationActions.SignInUser(
           this.loginForm.controls['email'].value,
           this.loginForm.controls['password'].value
         )

@@ -1,11 +1,11 @@
-import { IPlayer, IUser } from "../models/interfaces";
-import { EPlayerState } from "../models/interfaces/logic/room/IPlayer";
+import { Player, User } from "../models/interfaces";
+import { PlayerState } from "../models/interfaces/logic/room/Player";
 
 export namespace UserUtils {
-    export function exportUserToPlayer(user: IUser, joinOrder: number) : IPlayer {
+    export function exportUserToPlayer(user: User, joinOrder: number) : Player {
         return {
             id: user.id!,
-            state: EPlayerState.active,
+            state: PlayerState.active,
             username: user.username,
             profilePicture: user.profilePicture,
             joinOrder: joinOrder

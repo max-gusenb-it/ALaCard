@@ -1,4 +1,4 @@
-export namespace Loading {
+export namespace LoadingActions {
     export class StartLoading {
         static readonly type = "[Loading] StartLoading";
         constructor() {}

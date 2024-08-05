@@ -1,12 +1,12 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
-import { IRoom } from "../../models/interfaces/logic/room/IRoom";
+import { Room } from "../../models/interfaces/logic/room/Room";
 import { FirestoreService } from "./firestore.service";
 import { Store } from "@ngxs/store";
 import { AuthenticationState } from "../../state";
 import { RoomSourceServiceErrors } from '../../constants/errorCodes';
 import { catchError } from 'rxjs';
-import { IPlayer } from '../../models/interfaces';
+import { Player } from '../../models/interfaces';
 import { ItError } from '../../models/classes';
 import { UserUtils } from '../../utils/user.utils';
 
@@ -19,7 +19,7 @@ export class RoomSourceService {
 
     constructor(
         private store: Store,
-        private firestoreService: FirestoreService<IRoom>
+        private firestoreService: FirestoreService<Room>
     ) { }
 
     ref(userId?: string) {
@@ -71,11 +71,11 @@ export class RoomSourceService {
         }
     }
 
-    updateRoom(room: IRoom, roomId: string, userId?: string) {
+    updateRoom(room: Room, roomId: string, userId?: string) {
         return this.firestoreService.update(`${this.ref(userId)}`, roomId, room);
     }
 
-    updatePlayer(roomId: string, userId: string, player: IPlayer, roomOwnerId?: string) {
+    updatePlayer(roomId: string, userId: string, player: Player, roomOwnerId?: string) {
         return this.firestoreService.updateField(
             this.ref(roomOwnerId),
             roomId,

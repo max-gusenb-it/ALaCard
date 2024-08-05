@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { FirestoreService } from "./firestore.service";
-import { IUser } from "../../models/interfaces/logic/user/IUser";
+import { User } from "../../models/interfaces/logic/user/User";
 import { ItError } from "../../models/classes";
 
 @Injectable({
@@ -9,13 +9,13 @@ import { ItError } from "../../models/classes";
 export class UserSourceService {
     private readonly ref = "users";
 
-    constructor(private firestoreService: FirestoreService<IUser>) { }
+    constructor(private firestoreService: FirestoreService<User>) { }
 
     getUser$(id: string) {
         return this.firestoreService.getDocWithId$(this.ref, id);
     }
 
-    addUser(id: string, user: IUser) {
+    addUser(id: string, user: User) {
         return this.firestoreService.addWithId(
             this.ref,
             id,
@@ -28,7 +28,7 @@ export class UserSourceService {
         });
     }
 
-    updateUser(id: string, user: IUser) {
+    updateUser(id: string, user: User) {
         return this.firestoreService.update(this.ref, id, user).catch(error => {
             return Promise.reject(new ItError(
                 error.code,
