@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ItSignInDialog } from '../it-sign-in-dialog/it-sign-in-dialog.component';
-import { ItSignUpDialog } from '../it-sign-up-dialog/it-sign-up-dialog.component';
+import { ItSignInModal } from '../it-sign-in-modal/it-sign-in-modal.component';
+import { ItSignUpModal } from '../it-sign-up-modal/it-sign-up-modal.component';
 
 @Component({
-  selector: 'it-authenticate-dialog',
-  templateUrl: './it-authenticate-dialog.component.html',
+  selector: 'it-authenticate-modal',
+  templateUrl: './it-authenticate-modal.component.html',
 })
-export class ItAuthenticateDialog implements OnInit {
+export class ItAuthenticateModal implements OnInit {
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -15,7 +15,7 @@ export class ItAuthenticateDialog implements OnInit {
 
   async openSignInModal() {
     const modal = await this.modalCtrl.create({
-      component: ItSignInDialog
+      component: ItSignInModal
     });
     modal.present();
     const data = await modal.onDidDismiss<boolean>();
@@ -26,7 +26,7 @@ export class ItAuthenticateDialog implements OnInit {
 
   async openSignUpModal() {
     const modal = await this.modalCtrl.create({
-      component: ItSignUpDialog
+      component: ItSignUpModal
     });
     modal.present();
     const data = await modal.onDidDismiss<boolean>();

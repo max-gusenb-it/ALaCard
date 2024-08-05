@@ -8,9 +8,9 @@ import { AuthenticationActions } from 'src/app/core/state';
 
 @Component({
   selector: 'it-forgot-password-modal',
-  templateUrl: './it-forgot-password-dialog.component.html'
+  templateUrl: './it-forgot-password-modal.component.html'
 })
-export class ItForgotPasswordDialog {
+export class ItForgotPasswordModal {
 
   forgotPasswordForm: FormGroup = new FormGroup({
     email: new FormControl({value: "", disabled: false}, [Validators.required, Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')])

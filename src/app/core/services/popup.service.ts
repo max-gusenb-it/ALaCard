@@ -4,8 +4,8 @@ import { BasePortalOutlet } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { ItSnackbarComponent } from 'src/app/shared/components/display/it-snackbar/it-snackbar.component';
 import { SnackbarData } from '../models/interfaces/components/display/it-snackbar/SnackbarData';
-import { ItOptionDialog } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
-import { OptionDialogData } from '../models/interfaces';
+import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
+import { OptionBottomSheetData } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class PopupService {
     public overlay: Overlay
   ) { }
 
-  openDialog(component: ComponentType<unknown>, config?: DialogConfig<unknown, DialogRef<unknown, unknown>, BasePortalOutlet> | undefined) {
+  openBottomSheet(component: ComponentType<unknown>, config?: DialogConfig<unknown, DialogRef<unknown, unknown>, BasePortalOutlet> | undefined) {
     if (config == null) {
       config = {};
     }
@@ -31,21 +31,21 @@ export class PopupService {
     return this.dialog.open(component, config);
   }
 
-  openOptionDialog(
+  openOptionBottomSheet(
     title: string,
     optionOne: string,
     optionTwo: string,
     subtitle?: string
   ) {
-    return this.openDialog(
-      ItOptionDialog,
+    return this.openBottomSheet(
+      ItOptionBottomSheet,
       {
         data: {
           title: title,
           optionOne: optionOne,
           optionTwo: optionTwo,
           subtitle: subtitle
-        } as OptionDialogData
+        } as OptionBottomSheetData
       }
     )
   }

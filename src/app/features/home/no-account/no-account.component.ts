@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ItSignInDialog } from 'src/app/shared/components/forms/it-sign-in-dialog/it-sign-in-dialog.component';
-import { ItSignUpDialog } from 'src/app/shared/components/forms/it-sign-up-dialog/it-sign-up-dialog.component';
+import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
+import { ItSignUpModal } from 'src/app/shared/components/forms/it-sign-up-modal/it-sign-up-modal.component';
 
 @Component({
   selector: 'no-account',
@@ -13,14 +13,14 @@ export class NoAccountComponent {
 
   async openSignInModal() {
     const modal = await this.modalCtrl.create({
-      component: ItSignInDialog
+      component: ItSignInModal
     });
     modal.present();
   }
 
   async openSignUpModal() {
     const modal = await this.modalCtrl.create({
-      component: ItSignUpDialog,
+      component: ItSignUpModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"
     });

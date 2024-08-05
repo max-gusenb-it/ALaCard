@@ -5,10 +5,10 @@ import { CreateAccountFormData, ProfileEditorFormData } from 'src/app/core/model
 import { AuthenticationActions } from 'src/app/core/state';
 
 @Component({
-  selector: 'it-sign-up-dialog',
-  templateUrl: './it-sign-up-dialog.component.html'
+  selector: 'it-sign-up-modal',
+  templateUrl: './it-sign-up-modal.component.html'
 })
-export class ItSignUpDialog {
+export class ItSignUpModal {
   stepIndex: number = 0;
 
   profileFormData: ProfileEditorFormData = null as any;

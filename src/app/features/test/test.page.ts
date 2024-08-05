@@ -107,8 +107,8 @@ export class TestPage {
     } : null;
   }
 
-  openDialog() {
-    const ref = this.popupService.openDialog(
+  openBottomSheet() {
+    const ref = this.popupService.openBottomSheet(
       ExampleComponent
     );
 

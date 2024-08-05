@@ -8,7 +8,7 @@ import { RoomPageRoutingModule } from './room-routing.module';
 
 import { RoomPage } from './room.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ShareDialogComponent } from './menu-dialogs/share-dialog/share-dialog.component';
+import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { QRCodeModule } from 'angularx-qrcode';
   ],
   declarations: [
     RoomPage,
-    ShareDialogComponent
+    ShareBottomSheet
   ]
 })
 export class RoomPageModule {}

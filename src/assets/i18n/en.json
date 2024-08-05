@@ -8,7 +8,7 @@
         "new-account": "Create new account",
         "create-guest-room": "Create room as guest"
       },
-      "login-modal": {
+      "sign-in-modal": {
         "email": "E-Mail",
         "password": "Password",
         "forgot-password": "Forgot your password?"
@@ -73,7 +73,7 @@
     },
     "room": {
       "created": "Created",
-      "leave-dialog": {
+      "leave-bottom-sheet": {
         "title": "Do you really want to leave this room?",
         "leave-room": "Leave Room"
       },
@@ -83,11 +83,11 @@
         "inactive": "Inactive",
         "left": "Left"
       },
-      "join-room-offline-dialog": {
+      "join-room-offline-bottom-sheet": {
         "title": "Do you want to join your room in offline mode?",
         "subtitle": "Your current game data will be lost in this process."
       },
-      "share-dialog": {
+      "share-bottom-sheet": {
         "title": "Sharing",
         "share-link": "Share Join Link"
       }
@@ -111,7 +111,7 @@
         "signs": "Signs"
       },
       "forms": {
-        "it-authenticate-dialog": {
+        "it-authenticate-modal": {
           "title": "Let’s get started",
           "description": "To join a room you have to log in or register first. You can register as a guest if you don't want to create an account."
         }

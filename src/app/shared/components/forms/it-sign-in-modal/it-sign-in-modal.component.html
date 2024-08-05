@@ -5,22 +5,22 @@
 >
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
     <div class="flex flex-col gap-4">
-        <h3>{{'features.home.login-modal.login' | translate}}</h3>
+        <h3>{{'actions.signIn' | translate}}</h3>
         <it-input
             id="email"
-            [label]="'features.home.login-modal.email' | translate"
+            [label]="'features.home.sign-in-modal.email' | translate"
             formControlName="email"
             type="email"
         />
         <div class="flex flex-col gap-2">
             <it-input 
                 id="password"
-                [label]="'features.home.login-modal.password' | translate"
+                [label]="'features.home.sign-in-modal.password' | translate"
                 formControlName="password"
                 type="password"
             />
             <p class="text-xs cursor-pointer" (click)="forgotPassword()">
-                {{"features.home.login-modal.forgot-password" | translate}}
+                {{"features.home.sign-in-modal.forgot-password" | translate}}
             </p>
         </div>
     </div>

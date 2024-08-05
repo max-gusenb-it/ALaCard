@@ -4,12 +4,11 @@ import { Share } from '@capacitor/share';
 import { copyTextToClipboard } from 'src/app/core/utils/clipboard.utils';
 
 @Component({
-  selector: 'app-share-dialog',
-  templateUrl: './share-dialog.component.html',
-  styleUrls: ['./share-dialog.component.scss'],
+  selector: 'share-bottom-sheet',
+  templateUrl: './share-bottom-sheet.component.html',
+  styleUrls: ['./share-bottom-sheet.component.scss'],
 })
-export class ShareDialogComponent {
-
+export class ShareBottomSheet {
 
   constructor(
     @Inject(DIALOG_DATA) public data: string,

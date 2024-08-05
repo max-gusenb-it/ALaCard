@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { OptionDialogData, Player, Room } from 'src/app/core/models/interfaces';
+import { OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { ItOptionDialog } from 'src/app/shared/components/forms/it-option-dialog/it-option-dialog.component';
+import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { TranslateService } from '@ngx-translate/core';
-import { ShareDialogComponent } from './menu-dialogs/share-dialog/share-dialog.component';
+import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 
 @Component({
@@ -45,14 +45,14 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   handleMenuAction(actionType: string) {
     switch(actionType) {
       case("exit_to_app"):
-        const ref = this.popupService.openDialog(
-          ItOptionDialog, 
+        const ref = this.popupService.openBottomSheet(
+          ItOptionBottomSheet, 
           {
             data: { 
-              title: this.translateService.instant("features.room.leave-dialog.title"),
+              title: this.translateService.instant("features.room.leave-bottom-sheet.title"),
               optionOne: this.translateService.instant("actions.cancel"),
-              optionTwo: this.translateService.instant("features.room.leave-dialog.leave-room")
-            } as OptionDialogData 
+              optionTwo: this.translateService.instant("features.room.leave-bottom-sheet.leave-room")
+            } as OptionBottomSheetData 
           }
         );
         firstValueFrom(ref.closed)
@@ -66,8 +66,8 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       case("share"):
         const room = this.store.selectSnapshot(RoomState.room);
         if (!!room) {
-          this.popupService.openDialog(
-            ShareDialogComponent,
+          this.popupService.openBottomSheet(
+            ShareBottomSheet,
             {
               data: RoomUtils.generateJoinLink(room)
             }

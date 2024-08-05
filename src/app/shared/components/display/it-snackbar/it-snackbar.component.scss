@@ -3,10 +3,10 @@
     border-radius: 0.625rem;
     padding: 1rem;
     margin: 0 1.5rem;
-    animation: custom-dialog-enter 0.2s ease-out !important;
+    animation: custom-bottom-sheet-enter 0.2s ease-out !important;
 }
 
-@keyframes custom-dialog-enter {
+@keyframes custom-bottom-sheet-enter {
     from {
       opacity: 0;
     }

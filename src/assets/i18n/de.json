@@ -8,7 +8,7 @@
         "new-account": "Neuen Account erstellen",
         "title": "Let’s get started"
       },
-      "login-modal": {
+      "sign-in-modal": {
         "email": "E-Mail",
         "password": "Passwort",
         "forgot-password": "Passwort vergessen?"
@@ -73,7 +73,7 @@
     },
     "room": {
       "created": "Erstellt am",
-      "leave-dialog": {
+      "leave-bottom-sheet": {
         "title": "Willst du den Raum wirklich verlassen?",
         "leave-room": "Raum verlassen"
       },
@@ -83,11 +83,11 @@
         "inactive": "Inaktiv",
         "left": "Verlassen"
       },
-      "join-room-offline-dialog": {
+      "join-room-offline-bottom-sheet": {
         "title": "Möchtest du deinen Raum im Offline Modus beitretten?",
         "subtitle": "Deine aktuellen Spieldaten gehen dabei verloren"
       },
-      "share-dialog": {
+      "share-bottom-sheet": {
         "title": "Teilen",
         "share-link": "Einladung teilen"
       }
@@ -111,7 +111,7 @@
         "signs": "Zeichen"
       },
       "forms": {
-        "it-authenticate-dialog": {
+        "it-authenticate-modal": {
           "title": "Let’s get started",
           "description": "Um einem Raum beizutreten, musst du dich zuerst anmelden oder registrieren. Du kannst dich auch als Gast registrieren, wenn du keinen Account erstellen möchten."
         }

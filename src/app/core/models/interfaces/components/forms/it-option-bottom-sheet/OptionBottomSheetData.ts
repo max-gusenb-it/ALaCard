@@ -1,4 +1,4 @@
-export interface OptionDialogData {
+export interface OptionBottomSheetData {
     title: string;
     optionOne: string;
     optionTwo: string;

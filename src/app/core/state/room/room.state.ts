@@ -17,7 +17,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { UserUtils } from "../../utils/user.utils";
 import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
-import { ItAuthenticateDialog } from "src/app/shared/components/forms/it-authenticate-dialog/it-authenticate-dialog.component";
+import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -67,7 +67,7 @@ export class RoomState extends AngularLifecycle {
             let user = this.store.selectSnapshot(AuthenticationState.user);
             if (!!!user) {
                 const modal = await this.modalCtrl.create({
-                    component: ItAuthenticateDialog
+                    component: ItAuthenticateModal
                 });
                 modal.present();
                 await modal.onDidDismiss();
@@ -104,11 +104,11 @@ export class RoomState extends AngularLifecycle {
             let joinOffline = false;
             if (!navigator.onLine && !initialRoom.settings.singleDeviceMode) {
                 // If user is offline, ask him if eh wants to join his room in offline mode
-                joinOffline = await firstValueFrom(this.popupService.openOptionDialog(
-                    this.translateService.instant("features.room.join-room-offline-dialog.title"),
+                joinOffline = await firstValueFrom(this.popupService.openOptionBottomSheet(
+                    this.translateService.instant("features.room.join-room-offline-bottom-sheet.title"),
                     this.translateService.instant("actions.cancel"),
                     this.translateService.instant("actions.join"),
-                    this.translateService.instant("features.room.join-room-offline-dialog.subtitle")
+                    this.translateService.instant("features.room.join-room-offline-bottom-sheet.subtitle")
                 ).closed) as boolean;
                 if (!joinOffline) {
                     throw new Error();

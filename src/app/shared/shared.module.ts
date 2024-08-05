@@ -31,12 +31,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor/it-profile-editor.component';
 import { FireDatePipe } from './pipes/fire-date.pipe';
 import { ItPlayerComponent } from './components/display/it-player/it-player.component';
-import { ItOptionDialog } from './components/forms/it-option-dialog/it-option-dialog.component';
-import { ItForgotPasswordDialog } from './components/forms/it-forgot-password-dialog/it-forgot-password-dialog.component';
-import { ItSignInDialog } from './components/forms/it-sign-in-dialog/it-sign-in-dialog.component';
-import { ItSignUpDialog } from './components/forms/it-sign-up-dialog/it-sign-up-dialog.component';
-import { CreateAccountComponent } from './components/forms/it-sign-up-dialog/create-account/create-account.component';
-import { ItAuthenticateDialog } from './components/forms/it-authenticate-dialog/it-authenticate-dialog.component';
+import { ItOptionBottomSheet } from './components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
+import { ItForgotPasswordModal } from './components/forms/it-forgot-password-modal/it-forgot-password-modal.component';
+import { ItSignInModal } from './components/forms/it-sign-in-modal/it-sign-in-modal.component';
+import { ItSignUpModal } from './components/forms/it-sign-up-modal/it-sign-up-modal.component';
+import { CreateAccountComponent } from './components/forms/it-sign-up-modal/create-account/create-account.component';
+import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it-authenticate-modal.component';
 
 @NgModule({
   declarations: [
@@ -55,12 +55,12 @@ import { ItAuthenticateDialog } from './components/forms/it-authenticate-dialog/
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
-    ItAuthenticateDialog,
-    ItForgotPasswordDialog,
-    ItOptionDialog,
+    ItAuthenticateModal,
+    ItForgotPasswordModal,
+    ItOptionBottomSheet,
     ItProfileEditorComponent,
-    ItSignInDialog,
-    ItSignUpDialog,
+    ItSignInModal,
+    ItSignUpModal,
     CreateAccountComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
@@ -98,12 +98,12 @@ import { ItAuthenticateDialog } from './components/forms/it-authenticate-dialog/
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
-    ItAuthenticateDialog,
-    ItForgotPasswordDialog,
-    ItOptionDialog,
+    ItAuthenticateModal,
+    ItForgotPasswordModal,
+    ItOptionBottomSheet,
     ItProfileEditorComponent,
-    ItSignInDialog,
-    ItSignUpDialog,
+    ItSignInModal,
+    ItSignUpModal,
     CreateAccountComponent,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
