@@ -18,6 +18,7 @@ import { UserUtils } from "../../utils/user.utils";
 import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
 import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
+import { RoomSettings } from "../../models/interfaces/logic/room/RoomSettings";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -31,6 +32,11 @@ export class RoomState extends AngularLifecycle {
     @Selector()
     static room(state: RoomStateModel): Room | undefined {
         return state.room;
+    }
+
+    @Selector()
+    static roomSettings(state: RoomStateModel): RoomSettings | undefined {
+        return state.room?.settings;
     }
 
     constructor(

@@ -11,6 +11,7 @@ import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-b
 import { TranslateService } from '@ngx-translate/core';
 import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
+import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 
 @Component({
   selector: 'app-room',
@@ -73,7 +74,12 @@ export class RoomPage extends AngularLifecycle implements OnInit {
             }
           );
         }
-        break;  
+        break;
+      case("settings"): {
+        this.popupService.openBottomSheet(
+          RoomSettingsBottomSheet
+        );
+      }
     }
   }
 

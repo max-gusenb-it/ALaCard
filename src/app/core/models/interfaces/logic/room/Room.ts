@@ -1,12 +1,11 @@
 import { FirestoreBase } from "../FirestoreBase";
 import { Player } from "./Player";
+import { RoomSettings } from "./RoomSettings";
 
 export interface Room extends FirestoreBase {
     name: string;
     description: string;
-    settings: {
-      singleDeviceMode: boolean;
-    };
+    settings: RoomSettings;
     /**
      * Players that joined the room. Saved this way so players can be updated individually
      */

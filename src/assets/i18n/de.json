@@ -80,6 +80,10 @@
       "share-bottom-sheet": {
         "title": "Teilen",
         "share-link": "Einladung teilen"
+      },
+      "settings-bottom-sheet": {
+        "title": "Einstellungen",
+        "singleDeviceMode": "Spiele offline indem nur ein Gerät zum Spielen verwendet wird und Spieler manuell hinzugefügt werden"
       }
     }
   },

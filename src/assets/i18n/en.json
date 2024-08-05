@@ -80,6 +80,10 @@
       "share-bottom-sheet": {
         "title": "Sharing",
         "share-link": "Share Join Link"
+      },
+      "settings-bottom-sheet": {
+        "title": "Settings",
+        "singleDeviceMode": "Play offline by only using one device and manually adding players"
       }
     }
   },

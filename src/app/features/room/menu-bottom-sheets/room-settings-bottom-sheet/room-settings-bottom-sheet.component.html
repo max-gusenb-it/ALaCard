@@ -1,0 +1,21 @@
+<form
+  [formGroup]="roomSettingsForm"
+  class="flex flex-col gap-4"
+  (submit)="updateSettings()"
+>
+  <it-button-heading
+    icon="close"
+    (click)="close()"
+  >
+    {{ 'features.room.settings-bottom-sheet.title' | translate }}
+  </it-button-heading>
+  <it-checkbox
+    id="singleDeviceMode"
+    [label]="'features.room.settings-bottom-sheet.singleDeviceMode' | translate"
+    formControlName="singleDeviceMode"
+  />
+  <div class="flex flex-row gap-4">
+    <it-button class="flex grow" size="small" color="secondary" (click)="close()" type="button">{{ 'actions.cancel' | translate}}</it-button>
+    <it-button class="flex grow" size="small" type="submit">{{ 'actions.save' | translate}}</it-button>
+  </div>
+</form>
