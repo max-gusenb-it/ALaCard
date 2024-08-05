@@ -11,6 +11,7 @@ import { LoadingHelperService } from 'src/app/core/services/loading-helper.servi
 import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
 import { supportedColors } from 'src/app/core/constants/color';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
 
 @Component({
   selector: 'profile',
@@ -87,8 +88,11 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     ]);
   }
 
-  signIn() {
-    
+  async signIn() {
+    const modal = await this.modalCtrl.create({
+      component: ItSignInModal
+    });
+    modal.present();
   }
 
   signOut() {

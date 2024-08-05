@@ -48,7 +48,7 @@
       <h5>{{ 'features.profile.account' | translate }}</h5>
       <it-button *ngIf="(isAnonymous$ | async)" class="flex" size="small">{{ 'actions.signUp' | translate }}</it-button>
       <it-button *ngIf="(isAnonymous$ | async)" (click)="signIn()" class="flex" size="small">{{ 'actions.signIn' | translate }}</it-button>
-      <it-button (click)="signOut()"  class="flex" size="small">{{ 'actions.signOut' | translate }}</it-button>
+      <it-button *ngIf="!(isAnonymous$ | async)" (click)="signOut()"  class="flex" size="small">{{ 'actions.signOut' | translate }}</it-button>
       <!-- ToDo: add delete profile -->
     </div>
   </div>

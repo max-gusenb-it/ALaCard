@@ -65,18 +65,6 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
             .pipe(takeUntil(this.destroyed$))
             .subscribe(s => {
                 ctx.dispatch(new AuthenticationActions.SetUserCredentials(s?.uid, s?.isAnonymous));
-                if ((!!!this.userSubscription$ || this.userSubscription$.closed) && !!s && s.uid !== undefined) {
-                    this.userSubscription$ = this.userSourceService.getUser$(s.uid)
-                        .pipe(takeUntil(this.destroyed$))
-                        .subscribe(u => {
-                            ctx.dispatch(new AuthenticationActions.SetUser(u));
-                            if (!!u) {
-                                this.settingsService.setAppLanguage(u.settings.language);
-                                this.settingsService.setAppColor(u.settings.color);
-                            }
-                        }
-                    );
-                }
         });
     }
 
@@ -123,6 +111,20 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     setUserCredentials(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SetUserCredentials) {
         const state = ctx.getState();
 
+        if (action.uid !== undefined && (!!!this.userSubscription$ || this.userSubscription$.closed || action.uid !== state.uid)) {
+            if (!!this.userSubscription$ && !this.userSubscription$?.closed) this.userSubscription$.unsubscribe();
+            this.userSubscription$ = this.userSourceService.getUser$(action.uid)
+                .pipe(takeUntil(this.destroyed$))
+                .subscribe(u => {
+                    ctx.dispatch(new AuthenticationActions.SetUser(u));
+                    if (!!u) {
+                        this.settingsService.setAppLanguage(u.settings.language);
+                        this.settingsService.setAppColor(u.settings.color);
+                    }
+                }
+            );
+        }
+
         ctx.patchState({
             ...state,
             uid: action.uid,
@@ -163,7 +165,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Action(AuthenticationActions.SignOut)
     signOut(ctx: StateContext<AuthenticationStateModel>) {
         this.userSubscription$.unsubscribe();
-        ctx.dispatch(new AuthenticationActions.SetUser(undefined));
+        ctx.dispatch(new AuthenticationActions.SetUser());
+        ctx.dispatch(new AuthenticationActions.SetUserCredentials());
         return this.authService.signOut();
     }
 }
