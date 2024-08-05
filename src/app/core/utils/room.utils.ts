@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment";
 import { Player, Room, User } from "../models/interfaces";
-import { PlayerState } from "../models/interfaces/logic/room/Player";
 import { UserUtils } from "./user.utils";
+import { PlayerState } from "../models/enums";
 
 export namespace RoomUtils {
     

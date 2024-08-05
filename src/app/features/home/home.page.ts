@@ -9,5 +9,5 @@ import { AuthenticationState } from 'src/app/core/state/authentication/authentic
 })
 export class HomePage {
   @Select(AuthenticationState.isAuthenticated) isAuthenticated$!: Observable<boolean>;
-  @Select(AuthenticationState.ownsRoom) ownsRoom$!: Observable<boolean>;
+  @Select(AuthenticationState.hasRoom) ownsRoom$!: Observable<boolean>;
 }

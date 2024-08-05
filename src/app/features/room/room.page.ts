@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/popup.service';
-import { RoomActions, RoomState } from 'src/app/core/state';
+import { AuthenticationState, RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -41,6 +41,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
           this.navCtrl.navigateBack("home");
         }
       });
+  }
+
+  isUserRoomOwner() {
+    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomCreator(this.store.selectSnapshot(RoomState.room)!).id;
   }
 
   handleMenuAction(actionType: string) {
@@ -85,6 +89,14 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   mapPlayersToArray(players: { [key: string]: Player }) {
     return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
+  }
+
+  getMenuItems() {
+    if (this.isUserRoomOwner()) {
+      return ['exit_to_app', 'share', 'settings', 'help', 'report_problem'];
+    } else {
+      return ['exit_to_app', 'share', 'help', 'report_problem'];
+    }
   }
 
 }

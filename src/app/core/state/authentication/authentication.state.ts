@@ -47,7 +47,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     }
 
     @Selector()
-    static ownsRoom(state: AuthenticationStateModel): boolean {
+    static hasRoom(state: AuthenticationStateModel): boolean {
         return state.user?.roomId != null;
     }
 

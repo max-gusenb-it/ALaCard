@@ -23,12 +23,12 @@
         </div>
       </div>
     </div>
-    <div class="flex gap-x-4">
-      <it-button class="flex grow" size="big">
+    <div class="flex gap-x-4 justify-end">
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomOwner()">
         Start Game
       </it-button>
   
-      <it-menu-button [menuItemIcons]="['stop', 'exit_to_app', 'share', 'settings', 'info', 'report_problem']" (menuItemClicked)="handleMenuAction($event)"/>
+      <it-menu-button [menuItemIcons]="getMenuItems()" (menuItemClicked)="handleMenuAction($event)"/>
     </div>
   </div>
 </ion-content>

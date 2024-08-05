@@ -1,3 +1,5 @@
+import { Deck } from "../deck/Deck";
+import { GameSettings } from "../deck/GameSettings";
 import { FirestoreBase } from "../FirestoreBase";
 import { Player } from "./Player";
 import { RoomSettings } from "./RoomSettings";
@@ -12,4 +14,8 @@ export interface Room extends FirestoreBase {
     players: {
       [key: string]: Player;
     };
+    game?: {
+      deck: Deck;
+      gameSettings: GameSettings;
+    }
 }

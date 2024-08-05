@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { PlayerState } from 'src/app/core/models/interfaces/logic/room/Player';
+import { PlayerState } from 'src/app/core/models/enums';
 
 @Component({
   selector: 'it-player',

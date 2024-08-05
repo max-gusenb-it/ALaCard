@@ -1,5 +1,5 @@
+import { PlayerState } from "../models/enums";
 import { Player, User } from "../models/interfaces";
-import { PlayerState } from "../models/interfaces/logic/room/Player";
 
 export namespace UserUtils {
     export function exportUserToPlayer(user: User, joinOrder: number) : Player {
