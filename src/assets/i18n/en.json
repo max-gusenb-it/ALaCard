@@ -8,22 +8,6 @@
         "new-account": "Create new account",
         "create-guest-room": "Create room as guest"
       },
-      "sign-in-modal": {
-        "email": "E-Mail",
-        "password": "Password",
-        "forgot-password": "Forgot your password?"
-      },
-      "sign-up-modal": {
-        "create-account": {
-          "title": "Create your account",
-          "want-to-register": "Want to register?",
-          "description": "Create a account so you never loose your data and get more features like downloading new decks from the store"
-        }
-      },
-      "forgot-password-modal": {
-        "title": "Forgot your password",
-        "mail-sent": "Reset password mail successfully sent!"
-      },
       "no-room": {
         "title": "Create your room",
         "description": "To host games you will need a room. Create or join one with an invitation!",
@@ -115,6 +99,24 @@
           "title": "Let’s get started",
           "description": "To join a room you have to log in or register first. You can register as a guest if you don't want to create an account."
         }
+      }
+    },
+    "forms": {
+      "sign-in-modal": {
+        "email": "E-Mail",
+        "password": "Password",
+        "forgot-password": "Forgot your password?"
+      },
+      "sign-up-modal": {
+        "create-account": {
+          "title": "Create your account",
+          "want-to-register": "Want to register?",
+          "description": "Create a account so you never loose your data and get more features like downloading new decks from the store"
+        }
+      },
+      "forgot-password-modal": {
+        "title": "Forgot your password",
+        "mail-sent": "Reset password mail successfully sent!"
       }
     }
   },

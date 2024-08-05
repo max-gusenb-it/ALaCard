@@ -8,22 +8,6 @@
         "new-account": "Neuen Account erstellen",
         "title": "Let’s get started"
       },
-      "sign-in-modal": {
-        "email": "E-Mail",
-        "password": "Passwort",
-        "forgot-password": "Passwort vergessen?"
-      },
-      "sign-up-modal": {
-        "create-account": {
-          "title": "Erstelle deinen Account",
-          "want-to-register": "Möchtest du dich registrieren?",
-          "description": "Erstelle einen Account, damit du deine Daten nicht verlierst und weitere Funktionen wie das Herunterladen neuer Decks aus dem Store nutzen kannst."
-        }
-      },
-      "forgot-password-modal": {
-        "title": "Passwort vergessen",
-        "mail-sent": "E-Mail zum Passwort ändern erfolgreich gesendet!"
-      },
       "no-room": {
         "title": "Erstelle deinen Raum",
         "description": "Um Spiele zu hosten, brauchst du einen Raum. Erstellen einen oder tritt einem mit einer Einladung bei!",
@@ -115,6 +99,24 @@
           "title": "Let’s get started",
           "description": "Um einem Raum beizutreten, musst du dich zuerst anmelden oder registrieren. Du kannst dich auch als Gast registrieren, wenn du keinen Account erstellen möchten."
         }
+      }
+    },
+    "forms": {
+      "sign-in-modal": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "forgot-password": "Passwort vergessen?"
+      },
+      "sign-up-modal": {
+        "create-account": {
+          "title": "Erstelle deinen Account",
+          "want-to-register": "Möchtest du dich registrieren?",
+          "description": "Erstelle einen Account, damit du deine Daten nicht verlierst und weitere Funktionen wie das Herunterladen neuer Decks aus dem Store nutzen kannst."
+        }
+      },
+      "forgot-password-modal": {
+        "title": "Passwort vergessen",
+        "mail-sent": "E-Mail zum Passwort ändern erfolgreich gesendet!"
       }
     }
   },
