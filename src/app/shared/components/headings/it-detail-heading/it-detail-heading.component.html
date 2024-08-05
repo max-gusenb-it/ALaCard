@@ -1,7 +1,8 @@
 <div class="flex flex-col gap-y-2">
   <div class="flex flex-row gap-x-2 items-center">
-    <img id="rect-img" [src]="!!imageUrl ? imageUrl : 'assets/images/Icon.png'">
-    <img   />
+    <div id="image-container" class="rounded-full overflow-hidden" style="width: 3.25rem; height: 3.25rem;">
+      <img id="rect-img" [src]="!!imageUrl ? imageUrl : 'assets/images/Icon.png'" />
+    </div>
     <div class="flex flex-col gap-y-1">
       <h3 *ngIf="showHeading('h3')">{{ heading }}</h3>
       <h4 *ngIf="showHeading('h4')">{{ heading }}</h4>

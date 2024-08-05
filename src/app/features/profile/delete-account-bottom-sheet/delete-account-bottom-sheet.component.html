@@ -1,5 +1,14 @@
 <div class="flex flex-col gap-3">
   <it-detail-heading
-    [heading]="'features.profile.delete-account-bottom-sheet.title' | translate"
+    [heading]="'features.profile.delete-account-bottom-sheet.title' | translate"Are
+    headingType="h4"
+    [subheading]="'features.profile.delete-account-bottom-sheet.subtitle' | translate"
+    subheadingType="sm"
+    [imageUrl]="(user$ | async)!.profilePicture"
   ></it-detail-heading>
+  <p>{{ 'features.profile.delete-account-bottom-sheet.content' | translate }}</p>
+  <div class="flex flex-row gap-4">
+    <it-button class="flex grow" size="small" color="secondary" (click)="close()">{{ 'actions.cancel' | translate}}</it-button>
+    <it-button class="flex grow" size="small" [disabled]="confirmDisabled" (click)="close(true)">{{ 'actions.continue' | translate}}</it-button>
+  </div>
 </div>

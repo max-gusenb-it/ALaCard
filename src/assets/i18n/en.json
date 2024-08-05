@@ -56,7 +56,9 @@
       "account": "Account",
       "delete-account": "Delete account",
       "delete-account-bottom-sheet": {
-        "title": "Do you really want to delete your account?"
+        "title": "Delete Account",
+        "subtitle": "Are you sure?",
+        "content": "A deleted account cannot be restored. Therefore, all data will be lost."
       }
     },
     "room": {

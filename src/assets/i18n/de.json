@@ -56,7 +56,9 @@
       "account": "Account",
       "delete-account": "Account löschen",
       "delete-account-bottom-sheet": {
-        "title": "Möchtest du deinen Account wirklich löschen?"
+        "title": "Account löschen",
+        "subtitle": "Bist du sicher?",
+        "content": "Ein gelöschter Account kann nicht wiederhergestellt werden. Alle Daten werden verloren gehen."
       }
     },
     "room": {

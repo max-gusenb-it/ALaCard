@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'it-detail-heading',
-  templateUrl: './it-detail-heading.component.html'
+  templateUrl: './it-detail-heading.component.html',
+  styleUrls: ['./it-detail-heading.component.scss']
 })
 export class ItDetailHeadingComponent {
 

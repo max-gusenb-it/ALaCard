@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, takeUntil } from 'rxjs';
+import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { User } from 'src/app/core/models/interfaces/logic/user/User';
 import { AuthenticationActions, AuthenticationState } from 'src/app/core/state';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
@@ -15,6 +15,7 @@ import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/
 import { ItAddAccountModal } from 'src/app/shared/components/forms/it-add-account-modal/it-add-account-modal.component';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
+import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
 
 @Component({
   selector: 'profile',
@@ -108,11 +109,12 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   }
 
   deleteAccount() {
-    this.popupService.openOptionBottomSheet(
-      this.translateService.instant("features.profile.want-to-delete-account"),
-      this.translateService.instant("actions.cancel"),
-      this.translateService.instant("actions.submit")
-    )
+    const ref = this.popupService.openBottomSheet(DeleteAccountBottomSheetComponent);
+    firstValueFrom(ref.closed).then(del => {
+      if (del) {
+        this.signOut();
+      }
+    });
   }
 
   signOut() {
