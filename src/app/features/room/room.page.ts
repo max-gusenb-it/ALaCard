@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
+import { StartGameModal } from './start-game-modal/start-game-modal.component';
 
 @Component({
   selector: 'app-room',
@@ -25,7 +26,8 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private popupService: PopupService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private modalCtrl: ModalController
   ) {
     super();
   }
@@ -97,6 +99,13 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     } else {
       return ['exit_to_app', 'share', 'help', 'report_problem'];
     }
+  }
+
+  async startGame() {
+    const modal = await this.modalCtrl.create({
+      component: StartGameModal
+    });
+    modal.present();
   }
 
 }

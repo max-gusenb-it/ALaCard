@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
     template: ''
@@ -8,14 +8,16 @@ export abstract class ItSelectableComponent {
 
     @Output() selectionEmitter: EventEmitter<number> = new EventEmitter();
 
+    constructor(private changeDetectionRef: ChangeDetectorRef) { }
+
     id: number = null as any;
 
     toggleState() {
-        if (this.selected) {
-            this.unselect();
-        } else {
-            this.select();
-        }
+        this.emitSelection();
+    }
+
+    emitSelection() {
+        this.selectionEmitter.emit(this.id);
     }
 
     unselect() {
@@ -24,6 +26,9 @@ export abstract class ItSelectableComponent {
 
     select() {
         this.selected = true;
-        this.selectionEmitter.emit(this.id);
+    }
+
+    detectChanges() {
+        this.changeDetectionRef.detectChanges();
     }
 }

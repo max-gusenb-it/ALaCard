@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="flex gap-x-4 justify-end">
-      <it-button class="flex grow" size="big" *ngIf="isUserRoomOwner()">
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomOwner()" (click)="startGame()">
         Start Game
       </it-button>
   

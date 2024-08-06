@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
+import { StartGameModal } from './start-game-modal/start-game-modal.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bott
   declarations: [
     RoomPage,
     RoomSettingsBottomSheet,
-    ShareBottomSheet
+    ShareBottomSheet,
+    StartGameModal
   ]
 })
 export class RoomPageModule {}

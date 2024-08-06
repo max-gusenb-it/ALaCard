@@ -84,6 +84,12 @@
       "settings-bottom-sheet": {
         "title": "Settings",
         "singleDeviceMode": "Play offline by only using one device and manually adding players"
+      },
+      "start-game-modal": {
+        "deck": "Deck",
+        "settings": "Settings",
+        "types": "Types",
+        "deck-subtitle": "Choose the Deck you want to play"
       }
     }
   },
