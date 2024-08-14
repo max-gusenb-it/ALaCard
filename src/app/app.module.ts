@@ -31,6 +31,7 @@ import { LoadingState } from './core/state';
 import { DatePipe } from '@angular/common';
 import { ROOM_STATE_TOKEN, RoomState } from './core/state/room/room.state';
 import { ErrorMonitorState } from './core/state/error-monitor';
+import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AuthenticationState,
         LoadingState,
         RoomState,
+        DeckState,
         ErrorMonitorState
       ], 
       {
@@ -56,7 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     ),
     NgxsStoragePluginModule.forRoot({
-      key: [AUTHENTICATION_STATE_TOKEN, ROOM_STATE_TOKEN]
+      key: [AUTHENTICATION_STATE_TOKEN, ROOM_STATE_TOKEN, DECK_STATE_TOKEN]
     }),
     TranslateModule.forRoot({
       loader: {

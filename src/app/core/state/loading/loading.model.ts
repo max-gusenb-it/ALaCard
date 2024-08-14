@@ -1,5 +1,5 @@
 import { LoadingStates } from "./ELoadingStates";
 
-export interface ILoadingStateModel {
+export interface LoadingStateModel {
     loadingState: LoadingStates;
 }

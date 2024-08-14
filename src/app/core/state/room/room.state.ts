@@ -14,7 +14,6 @@ import { Room } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/popup.service";
 import { TranslateService } from "@ngx-translate/core";
-import { UserUtils } from "../../utils/user.utils";
 import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
 import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
@@ -47,7 +46,7 @@ export class RoomState extends AngularLifecycle {
         private store: Store,
         private zone: NgZone,
         private popupService: PopupService,
-        private modalCtrl: ModalController
+        private modalCtrl: ModalController,
     ) {
         super();
     }
@@ -103,6 +102,7 @@ export class RoomState extends AngularLifecycle {
                 }
             );
 
+            // ToDo: fix singleDeviceMode chache problem -> memo
             if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
             }
@@ -131,12 +131,8 @@ export class RoomState extends AngularLifecycle {
 
             if (joinOffline) {
                 // Convert room to offline room
-                initialRoom.players = {
-                    [user.id!]: UserUtils.exportUserToPlayer(user, 0)
-                };
-                initialRoom.settings.singleDeviceMode = true;
                 this.roomSourceService.updateRoom(
-                    initialRoom,
+                    RoomUtils.convertRoomToOfflineMode(initialRoom, user),
                     initialRoom.id!
                 );
             } else {
@@ -174,16 +170,39 @@ export class RoomState extends AngularLifecycle {
 
     @Action(RoomActions.SetRoom)
     setRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.SetRoom) {
-        const state = ctx.getState();
-
-        ctx.patchState({
-            ...state,
-            roomConnectionData: {
-                roomId: action.room.id!,
-                userId: action.userId
-            },
-            room: action.room
-        });
+        try {
+            const user = this.store.selectSnapshot(AuthenticationState.user);
+            if (!!!user || !!!action.room.players[user.id!]) {
+                // ToDo: User was removed from in this case but why? -> throw meaningfull error message
+                throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
+            }
+    
+            const state = ctx.getState();
+    
+            ctx.patchState({
+                ...state,
+                roomConnectionData: {
+                    roomId: action.room.id!,
+                    userId: action.userId
+                },
+                room: action.room
+            });
+        } catch (error) {
+            if (!!this.roomSubscription$ && !this.roomSubscription$.closed) this.roomSubscription$.unsubscribe();
+            if (error instanceof ItError) {
+                ctx.dispatch(new ErrorMonitorActions.SetError(error.exportError()));
+            } else {
+                console.error(error);
+                ctx.dispatch(
+                    new ErrorMonitorActions.SetError({
+                        code: SharedErrors.unknownError,
+                        location: RoomState.name
+                    })
+                );
+            }
+            this.navController.navigateBack('home');
+            return;
+        }
     }
 
     @Action(RoomActions.LeaveRoom)
@@ -209,5 +228,10 @@ export class RoomState extends AngularLifecycle {
         });
         if (!navigator.onLine) ctx.dispatch(new LoadingActions.EndLoading);
         return;
+    }
+
+    @Action(RoomActions.StartGame)
+    startGame(ctx: StateContext<RoomStateModel>, action: RoomActions.StartGame) {
+        
     }
 }

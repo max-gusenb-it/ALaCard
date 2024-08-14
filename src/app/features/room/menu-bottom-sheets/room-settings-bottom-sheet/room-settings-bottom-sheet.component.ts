@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { Room } from 'src/app/core/models/interfaces';
 import { RoomSettings } from 'src/app/core/models/interfaces/logic/room/RoomSettings';
 import { RoomSourceService } from 'src/app/core/services/data-source/room-source.service';
 import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
-import { RoomState } from 'src/app/core/state';
+import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-room-settings-bottom-sheet',
@@ -42,15 +44,19 @@ export class RoomSettingsBottomSheet {
     differences = room?.settings.singleDeviceMode !== this.roomSettingsForm.controls['singleDeviceMode'].value;
     this.close();
     if (differences) {
+      let newRoom = {...room} as Room;
+      if (this.roomSettingsForm.controls['singleDeviceMode'].value && !room?.settings.singleDeviceMode) {
+        newRoom = RoomUtils.convertRoomToOfflineMode(newRoom, this.store.selectSnapshot(AuthenticationState.user)!);
+      }
       this.loadingHelpService.loadWithLoadingState([
         this.roomSourceService.updateRoom(
           {
-            ...room!,
+            ...newRoom,
             settings: {
               singleDeviceMode: this.roomSettingsForm.controls['singleDeviceMode'].value
             }
           },
-          room!.id!,
+          newRoom.id!,
           RoomUtils.getRoomCreator(room!).id
         )
       ]).then(() => this.close());

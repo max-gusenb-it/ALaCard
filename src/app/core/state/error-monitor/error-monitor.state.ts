@@ -1,12 +1,12 @@
 import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
-import { IErrorMonitorStateModel } from "./error-monitor.model";
+import { ErrorMonitorStateModel } from "./error-monitor.model";
 import { Injectable } from "@angular/core";
 import { IItError } from "../../models/interfaces";
 import { ErrorMonitorActions } from "./error-monitor.actions";
 
-const ERROR_MONITOR_STATE_TOKEN = new StateToken<IErrorMonitorStateModel>('errorMonitor');
+const ERROR_MONITOR_STATE_TOKEN = new StateToken<ErrorMonitorStateModel>('errorMonitor');
 
-@State<IErrorMonitorStateModel>({
+@State<ErrorMonitorStateModel>({
     name: ERROR_MONITOR_STATE_TOKEN,
     defaults: {
         error: undefined
@@ -15,12 +15,12 @@ const ERROR_MONITOR_STATE_TOKEN = new StateToken<IErrorMonitorStateModel>('error
 @Injectable()
 export class ErrorMonitorState {
     @Selector()
-    static error(state: IErrorMonitorStateModel): IItError | undefined {
+    static error(state: ErrorMonitorStateModel): IItError | undefined {
         return state.error;
     }
 
     @Action(ErrorMonitorActions.SetError)
-    setError(ctx: StateContext<IErrorMonitorStateModel>, action: ErrorMonitorActions.SetError) {
+    setError(ctx: StateContext<ErrorMonitorStateModel>, action: ErrorMonitorActions.SetError) {
         ctx.setState({
             error: action.error
         });

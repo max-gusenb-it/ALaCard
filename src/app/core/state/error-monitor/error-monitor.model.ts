@@ -1,5 +1,5 @@
 import { IItError } from "../../models/interfaces";
 
-export interface IErrorMonitorStateModel {
+export interface ErrorMonitorStateModel {
     error?: IItError;
 }

@@ -68,4 +68,18 @@ export namespace RoomUtils {
             return `http://localhost:8100/room/${room.id}-${creator.id}`;
         }
     }
+
+    export function convertRoomToOfflineMode(room: Room, host: User) {
+        // Create copy of room -> objects returned from selectSnapshot can't be changed
+        let newRoom = {
+            ...room,
+            players: {...room.players},
+            settings: {...room.settings}
+        } as Room;
+        newRoom.players = {
+            [host.id!]: UserUtils.exportUserToPlayer(host, 0)
+        };
+        newRoom.settings.singleDeviceMode = true;
+        return newRoom;
+    }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 import { Deck } from 'src/app/core/models/interfaces';
+import { DeckState } from 'src/app/core/state/deck';
 
 @Component({
   selector: 'app-start-game-modal',
@@ -10,34 +12,12 @@ export class StartGameModal {
 
   selectedDeck: Deck = null as any;
 
-  decks: Deck[] = [
-    {
-      name: "A la card",
-      description: "The first and one of the best decks ever created",
-      icon: "🎉",
-      cards: [null as any, null as any, null as any, null as any]
-    },
-    {
-      name: "Lord of the Rings Quiz",
-      description: "Quiz about the famous movie triollogy",
-      icon: "💍",
-      cards: [null as any, null as any, null as any, null as any]
-    },
-    {
-      name: "Do you know your partner?",
-      description: "Funny game to test, how good you know your partner",
-      icon: "💌",
-      cards: [null as any, null as any, null as any, null as any]
-    },
-    {
-      name: "Extrem drinking Game",
-      description: "Are you ready to get drunk with your friends?",
-      icon: "🍺",
-      cards: [null as any, null as any, null as any, null as any]
-    }
-  ];
+  decks: Deck[] = this.store.selectSnapshot(DeckState.decks);
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private store: Store
+  ) { }
 
   onNavigation(event: boolean) {
     if (!event) {

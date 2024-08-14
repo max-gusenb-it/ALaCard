@@ -5,6 +5,5 @@ export interface Deck {
     description: string;
     icon: string;
     cards: Card[];
-    // ToDo: Change to FreeTextCard
-    groundRules?: Card[];
+    groundRules?: string[];
 }

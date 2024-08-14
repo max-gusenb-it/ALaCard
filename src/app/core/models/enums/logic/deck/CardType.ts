@@ -1,3 +1,4 @@
 export enum CardType {
-    "FreeText"
+    "FreeText",
+    "PlayerVoting"
 }

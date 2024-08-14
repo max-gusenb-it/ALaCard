@@ -1,4 +1,4 @@
-import { Room } from "../../models/interfaces";
+import { Deck, Room } from "../../models/interfaces";
 
 export namespace RoomActions {
     
@@ -34,5 +34,10 @@ export namespace RoomActions {
     export class LeaveRoom {
         static readonly type = '[Room] LeaveRoom';
         constructor() {}
+    }
+
+    export class StartGame {
+        static readonly type = '[Start-Game-Modal] StartGame';
+        constructor(public deck: Deck) {};
     }
 }

@@ -1,12 +1,12 @@
 import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
-import { ILoadingStateModel } from "./loading.model";
+import { LoadingStateModel } from "./loading.model";
 import { Injectable } from "@angular/core";
 import { LoadingStates } from "./ELoadingStates";
 import { LoadingActions } from "./loading.actions";
 
-const LOADING_STATE_TOKEN = new StateToken<ILoadingStateModel>('loading');
+const LOADING_STATE_TOKEN = new StateToken<LoadingStateModel>('loading');
 
-@State<ILoadingStateModel>({
+@State<LoadingStateModel>({
     name: LOADING_STATE_TOKEN,
     defaults: {
         loadingState: LoadingStates.Idle
@@ -15,12 +15,12 @@ const LOADING_STATE_TOKEN = new StateToken<ILoadingStateModel>('loading');
 @Injectable()
 export class LoadingState {
     @Selector()
-    static isLoading(state: ILoadingStateModel): boolean {
+    static isLoading(state: LoadingStateModel): boolean {
         return state.loadingState === LoadingStates.Loading;
     }
 
     @Action(LoadingActions.StartLoading)
-    startLoading(ctx: StateContext<ILoadingStateModel>) {
+    startLoading(ctx: StateContext<LoadingStateModel>) {
         const state = ctx.getState();
         if (state.loadingState === LoadingStates.Loading) return;
 
@@ -31,7 +31,7 @@ export class LoadingState {
     }
     
     @Action(LoadingActions.EndLoading)
-    endLoading(ctx: StateContext<ILoadingStateModel>) {
+    endLoading(ctx: StateContext<LoadingStateModel>) {
         const state = ctx.getState();
         if (state.loadingState !== LoadingStates.Loading) return
 
