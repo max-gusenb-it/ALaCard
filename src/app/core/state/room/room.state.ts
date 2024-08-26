@@ -189,7 +189,7 @@ export class RoomState extends AngularLifecycle {
     setRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.SetRoom) {
         try {
             const user = this.store.selectSnapshot(AuthenticationState.user);
-            if (!!!user || !!!action.room.players[user.id!]) {
+            if (!!action.room && (!!!user || !!!action.room.players[user.id!])) {
                 // ToDo: User was removed from in this case but why? -> throw meaningfull error message
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
             }
@@ -199,7 +199,7 @@ export class RoomState extends AngularLifecycle {
             ctx.patchState({
                 ...state,
                 roomConnectionData: {
-                    roomId: action.room.id!,
+                    roomId: action.room?.id,
                     userId: action.userId
                 },
                 room: action.room
@@ -237,8 +237,9 @@ export class RoomState extends AngularLifecycle {
 
         const state = ctx.getState();
         
-        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId, userId, player, state.roomConnectionData.userId)]);
+        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId!, userId, player, state.roomConnectionData.userId)]);
         this.roomSubscription$.unsubscribe();
+        ctx.dispatch(new RoomActions.SetRoom(null as any, userId));
         // zone wrap to prevent -> "Navigation triggered outside Angular zone"
         this.zone.run(() => {
             this.navController.navigateBack("home");
@@ -258,6 +259,7 @@ export class RoomState extends AngularLifecycle {
                 {
                     ...state.room,
                     game: {
+                        comparyValue: new Date().valueOf(),
                         state: GameState.started,
                         deck: action.deck,
                         settings: {}

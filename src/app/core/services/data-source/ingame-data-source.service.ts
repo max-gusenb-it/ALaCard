@@ -1,10 +1,10 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
-import { IngameData } from "../../models/interfaces/logic/game/IngameData";
 import { RoomUtils } from "../../utils/room.utils";
 import { FirestoreService } from "./firestore.service";
 import { gameDetailsRef, ingameDataRef } from "../../constants/firestoreReferences";
+import { IngameData } from '../../models/interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +15,13 @@ export class IngameDataSourceService {
         private store: Store,
         private firestoreService: FirestoreService<IngameData>
     ) {}
+
+    getIngameData$(roomId: string, userId?: string) {
+        return this.firestoreService.getDocWithId$(
+            `${RoomUtils.getRoomCollectionsRef(this.store, userId)}/${roomId}/${gameDetailsRef}`,
+            ingameDataRef
+        );
+    }
 
     createInitialIngameData(roomId: string, userId?: string) {
         return this.firestoreService.upsert(

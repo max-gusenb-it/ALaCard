@@ -1,9 +1,7 @@
-import { GameState } from "../../../enums";
-import { Deck } from "../deck/Deck";
-import { GameSettings } from "../deck/GameSettings";
 import { FirestoreBase } from "../FirestoreBase";
 import { Player } from "./Player";
 import { RoomSettings } from "./RoomSettings";
+import { Game } from "../game/Game";
 
 export interface Room extends FirestoreBase {
     name: string;
@@ -15,9 +13,5 @@ export interface Room extends FirestoreBase {
     players: {
       [key: string]: Player;
     };
-    game?: {
-      state: GameState;
-      deck: Deck;
-      settings: GameSettings;
-    }
+    game?: Game;
 }

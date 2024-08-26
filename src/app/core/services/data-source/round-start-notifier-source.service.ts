@@ -4,7 +4,7 @@ import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
 import { FirestoreService } from "./firestore.service";
 import { gameDetailsRef, roundStartNotifierRef } from "../../constants/firestoreReferences";
-import { RoundStartNotifier } from '../../models/interfaces/logic/game/RoundStartNotifier';
+import { RoundStartNotifier } from '../../models/interfaces';
 
 @Injectable({
     providedIn: 'root'

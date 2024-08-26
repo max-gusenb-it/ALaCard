@@ -1,6 +1,9 @@
-<div class="flex grow items-center justify-center">
-  <card
+<div class="flex grow" *ngIf="!!room && !!ingameData">
+  <ground-rules
+    class="flex grow"
+    *ngIf="ingameData.rounds.length === 0"
     [deckname]="(deckname$ | async)!"
-    style="width: 87%; height: 71%;"
-  />
+    [groundRules]="room.game!.deck!.groundRules!"
+    (onRulesRead)="onRulesRead()"
+  ></ground-rules>
 </div>

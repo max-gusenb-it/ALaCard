@@ -9,6 +9,6 @@ export interface RoomStateModel {
 }
 
 export interface RoomConnectionData {
-    roomId: string;
+    roomId?: string;
     userId?: string;
 }
