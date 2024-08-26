@@ -6,6 +6,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        it_yellow: {
+          900: "var(--sys-900)",
+          700: "var(--sys-700)",
+          600: "var(--sys-600)",
+          500: "var(--sys-500)",
+          300: "var(--sys-300)",
+          200: "var(--sys-200)",
+          100: "var(--sys-100)",
+          0o0: "var(--sys-000)"
+        },
         primary: {
           900: "rgb(var(--primary-900) / <alpha-value>)",
           700: "rgb(var(--primary-700) / <alpha-value>)",

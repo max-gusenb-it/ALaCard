@@ -9,7 +9,7 @@ import { ResponseData } from '../../models/interfaces/logic/game/ResponeData';
 @Injectable({
     providedIn: 'root'
 })
-export class ResponseDataSourceServicee {
+export class ResponseDataSourceService {
 
     constructor(
         private store: Store,

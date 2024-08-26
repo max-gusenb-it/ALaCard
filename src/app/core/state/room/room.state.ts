@@ -19,7 +19,9 @@ import { ErrorMonitorActions } from "../error-monitor";
 import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
 import { RoomSettings } from "../../models/interfaces/logic/room/RoomSettings";
 import { IngameDataSourceService } from "../../services/data-source/ingame-data-source.service";
-import { ResponseDataSourceServicee } from "../../services/data-source/response-source.service";
+import { ResponseDataSourceService } from "../../services/data-source/response-data-source.service";
+import { RoundStartNotifierSourceService } from "../../services/data-source/round-start-notifier-source.service";
+import { GameState } from "../../models/enums";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -40,11 +42,22 @@ export class RoomState extends AngularLifecycle {
         return state.room?.settings;
     }
 
+    @Selector()
+    static gameStarted(state: RoomStateModel): boolean {
+        return state.room?.game?.state === GameState.started;
+    }
+
+    @Selector()
+    static deckname(state: RoomStateModel): string {
+        return state.room?.game?.deck.name ?? "";
+    }
+
     constructor(
         private navController: NavController,
         private roomSourceService: RoomSourceService,
         private ingameDataSourceService: IngameDataSourceService,
-        private responseDataSourceService: ResponseDataSourceServicee,
+        private responseDataSourceService: ResponseDataSourceService,
+        private roundStartNotifierSourceService: RoundStartNotifierSourceService,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
         private store: Store,
@@ -245,6 +258,7 @@ export class RoomState extends AngularLifecycle {
                 {
                     ...state.room,
                     game: {
+                        state: GameState.started,
                         deck: action.deck,
                         settings: {}
                     }
@@ -253,7 +267,7 @@ export class RoomState extends AngularLifecycle {
             ),
             this.ingameDataSourceService.createInitialIngameData(state.room.id!),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
-            // ToDo: Add round start notifier doc
+            this.roundStartNotifierSourceService.createInitialRoundStartNotifier(state.room.id!)
         ]);
     }
 }

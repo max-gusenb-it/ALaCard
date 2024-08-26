@@ -1,3 +1,4 @@
+import { GameState } from "../../../enums";
 import { Deck } from "../deck/Deck";
 import { GameSettings } from "../deck/GameSettings";
 import { FirestoreBase } from "../FirestoreBase";
@@ -15,6 +16,7 @@ export interface Room extends FirestoreBase {
       [key: string]: Player;
     };
     game?: {
+      state: GameState;
       deck: Deck;
       settings: GameSettings;
     }

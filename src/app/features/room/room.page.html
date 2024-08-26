@@ -8,7 +8,7 @@
       [detail]="(room$ | async)!.description"
     />
     <!-- Content -->
-    <div class="flex grow">
+    <div class="flex grow" *ngIf="!(gameStarted$ | async)">
       <div class="bg-primary-200 rounded-lg w-full h-min p-4">
         <h3 class="pb-4">{{ "features.room.players" | translate }}</h3>
         <div
@@ -23,8 +23,9 @@
         </div>
       </div>
     </div>
+    <game class="flex grow" *ngIf="gameStarted$ | async"></game>
     <div class="flex gap-x-4 justify-end">
-      <it-button class="flex grow" size="big" *ngIf="isUserRoomOwner()" (click)="startGame()">
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomOwner() && !(gameStarted$ | async)" (click)="startGame()">
         Start Game
       </it-button>
   

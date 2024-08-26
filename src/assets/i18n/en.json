@@ -90,6 +90,13 @@
         "settings": "Settings",
         "types": "Types",
         "deck-subtitle": "Choose the Deck you want to play"
+      },
+      "game": {
+        "card": {
+          "groundRules": "Ground Rules",
+          "freeText": "Free Text",
+          "playerVoting": "Player Voting"
+        }
       }
     }
   },

@@ -21,6 +21,8 @@ import { StartGameModal } from './start-game-modal/start-game-modal.component';
 export class RoomPage extends AngularLifecycle implements OnInit {
   @Select(RoomState.room) room$!: Observable<Room>;
 
+  @Select(RoomState.gameStarted) gameStarted$!: Observable<boolean>;
+
   constructor(
     private store: Store,
     private navCtrl: NavController,
@@ -95,9 +97,9 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   getMenuItems() {
     if (this.isUserRoomOwner()) {
-      return ['exit_to_app', 'share', 'settings', 'help', 'report_problem'];
+      return ['exit_to_app', 'share', 'settings']; // ToDo: add 'help', 'report_problem' to button
     } else {
-      return ['exit_to_app', 'share', 'help', 'report_problem'];
+      return ['exit_to_app', 'share'];
     }
   }
 
