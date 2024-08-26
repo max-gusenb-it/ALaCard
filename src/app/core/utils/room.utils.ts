@@ -2,9 +2,29 @@ import { environment } from "src/environments/environment";
 import { Player, Room, User } from "../models/interfaces";
 import { UserUtils } from "./user.utils";
 import { PlayerState } from "../models/enums";
+import { RoomSourceServiceErrors } from "../constants/errorCodes";
+import { RoomSourceService } from "../services/data-source/room-source.service";
+import { ItError } from "../models/classes";
+import { Store } from "@ngxs/store";
+import { AuthenticationState } from "../state";
+import { roomsRef, usersRef } from "../constants/firestoreReferences";
 
 export namespace RoomUtils {
     
+    export function getRoomCollectionsRef(store: Store, userId?: string) {
+        if (!!!userId) {
+            const id = store.selectSnapshot(AuthenticationState.user)?.id;
+            if (!!!id) {
+                throw new ItError(
+                    RoomSourceServiceErrors.getRoomNoUser,
+                    RoomSourceService.name
+                );
+            }
+            userId = id;
+        }
+        return `${usersRef}/${userId}/${roomsRef}`;
+    }
+
     /**
      * Generates a newPlayer for a room from a given user. When the player is already added in the room and active null is returned
      *
@@ -37,7 +57,6 @@ export namespace RoomUtils {
         }
         return newPlayer;
     }
-
     
     /**
      * Generates a player that looks like he left the room from an existing room and an player id

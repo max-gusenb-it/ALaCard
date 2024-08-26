@@ -75,6 +75,18 @@ export class FirestoreService<T extends FirestoreBase> {
         }
     }
 
+    upsert(ref: string, id: string, data: T) {
+        let copy = data;
+        delete copy["id"];
+        try {
+            return this.afs.collection<T>(ref).doc(id).set(
+              data
+            ).then(() => data);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
     updateField(ref: string, id: string, fieldRef: string, data: any) {
         return this.afs.collection(ref).doc(id).update({
             [fieldRef]: data

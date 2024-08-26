@@ -16,6 +16,6 @@ export interface Room extends FirestoreBase {
     };
     game?: {
       deck: Deck;
-      gameSettings: GameSettings;
+      settings: GameSettings;
     }
 }

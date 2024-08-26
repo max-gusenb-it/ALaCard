@@ -9,35 +9,20 @@ import { catchError } from 'rxjs';
 import { Player } from '../../models/interfaces';
 import { ItError } from '../../models/classes';
 import { UserUtils } from '../../utils/user.utils';
+import { RoomUtils } from '../../utils/room.utils';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RoomSourceService {
-    private readonly usersRef = "users";
-    private readonly roomsRef = "rooms";
 
     constructor(
         private store: Store,
         private firestoreService: FirestoreService<Room>
     ) { }
 
-    ref(userId?: string) {
-        if (!!!userId) {
-            const id = this.store.selectSnapshot(AuthenticationState.user)?.id;
-            if (!!!id) {
-                throw new ItError(
-                    RoomSourceServiceErrors.getRoomNoUser,
-                    RoomSourceService.name
-                );
-            }
-            userId = id;
-        }
-        return `${this.usersRef}/${userId}/${this.roomsRef}`;
-    }
-
     getRoom$(roomId: string, userId?: string) {
-        return this.firestoreService.getDocWithId$(this.ref(userId), roomId)
+        return this.firestoreService.getDocWithId$(RoomUtils.getRoomCollectionsRef(this.store, userId), roomId)
             .pipe(
                 catchError(() => {
                     throw new ItError(
@@ -53,7 +38,7 @@ export class RoomSourceService {
         if (!!user && !!user.id) {
             const player = UserUtils.exportUserToPlayer(user, 0);
             return this.firestoreService.add(
-                this.ref(user.id),
+                RoomUtils.getRoomCollectionsRef(this.store, user.id),
                 {
                     creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                     name: name,
@@ -72,12 +57,12 @@ export class RoomSourceService {
     }
 
     updateRoom(room: Room, roomId: string, userId?: string) {
-        return this.firestoreService.update(`${this.ref(userId)}`, roomId, room);
+        return this.firestoreService.update(`${RoomUtils.getRoomCollectionsRef(this.store, userId)}`, roomId, room);
     }
 
     updatePlayer(roomId: string, userId: string, player: Player, roomOwnerId?: string) {
         return this.firestoreService.updateField(
-            this.ref(roomOwnerId),
+            RoomUtils.getRoomCollectionsRef(this.store, roomOwnerId),
             roomId,
             `players.${userId}`,
             player

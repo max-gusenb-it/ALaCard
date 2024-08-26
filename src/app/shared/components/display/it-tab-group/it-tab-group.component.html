@@ -22,7 +22,7 @@
     <it-button class="flex flex-grow" (click)="finishTabs()" [disabled]="!advanceControlsEnabled">
       <it-icon>play_arrow</it-icon>
     </it-button>
-    <it-button class="flex flex-grow" (click)="nextTab()" [disabled]="!advanceControlsEnabled">
+    <it-button *ngIf="tabs.length > 1" class="flex flex-grow" (click)="nextTab()" [disabled]="!advanceControlsEnabled">
       <it-icon>keyboard_arrow_right</it-icon>
     </it-button>
   </div>

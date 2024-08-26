@@ -22,10 +22,12 @@ export abstract class ItSelectableComponent {
 
     unselect() {
         this.selected = false;
+        this.emitSelection();
     }
 
     select() {
         this.selected = true;
+        this.emitSelection();
     }
 
     detectChanges() {

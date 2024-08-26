@@ -19,6 +19,10 @@ export class LoadingHelperService {
         loadPredicates: [ Promise<T1>, Promise<T2> ]
     ): Promise<[T1, T2]>;
 
+    loadWithLoadingState<T1, T2, T3>(
+        loadPredicates: [ Promise<T1>, Promise<T2>, Promise<T3> ]
+    ): Promise<[T1, T2, T3]>;
+
     loadWithLoadingState(
         loadPredicates: Promise<unknown>[]
     ): Promise<unknown[]> {

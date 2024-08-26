@@ -18,6 +18,8 @@ import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
 import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
 import { RoomSettings } from "../../models/interfaces/logic/room/RoomSettings";
+import { IngameDataSourceService } from "../../services/data-source/ingame-data-source.service";
+import { ResponseDataSourceServicee } from "../../services/data-source/response-source.service";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -41,6 +43,8 @@ export class RoomState extends AngularLifecycle {
     constructor(
         private navController: NavController,
         private roomSourceService: RoomSourceService,
+        private ingameDataSourceService: IngameDataSourceService,
+        private responseDataSourceService: ResponseDataSourceServicee,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
         private store: Store,
@@ -222,7 +226,7 @@ export class RoomState extends AngularLifecycle {
         
         this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId, userId, player, state.roomConnectionData.userId)]);
         this.roomSubscription$.unsubscribe();
-        // zone wrap to prevent -> Navigation triggered outside Angular zone
+        // zone wrap to prevent -> "Navigation triggered outside Angular zone"
         this.zone.run(() => {
             this.navController.navigateBack("home");
         });
@@ -232,6 +236,24 @@ export class RoomState extends AngularLifecycle {
 
     @Action(RoomActions.StartGame)
     startGame(ctx: StateContext<RoomStateModel>, action: RoomActions.StartGame) {
+        const state = ctx.getState();
+
+        if (!!!state.room) return;
         
+        return this.loadingHelperService.loadWithLoadingState([
+            this.roomSourceService.updateRoom(
+                {
+                    ...state.room,
+                    game: {
+                        deck: action.deck,
+                        settings: {}
+                    }
+                },
+                state.room.id!,
+            ),
+            this.ingameDataSourceService.createInitialIngameData(state.room.id!),
+            this.responseDataSourceService.createInitialResponseData(state.room.id!),
+            // ToDo: Add round start notifier doc
+        ]);
     }
 }
