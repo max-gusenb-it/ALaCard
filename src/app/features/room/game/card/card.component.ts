@@ -4,11 +4,13 @@ import { CardType } from 'src/app/core/models/enums';
 
 @Component({
   selector: 'card',
-  templateUrl: './card.component.html'
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
 
   @Input() cardType: CardType = CardType.FreeText;
+  @Input() text: string = "";
   @Input() deckname: string = "";
 
   constructor(private translateService: TranslateService) { }

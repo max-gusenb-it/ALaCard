@@ -46,7 +46,7 @@ export class DeckState implements NgxsOnInit {
                 } as PlayerVotingCard
             ],
             groundRules: [
-                "* No drinking with the left hand * No one is allowed to say the words: ’yes’, ‘no’ and ‘you’ * Rule violation = 1 sip",
+                "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
                 "Don't forget to **have fun** :)"
             ]
         };

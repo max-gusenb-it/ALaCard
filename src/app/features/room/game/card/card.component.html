@@ -17,7 +17,17 @@
   </p>
   <div class="rounded-b-xl flex grow flex-col gap-1 p-2 bg-it_yellow-0">
     <div class="flex grow items-center text-xl font-semibold">
-      Test
+      <div
+        *ngIf="cardType === 0"
+        id="markdown"
+        [innerHTML]="(text | markdown)"
+      >
+      </div>
+      <div
+        *ngIf="cardType !== 0"
+      >
+        {{ text }}
+      </div>
     </div>
     <div class="text-end text-sm">
       {{ deckname }}

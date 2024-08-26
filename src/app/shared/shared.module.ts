@@ -38,6 +38,7 @@ import { ItSignUpModal } from './components/forms/it-sign-up-modal/it-sign-up-mo
 import { CreateAccountComponent } from './components/forms/it-create-account/it-create-account.component';
 import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it-authenticate-modal.component';
 import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-add-account-modal.component';
+import { MarkdownPipe } from './pipes/markdown.pipe';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-ad
     ItSelectComponent,
     ItTextAreaComponent,
     ExampleComponent,
-    FireDatePipe
+    FireDatePipe,
+    MarkdownPipe
   ],
   imports: [
     CommonModule,
@@ -117,7 +119,8 @@ import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-ad
     ItSelectComponent,
     ItTextAreaComponent,
     ExampleComponent,
-    FireDatePipe
+    FireDatePipe,
+    MarkdownPipe
   ],
   providers: [
   ]
