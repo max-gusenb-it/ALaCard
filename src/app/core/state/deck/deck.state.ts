@@ -47,6 +47,8 @@ export class DeckState implements NgxsOnInit {
             ],
             groundRules: [
                 "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
+                "The winner is the last one standing :*",
+                "Don't drink too much ;)",
                 "Don't forget to **have fun** :)"
             ]
         };

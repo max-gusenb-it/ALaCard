@@ -32,6 +32,7 @@ import { DatePipe } from '@angular/common';
 import { ROOM_STATE_TOKEN, RoomState } from './core/state/room/room.state';
 import { ErrorMonitorState } from './core/state/error-monitor';
 import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     SharedModule,
