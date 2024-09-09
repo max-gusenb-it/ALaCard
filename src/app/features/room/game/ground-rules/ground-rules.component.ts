@@ -3,7 +3,8 @@ import { firstValueFrom, timer } from 'rxjs';
 
 @Component({
   selector: 'ground-rules',
-  templateUrl: './ground-rules.component.html'
+  templateUrl: './ground-rules.component.html',
+  styleUrls: ['./ground-rules.component.scss']
 })
 export class GroundRulesComponent implements AfterViewInit {
 

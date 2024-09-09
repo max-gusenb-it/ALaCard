@@ -1,3 +1,22 @@
+:host {
+    cursor: pointer;
+    @apply drop-shadow-card;
+}
+
+@media only screen and (max-width: 480px) {
+    :host {
+        aspect-ratio: 135 / 212;
+        width: 73vw;
+    }
+}
+
+@media only screen and (min-width: 481px) {
+    :host {
+        aspect-ratio: 135 / 212;
+        height: 31rem;
+    }
+}
+
 #markdown ::ng-deep{
     list-style: disc outside none;
 

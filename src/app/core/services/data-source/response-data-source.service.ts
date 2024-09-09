@@ -16,10 +16,6 @@ export class ResponseDataSourceService {
         private firestoreService: FirestoreService<ResponseData>
     ) {}
 
-    // ToDo: Make store for storing general information about players, that should be stored in cache
-
-    // Example -> Flag, if user has already sent response for current game.
-
     createInitialResponseData(roomId: string, roomOwnerId?: string) {
         return this.firestoreService.upsert(
             `${RoomUtils.getRoomCollectionsRef(this.store, roomOwnerId)}/${roomId}/${gameDetailsRef}`,

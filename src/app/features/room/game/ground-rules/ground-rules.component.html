@@ -1,9 +1,16 @@
 <div class="flex grow items-center justify-center">
   <card
+    *ngIf="currentRuleIndex % 2 !== 0"
     (click)="nextRule()"
     [cardType]="0"
     [text]="groundRules[currentRuleIndex]"
     [deckname]="deckname"
-    style="width: 87%; height: 71%;"
+  />
+  <card
+    *ngIf="currentRuleIndex % 2 === 0"
+    (click)="nextRule()"
+    [cardType]="0"
+    [text]="groundRules[currentRuleIndex]"
+    [deckname]="deckname"
   />
 </div>
