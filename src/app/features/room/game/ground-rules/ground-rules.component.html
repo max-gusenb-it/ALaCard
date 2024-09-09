@@ -1,14 +1,20 @@
-<div class="flex grow items-center justify-center">
+<div class="flex grow items-center justify-center relative">
   <card
-    *ngIf="currentRuleIndex % 2 !== 0"
+    @slideInOut
+    class="absolute"
+    *ngIf="currentRuleIndex % 2 === 0"
     (click)="nextRule()"
+    (swipe)="swipe($event)"
     [cardType]="0"
     [text]="groundRules[currentRuleIndex]"
     [deckname]="deckname"
   />
   <card
-    *ngIf="currentRuleIndex % 2 === 0"
+    @slideInOut
+    class="absolute"
+    *ngIf="currentRuleIndex % 2 === 1"
     (click)="nextRule()"
+    (swipe)="swipe($event)"
     [cardType]="0"
     [text]="groundRules[currentRuleIndex]"
     [deckname]="deckname"
