@@ -10,12 +10,12 @@ import { firstValueFrom, timer } from 'rxjs';
     trigger('slideToggle', [
       transition('* => *', [
           group([
-              query(':enter', style({ transform: 'translateX({{ enterStart }})' })),
+              query(':enter', style({ transform: 'translateX({{ enterStart }})', opacity: 0 })),
               query(':leave', [
-                  animate('750ms ease-in-out', style({ transform: 'translateX({{ leaveEnd }})' }))
+                  animate('750ms ease-in-out', style({ transform: 'translateX({{ leaveEnd }})', opacity: 0 }))
               ], { optional: true }),
               query(':enter', [
-                  animate('750ms ease-in-out', style({ transform: 'translateX(0)' }))
+                  animate('750ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
               ])
           ])
       ],
