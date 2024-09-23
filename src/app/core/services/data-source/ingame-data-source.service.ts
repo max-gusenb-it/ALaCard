@@ -23,15 +23,11 @@ export class IngameDataSourceService {
         );
     }
 
-    createInitialIngameData(roomId: string) {
+    createIngameData(ingameData: IngameData, roomId: string) {
         return this.firestoreService.upsert(
             `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             ingameDataRef,
-            {
-                creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
-                playedCardIndexes: [],
-                rounds: [],
-            }
+            ingameData
         );
     }
 

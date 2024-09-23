@@ -22,6 +22,7 @@ import { IngameDataSourceService } from "../../services/data-source/ingame-data-
 import { ResponseDataSourceService } from "../../services/data-source/response-data-source.service";
 import { RoundStartNotifierSourceService } from "../../services/data-source/round-start-notifier-source.service";
 import { GameState } from "../../models/enums";
+import { IngameDataUtils } from "../../utils/ingame-data.utils";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -83,6 +84,8 @@ export class RoomState extends AngularLifecycle {
             // ask user if he wants to leave current room
             this.roomSubscription$.unsubscribe();
         }
+
+        // ToDo: create second room in store where a copy of personal room is safed at all times for offline access
 
         // check if user exists
         try {
@@ -270,7 +273,7 @@ export class RoomState extends AngularLifecycle {
                 },
                 state.room.id!,
             ),
-            this.ingameDataSourceService.createInitialIngameData(state.room.id!),
+            this.ingameDataSourceService.createIngameData(IngameDataUtils.createInitialIngameData(action.deck), state.room.id!),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
             this.roundStartNotifierSourceService.createInitialRoundStartNotifier(state.room.id!)
         ]);
