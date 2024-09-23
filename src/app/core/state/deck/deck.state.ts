@@ -60,7 +60,12 @@ export class DeckState implements NgxsOnInit {
         const state = ctx.getState();
 
         decks.forEach(deck => {
-            if (!!!state.decks.find(d => d.name === deck.name)) {
+            let oldDeck = state.decks.find(d => d.name === deck.name);
+            if (!!oldDeck && !!oldDeck.groundRules && !!deck.groundRules && oldDeck.groundRules.length !== deck.groundRules.length) {
+                state.decks = state.decks.filter(d => d.name !== deck.name);
+                oldDeck = undefined;
+            }
+            if (!!!oldDeck) {
                 ctx.dispatch(new DeckActions.AddDeck(deck));
             }
         });
