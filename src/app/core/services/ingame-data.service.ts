@@ -6,7 +6,6 @@ import { IngameData, Room } from "../models/interfaces";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { IngameDataSourceService } from "./data-source/ingame-data-source.service";
 import { GameState } from "../models/enums";
-import { RoomUtils } from "../utils/room.utils";
 
 @Injectable({
     providedIn: 'root'
@@ -23,16 +22,16 @@ export class IngameDataService extends AngularLifecycle {
         this.room$
             .pipe(takeUntil(this.destroyed$))
             .subscribe(room => {
-                if ((!!!room || (!!room.game && room.game.state === GameState.ended)) && !!this.ingameDataSubscription$ && !this.ingameDataSubscription$.closed) {
-                    this.ingameDataSubscription$.unsubscribe();
-                    this.ingameData$.next(null as any);
-                } else {
-                    if (!!room.game && room.game.state === GameState.started && (!!!this.ingameDataSubscription$ || this.ingameDataSubscription$.closed)) {
-                        this.ingameDataSubscription$ = this.ingameDataSourceService
-                            .getIngameData$(room.id!, RoomUtils.getRoomCreator(room).id)
-                            .pipe(takeUntil(this.destroyed$))
-                            .subscribe(i => this.ingameData$.next(i));
+                if ((!!!room || !!!room.game || room.game.state === GameState.ended)) {
+                    if (!!this.ingameDataSubscription$ && !this.ingameDataSubscription$.closed) {
+                        this.ingameDataSubscription$.unsubscribe();
+                        this.ingameData$.next(null as any);
                     }
+                } else if (!!room.game && room.game.state === GameState.started && (!!!this.ingameDataSubscription$ || this.ingameDataSubscription$.closed)) {
+                    this.ingameDataSubscription$ = this.ingameDataSourceService
+                        .getIngameData$(room.id!)
+                        .pipe(takeUntil(this.destroyed$))
+                        .subscribe(i => this.ingameData$.next(i));
                 }
         });
     }

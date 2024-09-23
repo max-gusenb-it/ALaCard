@@ -96,6 +96,9 @@ export class RoomState extends AngularLifecycle {
                 user = this.store.selectSnapshot(AuthenticationState.user);
                 if (!!!user) throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
+            if (!!!action.userId) {
+                action.userId = user.id;
+            }
 
             ctx.dispatch(new LoadingActions.StartLoading);
 
@@ -237,7 +240,7 @@ export class RoomState extends AngularLifecycle {
 
         const state = ctx.getState();
         
-        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId!, userId, player, state.roomConnectionData.userId)]);
+        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId!, userId, player)]);
         this.roomSubscription$.unsubscribe();
         ctx.dispatch(new RoomActions.SetRoom(null as any, userId));
         // zone wrap to prevent -> "Navigation triggered outside Angular zone"

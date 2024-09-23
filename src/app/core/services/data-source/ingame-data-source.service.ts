@@ -16,16 +16,16 @@ export class IngameDataSourceService {
         private firestoreService: FirestoreService<IngameData>
     ) {}
 
-    getIngameData$(roomId: string, userId?: string) {
+    getIngameData$(roomId: string) {
         return this.firestoreService.getDocWithId$(
-            `${RoomUtils.getRoomCollectionsRef(this.store, userId)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             ingameDataRef
         );
     }
 
-    createInitialIngameData(roomId: string, userId?: string) {
+    createInitialIngameData(roomId: string) {
         return this.firestoreService.upsert(
-            `${RoomUtils.getRoomCollectionsRef(this.store, userId)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             ingameDataRef,
             {
                 creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
@@ -35,9 +35,9 @@ export class IngameDataSourceService {
         );
     }
 
-    updateIngameData(ingameData: IngameData, userId?: string) {
+    updateIngameData(ingameData: IngameData) {
         return this.firestoreService.update(
-            `${RoomUtils.getRoomCollectionsRef(this.store, userId)}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${gameDetailsRef}`,
             ingameDataRef,
             ingameData
         );

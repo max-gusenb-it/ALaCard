@@ -6,23 +6,33 @@ import { RoomSourceServiceErrors } from "../constants/errorCodes";
 import { RoomSourceService } from "../services/data-source/room-source.service";
 import { ItError } from "../models/classes";
 import { Store } from "@ngxs/store";
-import { AuthenticationState } from "../state";
+import { RoomState } from "../state";
 import { roomsRef, usersRef } from "../constants/firestoreReferences";
 
 export namespace RoomUtils {
     
-    export function getRoomCollectionsRef(store: Store, userId?: string) {
-        if (!!!userId) {
-            const id = store.selectSnapshot(AuthenticationState.user)?.id;
-            if (!!!id) {
+    
+    /**
+     * Returns collection reference for a room
+     *
+     * @export
+     * @param {Store} store
+     * @param {string} creatorId if the method is called at a point, where the room does not exist yet, the id of the room creator has to be provided
+     * @returns {string}
+     */
+    export function getRoomCollectionRef(store: Store, creatorId?: string) {
+        const room = store.selectSnapshot(RoomState.room);
+        if (!!!room) {
+            if (!!!creatorId) {
                 throw new ItError(
                     RoomSourceServiceErrors.getRoomNoUser,
                     RoomSourceService.name
                 );
             }
-            userId = id;
+        } else {
+            creatorId = getRoomCreator(room).id;
         }
-        return `${usersRef}/${userId}/${roomsRef}`;
+        return `${usersRef}/${creatorId}/${roomsRef}`;
     }
 
     /**

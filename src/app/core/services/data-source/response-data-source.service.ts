@@ -16,9 +16,9 @@ export class ResponseDataSourceService {
         private firestoreService: FirestoreService<ResponseData>
     ) {}
 
-    createInitialResponseData(roomId: string, roomOwnerId?: string) {
+    createInitialResponseData(roomId: string) {
         return this.firestoreService.upsert(
-            `${RoomUtils.getRoomCollectionsRef(this.store, roomOwnerId)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             responseDataRef,
             {
                 creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
@@ -27,9 +27,9 @@ export class ResponseDataSourceService {
         );
     }
 
-    addResponse(roomId: string, response: Response, roomOwnerId?: string) {
+    addResponse(roomId: string, response: Response) {
         return this.firestoreService.updateField(
-            `${RoomUtils.getRoomCollectionsRef(this.store, roomOwnerId)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             responseDataRef,
             `responses.${response.playerId}`,
             response

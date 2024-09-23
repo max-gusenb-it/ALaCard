@@ -56,8 +56,7 @@ export class RoomSettingsBottomSheet {
               singleDeviceMode: this.roomSettingsForm.controls['singleDeviceMode'].value
             }
           },
-          newRoom.id!,
-          RoomUtils.getRoomCreator(room!).id
+          newRoom.id!
         )
       ]).then(() => this.close());
     }

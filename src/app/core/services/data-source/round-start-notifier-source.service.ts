@@ -16,9 +16,9 @@ export class RoundStartNotifierSourceService {
         private firestoreService: FirestoreService<RoundStartNotifier>
     ) {}
 
-    createInitialRoundStartNotifier(roomId: string, userId?: string) {
+    createInitialRoundStartNotifier(roomId: string) {
         return this.firestoreService.upsert(
-            `${RoomUtils.getRoomCollectionsRef(this.store, userId)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             roundStartNotifierRef,
             {
                 creationDate: firebase.firestore.Timestamp.fromDate(new Date())
