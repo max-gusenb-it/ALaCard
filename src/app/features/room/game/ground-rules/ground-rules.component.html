@@ -1,20 +1,35 @@
-<div class="flex grow items-center justify-center relative">
-  <card
-    class="absolute"
-    *ngIf="currentRuleIndex % 2 === 0"
-    (click)="nextRule()"
-    (swipe)="swipe($event)"
-    [cardType]="0"
-    [text]="groundRules[currentRuleIndex]"
-    [deckname]="deckname"
-  />
-  <card
-    class="absolute"
-    *ngIf="currentRuleIndex % 2 === 1"
-    (click)="nextRule()"
-    (swipe)="swipe($event)"
-    [cardType]="0"
-    [text]="groundRules[currentRuleIndex]"
-    [deckname]="deckname"
-  />
+<div 
+  [@slideToggle]="{
+    value: currentRuleIndex % 2,
+    params: {
+      leaveEnd: animationDirection === 'right' ? '-150%' : '150%',
+      enterStart: animationDirection === 'right' ? '150%' : '-150%'
+    }
+  }"
+  class="flex grow items-center justify-center relative"
+>
+  @switch(currentRuleIndex % 2) {
+    @case(0) { 
+      <card
+        class="absolute"
+        *ngIf="currentRuleIndex % 2 === 0"
+        (click)="nextRule()"
+        (swipe)="swipe($event)"
+        [cardType]="0"
+        [text]="groundRules[currentRuleIndex]"
+        [deckname]="deckname"
+      />
+    }
+    @case(1) { 
+      <card
+        class="absolute"
+        *ngIf="currentRuleIndex % 2 === 1"
+        (click)="nextRule()"
+        (swipe)="swipe($event)"
+        [cardType]="0"
+        [text]="groundRules[currentRuleIndex]"
+        [deckname]="deckname"
+      />
+    }
+  }
 </div>

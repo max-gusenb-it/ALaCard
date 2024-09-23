@@ -1,24 +1,11 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CardType } from 'src/app/core/models/enums';
-import { trigger, style, transition, animate } from "@angular/animations";
 
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
-  animations: [
-    trigger('slideInAndOut', [
-      transition(':enter', [
-        style({ transform: 'translateX(150%)', opacity: 0 }),
-        animate('300ms ease-in', style({ transform: 'translateX(0%)', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ transform: 'translateX(0)', opacity: 1 }),
-        animate('300ms ease-in', style({ transform: 'translateX(-150%)', opacity: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
 
@@ -27,8 +14,6 @@ export class CardComponent {
   @Input() deckname: string = "";
 
   @Output() swipe: EventEmitter<boolean> = new EventEmitter();
-
-  @HostBinding('@slideInAndOut') public slideInAndOut = true;
 
   touchStartX = 0;
   touchEndX = 0;
@@ -45,8 +30,8 @@ export class CardComponent {
   }
 
   checkDirection() {
-    if (this.touchEndX < this.touchStartX) this.swipe.emit(true);
-    if (this.touchEndX > this.touchStartX) this.swipe.emit(false);
+    if (this.touchEndX < this.touchStartX && (this.touchStartX - this.touchEndX) >= 100) this.swipe.emit(true);
+    if (this.touchEndX > this.touchStartX && (this.touchEndX - this.touchStartX) >= 100) this.swipe.emit(false);
   }
 
   getCardTitle() {
