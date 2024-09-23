@@ -8,7 +8,7 @@ import { trigger, style, transition, animate } from "@angular/animations";
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   animations: [
-    trigger('slideIn', [
+    trigger('slideInAndOut', [
       transition(':enter', [
         style({ transform: 'translateX(150%)', opacity: 0 }),
         animate('300ms ease-in', style({ transform: 'translateX(0%)', opacity: 1 }))
@@ -28,7 +28,7 @@ export class CardComponent {
 
   @Output() swipe: EventEmitter<boolean> = new EventEmitter();
 
-  @HostBinding('@slideIn') public slideIn = true;
+  @HostBinding('@slideInAndOut') public slideInAndOut = true;
 
   touchStartX = 0;
   touchEndX = 0;
