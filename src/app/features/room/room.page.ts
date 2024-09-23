@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
+import { IngameData, OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { AuthenticationState, RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
@@ -13,6 +13,8 @@ import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
+import { IngameDataService } from 'src/app/core/services/ingame-data.service';
+import { ResponseDataService } from 'src/app/core/services/response-data.service';
 
 @Component({
   selector: 'app-room',
@@ -23,15 +25,21 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   @Select(RoomState.gameStarted) gameStarted$!: Observable<boolean>;
 
+  ingameData$: Observable<IngameData>;
+
   constructor(
     private store: Store,
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private popupService: PopupService,
     private translateService: TranslateService,
+    private ingameDataService: IngameDataService,
+    private responseDataService: ResponseDataService,
     private modalCtrl: ModalController
   ) {
     super();
+
+    this.ingameData$ = this.ingameDataService.getIngameData$();
   }
 
   ngOnInit() {
@@ -47,8 +55,8 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       });
   }
 
-  isUserRoomOwner() {
-    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomCreator(this.store.selectSnapshot(RoomState.room)!).id;
+  isUserRoomAdmin() {
+    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!).id;
   }
 
   handleMenuAction(actionType: string) {
@@ -96,7 +104,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   getMenuItems() {
-    if (this.isUserRoomOwner()) {
+    if (this.isUserRoomAdmin()) {
       return ['exit_to_app', 'share', 'settings']; // ToDo: add 'help', 'report_problem' to button
     } else {
       return ['exit_to_app', 'share'];

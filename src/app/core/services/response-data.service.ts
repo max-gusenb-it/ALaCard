@@ -1,0 +1,53 @@
+import { BehaviorSubject, Observable, Subscription, takeUntil } from "rxjs";
+import { ResponseData, Room } from "../models/interfaces";
+import { ResponseDataSourceService } from "./data-source/response-data-source.service";
+import { Select, Store } from "@ngxs/store";
+import { AuthenticationState, RoomState } from "../state";
+import { Injectable } from "@angular/core";
+import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
+import { GameState } from "../models/enums";
+import { RoomUtils } from "../utils/room.utils";
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ResponseDataService extends AngularLifecycle {
+    responseDataSubscription$: Subscription = null as any;
+    responseData$: BehaviorSubject<ResponseData> = new BehaviorSubject(null as any);;
+
+    @Select(RoomState.room) room$!: Observable<Room>;
+
+    constructor(
+        private store: Store,
+        private responseDataSourceService: ResponseDataSourceService
+    ) {
+        super();
+
+        this.room$
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe(room => {
+                const userId = this.store.selectSnapshot(AuthenticationState.userid);
+                if (!!!room || !!!room.game || room.game.state === GameState.ended || RoomUtils.getRoomAdmin(room).id !== userId) {
+                    if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) {
+                        this.responseDataSubscription$.unsubscribe();
+                        this.responseData$.next(null as any);
+                    };
+                } else if (!!userId && !!room.game && room.game.state === GameState.started && RoomUtils.getRoomAdmin(room).id === userId && (!!!this.responseDataSubscription$ || this.responseDataSubscription$.closed)) {
+                    this.responseDataSubscription$ = this.responseDataSourceService
+                        .getResponseData$(room.id!)
+                        .pipe(takeUntil(this.destroyed$))
+                        .subscribe(i => this.responseData$.next(i));
+                }
+        });
+    }
+
+    getResponseData() {
+        const responseData = this.responseData$.value.responses;
+        return Object.keys(responseData)
+            .map(key => (responseData[key]));
+    }
+
+    getResponseDataForRound(roundId: number) {
+        return this.getResponseData().filter(r => r.roundId === roundId);
+    }
+}

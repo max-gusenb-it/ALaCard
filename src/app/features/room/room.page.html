@@ -25,8 +25,12 @@
     </div>
     <game class="flex grow" *ngIf="gameStarted$ | async"></game>
     <div class="flex gap-x-4 justify-end">
-      <it-button class="flex grow" size="big" *ngIf="isUserRoomOwner() && !(gameStarted$ | async)" (click)="startGame()">
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && !(gameStarted$ | async)" (click)="startGame()">
         Start Game
+      </it-button>
+      
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (ingameData$ | async)?.rounds?.length === 0">
+        Continue
       </it-button>
   
       <it-menu-button [menuItemIcons]="getMenuItems()" (menuItemClicked)="handleMenuAction($event)"/>

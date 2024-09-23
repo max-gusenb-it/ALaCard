@@ -16,6 +16,13 @@ export class ResponseDataSourceService {
         private firestoreService: FirestoreService<ResponseData>
     ) {}
 
+    getResponseData$(roomId: string) {
+        return this.firestoreService.getDocWithId$(
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            responseDataRef
+        );
+    }
+
     createInitialResponseData(roomId: string) {
         return this.firestoreService.upsert(
             `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
