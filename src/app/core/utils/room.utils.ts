@@ -9,9 +9,7 @@ import { Store } from "@ngxs/store";
 import { RoomState } from "../state";
 import { roomsRef, usersRef } from "../constants/firestoreReferences";
 
-export namespace RoomUtils {
-    
-    
+export namespace RoomUtils {    
     /**
      * Returns collection reference for a room
      *
@@ -22,14 +20,14 @@ export namespace RoomUtils {
      */
     export function getRoomCollectionRef(store: Store, creatorId?: string) {
         const room = store.selectSnapshot(RoomState.room);
-        if (!!!room) {
-            if (!!!creatorId) {
-                throw new ItError(
-                    RoomSourceServiceErrors.getRoomNoUser,
-                    RoomSourceService.name
-                );
-            }
-        } else {
+        if (!!!room && !!!creatorId) {
+            // ToDo: Throw better error -> no it error -> not user fault, if this code is executed => my fault :)
+            throw new ItError(
+                RoomSourceServiceErrors.getRoomNoUser,
+                RoomSourceService.name
+            );
+        }
+        if (!!!creatorId && !!room) {
             creatorId = getRoomCreator(room).id;
         }
         return `${usersRef}/${creatorId}/${roomsRef}`;
