@@ -30,7 +30,7 @@
       </it-button>
       
       <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (ingameData$ | async)?.rounds?.length === 0">
-        Continue
+        Continue {{getRuleReadCount()}} / {{getActivePlayerCount((room$ | async)?.players)}}
       </it-button>
   
       <it-menu-button [menuItemIcons]="getMenuItems()" (menuItemClicked)="handleMenuAction($event)"/>

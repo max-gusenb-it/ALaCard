@@ -15,6 +15,7 @@ import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bott
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { IngameDataService } from 'src/app/core/services/ingame-data.service';
 import { ResponseDataService } from 'src/app/core/services/response-data.service';
+import { PlayerState } from 'src/app/core/models/enums';
 
 @Component({
   selector: 'app-room',
@@ -105,6 +106,15 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   mapPlayersToArray(players: { [key: string]: Player }) {
     return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
+  }
+
+  getActivePlayerCount(players?: { [key: string]: Player; } | undefined) {
+    if (!!!players) return 0;
+    return Object.values(players).filter(p => p.state === PlayerState.active).length;
+  }
+
+  getRuleReadCount() {
+    return this.responseDataService.getResponseDataForRound(-1).length;
   }
 
   getMenuItems() {
