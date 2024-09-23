@@ -48,7 +48,8 @@ export class RoomSourceService {
                         [player.id]: player
                     },
                     settings: {
-                        singleDeviceMode: false
+                        singleDeviceMode: false,
+                        otherAdmin: true
                     }
                 }
             );

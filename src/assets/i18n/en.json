@@ -83,7 +83,8 @@
       },
       "settings-bottom-sheet": {
         "title": "Settings",
-        "singleDeviceMode": "Play offline by only using one device and manually adding players"
+        "singleDeviceMode": "Play offline by only using one device and manually adding players",
+        "other-admin": "The game can continue even if you leave the room by making an other user the admin for the round"
       },
       "start-game-modal": {
         "deck": "Deck",

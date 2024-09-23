@@ -14,6 +14,11 @@
     [label]="'features.room.settings-bottom-sheet.singleDeviceMode' | translate"
     formControlName="singleDeviceMode"
   />
+  <it-checkbox
+    id="otherAdmin"
+    [label]="'features.room.settings-bottom-sheet.other-admin' | translate"
+    formControlName="otherAdmin"
+  />
   <div class="flex flex-row gap-4">
     <it-button class="flex grow" size="small" color="secondary" (click)="close()" type="button">{{ 'actions.cancel' | translate}}</it-button>
     <it-button class="flex grow" size="small" type="submit">{{ 'actions.save' | translate}}</it-button>

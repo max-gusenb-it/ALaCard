@@ -84,8 +84,12 @@ export namespace RoomUtils {
     }
     
     export function getRoomAdmin(room: Room) : Player {
-        return Object.values(room.players).sort((p1, p2) => p1.joinOrder - p2.joinOrder)
-            .filter(p => p.state === PlayerState.active)[0];
+        if (room.settings.otherAdmin) {
+            return Object.values(room.players).sort((p1, p2) => p1.joinOrder - p2.joinOrder)
+                .filter(p => p.state === PlayerState.active)[0];
+        } else {
+            return getRoomCreator(room);
+        }
     }
  
     export function getRoomCreator(room: Room) : Player {

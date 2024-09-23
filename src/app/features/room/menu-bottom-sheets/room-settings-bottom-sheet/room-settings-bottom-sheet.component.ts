@@ -21,6 +21,7 @@ export class RoomSettingsBottomSheet {
 
   roomSettingsForm: FormGroup = new FormGroup({
     singleDeviceMode: new FormControl({value: false, disabled: false}),
+    otherAdmin: new FormControl({value: true, disabled: false}),
   });
 
   constructor(
@@ -32,6 +33,7 @@ export class RoomSettingsBottomSheet {
     const settings = this.store.selectSnapshot(RoomState.roomSettings);
     if (!!!settings) this.close();
     this.roomSettingsForm.controls['singleDeviceMode'].setValue(settings?.singleDeviceMode);
+    this.roomSettingsForm.controls['otherAdmin'].setValue(settings?.otherAdmin);
   }
 
   close() {
@@ -41,7 +43,8 @@ export class RoomSettingsBottomSheet {
   updateSettings() {
     let differences = false;
     const room = this.store.selectSnapshot(RoomState.room);
-    differences = room?.settings.singleDeviceMode !== this.roomSettingsForm.controls['singleDeviceMode'].value;
+    differences = room?.settings.singleDeviceMode !== this.roomSettingsForm.controls['singleDeviceMode'].value ||
+      room?.settings.otherAdmin !== this.roomSettingsForm.controls['otherAdmin'].value;
     this.close();
     if (differences) {
       let newRoom = {...room} as Room;
@@ -53,7 +56,8 @@ export class RoomSettingsBottomSheet {
           {
             ...newRoom,
             settings: {
-              singleDeviceMode: this.roomSettingsForm.controls['singleDeviceMode'].value
+              singleDeviceMode: this.roomSettingsForm.controls['singleDeviceMode'].value,
+              otherAdmin: this.roomSettingsForm.controls['otherAdmin'].value
             }
           },
           newRoom.id!
