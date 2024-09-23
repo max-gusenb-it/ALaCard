@@ -55,6 +55,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       });
   }
 
+  isUserRoomCreator() {
+    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomCreator(this.store.selectSnapshot(RoomState.room)!).id;
+  }
+
   isUserRoomAdmin() {
     return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!).id;
   }
