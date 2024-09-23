@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { firstValueFrom, timer } from 'rxjs';
-import { slideInOut } from './animation';
 
 @Component({
   selector: 'ground-rules',
   templateUrl: './ground-rules.component.html',
-  styleUrls: ['./ground-rules.component.scss'],
-  animations: [slideInOut]
+  styleUrls: ['./ground-rules.component.scss']
 })
 export class GroundRulesComponent implements AfterViewInit {
 

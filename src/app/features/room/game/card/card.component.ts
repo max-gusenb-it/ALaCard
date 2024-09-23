@@ -1,11 +1,24 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CardType } from 'src/app/core/models/enums';
+import { trigger, style, transition, animate } from "@angular/animations";
 
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(150%)', opacity: 0 }),
+        animate('300ms ease-in', style({ transform: 'translateX(0%)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('300ms ease-in', style({ transform: 'translateX(-150%)', opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class CardComponent {
 
@@ -14,6 +27,8 @@ export class CardComponent {
   @Input() deckname: string = "";
 
   @Output() swipe: EventEmitter<boolean> = new EventEmitter();
+
+  @HostBinding('@slideIn') public slideIn = true;
 
   touchStartX = 0;
   touchEndX = 0;
@@ -35,14 +50,14 @@ export class CardComponent {
   }
 
   getCardTitle() {
-    switch(this.cardType) {
-      case(CardType.GroundRule): {
+    switch (this.cardType) {
+      case (CardType.GroundRule): {
         return this.translateService.instant("features.room.game.card.groundRules");
       };
-      case(CardType.FreeText): {
+      case (CardType.FreeText): {
         return this.translateService.instant("features.room.game.card.freeText");
       };
-      case(CardType.PlayerVoting): {
+      case (CardType.PlayerVoting): {
         return this.translateService.instant("features.room.game.card.playerVoting");
       };
     }

@@ -1,6 +1,5 @@
 <div class="flex grow items-center justify-center relative">
   <card
-    @slideInOut
     class="absolute"
     *ngIf="currentRuleIndex % 2 === 0"
     (click)="nextRule()"
@@ -10,7 +9,6 @@
     [deckname]="deckname"
   />
   <card
-    @slideInOut
     class="absolute"
     *ngIf="currentRuleIndex % 2 === 1"
     (click)="nextRule()"
