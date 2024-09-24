@@ -2,6 +2,9 @@
   <select
     [id]="getId()"
     [formControl]="control"
+    [ngClass]="{
+      'text-transparent': hideLabel
+    }"
     class="
       block
       rounded-lg
@@ -31,7 +34,7 @@
     [for]="getId()"
     *ngIf="label"
     [class.required]="isRequired"
-    [ngClass]="{'test': control.value !== null && control.value !== ''}"
+    [ngClass]="{'scale': control.value !== null && control.value !== '', 'text-transparent': hideLabel}"
     class="
       absolute
       text-base text-neutral-950 font-semibold

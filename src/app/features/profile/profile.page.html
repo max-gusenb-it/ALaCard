@@ -31,13 +31,17 @@
           {{ 'features.profile.languages.' + language | translate }}
         </option>
       </it-select>
+      <h5>{{ 'features.profile.color-scheme' | translate }}</h5>
       <it-select
         id="color"
-        [label]="'features.profile.color-scheme' | translate"
         name="color"
         formControlName="color"
+        class="remove-select-border"
+        icon="colorize"
+        [hideLabel]="true"
+        [ngClass]="getCSSColorClass(this.settingsForm.controls['color'].value, 'select')"
       >
-        <option *ngFor="let color of getColors()" [value]="color">
+        <option *ngFor="let color of getColors()" [ngClass]="getCSSColorClass(color, 'option')" [value]="color">
           {{ 'features.profile.colors.' + color | translate }}
         </option>
       </it-select>

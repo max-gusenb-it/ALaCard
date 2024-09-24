@@ -1,0 +1,203 @@
+.remove-select-border {
+    div {
+        select {
+            @apply border-none;
+        }
+    }
+}
+
+// Select Backgrounds
+
+.default-select-background {
+    div {
+        select {
+            @apply bg-primary-500;
+        }
+    }
+}
+
+.red-select-background {
+    div {
+        select {
+            @apply bg-red-500;
+        }
+    }
+}
+
+.orange-select-background {
+    div {
+        select {
+            @apply bg-orange-500;
+        }
+    }
+}
+
+.amber-select-background {
+    div {
+        select {
+            @apply bg-amber-500;
+        }
+    }
+}
+
+.yellow-select-background {
+    div {
+        select {
+            @apply bg-yellow-500;
+        }
+    }
+}
+
+.lime-select-background {
+    div {
+        select {
+            @apply bg-lime-500;
+        }
+    }
+}
+
+.green-select-background {
+    div {
+        select {
+            @apply bg-green-500;
+        }
+    }
+}
+
+.emerald-select-background {
+    div {
+        select {
+            @apply bg-emerald-500;
+        }
+    }
+}
+
+.teal-select-background {
+    div {
+        select {
+            @apply bg-teal-500;
+        }
+    }
+}
+
+.cyan-select-background {
+    div {
+        select {
+            @apply bg-cyan-500;
+        }
+    }
+}
+
+.sky-select-background {
+    div {
+        select {
+            @apply bg-sky-500;
+        }
+    }
+}
+
+.blue-select-background {
+    div {
+        select {
+            @apply bg-blue-500;
+        }
+    }
+}
+
+.indigo-select-background {
+    div {
+        select {
+            @apply bg-indigo-500;
+        }
+    }
+}
+
+.violet-select-background {
+    div {
+        select {
+            @apply bg-violet-500;
+        }
+    }
+}
+
+.pink-select-background {
+    div {
+        select {
+            @apply bg-pink-500;
+        }
+    }
+}
+
+.rose-select-background {
+    div {
+        select {
+            @apply bg-rose-500;
+        }
+    }
+}
+
+// Option backgrounds
+
+.default-option-background {
+    @apply bg-primary-500;
+}
+
+.red-option-background {
+    @apply bg-red-500;
+}
+
+.orange-option-background {
+    @apply bg-orange-500;
+}
+
+.amber-option-background {
+    @apply bg-amber-500;
+}
+
+.yellow-option-background {
+    @apply bg-yellow-500;
+}
+
+.lime-option-background {
+    @apply bg-lime-500;
+}
+
+.green-option-background {
+    @apply bg-green-500;
+}
+
+.emerald-option-background {
+    @apply bg-emerald-500;
+}
+
+.teal-option-background {
+    @apply bg-teal-500;
+}
+
+.cyan-option-background {
+    @apply bg-cyan-500;
+}
+
+.sky-option-background {
+    @apply bg-sky-500;
+}
+
+.blue-option-background {
+    @apply bg-blue-500;
+}
+
+.indigo-option-background {
+    @apply bg-indigo-500;
+}
+
+.violet-option-background {
+    @apply bg-violet-500;
+}
+
+.pink-option-background {
+    @apply bg-pink-500;
+}
+
+.rose-option-background {
+    @apply bg-rose-500;
+}

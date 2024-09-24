@@ -18,6 +18,8 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
   @Input() icon: string = null as any;
   @Input() defaultValue: string = null as any;
   @Input() label = "Label";
+  @Input() hideLabel: boolean = false;
+  @Input() hideOption: boolean = false;
 
   override getId() {
     return `${this.id}-select-element`

@@ -14,8 +14,8 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
 import { ItAddAccountModal } from 'src/app/shared/components/forms/it-add-account-modal/it-add-account-modal.component';
 import { PopupService } from 'src/app/core/services/popup.service';
-import { TranslateService } from '@ngx-translate/core';
 import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
+import { systemDefaultValue } from 'src/app/core/constants/systemDefaultValue';
 
 @Component({
   selector: 'profile',
@@ -36,8 +36,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     private navCtrl: NavController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
-    private popupService: PopupService,
-    private translateService: TranslateService
+    private popupService: PopupService
   ) {
     super();
   }
@@ -76,6 +75,17 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
 
   getColors() {
     return supportedColors;
+  }
+
+  getCSSColorClass(color: string, type: 'option' | 'select') : string {
+    switch(color) {
+      case(systemDefaultValue): {
+        return ".default-background";
+      }
+      default: {
+        return `${color}-${type}-background`;
+      }
+    }
   }
 
   updateSettings() {

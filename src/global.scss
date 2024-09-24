@@ -16,6 +16,8 @@
 
 @import '@angular/cdk/overlay-prebuilt.css';
 
+@import './theme/it-select.classes.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
