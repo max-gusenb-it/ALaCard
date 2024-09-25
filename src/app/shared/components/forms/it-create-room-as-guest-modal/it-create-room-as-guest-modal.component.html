@@ -1,0 +1,38 @@
+<div
+    class="h-full flex flex-col p-6 justify-between"
+>
+    <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
+    <it-profile-editor
+        *ngIf="stepIndex === 0"
+        (profileEditorFormChanged)="setProfileFormData($event)"
+        [profileEditorFormData]="profileFormData"
+    />
+    <it-create-room-form 
+        *ngIf="stepIndex === 1"
+        [createRoomFormData]="createRoomFormData"
+        (roomFormChanged)="setCreateRoomFormData($event)"
+    ></it-create-room-form>
+    <div
+        class="flex flex-col gap-2"
+    >
+        <div class="flex flex-row gap-4">
+            <it-button
+                class="flex flex-grow"
+                color="secondary"
+                [indicateLoading]="true"
+                *ngIf="stepIndex > 0"
+                (click)="goBack()"
+            >
+                {{'actions.back' | translate}}
+            </it-button>
+            <it-button
+                class="flex flex-grow"
+                [disabled]="formInvalid()"
+                [indicateLoading]="true"
+                (click)="goForward()"
+            >
+                {{'actions.continue' | translate}}
+            </it-button>
+        </div>
+    </div>
+</div>

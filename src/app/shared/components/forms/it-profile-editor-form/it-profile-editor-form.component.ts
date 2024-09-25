@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
-import { ProfileEditorFormData } from 'src/app/core/models/interfaces/components/forms/it-profile-editor/ProfileEditorFormData';
+import { ProfileEditorFormData } from 'src/app/core/models/interfaces';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({

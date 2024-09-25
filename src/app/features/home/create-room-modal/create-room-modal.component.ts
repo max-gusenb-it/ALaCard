@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
+import { CreateRoomFormData } from 'src/app/core/models/interfaces';
 import { RoomActions } from 'src/app/core/state';
 
 @Component({
@@ -10,11 +10,12 @@ import { RoomActions } from 'src/app/core/state';
   templateUrl: './create-room-modal.component.html'
 })
 export class CreateRoomModal {
-
-  roomForm: FormGroup = new FormGroup({
-    name: new FormControl({value: "", disabled: false}, [Validators.required, Validators.maxLength(30)]),
-    description: new FormControl({value: "", disabled: false}, [Validators.required, Validators.maxLength(60)]),
-  });
+  
+  createRoomFormData: CreateRoomFormData = {
+    name: "",
+    description: "",
+    valid: false
+  };
 
   constructor(
     private modalCtrl: ModalController,
@@ -25,10 +26,14 @@ export class CreateRoomModal {
     this.modalCtrl.dismiss();
   }
 
+  setCreateRoomFormData(formData: CreateRoomFormData) {
+    this.createRoomFormData = formData;
+  }
+
   createRoom() {
     firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
-      this.roomForm.controls["name"].value,
-      this.roomForm.controls["description"].value
+      this.createRoomFormData.name,
+      this.createRoomFormData.description
     ))).then(s => {
       this.modalCtrl.dismiss({
         roomId: s.authentication.user.roomId

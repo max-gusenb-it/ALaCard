@@ -35,10 +35,12 @@ import { ItOptionBottomSheet } from './components/forms/it-option-bottom-sheet/i
 import { ItForgotPasswordModal } from './components/forms/it-forgot-password-modal/it-forgot-password-modal.component';
 import { ItSignInModal } from './components/forms/it-sign-in-modal/it-sign-in-modal.component';
 import { ItSignUpModal } from './components/forms/it-sign-up-modal/it-sign-up-modal.component';
-import { CreateAccountComponent } from './components/forms/it-create-account/it-create-account.component';
+import { ItCreateAccountComponent } from './components/forms/it-create-account/it-create-account.component';
 import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it-authenticate-modal.component';
 import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-add-account-modal.component';
 import { MarkdownPipe } from './pipes/markdown.pipe';
+import { ItCreateRoomAsGuestModal } from './components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
+import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-create-room-form.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
     ItProfileEditorComponent,
     ItSignInModal,
     ItSignUpModal,
-    CreateAccountComponent,
+    ItCreateAccountComponent,
+    ItCreateRoomAsGuestModal,
+    ItCreateRoomForm,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
@@ -109,7 +113,9 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
     ItProfileEditorComponent,
     ItSignInModal,
     ItSignUpModal,
-    CreateAccountComponent,
+    ItCreateAccountComponent,
+    ItCreateRoomAsGuestModal,
+    ItCreateRoomForm,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,

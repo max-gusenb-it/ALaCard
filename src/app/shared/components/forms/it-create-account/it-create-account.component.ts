@@ -8,7 +8,7 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
   selector: 'it-create-account',
   templateUrl: './it-create-account.component.html'
 })
-export class CreateAccountComponent extends AngularLifecycle implements AfterViewInit {
+export class ItCreateAccountComponent extends AngularLifecycle implements AfterViewInit {
 
   @Input() registerMandatory: boolean = false;
   @Input() createAccountFormData: CreateAccountFormData = null as any;

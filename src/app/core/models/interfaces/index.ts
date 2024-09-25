@@ -1,5 +1,6 @@
 export { SnackbarData } from "./components/display/it-snackbar/SnackbarData";
-export { ProfileEditorFormData } from "./components/forms/it-profile-editor/ProfileEditorFormData";
+export { ProfileEditorFormData } from "./components/forms/it-profile-editor-form/ProfileEditorFormData";
+export { CreateRoomFormData } from "./components/forms/it-create-room-form/CreateRoomFormData";
 export { OptionBottomSheetData } from "./components/forms/it-option-bottom-sheet/OptionBottomSheetData";
 
 export { CreateAccountFormData } from "./features/home/CreateAccountFormData";
