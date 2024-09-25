@@ -7,11 +7,10 @@
 }
 
 // Select Backgrounds
-
 .default-select-background {
     div {
         select {
-            @apply bg-primary-500;
+            background-color: var(--default-500);
         }
     }
 }
@@ -137,9 +136,8 @@
 }
 
 // Option backgrounds
-
 .default-option-background {
-    @apply bg-primary-500;
+    background-color: var(--default-500);
 }
 
 .red-option-background {

@@ -23,16 +23,16 @@
 @tailwind utilities;
 
 :root {
-    --sys-900: #ffa105;
-    --sys-800: #fba907;     // sloppy
-    --sys-700: #ffae0a;
-    --sys-600: #fab708;
-    --sys-500: #ffc311;
-    --sys-400: #fec418;     // sloppy
-    --sys-300: #ffdd7a;
-    --sys-200: #ffe79f;
-    --sys-100: #fef6df;
-    --sys-000: #f9f8f1;
+    --default-900: #ffa105;
+    --default-800: #fba907;     // sloppy
+    --default-700: #ffae0a;
+    --default-600: #fab708;
+    --default-500: #ffc311;
+    --default-400: #fec418;     // sloppy
+    --default-300: #ffdd7a;
+    --default-200: #ffe79f;
+    --default-100: #fef6df;
+    --default-000: #f9f8f1;
 
     --red-900: theme(colors.red.900);
     --red-800: theme(colors.red.800);

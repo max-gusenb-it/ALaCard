@@ -32,10 +32,10 @@
       "languages": {
         "de": "Deutsch",
         "en": "Englisch",
-        "sys": "Von System übernehmen"
+        "default": "Von System übernehmen"
       },
       "colors": {
-        "sys": "Standard",
+        "default": "Standard",
         "red": "Rote",
         "orange": "Orange",
         "amber": "Gelborange",

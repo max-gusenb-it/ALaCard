@@ -7,14 +7,14 @@ module.exports = {
     extend: {
       colors: {
         it_yellow: {
-          900: "var(--sys-900)",
-          700: "var(--sys-700)",
-          600: "var(--sys-600)",
-          500: "var(--sys-500)",
-          300: "var(--sys-300)",
-          200: "var(--sys-200)",
-          100: "var(--sys-100)",
-          0o0: "var(--sys-000)"
+          900: "var(--default-900)",
+          700: "var(--default-700)",
+          600: "var(--default-600)",
+          500: "var(--default-500)",
+          300: "var(--default-300)",
+          200: "var(--default-200)",
+          100: "var(--default-100)",
+          0o0: "var(--default-000)"
         },
         primary: {
           900: "rgb(var(--primary-900) / <alpha-value>)",

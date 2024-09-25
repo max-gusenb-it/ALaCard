@@ -80,7 +80,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   getCSSColorClass(color: string, type: 'option' | 'select') : string {
     switch(color) {
       case(systemDefaultValue): {
-        return ".default-background";
+        return `${color}-${type}-background`;
       }
       default: {
         return `${color}-${type}-background`;

@@ -30,12 +30,12 @@
       "general": "General",
       "language": "Language",
       "languages": {
-        "sys": "System default",
+        "default": "System default",
         "en": "English",
         "de": "German"
       },
       "colors": {
-        "sys": "Default",
+        "default": "Default",
         "red": "Red",
         "orange": "Orange",
         "amber": "Amber",

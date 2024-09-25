@@ -1,1 +1,1 @@
-export const systemDefaultValue: string = "sys";
+export const systemDefaultValue: string = "default";
