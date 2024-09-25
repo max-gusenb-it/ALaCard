@@ -61,7 +61,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   isUserRoomAdmin() {
-    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!).id;
+    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!)?.id;
   }
 
   handleMenuAction(actionType: string) {

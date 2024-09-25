@@ -13,7 +13,7 @@ import { RoomUtils } from "../utils/room.utils";
 })
 export class ResponseDataService extends AngularLifecycle {
     responseDataSubscription$: Subscription = null as any;
-    responseData$: BehaviorSubject<ResponseData> = new BehaviorSubject(null as any);;
+    responseData$: BehaviorSubject<ResponseData> = new BehaviorSubject(null as any);
 
     @Select(RoomState.room) room$!: Observable<Room>;
 
@@ -36,13 +36,16 @@ export class ResponseDataService extends AngularLifecycle {
                     this.responseDataSubscription$ = this.responseDataSourceService
                         .getResponseData$(room.id!)
                         .pipe(takeUntil(this.destroyed$))
-                        .subscribe(i => this.responseData$.next(i));
+                        .subscribe(r => this.responseData$.next(r));
                 }
         });
     }
 
     getResponseData() {
-        const responseData = this.responseData$.value.responses;
+        const responseData = this.responseData$.value?.responses;
+        if (responseData == undefined) {
+            return [];
+        }
         return Object.keys(responseData)
             .map(key => (responseData[key]));
     }

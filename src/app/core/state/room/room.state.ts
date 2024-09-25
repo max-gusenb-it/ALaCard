@@ -144,14 +144,6 @@ export class RoomState extends AngularLifecycle {
                 }
             }
 
-            this.roomSubscription$ = roomObservable
-                .pipe(
-                    takeUntil(this.destroyed$)
-                )
-                .subscribe(r => {
-                    ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
-            });
-
             if (joinOffline) {
                 // Convert room to offline room
                 this.roomSourceService.updateRoom(
@@ -170,6 +162,14 @@ export class RoomState extends AngularLifecycle {
                     );
                 }
             }
+
+            this.roomSubscription$ = roomObservable
+                .pipe(
+                    takeUntil(this.destroyed$)
+                )
+                .subscribe(r => {
+                    ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
+            });
 
             ctx.dispatch(new LoadingActions.EndLoading());
             return Promise.resolve();
