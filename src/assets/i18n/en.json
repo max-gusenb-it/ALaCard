@@ -35,11 +35,10 @@
         "de": "German"
       },
       "colors": {
-        "default": "Default",
+        "default": "Yellow",
         "red": "Red",
         "orange": "Orange",
         "amber": "Amber",
-        "yellow": "Yellow",
         "lime": "Lime",
         "green": "Green",
         "emerald": "Emerald",

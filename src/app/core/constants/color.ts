@@ -1,11 +1,10 @@
 import { systemDefaultValue } from "./systemDefaultValue";
 
 export const supportedColors: string[] = [
-    systemDefaultValue,
     "red",
     "orange",
     "amber",
-    "yellow",
+    systemDefaultValue,
     "lime",
     "green",
     "emerald",
