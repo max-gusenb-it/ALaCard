@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ItChipComponent {
 
+  // ToDo: Convert to ItSelectable
+
   @Input() selectable: boolean = false;
   @Input() selected: boolean = false;
 

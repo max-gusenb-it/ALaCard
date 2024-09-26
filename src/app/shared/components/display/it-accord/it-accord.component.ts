@@ -19,13 +19,13 @@ export class ItAccordComponent extends ItSelectableComponent implements AfterVie
     });
   }
 
-  override unselect(): void {
-    super.unselect();
+  override quietUnselect(): void {
+    super.quietUnselect();
     this.animateToggle();  
   }
 
-  override select(): void {
-    super.select();
+  override quietSelect(): void {
+    super.quietSelect();
     this.animateToggle();
   }
 

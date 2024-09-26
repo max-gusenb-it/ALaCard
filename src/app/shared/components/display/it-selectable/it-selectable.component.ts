@@ -13,20 +13,32 @@ export abstract class ItSelectableComponent {
     id: number = null as any;
 
     toggleState() {
-        this.emitSelection();
+        if (this.selected) {
+            this.unselect();
+        } else {
+            this.select();
+        }
     }
 
     emitSelection() {
         this.selectionEmitter.emit(this.id);
     }
 
-    unselect() {
+    quietUnselect() {
         this.selected = false;
+    }
+
+    quietSelect() {
+        this.selected = true;
+    }
+
+    unselect() {
+        this.quietUnselect();
         this.emitSelection();
     }
 
     select() {
-        this.selected = true;
+        this.quietSelect();
         this.emitSelection();
     }
 

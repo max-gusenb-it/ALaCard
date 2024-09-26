@@ -23,6 +23,7 @@ export class ItSelectionListComponent implements AfterContentInit, AfterViewInit
 
   ngAfterViewInit(): void {
     if ((this.initialSelection !== undefined && this.initialSelection <= this.selectables.length) || this.required) {
+      // ToDo: Fix initial selection
       if (this.initialSelection === undefined) this.initialSelection = 0;
       const selectable = this.selectables.get(this.initialSelection);
       if (!!!selectable) return;
@@ -33,19 +34,22 @@ export class ItSelectionListComponent implements AfterContentInit, AfterViewInit
 
   onSelectionChanged(selectionId: number) {
     let selectable = this.selectables.get(selectionId)!;
+    const numberOfSelectedItem = this.selectables.filter(s => s.selected).length;
     if (selectable.selected) {
-      if (this.singleSelect && this.required) {
+      if (numberOfSelectedItem == 1) {
         return;
       }
-      if (!this.singleSelect && this.required && this.selectables.filter(s => s.selected).length === 1) {
-        return;
+      else {
+        if (this.singleSelect) {
+          this.selectables.filter(s => s.id !== selectionId).map(s => s.quietUnselect());
+        }
       }
-      selectable.unselect();
     } else {
-      if (this.singleSelect) {
-        this.selectables.filter(s => s.id !== selectionId).map(s => s.unselect());
+      if (numberOfSelectedItem == 0) {
+        if (this.required) {
+          selectable.quietSelect();
+        }
       }
-      selectable.select();
     }
   }
 }
