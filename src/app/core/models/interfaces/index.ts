@@ -22,6 +22,8 @@ export { Player } from "./logic/room/Player";
 export { Room } from "./logic/room/Room";
 export { RoomSettings } from "./logic/room/RoomSettings";
 
+export { RoomInformation } from "./state/information/RoomInformation";
+
 export { User } from "./logic/user/User";
 export { Settings } from "./logic/user/Settings";
 export { FirestoreBase } from "./logic/FirestoreBase";

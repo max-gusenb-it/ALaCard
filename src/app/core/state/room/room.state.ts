@@ -23,6 +23,7 @@ import { ResponseDataSourceService } from "../../services/data-source/response-d
 import { RoundStartNotifierSourceService } from "../../services/data-source/round-start-notifier-source.service";
 import { GameState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
+import { InformationActions } from "../information";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -170,6 +171,8 @@ export class RoomState extends AngularLifecycle {
                 .subscribe(r => {
                     ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
             });
+
+            this.store.dispatch(new InformationActions.SetRoom(initialRoom.id!));
 
             ctx.dispatch(new LoadingActions.EndLoading());
             return Promise.resolve();

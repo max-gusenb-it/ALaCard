@@ -33,6 +33,7 @@ import { ROOM_STATE_TOKEN, RoomState } from './core/state/room/room.state';
 import { ErrorMonitorState } from './core/state/error-monitor';
 import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { INFORMATION_STATE_TOKEN, InformationState } from './core/state/information';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,14 +54,15 @@ export function HttpLoaderFactory(http: HttpClient) {
         LoadingState,
         RoomState,
         DeckState,
-        ErrorMonitorState
+        ErrorMonitorState,
+        InformationState
       ], 
       {
         developmentMode: !environment.production
       }
     ),
     NgxsStoragePluginModule.forRoot({
-      key: [AUTHENTICATION_STATE_TOKEN, ROOM_STATE_TOKEN, DECK_STATE_TOKEN]
+      key: [AUTHENTICATION_STATE_TOKEN, ROOM_STATE_TOKEN, DECK_STATE_TOKEN, INFORMATION_STATE_TOKEN]
     }),
     TranslateModule.forRoot({
       loader: {

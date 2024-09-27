@@ -1,6 +1,8 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { firstValueFrom, timer } from 'rxjs';
+import { InformationActions, InformationState } from 'src/app/core/state/information';
 
 @Component({
   selector: 'ground-rules',
@@ -30,8 +32,6 @@ import { firstValueFrom, timer } from 'rxjs';
 })
 export class GroundRulesComponent implements AfterViewInit {
 
-  rulesRead: boolean = false;
-
   currentRuleIndex: number = 0;
 
   @Input() deckname: string;
@@ -41,7 +41,7 @@ export class GroundRulesComponent implements AfterViewInit {
 
   @Output() onRulesRead: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngAfterViewInit() {
     if (this.groundRules.length === 1) {
@@ -62,7 +62,7 @@ export class GroundRulesComponent implements AfterViewInit {
     if (this.currentRuleIndex < (this.groundRules.length - 1)) {
       this.currentRuleIndex = this.currentRuleIndex + 1;
     }
-    if (this.currentRuleIndex + 1 === this.groundRules.length && !this.rulesRead) {
+    if (this.currentRuleIndex + 1 === this.groundRules.length) {
       this.emitRulesRead();
     }
   }
@@ -75,9 +75,12 @@ export class GroundRulesComponent implements AfterViewInit {
   }
 
   emitRulesRead() {
-    this.rulesRead = true;
-    firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 100))
-      .then(() => this.onRulesRead.emit(true));
+    if (!this.store.selectSnapshot(InformationState.roomRulesRead)) {
+      console.log ("Emitting rules read");
+      this.store.dispatch(new InformationActions.RoomRulesRead());
+      firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 100))
+        .then(() => this.onRulesRead.emit(true));
+    }
   }
 
 }
