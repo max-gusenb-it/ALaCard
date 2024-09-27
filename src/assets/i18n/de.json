@@ -97,7 +97,9 @@
           "freeText": "Frei Text",
           "playerVoting": "Spieler Abstimmung"
         }
-      }
+      },
+      "start-game": "Spiel starten",
+      "continue": "Weiter"
     }
   },
   "shared": {

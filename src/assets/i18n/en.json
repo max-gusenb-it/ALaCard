@@ -97,7 +97,9 @@
           "freeText": "Free Text",
           "playerVoting": "Player Voting"
         }
-      }
+      },
+      "start-game": "Start Game",
+      "continue": "Continue"
     }
   },
   "shared": {

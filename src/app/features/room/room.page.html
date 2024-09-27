@@ -26,11 +26,11 @@
     <game class="flex grow" *ngIf="gameStarted$ | async"></game>
     <div class="flex gap-x-4 justify-end">
       <it-button class="flex grow" size="big" *ngIf="isUserRoomCreator() && !(gameStarted$ | async)" (click)="startGame()">
-        Start Game
+        {{ "features.room.start-game" | translate }}
       </it-button>
       
       <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (ingameData$ | async)?.rounds?.length === 0">
-        Continue {{getRuleReadCount()}} / {{getActivePlayerCount((room$ | async)?.players)}}
+        {{ "features.room.continue" | translate }} {{getRuleReadCount()}} / {{getActivePlayerCount((room$ | async)?.players)}}
       </it-button>
   
       <it-menu-button [menuItemIcons]="getMenuItems()" (menuItemClicked)="handleMenuAction($event)"/>
