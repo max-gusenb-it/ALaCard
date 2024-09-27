@@ -13,12 +13,17 @@ export class CardComponent {
   @Input() text: string = "";
   @Input() deckname: string = "";
 
-  @Output() swipe: EventEmitter<boolean> = new EventEmitter();
+  @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
+  @Output() onClick: EventEmitter<boolean> = new EventEmitter();
 
   touchStartX = 0;
   touchEndX = 0;
 
   constructor(private translateService: TranslateService) { }
+
+  cardClicked(event: MouseEvent) {
+    this.onClick.emit(event.clientX <= window.innerWidth / 2);
+  }
 
   @HostListener('touchstart', ['$event']) handleTouchStart(event: TouchEvent) {
     this.touchStartX = event.changedTouches[0].screenX;
@@ -30,8 +35,8 @@ export class CardComponent {
   }
 
   checkDirection() {
-    if (this.touchEndX < this.touchStartX && (this.touchStartX - this.touchEndX) >= 100) this.swipe.emit(true);
-    if (this.touchEndX > this.touchStartX && (this.touchEndX - this.touchStartX) >= 100) this.swipe.emit(false);
+    if (this.touchEndX < this.touchStartX && (this.touchStartX - this.touchEndX) >= 100) this.onSwipe.emit(true);
+    if (this.touchEndX > this.touchStartX && (this.touchEndX - this.touchStartX) >= 100) this.onSwipe.emit(false);
   }
 
   getCardTitle() {

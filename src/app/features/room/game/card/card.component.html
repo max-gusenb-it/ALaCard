@@ -5,6 +5,7 @@
     'border-it_yellow-500 bg-it_yellow-500': cardType <= 1,
     'border-red-500 bg-red-500': cardType === 2,
   }"
+  (click)="cardClicked($event)"
 >
   <p 
     class="rounded-t-xl text-2xl font-bold py-2 px-3"

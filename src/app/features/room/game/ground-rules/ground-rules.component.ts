@@ -49,7 +49,7 @@ export class GroundRulesComponent implements AfterViewInit {
     }
   }
 
-  swipe(direction: boolean) {
+  navigate(direction: boolean) {
     if (direction) {
       this.nextRule();
     } else {

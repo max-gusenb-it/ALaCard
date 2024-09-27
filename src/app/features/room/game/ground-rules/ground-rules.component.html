@@ -13,8 +13,8 @@
       <card
         class="absolute"
         *ngIf="currentRuleIndex % 2 === 0"
-        (click)="nextRule()"
-        (swipe)="swipe($event)"
+        (onClick)="navigate(!$event)"
+        (onSwipe)="navigate($event)"
         [cardType]="0"
         [text]="groundRules[currentRuleIndex]"
         [deckname]="deckname"
@@ -24,8 +24,8 @@
       <card
         class="absolute"
         *ngIf="currentRuleIndex % 2 === 1"
-        (click)="nextRule()"
-        (swipe)="swipe($event)"
+        (onClick)="navigate(!$event)"
+        (onSwipe)="navigate($event)"
         [cardType]="0"
         [text]="groundRules[currentRuleIndex]"
         [deckname]="deckname"
