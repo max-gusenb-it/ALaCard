@@ -1,9 +1,9 @@
 <div class="flex grow" *ngIf="!!room && !!ingameData">
-  <ground-rules
+  <game-rules
     class="flex grow"
     *ngIf="ingameData.rounds.length === 0"
     [deckname]="(deckname$ | async)!"
     [groundRules]="room.game!.deck!.groundRules!"
     (onRulesRead)="onRulesRead()"
-  ></ground-rules>
+  ></game-rules>
 </div>

@@ -5,9 +5,9 @@ import { firstValueFrom, timer } from 'rxjs';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
 
 @Component({
-  selector: 'ground-rules',
-  templateUrl: './ground-rules.component.html',
-  styleUrls: ['./ground-rules.component.scss'],
+  selector: 'game-rules',
+  templateUrl: './game-rules.component.html',
+  styleUrls: ['./game-rules.component.scss'],
   animations: [
     trigger('slideToggle', [
       transition('* => *', [
@@ -30,7 +30,7 @@ import { InformationActions, InformationState } from 'src/app/core/state/informa
     ])
   ]
 })
-export class GroundRulesComponent implements AfterViewInit {
+export class GameRulesComponent implements AfterViewInit {
 
   currentRuleIndex: number = 0;
 

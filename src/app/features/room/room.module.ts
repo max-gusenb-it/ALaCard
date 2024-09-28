@@ -14,7 +14,7 @@ import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bott
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { GameComponent } from './game/game.component';
 import { CardComponent } from './game/card/card.component';
-import { GroundRulesComponent } from './game/ground-rules/ground-rules.component';
+import { GameRulesComponent } from './game/game-rules/game-rules.component';
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import { GroundRulesComponent } from './game/ground-rules/ground-rules.component
     StartGameModal,
     GameComponent,
     CardComponent,
-    GroundRulesComponent
+    GameRulesComponent
   ]
 })
 export class RoomPageModule {}
