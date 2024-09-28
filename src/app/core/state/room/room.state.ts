@@ -171,8 +171,14 @@ export class RoomState extends AngularLifecycle {
                 .subscribe(r => {
                     ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
             });
-
-            this.store.dispatch(new InformationActions.SetRoom(initialRoom.id!));
+            
+            if (!!initialRoom.game?.comparyValue) {
+                this.store.dispatch(new InformationActions.SetGameInformation({
+                    compareValue: initialRoom.game.comparyValue,
+                    rulesReadSend: false,
+                    gameRulesCardIndex:  0
+                }));
+            }
 
             ctx.dispatch(new LoadingActions.EndLoading());
             return Promise.resolve();
@@ -262,13 +268,21 @@ export class RoomState extends AngularLifecycle {
         const state = ctx.getState();
 
         if (!!!state.room) return;
+
+        const compareValue = new Date().valueOf();
+
+        this.store.dispatch(new InformationActions.SetGameInformation({
+            compareValue: compareValue,
+            rulesReadSend: false,
+            gameRulesCardIndex:  0
+        }));
         
         return this.loadingHelperService.loadWithLoadingState([
             this.roomSourceService.updateRoom(
                 {
                     ...state.room,
                     game: {
-                        comparyValue: new Date().valueOf(),
+                        comparyValue: compareValue,
                         state: GameState.started,
                         deck: action.deck,
                         settings: {}

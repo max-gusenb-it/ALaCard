@@ -12,3 +12,8 @@ export namespace RoomStateErrors {
 export namespace SharedErrors {
     export const unknownError = "unknown-error";
 }
+
+export namespace InformationStateErrors {
+    export const gameRulesReadCPNotFound = "information-state.game-rules-read.cp-not-found";
+    export const setGameRulesCardIndex = "information-state.set-game-rules-card-index.cp-not-found";
+}

@@ -2,47 +2,75 @@ import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { InformationStateModel } from "./information.model";
 import { Injectable } from "@angular/core";
 import { InformationActions } from "./information.actions";
-import { RoomInformation } from "../../models/interfaces";
+import { GameInformation } from "../../models/interfaces";
+import { ItError } from "../../models/classes";
+import { InformationStateErrors } from "../../constants/errorCodes";
 
 export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('information');
 
 @State<InformationStateModel>({
     name: INFORMATION_STATE_TOKEN,
     defaults: { 
-        roomInformations: undefined
+        GameInformations: undefined
     }
 })
 @Injectable()
 export class InformationState {
     @Selector()
-    static roomInformation(state: InformationStateModel) : undefined | RoomInformation {
-        return state.roomInformations;
+    static gameInformation(state: InformationStateModel) : undefined | GameInformation {
+        return state.GameInformations;
     }
 
     @Selector()
-    static roomRulesRead(state: InformationStateModel) : undefined | boolean {
-        return state.roomInformations?.rulesReadSend;
+    static gameRulesRead(state: InformationStateModel) : undefined | boolean {
+        return state.GameInformations?.rulesReadSend;
     }
 
-    @Action(InformationActions.SetRoom)
-    async setRoom(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoom) {
-        // add game compare value so information is not reset on every join
+    @Selector()
+    static gameRulesCardIndex(state: InformationStateModel) : number {
+        return state.GameInformations?.gameRulesCardIndex ?? 0;
+    }
+
+    @Action(InformationActions.SetGameInformation)
+    async setGameInformation(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameInformation) {
+        const state = ctx.getState();
+        if (state.GameInformations?.compareValue === action.gameInformation.compareValue) return;
+        console.log ("Setting game information", action.gameInformation);
         ctx.patchState({
-            roomInformations: {
-                roomID: action.roomID,
-                rulesReadSend: false
+            GameInformations: action.gameInformation
+        });
+    }
+
+    @Action(InformationActions.GameRulesRead)
+    async gameRulesRead(ctx: StateContext<InformationStateModel>, action: InformationActions.GameRulesRead) {
+        const state = ctx.getState();
+        if (!!!state.GameInformations?.compareValue) {
+            throw new ItError(
+                InformationStateErrors.gameRulesReadCPNotFound,
+                InformationState.name
+            )
+        };
+        ctx.patchState({
+            GameInformations: {
+                ...state.GameInformations,
+                rulesReadSend: true
             }
         });
     }
 
-    @Action(InformationActions.RoomRulesRead)
-    async roomRulesRead(ctx: StateContext<InformationStateModel>, action: InformationActions.RoomRulesRead) {
+    @Action(InformationActions.SetGameRulesCardIndex)
+    async setGameRulesCardIndex(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameRulesCardIndex) {
         const state = ctx.getState();
-        if (!!!state.roomInformations?.roomID) return;
+        if (!!!state.GameInformations?.compareValue) {
+            throw new ItError(
+                InformationStateErrors.gameRulesReadCPNotFound,
+                InformationState.name
+            )
+        };
         ctx.patchState({
-            roomInformations: {
-                ...state.roomInformations,
-                rulesReadSend: true
+            GameInformations: {
+                ...state.GameInformations,
+                gameRulesCardIndex: action.gameRulesCardIndex
             }
         });
     }

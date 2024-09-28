@@ -41,7 +41,9 @@ export class GroundRulesComponent implements AfterViewInit {
 
   @Output() onRulesRead: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {
+    this.currentRuleIndex = this.store.selectSnapshot(InformationState.gameRulesCardIndex);
+  }
 
   ngAfterViewInit() {
     if (this.groundRules.length === 1) {
@@ -55,6 +57,7 @@ export class GroundRulesComponent implements AfterViewInit {
     } else {
       this.previousRule();
     }
+    this.store.dispatch(new InformationActions.SetGameRulesCardIndex(this.currentRuleIndex));
   }
 
   nextRule() {
@@ -75,9 +78,9 @@ export class GroundRulesComponent implements AfterViewInit {
   }
 
   emitRulesRead() {
-    if (!this.store.selectSnapshot(InformationState.roomRulesRead)) {
+    if (!this.store.selectSnapshot(InformationState.gameRulesRead)) {
       console.log ("Emitting rules read");
-      this.store.dispatch(new InformationActions.RoomRulesRead());
+      this.store.dispatch(new InformationActions.GameRulesRead());
       firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 100))
         .then(() => this.onRulesRead.emit(true));
     }

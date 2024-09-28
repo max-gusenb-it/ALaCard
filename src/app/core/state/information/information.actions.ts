@@ -1,11 +1,18 @@
+import { GameInformation } from "../../models/interfaces";
+
 export namespace InformationActions {
-    export class SetRoom {
-        static readonly type = '[RoomState] SetRoom';
-        constructor(public roomID: string) {}
+    export class SetGameInformation {
+        static readonly type = '[ToDo] SetGameInformation';
+        constructor(public gameInformation: GameInformation) {}
     }
 
-    export class RoomRulesRead {
-        static readonly type = '[GroundRules] RoomRulesRead';
+    export class GameRulesRead {
+        static readonly type = '[GroundRules] GameRulesRead';
         constructor() {}
+    }
+
+    export class SetGameRulesCardIndex {
+        static readonly type = '[GameRuleComponent] SetGameRulesCardIndex';
+        constructor(public gameRulesCardIndex: number) {}
     }
 }
