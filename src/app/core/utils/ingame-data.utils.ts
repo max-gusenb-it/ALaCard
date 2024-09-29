@@ -11,22 +11,26 @@ export namespace IngameDataUtils {
         };
         if (!!!deck.groundRules || deck.groundRules.length === 0) {
             ingameData.rounds = [
-                createGameRound(deck, ingameData)
+                ...createGameRounds(deck, ingameData)
             ];
         }
         return ingameData;
     }
 
-    export function createGameRound(deck: Deck, ingameData: IngameData) : Round {
+    export function createGameRounds(deck: Deck, ingameData: IngameData) : Round[] {
         const unplayedCards = Array.from(Array(deck.cards.length).keys())
             .filter(i => !ingameData.playedCardIndexes.includes(i));
         const newCardIndex = Math.floor(Math.random() * unplayedCards.length);
         const card = deck.cards[newCardIndex];
+
         const utils = CardUtilFactory.getCardUtils(card.type);
-        return utils.createGameRound(card, {
-            cardIndex: newCardIndex,
-            id: ingameData.playedCardIndexes.length,
-            processed: false
-        });
+        
+        return [
+            utils.createGameRound({
+                id: ingameData.playedCardIndexes.length,
+                cardIndex: newCardIndex,
+                processed: false
+            })
+        ];
     }
 }

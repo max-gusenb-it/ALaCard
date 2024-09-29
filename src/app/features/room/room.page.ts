@@ -132,4 +132,8 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     modal.present();
   }
 
+  continueToGame() {
+    this.store.dispatch(new RoomActions.ContinueToGame(this.ingameDataService.getIngameData()))
+  }
+
 }

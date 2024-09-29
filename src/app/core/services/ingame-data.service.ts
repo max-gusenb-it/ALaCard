@@ -36,6 +36,10 @@ export class IngameDataService extends AngularLifecycle {
         });
     }
 
+    getIngameData() {
+        return this.ingameData$.value;
+    }
+
     getIngameData$() {
         return this.ingameData$.asObservable();
     }

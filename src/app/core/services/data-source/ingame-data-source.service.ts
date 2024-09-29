@@ -31,9 +31,9 @@ export class IngameDataSourceService {
         );
     }
 
-    updateIngameData(ingameData: IngameData) {
+    updateIngameData(ingameData: IngameData, roomId: string) {
         return this.firestoreService.update(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             ingameDataRef,
             ingameData
         );

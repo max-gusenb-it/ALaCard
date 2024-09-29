@@ -1,6 +1,7 @@
-import { Round } from "../game-data/Round";
-import { Card } from "./Card";
+import { Round } from "../game-data/round/Round";
 
-export interface CardUtils {
-    createGameRound(card: Card, baseRound: Round) : Round;
+export class CardUtils {
+    createGameRound(baseRound: Round) : Round {
+        return baseRound;
+    }
 }

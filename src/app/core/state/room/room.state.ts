@@ -172,9 +172,9 @@ export class RoomState extends AngularLifecycle {
                     ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
             });
             
-            if (!!initialRoom.game?.comparyValue) {
+            if (!!initialRoom.game?.compareValue) {
                 this.store.dispatch(new InformationActions.SetGameInformation({
-                    compareValue: initialRoom.game.comparyValue,
+                    compareValue: initialRoom.game.compareValue,
                     rulesReadSend: false,
                     gameRulesCardIndex:  0
                 }));
@@ -282,7 +282,7 @@ export class RoomState extends AngularLifecycle {
                 {
                     ...state.room,
                     game: {
-                        comparyValue: compareValue,
+                        compareValue: compareValue,
                         state: GameState.started,
                         deck: action.deck,
                         settings: {}
@@ -294,5 +294,23 @@ export class RoomState extends AngularLifecycle {
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
             this.roundStartNotifierSourceService.createInitialRoundStartNotifier(state.room.id!)
         ]);
+    }
+
+    @Action(RoomActions.ContinueToGame)
+    continueToGame(ctx: StateContext<RoomStateModel>, action: RoomActions.ContinueToGame) {
+        const state = ctx.getState();
+
+        // ToDo: Create Error
+        if (!!!state.room.game) return;
+
+        const rounds = IngameDataUtils.createGameRounds(state.room.game?.deck, action.ingameData);
+
+        this.ingameDataSourceService.updateIngameData(
+            {
+                ...action.ingameData,
+                rounds: rounds
+            },
+            state.room.id!
+        );
     }
 }

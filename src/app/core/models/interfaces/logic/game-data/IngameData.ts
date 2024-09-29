@@ -1,5 +1,5 @@
 import { FirestoreBase } from "../FirestoreBase";
-import { Round } from "./Round";
+import { Round } from "./round/Round";
 
 export interface IngameData extends FirestoreBase {
     rounds: Round[];

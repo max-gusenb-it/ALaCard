@@ -12,11 +12,12 @@ export { GameSettings } from "./logic/game/GameSettings";
 
 export { IItError } from "./logic/error-monitor/IItError";
 
-export { ResponseData } from "./logic/game-data/ResponseData/ResponeData";
-export { Response } from "./logic/game-data/ResponseData/Response";
-export { IngameData } from "./logic/game-data/IngameData";
-export { Round } from "./logic/game-data/Round";
+export { Round } from "./logic/game-data/round/Round";
+export { IngameData } from "./logic/game-data/IngameData"
 export { RoundStartNotifier } from "./logic/game-data/RoundStartNotifier";
+
+export { ResponseData } from "./logic/response-data/ResponeData";
+export { Response } from "./logic/response-data/Response";;
 
 export { Player } from "./logic/room/Player";
 export { Room } from "./logic/room/Room";

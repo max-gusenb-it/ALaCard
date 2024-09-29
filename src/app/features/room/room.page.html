@@ -29,7 +29,7 @@
         {{ "features.room.start-game" | translate }}
       </it-button>
       
-      <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (ingameData$ | async)?.rounds?.length === 0">
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (ingameData$ | async)?.rounds?.length === 0" (click)="continueToGame()">
         {{ "features.room.continue" | translate }} {{getRuleReadCount()}} / {{getActivePlayerCount((room$ | async)?.players)}}
       </it-button>
   

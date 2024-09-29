@@ -1,4 +1,4 @@
-import { Deck, Room } from "../../models/interfaces";
+import { Deck, IngameData, Room } from "../../models/interfaces";
 
 export namespace RoomActions {
     
@@ -39,5 +39,10 @@ export namespace RoomActions {
     export class StartGame {
         static readonly type = '[Start-Game-Modal] StartGame';
         constructor(public deck: Deck) {};
+    }
+
+    export class ContinueToGame {
+        static readonly type = '[Game-Rules] ContinueToGame';
+        constructor(public ingameData: IngameData) {};
     }
 }

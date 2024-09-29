@@ -3,7 +3,7 @@ import { Deck } from "./Deck";
 import { GameSettings } from "./GameSettings";
 
 export interface Game {
-    comparyValue: number;
+    compareValue: number;
     state: GameState;
     deck: Deck;
     settings: GameSettings;
