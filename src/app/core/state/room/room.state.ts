@@ -267,7 +267,12 @@ export class RoomState extends AngularLifecycle {
     startGame(ctx: StateContext<RoomStateModel>, action: RoomActions.StartGame) {
         const state = ctx.getState();
 
-        if (!!!state.room) return;
+        if (!!!state.room) {
+            throw new ItError(
+                RoomStateErrors.startGameReadRoomNotFound,
+                RoomState.name
+            )
+        };
 
         const compareValue = new Date().valueOf();
 
@@ -300,8 +305,12 @@ export class RoomState extends AngularLifecycle {
     continueToGame(ctx: StateContext<RoomStateModel>, action: RoomActions.ContinueToGame) {
         const state = ctx.getState();
 
-        // ToDo: Create Error
-        if (!!!state.room.game) return;
+        if (!!!state.room?.game) {
+            throw new ItError(
+                RoomStateErrors.continueToGameReadGameNotFound,
+                RoomState.name
+            )
+        };
 
         const rounds = IngameDataUtils.createGameRounds(state.room.game?.deck, action.ingameData);
 
@@ -318,8 +327,12 @@ export class RoomState extends AngularLifecycle {
     endGame(ctx: StateContext<RoomStateModel>, action: RoomActions.EndGame) {
         const state = ctx.getState();
 
-        // ToDo: Create Error
-        if (!!!state.room.game) return;
+        if (!!!state.room?.game) {
+            throw new ItError(
+                RoomStateErrors.endGameReadGameNotFound,
+                RoomState.name
+            )
+        };
 
         this.roomSourceService.updateRoom(
             {
