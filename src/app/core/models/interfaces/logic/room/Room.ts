@@ -13,5 +13,5 @@ export interface Room extends FirestoreBase {
     players: {
       [key: string]: Player;
     };
-    game?: Game;
+    game: Game | null;
 }

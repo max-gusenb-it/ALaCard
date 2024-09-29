@@ -50,7 +50,8 @@ export class RoomSourceService {
                     settings: {
                         singleDeviceMode: false,
                         otherAdmin: true
-                    }
+                    },
+                    game: null
                 }
             );
         } else {

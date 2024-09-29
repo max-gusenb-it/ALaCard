@@ -17,6 +17,11 @@ import { IngameDataService } from 'src/app/core/services/ingame-data.service';
 import { ResponseDataService } from 'src/app/core/services/response-data.service';
 import { PlayerState } from 'src/app/core/models/enums';
 
+const leaveRoomMenuItem = 'exit_to_app';
+const shareMenuItem = 'share';
+const settingsMenuItem = 'settings';
+const endGameMenuItem = 'stop';
+
 @Component({
   selector: 'app-room',
   templateUrl: './room.page.html'
@@ -64,9 +69,21 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!)?.id;
   }
 
+  getMenuItems() {
+    let menuItems = [leaveRoomMenuItem, shareMenuItem];
+    if (this.isUserRoomAdmin()) {
+      menuItems = [...menuItems, settingsMenuItem]; // ToDo: add 'help', 'report_problem' to button
+      
+      if (!!this.store.selectSnapshot(RoomState.room)?.game) {
+        menuItems = [endGameMenuItem, ...menuItems];
+      }
+    }
+    return menuItems;
+  }
+
   handleMenuAction(actionType: string) {
     switch(actionType) {
-      case("exit_to_app"):
+      case(leaveRoomMenuItem):
         const ref = this.popupService.openBottomSheet(
           ItOptionBottomSheet, 
           {
@@ -85,7 +102,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
           }
         );
         break;
-      case("share"):
+      case(shareMenuItem):
         const room = this.store.selectSnapshot(RoomState.room);
         if (!!room) {
           this.popupService.openBottomSheet(
@@ -96,11 +113,13 @@ export class RoomPage extends AngularLifecycle implements OnInit {
           );
         }
         break;
-      case("settings"): {
-        this.popupService.openBottomSheet(
-          RoomSettingsBottomSheet
-        );
-      }
+      case(settingsMenuItem): {
+          this.popupService.openBottomSheet(RoomSettingsBottomSheet);
+        }
+        break;
+      case(endGameMenuItem): {
+          this.endGame();
+        }
     }
   }
 
@@ -117,14 +136,6 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     return this.responseDataService.getResponseDataForRound(-1).length;
   }
 
-  getMenuItems() {
-    if (this.isUserRoomAdmin()) {
-      return ['exit_to_app', 'share', 'settings']; // ToDo: add 'help', 'report_problem' to button
-    } else {
-      return ['exit_to_app', 'share'];
-    }
-  }
-
   async startGame() {
     const modal = await this.modalCtrl.create({
       component: StartGameModal
@@ -134,6 +145,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   continueToGame() {
     this.store.dispatch(new RoomActions.ContinueToGame(this.ingameDataService.getIngameData()))
+  }
+
+  endGame() {
+    this.store.dispatch(new RoomActions.EndGame());
   }
 
 }

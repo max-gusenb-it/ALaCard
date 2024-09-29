@@ -45,4 +45,9 @@ export namespace RoomActions {
         static readonly type = '[Game-Rules] ContinueToGame';
         constructor(public ingameData: IngameData) {};
     }
+
+    export class EndGame {
+        static readonly type = '[Room] EndGame';
+        constructor() {}; 
+    }
 }

@@ -313,4 +313,20 @@ export class RoomState extends AngularLifecycle {
             state.room.id!
         );
     }
+
+    @Action(RoomActions.EndGame)
+    endGame(ctx: StateContext<RoomStateModel>, action: RoomActions.EndGame) {
+        const state = ctx.getState();
+
+        // ToDo: Create Error
+        if (!!!state.room.game) return;
+
+        this.roomSourceService.updateRoom(
+            {
+                ...state.room,
+                game: null
+            },
+            state.room.id!
+        )
+    }
 }
