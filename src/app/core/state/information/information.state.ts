@@ -35,7 +35,6 @@ export class InformationState {
     async setGameInformation(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameInformation) {
         const state = ctx.getState();
         if (state.GameInformations?.compareValue === action.gameInformation.compareValue) return;
-        console.log ("Setting game information", action.gameInformation);
         ctx.patchState({
             GameInformations: action.gameInformation
         });
@@ -44,12 +43,14 @@ export class InformationState {
     @Action(InformationActions.GameRulesRead)
     async gameRulesRead(ctx: StateContext<InformationStateModel>, action: InformationActions.GameRulesRead) {
         const state = ctx.getState();
+
         if (!!!state.GameInformations?.compareValue) {
             throw new ItError(
                 InformationStateErrors.gameRulesReadCPNotFound,
                 InformationState.name
             )
         };
+
         ctx.patchState({
             GameInformations: {
                 ...state.GameInformations,
