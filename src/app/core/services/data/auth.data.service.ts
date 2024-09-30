@@ -5,7 +5,7 @@ import { ItError } from "../../models/classes";
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService {
+export class AuthDataService {
     constructor(private fireAuth: AngularFireAuth) { }
 
     getAuthState() {
@@ -25,7 +25,7 @@ export class AuthService {
             .catch(error => {
                 throw new ItError(
                     error.code,
-                    AuthService.name
+                    AuthDataService.name
                 );
             });
     }
@@ -35,7 +35,7 @@ export class AuthService {
             .catch(error => {
                 throw new ItError(
                     error.code,
-                    AuthService.name
+                    AuthDataService.name
                 );
             });
     }
@@ -45,7 +45,7 @@ export class AuthService {
             .catch(error => {
                 throw new ItError(
                     error.code,
-                    AuthService.name
+                    AuthDataService.name
                 );
             });
     }
@@ -55,7 +55,7 @@ export class AuthService {
             .catch(error => {
                 throw new ItError(
                     error.code,
-                    AuthService.name
+                    AuthDataService.name
                 );
             });
     }

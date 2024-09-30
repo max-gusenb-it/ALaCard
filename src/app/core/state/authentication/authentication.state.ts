@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { AuthenticationActions } from './authentication.actions';
-import { AuthService } from '../../services/data/auth.data.service';
+import { AuthDataService } from '../../services/data/auth.data.service';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
@@ -57,7 +57,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     }
 
     constructor(
-        private authService: AuthService,
+        private authService: AuthDataService,
         private userSourceService: UserSourceService,
         private loadingHelperService: LoadingHelperService,
         private settingsService: SettingsService
