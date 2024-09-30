@@ -109,7 +109,9 @@
         "decks": "Decks",
         "store": "Store",
         "profile": "Profile",
-        "no-room-owned": "You have to create a room first"
+        "no-room-owned": "You have to create a room first",
+        "no-account": "Create an account or sign in",
+        "soon-in-development": "Soon in development :)"
       },
       "profile-editor": {
         "create-profile": "Create your profile",

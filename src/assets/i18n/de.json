@@ -109,7 +109,9 @@
         "store": "Store",
         "home": "Home",
         "profile": "Profil",
-        "no-room-owned": "Du zuerst einen Raum erstellen."
+        "no-room-owned": "Du zuerst einen Raum erstellen.",
+        "no-account": "Erstelle einen Nutzer oder log dich ein",
+        "soon-in-development": "Bald in Entwicklung :)"
       },
       "profile-editor": {
         "create-profile": "Erstelle dein Profil",
