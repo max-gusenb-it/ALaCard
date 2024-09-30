@@ -75,7 +75,8 @@ export class RoomState extends AngularLifecycle {
         return this.loadingHelperService.loadWithLoadingState([
             this.roomSourceService.createRoom(action.name, action.description)
         ]).then(r => {
-            return ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!));
+            return firstValueFrom(ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!)))
+                .then(() => null);
         });
     }
 

@@ -69,22 +69,21 @@ export class ItCreateRoomAsGuestModal {
           },
           this.profileFormData)
         );
-        this.store.select(AuthenticationState.user)
+
+        firstValueFrom(this.store.select(AuthenticationState.user)
           .pipe(
             filter(u => !!u),
             take(1)
-          )
-          .subscribe(() => {
-            firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
+          ))
+          .then(() => {
+            return firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
               this.createRoomFormData.name,
               this.createRoomFormData.description
-            ))).then(s => {
-              this.modalCtrl.dismiss({
-                roomId: s.authentication.user.roomId
-              });
-            })
+            )));
           }
-        );
+        ).then(state => {
+          this.modalCtrl.dismiss({roomId: state?.authentication?.user?.roomId});
+        });
       }
     }
   }

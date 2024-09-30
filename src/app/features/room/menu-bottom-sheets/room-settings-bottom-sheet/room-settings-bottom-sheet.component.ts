@@ -9,7 +9,6 @@ import { RoomSourceService } from 'src/app/core/services/data-source/room-source
 import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
-import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-room-settings-bottom-sheet',
