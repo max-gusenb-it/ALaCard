@@ -2,15 +2,15 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { AuthenticationActions } from './authentication.actions';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/data/auth.data.service';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/data-source/user-source.service';
-import { LoadingHelperService } from '../../services/loading-helper.service';
+import { LoadingHelperService } from '../../services/helper/loading.helper.service';
 import { User } from '../../models/interfaces';
 import { systemDefaultValue } from '../../constants/systemDefaultValue';
-import { SettingsService } from '../../services/settings.service';
+import { SettingsService } from '../../services/service/settings.service';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 

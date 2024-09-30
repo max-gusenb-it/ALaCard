@@ -7,15 +7,15 @@ import { AuthenticationActions, AuthenticationState } from 'src/app/core/state';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { supportedLanguages } from 'src/app/core/constants/languages';
-import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
 import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
 import { supportedColors } from 'src/app/core/constants/color';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
 import { ItAddAccountModal } from 'src/app/shared/components/forms/it-add-account-modal/it-add-account-modal.component';
-import { PopupService } from 'src/app/core/services/popup.service';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
 import { systemDefaultValue } from 'src/app/core/constants/systemDefaultValue';
+import { LoadingHelperService } from 'src/app/core/services/helper/loading.helper.service';
 
 @Component({
   selector: 'profile',

@@ -3,7 +3,7 @@ import { RoomStateModel } from "./room.model";
 import { Injectable, NgZone } from "@angular/core";
 import { RoomActions } from "./room.actions";
 import { RoomSourceService } from "../../services/data-source/room-source.service";
-import { LoadingHelperService } from "../../services/loading-helper.service";
+import { LoadingHelperService } from "../../services/helper/loading.helper.service";
 import { AuthenticationActions, AuthenticationState } from "../authentication";
 import { Subscription, firstValueFrom, takeUntil } from "rxjs";
 import { LoadingActions } from "../loading";
@@ -12,7 +12,7 @@ import { ModalController, NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
 import { Room } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
-import { PopupService } from "../../services/popup.service";
+import { PopupService } from "../../services/service/popup.service";
 import { TranslateService } from "@ngx-translate/core";
 import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
@@ -35,7 +35,7 @@ export class RoomState extends AngularLifecycle {
     roomSubscription$: Subscription = null as any;
 
     @Selector()
-    static room(state: RoomStateModel): Room | undefined {
+    static room(state: RoomStateModel): Room | null {
         return state.room;
     }
 
@@ -240,18 +240,19 @@ export class RoomState extends AngularLifecycle {
 
     @Action(RoomActions.LeaveRoom)
     leaveRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.LeaveRoom) {
+        const state = ctx.getState();
+        if (!!!state.room) return;
+
         if (this.roomSubscription$ == null || this.roomSubscription$.closed) {
             this.navController.navigateBack("home");
             return Promise.resolve();
         }
 
         const userId = this.store.selectSnapshot(AuthenticationState.user)?.id!;
-        const player = RoomUtils.generateLeftPlayer(ctx.getState().room, userId);
+        const player = RoomUtils.generateLeftPlayer(state.room, userId);
         if (!!!player) {
             return;
         }
-
-        const state = ctx.getState();
         
         this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId!, userId, player)]);
         this.roomSubscription$.unsubscribe();

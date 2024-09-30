@@ -4,7 +4,7 @@ import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { IngameData, OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
-import { PopupService } from 'src/app/core/services/popup.service';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { AuthenticationState, RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
@@ -13,8 +13,8 @@ import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
-import { IngameDataService } from 'src/app/core/services/ingame-data.service';
-import { ResponseDataService } from 'src/app/core/services/response-data.service';
+import { IngameDataService } from 'src/app/core/services/data/ingame-data.service';
+import { ResponseDataService } from 'src/app/core/services/data/response-data.service';
 import { PlayerState } from 'src/app/core/models/enums';
 
 const leaveRoomMenuItem = 'exit_to_app';

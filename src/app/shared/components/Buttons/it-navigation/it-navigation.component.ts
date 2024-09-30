@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PopupService } from 'src/app/core/services/popup.service';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { AuthenticationState } from 'src/app/core/state';
 import { environment } from 'src/environments/environment';
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Room } from 'src/app/core/models/interfaces';
 import { RoomSettings } from 'src/app/core/models/interfaces/logic/room/room-settings';
 import { RoomSourceService } from 'src/app/core/services/data-source/room-source.service';
-import { LoadingHelperService } from 'src/app/core/services/loading-helper.service';
+import { LoadingHelperService } from 'src/app/core/services/helper/loading.helper.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 

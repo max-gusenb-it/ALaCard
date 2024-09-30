@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { systemDefaultValue } from '../constants/systemDefaultValue';
-import { getBrowserLanguage } from '../utils/language.util';
+import { systemDefaultValue } from '../../constants/systemDefaultValue';
+import { getBrowserLanguage } from '../../utils/language.util';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({

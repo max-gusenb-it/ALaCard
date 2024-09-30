@@ -5,8 +5,21 @@ export interface RoomStateModel {
      * Id's of room that user is currently in
      */
     roomConnectionData: RoomConnectionData;
-    // ToDO: Make optional
-    room: Room;
+
+    
+    /**
+     * Room that user has joined
+     *
+     * @type {(Room | null)}
+     */
+    room: Room | null;
+    
+    /**
+     * Copy of private room for offline use
+     *
+     * @type {(Room | null)}
+     */
+    privateRoom: Room | null;
 }
 
 export interface RoomConnectionData {

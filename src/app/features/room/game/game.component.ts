@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
 import { IngameData, Room } from 'src/app/core/models/interfaces';
 import { ResponseDataSourceService } from 'src/app/core/services/data-source/response-data-source.service';
-import { IngameDataService } from 'src/app/core/services/ingame-data.service';
+import { IngameDataService } from 'src/app/core/services/data/ingame-data.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 

@@ -1,12 +1,12 @@
 import { BehaviorSubject, Observable, Subscription, takeUntil } from "rxjs";
-import { ResponseData, Room } from "../models/interfaces";
-import { ResponseDataSourceService } from "./data-source/response-data-source.service";
+import { ResponseData, Room } from "../../models/interfaces";
+import { ResponseDataSourceService } from "../data-source/response-data-source.service";
 import { Select, Store } from "@ngxs/store";
-import { AuthenticationState, RoomState } from "../state";
+import { AuthenticationState, RoomState } from "../../state";
 import { Injectable } from "@angular/core";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
-import { GameState } from "../models/enums";
-import { RoomUtils } from "../utils/room.utils";
+import { GameState } from "../../models/enums";
+import { RoomUtils } from "../../utils/room.utils";
 
 @Injectable({
     providedIn: 'root'

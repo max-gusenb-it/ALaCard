@@ -1,6 +1,6 @@
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Injectable } from "@angular/core";
-import { ItError } from "../models/classes";
+import { ItError } from "../../models/classes";
 
 @Injectable({
     providedIn: 'root'
