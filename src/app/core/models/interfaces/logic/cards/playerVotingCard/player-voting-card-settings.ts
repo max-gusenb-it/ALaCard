@@ -1,4 +1,4 @@
-import { CardSettings } from "../CardSettings";
+import { CardSettings } from "../card-settings";
 
 export interface PlayerVotingCardSettings extends CardSettings {
     selfVotAllowed: boolean;

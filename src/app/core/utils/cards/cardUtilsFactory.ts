@@ -1,5 +1,5 @@
 import { CardType } from "../../models/enums";
-import { CardUtils } from "../../models/interfaces/logic/cards/CardUtils";
+import { CardUtils } from "../../models/interfaces/logic/cards/card-utils";
 import { PlayerVotingUtils } from "./playerVotingCardUtils";
 
 export namespace CardUtilFactory {

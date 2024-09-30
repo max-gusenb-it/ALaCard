@@ -1,6 +1,6 @@
 import { GameState } from "../../../enums";
-import { Deck } from "./Deck";
-import { GameSettings } from "./GameSettings";
+import { Deck } from "./deck";
+import { GameSettings } from "./game-settings";
 
 export interface Game {
     compareValue: number;

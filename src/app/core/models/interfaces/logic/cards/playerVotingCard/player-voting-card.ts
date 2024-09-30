@@ -1,5 +1,5 @@
-import { Card } from "../Card";
-import { PlayerVotingCardSettings } from "./PlayerVotingCardSettings";
+import { Card } from "../card";
+import { PlayerVotingCardSettings } from "./player-voting-card-settings";
 
 export interface PlayerVotingCard extends Card {
     text: string;

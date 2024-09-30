@@ -2,7 +2,7 @@ import { GameInformation } from "../../models/interfaces";
 
 export namespace InformationActions {
     export class SetGameInformation {
-        static readonly type = '[ToDo] SetGameInformation';
+        static readonly type = '[RoomState] SetGameInformation';
         constructor(public gameInformation: GameInformation) {}
     }
 

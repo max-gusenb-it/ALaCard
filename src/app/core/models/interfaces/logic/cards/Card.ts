@@ -1,5 +1,5 @@
 import { CardType } from "../../../enums";
-import { CardSettings } from "./CardSettings";
+import { CardSettings } from "./card-settings";
 
 export interface Card {
     type: CardType;

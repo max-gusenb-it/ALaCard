@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Deck } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
 import { CardType } from "../../models/enums";
-import { PlayerVotingCard } from "../../models/interfaces/logic/cards/playerVotingCard/PlayerVotingCard";
+import { PlayerVotingCard } from "../../models/interfaces/logic/cards/playerVotingCard/player-voting-card";
 
 export const DECK_STATE_TOKEN = new StateToken<DeckStateModel>('deck');
 

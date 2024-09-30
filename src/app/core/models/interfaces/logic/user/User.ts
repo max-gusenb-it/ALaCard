@@ -1,5 +1,5 @@
-import { FirestoreBase } from "../FirestoreBase";
-import { Settings } from "./Settings";
+import { FirestoreBase } from "../firestore-base";
+import { Settings } from "./settings";
 
 export interface User extends FirestoreBase {
     username: string;

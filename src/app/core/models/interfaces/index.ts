@@ -1,30 +1,30 @@
-export { SnackbarData } from "./components/display/it-snackbar/SnackbarData";
-export { ProfileEditorFormData } from "./components/forms/it-profile-editor-form/ProfileEditorFormData";
-export { CreateRoomFormData } from "./components/forms/it-create-room-form/CreateRoomFormData";
-export { OptionBottomSheetData } from "./components/forms/it-option-bottom-sheet/OptionBottomSheetData";
+export { SnackbarData } from "./components/display/it-snackbar/snackbar-data";
+export { ProfileEditorFormData } from "./components/forms/it-profile-editor-form/profile-editor-form-data";
+export { CreateRoomFormData } from "./components/forms/it-create-room-form/create-room-form-data";
+export { OptionBottomSheetData } from "./components/forms/it-option-bottom-sheet/option-bottom-sheet-data";
 
-export { CreateAccountFormData } from "./features/home/CreateAccountFormData";
+export { CreateAccountFormData } from "./features/home/create-account-form-data";
 
-export { Card } from "./logic/cards/Card";
+export { Card } from "./logic/cards/card";
 
-export { Deck } from "./logic/game/Deck";
-export { GameSettings } from "./logic/game/GameSettings";
+export { Deck } from "./logic/game/deck";
+export { GameSettings } from "./logic/game/game-settings";
 
-export { IItError } from "./logic/error-monitor/IItError";
+export { IItError } from "./logic/error-monitor/it-error";
 
-export { Round } from "./logic/game-data/round/Round";
-export { IngameData } from "./logic/game-data/IngameData"
-export { RoundStartNotifier } from "./logic/game-data/RoundStartNotifier";
+export { Round } from "./logic/game-data/round/round";
+export { IngameData } from "./logic/game-data/ingame-data"
+export { RoundStartNotifier } from "./logic/game-data/round-start-notifier";
 
 export { ResponseData } from "./logic/response-data/ResponeData";
 export { Response } from "./logic/response-data/Response";;
 
-export { Player } from "./logic/room/Player";
-export { Room } from "./logic/room/Room";
-export { RoomSettings } from "./logic/room/RoomSettings";
+export { Player } from "./logic/room/player";
+export { Room } from "./logic/room/room";
+export { RoomSettings } from "./logic/room/room-settings";
 
-export { GameInformation } from "./state/information/GameInformation";
+export { GameInformation } from "./state/information/game-information";
 
-export { User } from "./logic/user/User";
-export { Settings } from "./logic/user/Settings";
-export { FirestoreBase } from "./logic/FirestoreBase";
+export { User } from "./logic/user/user";
+export { Settings } from "./logic/user/settings";
+export { FirestoreBase } from "./logic/firestore-base";

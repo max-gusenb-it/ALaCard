@@ -1,7 +1,7 @@
-import { FirestoreBase } from "../FirestoreBase";
-import { Player } from "./Player";
-import { RoomSettings } from "./RoomSettings";
-import { Game } from "../game/Game";
+import { FirestoreBase } from "../firestore-base";
+import { Player } from "./player";
+import { RoomSettings } from "./room-settings";
+import { Game } from "../game/game";
 
 export interface Room extends FirestoreBase {
     name: string;

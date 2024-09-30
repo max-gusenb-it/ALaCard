@@ -17,7 +17,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
 import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
-import { RoomSettings } from "../../models/interfaces/logic/room/RoomSettings";
+import { RoomSettings } from "../../models/interfaces/logic/room/room-settings";
 import { IngameDataSourceService } from "../../services/data-source/ingame-data-source.service";
 import { ResponseDataSourceService } from "../../services/data-source/response-data-source.service";
 import { RoundStartNotifierSourceService } from "../../services/data-source/round-start-notifier-source.service";

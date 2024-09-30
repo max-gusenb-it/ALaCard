@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { User } from 'src/app/core/models/interfaces/logic/user/User';
+import { User } from 'src/app/core/models/interfaces/logic/user/user';
 import { AuthenticationActions, AuthenticationState } from 'src/app/core/state';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
 import { FormControl, FormGroup } from '@angular/forms';

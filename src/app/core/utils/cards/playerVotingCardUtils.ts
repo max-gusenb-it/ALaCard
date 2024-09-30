@@ -1,4 +1,4 @@
-import { CardUtils } from "../../models/interfaces/logic/cards/CardUtils";
+import { CardUtils } from "../../models/interfaces/logic/cards/card-utils";
 
 class PlayerVotingCardUtils extends CardUtils {
 }

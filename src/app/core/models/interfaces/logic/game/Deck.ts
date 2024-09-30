@@ -1,4 +1,4 @@
-import { Card } from "../cards/Card";
+import { Card } from "../cards/card";
 
 export interface Deck {
     name: string;

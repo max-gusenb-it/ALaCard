@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
-import { Room } from "../../models/interfaces/logic/room/Room";
+import { Room } from "../../models/interfaces/logic/room/room";
 import { FirestoreService } from "./firestore.service";
 import { Store } from "@ngxs/store";
 import { AuthenticationState } from "../../state";

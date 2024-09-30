@@ -1,5 +1,7 @@
-export { CardType } from "./logic/deck/CardType";
+export { CardType } from "./logic/deck/card-type";
 
-export { PlayerState } from "./logic/room/PlayerState";
+export { PlayerState } from "./logic/room/player-state";
 
-export { GameState } from "./logic/game/GameState";
+export { GameState } from "./logic/game/game-state";
+
+export { LoadingStates } from "./state/loading/loading-states";

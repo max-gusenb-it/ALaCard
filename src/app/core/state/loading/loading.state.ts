@@ -1,7 +1,7 @@
 import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { LoadingStateModel } from "./loading.model";
 import { Injectable } from "@angular/core";
-import { LoadingStates } from "./ELoadingStates";
+import { LoadingStates } from "../../models/enums/logic/state/loading/loading-states";
 import { LoadingActions } from "./loading.actions";
 
 const LOADING_STATE_TOKEN = new StateToken<LoadingStateModel>('loading');

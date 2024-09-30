@@ -1,4 +1,4 @@
-import { Room } from "../../models/interfaces/logic/room/Room";
+import { Room } from "../../models/interfaces/logic/room/room";
 
 export interface RoomStateModel {
     /**

@@ -1,1 +1,1 @@
-export { ItError } from "./logic/error-monitor/ItError";
+export { ItError } from "./logic/error-monitor/it-error";
