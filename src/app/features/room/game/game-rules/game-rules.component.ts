@@ -12,13 +12,13 @@ import { InformationActions, InformationState } from 'src/app/core/state/informa
     trigger('slideToggle', [
       transition('* => *', [
           group([
-              query(':enter', style({ transform: 'translateX({{ enterStart }})', opacity: 0 })),
+              query(':enter', style({ transform: 'translateX({{ enterStart }})', opacity: 0 }), { optional: true }),
               query(':leave', [
                   animate('750ms ease-in-out', style({ transform: 'translateX({{ leaveEnd }})', opacity: 0 }))
               ], { optional: true }),
               query(':enter', [
                   animate('750ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
-              ])
+              ], { optional: true })
           ])
       ],
       { 

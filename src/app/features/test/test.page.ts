@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ExampleComponent } from '../../shared/components/display/example/example.component';
-import { PopupService } from 'src/app/core/services/popup.service';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 
 @Component({
   selector: 'app-test',
