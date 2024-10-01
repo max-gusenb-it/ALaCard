@@ -25,17 +25,21 @@ export class ItNavigationComponent {
   ) { }
 
   navigate(url: string) {
-    if (url !== "/home" && !this.store.selectSnapshot(AuthenticationState.isAuthenticated) && url !== "/test") {
-      this.popupService.openSnackbar(
-        this.translateService.instant("shared.components.navigation.no-account")
-      );
-      return;
+    if (url !== "/home" && !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ) {
+      if (environment.production || !environment.production && url !== '/test') {
+        this.popupService.openSnackbar(
+          this.translateService.instant("shared.components.navigation.no-account")
+        );
+        return;
+      }
     }
-    if (inDevUrls.includes(url) && url !== "/test") {
-      this.popupService.openSnackbar(
-        this.translateService.instant("shared.components.navigation.soon-in-development")
-      );
-      return;
+    if (inDevUrls.includes(url)) {
+      if (environment.production || !environment.production && url !== '/test') {
+        this.popupService.openSnackbar(
+          this.translateService.instant("shared.components.navigation.soon-in-development")
+        );
+        return;
+      }
     }
     if (url === "/room") {
       const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
