@@ -13,13 +13,6 @@ export interface RoomStateModel {
      * @type {(Room | null)}
      */
     room: Room | null;
-    
-    /**
-     * Copy of private room for offline use
-     *
-     * @type {(Room | null)}
-     */
-    privateRoom: Room | null;
 }
 
 export interface RoomConnectionData {
