@@ -11,19 +11,19 @@ import { ItSignUpModal } from 'src/app/shared/components/forms/it-sign-up-modal/
 export class NoAccountComponent {
 
   constructor(
-    private modalController: ModalController,
+    private modalCtrl: ModalController,
     private navController: NavController
   ) { }
 
   async openSignInModal() {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: ItSignInModal
     });
     modal.present();
   }
 
   async openSignUpModal() {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: ItSignUpModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"
@@ -32,7 +32,7 @@ export class NoAccountComponent {
   }
 
   async openCreateRoomAsGuestModal() {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: ItCreateRoomAsGuestModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"

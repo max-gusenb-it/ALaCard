@@ -15,6 +15,7 @@ import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { GameComponent } from './game/game.component';
 import { CardComponent } from './game/card/card.component';
 import { GameRulesComponent } from './game/game-rules/game-rules.component';
+import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { GameRulesComponent } from './game/game-rules/game-rules.component';
     RoomSettingsBottomSheet,
     ShareBottomSheet,
     StartGameModal,
+    AddOfflinePlayerBottomSheet,
     GameComponent,
     CardComponent,
     GameRulesComponent

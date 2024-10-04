@@ -31,6 +31,11 @@ export namespace RoomActions {
         constructor(public creatorId: string | null, public room: Room | null) {}
     }
 
+    export class AddOfflinePlayer {
+        static readonly type = '[Add-Offline-Player-Bottom-Sheet] AddOfflinePlayer';
+        constructor(public playerName: string) {};
+    }
+
     export class LeaveRoom {
         static readonly type = '[Room] LeaveRoom';
         constructor() {}

@@ -16,6 +16,7 @@ import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { IngameDataService } from 'src/app/core/services/data/ingame-data.service';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.service';
 import { PlayerState } from 'src/app/core/models/enums';
+import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
@@ -121,6 +122,12 @@ export class RoomPage extends AngularLifecycle implements OnInit {
           this.endGame();
         }
     }
+  }
+
+  addOfflinePlayer() {
+    this.popupService.openBottomSheet(
+      AddOfflinePlayerBottomSheet
+    )
   }
 
   mapPlayersToArray(players: { [key: string]: Player }) {

@@ -17,6 +17,8 @@ export class PopupService {
     public overlay: Overlay
   ) { }
 
+  // ToDo: Add Open modal -> modalCtrl
+
   openBottomSheet(component: ComponentType<unknown>, config?: DialogConfig<unknown, DialogRef<unknown, unknown>, BasePortalOutlet> | undefined) {
     if (config == null) {
       config = {};

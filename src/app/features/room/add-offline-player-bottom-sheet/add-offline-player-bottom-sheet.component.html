@@ -1,0 +1,22 @@
+<form
+  [formGroup]="addOfflinePlayerForm"
+  class="flex flex-col gap-4"
+  (submit)="submitPlayer()"
+>
+  <it-button-heading
+    icon="close"
+    (click)="close()"
+  >
+    {{ 'features.room.add-offline-player-sheet.title' | translate }}
+  </it-button-heading>
+  <it-input
+    icon="person"
+    [label]="'features.room.add-offline-player-sheet.player-name' | translate"
+    name="name"
+    formControlName="name"
+  />
+  <div class="flex flex-row gap-4">
+    <it-button class="flex grow flex-1" size="small" color="secondary" (click)="close()" type="button">{{ 'actions.cancel' | translate}}</it-button>
+    <it-button class="flex grow flex-1" size="small" type="submit" [disabled]="!addOfflinePlayerForm.valid">{{ 'actions.save' | translate}}</it-button>
+  </div>
+</form>

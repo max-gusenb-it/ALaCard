@@ -86,6 +86,8 @@ export class RoomState extends AngularLifecycle {
             this.roomSubscription$.unsubscribe();
         }
 
+        // ToDo: Add loading screen when loading room
+
         // check if user exists
         try {
             let user = this.store.selectSnapshot(AuthenticationState.user);
@@ -233,6 +235,11 @@ export class RoomState extends AngularLifecycle {
             this.navController.navigateBack('home');
             return;
         }
+    }
+
+    @Action(RoomActions.AddOfflinePlayer)
+    addOfflinePlayer(ctx: StateContext<RoomStateModel>, action: RoomActions.AddOfflinePlayer) {
+        console.log (action.playerName);
     }
 
     @Action(RoomActions.LeaveRoom)

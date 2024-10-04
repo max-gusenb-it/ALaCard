@@ -99,7 +99,11 @@
         }
       },
       "start-game": "Start Game",
-      "continue": "Continue"
+      "continue": "Continue",
+      "add-offline-player-sheet": {
+        "title": "Add Player",
+        "player-name": "Name"
+      }
     }
   },
   "shared": {
