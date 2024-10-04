@@ -191,7 +191,10 @@
 
           <it-chip>Chip</it-chip>
 
-          <it-selection-list #accordion>
+          <it-selection-list 
+            [required]="true"
+            #accordion
+          >
             <it-accord (selectionEmitter)="accordion.onSelectionChanged($event)"
               heading="How To Play?"
             >
