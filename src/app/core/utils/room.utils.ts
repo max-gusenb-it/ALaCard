@@ -2,11 +2,8 @@ import { environment } from "src/environments/environment";
 import { Player, Room, User } from "../models/interfaces";
 import { UserUtils } from "./user.utils";
 import { PlayerState } from "../models/enums";
-import { RoomSourceServiceErrors } from "../constants/errorCodes";
-import { RoomSourceService } from "../services/data-source/room-source.service";
-import { ItError } from "../models/classes";
 import { Store } from "@ngxs/store";
-import { RoomState } from "../state";
+import { AuthenticationState, RoomState } from "../state";
 import { roomsRef, usersRef } from "../constants/firestoreReferences";
 
 export namespace RoomUtils {    
@@ -21,11 +18,8 @@ export namespace RoomUtils {
     export function getRoomCollectionRef(store: Store, creatorId?: string) {
         const room = store.selectSnapshot(RoomState.room);
         if (!!!room && !!!creatorId) {
-            // ToDo: Throw better error -> no it error -> not user fault, if this code is executed => my fault :)
-            throw new ItError(
-                RoomSourceServiceErrors.getRoomNoUser,
-                RoomSourceService.name
-            );
+            // Currently joined in no room
+            creatorId = store.selectSnapshot(AuthenticationState.userid);
         }
         if (!!!creatorId && !!room) {
             creatorId = getRoomCreator(room).id;
@@ -99,9 +93,9 @@ export namespace RoomUtils {
     export function generateJoinLink(room: Room) : string {
         const creator = getRoomCreator(room);
         if (environment.production) {
-            return `https://alacard-de849.web.app/room/${room.id}-${creator.id}`;
+            return `https://alacard-de849.web.app/room/${creator.id}-${room.id}`;
         } else {
-            return `http://localhost:8100/room/${room.id}-${creator.id}`;
+            return `http://localhost:8100/room/${creator.id}-${room.id}`;
         }
     }
 

@@ -42,6 +42,7 @@ export class ItNavigationComponent {
       }
     }
     if (url === "/room") {
+      const userId = this.store.selectSnapshot(AuthenticationState.userid)!;
       const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
       if (!!!roomId) {
         this.popupService.openSnackbar(
@@ -49,7 +50,7 @@ export class ItNavigationComponent {
         );
         return;
       }
-      url += `/${roomId}`;
+      url += `/${userId}-${roomId}`;
     }
     if (url === "/test") {
       if (environment.production) return;

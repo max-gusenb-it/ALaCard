@@ -53,7 +53,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe((paramMap) => {
         const joinInfos =  paramMap.get("connectionData")?.split("-");
-        if (joinInfos != null && (joinInfos?.length == 1 || joinInfos?.length == 2)) {
+        if (joinInfos != null && joinInfos.length == 2) {
           this.store.dispatch(new RoomActions.JoinRoom(joinInfos[0], joinInfos[1]));
         } else {
           this.navCtrl.navigateBack("home");

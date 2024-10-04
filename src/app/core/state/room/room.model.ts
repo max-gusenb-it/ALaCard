@@ -4,7 +4,7 @@ export interface RoomStateModel {
     /**
      * Id's of room that user is currently in
      */
-    roomConnectionData: RoomConnectionData;
+    roomConnectionData: RoomConnectionData | null;
 
     
     /**
@@ -16,6 +16,6 @@ export interface RoomStateModel {
 }
 
 export interface RoomConnectionData {
-    roomId?: string;
-    userId?: string;
+    roomId: string;
+    creatorId: string;
 }

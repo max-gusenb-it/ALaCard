@@ -16,7 +16,7 @@ export namespace RoomActions {
 
     export class JoinRoom {
         static readonly type = '[Home] JoinRoom';
-        constructor(public roomId: string, public userId?: string) {}
+        constructor(public creatorId: string, public roomId: string) {}
     }
 
     export class SetRoom {
@@ -25,10 +25,10 @@ export namespace RoomActions {
          * Creates an instance of SetRoom.
          *
          * @constructor
-         * @param {Room} room
-         * @param {?string} [userId] Optional id of user that owns the room. If null, room is owned by currently signed in user
+         * @param {string | null} creatorId
+         * @param {Room | null} room
          */
-        constructor(public room: Room, public userId?: string) {}
+        constructor(public creatorId: string | null, public room: Room | null) {}
     }
 
     export class LeaveRoom {

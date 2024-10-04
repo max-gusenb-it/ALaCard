@@ -1,5 +1,5 @@
 import { Action, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
-import { RoomStateModel } from "./room.model";
+import { RoomConnectionData, RoomStateModel } from "./room.model";
 import { Injectable, NgZone } from "@angular/core";
 import { RoomActions } from "./room.actions";
 import { RoomSourceService } from "../../services/data-source/room-source.service";
@@ -86,8 +86,6 @@ export class RoomState extends AngularLifecycle {
             this.roomSubscription$.unsubscribe();
         }
 
-        // ToDo: create second room in store where a copy of personal room is safed at all times for offline access
-
         // check if user exists
         try {
             let user = this.store.selectSnapshot(AuthenticationState.user);
@@ -100,20 +98,17 @@ export class RoomState extends AngularLifecycle {
                 user = this.store.selectSnapshot(AuthenticationState.user);
                 if (!!!user) throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
             }
-            if (!!!action.userId) {
-                action.userId = user.id;
-            }
 
             ctx.dispatch(new LoadingActions.StartLoading);
 
             // If user is not online he can only join his own room 
             if (!navigator.onLine) {
-                if (action.userId !== undefined && action.userId !== user.id) {
+                if (action.creatorId !== undefined && action.creatorId !== user.id) {
                     throw new ItError(RoomStateErrors.joinRoomOffline, RoomState.name);
                 }
             }
 
-            let roomObservable = this.roomSourceService.getRoom$(action.roomId, action.userId);
+            let roomObservable = this.roomSourceService.getRoom$(action.roomId, action.creatorId);
 
             // check if room exists
             let initialRoom = await firstValueFrom(roomObservable)
@@ -159,7 +154,7 @@ export class RoomState extends AngularLifecycle {
                         initialRoom.id!,
                         newPlayer.id,
                         newPlayer,
-                        action.userId
+                        action.creatorId
                     );
                 }
             }
@@ -169,7 +164,7 @@ export class RoomState extends AngularLifecycle {
                     takeUntil(this.destroyed$)
                 )
                 .subscribe(r => {
-                    ctx.dispatch(new RoomActions.SetRoom(r, action.userId))
+                    ctx.dispatch(new RoomActions.SetRoom(action.creatorId, r))
             });
             
             if (!!initialRoom.game?.compareValue) {
@@ -208,15 +203,18 @@ export class RoomState extends AngularLifecycle {
                 // ToDo: User was removed from in this case but why? -> throw meaningfull error message
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
             }
-    
-            const state = ctx.getState();
+
+            let connectionData: RoomConnectionData | null = null;
+
+            if (!!action.room) {
+                connectionData = {
+                    creatorId: action.creatorId!,
+                    roomId: action.room.id!
+                }
+            }
     
             ctx.patchState({
-                ...state,
-                roomConnectionData: {
-                    roomId: action.room?.id,
-                    userId: action.userId
-                },
+                roomConnectionData: connectionData,
                 room: action.room
             });
         } catch (error) {
@@ -253,14 +251,14 @@ export class RoomState extends AngularLifecycle {
             return;
         }
         
-        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.roomConnectionData.roomId!, userId, player)]);
+        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.room.id!, userId, player)]);
         this.roomSubscription$.unsubscribe();
-        ctx.dispatch(new RoomActions.SetRoom(null as any, userId));
+        ctx.dispatch(new RoomActions.SetRoom(null, null));
         // zone wrap to prevent -> "Navigation triggered outside Angular zone"
         this.zone.run(() => {
             this.navController.navigateBack("home");
         });
-        if (!navigator.onLine) ctx.dispatch(new LoadingActions.EndLoading);
+        ctx.dispatch(new LoadingActions.EndLoading);
         return;
     }
 
