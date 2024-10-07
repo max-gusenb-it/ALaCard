@@ -143,16 +143,17 @@ export class RoomState extends AngularLifecycle {
             }
 
             if (joinOffline) {
-                // Convert room to offline room
+                // Convert room to single device mode
+                initialRoom.settings.singleDeviceMode = true;
                 this.roomSourceService.updateRoom(
-                    RoomUtils.convertRoomToOfflineMode(initialRoom, user),
+                    RoomUtils.removePlayersFromRoom(initialRoom, user),
                     initialRoom.id!
                 );
             } else {
                 // Add user to room
                 const newPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
                 if (!!newPlayer) {
-                    this.roomSourceService.updatePlayer(
+                    this.roomSourceService.upsertPlayer(
                         initialRoom.id!,
                         newPlayer.id,
                         newPlayer,
@@ -239,7 +240,16 @@ export class RoomState extends AngularLifecycle {
 
     @Action(RoomActions.AddOfflinePlayer)
     addOfflinePlayer(ctx: StateContext<RoomStateModel>, action: RoomActions.AddOfflinePlayer) {
-        console.log (action.playerName);
+        const state = ctx.getState();
+        if (!!!state.room) return;
+
+        const newPlayer = RoomUtils.generateOfflinePlayerForRoom(state.room, action.playerName);
+
+        this.roomSourceService.upsertPlayer(
+            state.room.id!,
+            newPlayer.id,
+            newPlayer
+        );
     }
 
     @Action(RoomActions.LeaveRoom)
@@ -258,7 +268,7 @@ export class RoomState extends AngularLifecycle {
             return;
         }
         
-        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.updatePlayer(state.room.id!, userId, player)]);
+        this.loadingHelperService.loadWithLoadingState([this.roomSourceService.upsertPlayer(state.room.id!, userId, player)]);
         this.roomSubscription$.unsubscribe();
         ctx.dispatch(new RoomActions.SetRoom(null, null));
         // zone wrap to prevent -> "Navigation triggered outside Angular zone"

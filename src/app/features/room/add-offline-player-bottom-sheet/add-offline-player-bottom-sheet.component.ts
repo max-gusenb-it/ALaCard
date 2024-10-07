@@ -28,6 +28,7 @@ export class AddOfflinePlayerBottomSheet {
     this.store.dispatch(new RoomActions.AddOfflinePlayer(
       this.addOfflinePlayerForm.controls["name"].value
     ));
+    this.addOfflinePlayerForm.controls["name"].setValue("");
   }
 
 }

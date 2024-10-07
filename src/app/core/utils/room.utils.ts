@@ -5,6 +5,7 @@ import { PlayerState } from "../models/enums";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../state";
 import { roomsRef, usersRef } from "../constants/firestoreReferences";
+import { offlinePlayerProfilePicture } from "../constants/user";
 
 export namespace RoomUtils {    
     /**
@@ -59,6 +60,17 @@ export namespace RoomUtils {
         }
         return newPlayer;
     }
+
+    export function generateOfflinePlayerForRoom(room: Room, playerName: string) : Player {
+        const playersArray = Object.values(room.players);
+        return {
+            id: playersArray.length.toString(),
+            joinOrder: playersArray.length !== 0 ? playersArray.length : 0,
+            profilePicture: offlinePlayerProfilePicture,
+            state: PlayerState.offline,
+            username: playerName
+        }
+    }
     
     /**
      * Generates a player that looks like he left the room from an existing room and an player id
@@ -99,7 +111,7 @@ export namespace RoomUtils {
         }
     }
 
-    export function convertRoomToOfflineMode(room: Room, host: User) {
+    export function removePlayersFromRoom(room: Room, host: User) {
         // Create copy of room -> objects returned from selectSnapshot can't be changed
         let newRoom = {
             ...room,
@@ -109,7 +121,6 @@ export namespace RoomUtils {
         newRoom.players = {
             [host.id!]: UserUtils.exportUserToPlayer(host, 0)
         };
-        newRoom.settings.singleDeviceMode = true;
         return newRoom;
     }
 }

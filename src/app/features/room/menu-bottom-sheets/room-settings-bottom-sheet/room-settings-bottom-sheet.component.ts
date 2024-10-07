@@ -1,12 +1,14 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Room } from 'src/app/core/models/interfaces';
 import { RoomSettings } from 'src/app/core/models/interfaces/logic/room/room-settings';
 import { RoomSourceService } from 'src/app/core/services/data-source/room-source.service';
 import { LoadingHelperService } from 'src/app/core/services/helper/loading.helper.service';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 
@@ -26,10 +28,13 @@ export class RoomSettingsBottomSheet {
   constructor(
     private dialogRef: DialogRef,
     private store: Store,
+    private popupService: PopupService,
     private roomSourceService: RoomSourceService,
-    private loadingHelpService: LoadingHelperService
+    private loadingHelpService: LoadingHelperService,
+    private translateService: TranslateService
   ) {
     const settings = this.store.selectSnapshot(RoomState.roomSettings);
+    console.log (settings);
     if (!!!settings) this.close();
     this.roomSettingsForm.controls['singleDeviceMode'].setValue(settings?.singleDeviceMode);
     this.roomSettingsForm.controls['otherAdmin'].setValue(settings?.otherAdmin);
@@ -42,13 +47,19 @@ export class RoomSettingsBottomSheet {
   updateSettings() {
     let differences = false;
     const room = this.store.selectSnapshot(RoomState.room);
-    differences = room?.settings.singleDeviceMode !== this.roomSettingsForm.controls['singleDeviceMode'].value ||
+    differences = 
+      room?.settings.singleDeviceMode !== this.roomSettingsForm.controls['singleDeviceMode'].value ||
       room?.settings.otherAdmin !== this.roomSettingsForm.controls['otherAdmin'].value;
     this.close();
     if (differences) {
       let newRoom = {...room} as Room;
-      if (this.roomSettingsForm.controls['singleDeviceMode'].value && !room?.settings.singleDeviceMode) {
-        newRoom = RoomUtils.convertRoomToOfflineMode(newRoom, this.store.selectSnapshot(AuthenticationState.user)!);
+      if (room?.settings.singleDeviceMode != this.roomSettingsForm.controls['singleDeviceMode'].value) {
+        if (!this.roomSettingsForm.controls['singleDeviceMode'].value && !navigator.onLine) {
+          this.popupService.openSnackbar(this.translateService.instant('features.room.settings-bottom-sheet.only-single-device-when-offline'));
+          return;
+        }
+        newRoom = RoomUtils.removePlayersFromRoom(newRoom, this.store.selectSnapshot(AuthenticationState.user)!);
+        newRoom.settings.singleDeviceMode = this.roomSettingsForm.controls['singleDeviceMode'].value;
       }
       this.loadingHelpService.loadWithLoadingState([
         this.roomSourceService.updateRoom(

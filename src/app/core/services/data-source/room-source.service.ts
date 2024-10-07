@@ -63,7 +63,7 @@ export class RoomSourceService {
         return this.firestoreService.update(`${RoomUtils.getRoomCollectionRef(this.store)}`, roomId, room);
     }
 
-    updatePlayer(roomId: string, userId: string, player: Player, roomCreatorId?: string) {
+    upsertPlayer(roomId: string, userId: string, player: Player, roomCreatorId?: string) {
         return this.firestoreService.updateField(
             RoomUtils.getRoomCollectionRef(this.store, roomCreatorId),
             roomId,

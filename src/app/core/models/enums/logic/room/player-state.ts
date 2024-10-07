@@ -1,5 +1,6 @@
 export enum PlayerState {
     active,
     inactive,
-    left
+    left,
+    offline
 }

@@ -83,7 +83,8 @@
       "settings-bottom-sheet": {
         "title": "Einstellungen",
         "singleDeviceMode": "Spiele offline indem nur ein Gerät zum Spielen verwendet wird und Spieler manuell hinzugefügt werden",
-        "other-admin": "Lasse einen anderen Spieler die Admin Rolle übernehmen, wenn du den Raum verlässt. So geht das aktuelle Spiel auch ohne dir weiter"
+        "other-admin": "Lasse einen anderen Spieler die Admin Rolle übernehmen, wenn du den Raum verlässt. So geht das aktuelle Spiel auch ohne dir weiter",
+        "only-single-device-when-offline": "Ohne aktiver Internet Verbindung kann nur offline gespielt werden"
       },
       "start-game-modal": {
         "deck": "Deck",
