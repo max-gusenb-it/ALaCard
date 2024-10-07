@@ -82,7 +82,10 @@ export class ItCreateRoomAsGuestModal {
             )));
           }
         ).then(state => {
-          this.modalCtrl.dismiss({roomId: state?.authentication?.user?.roomId});
+          this.modalCtrl.dismiss({
+            userId: state?.authentication?.user?.id,
+            roomId: state?.authentication?.user?.roomId
+          });
         });
       }
     }

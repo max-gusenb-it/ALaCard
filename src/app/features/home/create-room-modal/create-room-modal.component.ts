@@ -34,9 +34,10 @@ export class CreateRoomModal {
     firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
       this.createRoomFormData.name,
       this.createRoomFormData.description
-    ))).then(s => {
+    ))).then(state => {
       this.modalCtrl.dismiss({
-        roomId: s.authentication.user.roomId
+        userId: state?.authentication?.user?.id,
+        roomId: state?.authentication?.user?.roomId
       });
     })
   }

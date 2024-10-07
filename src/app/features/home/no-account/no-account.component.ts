@@ -40,7 +40,7 @@ export class NoAccountComponent {
     modal.present();
     modal.onDidDismiss().then(modalResponse => {
       if (modalResponse.data.roomId != null) {
-        this.navController.navigateForward(`room/${modalResponse.data.roomId}`);
+        this.navController.navigateForward(`room/${modalResponse.data.userId}-${modalResponse.data.roomId}`);
       }
     });
   }
