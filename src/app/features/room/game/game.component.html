@@ -6,4 +6,7 @@
     [groundRules]="room.game!.deck!.groundRules!"
     (onRulesRead)="onRulesRead()"
   ></game-rules>
+  <game-cards
+    *ngIf="ingameData.rounds.length !== 0"
+  ></game-cards>
 </div>

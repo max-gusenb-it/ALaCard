@@ -16,6 +16,7 @@ import { GameComponent } from './game/game.component';
 import { CardComponent } from './game/card/card.component';
 import { GameRulesComponent } from './game/game-rules/game-rules.component';
 import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
+import { GameCardsComponent } from './game/game-cards/game-cards.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/a
     AddOfflinePlayerBottomSheet,
     GameComponent,
     CardComponent,
+    GameCardsComponent,
     GameRulesComponent
   ]
 })
