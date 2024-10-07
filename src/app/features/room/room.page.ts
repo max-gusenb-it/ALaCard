@@ -121,6 +121,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       case(endGameMenuItem): {
           this.endGame();
         }
+        break;
     }
   }
 
@@ -131,12 +132,16 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   mapPlayersToArray(players: { [key: string]: Player }) {
-    return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
+    return RoomUtils.mapPlayersToArray(players);
+  }
+
+  getRulesReadInfo() {
+    return `${this.responseDataService.getResponseDataForRound(-1).length} / ${this.getActivePlayerCount(this.store.selectSnapshot(RoomState.room)!.players)}`
   }
 
   getActivePlayerCount(players?: { [key: string]: Player; } | undefined) {
     if (!!!players) return 0;
-    return Object.values(players).filter(p => p.state === PlayerState.active).length;
+    return this.mapPlayersToArray(players).filter(p => p.state === PlayerState.active).length;
   }
 
   getRuleReadCount() {

@@ -34,7 +34,6 @@ export class RoomSettingsBottomSheet {
     private translateService: TranslateService
   ) {
     const settings = this.store.selectSnapshot(RoomState.roomSettings);
-    console.log (settings);
     if (!!!settings) this.close();
     this.roomSettingsForm.controls['singleDeviceMode'].setValue(settings?.singleDeviceMode);
     this.roomSettingsForm.controls['otherAdmin'].setValue(settings?.otherAdmin);

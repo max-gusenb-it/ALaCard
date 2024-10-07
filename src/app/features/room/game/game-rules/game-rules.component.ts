@@ -2,6 +2,7 @@ import { animate, group, query, style, transition, trigger } from '@angular/anim
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, timer } from 'rxjs';
+import { RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
 
 @Component({
@@ -78,8 +79,7 @@ export class GameRulesComponent implements AfterViewInit {
   }
 
   emitRulesRead() {
-    if (!this.store.selectSnapshot(InformationState.gameRulesRead)) {
-      console.log ("Emitting rules read");
+    if (!this.store.selectSnapshot(RoomState.roomSettings)?.singleDeviceMode && !this.store.selectSnapshot(InformationState.gameRulesRead)) {
       this.store.dispatch(new InformationActions.GameRulesRead());
       firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 100))
         .then(() => this.onRulesRead.emit(true));

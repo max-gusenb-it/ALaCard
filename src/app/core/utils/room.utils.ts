@@ -40,7 +40,7 @@ export namespace RoomUtils {
         // check if player already exists
         let newPlayer: Player;
         let existingPlayer: Player | undefined;
-        let playersArray = Object.values(room.players);
+        let playersArray = mapPlayersToArray(room.players);
         if (playersArray.length !== 0) {
             existingPlayer = playersArray.find(p => p.id === user.id);
         }
@@ -62,7 +62,7 @@ export namespace RoomUtils {
     }
 
     export function generateOfflinePlayerForRoom(room: Room, playerName: string) : Player {
-        const playersArray = Object.values(room.players);
+        const playersArray = mapPlayersToArray(room.players);
         return {
             id: playersArray.length.toString(),
             joinOrder: playersArray.length !== 0 ? playersArray.length : 0,
@@ -88,18 +88,21 @@ export namespace RoomUtils {
         }
         return null;
     }
+
+    export function mapPlayersToArray(players: { [key: string]: Player }) {
+        return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
+    }
     
     export function getRoomAdmin(room: Room) : Player {
         if (room.settings.otherAdmin) {
-            return Object.values(room.players).sort((p1, p2) => p1.joinOrder - p2.joinOrder)
-                .filter(p => p.state === PlayerState.active)[0];
+            return mapPlayersToArray(room.players).filter(p => p.state === PlayerState.active)[0];
         } else {
             return getRoomCreator(room);
         }
     }
  
     export function getRoomCreator(room: Room) : Player {
-        return Object.values(room.players).sort((p1, p2) => p1.joinOrder - p2.joinOrder)[0];
+        return mapPlayersToArray(room.players)[0];
     }
 
     export function generateJoinLink(room: Room) : string {
