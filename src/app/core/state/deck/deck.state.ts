@@ -44,6 +44,25 @@ export class DeckState implements NgxsOnInit {
                         order: 1
                     }
                 } as PlayerVotingCard
+            ]
+        };
+
+        const partyDeckWithRules: Deck = {
+            icon: "🎉",
+            name: "Party Game with Rules",
+            description: "Very funny Party Game for your whole family",
+            cards: [
+                {
+                    text: "Bitte zeige diese Karte an",
+                    type: CardType.PlayerVoting
+                } as PlayerVotingCard,
+                {
+                    text: "Erster :)",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 1
+                    }
+                } as PlayerVotingCard
             ],
             groundRules: [
                 "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
@@ -54,7 +73,7 @@ export class DeckState implements NgxsOnInit {
         };
 
         decks = [
-            partyDeck
+            partyDeck, partyDeckWithRules
         ];
 
         const state = ctx.getState();
