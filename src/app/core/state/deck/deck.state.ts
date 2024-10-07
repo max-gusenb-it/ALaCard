@@ -43,6 +43,14 @@ export class DeckState implements NgxsOnInit {
                     settings: {
                         order: 1
                     }
+                } as PlayerVotingCard,
+                {
+                    text: "Zweiter :)",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 2
+
+                    }
                 } as PlayerVotingCard
             ]
         };
@@ -61,6 +69,14 @@ export class DeckState implements NgxsOnInit {
                     type: CardType.PlayerVoting,
                     settings: {
                         order: 1
+                    }
+                } as PlayerVotingCard,
+                {
+                    text: "Zweiter :)",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 2
+
                     }
                 } as PlayerVotingCard
             ],
