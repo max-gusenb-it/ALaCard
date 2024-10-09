@@ -56,9 +56,9 @@ export class DeckState implements NgxsOnInit {
             speficPlayerMandatory: false
         };
 
-        const partyDeckWithRules: Deck = {
+        const partyDeckWithSpMandatory: Deck = {
             icon: "🎉",
-            name: "Party Game with Rules",
+            name: "Party Game with sp mandatory",
             description: "Very funny Party Game for your whole family",
             cards: [
                 {
@@ -66,7 +66,35 @@ export class DeckState implements NgxsOnInit {
                     type: CardType.PlayerVoting
                 } as PlayerVotingCard,
                 {
-                    text: "Erster :)",
+                    text: "Erster :) - %sp is a echter Wappla",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 1
+                    }
+                } as PlayerVotingCard,
+                {
+                    text: "Zweiter :)",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 2
+
+                    }
+                } as PlayerVotingCard
+            ],
+            speficPlayerMandatory: true
+        };
+
+        const partyDeckWithRules: Deck = {
+            icon: "🎉",
+            name: "Party Game with Rules and sp",
+            description: "Very funny Party Game for your whole family",
+            cards: [
+                {
+                    text: "Bitte zeige diese Karte an",
+                    type: CardType.PlayerVoting
+                } as PlayerVotingCard,
+                {
+                    text: "Erster :) - %sp is a echter Wappla",
                     type: CardType.PlayerVoting,
                     settings: {
                         order: 1
@@ -91,7 +119,7 @@ export class DeckState implements NgxsOnInit {
         };
 
         decks = [
-            partyDeck, partyDeckWithRules
+            partyDeck, partyDeckWithSpMandatory, partyDeckWithRules
         ];
 
         const state = ctx.getState();
