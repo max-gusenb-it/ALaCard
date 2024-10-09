@@ -4,8 +4,9 @@ import { Select } from '@ngxs/store';
 import { interval, Observable, take } from 'rxjs';
 import { User } from 'src/app/core/models/interfaces';
 import { AuthenticationState } from 'src/app/core/state';
+import { environment } from 'src/environments/environment';
 
-const secondsUntilDeleteEnabled = 5;
+const secondsUntilDeleteEnabled = environment.production ? 5 : 1;
 
 @Component({
   selector: 'app-delete-account-bottom-sheet',
