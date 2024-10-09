@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { TranslateService } from '@ngx-translate/core';
 import { CardType } from 'src/app/core/models/enums';
 import { Card } from 'src/app/core/models/interfaces';
-import { CardUtils } from 'src/app/core/utils/card-utils';
+import { CardUtils } from 'src/app/core/utils/card.utils';
 
 @Component({
   selector: 'card',

@@ -317,9 +317,18 @@ export class RoomState extends AngularLifecycle {
                 },
                 state.room.id!,
             ),
-            this.ingameDataSourceService.createIngameData(IngameDataUtils.createInitialIngameData(), state.room.id!),
+            this.ingameDataSourceService.createIngameData(
+                IngameDataUtils.createInitialIngameData(),
+                state.room.id!
+            ),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
-            this.staticRoundDataSourceService.createStaticRoundData(StaticRoundDataUtils.createInitialStaticRoundData(action.deck), state.room.id!)
+            this.staticRoundDataSourceService.createStaticRoundData(
+                StaticRoundDataUtils.createInitialStaticRoundData(
+                    action.deck,
+                    RoomUtils.mapPlayersToArray(state.room.players)
+                ),
+                state.room.id!
+            )
         ]);
     }
 
@@ -334,7 +343,11 @@ export class RoomState extends AngularLifecycle {
             )
         };
 
-        const round = StaticRoundDataUtils.createGameRound(state.room.game?.deck, action.staticRoundData);
+        const round = StaticRoundDataUtils.createGameRound(
+            state.room.game?.deck,
+            action.staticRoundData,
+            RoomUtils.mapPlayersToArray(state.room.players)
+        );
 
         this.staticRoundDataSourceService.updateStaticRoundData(
             {
