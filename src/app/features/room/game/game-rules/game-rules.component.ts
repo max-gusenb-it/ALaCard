@@ -1,7 +1,9 @@
-import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, timer } from 'rxjs';
+import { slideToggle } from 'src/app/core/animations/slideToggle';
+import { CardType } from 'src/app/core/models/enums';
+import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/freeTextCard/free-text-card';
 import { RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
 
@@ -9,27 +11,7 @@ import { InformationActions, InformationState } from 'src/app/core/state/informa
   selector: 'game-rules',
   templateUrl: './game-rules.component.html',
   styleUrls: ['./game-rules.component.scss'],
-  animations: [
-    trigger('slideToggle', [
-      transition('* => *', [
-          group([
-              query(':enter', style({ transform: 'translateX({{ enterStart }})', opacity: 0 }), { optional: true }),
-              query(':leave', [
-                  animate('750ms ease-in-out', style({ transform: 'translateX({{ leaveEnd }})', opacity: 0 }))
-              ], { optional: true }),
-              query(':enter', [
-                  animate('750ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
-              ], { optional: true })
-          ])
-      ],
-      { 
-          params: {
-              leaveEnd: '',
-              enterStart: ''
-          }
-      })
-    ])
-  ]
+  animations: [slideToggle]
 })
 export class GameRulesComponent implements AfterViewInit {
 
@@ -49,6 +31,13 @@ export class GameRulesComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (this.groundRules.length === 1) {
       this.emitRulesRead();
+    }
+  }
+
+  getCard() : FreeTextCard {
+    return {
+      type: CardType.FreeText,
+      text: this.groundRules[this.currentRuleIndex]
     }
   }
 

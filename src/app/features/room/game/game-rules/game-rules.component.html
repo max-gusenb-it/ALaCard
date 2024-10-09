@@ -15,8 +15,7 @@
         *ngIf="currentRuleIndex % 2 === 0"
         (onClick)="navigate(!$event)"
         (onSwipe)="navigate($event)"
-        [cardType]="0"
-        [text]="groundRules[currentRuleIndex]"
+        [card]="getCard()"
         [deckname]="deckname"
       />
     }
@@ -26,8 +25,7 @@
         *ngIf="currentRuleIndex % 2 === 1"
         (onClick)="navigate(!$event)"
         (onSwipe)="navigate($event)"
-        [cardType]="0"
-        [text]="groundRules[currentRuleIndex]"
+        [card]="getCard()"
         [deckname]="deckname"
       />
     }

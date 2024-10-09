@@ -1,6 +1,8 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CardType } from 'src/app/core/models/enums';
+import { Card } from 'src/app/core/models/interfaces';
+import { CardUtilFactory } from 'src/app/core/utils/cards/cardUtilsFactory';
 
 @Component({
   selector: 'card',
@@ -9,8 +11,9 @@ import { CardType } from 'src/app/core/models/enums';
 })
 export class CardComponent {
 
-  @Input() cardType: CardType = CardType.FreeText;
-  @Input() text: string = "";
+  @Input() card: Card = {
+    type: CardType.FreeText
+  };
   @Input() deckname: string = "";
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
@@ -20,6 +23,10 @@ export class CardComponent {
   touchEndX = 0;
 
   constructor(private translateService: TranslateService) { }
+
+  getCardText() {
+    return CardUtilFactory.getCardUtils(this.card.type);
+  }
 
   cardClicked(event: MouseEvent) {
     this.onClick.emit(event.clientX <= window.innerWidth / 2);
@@ -40,7 +47,7 @@ export class CardComponent {
   }
 
   getCardTitle() {
-    switch (this.cardType) {
+    switch (this.card.type) {
       case (CardType.GroundRule): {
         return this.translateService.instant("features.room.game.card.groundRules");
       };

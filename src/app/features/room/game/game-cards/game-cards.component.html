@@ -1,3 +1,32 @@
-<p>
-  game-cards works!
-</p>
+<div 
+  [@slideToggle]="{
+    value: staticRoundData.round!.id % 2,
+    params: {
+      leaveEnd: '-150%',
+      enterStart: '150%'
+    }
+  }"
+  class="flex grow items-center justify-center relative"
+>
+  @switch(staticRoundData.round!.id % 2) {
+    @case(0) { 
+      <card
+        class="absolute"
+        *ngIf="staticRoundData.round!.id === 0"
+        [card]="deck.cards[staticRoundData.round!.cardIndex]"
+        [deckname]="deck.name"
+      />
+    }
+    <!-- @case(1) { 
+      <card
+        class="absolute"
+        *ngIf="currentRuleIndex % 2 === 1"
+        (onClick)="navigate(!$event)"
+        (onSwipe)="navigate($event)"
+        [cardType]="0"
+        [text]="groundRules[currentRuleIndex]"
+        [deckname]="deckname"
+      />
+    } -->
+  }
+</div>

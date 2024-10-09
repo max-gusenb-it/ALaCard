@@ -2,16 +2,16 @@
   class="rounded-xl flex flex-col h-full"
   style="border-width: 16px;"
   [ngClass]="{
-    'border-it_yellow-500 bg-it_yellow-500': cardType <= 1,
-    'border-red-500 bg-red-500': cardType === 2,
+    'border-it_yellow-500 bg-it_yellow-500': card.type <= 1,
+    'border-red-500 bg-red-500': card.type === 2,
   }"
   (click)="cardClicked($event)"
 >
   <p 
     class="rounded-t-xl text-2xl font-bold py-2 px-3"
     [ngClass]="{
-      'bg-it_yellow-200': cardType <= 1,
-      'bg-red-200': cardType === 2,
+      'bg-it_yellow-200': card.type <= 1,
+      'bg-red-200': card.type === 2,
     }"
   >
     {{ getCardTitle() }}
@@ -19,15 +19,15 @@
   <div class="rounded-b-xl flex grow flex-col gap-1 p-2 bg-it_yellow-0">
     <div class="flex grow items-center text-xl font-semibold">
       <div
-        *ngIf="cardType === 0"
+        *ngIf="card.type === 0"
         id="markdown"
-        [innerHTML]="(text | markdown)"
+        [innerHTML]="(getCardText()| markdown)"
       >
       </div>
       <div
-        *ngIf="cardType !== 0"
+        *ngIf="card.type !== 0"
       >
-        {{ text }}
+        {{ getCardText() }}
       </div>
     </div>
     <div class="text-end text-sm">
