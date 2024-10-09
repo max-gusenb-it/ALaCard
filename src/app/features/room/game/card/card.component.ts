@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { TranslateService } from '@ngx-translate/core';
 import { CardType } from 'src/app/core/models/enums';
 import { Card } from 'src/app/core/models/interfaces';
-import { CardUtilFactory } from 'src/app/core/utils/cards/cardUtilsFactory';
+import { CardUtils } from 'src/app/core/utils/card-utils';
 
 @Component({
   selector: 'card',
@@ -25,7 +25,7 @@ export class CardComponent {
   constructor(private translateService: TranslateService) { }
 
   getCardText() {
-    return CardUtilFactory.getCardUtils(this.card.type);
+    return CardUtils.getCardService(this.card.type);
   }
 
   cardClicked(event: MouseEvent) {

@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import { Deck, Round, StaticRoundData } from "../models/interfaces";
-import { CardUtilFactory } from './cards/cardUtilsFactory';
+import { CardUtils } from './card-utils';
 
 export namespace StaticRoundDataUtils {
     export function createInitialStaticRoundData(deck: Deck) : StaticRoundData {
@@ -32,7 +32,7 @@ export namespace StaticRoundDataUtils {
         }
         
         const card = deck.cards[newCardIndex];
-        const utils = CardUtilFactory.getCardUtils(card.type);
+        const utils = CardUtils.getCardService(card.type);
         
         return utils.createGameRound({
             id: staticRoundData.playedCardIndexes.length,
