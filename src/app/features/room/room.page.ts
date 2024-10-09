@@ -9,13 +9,13 @@ import { AuthenticationState, RoomActions, RoomState } from 'src/app/core/state'
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { TranslateService } from '@ngx-translate/core';
-import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
+import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
-import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
+import { RoomSettingsBottomSheet } from './bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { ResponseDataService } from 'src/app/core/services/data/response.data.service';
 import { PlayerState } from 'src/app/core/models/enums';
-import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
+import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
 const leaveRoomMenuItem = 'exit_to_app';
