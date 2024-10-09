@@ -10,14 +10,12 @@ export namespace IngameDataUtils {
             rounds: [],
         };
         if (!!!deck.groundRules || deck.groundRules.length === 0) {
-            ingameData.rounds = [
-                ...createGameRounds(deck, ingameData)
-            ];
+            ingameData.rounds = [createGameRound(deck, ingameData)];
         }
         return ingameData;
     }
 
-    export function createGameRounds(deck: Deck, ingameData: IngameData) : Round[] {
+    export function createGameRound(deck: Deck, ingameData: IngameData) : Round {
         const unplayedCards = Array.from(Array(deck.cards.length).keys())
             .filter(i => !ingameData.playedCardIndexes.includes(i));
         
@@ -36,12 +34,10 @@ export namespace IngameDataUtils {
         const card = deck.cards[newCardIndex];
         const utils = CardUtilFactory.getCardUtils(card.type);
         
-        return [
-            utils.createGameRound({
-                id: ingameData.playedCardIndexes.length,
-                cardIndex: newCardIndex,
-                processed: false
-            })
-        ];
+        return utils.createGameRound({
+            id: ingameData.playedCardIndexes.length,
+            cardIndex: newCardIndex,
+            processed: false
+        });
     }
 }

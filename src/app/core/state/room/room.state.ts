@@ -328,12 +328,12 @@ export class RoomState extends AngularLifecycle {
             )
         };
 
-        const rounds = IngameDataUtils.createGameRounds(state.room.game?.deck, action.ingameData);
+        const round = IngameDataUtils.createGameRound(state.room.game?.deck, action.ingameData);
 
         this.ingameDataSourceService.updateIngameData(
             {
                 ...action.ingameData,
-                rounds: rounds
+                rounds: [round]
             },
             state.room.id!
         );
