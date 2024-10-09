@@ -6,4 +6,6 @@ export interface Deck {
     icon: string;
     cards: Card[];
     groundRules?: string[];
+    
+    speficPlayerMandatory: boolean;
 }

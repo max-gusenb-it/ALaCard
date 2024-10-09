@@ -321,7 +321,9 @@ export class RoomState extends AngularLifecycle {
                         compareValue: compareValue,
                         state: GameState.started,
                         deck: action.deck,
-                        settings: {}
+                        settings: {
+                            speficiPlayerId: null
+                        }
                     }
                 },
                 state.room.id!,

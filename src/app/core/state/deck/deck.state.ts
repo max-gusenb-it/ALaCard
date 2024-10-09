@@ -52,7 +52,8 @@ export class DeckState implements NgxsOnInit {
 
                     }
                 } as PlayerVotingCard
-            ]
+            ],
+            speficPlayerMandatory: false
         };
 
         const partyDeckWithRules: Deck = {
@@ -85,7 +86,8 @@ export class DeckState implements NgxsOnInit {
                 "The winner is the last one standing :*",
                 "Don't drink too much ;)",
                 "Don't forget to **have fun** :)"
-            ]
+            ],
+            speficPlayerMandatory: false
         };
 
         decks = [
