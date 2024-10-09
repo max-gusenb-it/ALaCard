@@ -47,7 +47,7 @@ export class StartGameModal extends AngularLifecycle {
         this.gameSettingsForm.controls["specificPlayerId"].addValidators(Validators.required);
         this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
       }
-      if (!!!this.selectedDeck.cards.find(c => c.text.includes(specificPlayerNameWhitecard))) {
+      if (!this.specificPersonModeAvailable()) {
         this.gameSettingsForm.patchValue({
           specificPlayerActivated: false,
           specificPlayerId: null
@@ -58,6 +58,11 @@ export class StartGameModal extends AngularLifecycle {
       }
       this.showSettings = event === "Settings";
     }
+  }
+
+  specificPersonModeAvailable() {
+    if (!!!this.selectedDeck) return false;
+    else return !!this.selectedDeck.cards.find(c => c.text.includes(specificPlayerNameWhitecard));
   }
 
   onSubmitOrCancel(event: boolean) {

@@ -30,12 +30,12 @@
           [formGroup]="gameSettingsForm"
         >
           <it-checkbox-accord
+            *ngIf="!selectedDeck.speficPlayerMandatory && specificPersonModeAvailable()"
             id="specificPlayerActivated"
             [label]="'features.room.settings-bottom-sheet.specificPlayerActivated' | translate"
             formControlName="specificPlayerActivated"
-            *ngIf="!selectedDeck.speficPlayerMandatory"
           >
-            <it-select 
+            <it-select
               id="specificPlayerId"
               [label]="'features.room.settings-bottom-sheet.specific-player' | translate"
               formControlName="specificPlayerId"
