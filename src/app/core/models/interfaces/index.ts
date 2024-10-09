@@ -14,7 +14,7 @@ export { IItError } from "./logic/error-monitor/it-error";
 
 export { Round } from "./logic/game-data/round/round";
 export { IngameData } from "./logic/game-data/ingame-data"
-export { RoundStartNotifier } from "./logic/game-data/round-start-notifier";
+export { StaticRoundData } from "./logic/game-data/static-round-data";
 
 export { ResponseData } from "./logic/response-data/ResponeData";
 export { Response } from "./logic/response-data/Response";;

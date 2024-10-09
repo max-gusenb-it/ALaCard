@@ -1,10 +1,9 @@
-import firebase from 'firebase/compat/app';
 import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
-import { FirestoreService } from "./firestore.service";
 import { gameDetailsRef, ingameDataRef } from "../../constants/firestoreReferences";
 import { IngameData } from '../../models/interfaces';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
     providedIn: 'root'

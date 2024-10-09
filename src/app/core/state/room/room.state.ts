@@ -20,7 +20,7 @@ import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenti
 import { RoomSettings } from "../../models/interfaces/logic/room/room-settings";
 import { IngameDataSourceService } from "../../services/data-source/ingame-data-source.service";
 import { ResponseDataSourceService } from "../../services/data-source/response-data-source.service";
-import { RoundStartNotifierSourceService } from "../../services/data-source/round-start-notifier-source.service";
+import { StaticRoundDataSourceService } from "../../services/data-source/static-round-data-source.service";
 import { GameState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
 import { InformationActions } from "../information";
@@ -59,7 +59,7 @@ export class RoomState extends AngularLifecycle {
         private roomSourceService: RoomSourceService,
         private ingameDataSourceService: IngameDataSourceService,
         private responseDataSourceService: ResponseDataSourceService,
-        private roundStartNotifierSourceService: RoundStartNotifierSourceService,
+        private staticRoundDataSourceService: StaticRoundDataSourceService,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
         private store: Store,
@@ -313,7 +313,7 @@ export class RoomState extends AngularLifecycle {
             ),
             this.ingameDataSourceService.createIngameData(IngameDataUtils.createInitialIngameData(action.deck), state.room.id!),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
-            this.roundStartNotifierSourceService.createInitialRoundStartNotifier(state.room.id!)
+            this.staticRoundDataSourceService.createInitialStaticRoundData(state.room.id!)
         ]);
     }
 

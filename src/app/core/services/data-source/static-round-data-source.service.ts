@@ -3,25 +3,27 @@ import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
 import { FirestoreService } from "./firestore.service";
-import { gameDetailsRef, roundStartNotifierRef } from "../../constants/firestoreReferences";
-import { RoundStartNotifier } from '../../models/interfaces';
+import { gameDetailsRef, staticRoundDataRef } from "../../constants/firestoreReferences";
+import { StaticRoundData } from '../../models/interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
-export class RoundStartNotifierSourceService {
+export class StaticRoundDataSourceService {
 
     constructor(
         private store: Store,
-        private firestoreService: FirestoreService<RoundStartNotifier>
+        private firestoreService: FirestoreService<StaticRoundData>
     ) {}
 
-    createInitialRoundStartNotifier(roomId: string) {
+    createInitialStaticRoundData(roomId: string) {
         return this.firestoreService.upsert(
             `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
-            roundStartNotifierRef,
+            staticRoundDataRef,
             {
-                creationDate: firebase.firestore.Timestamp.fromDate(new Date())
+                creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
+                round: null,
+                playedCardIndexes: []
             }
         );
     }
