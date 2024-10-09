@@ -1,6 +1,7 @@
 import { AfterViewInit, Directive, Inject, Injector, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, Validators, NgControl, FormControlName, FormGroupDirective, FormControlDirective } from '@angular/forms';
 import { Subject, takeUntil, startWith, distinctUntilChanged, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Directive({
   selector: '[appControlValueAccessor]'
@@ -28,7 +29,7 @@ export class ControlValueAccessorDirective<T> implements ControlValueAccessor, O
     const input: any = document.getElementById(this.getId());
 
     if (input == null) {
-      console.warn("HTML Element not found");
+      if (!environment.production) console.warn("HTML Element not found");
       return;
     }
 
