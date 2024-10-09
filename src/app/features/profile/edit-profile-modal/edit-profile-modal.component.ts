@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ProfileEditorFormData, User } from 'src/app/core/models/interfaces';
-import { UserSourceService } from 'src/app/core/services/data-source/user-source.service';
+import { UserSourceService } from 'src/app/core/services/source/user.source.service';
 import { LoadingHelperService } from 'src/app/core/services/helper/loading.helper.service';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 

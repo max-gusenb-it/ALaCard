@@ -13,8 +13,8 @@ import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
-import { IngameDataService } from 'src/app/core/services/data/ingame-data.service';
-import { ResponseDataService } from 'src/app/core/services/data/response-data.service';
+import { IngameDataService } from 'src/app/core/services/data/ingame.data.service';
+import { ResponseDataService } from 'src/app/core/services/data/response.data.service';
 import { PlayerState } from 'src/app/core/models/enums';
 import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 

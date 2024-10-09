@@ -4,8 +4,8 @@ import { RoomState } from "../../state";
 import { BehaviorSubject, Observable, Subscription, takeUntil } from "rxjs";
 import { IngameData, Room } from "../../models/interfaces";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
-import { IngameDataSourceService } from "../data-source/ingame-data-source.service";
 import { GameState } from "../../models/enums";
+import { IngameDataSourceService } from "../source/ingame-data.source.service";
 
 @Injectable({
     providedIn: 'root'

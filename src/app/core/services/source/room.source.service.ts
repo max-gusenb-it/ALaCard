@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Room } from "../../models/interfaces/logic/room/room";
-import { FirestoreService } from "./firestore.service";
+import { FirestoreService } from "./firestore.source.service";
 import { Store } from "@ngxs/store";
 import { AuthenticationState } from "../../state";
 import { RoomSourceServiceErrors } from '../../constants/errorCodes';

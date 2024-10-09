@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable, Subscription, takeUntil } from "rxjs";
 import { ResponseData, Room } from "../../models/interfaces";
-import { ResponseDataSourceService } from "../data-source/response-data-source.service";
+import { ResponseDataSourceService } from "../source/response-data.source.service";
 import { Select, Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../../state";
 import { Injectable } from "@angular/core";

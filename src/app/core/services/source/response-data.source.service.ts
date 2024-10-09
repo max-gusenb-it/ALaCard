@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
-import { FirestoreService } from "./firestore.service";
+import { FirestoreService } from "./firestore.source.service";
 import { gameDetailsRef, responseDataRef } from "../../constants/firestoreReferences";
 import { Response, ResponseData } from '../../models/interfaces';
 

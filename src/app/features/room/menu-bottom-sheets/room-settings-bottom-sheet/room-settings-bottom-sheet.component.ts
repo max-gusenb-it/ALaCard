@@ -6,7 +6,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Room } from 'src/app/core/models/interfaces';
 import { RoomSettings } from 'src/app/core/models/interfaces/logic/room/room-settings';
-import { RoomSourceService } from 'src/app/core/services/data-source/room-source.service';
+import { RoomSourceService } from 'src/app/core/services/source/room.source.service';
 import { LoadingHelperService } from 'src/app/core/services/helper/loading.helper.service';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';

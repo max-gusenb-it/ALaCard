@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { FirestoreService } from "./firestore.service";
+import { FirestoreService } from "./firestore.source.service";
 import { User } from "../../models/interfaces/logic/user/user";
 import { ItError } from "../../models/classes";
 import { usersRef } from "../../constants/firestoreReferences";

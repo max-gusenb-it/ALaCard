@@ -3,7 +3,7 @@ import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
 import { gameDetailsRef, ingameDataRef } from "../../constants/firestoreReferences";
 import { IngameData } from '../../models/interfaces';
-import { FirestoreService } from './firestore.service';
+import { FirestoreService } from './firestore.source.service';
 
 @Injectable({
     providedIn: 'root'
