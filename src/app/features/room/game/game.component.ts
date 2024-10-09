@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
-import { IngameData, Room } from 'src/app/core/models/interfaces';
+import { Room, StaticRoundData } from 'src/app/core/models/interfaces';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
-import { IngameDataService } from 'src/app/core/services/data/ingame.data.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
 @Component({
   selector: 'game',
@@ -14,13 +14,13 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 export class GameComponent extends AngularLifecycle {
 
   room: Room;
-  ingameData: IngameData;
+  staticRoundData: StaticRoundData;
 
   @Select(RoomState.deckname) deckname$: Observable<string>;
   @Select(RoomState.room) room$: Observable<Room>;
 
   constructor(
-    private ingameDataService: IngameDataService,
+    private staticRoundDataService: StaticRoundDataService,
     private responseDataSourceService: ResponseDataSourceService,
     private store: Store
   ) {
@@ -30,9 +30,9 @@ export class GameComponent extends AngularLifecycle {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(r => this.room = r);
 
-    this.ingameDataService.getIngameData$()
+    this.staticRoundDataService.getStaticRoundData$()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(i => this.ingameData = i);
+      .subscribe(i => this.staticRoundData = i);
   }
 
   onRulesRead() {
