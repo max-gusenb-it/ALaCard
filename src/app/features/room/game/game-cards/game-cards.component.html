@@ -14,6 +14,7 @@
         class="absolute"
         *ngIf="staticRoundData.round!.id === 0"
         [card]="deck.cards[staticRoundData.round!.cardIndex]"
+        [playerIds]="staticRoundData.round!.playerIds"
         [deckname]="deck.name"
       />
     }

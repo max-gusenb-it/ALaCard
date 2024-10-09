@@ -10,7 +10,7 @@ import { LoadingActions } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { ModalController, NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
-import { Deck, Room } from "../../models/interfaces";
+import { Deck, Player, Room } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/service/popup.service";
 import { TranslateService } from "@ngx-translate/core";
@@ -43,6 +43,15 @@ export class RoomState extends AngularLifecycle {
     @Selector()
     static roomSettings(state: RoomStateModel): RoomSettings | undefined {
         return state.room?.settings;
+    }
+
+    @Selector()
+    static players(state: RoomStateModel): Player[] {
+        if (!!!state.room) {
+            return [];
+        } else {
+            return RoomUtils.mapPlayersToArray(state.room.players)
+        }
     }
 
     @Selector()

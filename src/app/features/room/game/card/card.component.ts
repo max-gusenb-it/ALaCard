@@ -1,18 +1,25 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngxs/store';
+import { takeUntil } from 'rxjs';
 import { CardType } from 'src/app/core/models/enums';
-import { Card } from 'src/app/core/models/interfaces';
+import { Card, Player } from 'src/app/core/models/interfaces';
+import { RoomState } from 'src/app/core/state';
 import { CardUtils } from 'src/app/core/utils/card.utils';
+import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent {
+export class CardComponent extends AngularLifecycle {
+
+  players: Player[];
 
   @Input() card: Card;
   @Input() deckname: string = "";
+  @Input() playerIds: string[] | undefined;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
   @Output() onClick: EventEmitter<boolean> = new EventEmitter();
@@ -20,10 +27,24 @@ export class CardComponent {
   touchStartX = 0;
   touchEndX = 0;
 
-  constructor(private translateService: TranslateService) { }
+  constructor(
+    private store: Store,
+    private translateService: TranslateService
+  ) {
+    super();
+
+    this.store.select(RoomState.players)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(p => this.players = p);
+  }
 
   getCardText() {
-    return CardUtils.getCardService(this.card.type).getCardText(this.card);
+    return CardUtils.getCardService(this.card.type)
+      .getCardText(
+        this.card,
+        this.playerIds,
+        this.players
+    );
   }
 
   cardClicked(event: MouseEvent) {

@@ -14,7 +14,13 @@ export class CardService {
         return baseRound;
     }
 
-    getCardText(card: Card) : string {
-        return card.text;
+    getCardText(card: Card, playerIds?: string[], players?: Player[]) : string {
+        let text = card.text;
+        if (!!playerIds && players && playerIds.length > 0) {
+            playerIds.forEach((playerId, index) => {
+                text = text.split(`${playerNameWhitecard}${index}`).join(players.find(p => p.id === playerId)?.username);
+            });
+        }
+        return text;
     }
 }
