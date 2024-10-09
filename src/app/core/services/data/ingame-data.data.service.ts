@@ -20,6 +20,7 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
     }
 
     protected override connectToData(roomId: string): void {
+        if (!!!this.ingameDataSourceService) return;
         this.dataSubscription$ = this.ingameDataSourceService
             .getIngameData$(roomId)
             .pipe(takeUntil(this.destroyed$))
