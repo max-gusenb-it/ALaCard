@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { IngameData, OptionBottomSheetData, Player, Room } from 'src/app/core/models/interfaces';
+import { OptionBottomSheetData, Player, Room, StaticRoundData } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 import { AuthenticationState, RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
@@ -13,10 +13,10 @@ import { ShareBottomSheet } from './menu-bottom-sheets/share-bottom-sheet/share-
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './menu-bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
-import { IngameDataService } from 'src/app/core/services/data/ingame.data.service';
 import { ResponseDataService } from 'src/app/core/services/data/response.data.service';
 import { PlayerState } from 'src/app/core/models/enums';
 import { AddOfflinePlayerBottomSheet } from './add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
+import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
@@ -32,7 +32,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   @Select(RoomState.gameStarted) gameStarted$!: Observable<boolean>;
 
-  ingameData$: Observable<IngameData>;
+  staticRoundData$: Observable<StaticRoundData>;
 
   constructor(
     private store: Store,
@@ -40,13 +40,13 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private route: ActivatedRoute,
     private popupService: PopupService,
     private translateService: TranslateService,
-    private ingameDataService: IngameDataService,
+    private staticRoundDataService: StaticRoundDataService,
     private responseDataService: ResponseDataService,
     private modalCtrl: ModalController
   ) {
     super();
 
-    this.ingameData$ = this.ingameDataService.getIngameData$();
+    this.staticRoundData$ = this.staticRoundDataService.getStaticRoundData$();
   }
 
   ngOnInit() {
@@ -156,7 +156,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   continueToGame() {
-    this.store.dispatch(new RoomActions.ContinueToGame(this.ingameDataService.getIngameData()))
+    this.store.dispatch(new RoomActions.ContinueToGame(this.staticRoundDataService.getStaticRoundData()))
   }
 
   endGame() {

@@ -16,15 +16,26 @@ export class StaticRoundDataSourceService {
         private firestoreService: FirestoreService<StaticRoundData>
     ) {}
 
-    createInitialStaticRoundData(roomId: string) {
+    createStaticRoundData(staticRoundData: StaticRoundData, roomId: string) {
         return this.firestoreService.upsert(
             `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
             staticRoundDataRef,
-            {
-                creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
-                round: null,
-                playedCardIndexes: []
-            }
+            staticRoundData
+        );
+    }
+
+    getStaticRoundData$(roomId: string) {
+        return this.firestoreService.getDocWithId$(
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            staticRoundDataRef
+        );
+    }
+
+    updateStaticRoundData(staticRoundData: StaticRoundData, roomId: string) {
+        return this.firestoreService.update(
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            staticRoundDataRef,
+            staticRoundData
         );
     }
 }

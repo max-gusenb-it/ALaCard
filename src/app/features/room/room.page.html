@@ -38,7 +38,7 @@
         {{ "features.room.start-game" | translate }}
       </it-button>
       
-      <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (ingameData$ | async)?.rounds?.length === 0" (click)="continueToGame()">
+      <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (staticRoundData$ | async)?.round === null" (click)="continueToGame()">
         {{ "features.room.continue" | translate }} {{(!(room$ | async)!.settings.singleDeviceMode) ? getRulesReadInfo() : null}}
       </it-button>
   
