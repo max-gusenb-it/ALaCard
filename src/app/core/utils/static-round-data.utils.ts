@@ -32,9 +32,9 @@ export namespace StaticRoundDataUtils {
         }
         
         const card = deck.cards[newCardIndex];
-        const utils = CardUtils.getCardService(card.type);
+        const cardService = CardUtils.getCardService(card.type);
         
-        return utils.createGameRound({
+        return cardService.createGameRound({
             id: staticRoundData.playedCardIndexes.length,
             cardIndex: newCardIndex,
             processed: false

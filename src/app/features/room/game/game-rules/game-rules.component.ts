@@ -36,7 +36,7 @@ export class GameRulesComponent implements AfterViewInit {
 
   getCard() : FreeTextCard {
     return {
-      type: CardType.FreeText,
+      type: CardType.GroundRule,
       text: this.groundRules[this.currentRuleIndex]
     }
   }

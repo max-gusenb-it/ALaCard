@@ -25,7 +25,7 @@ export class CardComponent {
   constructor(private translateService: TranslateService) { }
 
   getCardText() {
-    return CardUtils.getCardService(this.card.type);
+    return CardUtils.getCardService(this.card.type).getCardText(this.card);
   }
 
   cardClicked(event: MouseEvent) {

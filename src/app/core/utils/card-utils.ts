@@ -1,5 +1,6 @@
 import { CardType } from "../models/enums";
 import { CardService } from "../services/service/card/card.service";
+import { FTCardService } from "../services/service/card/free-text-card.service";
 import { PVCardService } from "../services/service/card/player-voting-card.service";
 
 export namespace CardUtils {
@@ -8,7 +9,7 @@ export namespace CardUtils {
             case(CardType.PlayerVoting): {
                 return PVCardService;
             }
-            default: return null as any;
+            default: return FTCardService;
         }
     }
 }
