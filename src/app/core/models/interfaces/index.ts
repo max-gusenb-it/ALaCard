@@ -16,8 +16,8 @@ export { Round } from "./logic/game-data/round/round";
 export { IngameData } from "./logic/game-data/ingame-data"
 export { StaticRoundData } from "./logic/game-data/static-round-data";
 
-export { ResponseData } from "./logic/response-data/ResponeData";
-export { Response } from "./logic/response-data/Response";;
+export { ResponseData } from "./logic/response-data/response-data";
+export { Response } from "./logic/response-data/response";;
 
 export { Player } from "./logic/room/player";
 export { Room } from "./logic/room/room";

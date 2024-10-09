@@ -11,9 +11,7 @@ import { CardUtils } from 'src/app/core/utils/card-utils';
 })
 export class CardComponent {
 
-  @Input() card: Card = {
-    type: CardType.FreeText
-  };
+  @Input() card: Card;
   @Input() deckname: string = "";
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();

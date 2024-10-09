@@ -7,6 +7,6 @@ export class CardService {
     }
 
     getCardText(card: Card) : string {
-        throw Error();
+        return card.text;
     }
 }
