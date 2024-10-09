@@ -14,12 +14,12 @@ export class StaticRoundDataService extends RoomPlayerLoadBaseDataService {
         super();
     }
 
-    override disconnectFromData(): void {
+    protected override disconnectFromData(): void {
         this.dataSubscription$.unsubscribe();
         this.staticRoundData$.next(null as any);
     }
 
-    override connectToData(roomId: string): void {
+    protected override connectToData(roomId: string): void {
         this.dataSubscription$ = this.staticRoundDataSourceService
             .getStaticRoundData$(roomId)
             .pipe(takeUntil(this.destroyed$))

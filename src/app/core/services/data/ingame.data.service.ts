@@ -14,12 +14,12 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
         super();
     }
 
-    override disconnectFromData(): void {
+    protected override disconnectFromData(): void {
         this.dataSubscription$.unsubscribe();
         this.ingameData$.next(null as any);
     }
 
-    override connectToData(roomId: string): void {
+    protected override connectToData(roomId: string): void {
         this.dataSubscription$ = this.ingameDataSourceService
             .getIngameData$(roomId)
             .pipe(takeUntil(this.destroyed$))

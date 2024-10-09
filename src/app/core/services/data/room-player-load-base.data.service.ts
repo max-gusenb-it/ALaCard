@@ -35,11 +35,11 @@ export class RoomPlayerLoadBaseDataService extends AngularLifecycle {
         });
     }
 
-    disconnectFromData() {
+    protected disconnectFromData() {
         return;
     }
 
-    connectToData(roomId: string) {
+    protected connectToData(roomId: string) {
         return;
     }
 }
