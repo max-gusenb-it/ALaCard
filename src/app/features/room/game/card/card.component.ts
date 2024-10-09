@@ -42,8 +42,9 @@ export class CardComponent extends AngularLifecycle {
     return CardUtils.getCardService(this.card.type)
       .getCardText(
         this.card,
+        this.store.selectSnapshot(RoomState.players),
         this.playerIds,
-        this.players
+        this.store.selectSnapshot(RoomState.specificPlayerId),
     );
   }
 

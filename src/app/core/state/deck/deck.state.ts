@@ -94,7 +94,7 @@ export class DeckState implements NgxsOnInit {
                     type: CardType.PlayerVoting
                 } as PlayerVotingCard,
                 {
-                    text: "Erster :) - %sp is a echter Wappla",
+                    text: "Erster :) - %sp und %p0 san echter Wappla",
                     type: CardType.PlayerVoting,
                     settings: {
                         order: 1

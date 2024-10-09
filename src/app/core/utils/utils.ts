@@ -1,20 +1,17 @@
-export function getRandomNumber(topNumber: number) {
-    return Math.floor(Math.random() * topNumber);
+export function getRandomNumber(max: number) {
+    return Math.floor(Math.random() * max);
 }
 
-export function getNFromArray(arr: any[], n?: number) {
-    if (!!n) {
-        let availableEntries = [...arr];
-        let result: any[] = [];
-        for (let i = 0; i < n; i++) {
-            const randomIndex = getRandomNumber(availableEntries.length);
-            result = [...result, availableEntries[randomIndex]];
-            availableEntries.splice(randomIndex, 1);
-        }
-        return result;
-    } else {
-        return [];
+export function getNFromArray(arr: any[], n: number, unavailableEntries: any[] = []) {
+    let availableEntries = [...arr];
+    if(unavailableEntries.length > 0) availableEntries = availableEntries.filter(e => !unavailableEntries.includes(e));
+    let result: any[] = [];
+    for (let i = 0; i < n; i++) {
+        const randomIndex = getRandomNumber(availableEntries.length);
+        result = [...result, availableEntries[randomIndex]];
+        availableEntries.splice(randomIndex, 1);
     }
+    return result;
 };
 
 /**

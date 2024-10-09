@@ -69,6 +69,12 @@ export class RoomState extends AngularLifecycle {
         return state.room?.game?.deck;
     }
 
+    @Selector()
+    static specificPlayerId(state: RoomStateModel): string | undefined {
+        const id = state.room?.game?.settings.speficiPlayerId;
+        return !!id ? id : undefined;
+    }
+
     constructor(
         private navController: NavController,
         private roomSourceService: RoomSourceService,
@@ -321,9 +327,7 @@ export class RoomState extends AngularLifecycle {
                         compareValue: compareValue,
                         state: GameState.started,
                         deck: action.deck,
-                        settings: {
-                            speficiPlayerId: null
-                        }
+                        settings: action.gameSettings
                     }
                 },
                 state.room.id!,
@@ -336,9 +340,10 @@ export class RoomState extends AngularLifecycle {
             this.staticRoundDataSourceService.createStaticRoundData(
                 StaticRoundDataUtils.createInitialStaticRoundData(
                     action.deck,
-                    RoomUtils.mapPlayersToArray(state.room.players)
+                    RoomUtils.mapPlayersToArray(state.room.players),
+                    action.gameSettings
                 ),
-                state.room.id!
+                state.room.id!,
             )
         ]);
     }
@@ -355,9 +360,10 @@ export class RoomState extends AngularLifecycle {
         };
 
         const round = StaticRoundDataUtils.createGameRound(
-            state.room.game?.deck,
+            state.room.game!.deck,
             action.staticRoundData,
-            RoomUtils.mapPlayersToArray(state.room.players)
+            RoomUtils.mapPlayersToArray(state.room.players),
+            state.room.game!.settings
         );
 
         this.staticRoundDataSourceService.updateStaticRoundData(

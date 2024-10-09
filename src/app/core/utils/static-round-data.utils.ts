@@ -1,22 +1,22 @@
 import firebase from 'firebase/compat/app';
-import { Deck, Player, Round, StaticRoundData } from "../models/interfaces";
+import { Deck, GameSettings, Player, Round, StaticRoundData } from "../models/interfaces";
 import { CardUtils } from './card.utils';
 import { getNFromArray } from './utils';
 
 export namespace StaticRoundDataUtils {
-    export function createInitialStaticRoundData(deck: Deck, players: Player[]) : StaticRoundData {
+    export function createInitialStaticRoundData(deck: Deck, players: Player[], gameSettings: GameSettings) : StaticRoundData {
         let ingameData: StaticRoundData = {
             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
             round: null,
             playedCardIndexes: [],
         };
         if (!!!deck.groundRules || deck.groundRules.length === 0) {
-            ingameData.round = createGameRound(deck, ingameData, players);
+            ingameData.round = createGameRound(deck, ingameData, players, gameSettings);
         }
         return ingameData;
     }
 
-    export function createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[]) : Round {
+    export function createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) : Round {
         const newCardIndex = getNewCardIndex(deck, staticRoundData);        
         
         const card = deck.cards[newCardIndex];
@@ -29,7 +29,8 @@ export namespace StaticRoundDataUtils {
                 processed: false
             },
             card,
-            players
+            players,
+            gameSettings
         );
     }
 
