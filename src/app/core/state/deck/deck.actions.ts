@@ -5,4 +5,9 @@ export namespace DeckActions {
         static readonly type = "[Store|Decks] AddDeck";
         constructor(public deck: Deck) {};
     }
+
+    export class SetDecks {
+        static readonly type = "[Store|Decks] SetDecks";
+        constructor(public decks: Deck[]) {};
+    }
 }

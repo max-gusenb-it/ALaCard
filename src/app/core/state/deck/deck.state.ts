@@ -5,6 +5,7 @@ import { Deck } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
 import { CardType } from "../../models/enums";
 import { PlayerVotingCard } from "../../models/interfaces/logic/cards/playerVotingCard/player-voting-card";
+import { environment } from "src/environments/environment";
 
 export const DECK_STATE_TOKEN = new StateToken<DeckStateModel>('deck');
 
@@ -117,23 +118,35 @@ export class DeckState implements NgxsOnInit {
             ],
             speficPlayerMandatory: false
         };
+        
+        const leggitPartyDeck: Deck = {
+            icon: "🎉",
+            name: "Party Game",
+            description: "Very funny Party Game",
+            cards: [
+                {
+                    text: "%p0 thanks for testing out my game :)",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 1
+                    }
+                } as PlayerVotingCard
+            ],
+            groundRules: [
+                "- **Reminder**  \n- The game is currently under development so the features are limited"
+            ],
+            speficPlayerMandatory: false
+        };
 
-        decks = [
-            partyDeck, partyDeckWithSpMandatory, partyDeckWithRules
-        ];
+        if (environment.production) {
+            decks = [leggitPartyDeck];
+        } else {
+            decks = [
+                partyDeck, partyDeckWithSpMandatory, partyDeckWithRules
+            ];
+        }
 
-        const state = ctx.getState();
-
-        decks.forEach(deck => {
-            let oldDeck = state.decks.find(d => d.name === deck.name);
-            if (!!oldDeck && !!oldDeck.groundRules && !!deck.groundRules && oldDeck.groundRules.length !== deck.groundRules.length) {
-                state.decks = state.decks.filter(d => d.name !== deck.name);
-                oldDeck = undefined;
-            }
-            if (!!!oldDeck) {
-                ctx.dispatch(new DeckActions.AddDeck(deck));
-            }
-        });
+        ctx.dispatch(new DeckActions.SetDecks(decks));
     }
 
     @Action(DeckActions.AddDeck)
@@ -144,6 +157,17 @@ export class DeckState implements NgxsOnInit {
             decks: [
                 ...state.decks,
                 action.deck
+            ]
+        });
+    }
+
+    @Action(DeckActions.SetDecks)
+    setDecks(ctx: StateContext<DeckStateModel>, action: DeckActions.SetDecks) {
+        const state = ctx.getState();
+
+        ctx.patchState({
+            decks: [
+                ...action.decks
             ]
         });
     }

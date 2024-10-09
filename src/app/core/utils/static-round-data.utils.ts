@@ -38,6 +38,8 @@ export namespace StaticRoundDataUtils {
         const unplayedCardIndexes = Array.from(Array(deck.cards.length).keys())
             .filter(i => !staticRoundData.playedCardIndexes.includes(i));
 
+        // ToDo: filter out playable cards -> user count
+
         const orderCardIndexes = unplayedCardIndexes.filter(index => deck.cards[index].settings?.order !== undefined);
         if (orderCardIndexes.length !== 0) {
             return orderCardIndexes.map(i => { return {
