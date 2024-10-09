@@ -41,6 +41,7 @@ import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-ad
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ItCreateRoomAsGuestModal } from './components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
 import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-create-room-form.component';
+import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accord/it-checkbox-accord.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-crea
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
     ItCheckboxComponent,
+    ItCheckboxAccordComponent,
     ItDrawingBoardComponent,
     ItInputComponent,
     ItSelectComponent,
@@ -120,6 +122,7 @@ import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-crea
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
     ItCheckboxComponent,
+    ItCheckboxAccordComponent,
     ItDrawingBoardComponent,
     ItInputComponent,
     ItSelectComponent,

@@ -11,6 +11,7 @@ export class ItTabGroupComponent implements AfterContentInit {
   @Input() hideControls: boolean = false;
   @Input() advanceControlsEnabled: boolean = true;
 
+  @Output() onTabChange = new EventEmitter<string>();
   @Output() onStatusChange = new EventEmitter<boolean>();
 
   constructor() { }
@@ -48,6 +49,7 @@ export class ItTabGroupComponent implements AfterContentInit {
     if ((activeTabIndex + 1) >= tabs.length) {
       this.finishTabs();
     } else {
+      this.onTabChange.emit(tabs[activeTabIndex + 1].title);
       this.selectTab(tabs[activeTabIndex + 1]);
     }
   }
@@ -56,10 +58,13 @@ export class ItTabGroupComponent implements AfterContentInit {
     const activeTabIndex = this.getActiveTabIndex();
     if (activeTabIndex == undefined) return;
 
+    const tabs = this.tabs.toArray();
+
     if (this.isFirstTab()) {
       this.cancelTabs();
     } else {
-      this.selectTab(this.tabs.toArray()[activeTabIndex - 1]);
+      this.onTabChange.emit(tabs[activeTabIndex - 1].title);
+      this.selectTab(tabs[activeTabIndex - 1]);
     }
   }
 

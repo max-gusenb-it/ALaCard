@@ -1,0 +1,18 @@
+<div *ngIf="control" class="flex flex-col">
+  <div (click)="toggleAccord()">
+    <it-checkbox
+      [formControl]="control"
+      [label]="label"
+    ></it-checkbox>
+  </div>
+  <div
+    #content
+    class="
+      overflow-hidden max-h-0 transition-all duration-700 ease-in-out
+    "
+  >
+    <!-- Using div instead of padding/margin so antimation is displayed correct -->
+    <div class="h-4"></div>
+    <ng-content></ng-content>
+  </div>
+</div>

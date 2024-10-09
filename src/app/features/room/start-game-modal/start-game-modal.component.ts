@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Deck } from 'src/app/core/models/interfaces';
@@ -11,16 +12,26 @@ import { DeckState } from 'src/app/core/state/deck';
 })
 export class StartGameModal {
 
+  decks: Deck[] = this.store.selectSnapshot(DeckState.decks);
   selectedDeck: Deck = null as any;
 
-  decks: Deck[] = this.store.selectSnapshot(DeckState.decks);
+  showSettings: boolean = false;
+
+  gameSettingsForm: FormGroup = new FormGroup({
+    specificPlayerActivated: new FormControl({value: true, disabled: false})
+  });
 
   constructor(
     private modalCtrl: ModalController,
     private store: Store
   ) { }
 
-  onNavigation(event: boolean) {
+  onNavigation(event: string) {
+    console.log(event);
+    this.showSettings = event === "Settings";
+  }
+
+  onSubmitOrCancel(event: boolean) {
     if (!event) {
       this.modalCtrl.dismiss();
     } else {
@@ -30,6 +41,10 @@ export class StartGameModal {
 
   onDeckSelection(selectionId: number) {
     this.selectedDeck = this.decks[selectionId];
+  }
+
+  isSpecificPlayerAvailable() {
+
   }
 
   startGame() {

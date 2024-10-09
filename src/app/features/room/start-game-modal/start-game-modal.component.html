@@ -1,4 +1,4 @@
-<it-tab-group (onStatusChange)="onNavigation($event)" class="flex flex-grow p-6">
+<it-tab-group (onStatusChange)="onSubmitOrCancel($event)" (onTabChange)="onNavigation($event)" class="flex flex-grow p-6">
   <it-tab [title]="'features.room.start-game-modal.deck' | translate">
     <div class="h-full flex flex-col">
       <p>{{ 'features.room.start-game-modal.deck-subtitle' | translate }}</p>
@@ -17,6 +17,23 @@
       </div>
     </div>
   </it-tab>
-  <!-- <it-tab [title]="'features.room.start-game-modal.settings' | translate"></it-tab>
-  <it-tab [title]="'features.room.start-game-modal.types' | translate"></it-tab> -->
+  <it-tab [title]="'features.room.start-game-modal.settings.title' | translate">
+    <div class="h-full flex flex-col" *ngIf="showSettings"> <!-- Hide Settings in the beginning so accord animation works -->
+      <p>{{ 'features.room.start-game-modal.settings.subtitle' | translate }}</p>
+      <div class="flex flex-col flex-grow justify-center">
+        <form
+          [formGroup]="gameSettingsForm"
+        >
+          <it-checkbox-accord
+            id="specificPlayerActivated"
+            [label]="'features.room.settings-bottom-sheet.specificPlayerActivated' | translate"
+            formControlName="specificPlayerActivated"
+          >
+            <it-select [label]="'Test'"></it-select>
+          </it-checkbox-accord>
+        </form>
+      </div>
+    </div>
+  </it-tab>
+  <!-- <it-tab [title]="'features.room.start-game-modal.types' | translate"></it-tab> -->
 </it-tab-group>

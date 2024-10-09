@@ -84,13 +84,17 @@
         "title": "Settings",
         "singleDeviceMode": "Play offline by only using one device and manually adding players",
         "other-admin": "The game can continue even if you leave the room by making an other user the admin for the round",
-        "only-single-device-when-offline": "Can't leave single device mode when offline"
+        "only-single-device-when-offline": "Can't leave single device mode when offline",
+        "specificPlayerActivated": "Choose specific player for supported cards?"
       },
       "start-game-modal": {
         "deck": "Deck",
-        "settings": "Settings",
         "types": "Types",
-        "deck-subtitle": "Choose the Deck you want to play"
+        "deck-subtitle": "Choose the Deck you want to play",
+        "settings": {
+          "title": "Settings",
+          "subtitle": "Adjust the settings to your liking.Continue if you want to play with the default settings the creator of the deck defined."
+        }
       },
       "game": {
         "card": {
