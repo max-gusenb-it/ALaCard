@@ -28,7 +28,10 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
   }
 
   getColorClassesForSelect() : string {
-    if (!!!this.customColor) return "bg-primary-200 border-primary-200 hover:border-b-primary-500 focus:border-primary-500 disabled:bg-primary-900 disabled:border-b-primary-200";
-    return `bg-${this.customColor}-200 border-${this.customColor}-200 hover:border-b-${this.customColor}-500 focus:border-${this.customColor}-500 disabled:bg-${this.customColor}-900 disabled:border-b-${this.customColor}-200`;
+    let css;
+    if (!!!this.customColor) css = "bg-primary-200 border-primary-200 hover:border-b-primary-500 focus:border-primary-500 disabled:bg-primary-900 disabled:border-b-primary-200";
+    else css = `bg-${this.customColor}-200 border-${this.customColor}-200 hover:border-b-${this.customColor}-500 focus:border-${this.customColor}-500 disabled:bg-${this.customColor}-900 disabled:border-b-${this.customColor}-200`;
+    if (this.hideLabel) css += " text-transparent";
+    return css;
   }
 }
