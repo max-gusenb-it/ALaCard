@@ -13,7 +13,7 @@ import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-botto
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
-import { ResponseDataService } from 'src/app/core/services/data/response.data.service';
+import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
 import { PlayerState } from 'src/app/core/models/enums';
 import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
