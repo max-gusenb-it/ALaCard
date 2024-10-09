@@ -85,7 +85,8 @@
         "singleDeviceMode": "Play offline by only using one device and manually adding players",
         "other-admin": "The game can continue even if you leave the room by making an other user the admin for the round",
         "only-single-device-when-offline": "Can't leave single device mode when offline",
-        "specificPlayerActivated": "Choose specific player for supported cards?"
+        "specificPlayerActivated": "Choose specific player for supported cards?",
+        "specific-player": "Specific Player for deck"
       },
       "start-game-modal": {
         "deck": "Deck",

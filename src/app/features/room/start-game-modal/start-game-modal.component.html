@@ -1,4 +1,9 @@
-<it-tab-group (onStatusChange)="onSubmitOrCancel($event)" (onTabChange)="onNavigation($event)" class="flex flex-grow p-6">
+<it-tab-group 
+  (onStatusChange)="onSubmitOrCancel($event)"
+  (onTabChange)="onNavigation($event)"
+  [advanceControlsEnabled]="gameSettingsForm.valid"
+  class="flex flex-grow p-6"
+>
   <it-tab [title]="'features.room.start-game-modal.deck' | translate">
     <div class="h-full flex flex-col">
       <p>{{ 'features.room.start-game-modal.deck-subtitle' | translate }}</p>
@@ -28,9 +33,27 @@
             id="specificPlayerActivated"
             [label]="'features.room.settings-bottom-sheet.specificPlayerActivated' | translate"
             formControlName="specificPlayerActivated"
+            *ngIf="!selectedDeck.speficPlayerMandatory"
           >
-            <it-select [label]="'Test'"></it-select>
-          </it-checkbox-accord>
+            <it-select 
+              id="specificPlayerId"
+              [label]="'features.room.settings-bottom-sheet.specific-player' | translate"
+              formControlName="specificPlayerId"
+            >
+              <option *ngFor="let player of players" [value]="player.id">
+                {{ player.username }}
+              </option>
+            </it-select>
+          </it-checkbox-accord><it-select 
+            id="specificPlayerId"
+            [label]="'features.room.settings-bottom-sheet.specific-player' | translate"
+            formControlName="specificPlayerId"
+            *ngIf="selectedDeck.speficPlayerMandatory"
+          >
+            <option *ngFor="let player of players" [value]="player.id">
+              {{ player.username }}
+            </option>
+          </it-select>
         </form>
       </div>
     </div>

@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { Deck } from 'src/app/core/models/interfaces';
-import { RoomActions } from 'src/app/core/state';
+import { takeUntil } from 'rxjs';
+import { specificPlayerNameWhitecard } from 'src/app/core/constants/card';
+import { Deck, Player } from 'src/app/core/models/interfaces';
+import { RoomActions, RoomState } from 'src/app/core/state';
 import { DeckState } from 'src/app/core/state/deck';
+import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'app-start-game-modal',
   templateUrl: './start-game-modal.component.html'
 })
-export class StartGameModal {
+export class StartGameModal extends AngularLifecycle {
+  players: Player[];
 
   decks: Deck[] = this.store.selectSnapshot(DeckState.decks);
   selectedDeck: Deck = null as any;
@@ -18,17 +22,42 @@ export class StartGameModal {
   showSettings: boolean = false;
 
   gameSettingsForm: FormGroup = new FormGroup({
-    specificPlayerActivated: new FormControl({value: true, disabled: false})
+    specificPlayerActivated: new FormControl({value: false, disabled: false}),
+    specificPlayerId: new FormControl({value: null, disabled: false})
   });
 
   constructor(
     private modalCtrl: ModalController,
     private store: Store
-  ) { }
+  ) {
+    super();
+
+    this.store.select(RoomState.players)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(p => this.players = p);
+  }
 
   onNavigation(event: string) {
-    console.log(event);
-    this.showSettings = event === "Settings";
+    if (event === "Deck") {
+      this.gameSettingsForm.controls["specificPlayerId"].clearValidators();
+      this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
+    }
+    if (event === "Settings") {
+      if (this.selectedDeck.speficPlayerMandatory) {
+        this.gameSettingsForm.controls["specificPlayerId"].addValidators(Validators.required);
+        this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
+      }
+      if (!!!this.selectedDeck.cards.find(c => c.text.includes(specificPlayerNameWhitecard))) {
+        this.gameSettingsForm.patchValue({
+          specificPlayerActivated: false,
+          specificPlayerId: null
+        });
+        this.gameSettingsForm.controls["specificPlayerActivated"].disable();
+      } else {
+        this.gameSettingsForm.controls["specificPlayerActivated"].enable();
+      }
+      this.showSettings = event === "Settings";
+    }
   }
 
   onSubmitOrCancel(event: boolean) {
@@ -48,7 +77,20 @@ export class StartGameModal {
   }
 
   startGame() {
-    this.store.dispatch(new RoomActions.StartGame(this.selectedDeck));
+    let speficiPlayerId = null;
+    if (
+      this.selectedDeck.speficPlayerMandatory || 
+      this.gameSettingsForm.controls["specificPlayerActivated"].value && this.gameSettingsForm.controls["specificPlayerId"].value != null
+    ) {
+      speficiPlayerId = this.gameSettingsForm.controls["specificPlayerId"].value;
+    }
+
+    this.store.dispatch(new RoomActions.StartGame(
+      this.selectedDeck,
+      {
+        speficiPlayerId: speficiPlayerId
+      }
+    ));
     this.modalCtrl.dismiss();
   }
 
