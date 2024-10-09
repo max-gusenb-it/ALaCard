@@ -67,7 +67,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   isUserRoomAdmin() {
-    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!)?.id;
+    return RoomUtils.isUserAdmin(this.store);
   }
 
   getMenuItems() {
@@ -136,12 +136,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   getRulesReadInfo() {
-    return `${this.responseDataService.getResponseDataForRound(-1).length} / ${this.getActivePlayerCount(this.store.selectSnapshot(RoomState.room)!.players)}`
-  }
-
-  getActivePlayerCount(players?: { [key: string]: Player; } | undefined) {
-    if (!!!players) return 0;
-    return this.mapPlayersToArray(players).filter(p => p.state === PlayerState.active).length;
+    return this.responseDataService.getRulesReadInfo(this.staticRoundDataService.getStaticRoundData()!.round!.id);
   }
 
   getRuleReadCount() {

@@ -18,6 +18,8 @@ export class GameCardsComponent extends AngularLifecycle {
 
   staticRoundData: StaticRoundData;
 
+  clickCount: number = 0;
+
   constructor(
     private store: Store,
     private staticRoundDataService: StaticRoundDataService
@@ -28,7 +30,13 @@ export class GameCardsComponent extends AngularLifecycle {
 
     this.staticRoundDataService.getStaticRoundData$()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(srd => this.staticRoundData = srd);
+      .subscribe(srd => {
+        this.staticRoundData = srd;
+      });
+  }
+
+  increaseClickCount() {
+    this.clickCount += 1;
   }
 
 }

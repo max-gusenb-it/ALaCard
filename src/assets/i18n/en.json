@@ -102,6 +102,11 @@
           "groundRules": "Ground Rules",
           "freeText": "Free Text",
           "playerVoting": "Player Voting"
+        },
+        "game-cards": {
+          "forms": {
+            "answer": "Answer"
+          }
         }
       },
       "start-game": "Start Game",

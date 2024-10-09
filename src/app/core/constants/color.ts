@@ -1,6 +1,6 @@
 import { systemDefaultValue } from "./systemDefaultValue";
 
-export const supportedColors: string[] = [
+export const supportedColors = [
     "red",
     "orange",
     "amber",
@@ -16,4 +16,6 @@ export const supportedColors: string[] = [
     "violet",
     "pink",
     "rose"
-];
+] as const;
+
+export type Color = typeof supportedColors[number];

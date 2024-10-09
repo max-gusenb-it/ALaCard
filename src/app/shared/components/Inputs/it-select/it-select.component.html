@@ -13,16 +13,14 @@
       px-4 pb-1 pt-5
       w-full
       text-base text-neutral-950 font-normal
-      bg-primary-200
       appearance-none
       cursor-pointer
-      border-2 border-primary-200
-      hover:border-b-primary-500
-      focus:outline-none focus:border-2 focus:border-primary-500
-      disabled:bg-primary-100 disabled:border-b-primary-200
+      border-2 
+      focus:outline-none focus:border-2 
       invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500
       peer
     "
+    [ngClass]="getColorClassesForSelect()"
     placeholder=" "
   >
     <!-- Default option that disables safari from auto selecting the first option -->

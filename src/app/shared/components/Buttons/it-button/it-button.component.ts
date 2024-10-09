@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { Color } from 'src/app/core/constants/color';
 import { LoadingState } from 'src/app/core/state';
 
 @Component({
@@ -9,7 +10,7 @@ import { LoadingState } from 'src/app/core/state';
   styleUrls: ['./it-button.component.scss'],
 })
 export class ItButtonComponent implements OnInit {
-  @Input() color: "primary" | "secondary" | "tertiary" | "quaternary" | "red" | "blue" | "orange" | "green" = "primary";
+  @Input() color: "primary" | "secondary" | "tertiary" | "quaternary" | Color = "primary";
   @Input() size: "big" | "small" = "big";
   @Input() type: "submit" | "button" = "submit";
   @Input() disabled = false;

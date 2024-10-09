@@ -12,10 +12,17 @@
     @case(0) { 
       <card
         class="absolute"
-        *ngIf="staticRoundData.round!.id === 0"
+        *ngIf="staticRoundData.round!.id === 0 && clickCount === 0"
+        (click)="increaseClickCount()"
         [card]="deck.cards[staticRoundData.round!.cardIndex]"
         [playerIds]="staticRoundData.round!.playerIds"
         [deckname]="deck.name"
+      />
+      <player-voting-form
+        class="w-full"
+        *ngIf="clickCount === 1"
+        [card]="deck.cards[staticRoundData.round!.cardIndex]"
+        [round]="staticRoundData.round!"
       />
     }
     <!-- @case(1) { 

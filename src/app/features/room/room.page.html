@@ -39,7 +39,7 @@
       </it-button>
       
       <it-button class="flex grow" size="big" *ngIf="isUserRoomAdmin() && (gameStarted$ | async) && (staticRoundData$ | async)?.round === null" (click)="continueToGame()">
-        {{ "features.room.continue" | translate }} {{(!(room$ | async)!.settings.singleDeviceMode) ? getRulesReadInfo() : null}}
+        {{ "features.room.continue" | translate }} {{(!(room$ | async)!.settings.singleDeviceMode) && !!((staticRoundData$ | async)?.round?.id) ? getRulesReadInfo() : null}}
       </it-button>
   
       <it-menu-button [menuItemIcons]="getMenuItems()" (menuItemClicked)="handleMenuAction($event)"/>
