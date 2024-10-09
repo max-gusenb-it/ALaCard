@@ -1,5 +1,6 @@
-import { Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ControlValueAccessorDirective } from 'src/app/shared/directives/control-value-accessor.directive';
 
 @Component({
@@ -13,16 +14,32 @@ import { ControlValueAccessorDirective } from 'src/app/shared/directives/control
     },
   ]
 })
-export class ItCheckboxAccordComponent extends ControlValueAccessorDirective<boolean> {
+export class ItCheckboxAccordComponent extends ControlValueAccessorDirective<boolean> implements OnDestroy {
+  subscription: Subscription | undefined;
+
   @ViewChild("content") content?: ElementRef<HTMLDivElement>;
 
   @Input() label: string;
 
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
+
+    this.subscription = this.control?.valueChanges
+      .subscribe(() => {
+        setTimeout(() => {
+          this.animateToggle();
+        });
+    });
+
     setTimeout(() => {
       this.animateToggle();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (!!this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   toggleAccord() {
