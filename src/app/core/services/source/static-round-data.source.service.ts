@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
 import { FirestoreService } from "./firestore.source.service";
-import { gameDetailsRef, staticRoundDataRef } from "../../constants/firestoreReferences";
+import { gameDataRef, staticRoundDataRef } from "../../constants/firestoreReferences";
 import { StaticRoundData } from '../../models/interfaces';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class StaticRoundDataSourceService {
 
     createStaticRoundData(staticRoundData: StaticRoundData, roomId: string) {
         return this.firestoreService.upsert(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             staticRoundDataRef,
             staticRoundData
         );
@@ -26,14 +26,14 @@ export class StaticRoundDataSourceService {
 
     getStaticRoundData$(roomId: string) {
         return this.firestoreService.getDocWithId$(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             staticRoundDataRef
         );
     }
 
     updateStaticRoundData(staticRoundData: StaticRoundData, roomId: string) {
         return this.firestoreService.update(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             staticRoundDataRef,
             staticRoundData
         );

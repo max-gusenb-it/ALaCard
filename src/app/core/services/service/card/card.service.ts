@@ -1,5 +1,4 @@
-import { Card } from "src/app/core/models/interfaces";
-import { Round } from "../../../models/interfaces/logic/game-data/round/round";
+import { Card, Round } from "src/app/core/models/interfaces";
 
 export class CardService {
     createGameRound(baseRound: Round) : Round {

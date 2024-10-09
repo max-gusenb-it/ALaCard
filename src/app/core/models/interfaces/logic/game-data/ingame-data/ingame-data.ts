@@ -1,3 +1,3 @@
-import { FirestoreBase } from "../firestore-base";
+import { FirestoreBase } from "../../firestore-base";
 
 export interface IngameData extends FirestoreBase { }

@@ -1,4 +1,4 @@
-import { FirestoreBase } from "../firestore-base";
+import { FirestoreBase } from "../../firestore-base";
 import { Round } from "./round/round";
 
 /**

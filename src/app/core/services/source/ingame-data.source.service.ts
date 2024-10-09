@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
-import { gameDetailsRef, ingameDataRef } from "../../constants/firestoreReferences";
+import { gameDataRef, ingameDataRef } from "../../constants/firestoreReferences";
 import { IngameData } from '../../models/interfaces';
 import { FirestoreService } from './firestore.source.service';
 
@@ -17,14 +17,14 @@ export class IngameDataSourceService {
 
     getIngameData$(roomId: string) {
         return this.firestoreService.getDocWithId$(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             ingameDataRef
         );
     }
 
     createIngameData(ingameData: IngameData, roomId: string) {
         return this.firestoreService.upsert(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             ingameDataRef,
             ingameData
         );
@@ -32,7 +32,7 @@ export class IngameDataSourceService {
 
     updateIngameData(ingameData: IngameData, roomId: string) {
         return this.firestoreService.update(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDetailsRef}`,
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             ingameDataRef,
             ingameData
         );
