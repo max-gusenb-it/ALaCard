@@ -42,6 +42,7 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ItCreateRoomAsGuestModal } from './components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
 import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-create-room-form.component';
 import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accord/it-checkbox-accord.component';
+import { ItResultComponent } from './components/display/it-result/it-result.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accor
     ItAccordComponent,
     ItIconComponent,
     ItPlayerComponent,
+    ItResultComponent,
     ItSelectionListComponent,
     ItSnackbarComponent,
     ItTabComponent,
@@ -104,6 +106,7 @@ import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accor
     ItAccordComponent,
     ItIconComponent,
     ItPlayerComponent,
+    ItResultComponent,
     ItSelectionListComponent,
     ItSnackbarComponent,
     ItTabComponent,
