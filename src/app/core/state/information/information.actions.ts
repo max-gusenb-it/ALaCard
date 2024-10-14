@@ -15,4 +15,9 @@ export namespace InformationActions {
         static readonly type = '[GameRuleComponent] SetGameRulesCardIndex';
         constructor(public gameRulesCardIndex: number) {}
     }
+    
+    export class SetRoundCardClicked {
+        static readonly type = '[CardContainer] SetRoundCardClicked';
+        constructor(public roundId: number) {};
+    }
 }

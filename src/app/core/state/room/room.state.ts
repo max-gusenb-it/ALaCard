@@ -200,7 +200,8 @@ export class RoomState extends AngularLifecycle {
                 this.store.dispatch(new InformationActions.SetGameInformation({
                     compareValue: initialRoom.game.compareValue,
                     rulesReadSend: false,
-                    gameRulesCardIndex:  0
+                    gameRulesCardIndex:  0,
+                    roundInformation: undefined
                 }));
             }
 
@@ -321,7 +322,8 @@ export class RoomState extends AngularLifecycle {
         this.store.dispatch(new InformationActions.SetGameInformation({
             compareValue: compareValue,
             rulesReadSend: false,
-            gameRulesCardIndex:  0
+            gameRulesCardIndex:  0,
+            roundInformation: undefined
         }));
         
         return this.loadingHelperService.loadWithLoadingState([

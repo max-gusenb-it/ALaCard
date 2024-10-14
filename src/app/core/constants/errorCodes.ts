@@ -18,5 +18,6 @@ export namespace SharedErrors {
 
 export namespace InformationStateErrors {
     export const gameRulesReadCPNotFound = "information-state.game-rules-read.cp-not-found";
-    export const setGameRulesCardIndex = "information-state.set-game-rules-card-index.cp-not-found";
+    export const setGameRulesCardIndexCPNotFound = "information-state.set-game-rules-card-index.cp-not-found";
+    export const setRoundCardClickedCPNotFound = "information-state.set-round-card-clicked.cp-not-found"
 }

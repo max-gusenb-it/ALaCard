@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
-import { Deck, StaticRoundData } from 'src/app/core/models/interfaces';
+import { Deck, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
 import { IngameDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { RoomState } from 'src/app/core/state';
+import { InformationActions, InformationState } from 'src/app/core/state/information';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 enum RoundState {
@@ -27,6 +28,8 @@ export class CardContainerComponent extends AngularLifecycle{
   
   cardClicked: boolean = false;
 
+  roundInformation?: RoundInformation;
+
   constructor(
     private store: Store,
     private staticRoundDataService: StaticRoundDataService,
@@ -42,10 +45,16 @@ export class CardContainerComponent extends AngularLifecycle{
       .subscribe(srd => {
         this.staticRoundData = srd;
     });
+
+    this.roundInformation = this.store.selectSnapshot(InformationState.roundInformation);
   }
 
   getRoundState() : RoundState {
-    if (!this.cardClicked && !this.responseDataService.userResponded(this.staticRoundData.round!.id)) {
+    if (
+      !this.cardClicked &&
+      !this.responseDataService.userResponded(this.staticRoundData.round!.id) && 
+      (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData.round!.id || !this.roundInformation.cardClicked)
+    ) {
       return RoundState.card;
     }
     if (!this.ingameDataService.roundProcessed(this.staticRoundData.round!.id)) {
@@ -68,7 +77,6 @@ export class CardContainerComponent extends AngularLifecycle{
 
   continue() {
     this.cardClicked = true;
-    // ToDo: add to information store
+    this.store.dispatch(new InformationActions.SetRoundCardClicked(this.staticRoundData.round!.id));
   }
-
 }

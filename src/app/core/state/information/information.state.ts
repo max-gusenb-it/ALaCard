@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { InformationStateModel } from "./information.model";
 import { Injectable } from "@angular/core";
 import { InformationActions } from "./information.actions";
-import { GameInformation } from "../../models/interfaces";
+import { GameInformation, RoundInformation } from "../../models/interfaces";
 import { ItError } from "../../models/classes";
 import { InformationStateErrors } from "../../constants/errorCodes";
 
@@ -29,6 +29,11 @@ export class InformationState {
     @Selector()
     static gameRulesCardIndex(state: InformationStateModel) : number {
         return state.GameInformations?.gameRulesCardIndex ?? 0;
+    }
+
+    @Selector()
+    static roundInformation(state: InformationStateModel) : RoundInformation | undefined {
+        return state.GameInformations?.roundInformation;
     }
 
     @Action(InformationActions.SetGameInformation)
@@ -62,16 +67,40 @@ export class InformationState {
     @Action(InformationActions.SetGameRulesCardIndex)
     async setGameRulesCardIndex(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameRulesCardIndex) {
         const state = ctx.getState();
+
         if (!!!state.GameInformations?.compareValue) {
             throw new ItError(
                 InformationStateErrors.gameRulesReadCPNotFound,
                 InformationState.name
             )
         };
+
         ctx.patchState({
             GameInformations: {
                 ...state.GameInformations,
                 gameRulesCardIndex: action.gameRulesCardIndex
+            }
+        });
+    }
+
+    @Action(InformationActions.SetRoundCardClicked)
+    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundCardClicked) {
+        const state = ctx.getState();
+        
+        if (!!!state.GameInformations?.compareValue) {
+            throw new ItError(
+                InformationStateErrors.setRoundCardClickedCPNotFound,
+                InformationState.name
+            )
+        };
+
+        ctx.patchState({
+            GameInformations: {
+                ...state.GameInformations,
+                roundInformation: {
+                    roundId: action.roundId,
+                    cardClicked: true
+                }
             }
         });
     }
