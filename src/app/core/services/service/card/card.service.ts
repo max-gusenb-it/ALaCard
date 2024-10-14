@@ -1,9 +1,13 @@
+import { Injectable } from "@angular/core";
 import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
 import { PlayerState } from "src/app/core/models/enums";
-import { Card, GameSettings, Player, Round } from "src/app/core/models/interfaces";
+import { Card, GameSettings, Player, Response, Round } from "src/app/core/models/interfaces";
 import { Utils } from "src/app/core/utils/utils";
 
-export class CardService {
+@Injectable({
+    providedIn: 'root'
+})
+export class CardService<T> {
     createGameRound(baseRound: Round, card: Card, players: Player[], gameSettings: GameSettings) : Round {
         players = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline);
 
@@ -35,5 +39,9 @@ export class CardService {
             });
         }
         return text;
+    }
+
+    castResponse(response: Response | null) : T {
+        return response as T;
     }
 }

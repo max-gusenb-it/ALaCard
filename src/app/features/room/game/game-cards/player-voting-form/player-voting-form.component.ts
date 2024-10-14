@@ -5,9 +5,9 @@ import { takeUntil } from 'rxjs';
 import { Card, Player, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
+import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
-import { CardUtils } from 'src/app/core/utils/card.utils';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
@@ -31,6 +31,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     private responseSourceService: ResponseDataSourceService,
     private responseDataService: ResponseDataService,
     private changeDetectorRef: ChangeDetectorRef,
+    private playerVotingService: PlayerVotingCardService,
     private store: Store
   ) {
     super();
@@ -43,16 +44,21 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   ngAfterViewInit() {
-    if(this.responseDataService.userResponded(this.round.id)) {
+    const response = this.playerVotingService.castResponse(
+      this.responseDataService.getResponseDataForRoundAndUser(this.round.id)
+    );
+
+    if(!!response) {
       this.playerVotingForm.controls["votedPlayerId"].disable();
+      this.playerVotingForm.controls["votedPlayerId"].setValue(response.votedPlayerId);
+      
       this.playerVotingForm.controls["votedPlayerId"].updateValueAndValidity();
       this.changeDetectorRef.detectChanges();
     }
   }
 
   getCardText() {
-    return CardUtils.getCardService(this.card.type)
-      .getCardText(
+    return this.playerVotingService.getCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
         this.round.playerIds,

@@ -54,6 +54,16 @@ export class ResponseDataService extends AngularLifecycle {
         return this.getResponseData().filter(r => r.roundId === roundId);
     }
 
+    getResponseDataForRoundAndUser(roundId: number) {
+        const userResponses = this.getResponseDataForRound(roundId)
+            .filter(r => r.playerId === this.store.selectSnapshot(AuthenticationState.userid));
+        if (userResponses.length === 1) {
+            return userResponses[0];
+        } else {
+            return null;
+        }
+    }
+
     userResponded(roundId: number) {
         return this.checkIfUserResponded(this.getResponseData(), roundId);
     }

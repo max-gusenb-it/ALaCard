@@ -1,6 +1,6 @@
 import { CardService } from "./card.service";
 
-class FreeTextCardService extends CardService {
+export class FreeTextCardService extends CardService<Response> {
 }
 
 export const FTCardService = new FreeTextCardService();
