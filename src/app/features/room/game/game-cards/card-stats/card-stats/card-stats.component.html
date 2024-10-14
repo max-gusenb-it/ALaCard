@@ -6,6 +6,9 @@
     @case(2) {
       <player-voting-stats
         class="w-full"
+        [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [round]="staticRoundData.round"
+        [dynamicRoundData]="dynamicRoundData"
       />
     }
   }

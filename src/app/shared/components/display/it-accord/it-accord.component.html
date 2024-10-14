@@ -9,7 +9,7 @@
       [ngClass]="{
         'rotate-180': selected && !!!icon
       }"
-      [filled]="!!icon && !selected"
+      [filled]="!!icon && selected"
     >
       {{ !!icon ? icon : 'expand_more' }}
     </it-icon>

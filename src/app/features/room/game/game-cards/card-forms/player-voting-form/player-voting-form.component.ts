@@ -38,6 +38,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   ) {
     super();
 
+    // ToDo: Fix -> When players join he is not added to list -> When you updated players it breaks the select when a option is already selected -> after responded reload
     this.players = this.store.selectSnapshot(RoomState.players);
 
     this.roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;

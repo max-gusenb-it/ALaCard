@@ -5,7 +5,16 @@ export { OptionBottomSheetData } from "./components/forms/it-option-bottom-sheet
 
 export { CreateAccountFormData } from "./features/home/create-account-form-data";
 
+export { FreeTextCardSettings } from "./logic/cards/freeTextCard/free-text-card-settings";
+export { FreeTextCard } from "./logic/cards/freeTextCard/free-text-card";
+
+export { PlayerVotingCardSettings } from "./logic/cards/playerVotingCard/player-voting-card-settings";
+export { PlayerVotingCard } from "./logic/cards/playerVotingCard/player-voting-card";
+export { PlayerVotingResult } from "./logic/cards/playerVotingCard/player-voting-result";
+
 export { Card } from "./logic/cards/card";
+export { Result } from "./logic/cards/result";
+export { CardSettings } from "./logic/cards/card-settings";
 
 export { Deck } from "./logic/game/deck";
 export { GameSettings } from "./logic/game/game-settings";
