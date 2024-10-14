@@ -160,15 +160,42 @@ export class DeckState implements NgxsOnInit {
             description: "Very funny Party Game",
             cards: [
                 {
-                    text: "%p0 thanks for testing out my game :)",
+                    text: "Who is most likely to have a one-night stand?",
                     type: CardType.PlayerVoting,
                     settings: {
-                        order: 1
+                        isAnonymous: true
                     }
+                } as PlayerVotingCard,
+                {
+                    text: "Who wet his/her bed the longest?",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        isAnonymous: true
+                    }
+                } as PlayerVotingCard,
+                {
+                    text: "Who's the leftover eater among you?",
+                    type: CardType.PlayerVoting
+                } as PlayerVotingCard,
+                {
+                    text: "Who would be more likely to start a relationship with a friend's parent?",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        isAnonymous: true
+                    }
+                } as PlayerVotingCard,
+                {
+                    text: "Whose cooking skills are only good enough for finished products?",
+                    type: CardType.PlayerVoting
+                } as PlayerVotingCard,
+                {
+                    text: "Who watches the most trash TV?",
+                    type: CardType.PlayerVoting
                 } as PlayerVotingCard
             ],
             groundRules: [
-                "- **Reminder**  \n- The game is currently under development so the features are limited"
+                "- **Reminder**  \n- The game is currently under development so the features are limited",
+                "Thanks for testing out my game btw. :)"
             ],
             speficPlayerMandatory: false
         };
