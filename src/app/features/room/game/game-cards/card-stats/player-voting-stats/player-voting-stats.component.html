@@ -17,7 +17,7 @@
             />
         </div>
     </it-accord>
-    <it-button class="flex grow" color="red" type="button" (click)="startNextRound()">
+    <it-button class="flex grow" color="red" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
         {{ 'actions.continue' | translate }}
     </it-button>
 </div>

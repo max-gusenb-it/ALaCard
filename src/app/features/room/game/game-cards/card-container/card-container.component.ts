@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
-import { Deck, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
+import { Deck, DynamicRoundData, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
 import { IngameDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
@@ -25,6 +25,7 @@ export class CardContainerComponent extends AngularLifecycle{
 
   deck: Deck;
   staticRoundData: StaticRoundData;
+  dynamicRoundData: DynamicRoundData | null;
   
   cardClicked: boolean = false;
 
@@ -47,13 +48,18 @@ export class CardContainerComponent extends AngularLifecycle{
     });
 
     this.roundInformation = this.store.selectSnapshot(InformationState.roundInformation);
+
+    this.ingameDataService.getDynamicRoundData$()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(d => this.dynamicRoundData = d);
   }
 
   getRoundState() : RoundState {
     if (
       !this.cardClicked &&
       !this.responseDataService.userResponded(this.staticRoundData.round!.id) && 
-      (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData.round!.id || !this.roundInformation.cardClicked)
+      (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData.round!.id || !this.roundInformation.cardClicked) &&
+      (!!!this.dynamicRoundData || this.dynamicRoundData.roundId !== this.staticRoundData.round!.id || !this.dynamicRoundData.processed)
     ) {
       return RoundState.card;
     }

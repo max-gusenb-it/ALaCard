@@ -4,6 +4,7 @@ import { Card, DynamicRoundData, Player, PlayerVotingResult, Result, Round } fro
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { RoomState } from 'src/app/core/state';
+import { RoomUtils } from 'src/app/core/utils/room.utils';
 
 @Component({
   selector: 'player-voting-stats',
@@ -42,6 +43,10 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
 
   getPlayerForResult(result: PlayerVotingResult) {
     return this.players.find(p => p.id === result.votedPlayerId);
+  }
+
+  isUserRoomAdmin() {
+    return RoomUtils.isUserAdmin(this.store);
   }
 
   startNextRound() {

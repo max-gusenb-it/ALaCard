@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, takeUntil } from "rxjs";
+import { BehaviorSubject, filter, map, takeUntil } from "rxjs";
 import { IngameData } from "../../models/interfaces";
 import { IngameDataSourceService } from "../source/ingame-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
@@ -33,6 +33,14 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
 
     getIngameData$() {
         return this.ingameData$.asObservable();
+    }
+
+    getDynamicRoundData$() {
+        return this.ingameData$.asObservable()
+            .pipe(
+                filter(d => !!d && !!d.dynamicRoundData),
+                map(d => d.dynamicRoundData)
+            );
     }
 
     roundProcessed(roundId: number) {
