@@ -76,4 +76,12 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     getResultText(result: Result, translateService: TranslateService) {
         return "";
     }
+
+    cardHasResultSubText(card: Card): boolean {
+        return false;
+    }
+
+    getResultSubText(result: Result, players: Player[]) {
+        return "";
+    }
 }

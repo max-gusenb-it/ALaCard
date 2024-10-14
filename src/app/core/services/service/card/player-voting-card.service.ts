@@ -2,7 +2,7 @@ import { PlayerVotingResponse } from "src/app/core/models/interfaces/logic/game-
 import { CardService } from "./card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { DynamicRoundData, PlayerVotingCard, PlayerVotingResult, Response, Result } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResult, Response, Result } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
@@ -46,6 +46,22 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
         const pvResult = this.castResult(result);
         const translation = pvResult.votes === 1 ? translateService.instant("shared.components.display.it-result.vote") : translateService.instant("shared.components.display.it-result.votes");
         return `${pvResult.votes} ${translation}`;
+    }
+
+    override cardHasResultSubText(card: Card): boolean {
+        const pvCard = this.castCard(card);
+        if (pvCard.settings?.isAnonymous) return false;
+        return true;
+    }
+
+    override getResultSubText(result: Result, players: Player[]): string {
+        const pvResult = this.castResult(result);
+        let text = "";
+        pvResult.playerIds.forEach((playerId, index) => {
+            text += players.find(p => p.id === playerId)!.username;
+            if (index !== pvResult.playerIds.length -1) text += ", ";
+        });
+        return text;
     }
 }
 

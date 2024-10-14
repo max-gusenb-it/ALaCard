@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { CardType } from 'src/app/core/models/enums';
-import { Result } from 'src/app/core/models/interfaces';
+import { Card, Player, Result } from 'src/app/core/models/interfaces';
 import { CardUtils } from 'src/app/core/utils/card.utils';
 
 @Component({
@@ -16,7 +15,8 @@ export class ItResultComponent implements AfterViewInit {
   @Input() result: Result;
   @Input() profilePicture?: string;
   @Input() username?: string;
-  @Input() type: CardType;
+  @Input() card: Card;
+  @Input() players: Player[];
 
   constructor(
     private translateService: TranslateService,
@@ -24,7 +24,7 @@ export class ItResultComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    this.cardService = CardUtils.getCardService(this.type);
+    this.cardService = CardUtils.getCardService(this.card.type);
     this.changeDetectornRef.detectChanges();
   }
 
@@ -38,6 +38,14 @@ export class ItResultComponent implements AfterViewInit {
 
   getResultText() {
     return this.cardService.getResultText(this.result, this.translateService);
+  }
+
+  cardHasResultSubText() {
+    return this.cardService.cardHasResultSubText(this.card);
+  }
+
+  getResultSubText() {
+    return this.cardService.getResultSubText(this.result, this.players);
   }
 
 }

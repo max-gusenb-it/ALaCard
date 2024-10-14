@@ -50,7 +50,8 @@ export class DeckState implements NgxsOnInit {
                     text: "Zweiter :)",
                     type: CardType.PlayerVoting,
                     settings: {
-                        order: 2
+                        order: 2,
+                        isAnonymous: true
                     }
                 } as PlayerVotingCard
             ],
