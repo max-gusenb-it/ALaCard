@@ -21,16 +21,26 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
   @Input() label = "Label";
   @Input() hideLabel: boolean = false;
   @Input() hideOption: boolean = false;
-  @Input() customColor: Color;
+  @Input() customColor: Color | undefined;
 
   override getId() {
     return `${this.id}-select-element`
   }
 
   getColorClassesForSelect() : string {
-    let css;
-    if (!!!this.customColor) css = "bg-primary-200 border-primary-200 hover:border-b-primary-500 focus:border-primary-500 disabled:bg-primary-900 disabled:border-b-primary-200";
-    else css = `bg-${this.customColor}-200 border-${this.customColor}-200 hover:border-b-${this.customColor}-500 focus:border-${this.customColor}-500 disabled:bg-${this.customColor}-900 disabled:border-b-${this.customColor}-200`;
+    let color = this.customColor?.valueOf();
+    let css = "";
+    
+    if (!!!this.customColor) color = "primary";
+    switch(color) {
+      case("primary"): {
+        css += "bg-primary-200 border-primary-200 hover:border-b-primary-500 focus:border-primary-500 disabled:bg-primary-100 disabled:border-primary-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500";
+      } break;
+      case("red"): {
+        css += "bg-red-200 border-red-200 hover:border-b-red-500 focus:border-red-500 disabled:bg-red-100 disabled:border-red-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500";
+      }
+    }
+    
     if (this.hideLabel) css += " text-transparent";
     return css;
   }
