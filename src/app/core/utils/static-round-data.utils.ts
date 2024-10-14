@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app';
 import { Deck, GameSettings, Player, Round, StaticRoundData } from "../models/interfaces";
 import { CardUtils } from './card.utils';
-import { getNFromArray } from './utils';
+import { Utils } from './utils';
 
 export namespace StaticRoundDataUtils {
     export function createInitialStaticRoundData(deck: Deck, players: Player[], gameSettings: GameSettings) : StaticRoundData {
@@ -47,7 +47,7 @@ export namespace StaticRoundDataUtils {
                 index: i
             }}).sort((c1, c2) => c1.cardOrder - c2.cardOrder)[0].index;
         } else {
-            return getNFromArray(unplayedCardIndexes, 1)[0];
+            return Utils.getNFromArray(unplayedCardIndexes, 1)[0];
         }
     }
 }

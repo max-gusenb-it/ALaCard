@@ -24,7 +24,7 @@ import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '
 import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { SharedModule } from './shared/shared.module';
-import { getBrowserLanguage } from './core/utils/language.util';
+import { LanguageUtils } from './core/utils/language.util';
 import { AUTHENTICATION_STATE_TOKEN, AuthenticationState } from './core/state/authentication/authentication.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { LoadingState } from './core/state';
@@ -70,7 +70,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: getBrowserLanguage()
+      defaultLanguage: LanguageUtils.getBrowserLanguage()
     }),
     AngularFirestoreModule.enablePersistence()
   ],

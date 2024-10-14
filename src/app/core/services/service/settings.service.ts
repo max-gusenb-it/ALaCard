@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { systemDefaultValue } from '../../constants/systemDefaultValue';
-import { getBrowserLanguage } from '../../utils/language.util';
+import { LanguageUtils } from '../../utils/language.util';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class SettingsService {
 
   setAppLanguage(lang: string) {
     if (lang !== systemDefaultValue) this.translateService.setDefaultLang(lang);
-    else this.translateService.setDefaultLang(getBrowserLanguage());
+    else this.translateService.setDefaultLang(LanguageUtils.getBrowserLanguage());
   }
 
   setAppColor(color: string) {
