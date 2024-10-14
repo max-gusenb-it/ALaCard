@@ -2,13 +2,13 @@ import { PlayerVotingResponse } from "src/app/core/models/interfaces/logic/game-
 import { CardService } from "./card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { DynamicRoundData, PlayerVotingResult, Response, Result } from "src/app/core/models/interfaces";
+import { DynamicRoundData, PlayerVotingCard, PlayerVotingResult, Response, Result } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends CardService<PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
+export class PlayerVotingCardService extends CardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
         const pvResponses = this.castResponses(responses);
         let drd : DynamicPlayerVotingRoundData = super.createDynamicRoundData(roundId, responses);

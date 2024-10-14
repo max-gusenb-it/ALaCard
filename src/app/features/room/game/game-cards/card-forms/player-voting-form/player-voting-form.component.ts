@@ -1,8 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { takeUntil } from 'rxjs';
-import { Card, Player, RoomSettings, Round } from 'src/app/core/models/interfaces';
+import { Player, PlayerVotingCard, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
@@ -25,7 +24,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   players: Player[];
   roomSettings: RoomSettings;
   
-  @Input() card: Card;
+  @Input() card: PlayerVotingCard;
   @Input() round: Round;
 
   constructor(
@@ -48,6 +47,11 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     const response = this.playerVotingService.castResponse(
       this.responseDataService.getResponsesForRoundAndUser(this.round.id)
     );
+
+    if (!!this.card.settings && this.card.settings.selfVoteDisabled === true) {
+      this.players = this.players.filter(p => p.id !== this.store.selectSnapshot(AuthenticationState.userid));
+      this.changeDetectorRef.detectChanges();
+    }
 
     if(!!response) {
       this.playerVotingForm.controls["votedPlayerId"].disable();

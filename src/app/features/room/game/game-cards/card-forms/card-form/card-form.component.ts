@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { Deck, StaticRoundData } from 'src/app/core/models/interfaces';
+import { Card, Deck, StaticRoundData } from 'src/app/core/models/interfaces';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
@@ -17,7 +18,8 @@ export class CardFormComponent extends AngularLifecycle {
 
   constructor(
     private store: Store,
-    private staticRoundDataService: StaticRoundDataService
+    private staticRoundDataService: StaticRoundDataService,
+    private playerVotingCardService: PlayerVotingCardService
   ) {
     super();
 
@@ -28,6 +30,10 @@ export class CardFormComponent extends AngularLifecycle {
       .subscribe(srd => {
         this.staticRoundData = srd;
     });
+  }
+
+  getPlayerVotingCard(card: Card) {
+    return this.playerVotingCardService.castCard(card);
   }
 
 }

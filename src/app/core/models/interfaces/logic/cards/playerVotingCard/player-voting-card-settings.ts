@@ -1,7 +1,8 @@
 import { CardSettings } from "../card-settings";
 
 export interface PlayerVotingCardSettings extends CardSettings {
-    selfVotAllowed: boolean;
+    selfVoteDisabled: boolean;
     isAnonymous: boolean;
+    payToDisplay: boolean;
     // ToDo: implement
 }

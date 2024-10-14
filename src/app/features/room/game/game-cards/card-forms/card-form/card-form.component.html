@@ -6,7 +6,7 @@
     @case(2) {
       <player-voting-form
         class="w-full"
-        [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [card]="getPlayerVotingCard(deck.cards[staticRoundData.round.cardIndex])"
         [round]="staticRoundData.round"
       />
     }

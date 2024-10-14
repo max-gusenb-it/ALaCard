@@ -8,7 +8,7 @@ import { Utils } from "src/app/core/utils/utils";
 @Injectable({
     providedIn: 'root'
 })
-export class CardService<R extends Response, D extends DynamicRoundData, T extends Result> {
+export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
     createGameRound(baseRound: Round, card: Card, players: Player[], gameSettings: GameSettings) : Round {
         players = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline);
 
@@ -21,6 +21,10 @@ export class CardService<R extends Response, D extends DynamicRoundData, T exten
             baseRound.playerIds = Utils.getNFromArray(players.map(p => p.id), playerWhiteCardCount, !!gameSettings.speficiPlayerId ? [gameSettings.speficiPlayerId] : [])
         }
         return baseRound;
+    }
+
+    castCard(card: Card) : C {
+        return <C> card;
     }
 
     getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string) : string {
