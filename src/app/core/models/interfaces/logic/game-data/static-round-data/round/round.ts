@@ -5,5 +5,4 @@ export interface Round {
      * Ids of players that are mentioned in card text
      */
     playerIds?: string[];
-    processed: boolean;
 }

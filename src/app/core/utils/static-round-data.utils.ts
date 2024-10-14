@@ -5,15 +5,16 @@ import { Utils } from './utils';
 
 export namespace StaticRoundDataUtils {
     export function createInitialStaticRoundData(deck: Deck, players: Player[], gameSettings: GameSettings) : StaticRoundData {
-        let ingameData: StaticRoundData = {
+        let staticRoundData: StaticRoundData = {
             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
             round: null,
             playedCardIndexes: [],
         };
         if (!!!deck.groundRules || deck.groundRules.length === 0) {
-            ingameData.round = createGameRound(deck, ingameData, players, gameSettings);
+            staticRoundData.round = createGameRound(deck, staticRoundData, players, gameSettings);
+            staticRoundData.playedCardIndexes = [staticRoundData.round.cardIndex]
         }
-        return ingameData;
+        return staticRoundData;
     }
 
     export function createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) : Round {
@@ -25,8 +26,7 @@ export namespace StaticRoundDataUtils {
         return cardService.createGameRound(
             {
                 id: staticRoundData.playedCardIndexes.length,
-                cardIndex: newCardIndex,
-                processed: false
+                cardIndex: newCardIndex
             },
             card,
             players,

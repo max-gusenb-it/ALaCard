@@ -20,6 +20,8 @@ import { GameCardsComponent } from './game/game-cards/game-cards.component';
 import { PlayerVotingFormComponent } from './game/game-cards/card-forms/player-voting-form/player-voting-form.component';
 import { CardFormComponent } from './game/game-cards/card-forms/card-form/card-form.component';
 import { CardContainerComponent } from './game/game-cards/card-container/card-container.component';
+import { CardStatsComponent } from './game/game-cards/card-stats/card-stats/card-stats.component';
+import { PlayerVotingStatsComponent } from './game/game-cards/card-stats/player-voting-stats/player-voting-stats.component';
 
 @NgModule({
   imports: [
@@ -41,6 +43,8 @@ import { CardContainerComponent } from './game/game-cards/card-container/card-co
     CardContainerComponent,
     CardFormComponent,
     PlayerVotingFormComponent,
+    CardStatsComponent,
+    PlayerVotingStatsComponent,
     GameCardsComponent,
     GameRulesComponent
   ]

@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
 @Component({
-  selector: 'app-player-voting-stats',
+  selector: 'player-voting-stats',
   templateUrl: './player-voting-stats.component.html'
 })
 export class PlayerVotingStatsComponent {
 
-  constructor() { }
+  constructor(
+    private staticRoundDataService: StaticRoundDataService
+  ) { }
+
+  startNextRound() {
+    this.staticRoundDataService.startNewRound();
+  }
 
 }

@@ -10,7 +10,7 @@ import { LoadingActions } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { ModalController, NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
-import { Deck, Player, Room } from "../../models/interfaces";
+import { Deck, GameSettings, Player, Room } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
 import { PopupService } from "../../services/service/popup.service";
 import { TranslateService } from "@ngx-translate/core";
@@ -25,6 +25,7 @@ import { GameState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
 import { InformationActions } from "../information";
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
+import { Game } from "../../models/interfaces/logic/game/game";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -60,8 +61,19 @@ export class RoomState extends AngularLifecycle {
     }
 
     @Selector()
+    static game(state: RoomStateModel): Game | undefined {
+        const game = state.room?.game;
+        return !!game ? game : undefined;
+    }
+
+    @Selector()
     static gameStarted(state: RoomStateModel): boolean {
         return state.room?.game?.state === GameState.started;
+    }
+
+    @Selector()
+    static gameSettings(state: RoomStateModel): GameSettings | undefined {
+        return state.room?.game?.settings;
     }
 
     @Selector()
@@ -376,7 +388,8 @@ export class RoomState extends AngularLifecycle {
         this.staticRoundDataSourceService.updateStaticRoundData(
             {
                 ...action.staticRoundData,
-                round: round
+                round: round,
+                playedCardIndexes: [...action.staticRoundData.playedCardIndexes]
             },
             state.room.id!
         )

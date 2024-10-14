@@ -12,7 +12,6 @@
     @case (getCardState()) {
       <card
         class="absolute"
-        *ngIf="getRoundState() === getCardState()"
         (click)="continue()"
         [card]="deck.cards[staticRoundData.round!.cardIndex]"
         [playerIds]="staticRoundData.round!.playerIds"
@@ -21,10 +20,13 @@
     }
     @case (getFormState()) {
       <card-form
-        *ngIf="getRoundState() === getFormState()"
-        class="w-full"
+        class="absolute w-full"
       />
     }
-    @case (getStatsState()) {}
+    @case (getStatsState()) {
+      <card-stats
+        class="w-full"
+      ></card-stats>
+    }
   }
 </div>

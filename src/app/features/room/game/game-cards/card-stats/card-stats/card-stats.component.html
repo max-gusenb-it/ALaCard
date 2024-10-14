@@ -1,3 +1,12 @@
-<p>
-  card-stats works!
-</p>
+<div
+  *ngIf="staticRoundData.round !== null"
+  class="w-full flex flex-col gap-4"
+>
+  @switch(deck.cards[staticRoundData.round.cardIndex].type) {
+    @case(2) {
+      <player-voting-stats
+        class="w-full"
+      />
+    }
+  }
+</div>
