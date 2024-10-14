@@ -1,40 +1,12 @@
-<div 
-  [@slideToggle]="{
-    value: staticRoundData.round!.id % 2,
-    params: {
-      leaveEnd: '-150%',
-      enterStart: '150%'
-    }
-  }"
+<div
   class="flex grow items-center justify-center relative"
 >
   @switch(staticRoundData.round!.id % 2) {
     @case(0) {
-      <card
-        class="absolute"
-        *ngIf="clickCount === 0"
-        (click)="increaseClickCount()"
-        [card]="deck.cards[staticRoundData.round!.cardIndex]"
-        [playerIds]="staticRoundData.round!.playerIds"
-        [deckname]="deck.name"
-      />
-      <player-voting-form
-        class="w-full"
-        *ngIf="clickCount === 1"
-        [card]="deck.cards[staticRoundData.round!.cardIndex]"
-        [round]="staticRoundData.round!"
-      />
+      <card-container></card-container>
     }
-    <!-- @case(1) { 
-      <card
-        class="absolute"
-        *ngIf="currentRuleIndex % 2 === 1"
-        (onClick)="navigate(!$event)"
-        (onSwipe)="navigate($event)"
-        [cardType]="0"
-        [text]="groundRules[currentRuleIndex]"
-        [deckname]="deckname"
-      />
-    } -->
+    @case (1) {
+      <card-container></card-container>
+    }
   }
 </div>

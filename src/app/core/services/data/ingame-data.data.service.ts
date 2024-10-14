@@ -34,4 +34,10 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
     getIngameData$() {
         return this.ingameData$.asObservable();
     }
+
+    roundProcessed(roundId: number) {
+        const ingameData = this.getIngameData();
+        if (!!ingameData && !!ingameData.dynamicRoundData && ingameData.dynamicRoundData.roundId === roundId) return ingameData.dynamicRoundData.processed;
+        else return false; 
+    }
 }

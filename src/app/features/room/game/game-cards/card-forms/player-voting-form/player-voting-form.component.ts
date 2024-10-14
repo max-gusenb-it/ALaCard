@@ -38,9 +38,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   ) {
     super();
 
-    this.store.select(RoomState.players)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(p => this.players = p);
+    this.players = this.store.selectSnapshot(RoomState.players);
 
     this.roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
   }

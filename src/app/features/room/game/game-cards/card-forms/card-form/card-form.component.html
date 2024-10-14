@@ -1,0 +1,14 @@
+<div
+  *ngIf="staticRoundData.round !== null"
+  class="w-full flex flex-col gap-4"
+>
+  @switch(deck.cards[staticRoundData.round.cardIndex].type) {
+    @case(2) {
+      <player-voting-form
+        class="w-full"
+        [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [round]="staticRoundData.round"
+      />
+    }
+  }
+</div>

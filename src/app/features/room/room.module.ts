@@ -18,6 +18,8 @@ import { CardComponent } from './game/card/card.component';
 import { GameRulesComponent } from './game/game-rules/game-rules.component';
 import { GameCardsComponent } from './game/game-cards/game-cards.component';
 import { PlayerVotingFormComponent } from './game/game-cards/card-forms/player-voting-form/player-voting-form.component';
+import { CardFormComponent } from './game/game-cards/card-forms/card-form/card-form.component';
+import { CardContainerComponent } from './game/game-cards/card-container/card-container.component';
 
 @NgModule({
   imports: [
@@ -36,6 +38,8 @@ import { PlayerVotingFormComponent } from './game/game-cards/card-forms/player-v
     AddOfflinePlayerBottomSheet,
     GameComponent,
     CardComponent,
+    CardContainerComponent,
+    CardFormComponent,
     PlayerVotingFormComponent,
     GameCardsComponent,
     GameRulesComponent

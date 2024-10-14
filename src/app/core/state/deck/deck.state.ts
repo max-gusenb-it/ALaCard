@@ -57,6 +57,40 @@ export class DeckState implements NgxsOnInit {
             speficPlayerMandatory: false
         };
 
+        const partyDeckWithRules: Deck = {
+            icon: "🎉",
+            name: "Party Game with Rules",
+            description: "Very funny Party Game for your whole family",
+            cards: [
+                {
+                    text: "Bitte zeige diese Karte an",
+                    type: CardType.PlayerVoting
+                } as PlayerVotingCard,
+                {
+                    text: "Erster :) - %p0 is a echter Wappla",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 1
+                    }
+                } as PlayerVotingCard,
+                {
+                    text: "Zweiter :)",
+                    type: CardType.PlayerVoting,
+                    settings: {
+                        order: 2
+
+                    }
+                } as PlayerVotingCard
+            ],
+            groundRules: [
+                "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
+                "The winner is the last one standing :*",
+                "Don't drink too much ;)",
+                "Don't forget to **have fun** :)"
+            ],
+            speficPlayerMandatory: false
+        };
+
         const partyDeckWithSpMandatory: Deck = {
             icon: "🎉",
             name: "Party Game with sp mandatory",
@@ -85,7 +119,7 @@ export class DeckState implements NgxsOnInit {
             speficPlayerMandatory: true
         };
 
-        const partyDeckWithRules: Deck = {
+        const partyDeckWithRulesAndSp: Deck = {
             icon: "🎉",
             name: "Party Game with Rules and sp",
             description: "Very funny Party Game for your whole family",
@@ -142,7 +176,7 @@ export class DeckState implements NgxsOnInit {
             decks = [leggitPartyDeck];
         } else {
             decks = [
-                partyDeck, partyDeckWithSpMandatory, partyDeckWithRules
+                partyDeck, partyDeckWithRules, partyDeckWithSpMandatory, partyDeckWithRulesAndSp
             ];
         }
 

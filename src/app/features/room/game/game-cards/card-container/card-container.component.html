@@ -1,0 +1,30 @@
+<div
+  [@slideToggle]="{
+    value: getRoundState(),
+    params: {
+      leaveEnd: '-150%',
+      enterStart: '150%'
+    }
+  }"
+  class="flex grow items-center justify-center relative"
+>
+  @switch(getRoundState()) {
+    @case (getCardState()) {
+      <card
+        class="absolute"
+        *ngIf="getRoundState() === getCardState()"
+        (click)="continue()"
+        [card]="deck.cards[staticRoundData.round!.cardIndex]"
+        [playerIds]="staticRoundData.round!.playerIds"
+        [deckname]="deck.name"
+      />
+    }
+    @case (getFormState()) {
+      <card-form
+        *ngIf="getRoundState() === getFormState()"
+        class="w-full"
+      />
+    }
+    @case (getStatsState()) {}
+  }
+</div>
