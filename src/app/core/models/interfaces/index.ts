@@ -13,6 +13,8 @@ export { GameSettings } from "./logic/game/game-settings";
 export { IItError } from "./logic/error-monitor/it-error";
 
 export { Round } from "./logic/game-data/static-round-data/round/round";
+export { DynamicRoundData } from "./logic/game-data/ingame-data/dynamic-round-data/dynamic-round-data";
+export { DynamicPlayerVotingRoundData } from "./logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
 export { IngameData } from "./logic/game-data/ingame-data/ingame-data"
 export { StaticRoundData } from "./logic/game-data/static-round-data/static-round-data";
 

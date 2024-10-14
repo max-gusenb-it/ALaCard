@@ -41,6 +41,11 @@ export class RoomState extends AngularLifecycle {
     }
 
     @Selector()
+    static roomId(state: RoomStateModel): string | undefined {
+        return state.room?.id;
+    }
+
+    @Selector()
     static roomSettings(state: RoomStateModel): RoomSettings | undefined {
         return state.room?.settings;
     }

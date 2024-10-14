@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <it-button class="flex grow" color="red" *ngIf="userResponded() && isUserRoomAdmin()">
+  <it-button class="flex grow" color="red" *ngIf="userResponded() && isUserRoomAdmin()" type="button" (click)="processRound()">
     {{ 'actions.continue' | translate }} {{(!roomSettings.singleDeviceMode) ? getRulesReadInfo() : null}}
   </it-button>
 </form>

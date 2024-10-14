@@ -6,6 +6,7 @@ import { Card, Player, RoomSettings, Round } from 'src/app/core/models/interface
 import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
+import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
@@ -32,6 +33,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     private responseDataService: ResponseDataService,
     private changeDetectorRef: ChangeDetectorRef,
     private playerVotingService: PlayerVotingCardService,
+    private ingameDataSourceService: IngameDataSourceService,
     private store: Store
   ) {
     super();
@@ -45,7 +47,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
 
   ngAfterViewInit() {
     const response = this.playerVotingService.castResponse(
-      this.responseDataService.getResponseDataForRoundAndUser(this.round.id)
+      this.responseDataService.getResponsesForRoundAndUser(this.round.id)
     );
 
     if(!!response) {
@@ -92,4 +94,13 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
    return this.responseDataService.getRulesReadInfo(this.round.id);
   }
 
+  processRound() {
+    this.ingameDataSourceService.updateDynamicRoundData(
+      this.store.selectSnapshot(RoomState.roomId)!,
+      this.playerVotingService.createDynamicRoundData(
+        this.round.id, 
+        this.responseDataService.getResponsesForRound(this.round.id)
+      )
+    );
+  }
 }

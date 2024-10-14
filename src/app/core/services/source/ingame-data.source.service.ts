@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from "@ngxs/store";
 import { RoomUtils } from "../../utils/room.utils";
 import { gameDataRef, ingameDataRef } from "../../constants/firestoreReferences";
-import { IngameData } from '../../models/interfaces';
+import { DynamicRoundData, IngameData } from '../../models/interfaces';
 import { FirestoreService } from './firestore.source.service';
 
 @Injectable({
@@ -35,6 +35,15 @@ export class IngameDataSourceService {
             `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
             ingameDataRef,
             ingameData
+        );
+    }
+    
+    updateDynamicRoundData(roomId: string, dynamicRoundData: DynamicRoundData) {
+        return this.firestoreService.updateField(
+            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
+            ingameDataRef,
+            `dynamicRoundData`,
+            dynamicRoundData
         );
     }
 }

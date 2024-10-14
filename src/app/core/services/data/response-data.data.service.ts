@@ -41,7 +41,7 @@ export class ResponseDataService extends AngularLifecycle {
         });
     }
 
-    getResponseData() {
+    getResponses() {
         const responseData = this.responseData$.value?.responses;
         if (responseData == undefined) {
             return [];
@@ -50,12 +50,12 @@ export class ResponseDataService extends AngularLifecycle {
             .map(key => (responseData[key]));
     }
 
-    getResponseDataForRound(roundId: number) {
-        return this.getResponseData().filter(r => r.roundId === roundId);
+    getResponsesForRound(roundId: number) {
+        return this.getResponses().filter(r => r.roundId === roundId);
     }
 
-    getResponseDataForRoundAndUser(roundId: number) {
-        const userResponses = this.getResponseDataForRound(roundId)
+    getResponsesForRoundAndUser(roundId: number) {
+        const userResponses = this.getResponsesForRound(roundId)
             .filter(r => r.playerId === this.store.selectSnapshot(AuthenticationState.userid));
         if (userResponses.length === 1) {
             return userResponses[0];
@@ -65,7 +65,7 @@ export class ResponseDataService extends AngularLifecycle {
     }
 
     userResponded(roundId: number) {
-        return this.checkIfUserResponded(this.getResponseData(), roundId);
+        return this.checkIfUserResponded(this.getResponses(), roundId);
     }
 
     private checkIfUserResponded(responses: Response[], roundId: number) {
@@ -73,6 +73,6 @@ export class ResponseDataService extends AngularLifecycle {
     }
 
     getRulesReadInfo(roundId: number) {
-        return `${this.getResponseDataForRound(roundId).length} / ${RoomUtils.getActivePlayerCount(this.store)}`
+        return `${this.getResponsesForRound(roundId).length} / ${RoomUtils.getActivePlayerCount(this.store)}`
     }
 }
