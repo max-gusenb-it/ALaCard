@@ -71,6 +71,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   submit(skipped: boolean = false) {
+    if (skipped) this.playerVotingForm.controls["votedPlayerId"].setValue("");
     this.playerVotingForm.controls["votedPlayerId"].disable();
     this.playerVotingForm.controls["votedPlayerId"].updateValueAndValidity();
     this.responseSourceService.addResponse(

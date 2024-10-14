@@ -20,7 +20,7 @@
         </option>
       </it-select>
       <div class="flex flex-row gap-4">
-        <it-button class="flex grow basis-0" [size]="'small'" color="secondary" [disabled]="userResponded()" (click)="submit(true)">
+        <it-button class="flex grow basis-0" [size]="'small'" color="secondary" [disabled]="userResponded()" type="button" (click)="submit(true)">
           <it-icon color="text-neutral-100">skip_next</it-icon>
         </it-button>
         <it-button class="flex grow basis-0" [size]="'small'" color="red" [disabled]="!playerVotingForm.valid || userResponded()" type="submit">
