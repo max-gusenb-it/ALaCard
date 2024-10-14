@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
 import { PlayerState } from "src/app/core/models/enums";
 import { Card, DynamicRoundData, GameSettings, Player, Response, Result, Round } from "src/app/core/models/interfaces";
@@ -60,7 +61,15 @@ export class CardService<R extends Response, D extends DynamicRoundData, T exten
         return <D> dynamicRoundData;
     }
 
+    castResult(result: Result) : T {
+        return <T> result;
+    }
+
     getResults(dynamicRoundData: DynamicRoundData) : T[] {
         return [];
+    }
+
+    getResultText(result: Result, translateService: TranslateService) {
+        return "";
     }
 }

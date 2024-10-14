@@ -141,6 +141,13 @@
           "title": "Let’s get started",
           "description": "Um einem Raum beizutreten, musst du dich zuerst anmelden oder registrieren. Du kannst dich auch als Gast registrieren, wenn du keinen Account erstellen möchten."
         }
+      },
+      "display": {
+        "it-result": {
+          "votes": "Stimmen",
+          "vote": "Stimme",
+          "skipped": "Ausgelassen"
+        }
       }
     },
     "forms": {

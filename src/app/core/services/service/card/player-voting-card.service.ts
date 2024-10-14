@@ -2,7 +2,8 @@ import { PlayerVotingResponse } from "src/app/core/models/interfaces/logic/game-
 import { CardService } from "./card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { DynamicRoundData, PlayerVotingResult, Response } from "src/app/core/models/interfaces";
+import { DynamicRoundData, PlayerVotingResult, Response, Result } from "src/app/core/models/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
@@ -39,6 +40,12 @@ export class PlayerVotingCardService extends CardService<PlayerVotingResponse, D
             }
         });
         return results;
+    }
+
+    override getResultText(result: Result, translateService: TranslateService): string {
+        const pvResult = this.castResult(result);
+        const translation = pvResult.votes === 1 ? translateService.instant("shared.components.display.it-result.vote") : translateService.instant("shared.components.display.it-result.votes");
+        return `${pvResult.votes} ${translation}`;
     }
 }
 

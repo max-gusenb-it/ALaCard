@@ -141,6 +141,13 @@
           "title": "Let’s get started",
           "description": "To join a room you have to log in or register first. You can register as a guest if you don't want to create an account."
         }
+      },
+      "display": {
+        "it-result": {
+          "votes": "votes",
+          "vote": "vote",
+          "skipped": "Skipped"
+        }
       }
     },
     "forms": {

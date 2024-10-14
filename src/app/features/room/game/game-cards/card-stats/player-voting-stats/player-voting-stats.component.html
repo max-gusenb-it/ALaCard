@@ -5,8 +5,17 @@
         heading="How To Play?"
         icon="emoji_events"
         [selected]="true"
+        *ngIf="!!results"
     >
-        <p>Duis consectetur quis tempus sed. Facilisis tincidunt aliquam nulla pharetra ut adipiscing. Montes facilisis scelerisque augue quam gravida purus. Nulla sed velit lectus a mattis fringilla convallis eu.</p>
+        <div class="flex flex-col gap-2">
+            <it-result
+                *ngFor="let result of results"
+                [result]="result"
+                [username]="getPlayerForResult(result)?.username"
+                [profilePicture]="getPlayerForResult(result)?.profilePicture"
+                [type]="card.type"
+            />
+        </div>
     </it-accord>
     <it-button class="flex grow" color="red" type="button" (click)="startNextRound()">
         {{ 'actions.continue' | translate }}

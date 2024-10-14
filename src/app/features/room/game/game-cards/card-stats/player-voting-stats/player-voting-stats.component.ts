@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Card, DynamicRoundData, PlayerVotingResult, Round } from 'src/app/core/models/interfaces';
+import { Card, DynamicRoundData, Player, PlayerVotingResult, Result, Round } from 'src/app/core/models/interfaces';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { RoomState } from 'src/app/core/state';
@@ -16,16 +16,19 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   @Input() dynamicRoundData: DynamicRoundData;
 
   results: PlayerVotingResult[];
+  players: Player[];
 
   constructor(
     private staticRoundDataService: StaticRoundDataService,
     private playerVotingService: PlayerVotingCardService,
-    private store: Store
+    private store: Store,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngAfterViewInit(): void {
+    this.players = this.store.selectSnapshot(RoomState.players);
     this.results = this.playerVotingService.getResults(this.dynamicRoundData);
-    console.log (this.results);
+    this.changeDetectorRef.detectChanges();
   }
 
   getCardText() {
@@ -35,6 +38,10 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
         this.round.playerIds,
         this.store.selectSnapshot(RoomState.specificPlayerId),
     );
+  }
+
+  getPlayerForResult(result: PlayerVotingResult) {
+    return this.players.find(p => p.id === result.votedPlayerId);
   }
 
   startNextRound() {
