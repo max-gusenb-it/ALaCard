@@ -1,12 +1,19 @@
 <div
+  [@slideToggle]="{
+    value: staticRoundData.round!.id % 2,
+    params: {
+      leaveEnd: '-150%',
+      enterStart: '150%'
+    }
+  }"
   class="flex grow items-center justify-center relative"
 >
   @switch(staticRoundData.round!.id % 2) {
     @case(0) {
-      <card-container class="flex grow"></card-container>
+      <card-container class="w-full absolute"></card-container>
     }
     @case (1) {
-      <card-container class="flex grow"></card-container>
+      <card-container class="w-full absolute"></card-container>
     }
   }
 </div>
