@@ -12,7 +12,7 @@
     @case(0) { 
       <card
         class="absolute"
-        *ngIf="staticRoundData.round!.id === 0 && clickCount === 0"
+        *ngIf="clickCount === 0"
         (click)="increaseClickCount()"
         [card]="deck.cards[staticRoundData.round!.cardIndex]"
         [playerIds]="staticRoundData.round!.playerIds"

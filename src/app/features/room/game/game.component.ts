@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
 import { Room, StaticRoundData } from 'src/app/core/models/interfaces';
-import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
-import { AuthenticationState, RoomState } from 'src/app/core/state';
+import { RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
@@ -20,9 +19,7 @@ export class GameComponent extends AngularLifecycle {
   @Select(RoomState.room) room$: Observable<Room>;
 
   constructor(
-    private staticRoundDataService: StaticRoundDataService,
-    private responseDataSourceService: ResponseDataSourceService,
-    private store: Store
+    private staticRoundDataService: StaticRoundDataService
   ) {
     super();
 
@@ -34,16 +31,4 @@ export class GameComponent extends AngularLifecycle {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(i => this.staticRoundData = i);
   }
-
-  onRulesRead() {
-    return this.responseDataSourceService.addResponse(
-      this.room.id!,
-      {
-        roundId: -1,
-        playerId: this.store.selectSnapshot(AuthenticationState.user)?.id!,
-        skipped: false
-      }
-    );
-  }
-
 }

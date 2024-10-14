@@ -4,7 +4,6 @@
     *ngIf="staticRoundData.round === null"
     [deckname]="(deckname$ | async)!"
     [groundRules]="room.game!.deck!.groundRules!"
-    (onRulesRead)="onRulesRead()"
   ></game-rules>
   <game-cards
     class="flex grow"

@@ -4,7 +4,8 @@ import { firstValueFrom, timer } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
 import { CardType } from 'src/app/core/models/enums';
 import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/freeTextCard/free-text-card';
-import { RoomState } from 'src/app/core/state';
+import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
+import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
 
 @Component({
@@ -22,9 +23,10 @@ export class GameRulesComponent implements AfterViewInit {
 
   protected animationDirection: "right" | "left" = "right";
 
-  @Output() onRulesRead: EventEmitter<boolean> = new EventEmitter();
-
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private responseDataSourceService: ResponseDataSourceService
+  ) {
     this.currentRuleIndex = this.store.selectSnapshot(InformationState.gameRulesCardIndex);
   }
 
@@ -70,9 +72,20 @@ export class GameRulesComponent implements AfterViewInit {
   emitRulesRead() {
     if (!this.store.selectSnapshot(RoomState.roomSettings)?.singleDeviceMode && !this.store.selectSnapshot(InformationState.gameRulesRead)) {
       this.store.dispatch(new InformationActions.GameRulesRead());
-      firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 100))
-        .then(() => this.onRulesRead.emit(true));
+      firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 70))
+        .then(() => this.onRulesRead());
     }
+  }
+
+  onRulesRead() {
+    return this.responseDataSourceService.addResponse(
+      this.store.selectSnapshot(RoomState.roomId)!,
+      {
+        roundId: -1,
+        playerId: this.store.selectSnapshot(AuthenticationState.user)?.id!,
+        skipped: false
+      }
+    );
   }
 
 }
