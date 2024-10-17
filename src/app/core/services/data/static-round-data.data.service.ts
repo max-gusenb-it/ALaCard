@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, takeUntil } from "rxjs";
+import { BehaviorSubject, filter, Observable, takeUntil } from "rxjs";
 import { StaticRoundData } from "../../models/interfaces";
 import { StaticRoundDataSourceService } from "../source/static-round-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
@@ -11,7 +11,7 @@ import { RoomState } from "../../state";
     providedIn: 'root'
 })
 export class StaticRoundDataService extends RoomPlayerLoadBaseDataService {
-    staticRoundData$: BehaviorSubject<StaticRoundData> = new BehaviorSubject(null as any);
+    staticRoundData$: BehaviorSubject<StaticRoundData | null> = new BehaviorSubject(null as any);
 
     constructor(
         private store: Store,
@@ -38,12 +38,18 @@ export class StaticRoundDataService extends RoomPlayerLoadBaseDataService {
         return this.staticRoundData$.value;
     }
 
-    getStaticRoundData$() {
-        return this.staticRoundData$.asObservable();
+    getStaticRoundData$() : Observable<StaticRoundData> {
+        return this.staticRoundData$
+            .asObservable()
+            .pipe(
+                filter((s): s is StaticRoundData => s !== null)
+            );
     }
 
     startNewRound() {
         const staticRoundData = this.getStaticRoundData();
+
+        if (!!!staticRoundData) return;
 
         const round = StaticRoundDataUtils.createGameRound(
             this.store.selectSnapshot(RoomState.deck)!,

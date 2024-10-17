@@ -24,7 +24,7 @@ enum RoundState {
 export class CardContainerComponent extends AngularLifecycle{
 
   deck: Deck;
-  staticRoundData: StaticRoundData;
+  staticRoundData: StaticRoundData | null;
   dynamicRoundData: DynamicRoundData | null;
   
   cardClicked: boolean = false;
@@ -60,13 +60,13 @@ export class CardContainerComponent extends AngularLifecycle{
   getRoundState() : RoundState {
     if (
       !this.cardClicked &&
-      !this.responseDataService.userResponded(this.staticRoundData.round!.id) && 
-      (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData.round!.id || !this.roundInformation.cardClicked) &&
-      (!!!this.dynamicRoundData || this.dynamicRoundData.roundId !== this.staticRoundData.round!.id || !this.dynamicRoundData.processed)
+      !this.responseDataService.userResponded(this.staticRoundData!.round!.id) && 
+      (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData!.round!.id || !this.roundInformation.cardClicked) &&
+      (!!!this.dynamicRoundData || this.dynamicRoundData.roundId !== this.staticRoundData!.round!.id || !this.dynamicRoundData.processed)
     ) {
       return RoundState.card;
     }
-    if (!this.ingameDataService.roundProcessed(this.staticRoundData.round!.id)) {
+    if (!this.ingameDataService.roundProcessed(this.staticRoundData!.round!.id)) {
       return RoundState.form;
     }
     return RoundState.stats;
@@ -86,6 +86,6 @@ export class CardContainerComponent extends AngularLifecycle{
 
   continue() {
     this.cardClicked = true;
-    this.store.dispatch(new InformationActions.SetRoundCardClicked(this.staticRoundData.round!.id));
+    this.store.dispatch(new InformationActions.SetRoundCardClicked());
   }
 }
