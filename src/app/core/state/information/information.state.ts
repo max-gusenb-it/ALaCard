@@ -49,9 +49,9 @@ export class InformationState {
     async gameRulesRead(ctx: StateContext<InformationStateModel>, action: InformationActions.GameRulesRead) {
         const state = ctx.getState();
 
-        if (!!!state.GameInformations?.compareValue) {
+        if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.gameRulesReadCPNotFound,
+                InformationStateErrors.gameRulesReadGINotFound,
                 InformationState.name
             )
         };
@@ -68,9 +68,9 @@ export class InformationState {
     async setGameRulesCardIndex(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameRulesCardIndex) {
         const state = ctx.getState();
 
-        if (!!!state.GameInformations?.compareValue) {
+        if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.gameRulesReadCPNotFound,
+                InformationStateErrors.gameRulesReadGINotFound,
                 InformationState.name
             )
         };
@@ -83,22 +83,56 @@ export class InformationState {
         });
     }
 
-    @Action(InformationActions.SetRoundCardClicked)
-    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundCardClicked) {
+    @Action(InformationActions.SetRoundId)
+    async setRoundId(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundId) {
         const state = ctx.getState();
         
-        if (!!!state.GameInformations?.compareValue) {
+        if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.setRoundCardClickedCPNotFound,
+                InformationStateErrors.setRoundIdGINotFound,
                 InformationState.name
             )
         };
+
+        if (!!state.GameInformations.roundInformation && state.GameInformations.roundInformation.roundId === action.roundId) return;
 
         ctx.patchState({
             GameInformations: {
                 ...state.GameInformations,
                 roundInformation: {
                     roundId: action.roundId,
+                    cardClicked: false,
+                    responded: false
+                }
+            }
+        });
+    }
+
+    @Action(InformationActions.SetRoundCardClicked)
+    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundCardClicked) {
+        const state = ctx.getState();
+        
+        if (!!!state.GameInformations) {
+            throw new ItError(
+                InformationStateErrors.setRoundCardClickedGINotFound,
+                InformationState.name
+            )
+        };
+
+        console.log (InformationState.name + "-" + this.setRoundCardClicked.name);
+
+        if (!!!state.GameInformations.roundInformation) {
+            throw new ItError(
+                InformationStateErrors.roundInfomrationNotFound,
+                InformationState.name + "-" + this.setRoundCardClicked.name
+            )
+        }
+
+        ctx.patchState({
+            GameInformations: {
+                ...state.GameInformations,
+                roundInformation: {
+                    ...state.GameInformations.roundInformation,
                     cardClicked: true
                 }
             }

@@ -43,7 +43,12 @@ export class CardContainerComponent extends AngularLifecycle{
 
     this.staticRoundDataService.getStaticRoundData$()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(srd => this.staticRoundData = srd);
+      .subscribe(srd => {
+        if (srd.round?.id !== undefined && this.staticRoundData?.round?.id !== srd?.round?.id) {
+          this.store.dispatch(new InformationActions.SetRoundId(srd.round.id));
+        }
+        this.staticRoundData = srd;
+      });
 
     this.roundInformation = this.store.selectSnapshot(InformationState.roundInformation);
 
