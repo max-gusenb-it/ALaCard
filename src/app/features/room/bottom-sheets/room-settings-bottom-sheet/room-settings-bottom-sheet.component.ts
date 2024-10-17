@@ -43,6 +43,8 @@ export class RoomSettingsBottomSheet {
     this.dialogRef.close();
   }
 
+  // ToDo: disable single device mode during gameplay
+
   updateSettings() {
     let differences = false;
     const room = this.store.selectSnapshot(RoomState.room);

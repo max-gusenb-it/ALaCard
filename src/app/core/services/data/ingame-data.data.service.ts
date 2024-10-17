@@ -12,6 +12,8 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
 
     constructor(private ingameDataSourceService: IngameDataSourceService) {
         super();
+
+        this.constructorDone$.next(true);
     }
 
     protected override disconnectFromData(): void {
@@ -20,7 +22,6 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
     }
 
     protected override connectToData(roomId: string): void {
-        if (!!!this.ingameDataSourceService) return;
         this.dataSubscription$ = this.ingameDataSourceService
             .getIngameData$(roomId)
             .pipe(takeUntil(this.destroyed$))

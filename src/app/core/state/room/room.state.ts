@@ -389,7 +389,7 @@ export class RoomState extends AngularLifecycle {
             {
                 ...action.staticRoundData,
                 round: round,
-                playedCardIndexes: [...action.staticRoundData.playedCardIndexes]
+                playedCardIndexes: [round.cardIndex]
             },
             state.room.id!
         )

@@ -18,6 +18,8 @@ export class StaticRoundDataService extends RoomPlayerLoadBaseDataService {
         private staticRoundDataSourceService: StaticRoundDataSourceService
     ) {
         super();
+
+        this.constructorDone$.next(true);
     }
 
     protected override disconnectFromData(): void {
@@ -26,10 +28,6 @@ export class StaticRoundDataService extends RoomPlayerLoadBaseDataService {
     }
 
     protected override connectToData(roomId: string): void {
-        // Typescript bug -> because of base class, source Service is undefined in first call
-        // When reloading in room -> Without if error would be thrown
-        // Okay solution because room fires multiple times in intial loadig
-        if (!!!this.staticRoundDataSourceService) return;
         this.dataSubscription$ = this.staticRoundDataSourceService
             .getStaticRoundData$(roomId)
             .pipe(takeUntil(this.destroyed$))
