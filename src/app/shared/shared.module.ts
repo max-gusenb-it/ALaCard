@@ -43,6 +43,7 @@ import { ItCreateRoomAsGuestModal } from './components/forms/it-create-room-as-g
 import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-create-room-form.component';
 import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accord/it-checkbox-accord.component';
 import { ItResultComponent } from './components/display/it-result/it-result.component';
+import { ItLoadingScreenComponent } from './components/display/it-loading-screen/it-loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ItResultComponent } from './components/display/it-result/it-result.comp
     ItNavItemComponent,
     ItAccordComponent,
     ItIconComponent,
+    ItLoadingScreenComponent,
     ItPlayerComponent,
     ItResultComponent,
     ItSelectionListComponent,
@@ -105,6 +107,7 @@ import { ItResultComponent } from './components/display/it-result/it-result.comp
     ItNavItemComponent,
     ItAccordComponent,
     ItIconComponent,
+    ItLoadingScreenComponent,
     ItPlayerComponent,
     ItResultComponent,
     ItSelectionListComponent,
