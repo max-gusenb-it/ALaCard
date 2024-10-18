@@ -29,6 +29,11 @@
         <form
           [formGroup]="gameSettingsForm"
         >
+          <it-checkbox
+            id="drinkingGame"
+            [label]="'features.room.settings-bottom-sheet.drinking-game' | translate"
+            formControlName="drinkingGame"
+          />
           <it-checkbox-accord
             *ngIf="!selectedDeck.speficPlayerMandatory && specificPersonModeAvailable()"
             id="specificPlayerActivated"
@@ -44,7 +49,8 @@
                 {{ player.username }}
               </option>
             </it-select>
-          </it-checkbox-accord><it-select 
+          </it-checkbox-accord>
+          <it-select 
             id="specificPlayerId"
             [label]="'features.room.settings-bottom-sheet.specific-player' | translate"
             formControlName="specificPlayerId"

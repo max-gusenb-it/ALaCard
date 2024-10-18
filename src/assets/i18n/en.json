@@ -86,7 +86,8 @@
         "other-admin": "The game can continue even if you leave the room by making an other user the admin for the round",
         "only-single-device-when-offline": "Can't leave single device mode when offline",
         "specificPlayerActivated": "Choose specific player for supported cards?",
-        "specific-player": "Specific Player for deck"
+        "specific-player": "Specific Player for deck",
+        "drinking-game": "Do you want to play a drinking game?"
       },
       "start-game-modal": {
         "deck": "Deck",
@@ -147,6 +148,10 @@
           "votes": "votes",
           "vote": "vote",
           "skipped": "Skipped"
+        },
+        "it-loading-screen": {
+          "title": "Loading Room",
+          "subtitle": "Brace yourself for awesomeness!"
         }
       }
     },

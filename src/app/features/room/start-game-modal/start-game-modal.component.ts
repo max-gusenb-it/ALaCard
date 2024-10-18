@@ -22,8 +22,9 @@ export class StartGameModal extends AngularLifecycle {
   showSettings: boolean = false;
 
   gameSettingsForm: FormGroup = new FormGroup({
+    drinkingGame: new FormControl({value: false, disabled: false}),
     specificPlayerActivated: new FormControl({value: false, disabled: false}),
-    specificPlayerId: new FormControl({value: null, disabled: false})
+    specificPlayerId: new FormControl({value: null, disabled: false}),
   });
 
   constructor(
@@ -93,7 +94,8 @@ export class StartGameModal extends AngularLifecycle {
     this.store.dispatch(new RoomActions.StartGame(
       this.selectedDeck,
       {
-        speficiPlayerId: speficiPlayerId
+        speficiPlayerId: speficiPlayerId,
+        drinkingGame: this.gameSettingsForm.controls["drinkingGame"].value
       }
     ));
     this.modalCtrl.dismiss();

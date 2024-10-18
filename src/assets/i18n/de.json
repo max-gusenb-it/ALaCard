@@ -86,7 +86,8 @@
         "other-admin": "Lasse einen anderen Spieler die Admin Rolle übernehmen, wenn du den Raum verlässt. So geht das aktuelle Spiel auch ohne dir weiter",
         "only-single-device-when-offline": "Ohne aktiver Internet Verbindung kann nur offline gespielt werden",
         "specificPlayerActivated": "Konkreten Spieler für unterstützte Karten auswählen?",
-        "specific-player": "Konkreten Spieler für Deck"
+        "specific-player": "Konkreten Spieler für Deck",
+        "drinking-game": "Willst du ein Trinkspiel spielen?"
       },
       "start-game-modal": {
         "deck": "Deck",
@@ -147,6 +148,10 @@
           "votes": "Stimmen",
           "vote": "Stimme",
           "skipped": "Ausgelassen"
+        },
+        "it-loading-screen": {
+          "title": "Lade Raum",
+          "subtitle": "Mach dich bereit für Großartiges!"
         }
       }
     },
