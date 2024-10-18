@@ -107,6 +107,9 @@
         "game-cards": {
           "forms": {
             "answer": "Antwort"
+          },
+          "card-stats": {
+            "skipped": "Jeder hat übersprungen"
           }
         }
       },

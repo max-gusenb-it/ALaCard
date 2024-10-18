@@ -107,6 +107,9 @@
         "game-cards": {
           "forms": {
             "answer": "Answer"
+          },
+          "card-stats": {
+            "skipped": "Everyone skipped"
           }
         }
       },

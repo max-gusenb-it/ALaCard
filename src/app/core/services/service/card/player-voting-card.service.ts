@@ -39,6 +39,11 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
                 }
             }
         });
+        results = results.sort((r1, r2) => {
+            if (r1.votedPlayerId === null) return 1;
+            if (r2.votedPlayerId === null) return 1;
+            return r2.votes - r1.votes;
+        });
         return results;
     }
 

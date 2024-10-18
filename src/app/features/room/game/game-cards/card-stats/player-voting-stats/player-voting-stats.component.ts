@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { Card, DynamicRoundData, Player, PlayerVotingResult, Result, Round } from 'src/app/core/models/interfaces';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
@@ -22,6 +23,7 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   constructor(
     private staticRoundDataDataService: StaticRoundDataDataService,
     private playerVotingService: PlayerVotingCardService,
+    private translateService: TranslateService,
     private store: Store,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
@@ -39,6 +41,15 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
         this.round.playerIds,
         this.store.selectSnapshot(RoomState.specificPlayerId),
     );
+  }
+
+  getResultsHeading() {
+    const player = this.getPlayerForResult(this.results[0]);
+    if (player) {
+      return player.username;
+    } else {
+      return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
+    }
   }
 
   getPlayerForResult(result: PlayerVotingResult) {
