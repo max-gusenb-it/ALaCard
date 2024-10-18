@@ -17,6 +17,7 @@ export class ResponseDataService extends AngularLifecycle {
     responseData$: BehaviorSubject<ResponseData> = new BehaviorSubject(null as any);
 
     @Select(RoomState.room) room$!: Observable<Room>;
+    room: Room;
 
     constructor(
         private store: Store,
@@ -30,16 +31,27 @@ export class ResponseDataService extends AngularLifecycle {
                 const userId = this.store.selectSnapshot(AuthenticationState.userid);
                 if (!!!room || !!!room.game || room.game.state === GameState.ended || RoomUtils.getRoomAdmin(room).id !== userId) {
                     if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) {
-                        this.responseDataSubscription$.unsubscribe();
-                        this.responseData$.next(null as any);
+                        this.disconnectFromResponseData();
                     };
                 } else if (!!userId && !!room.game && room.game.state === GameState.started && RoomUtils.getRoomAdmin(room).id === userId && (!!!this.responseDataSubscription$ || this.responseDataSubscription$.closed)) {
-                    this.responseDataSubscription$ = this.responseDataSourceService
-                        .getResponseData$(room.id!)
-                        .pipe(takeUntil(this.destroyed$))
-                        .subscribe(r => this.responseData$.next(r));
+                    this.connectToResponseData(room.id!);
+                } else if (!!userId && RoomUtils.getRoomAdmin(room).id === userId && !!room && !!this.room && this.room.id! !== room.id) {
+                    if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) this.disconnectFromResponseData();
+                    this.connectToResponseData(room.id!);
                 }
         });
+    }
+
+    connectToResponseData(roomId: string) {
+        this.responseDataSubscription$ = this.responseDataSourceService
+            .getResponseData$(roomId)
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe(r => this.responseData$.next(r));
+    }
+
+    disconnectFromResponseData() {
+        this.responseDataSubscription$.unsubscribe();
+        this.responseData$.next(null as any);
     }
 
     getAdminResponses() {

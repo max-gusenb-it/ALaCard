@@ -38,16 +38,13 @@ export class InformationState {
 
     @Selector()
     static response(state: InformationStateModel) : Response | undefined {
-        console.log ("Get response");
         return state.GameInformations?.roundInformation?.response;
     }
 
     @Action(InformationActions.SetGameInformation)
     async setGameInformation(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameInformation) {
         const state = ctx.getState();
-        console.log ("Set Game Information reached");
         if (state.GameInformations?.compareValue === action.gameInformation.compareValue) return;
-        console.log ("Set Game Information", action.gameInformation);
         ctx.patchState({
             GameInformations: action.gameInformation
         });
@@ -105,10 +102,8 @@ export class InformationState {
             )
         };
 
-        console.log ("Set round ID Reached");
         if (!!state.GameInformations.roundInformation && state.GameInformations.roundInformation.roundId === action.roundId) return;
 
-        console.log ("Set round id", action.roundId);
         ctx.patchState({
             GameInformations: {
                 ...state.GameInformations,
@@ -170,8 +165,6 @@ export class InformationState {
                 this.setRoundResponded.name
             )
         }
-
-        console.log ("Set Round Response", action.response);
 
         ctx.patchState({
             GameInformations: {

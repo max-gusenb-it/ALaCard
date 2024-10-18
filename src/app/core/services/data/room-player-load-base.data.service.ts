@@ -18,6 +18,7 @@ export class RoomPlayerLoadBaseDataService extends AngularLifecycle {
     protected constructorDone$ = new Subject<unknown>();
 
     @Select(RoomState.room) room$!: Observable<Room>;
+    room: Room;
 
     constructor() {
         super();
@@ -35,7 +36,11 @@ export class RoomPlayerLoadBaseDataService extends AngularLifecycle {
                             }
                         } else if (!!room.game && room.game.state === GameState.started && (!!!this.dataSubscription$ || this.dataSubscription$.closed)) {
                             this.connectToData(room.id!);
+                        } else if (!!room && !!this.room && this.room.id! !== room.id) {
+                            if (!!this.dataSubscription$ && !this.dataSubscription$.closed) this.disconnectFromData();
+                            this.connectToData(room.id!);
                         }
+                        this.room = room;
                 });
         });
     }

@@ -52,13 +52,19 @@ export class CardContainerComponent extends AngularLifecycle{
           this.store.dispatch(new InformationActions.SetRoundId(srd.round.id));
         }
         this.staticRoundData = srd;
-      });
+    });
 
-    this.roundInformation = this.store.selectSnapshot(InformationState.roundInformation);
+    this.store.select(InformationState.roundInformation)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(ri => {
+        this.roundInformation = ri;
+    });
 
     this.ingameDataService.getDynamicRoundData$()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(d => this.dynamicRoundData = d);
+      .subscribe(d => {
+        this.dynamicRoundData = d;
+      });
   }
 
   getRoundState() : RoundState {
