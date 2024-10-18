@@ -1,16 +1,23 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, filter, map, takeUntil } from "rxjs";
-import { IngameData } from "../../models/interfaces";
+import { IngameData, Response } from "../../models/interfaces";
 import { IngameDataSourceService } from "../source/ingame-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
+import { Store } from "@ngxs/store";
+import { RoomState } from "../../state";
+import { CardType } from "../../models/enums";
+import { CardUtils } from "../../utils/card.utils";
 
 @Injectable({
     providedIn: 'root'
 })
-export class IngameDataService extends RoomPlayerLoadBaseDataService {
+export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     ingameData$: BehaviorSubject<IngameData> = new BehaviorSubject(null as any);
 
-    constructor(private ingameDataSourceService: IngameDataSourceService) {
+    constructor(
+        private ingameDataSourceService: IngameDataSourceService,
+        private store: Store
+    ) {
         super();
 
         this.constructorDone$.next(true);
@@ -42,6 +49,18 @@ export class IngameDataService extends RoomPlayerLoadBaseDataService {
                 filter(d => !!d && !!d.dynamicRoundData),
                 map(d => d.dynamicRoundData)
             );
+    }
+
+    processRound(roundId: number, cardType: CardType, responses: Response[]) {
+        const cardService = CardUtils.getCardService(cardType);
+
+        this.ingameDataSourceService.updateDynamicRoundData(
+          this.store.selectSnapshot(RoomState.roomId)!,
+          cardService.createDynamicRoundData(
+            roundId, 
+            responses
+          )
+        );
     }
 
     roundProcessed(roundId: number) {

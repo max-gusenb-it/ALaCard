@@ -3,9 +3,9 @@ import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
 import { Deck, DynamicRoundData, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
-import { IngameDataService } from 'src/app/core/services/data/ingame-data.data.service';
-import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
-import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
+import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
+import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
@@ -35,9 +35,9 @@ export class CardContainerComponent extends AngularLifecycle{
 
   constructor(
     private store: Store,
-    private staticRoundDataService: StaticRoundDataService,
-    private responseDataService: ResponseDataService,
-    private ingameDataService: IngameDataService
+    private staticRoundDataDataService: StaticRoundDataDataService,
+    private responseDataDataService: ResponseDataDataService,
+    private ingameDataDataService: IngameDataDataService
   ) {
     super();
 
@@ -45,7 +45,7 @@ export class CardContainerComponent extends AngularLifecycle{
 
     this.deck = this.store.selectSnapshot(RoomState.deck)!;
 
-    this.staticRoundDataService.getStaticRoundData$()
+    this.staticRoundDataDataService.getStaticRoundData$()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(srd => {
         if (srd.round?.id !== undefined && this.staticRoundData?.round?.id !== srd?.round?.id) {
@@ -60,7 +60,7 @@ export class CardContainerComponent extends AngularLifecycle{
         this.roundInformation = ri;
     });
 
-    this.ingameDataService.getDynamicRoundData$()
+    this.ingameDataDataService.getDynamicRoundData$()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(d => {
         this.dynamicRoundData = d;
@@ -70,13 +70,13 @@ export class CardContainerComponent extends AngularLifecycle{
   getRoundState() : RoundState {
     if (
       !this.cardClicked &&
-      !this.responseDataService.userResponded(this.staticRoundData!.round!.id) && 
+      !this.responseDataDataService.userResponded(this.staticRoundData!.round!.id) && 
       (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData!.round!.id || !this.roundInformation.cardClicked) &&
       (!!!this.dynamicRoundData || this.dynamicRoundData.roundId !== this.staticRoundData!.round!.id || !this.dynamicRoundData.processed)
     ) {
       return RoundState.card;
     }
-    if (!this.ingameDataService.roundProcessed(this.staticRoundData!.round!.id)) {
+    if (!this.ingameDataDataService.roundProcessed(this.staticRoundData!.round!.id)) {
       return RoundState.form;
     }
     return RoundState.stats;

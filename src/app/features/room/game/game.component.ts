@@ -4,7 +4,7 @@ import { Observable, takeUntil } from 'rxjs';
 import { Room, StaticRoundData } from 'src/app/core/models/interfaces';
 import { RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
 @Component({
   selector: 'game',
@@ -19,7 +19,7 @@ export class GameComponent extends AngularLifecycle {
   @Select(RoomState.room) room$: Observable<Room>;
 
   constructor(
-    private staticRoundDataService: StaticRoundDataService
+    private staticRoundDataDataService: StaticRoundDataDataService
   ) {
     super();
 
@@ -27,7 +27,7 @@ export class GameComponent extends AngularLifecycle {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(r => this.room = r);
 
-    this.staticRoundDataService.getStaticRoundData$()
+    this.staticRoundDataDataService.getStaticRoundData$()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(i => this.staticRoundData = i);
   }

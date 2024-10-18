@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Card, DynamicRoundData, Player, PlayerVotingResult, Result, Round } from 'src/app/core/models/interfaces';
-import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
@@ -20,7 +20,7 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   players: Player[];
 
   constructor(
-    private staticRoundDataService: StaticRoundDataService,
+    private staticRoundDataDataService: StaticRoundDataDataService,
     private playerVotingService: PlayerVotingCardService,
     private store: Store,
     private changeDetectorRef: ChangeDetectorRef
@@ -50,7 +50,7 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   }
 
   startNextRound() {
-    this.staticRoundDataService.startNewRound();
+    this.staticRoundDataDataService.startNewRound();
   }
 
 }

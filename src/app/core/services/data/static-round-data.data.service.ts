@@ -10,7 +10,7 @@ import { RoomState } from "../../state";
 @Injectable({
     providedIn: 'root'
 })
-export class StaticRoundDataService extends RoomPlayerLoadBaseDataService {
+export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
     staticRoundData$: BehaviorSubject<StaticRoundData | null> = new BehaviorSubject(null as any);
 
     constructor(

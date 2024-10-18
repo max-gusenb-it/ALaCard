@@ -2,11 +2,12 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
+import { CardType } from 'src/app/core/models/enums';
 import { Player, PlayerVotingCard, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
-import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
+import { IngameDataDataService as IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
+import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
-import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
@@ -31,10 +32,10 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
 
   constructor(
     private responseSourceService: ResponseDataSourceService,
-    private responseDataService: ResponseDataService,
+    private responseDataDataService: ResponseDataDataService,
+    private ingameDataDataDataService: IngameDataDataService,
     private changeDetectorRef: ChangeDetectorRef,
     private playerVotingService: PlayerVotingCardService,
-    private ingameDataSourceService: IngameDataSourceService,
     private store: Store
   ) {
     super();
@@ -76,7 +77,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   userResponded() {
-    return this.responseDataService.userResponded(this.round.id);
+    return this.responseDataDataService.userResponded(this.round.id);
   }
 
   submit(skipped: boolean = false) {
@@ -103,17 +104,14 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   getAdminResponseCountInfo() {
-   return this.responseDataService.getAdminResponseCountInfo(this.round.id);
+   return this.responseDataDataService.getAdminResponseCountInfo(this.round.id);
   }
 
   processRound() {
-    // ToDo: Move to ingameDataService
-    this.ingameDataSourceService.updateDynamicRoundData(
-      this.store.selectSnapshot(RoomState.roomId)!,
-      this.playerVotingService.createDynamicRoundData(
-        this.round.id, 
-        this.responseDataService.getAdminResponsesForRound(this.round.id)
-      )
+    this.ingameDataDataDataService.processRound(
+      this.round.id,
+      CardType.PlayerVoting,
+      this.responseDataDataService.getAdminResponsesForRound(this.round.id)
     );
   }
 }

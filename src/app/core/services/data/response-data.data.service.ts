@@ -1,5 +1,5 @@
-import { BehaviorSubject, map, Observable, Subscription, takeUntil } from "rxjs";
-import { Response, ResponseData, Room } from "../../models/interfaces";
+import { BehaviorSubject, Observable, Subscription, takeUntil } from "rxjs";
+import { ResponseData, Room } from "../../models/interfaces";
 import { ResponseDataSourceService } from "../source/response-data.source.service";
 import { Select, Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../../state";
@@ -12,7 +12,7 @@ import { InformationState } from "../../state/information";
 @Injectable({
     providedIn: 'root'
 })
-export class ResponseDataService extends AngularLifecycle {
+export class ResponseDataDataService extends AngularLifecycle {
     responseDataSubscription$: Subscription = null as any;
     responseData$: BehaviorSubject<ResponseData> = new BehaviorSubject(null as any);
 

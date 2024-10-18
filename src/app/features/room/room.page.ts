@@ -13,9 +13,9 @@ import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-botto
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
-import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
+import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
-import { StaticRoundDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
@@ -41,13 +41,13 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private route: ActivatedRoute,
     private popupService: PopupService,
     private translateService: TranslateService,
-    private staticRoundDataService: StaticRoundDataService,
-    private responseDataService: ResponseDataService,
+    private staticRoundDataDataService: StaticRoundDataDataService,
+    private responseDataDataService: ResponseDataDataService,
     private modalCtrl: ModalController
   ) {
     super();
 
-    this.staticRoundData$ = this.staticRoundDataService.getStaticRoundData$();
+    this.staticRoundData$ = this.staticRoundDataDataService.getStaticRoundData$();
   }
 
   ngOnInit() {
@@ -137,11 +137,11 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   getAdminResponseCountInfo() {
-    return this.responseDataService.getAdminResponseCountInfo(this.staticRoundDataService.getStaticRoundData()!.round!.id);
+    return this.responseDataDataService.getAdminResponseCountInfo(this.staticRoundDataDataService.getStaticRoundData()!.round!.id);
   }
 
   getRuleReadCount() {
-    return this.responseDataService.getAdminResponsesForRound(-1).length;
+    return this.responseDataDataService.getAdminResponsesForRound(-1).length;
   }
 
   async startGame() {
@@ -152,7 +152,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   continueToGame() {
-    const staticRoundData = this.staticRoundDataService.getStaticRoundData();
+    const staticRoundData = this.staticRoundDataDataService.getStaticRoundData();
     if (!!!staticRoundData) return;
     this.store.dispatch(new RoomActions.ContinueToGame(staticRoundData))
   }
