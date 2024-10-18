@@ -1,4 +1,4 @@
-import { GameInformation } from "../../models/interfaces";
+import { GameInformation, Response } from "../../models/interfaces";
 
 export namespace InformationActions {
     export class SetGameInformation {
@@ -24,5 +24,10 @@ export namespace InformationActions {
     export class SetRoundCardClicked {
         static readonly type = '[CardContainer] SetRoundCardClicked';
         constructor() {};
+    }
+
+    export class SetRoundResponded {
+        static readonly type = "[CardForm] SetRoundResponded";
+        constructor(public response: Response) {};
     }
 }

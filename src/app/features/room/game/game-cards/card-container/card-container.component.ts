@@ -31,6 +31,8 @@ export class CardContainerComponent extends AngularLifecycle{
 
   roundInformation?: RoundInformation;
 
+  state: RoundState;
+
   constructor(
     private store: Store,
     private staticRoundDataService: StaticRoundDataService,
@@ -38,6 +40,8 @@ export class CardContainerComponent extends AngularLifecycle{
     private ingameDataService: IngameDataService
   ) {
     super();
+
+    this.state = RoundState.card;
 
     this.deck = this.store.selectSnapshot(RoomState.deck)!;
 

@@ -134,12 +134,12 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     return RoomUtils.mapPlayersToArray(players);
   }
 
-  getRulesReadInfo() {
-    return this.responseDataService.getRulesReadInfo(this.staticRoundDataService.getStaticRoundData()!.round!.id);
+  getAdminResponseCountInfo() {
+    return this.responseDataService.getAdminResponseCountInfo(this.staticRoundDataService.getStaticRoundData()!.round!.id);
   }
 
   getRuleReadCount() {
-    return this.responseDataService.getResponsesForRound(-1).length;
+    return this.responseDataService.getAdminResponsesForRound(-1).length;
   }
 
   async startGame() {

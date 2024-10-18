@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import { takeUntil } from 'rxjs';
 import { Player, PlayerVotingCard, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
 import { ResponseDataService } from 'src/app/core/services/data/response-data.data.service';
@@ -8,6 +9,7 @@ import { PlayerVotingCardService } from 'src/app/core/services/service/card/play
 import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
+import { InformationActions, InformationState } from 'src/app/core/state/information';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
@@ -44,22 +46,24 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   ngAfterViewInit() {
-    const response = this.playerVotingService.castResponse(
-      this.responseDataService.getResponsesForRoundAndUser(this.round.id)
-    );
-
     if (!!this.card.settings && this.card.settings.selfVoteDisabled === true) {
       this.players = this.players.filter(p => p.id !== this.store.selectSnapshot(AuthenticationState.userid));
       this.changeDetectorRef.detectChanges();
     }
 
-    if(!!response) {
-      this.playerVotingForm.controls["votedPlayerId"].disable();
-      this.playerVotingForm.controls["votedPlayerId"].setValue(response.votedPlayerId);
-      
-      this.playerVotingForm.controls["votedPlayerId"].updateValueAndValidity();
-      this.changeDetectorRef.detectChanges();
-    }
+    this.store.select(InformationState.response)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(r => {
+        const response = this.playerVotingService.castResponse(r ?? null);
+
+        if (!!response) {
+          this.playerVotingForm.controls["votedPlayerId"].disable();
+          this.playerVotingForm.controls["votedPlayerId"].setValue(response.votedPlayerId);
+          
+          this.playerVotingForm.controls["votedPlayerId"].updateValueAndValidity();
+          this.changeDetectorRef.detectChanges();
+        }
+    });
   }
 
   getCardText() {
@@ -79,23 +83,27 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     if (skipped) this.playerVotingForm.controls["votedPlayerId"].setValue("");
     this.playerVotingForm.controls["votedPlayerId"].disable();
     this.playerVotingForm.controls["votedPlayerId"].updateValueAndValidity();
+
+    const response : PlayerVotingResponse = {
+      playerId: this.store.selectSnapshot(AuthenticationState.userid)!,
+      skipped: skipped,
+      votedPlayerId: !skipped ? this.playerVotingForm.controls['votedPlayerId'].value : null,
+      roundId: this.round.id  
+    };
+
     this.responseSourceService.addResponse(
       this.store.selectSnapshot(RoomState.room)!.id!,
-      {
-        playerId: this.store.selectSnapshot(AuthenticationState.userid),
-        skipped: skipped,
-        votedPlayerId: !skipped ? this.playerVotingForm.controls['votedPlayerId'].value : null,
-        roundId: this.round.id  
-      } as PlayerVotingResponse
-    )
+      response
+    );
+    this.store.dispatch(new InformationActions.SetRoundResponded(response));
   }
 
   isUserRoomAdmin() {
     return RoomUtils.isUserAdmin(this.store);
   }
 
-  getRulesReadInfo() {
-   return this.responseDataService.getRulesReadInfo(this.round.id);
+  getAdminResponseCountInfo() {
+   return this.responseDataService.getAdminResponseCountInfo(this.round.id);
   }
 
   processRound() {
@@ -104,7 +112,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
       this.store.selectSnapshot(RoomState.roomId)!,
       this.playerVotingService.createDynamicRoundData(
         this.round.id, 
-        this.responseDataService.getResponsesForRound(this.round.id)
+        this.responseDataService.getAdminResponsesForRound(this.round.id)
       )
     );
   }

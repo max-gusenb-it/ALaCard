@@ -29,6 +29,6 @@
     </div>
   </div>
   <it-button class="flex grow" color="red" *ngIf="userResponded() && isUserRoomAdmin()" type="button" (click)="processRound()">
-    {{ 'actions.continue' | translate }} {{(!roomSettings.singleDeviceMode) ? getRulesReadInfo() : null}}
+    {{ 'actions.continue' | translate }} {{(!roomSettings.singleDeviceMode) ? getAdminResponseCountInfo() : null}}
   </it-button>
 </form>

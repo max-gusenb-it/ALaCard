@@ -7,6 +7,7 @@ import { Injectable } from "@angular/core";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { GameState } from "../../models/enums";
 import { RoomUtils } from "../../utils/room.utils";
+import { InformationState } from "../../state/information";
 
 @Injectable({
     providedIn: 'root'
@@ -41,7 +42,7 @@ export class ResponseDataService extends AngularLifecycle {
         });
     }
 
-    getResponses() {
+    getAdminResponses() {
         const responseData = this.responseData$.value?.responses;
         if (responseData == undefined) {
             return [];
@@ -50,12 +51,12 @@ export class ResponseDataService extends AngularLifecycle {
             .map(key => (responseData[key]));
     }
 
-    getResponsesForRound(roundId: number) {
-        return this.getResponses().filter(r => r.roundId === roundId);
+    getAdminResponsesForRound(roundId: number) {
+        return this.getAdminResponses().filter(r => r.roundId === roundId);
     }
 
-    getResponsesForRoundAndUser(roundId: number) {
-        const userResponses = this.getResponsesForRound(roundId)
+    getAdminResponsesForRoundAndUser(roundId: number) {
+        const userResponses = this.getAdminResponsesForRound(roundId)
             .filter(r => r.playerId === this.store.selectSnapshot(AuthenticationState.userid));
         if (userResponses.length === 1) {
             return userResponses[0];
@@ -65,14 +66,11 @@ export class ResponseDataService extends AngularLifecycle {
     }
 
     userResponded(roundId: number) {
-        return this.checkIfUserResponded(this.getResponses(), roundId);
+        const response = this.store.selectSnapshot(InformationState.response);
+        return !!response && response.roundId == roundId;
     }
 
-    private checkIfUserResponded(responses: Response[], roundId: number) {
-        return !!responses.find(r => r.playerId === this.store.selectSnapshot(AuthenticationState.userid) && r.roundId === roundId);
-    }
-
-    getRulesReadInfo(roundId: number) {
-        return `${this.getResponsesForRound(roundId).length} / ${RoomUtils.getActivePlayerCount(this.store)}`
+    getAdminResponseCountInfo(roundId: number) {
+        return `${this.getAdminResponsesForRound(roundId).length} / ${RoomUtils.getActivePlayerCount(this.store)}`
     }
 }

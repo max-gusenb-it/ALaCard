@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { InformationStateModel } from "./information.model";
 import { Injectable } from "@angular/core";
 import { InformationActions } from "./information.actions";
-import { GameInformation, RoundInformation } from "../../models/interfaces";
+import { GameInformation, Response, RoundInformation } from "../../models/interfaces";
 import { ItError } from "../../models/classes";
 import { InformationStateErrors } from "../../constants/errorCodes";
 
@@ -36,10 +36,18 @@ export class InformationState {
         return state.GameInformations?.roundInformation;
     }
 
+    @Selector()
+    static response(state: InformationStateModel) : Response | undefined {
+        console.log ("Get response");
+        return state.GameInformations?.roundInformation?.response;
+    }
+
     @Action(InformationActions.SetGameInformation)
     async setGameInformation(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameInformation) {
         const state = ctx.getState();
+        console.log ("Set Game Information reached");
         if (state.GameInformations?.compareValue === action.gameInformation.compareValue) return;
+        console.log ("Set Game Information", action.gameInformation);
         ctx.patchState({
             GameInformations: action.gameInformation
         });
@@ -51,8 +59,9 @@ export class InformationState {
 
         if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.gameRulesReadGINotFound,
-                InformationState.name
+                InformationStateErrors.gameInformationNotFound,
+                InformationState.name,
+                this.gameRulesRead.name
             )
         };
 
@@ -70,8 +79,9 @@ export class InformationState {
 
         if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.gameRulesReadGINotFound,
-                InformationState.name
+                InformationStateErrors.gameInformationNotFound,
+                InformationState.name,
+                this.setGameRulesCardIndex.name
             )
         };
 
@@ -89,20 +99,22 @@ export class InformationState {
         
         if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.setRoundIdGINotFound,
-                InformationState.name
+                InformationStateErrors.gameInformationNotFound,
+                InformationState.name,
+                this.setRoundId.name
             )
         };
 
+        console.log ("Set round ID Reached");
         if (!!state.GameInformations.roundInformation && state.GameInformations.roundInformation.roundId === action.roundId) return;
 
+        console.log ("Set round id", action.roundId);
         ctx.patchState({
             GameInformations: {
                 ...state.GameInformations,
                 roundInformation: {
                     roundId: action.roundId,
-                    cardClicked: false,
-                    responded: false
+                    cardClicked: false
                 }
             }
         });
@@ -114,17 +126,17 @@ export class InformationState {
         
         if (!!!state.GameInformations) {
             throw new ItError(
-                InformationStateErrors.setRoundCardClickedGINotFound,
-                InformationState.name
+                InformationStateErrors.gameInformationNotFound,
+                InformationState.name,
+                this.setRoundCardClicked.name
             )
         };
-
-        console.log (InformationState.name + "-" + this.setRoundCardClicked.name);
 
         if (!!!state.GameInformations.roundInformation) {
             throw new ItError(
                 InformationStateErrors.roundInfomrationNotFound,
-                InformationState.name + "-" + this.setRoundCardClicked.name
+                InformationState.name,
+                this.setRoundCardClicked.name
             )
         }
 
@@ -134,6 +146,39 @@ export class InformationState {
                 roundInformation: {
                     ...state.GameInformations.roundInformation,
                     cardClicked: true
+                }
+            }
+        });
+    }
+
+    @Action(InformationActions.SetRoundResponded)
+    async setRoundResponded(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundResponded) {
+        const state = ctx.getState();
+        
+        if (!!!state.GameInformations) {
+            throw new ItError(
+                InformationStateErrors.gameInformationNotFound,
+                InformationState.name,
+                this.setRoundCardClicked.name
+            )
+        };
+
+        if (!!!state.GameInformations.roundInformation) {
+            throw new ItError(
+                InformationStateErrors.roundInfomrationNotFound,
+                InformationState.name,
+                this.setRoundResponded.name
+            )
+        }
+
+        console.log ("Set Round Response", action.response);
+
+        ctx.patchState({
+            GameInformations: {
+                ...state.GameInformations,
+                roundInformation: {
+                    ...state.GameInformations.roundInformation,
+                    response: action.response
                 }
             }
         });
