@@ -5,7 +5,7 @@ import { RoomActions } from "./room.actions";
 import { RoomSourceService } from "../../services/source/room.source.service";
 import { LoadingHelperService } from "../../services/helper/loading.helper.service";
 import { AuthenticationActions, AuthenticationState } from "../authentication";
-import { Subscription, firstValueFrom, takeUntil } from "rxjs";
+import { Subscription, combineLatest, filter, firstValueFrom, of, take, takeUntil } from "rxjs";
 import { LoadingActions } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { ModalController, NavController } from "@ionic/angular";
@@ -23,7 +23,7 @@ import { ResponseDataSourceService } from "../../services/source/response-data.s
 import { StaticRoundDataSourceService } from "../../services/source/static-round-data.source.service";
 import { GameState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
-import { InformationActions } from "../information";
+import { InformationActions, InformationState } from "../information";
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { Game } from "../../models/interfaces/logic/game/game";
 
@@ -124,8 +124,6 @@ export class RoomState extends AngularLifecycle {
             this.roomSubscription$.unsubscribe();
         }
 
-        // ToDo: Add loading screen when loading room
-
         // check if user exists
         try {
             let user = this.store.selectSnapshot(AuthenticationState.user);
@@ -217,7 +215,25 @@ export class RoomState extends AngularLifecycle {
                 }));
             }
 
-            ctx.dispatch(new LoadingActions.EndLoading());
+            combineLatest([
+                this.store.select(RoomState.room)
+                    .pipe(
+                        filter(room => !!room && !!room.id && room.id === action.roomId),
+                        take(1)
+                    ),
+                !!initialRoom.game 
+                    ? this.store.select(InformationState.gameInformation)
+                        .pipe(
+                            filter(g => g!.compareValue === initialRoom.game?.compareValue),
+                            take(1)
+                        ) 
+                    : of(null)
+            ])
+            .pipe(take(1))
+            .subscribe(() => {
+                ctx.dispatch(new LoadingActions.EndLoading());
+            });
+            
             return Promise.resolve();
         } catch(error) {
             ctx.dispatch(new LoadingActions.EndLoading);

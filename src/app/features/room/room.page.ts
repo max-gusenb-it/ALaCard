@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { OptionBottomSheetData, Player, Room, StaticRoundData } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/service/popup.service';
-import { AuthenticationState, RoomActions, RoomState } from 'src/app/core/state';
+import { AuthenticationState, LoadingState, RoomActions, RoomState } from 'src/app/core/state';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,9 +27,11 @@ const endGameMenuItem = 'stop';
   templateUrl: './room.page.html'
 })
 export class RoomPage extends AngularLifecycle implements OnInit {
-  @Select(RoomState.room) room$!: Observable<Room>;
+  @Select(RoomState.room) room$: Observable<Room>;
 
-  @Select(RoomState.gameStarted) gameStarted$!: Observable<boolean>;
+  @Select(RoomState.gameStarted) gameStarted$: Observable<boolean>;
+
+  @Select(LoadingState.isLoading) isLoading$: Observable<boolean>;
 
   staticRoundData$: Observable<StaticRoundData>;
 
