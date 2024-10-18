@@ -23,7 +23,7 @@
 
 .secondary-button {
     @extend #button;
-    @apply bg-neutral-900 text-white hover:brightness-125 active:brightness-100;
+    @apply bg-neutral-900 text-white hover:brightness-125 active:brightness-100 disabled:hover:brightness-100 disabled:active:brightness-100;
 }
 
 .tertiary-button {
