@@ -3,10 +3,10 @@ import { IItError } from "../../../interfaces";
 export class ItError extends Error {
     location: string;
 
-    constructor(msg: string, location: string) {
+    constructor(msg: string, location: string, method?: string) {
         super(msg);
 
-        this.location = location;
+        this.location = location + "-" + method;
         Object.setPrototypeOf(this, ItError.prototype);
     }
 

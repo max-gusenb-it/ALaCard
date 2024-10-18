@@ -17,9 +17,6 @@ export namespace SharedErrors {
 }
 
 export namespace InformationStateErrors {
-    export const gameRulesReadGINotFound = "information-state.game-rules-read.gi-not-found";
-    export const setGameRulesCardIndexGINotFound = "information-state.set-game-rules-card-index.gi-not-found";
-    export const setRoundIdGINotFound = "information-state.set-round-id.gi-not-found"
-    export const setRoundCardClickedGINotFound = "information-state.set-round-card-clicked.gi-not-found"
+    export const gameInformationNotFound = "information-state.set-round-card-clicked.gi-not-found"
     export const roundInfomrationNotFound = "information-state.round-information-not-found";
 }
