@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { takeUntil } from 'rxjs';
-import { Deck, DynamicRoundData, StaticRoundData } from 'src/app/core/models/interfaces';
+import { Select, Store } from '@ngxs/store';
+import { Observable, takeUntil } from 'rxjs';
+import { Deck, DynamicRoundData, GameSettings, StaticRoundData } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { RoomState } from 'src/app/core/state';
@@ -16,6 +16,7 @@ export class CardStatsComponent extends AngularLifecycle {
   deck: Deck;
   staticRoundData: StaticRoundData;
   dynamicRoundData: DynamicRoundData;
+  @Select(RoomState.gameSettings) gameSettings$: Observable<GameSettings>;
 
   constructor(
     private store: Store,

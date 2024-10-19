@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { Card, DynamicRoundData, Player, PlayerVotingResult, Result, Round } from 'src/app/core/models/interfaces';
+import { Card, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Result, Round } from 'src/app/core/models/interfaces';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { RoomState } from 'src/app/core/state';
@@ -16,6 +16,7 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   @Input() card: Card;
   @Input() round: Round;
   @Input() dynamicRoundData: DynamicRoundData;
+  @Input() gameSettings: GameSettings;
 
   results: PlayerVotingResult[];
   players: Player[];

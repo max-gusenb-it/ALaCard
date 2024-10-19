@@ -9,6 +9,7 @@
         [card]="deck.cards[staticRoundData.round.cardIndex]"
         [round]="staticRoundData.round"
         [dynamicRoundData]="dynamicRoundData"
+        [gameSettings]="(gameSettings$ | async)!"
       />
     }
   }

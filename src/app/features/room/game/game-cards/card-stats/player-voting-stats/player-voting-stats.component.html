@@ -1,24 +1,37 @@
 <div class="flex flex-col gap-4 bg-red-100 p-4 rounded-lg drop-shadow-card">
     <h4>{{ "features.room.game.card.playerVoting" | translate }}</h4>
     <p class="text-lg">{{ getCardText() }}</p>
-    <it-accord
-        [heading]="getResultsHeading()"
-        icon="emoji_events"
-        [selected]="true"
-        *ngIf="!!results"
+    <it-selection-list
+        [singleSelect]="true"
+        #resulSelectionList
     >
-        <!-- ToDo: Add max height and scrolling -->
-        <div class="flex flex-col gap-2">
-            <it-result
-                *ngFor="let result of results"
-                [result]="result"
-                [username]="getPlayerForResult(result)?.username"
-                [profilePicture]="getPlayerForResult(result)?.profilePicture"
-                [card]="card"
-                [players]="players"
-            />
-        </div>
-    </it-accord>
+        <it-accord
+            [heading]="getResultsHeading()"
+            icon="emoji_events"
+            [selected]="true"
+            *ngIf="!!results"
+            (selectionEmitter)="resulSelectionList.onSelectionChanged($event)"
+        >
+            <!-- ToDo: Add max height and scrolling -->
+            <div class="flex flex-col gap-2">
+                <it-result
+                    *ngFor="let result of results"
+                    [result]="result"
+                    [username]="getPlayerForResult(result)?.username"
+                    [profilePicture]="getPlayerForResult(result)?.profilePicture"
+                    [card]="card"
+                    [players]="players"
+                />
+            </div>
+        </it-accord>
+        <it-accord
+            [heading]="'features.room.game.game-cards.sips' | translate"
+            icon="water_loss"
+            *ngIf="gameSettings.drinkingGame"
+            (selectionEmitter)="resulSelectionList.onSelectionChanged($event)"
+        >
+        </it-accord>
+    </it-selection-list>
     <it-button class="flex grow" color="red" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
         {{ 'actions.continue' | translate }}
     </it-button>

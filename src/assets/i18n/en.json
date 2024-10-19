@@ -110,7 +110,8 @@
           },
           "card-stats": {
             "skipped": "Everyone skipped"
-          }
+          },
+          "sips": "Sips"
         }
       },
       "start-game": "Start Game",

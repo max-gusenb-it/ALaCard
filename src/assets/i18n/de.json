@@ -110,7 +110,8 @@
           },
           "card-stats": {
             "skipped": "Jeder hat übersprungen"
-          }
+          },
+          "sips": "Schlücke"
         }
       },
       "start-game": "Spiel starten",
