@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { CardType } from 'src/app/core/models/enums';
+import { CardType, PlayerState } from 'src/app/core/models/enums';
 import { Player, PlayerVotingCard, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
 import { IngameDataDataService as IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
@@ -24,7 +24,15 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     votedPlayerId: new FormControl({ value: "", disabled: false}, Validators.required)
   });
   
-  players: Player[];
+  players: Player[] = [
+    {
+      id: "WenOuzP9rgL8vjLF3Gs2Qf6vqOgW",
+      joinOrder: 0,
+      profilePicture: "",
+      state: PlayerState.active,
+      username: "test1"
+    }
+  ];
   roomSettings: RoomSettings;
   
   @Input() card: PlayerVotingCard;
@@ -40,13 +48,18 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   ) {
     super();
 
-    // ToDo: Fix -> When players join he is not added to list -> When you updated players it breaks the select when a option is already selected -> after responded reload
-    this.players = this.store.selectSnapshot(RoomState.players);
-
     this.roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
   }
 
   ngAfterViewInit() {
+    this.store.select(RoomState.players)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(p => {
+        this.players = p;
+        console.log(this.players);
+        this.changeDetectorRef.detectChanges();
+    });
+
     if (!!this.card.settings && this.card.settings.selfVoteDisabled === true) {
       this.players = this.players.filter(p => p.id !== this.store.selectSnapshot(AuthenticationState.userid));
       this.changeDetectorRef.detectChanges();
@@ -74,6 +87,10 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
         this.round.playerIds,
         this.store.selectSnapshot(RoomState.specificPlayerId),
     );
+  }
+
+  identifyPlayer(index: number, player: Player): string {
+    return player.id;
   }
 
   userResponded() {

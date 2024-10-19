@@ -14,7 +14,7 @@
         formControlName="votedPlayerId"
         customColor="red"
       >
-        <option *ngFor="let player of players" [value]="player.id">
+        <option *ngFor="let player of players, trackBy: identifyPlayer" [value]="player.id">
           {{ player.username }}
         </option>
       </it-select>
