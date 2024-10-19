@@ -55,9 +55,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     this.store.select(RoomState.players)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(p => {
-        this.players = p;
-        console.log(this.players);
-        this.changeDetectorRef.detectChanges();
+        setTimeout(() => this.players = p);
     });
 
     if (!!this.card.settings && this.card.settings.selfVoteDisabled === true) {
