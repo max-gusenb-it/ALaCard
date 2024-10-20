@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <div class="h-full w-full flex flex-col p-6 gap-4 justify-between" *ngIf="!(isLoading$ | async)">
+  <div class="h-full w-full flex flex-col p-6 gap-4 justify-between" *ngIf="!!(room$ | async) && !(isLoading$ | async)">
     <it-detail-heading
       [heading]="(room$ | async)!.name"
       [subheading]="('features.room.created' | translate) + ' ' + ((room$ | async)?.creationDate | fireDate)"
@@ -46,5 +46,5 @@
       <it-menu-button [menuItemIcons]="getMenuItems()" (menuItemClicked)="handleMenuAction($event)"/>
     </div>
   </div>
-  <it-loading-screen class="h-full w-full flex" *ngIf="(isLoading$ | async)"></it-loading-screen>
+  <it-loading-screen class="h-full w-full flex" *ngIf="!!!(room$ | async) || (isLoading$ | async)"></it-loading-screen>
 </ion-content>
