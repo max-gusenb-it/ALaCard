@@ -30,4 +30,9 @@ export namespace InformationActions {
         static readonly type = "[CardForm] SetRoundResponded";
         constructor(public response: Response) {};
     }
+
+    export class SetTutorialDisplayed {
+        static readonly type = "[GameRulesComponent] SetTutorialDisplayed";
+        constructor(public labelId: string)  {}
+    }
 }

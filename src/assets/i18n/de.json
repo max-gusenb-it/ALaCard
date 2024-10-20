@@ -102,7 +102,11 @@
         "card": {
           "groundRules": "Regeln",
           "freeText": "Frei Text",
-          "playerVoting": "Spieler Abstimmung"
+          "playerVoting": "Spieler Abstimmung",
+          "game-rules": {
+            "mobile-tutorial": "Klicke oder wische nach links oder rechts auf der Karte, um durch die Regeln zu navigieren.",
+            "desktop-tutorial": "Klicke links oder rechts auf die Karte, um durch die Regeln zu navigieren."
+          }
         },
         "game-cards": {
           "forms": {

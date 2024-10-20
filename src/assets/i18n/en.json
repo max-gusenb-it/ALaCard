@@ -102,7 +102,11 @@
         "card": {
           "groundRules": "Ground Rules",
           "freeText": "Free Text",
-          "playerVoting": "Player Voting"
+          "playerVoting": "Player Voting",
+          "game-rules": {
+            "mobile-tutorial": "Click or swipe left or right on the card to navigate through the rules.",
+            "desktop-tutorial": "Click left or right on the card to navigate through the rules."
+          }
         },
         "game-cards": {
           "forms": {

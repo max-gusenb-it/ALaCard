@@ -35,6 +35,7 @@ export { Room } from "./logic/room/room";
 export { RoomSettings } from "./logic/room/room-settings";
 
 export { GameInformation } from "./state/information/game-information";
+export { TutorialInfo } from "./state/information/tutorial-info";
 export { RoundInformation } from "./state/information/round-information";
 
 export { User } from "./logic/user/user";

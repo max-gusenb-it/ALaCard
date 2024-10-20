@@ -2,7 +2,7 @@ import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { InformationStateModel } from "./information.model";
 import { Injectable } from "@angular/core";
 import { InformationActions } from "./information.actions";
-import { GameInformation, Response, RoundInformation } from "../../models/interfaces";
+import { GameInformation, Response, RoundInformation, TutorialInfo } from "../../models/interfaces";
 import { ItError } from "../../models/classes";
 import { InformationStateErrors } from "../../constants/errorCodes";
 
@@ -11,42 +11,48 @@ export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('in
 @State<InformationStateModel>({
     name: INFORMATION_STATE_TOKEN,
     defaults: { 
-        GameInformations: undefined
+        gameInformations: undefined,
+        tutorialInfos: []
     }
 })
 @Injectable()
 export class InformationState {
     @Selector()
     static gameInformation(state: InformationStateModel) : undefined | GameInformation {
-        return state.GameInformations;
+        return state.gameInformations;
     }
 
     @Selector()
     static gameRulesRead(state: InformationStateModel) : undefined | boolean {
-        return state.GameInformations?.rulesReadSend;
+        return state.gameInformations?.rulesReadSend;
     }
 
     @Selector()
     static gameRulesCardIndex(state: InformationStateModel) : number {
-        return state.GameInformations?.gameRulesCardIndex ?? 0;
+        return state.gameInformations?.gameRulesCardIndex ?? 0;
     }
 
     @Selector()
     static roundInformation(state: InformationStateModel) : RoundInformation | undefined {
-        return state.GameInformations?.roundInformation;
+        return state.gameInformations?.roundInformation;
     }
 
     @Selector()
     static response(state: InformationStateModel) : Response | undefined {
-        return state.GameInformations?.roundInformation?.response;
+        return state.gameInformations?.roundInformation?.response;
+    }
+
+    @Selector()
+    static tutorialInfos(state: InformationStateModel) : TutorialInfo[] {
+        return state.tutorialInfos;
     }
 
     @Action(InformationActions.SetGameInformation)
     async setGameInformation(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameInformation) {
         const state = ctx.getState();
-        if (state.GameInformations?.compareValue === action.gameInformation.compareValue) return;
+        if (state.gameInformations?.compareValue === action.gameInformation.compareValue) return;
         ctx.patchState({
-            GameInformations: action.gameInformation
+            gameInformations: action.gameInformation
         });
     }
 
@@ -54,7 +60,7 @@ export class InformationState {
     async gameRulesRead(ctx: StateContext<InformationStateModel>, action: InformationActions.GameRulesRead) {
         const state = ctx.getState();
 
-        if (!!!state.GameInformations) {
+        if (!!!state.gameInformations) {
             throw new ItError(
                 InformationStateErrors.gameInformationNotFound,
                 InformationState.name,
@@ -63,8 +69,8 @@ export class InformationState {
         };
 
         ctx.patchState({
-            GameInformations: {
-                ...state.GameInformations,
+            gameInformations: {
+                ...state.gameInformations,
                 rulesReadSend: true
             }
         });
@@ -74,7 +80,7 @@ export class InformationState {
     async setGameRulesCardIndex(ctx: StateContext<InformationStateModel>, action: InformationActions.SetGameRulesCardIndex) {
         const state = ctx.getState();
 
-        if (!!!state.GameInformations) {
+        if (!!!state.gameInformations) {
             throw new ItError(
                 InformationStateErrors.gameInformationNotFound,
                 InformationState.name,
@@ -83,8 +89,8 @@ export class InformationState {
         };
 
         ctx.patchState({
-            GameInformations: {
-                ...state.GameInformations,
+            gameInformations: {
+                ...state.gameInformations,
                 gameRulesCardIndex: action.gameRulesCardIndex
             }
         });
@@ -94,7 +100,7 @@ export class InformationState {
     async setRoundId(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundId) {
         const state = ctx.getState();
         
-        if (!!!state.GameInformations) {
+        if (!!!state.gameInformations) {
             throw new ItError(
                 InformationStateErrors.gameInformationNotFound,
                 InformationState.name,
@@ -102,11 +108,11 @@ export class InformationState {
             )
         };
 
-        if (!!state.GameInformations.roundInformation && state.GameInformations.roundInformation.roundId === action.roundId) return;
+        if (!!state.gameInformations.roundInformation && state.gameInformations.roundInformation.roundId === action.roundId) return;
 
         ctx.patchState({
-            GameInformations: {
-                ...state.GameInformations,
+            gameInformations: {
+                ...state.gameInformations,
                 roundInformation: {
                     roundId: action.roundId,
                     cardClicked: false
@@ -119,7 +125,7 @@ export class InformationState {
     async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundCardClicked) {
         const state = ctx.getState();
         
-        if (!!!state.GameInformations) {
+        if (!!!state.gameInformations) {
             throw new ItError(
                 InformationStateErrors.gameInformationNotFound,
                 InformationState.name,
@@ -127,7 +133,7 @@ export class InformationState {
             )
         };
 
-        if (!!!state.GameInformations.roundInformation) {
+        if (!!!state.gameInformations.roundInformation) {
             throw new ItError(
                 InformationStateErrors.roundInfomrationNotFound,
                 InformationState.name,
@@ -136,10 +142,10 @@ export class InformationState {
         }
 
         ctx.patchState({
-            GameInformations: {
-                ...state.GameInformations,
+            gameInformations: {
+                ...state.gameInformations,
                 roundInformation: {
-                    ...state.GameInformations.roundInformation,
+                    ...state.gameInformations.roundInformation,
                     cardClicked: true
                 }
             }
@@ -150,7 +156,7 @@ export class InformationState {
     async setRoundResponded(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundResponded) {
         const state = ctx.getState();
         
-        if (!!!state.GameInformations) {
+        if (!!!state.gameInformations) {
             throw new ItError(
                 InformationStateErrors.gameInformationNotFound,
                 InformationState.name,
@@ -158,7 +164,7 @@ export class InformationState {
             )
         };
 
-        if (!!!state.GameInformations.roundInformation) {
+        if (!!!state.gameInformations.roundInformation) {
             throw new ItError(
                 InformationStateErrors.roundInfomrationNotFound,
                 InformationState.name,
@@ -167,13 +173,31 @@ export class InformationState {
         }
 
         ctx.patchState({
-            GameInformations: {
-                ...state.GameInformations,
+            gameInformations: {
+                ...state.gameInformations,
                 roundInformation: {
-                    ...state.GameInformations.roundInformation,
+                    ...state.gameInformations.roundInformation,
                     response: action.response
                 }
             }
         });
+    }
+
+    @Action(InformationActions.SetTutorialDisplayed)
+    async setTutorialDisplayed(ctx: StateContext<InformationStateModel>, action: InformationActions.SetTutorialDisplayed) {
+        const state = ctx.getState();
+
+        if (!!state.tutorialInfos.find(t => t.labelId === action.labelId)) return;
+
+        ctx.patchState({
+            ...state,
+            tutorialInfos: [
+                ...state.tutorialInfos,
+                {
+                    displayDate: new Date(),
+                    labelId: action.labelId
+                }
+            ]
+        })
     }
 } 

@@ -1,5 +1,6 @@
-import { GameInformation } from "../../models/interfaces";
+import { GameInformation, TutorialInfo } from "../../models/interfaces";
 
 export interface InformationStateModel {
-    GameInformations: GameInformation | undefined;
+    gameInformations: GameInformation | undefined;
+    tutorialInfos: TutorialInfo[];
 }

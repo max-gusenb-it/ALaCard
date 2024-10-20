@@ -1,12 +1,17 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, timer } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
 import { CardType } from 'src/app/core/models/enums';
 import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/freeTextCard/free-text-card';
+import { TutorialService } from 'src/app/core/services/service/tutorial.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
+
+const mobileRuleTutorialLabelId : string = "features.room.game.card.game-rules.mobile-tutorial";
+const desktopRuleTutorialLabelId : string = "features.room.game.card.game-rules.desktop-tutorial";
 
 @Component({
   selector: 'game-rules',
@@ -25,7 +30,9 @@ export class GameRulesComponent implements AfterViewInit {
 
   constructor(
     private store: Store,
-    private responseDataSourceService: ResponseDataSourceService
+    private responseDataSourceService: ResponseDataSourceService,
+    private tutorialService: TutorialService,
+    public platform: Platform
   ) {
     this.currentRuleIndex = this.store.selectSnapshot(InformationState.gameRulesCardIndex);
   }
@@ -33,6 +40,11 @@ export class GameRulesComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (this.groundRules.length === 1) {
       this.emitRulesRead();
+    }
+
+    const tutorialLabelId = this.platform.is('mobileweb') ? mobileRuleTutorialLabelId : desktopRuleTutorialLabelId;
+    if (!this.tutorialService.wasTutorialDisplayed(tutorialLabelId)) {
+      this.tutorialService.displayTutorial(tutorialLabelId);
     }
   }
 
