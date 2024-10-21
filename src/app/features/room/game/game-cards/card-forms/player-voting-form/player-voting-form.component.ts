@@ -24,15 +24,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     votedPlayerId: new FormControl({ value: "", disabled: false}, Validators.required)
   });
   
-  players: Player[] = [
-    {
-      id: "WenOuzP9rgL8vjLF3Gs2Qf6vqOgW",
-      joinOrder: 0,
-      profilePicture: "",
-      state: PlayerState.active,
-      username: "test1"
-    }
-  ];
+  players: Player[];
   roomSettings: RoomSettings;
   
   @Input() card: PlayerVotingCard;
@@ -52,6 +44,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   ngAfterViewInit() {
+    // ToDo: Fix voted and the reload bug
     this.store.select(RoomState.players)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(p => {
@@ -60,7 +53,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
           if (!!this.card.settings && this.card.settings.selfVoteDisabled === true) {
             this.players = p.filter(p => p.id !== this.store.selectSnapshot(AuthenticationState.userId));
           } else {
-            this.players = p
+            this.players = p;
           }
           this.changeDetectorRef.detectChanges();
         });

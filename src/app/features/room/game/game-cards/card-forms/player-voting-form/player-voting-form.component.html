@@ -1,5 +1,5 @@
 <form
-  *ngIf="round !== undefined"
+  *ngIf="round !== undefined && !!players"
   class="w-full flex flex-col gap-4"
   [formGroup]="playerVotingForm"
   (submit)="submit()"
