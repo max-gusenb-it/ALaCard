@@ -15,10 +15,10 @@
       {{ !!icon ? icon : 'expand_more' }}
     </it-icon>
   </div>
-  <div [ngClass]="{'hidden': !wrapper.children.length}">
+  <div [ngClass]="{'hidden': !wrapperDefault.children.length}">
     <div class="h-2"></div>
   </div>
-  <div #wrapper>
+  <div #wrapperDefault>
     <ng-content select="[default]"></ng-content>
   </div>
   <div
@@ -29,7 +29,11 @@
     "
   >
     <!-- Using div instead of padding/margin so antimation is displayed correct -->
-    <div class="h-2"></div>
-    <ng-content select="[collapsible]"></ng-content>
+    <div [ngClass]="{'hidden': !wrapperCollapsible.children.length}">
+      <div class="h-2"></div>
+    </div>
+    <div #wrapperCollapsible>
+      <ng-content select="[collapsible]"></ng-content>
+    </div>
   </div>
 </div>
