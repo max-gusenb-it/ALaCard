@@ -31,6 +31,20 @@
             *ngIf="gameSettings.drinkingGame"
             (selectionEmitter)="resulSelectionList.onSelectionChanged($event)"
         >
+            <it-result
+                default
+                *ngIf="!!userSipResult"
+                [sipResult]="userSipResult"
+                [username]="getPlayerForSipResult(userSipResult)?.username"
+                [profilePicture]="getPlayerForSipResult(userSipResult)?.profilePicture"
+            />
+            <it-result
+                collapsible
+                *ngFor="let result of sipResults"
+                [sipResult]="result"
+                [username]="getPlayerForSipResult(result)?.username"
+                [profilePicture]="getPlayerForSipResult(result)?.profilePicture"
+            />
         </it-accord>
     </it-selection-list>
     <it-button class="flex grow" color="red" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">

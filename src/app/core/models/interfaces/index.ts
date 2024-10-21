@@ -13,8 +13,9 @@ export { PlayerVotingCard } from "./logic/cards/playerVotingCard/player-voting-c
 export { PlayerVotingResult } from "./logic/cards/playerVotingCard/player-voting-result";
 
 export { Card } from "./logic/cards/card";
-export { Result } from "./logic/cards/result";
 export { CardSettings } from "./logic/cards/card-settings";
+export { Result } from "./logic/cards/result";
+export { SipResult } from "./logic/cards/sip-result";
 
 export { Deck } from "./logic/game/deck";
 export { GameSettings } from "./logic/game/game-settings";

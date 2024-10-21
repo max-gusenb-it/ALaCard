@@ -1,10 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { Card, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Result, Round } from 'src/app/core/models/interfaces';
+import { Card, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Result, Round, SipResult } from 'src/app/core/models/interfaces';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
-import { RoomState } from 'src/app/core/state';
+import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 
 @Component({
@@ -19,6 +19,9 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   @Input() gameSettings: GameSettings;
 
   results: PlayerVotingResult[];
+  sipResults: SipResult[];
+  userSipResult: SipResult;
+
   players: Player[];
 
   constructor(
@@ -32,6 +35,12 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.players = this.store.selectSnapshot(RoomState.players);
     this.results = this.playerVotingService.getResults(this.dynamicRoundData);
+    this.sipResults = this.playerVotingService.getSipResults(this.dynamicRoundData);
+    const userSR = this.sipResults.find(s => s.playerId === this.store.selectSnapshot(AuthenticationState.userId));
+    if (!!userSR) {
+      this.userSipResult = userSR;
+      this.sipResults = this.sipResults.filter(s => s.playerId !== this.userSipResult.playerId);
+    }
     this.changeDetectorRef.detectChanges();
   }
 
@@ -55,6 +64,10 @@ export class PlayerVotingStatsComponent implements AfterViewInit {
 
   getPlayerForResult(result: PlayerVotingResult) {
     return this.players.find(p => p.id === result.votedPlayerId);
+  }
+  
+  getPlayerForSipResult(result: SipResult) {
+    return this.playerVotingService.getPlayerForSipResult(this.players, result);
   }
 
   isUserRoomAdmin() {

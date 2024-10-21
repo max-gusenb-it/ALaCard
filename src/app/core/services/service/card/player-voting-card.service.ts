@@ -2,8 +2,9 @@ import { PlayerVotingResponse } from "src/app/core/models/interfaces/logic/game-
 import { CardService } from "./card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResult, Response, Result } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResult, Response, Result, SipResult } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
+import { defaultCardSips } from "src/app/core/constants/card";
 
 @Injectable({
     providedIn: 'root'
@@ -67,6 +68,23 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
             if (index !== pvResult.playerIds.length -1) text += ", ";
         });
         return text;
+    }
+
+    override getSipResults(dynamicRoundData: DynamicRoundData): SipResult[] {
+        const results = this.getResults(dynamicRoundData)
+            .filter(r => r.votedPlayerId !== null);
+        if (results.length === 0) return [];
+        const topVotes = results[0].votes;
+        return results
+            .filter(r => r.votes === topVotes)
+            .map(r => {
+                return {
+                    playerId: r.votedPlayerId,
+                    sips: defaultCardSips,
+                    distribute: false
+                } as SipResult
+            }
+        );
     }
 }
 

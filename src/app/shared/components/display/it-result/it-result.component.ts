@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Card, Player, Result } from 'src/app/core/models/interfaces';
+import { Card, Player, Result, SipResult } from 'src/app/core/models/interfaces';
 import { CardUtils } from 'src/app/core/utils/card.utils';
 
 @Component({
@@ -13,6 +13,7 @@ export class ItResultComponent implements AfterViewInit {
   cardService: CardUtils.CardService;
 
   @Input() result: Result;
+  @Input() sipResult: SipResult;
   @Input() profilePicture?: string;
   @Input() username?: string;
   @Input() card: Card;
@@ -24,8 +25,10 @@ export class ItResultComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    this.cardService = CardUtils.getCardService(this.card.type);
-    this.changeDetectornRef.detectChanges();
+    if (!!this.card) {
+      this.cardService = CardUtils.getCardService(this.card.type);
+      this.changeDetectornRef.detectChanges();
+    }
   }
 
   skipped() {
@@ -33,15 +36,28 @@ export class ItResultComponent implements AfterViewInit {
   }
 
   getTitle() {
-    return !this.skipped() ? this.username : this.translateService.instant("shared.components.display.it-result.skipped");
+    return !this.skipped() ? 
+      this.username : 
+      this.translateService.instant("shared.components.display.it-result.skipped");
   }
 
   getResultText() {
-    return this.cardService.getResultText(this.result, this.translateService);
+    if (!!!this.sipResult) {
+      return this.cardService.getResultText(this.result, this.translateService);
+    } else {
+      let text = this.sipResult.distribute ? 
+        this.translateService.instant("shared.components.display.it-result.distribute") : 
+        this.translateService.instant("shared.components.display.it-result.drink");
+      text += ` ${this.sipResult.sips} `;
+      text += this.sipResult.sips > 1 ? 
+        this.translateService.instant("shared.components.display.it-result.sips") : 
+        this.translateService.instant("shared.components.display.it-result.sip");
+      return text;
+    }
   }
 
   cardHasResultSubText() {
-    return this.cardService.cardHasResultSubText(this.card);
+    return !!!this.sipResult && this.cardService.cardHasResultSubText(this.card);
   }
 
   getResultSubText() {

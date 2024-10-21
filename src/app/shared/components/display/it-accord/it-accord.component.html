@@ -15,7 +15,12 @@
       {{ !!icon ? icon : 'expand_more' }}
     </it-icon>
   </div>
-  <ng-content class="mt-2" select="[default]"></ng-content>
+  <div [ngClass]="{'hidden': !wrapper.children.length}">
+    <div class="h-2"></div>
+  </div>
+  <div #wrapper>
+    <ng-content select="[default]"></ng-content>
+  </div>
   <div
     #content
     id="content"

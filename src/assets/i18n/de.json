@@ -162,7 +162,11 @@
         "it-result": {
           "votes": "Stimmen",
           "vote": "Stimme",
-          "skipped": "Ausgelassen"
+          "skipped": "Ausgelassen",
+          "distribute": "Verteile",
+          "drink": "Trink",
+          "sips": "Schlücke",
+          "sip": "Schluck"
         },
         "it-loading-screen": {
           "title": "Lade Raum",

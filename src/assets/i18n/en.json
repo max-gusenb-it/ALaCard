@@ -162,7 +162,11 @@
         "it-result": {
           "votes": "votes",
           "vote": "vote",
-          "skipped": "Skipped"
+          "skipped": "Skipped",
+          "distribute": "Distribute",
+          "drink": "Drink",
+          "sips": "Sips",
+          "sip": "sip"
         },
         "it-loading-screen": {
           "title": "Loading Room",
