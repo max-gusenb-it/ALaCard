@@ -101,6 +101,10 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
     return RoomUtils.isUserAdmin(this.store);
   }
 
+  displayPayToDisplay() {
+    return this.gameSettings.drinkingGame && this.getCastedCard()?.settings?.payToDisplay && !!!this.getCastedDynamicRoundData()?.payedToDisplayPlayerId;
+  }
+
   async payToDisplay() {
     const payToDisplay = await firstValueFrom(
       this.popupService.openOptionBottomSheet(

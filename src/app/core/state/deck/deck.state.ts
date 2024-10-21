@@ -164,14 +164,16 @@ export class DeckState implements NgxsOnInit {
                     text: "Who is most likely to have a one-night stand?",
                     type: CardType.PlayerVoting,
                     settings: {
-                        isAnonymous: true
+                        isAnonymous: true,
+                        payToDisplay: true
                     }
                 } as PlayerVotingCard,
                 {
                     text: "Who wet his/her bed the longest?",
                     type: CardType.PlayerVoting,
                     settings: {
-                        isAnonymous: true
+                        isAnonymous: true,
+                        payToDisplay: true
                     }
                 } as PlayerVotingCard,
                 {
