@@ -106,6 +106,13 @@
           "game-rules": {
             "mobile-tutorial": "Klicke oder wische nach links oder rechts auf der Karte, um durch die Regeln zu navigieren.",
             "desktop-tutorial": "Klicke links oder rechts auf die Karte, um durch die Regeln zu navigieren."
+          },
+          "game-cards": {
+            "card-container": {
+              "mobile-swipe-tutorial": "Kein Button zum Fortsetzen? Klicke oder swipe nach links auf der Karte, um weiter zu spielen",
+              "desktop-swipe-tutorial": "Kein Button zum Fortsetzen? Klick auf die Karte, um weiter zu spielen!",
+              "response-count-tutorial": "Verfolge anhand der Zahlen neben „Weiter“, wie viele Spieler bereits eine Antwort abgegeben haben."
+            }
           }
         },
         "game-cards": {

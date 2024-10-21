@@ -42,7 +42,7 @@ export class ItNavigationComponent {
       }
     }
     if (url === "/room") {
-      const userId = this.store.selectSnapshot(AuthenticationState.userid)!;
+      const userId = this.store.selectSnapshot(AuthenticationState.userId)!;
       const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
       if (!!!roomId) {
         this.popupService.openSnackbar(

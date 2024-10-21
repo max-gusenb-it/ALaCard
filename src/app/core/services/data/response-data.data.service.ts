@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, Subscription, takeUntil } from "rxjs";
+import { BehaviorSubject, filter, map, Observable, Subscription, takeUntil } from "rxjs";
 import { ResponseData, Room } from "../../models/interfaces";
 import { ResponseDataSourceService } from "../source/response-data.source.service";
 import { Select, Store } from "@ngxs/store";
@@ -28,7 +28,7 @@ export class ResponseDataDataService extends AngularLifecycle {
         this.room$
             .pipe(takeUntil(this.destroyed$))
             .subscribe(room => {
-                const userId = this.store.selectSnapshot(AuthenticationState.userid);
+                const userId = this.store.selectSnapshot(AuthenticationState.userId);
                 if (!!!room || !!!room.game || room.game.state === GameState.ended || RoomUtils.getRoomAdmin(room).id !== userId) {
                     if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) {
                         this.disconnectFromResponseData();
@@ -54,6 +54,15 @@ export class ResponseDataDataService extends AngularLifecycle {
         this.responseData$.next(null as any);
     }
 
+    getAdminResponses$() {
+        return this.responseData$
+            .asObservable()
+            .pipe(
+                filter(r => !!r?.responses),
+                map(r => Object.keys(r.responses).map(key => (r.responses[key])))
+            );
+    }
+
     getAdminResponses() {
         const responseData = this.responseData$.value?.responses;
         if (responseData == undefined) {
@@ -69,7 +78,7 @@ export class ResponseDataDataService extends AngularLifecycle {
 
     getAdminResponsesForRoundAndUser(roundId: number) {
         const userResponses = this.getAdminResponsesForRound(roundId)
-            .filter(r => r.playerId === this.store.selectSnapshot(AuthenticationState.userid));
+            .filter(r => r.playerId === this.store.selectSnapshot(AuthenticationState.userId));
         if (userResponses.length === 1) {
             return userResponses[0];
         } else {

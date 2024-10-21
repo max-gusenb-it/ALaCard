@@ -1,4 +1,4 @@
-import { Action, Selector, State, StateContext, StateToken } from "@ngxs/store";
+import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { InformationStateModel } from "./information.model";
 import { Injectable } from "@angular/core";
 import { InformationActions } from "./information.actions";
@@ -6,17 +6,19 @@ import { GameInformation, Response, RoundInformation, TutorialInfo } from "../..
 import { ItError } from "../../models/classes";
 import { InformationStateErrors } from "../../constants/errorCodes";
 
+export const INFORMATION_STATE_VERSION = 1;
 export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('information');
 
 @State<InformationStateModel>({
     name: INFORMATION_STATE_TOKEN,
-    defaults: { 
+    defaults: {
+        version: INFORMATION_STATE_VERSION,
         gameInformations: undefined,
         tutorialInfos: []
     }
 })
 @Injectable()
-export class InformationState {
+export class InformationState implements NgxsOnInit {
     @Selector()
     static gameInformation(state: InformationStateModel) : undefined | GameInformation {
         return state.gameInformations;
@@ -45,6 +47,17 @@ export class InformationState {
     @Selector()
     static tutorialInfos(state: InformationStateModel) : TutorialInfo[] {
         return state.tutorialInfos;
+    }
+
+    ngxsOnInit(ctx: StateContext<InformationStateModel>): void {
+        const state = ctx.getState();
+        if (state.version === INFORMATION_STATE_VERSION) return;
+        let tutorialInfos = !!state.tutorialInfos ? state.tutorialInfos : [];
+        ctx.patchState({
+            version: INFORMATION_STATE_VERSION,
+            gameInformations: undefined,
+            tutorialInfos: tutorialInfos
+        });
     }
 
     @Action(InformationActions.SetGameInformation)

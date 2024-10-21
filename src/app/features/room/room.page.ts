@@ -64,7 +64,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   isUserRoomCreator() {
-    return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomCreator(this.store.selectSnapshot(RoomState.room)!).id;
+    return this.store.selectSnapshot(AuthenticationState.userId) === RoomUtils.getRoomCreator(this.store.selectSnapshot(RoomState.room)!).id;
   }
 
   isUserRoomAdmin() {
@@ -137,11 +137,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   getAdminResponseCountInfo() {
-    return this.responseDataDataService.getAdminResponseCountInfo(this.staticRoundDataDataService.getStaticRoundData()!.round!.id);
-  }
-
-  getRuleReadCount() {
-    return this.responseDataDataService.getAdminResponsesForRound(-1).length;
+    return this.responseDataDataService.getAdminResponseCountInfo(-1);
   }
 
   async startGame() {

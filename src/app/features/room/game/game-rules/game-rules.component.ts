@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { Platform } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, timer } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
@@ -31,8 +30,7 @@ export class GameRulesComponent implements AfterViewInit {
   constructor(
     private store: Store,
     private responseDataSourceService: ResponseDataSourceService,
-    private tutorialService: TutorialService,
-    public platform: Platform
+    private tutorialService: TutorialService
   ) {
     this.currentRuleIndex = this.store.selectSnapshot(InformationState.gameRulesCardIndex);
   }
@@ -42,10 +40,10 @@ export class GameRulesComponent implements AfterViewInit {
       this.emitRulesRead();
     }
 
-    const tutorialLabelId = this.platform.is('mobileweb') ? mobileRuleTutorialLabelId : desktopRuleTutorialLabelId;
-    if (!this.tutorialService.wasTutorialDisplayed(tutorialLabelId)) {
-      this.tutorialService.displayTutorial(tutorialLabelId);
-    }
+    this.tutorialService.checkForDualTutorial(
+      mobileRuleTutorialLabelId,
+      desktopRuleTutorialLabelId
+    );
   }
 
   getCard() : FreeTextCard {

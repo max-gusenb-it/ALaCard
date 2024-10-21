@@ -8,12 +8,13 @@
     }
   }"
   class="flex grow items-center justify-center relative"
->
+  >
   @switch(getRoundState()) {
     @case (getCardState()) {
       <card
         class="absolute"
         (click)="continue()"
+        (onSwipe)="swipe($event)"
         [card]="deck.cards[staticRoundData.round.cardIndex]"
         [playerIds]="staticRoundData.round.playerIds"
         [deckname]="deck.name"

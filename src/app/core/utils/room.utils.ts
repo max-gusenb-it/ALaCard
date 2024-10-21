@@ -20,7 +20,7 @@ export namespace RoomUtils {
         const room = store.selectSnapshot(RoomState.room);
         if (!!!room && !!!creatorId) {
             // Currently joined in no room
-            creatorId = store.selectSnapshot(AuthenticationState.userid);
+            creatorId = store.selectSnapshot(AuthenticationState.userId);
         }
         if (!!!creatorId && !!room) {
             creatorId = getRoomCreator(room).id;

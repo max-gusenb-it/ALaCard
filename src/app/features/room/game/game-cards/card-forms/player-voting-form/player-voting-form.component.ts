@@ -101,7 +101,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     this.playerVotingForm.controls["votedPlayerId"].updateValueAndValidity();
 
     const response : PlayerVotingResponse = {
-      playerId: this.store.selectSnapshot(AuthenticationState.userid)!,
+      playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
       skipped: skipped,
       votedPlayerId: !skipped ? this.playerVotingForm.controls['votedPlayerId'].value : null,
       roundId: this.round.id  
