@@ -5,7 +5,7 @@ import { RoomActions } from "./room.actions";
 import { RoomSourceService } from "../../services/source/room.source.service";
 import { LoadingHelperService } from "../../services/helper/loading.helper.service";
 import { AuthenticationActions, AuthenticationState } from "../authentication";
-import { Subscription, combineLatest, filter, firstValueFrom, of, take, takeUntil } from "rxjs";
+import { Subscription, bufferTime, combineLatest, filter, firstValueFrom, map, of, take, takeUntil } from "rxjs";
 import { LoadingActions } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { ModalController, NavController } from "@ionic/angular";
@@ -149,8 +149,14 @@ export class RoomState extends AngularLifecycle {
             let roomObservable = this.roomSourceService.getRoom$(action.roomId, action.creatorId);
 
             // check if room exists
-            let initialRoom = await firstValueFrom(roomObservable)
-                .then(
+            let initialRoom = await firstValueFrom(
+                this.roomSourceService.getRoom$(action.roomId, action.creatorId)
+                    .pipe(
+                        // Wait for 1500 ms so actuall room settings are loaded and not cached value -> singleDeviceMode join bug
+                        bufferTime(1500),
+                        map(buffer => buffer.slice(-1)[0])
+                    )
+                ).then(
                     r => {
                         return r;
                     },
@@ -159,7 +165,6 @@ export class RoomState extends AngularLifecycle {
                 }
             );
 
-            // ToDo: fix singleDeviceMode chache problem -> memo
             if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
             }
@@ -228,11 +233,12 @@ export class RoomState extends AngularLifecycle {
                             take(1)
                         ) 
                     : of(null)
-            ])
-            .pipe(take(1))
-            .subscribe(() => {
-                ctx.dispatch(new LoadingActions.EndLoading());
-            });
+                ])
+                .pipe(take(1))
+                .subscribe(() => {
+                    ctx.dispatch(new LoadingActions.EndLoading());
+                }
+            );
             
             return Promise.resolve();
         } catch(error) {
