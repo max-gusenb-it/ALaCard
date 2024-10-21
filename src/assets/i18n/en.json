@@ -120,7 +120,12 @@
             "answer": "Answer"
           },
           "card-stats": {
-            "skipped": "Everyone skipped"
+            "skipped": "Everyone skipped",
+            "player-voting-stats": {
+              "pay-to-display": "Display Voters",
+              "pay-to-display-explanation": "For a small price you can reveal the names of the voters",
+              "pay": "Pay"
+            }
           },
           "sips": "Sips"
         }
@@ -165,7 +170,7 @@
           "skipped": "Skipped",
           "distribute": "Distribute",
           "drink": "Drink",
-          "sips": "Sips",
+          "sips": "sips",
           "sip": "sip"
         },
         "it-loading-screen": {

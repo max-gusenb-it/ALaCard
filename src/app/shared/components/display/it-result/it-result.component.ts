@@ -18,6 +18,7 @@ export class ItResultComponent implements AfterViewInit {
   @Input() username?: string;
   @Input() card: Card;
   @Input() players: Player[];
+  @Input() overrideAnonymous: boolean = false;
 
   constructor(
     private translateService: TranslateService,
@@ -57,7 +58,7 @@ export class ItResultComponent implements AfterViewInit {
   }
 
   cardHasResultSubText() {
-    return !!!this.sipResult && this.cardService.cardHasResultSubText(this.card);
+    return !!!this.sipResult && this.cardService.cardHasResultSubText(this.card, this.overrideAnonymous);
   }
 
   getResultSubText() {

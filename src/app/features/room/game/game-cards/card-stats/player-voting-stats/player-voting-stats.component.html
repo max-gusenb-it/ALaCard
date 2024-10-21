@@ -22,6 +22,7 @@
                     [profilePicture]="getPlayerForResult(result)?.profilePicture"
                     [card]="card"
                     [players]="players"
+                    [overrideAnonymous]="!!getCastedDynamicRoundData().payedToDisplayPlayerId"
                 />
             </div>
         </it-accord>
@@ -47,7 +48,12 @@
             />
         </it-accord>
     </it-selection-list>
-    <it-button class="flex grow" color="red" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
-        {{ 'actions.continue' | translate }}
-    </it-button>
+    <div class="flex flex-row gap-4">
+        <it-button class="flex grow" color="red" type="button" *ngIf="gameSettings.drinkingGame && getCastedCard().settings.payToDisplay && !!!getCastedDynamicRoundData()?.payedToDisplayPlayerId" (click)="payToDisplay()">
+            {{ 'features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display' | translate }}
+        </it-button>
+        <it-button class="flex grow" color="red" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
+            {{ 'actions.continue' | translate }}
+        </it-button>
+    </div>
 </div>

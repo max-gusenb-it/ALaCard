@@ -120,7 +120,12 @@
             "answer": "Antwort"
           },
           "card-stats": {
-            "skipped": "Jeder hat übersprungen"
+            "skipped": "Jeder hat übersprungen",
+            "player-voting-stats": {
+              "pay-to-display": "Abstimmer?",
+              "pay-to-display-explanation": "Für einen kleinen Preis kannst du die Namen der Wähler preisgeben",
+              "pay": "Zahle"
+            }
           },
           "sips": "Schlücke"
         }

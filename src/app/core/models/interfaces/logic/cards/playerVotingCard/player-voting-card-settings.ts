@@ -4,5 +4,5 @@ export interface PlayerVotingCardSettings extends CardSettings {
     selfVoteDisabled: boolean;
     isAnonymous: boolean;
     payToDisplay: boolean;
-    // ToDo: implement
+    // ToDo: add sip config
 }

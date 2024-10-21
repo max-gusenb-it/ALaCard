@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
 import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResult, Response, Result, SipResult } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
-import { defaultCardSips } from "src/app/core/constants/card";
+import { defaultCardSips, defaultPayToDisplaySips } from "src/app/core/constants/card";
 
 @Injectable({
     providedIn: 'root'
@@ -54,9 +54,9 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
         return `${pvResult.votes} ${translation}`;
     }
 
-    override cardHasResultSubText(card: Card): boolean {
+    override cardHasResultSubText(card: Card, overwriteAnonymous: boolean = false): boolean {
         const pvCard = this.castCard(card);
-        if (pvCard.settings?.isAnonymous) return false;
+        if (pvCard.settings?.isAnonymous && !overwriteAnonymous) return false;
         return true;
     }
 
@@ -75,7 +75,7 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
             .filter(r => r.votedPlayerId !== null);
         if (results.length === 0) return [];
         const topVotes = results[0].votes;
-        return results
+        let sipResults = results
             .filter(r => r.votes === topVotes)
             .map(r => {
                 return {
@@ -85,6 +85,23 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
                 } as SipResult
             }
         );
+        const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
+        if (!!dynamicPlayerVotingRoundData.payedToDisplayPlayerId) {
+            const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPlayerVotingRoundData.payedToDisplayPlayerId && !sr.distribute);
+            if (payToWinUserIndex !== -1) {
+                sipResults[payToWinUserIndex].sips += defaultPayToDisplaySips
+            } else {
+                sipResults = [
+                    ...sipResults,
+                    {
+                        playerId: dynamicPlayerVotingRoundData.payedToDisplayPlayerId,
+                        sips: defaultPayToDisplaySips,
+                        distribute: false
+                    }
+                ]
+            }
+        }
+        return sipResults;
     }
 }
 
