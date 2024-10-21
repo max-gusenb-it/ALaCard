@@ -3,17 +3,18 @@
     <p class="text-lg">{{ getCardText() }}</p>
     <it-selection-list
         [singleSelect]="true"
+        [required]="true"
+        *ngIf="!!results"
         #resulSelectionList
     >
         <it-accord
             [heading]="getResultsHeading()"
             icon="emoji_events"
             [selected]="true"
-            *ngIf="!!results"
             (selectionEmitter)="resulSelectionList.onSelectionChanged($event)"
         >
             <!-- ToDo: Add max height and scrolling -->
-            <div class="flex flex-col gap-2">
+            <div collapsible class="flex flex-col gap-2">
                 <it-result
                     *ngFor="let result of results"
                     [result]="result"

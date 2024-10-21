@@ -18,7 +18,11 @@ export class ItSelectionListComponent implements AfterContentInit, AfterViewInit
   @Input() required: boolean = false;
 
   ngAfterContentInit() {
-    this.selectables.map(s => s.id = this.selectables.toArray().indexOf(s));
+    this.mapSelectableIds();
+    this.selectables.changes
+      .subscribe(() => {
+        this.mapSelectableIds();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -32,8 +36,12 @@ export class ItSelectionListComponent implements AfterContentInit, AfterViewInit
     }
   }
 
+  mapSelectableIds() {
+    this.selectables.map(s => s.id = this.selectables.toArray().indexOf(s));
+  }
+
   onSelectionChanged(selectionId: number) {
-    let selectable = this.selectables.get(selectionId)!;
+    let selectable = this.selectables.toArray().find(s => s.id === selectionId)!;
     const numberOfSelectedItem = this.selectables.filter(s => s.selected).length;
     if (selectable.selected) {
       if (numberOfSelectedItem == 1) {

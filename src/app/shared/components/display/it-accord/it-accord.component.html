@@ -2,6 +2,7 @@
   <div 
     class="flex flex-row justify-between items-center cursor-pointer"
     (click)="toggleState()"
+    *ngIf="!!heading"
   >
     <h4>{{heading}}</h4>
     <it-icon
@@ -14,6 +15,7 @@
       {{ !!icon ? icon : 'expand_more' }}
     </it-icon>
   </div>
+  <ng-content class="mt-2" select="[default]"></ng-content>
   <div
     #content
     id="content"
@@ -23,6 +25,6 @@
   >
     <!-- Using div instead of padding/margin so antimation is displayed correct -->
     <div class="h-2"></div>
-    <ng-content></ng-content>
+    <ng-content select="[collapsible]"></ng-content>
   </div>
 </div>
