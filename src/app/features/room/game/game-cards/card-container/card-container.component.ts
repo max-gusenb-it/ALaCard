@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
+import { CardType } from 'src/app/core/models/enums';
 import { Deck, DynamicRoundData, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
@@ -118,6 +119,13 @@ export class CardContainerComponent extends AngularLifecycle{
   }
 
   continue() {
+    const card = this.deck.cards[this.staticRoundData!.round!.cardIndex!];
+    
+    if (card.type === CardType.FreeText) {
+      this.staticRoundDataDataService.startNewRound();
+      return;
+    }
+
     this.cardClicked = true;
     this.store.dispatch(new InformationActions.SetRoundCardClicked());
   }

@@ -20,6 +20,8 @@ export class ItResultComponent implements AfterViewInit {
   @Input() players: Player[];
   @Input() overrideAnonymous: boolean = false;
 
+  // ToDo: Refactor
+
   constructor(
     private translateService: TranslateService,
     private changeDetectornRef: ChangeDetectorRef

@@ -1,7 +1,7 @@
 import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { DeckStateModel } from "./deck.model";
 import { Injectable } from "@angular/core";
-import { Deck } from "../../models/interfaces";
+import { Deck, FreeTextCard } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
 import { CardType } from "../../models/enums";
 import { PlayerVotingCard } from "../../models/interfaces/logic/cards/playerVotingCard/player-voting-card";
@@ -48,13 +48,11 @@ export class DeckState implements NgxsOnInit {
                 } as PlayerVotingCard,
                 {
                     text: "Zweiter :)",
-                    type: CardType.PlayerVoting,
+                    type: CardType.FreeText,
                     settings: {
-                        order: 2,
-                        isAnonymous: true,
-                        payToDisplay: true
+                        order: 2
                     }
-                } as PlayerVotingCard
+                } as FreeTextCard
             ],
             speficPlayerMandatory: false
         };
