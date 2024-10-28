@@ -3,6 +3,9 @@
     (submit)="createRoom()"
 >
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
-    <it-create-room-form (roomFormChanged)="setCreateRoomFormData($event)"></it-create-room-form>
+    <it-create-room-form 
+        (roomFormChanged)="setCreateRoomFormData($event)"
+        (onSubmit)="createRoom()"
+    />
     <it-button class="flex" type="submit" [indicateLoading]="true" [disabled]="!createRoomFormData.valid">{{"features.home.create-room-modal.create-room" | translate}}</it-button>
 </form>

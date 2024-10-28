@@ -31,6 +31,7 @@ export class CreateRoomModal {
   }
 
   createRoom() {
+    if (!this.createRoomFormData.valid) return;
     firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
       this.createRoomFormData.name,
       this.createRoomFormData.description
