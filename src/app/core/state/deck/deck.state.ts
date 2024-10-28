@@ -43,7 +43,9 @@ export class DeckState implements NgxsOnInit {
                     type: CardType.PlayerVoting,
                     settings: {
                         order: 1,
-                        selfVoteDisabled: true
+                        selfVoteDisabled: true,
+                        isAnonymous: true,
+                        payToDisplay: true
                     }
                 } as PlayerVotingCard,
                 {
