@@ -19,7 +19,7 @@ export class NoRoomComponent {
     });
     modal.present();
     modal.onDidDismiss().then(modalResponse => {
-      if (modalResponse.data.roomId != null) {
+      if (modalResponse.data?.roomId != null) {
         this.navController.navigateForward(`room/${modalResponse.data.userId}-${modalResponse.data.roomId}`);
       }
     });
