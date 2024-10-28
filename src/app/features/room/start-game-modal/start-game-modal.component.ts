@@ -14,11 +14,12 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
   templateUrl: './start-game-modal.component.html'
 })
 export class StartGameModal extends AngularLifecycle {
+
+  currentTab: string = "";
   players: Player[];
-
   decks: Deck[] = this.store.selectSnapshot(DeckState.decks);
-  selectedDeck: Deck = null as any;
 
+  selectedDeck: Deck = null as any;
   showSettings: boolean = false;
 
   gameSettingsForm: FormGroup = new FormGroup({
@@ -39,25 +40,9 @@ export class StartGameModal extends AngularLifecycle {
   }
 
   onNavigation(event: string) {
-    if (event === "Deck") {
-      this.gameSettingsForm.controls["specificPlayerId"].clearValidators();
-      this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
-    }
+    this.currentTab = event;
     if (event === "Settings") {
-      if (this.selectedDeck.speficPlayerMandatory) {
-        this.gameSettingsForm.controls["specificPlayerId"].addValidators(Validators.required);
-        this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
-      }
-      if (!this.specificPersonModeAvailable()) {
-        this.gameSettingsForm.patchValue({
-          specificPlayerActivated: false,
-          specificPlayerId: null
-        });
-        this.gameSettingsForm.controls["specificPlayerActivated"].disable();
-      } else {
-        this.gameSettingsForm.controls["specificPlayerActivated"].enable();
-      }
-      this.showSettings = event === "Settings";
+      this.showSettings = true;
     }
   }
 
@@ -66,20 +51,38 @@ export class StartGameModal extends AngularLifecycle {
     else return !!this.selectedDeck.cards.find(c => c.text.includes(specificPlayerNameWhitecard));
   }
 
+  onDeckSelection(selectionId: number) {
+    this.selectedDeck = this.decks[selectionId];
+    this.prepareSettingsForm();
+  }
+
+  prepareSettingsForm() {
+    this.gameSettingsForm.patchValue({
+      specificPlayerActivated: false,
+      specificPlayerId: null
+    });
+
+    if (this.selectedDeck.speficPlayerMandatory) {
+      this.gameSettingsForm.controls["specificPlayerId"].addValidators(Validators.required);
+    } else {
+      this.gameSettingsForm.controls["specificPlayerId"].clearValidators();
+    }
+    if (!this.specificPersonModeAvailable()) {
+      this.gameSettingsForm.controls["specificPlayerActivated"].disable();
+    } else {
+      this.gameSettingsForm.controls["specificPlayerActivated"].enable();
+    }
+    
+    this.gameSettingsForm.controls['specificPlayerActivated'].updateValueAndValidity();
+    this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
+  }
+
   onSubmitOrCancel(event: boolean) {
     if (!event) {
       this.modalCtrl.dismiss();
     } else {
       this.startGame();
     }
-  }
-
-  onDeckSelection(selectionId: number) {
-    this.selectedDeck = this.decks[selectionId];
-  }
-
-  isSpecificPlayerAvailable() {
-
   }
 
   startGame() {

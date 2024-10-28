@@ -1,7 +1,8 @@
 <it-tab-group 
   (onStatusChange)="onSubmitOrCancel($event)"
   (onTabChange)="onNavigation($event)"
-  [advanceControlsEnabled]="gameSettingsForm.valid"
+  [advanceControlDisabled]="!gameSettingsForm.valid && currentTab === 'Settings'"
+  [finishControlDisabled]="!gameSettingsForm.valid"
   class="flex flex-grow p-6"
 >
   <it-tab [title]="'features.room.start-game-modal.deck' | translate">
@@ -28,6 +29,7 @@
       <div class="flex flex-col flex-grow justify-center">
         <form
           [formGroup]="gameSettingsForm"
+          class="flex flex-col gap-2"
         >
           <it-checkbox
             id="drinkingGame"

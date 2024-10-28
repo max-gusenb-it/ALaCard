@@ -9,7 +9,8 @@ export class ItTabGroupComponent implements AfterContentInit {
   @ContentChildren(ItTabComponent) tabs: QueryList<ItTabComponent> = null as any;
 
   @Input() hideControls: boolean = false;
-  @Input() advanceControlsEnabled: boolean = true;
+  @Input() advanceControlDisabled: boolean = false;
+  @Input() finishControlDisabled: boolean = false;
 
   @Output() onTabChange = new EventEmitter<string>();
   @Output() onStatusChange = new EventEmitter<boolean>();
@@ -27,6 +28,7 @@ export class ItTabGroupComponent implements AfterContentInit {
   selectTab(tab: ItTabComponent) {
     this.tabs.toArray().forEach(tab => (tab.active = false));
     tab.active = true;
+    this.onTabChange.emit(tab.title);
   }
 
   getActiveTabIndex() {

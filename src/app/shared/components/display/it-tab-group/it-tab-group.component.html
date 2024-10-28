@@ -19,10 +19,10 @@
     <it-button class="flex flex-grow" color="secondary" (click)="previousTab()">
       <it-icon color="text-white">{{ isFirstTab() ? "close" : "keyboard_arrow_left"}}</it-icon>
     </it-button>
-    <it-button class="flex flex-grow" (click)="finishTabs()" [disabled]="!advanceControlsEnabled">
+    <it-button class="flex flex-grow" (click)="finishTabs()" [disabled]="finishControlDisabled">
       <it-icon>play_arrow</it-icon>
     </it-button>
-    <it-button *ngIf="tabs.length > 1" class="flex flex-grow" (click)="nextTab()" [disabled]="!advanceControlsEnabled">
+    <it-button *ngIf="tabs.length > 1" class="flex flex-grow" (click)="nextTab()" [disabled]="advanceControlDisabled ">
       <it-icon>keyboard_arrow_right</it-icon>
     </it-button>
   </div>
