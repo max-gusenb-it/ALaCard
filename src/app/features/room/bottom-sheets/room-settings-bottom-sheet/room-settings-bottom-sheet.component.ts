@@ -37,13 +37,17 @@ export class RoomSettingsBottomSheet {
     if (!!!settings) this.close();
     this.roomSettingsForm.controls['singleDeviceMode'].setValue(settings?.singleDeviceMode);
     this.roomSettingsForm.controls['otherAdmin'].setValue(settings?.otherAdmin);
+
+    const game = this.store.selectSnapshot(RoomState.game);
+    if (!!game) {
+      this.roomSettingsForm.controls['singleDeviceMode'].disable();
+      this.roomSettingsForm.controls['singleDeviceMode'].updateValueAndValidity();
+    }
   }
 
   close() {
     this.dialogRef.close();
   }
-
-  // ToDo: disable single device mode during gameplay
 
   updateSettings() {
     let differences = false;
