@@ -22,8 +22,8 @@ export class ItCreateRoomAsGuestModal {
     private store: Store
   ) { }
 
-  close(succeeded: boolean = false) {
-    this.modalCtrl.dismiss(succeeded);
+  close() {
+    this.modalCtrl.dismiss();
   }
 
   setProfileFormData(profileFormData: ProfileEditorFormData) {
