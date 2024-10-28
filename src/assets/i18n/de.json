@@ -96,7 +96,8 @@
         "settings": {
           "title": "Einstellungen",
           "subtitle": "Passen die Einstellungen nach deinem Geschmack an.Klick auf weiter, wenn du mit den Standardeinstellungen spielen möchtest, die der Ersteller des Decks festgelegt hat."
-        }
+        },
+        "deck-not-playable": "Das Deck ist aktuell nicht spielbar. Überprüfe die Spieleinstellungen und/oder lade mehr Spieler ein!"
       },
       "game": {
         "card": {

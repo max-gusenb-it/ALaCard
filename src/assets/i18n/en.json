@@ -96,7 +96,8 @@
         "settings": {
           "title": "Settings",
           "subtitle": "Adjust the settings to your liking.Continue if you want to play with the default settings the creator of the deck defined."
-        }
+        },
+        "deck-not-playable": "The deck is currently not playable. Check the game settings and/or invite more players!"
       },
       "game": {
         "card": {

@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { specificPlayerNameWhitecard } from 'src/app/core/constants/card';
-import { Deck, Player } from 'src/app/core/models/interfaces';
+import { Deck, GameSettings, Player, RoomSettings } from 'src/app/core/models/interfaces';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomActions, RoomState } from 'src/app/core/state';
 import { DeckState } from 'src/app/core/state/deck';
+import { StaticRoundDataUtils } from 'src/app/core/utils/static-round-data.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -30,6 +33,8 @@ export class StartGameModal extends AngularLifecycle {
 
   constructor(
     private modalCtrl: ModalController,
+    private popupService: PopupService,
+    private translateService: TranslateService,
     private store: Store
   ) {
     super();
@@ -92,6 +97,19 @@ export class StartGameModal extends AngularLifecycle {
       this.gameSettingsForm.controls["specificPlayerActivated"].value && this.gameSettingsForm.controls["specificPlayerId"].value != null
     ) {
       speficiPlayerId = this.gameSettingsForm.controls["specificPlayerId"].value;
+    }
+
+    let gameSettings: GameSettings = {
+      speficiPlayerId: speficiPlayerId,
+      drinkingGame: this.gameSettingsForm.controls["drinkingGame"].value
+    }
+    
+    if (!StaticRoundDataUtils.isDeckPlayable(this.selectedDeck, this.store.selectSnapshot(RoomState.players), gameSettings)) {
+      this.popupService.openSnackbar(
+        this.translateService.instant("features.room.start-game-modal.deck-not-playable"),
+        "check"
+      );
+      return;
     }
 
     this.store.dispatch(new RoomActions.StartGame(

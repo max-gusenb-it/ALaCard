@@ -154,7 +154,36 @@ export class DeckState implements NgxsOnInit {
             ],
             speficPlayerMandatory: false
         };
-        
+
+        const drinkingDeck: Deck = {
+            icon: "🍻",
+            name: "Drinking Game",
+            description: "Party hard!",
+            cards: [
+                {
+                    text: "%p0 trink fünf Schlücke :)",
+                    type: CardType.FreeText,
+                    settings: {
+                        drinkingCard: true
+                    }
+                } as FreeTextCard
+            ],
+            speficPlayerMandatory: false
+        };
+
+        const aLotOfPlayersDeck: Deck = {
+            icon: "👩‍👧‍👦",
+            name: "A lot of Players Game",
+            description: "Hopefully you have a lot of friends",
+            cards: [
+                {
+                    text: "%p0, %p1 und %p2 ihr seit mega cool :)",
+                    type: CardType.FreeText
+                } as FreeTextCard
+            ],
+            speficPlayerMandatory: false
+        };
+
         const leggitPartyDeck: Deck = {
             icon: "🎉",
             name: "Party Game",
@@ -207,7 +236,7 @@ export class DeckState implements NgxsOnInit {
             decks = [leggitPartyDeck];
         } else {
             decks = [
-                partyDeck, partyDeckWithRules, partyDeckWithSpMandatory, partyDeckWithRulesAndSp
+                partyDeck, partyDeckWithRules, partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
             ];
         }
 

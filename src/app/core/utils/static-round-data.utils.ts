@@ -53,6 +53,10 @@ export namespace StaticRoundDataUtils {
         }
     }
 
+    export function isDeckPlayable(deck: Deck, players: Player[], gameSettings: GameSettings) {
+        return getPlayableCards(Array.from(Array(deck.cards.length).keys()), deck, players, gameSettings).length > 0;
+    }
+
     function getPlayableCards(availableCardIndexes: number[], deck: Deck, players: Player[], gameSettings: GameSettings) : number[] {
         const activePlayerCount = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline).length;
         return availableCardIndexes
