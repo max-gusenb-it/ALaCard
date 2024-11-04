@@ -22,6 +22,36 @@ export const partyDeck: Deck = {
             }
         } as PlayerVotingCard,
         {
+            text: "Erster :) - %p0 is a echter Wappla",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 1,
+                selfVoteDisabled: true,
+                isAnonymous: true,
+                payToDisplay: true
+            }
+        } as PlayerVotingCard,
+        {
+            text: "Erster :) - %p0 is a echter Wappla",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 1,
+                selfVoteDisabled: true,
+                isAnonymous: true,
+                payToDisplay: true
+            }
+        } as PlayerVotingCard,
+        {
+            text: "Erster :) - %p0 is a echter Wappla",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 1,
+                selfVoteDisabled: true,
+                isAnonymous: true,
+                payToDisplay: true
+            }
+        } as PlayerVotingCard,
+        {
             text: "Zweiter :)",
             type: CardType.FreeText,
             settings: {

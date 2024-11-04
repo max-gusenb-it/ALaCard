@@ -71,20 +71,8 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
     }
 
     override getSipResults(dynamicRoundData: DynamicRoundData): SipResult[] {
-        const results = this.getResults(dynamicRoundData)
-            .filter(r => r.votedPlayerId !== null);
-        if (results.length === 0) return [];
-        const topVotes = results[0].votes;
-        let sipResults = results
-            .filter(r => r.votes === topVotes)
-            .map(r => {
-                return {
-                    playerId: r.votedPlayerId,
-                    sips: defaultCardSips,
-                    distribute: false
-                } as SipResult
-            }
-        );
+        let sipResults: SipResult[] = this.calculateRoundSipResults(dynamicRoundData);
+        // Pay To Disply Sip Calculation
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         if (!!dynamicPlayerVotingRoundData.payedToDisplayPlayerId) {
             const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPlayerVotingRoundData.payedToDisplayPlayerId && !sr.distribute);
@@ -101,6 +89,34 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
                 ]
             }
         }
+        return sipResults;
+    }
+    
+    /**
+     * Calculates sip results for the essential part of the round
+     * Move to card.service.ts if other child card services need this method
+     *
+     * @protected
+     * @param {DynamicRoundData} dynamicRoundData
+     * @returns {SipResult[]}
+     */
+    protected calculateRoundSipResults(dynamicRoundData: DynamicRoundData): SipResult[] {
+        const results = this.getResults(dynamicRoundData)
+            .filter(r => r.votedPlayerId !== null);
+        let sipResults: SipResult[] = [];
+        if (results.length !== 0) {
+            const topVotes = results[0].votes;
+            sipResults = results
+                .filter(r => r.votes === topVotes)
+                .map(r => {
+                    return {
+                        playerId: r.votedPlayerId,
+                        sips: defaultCardSips,
+                        distribute: false
+                    } as SipResult
+                }
+            );
+        };
         return sipResults;
     }
 }

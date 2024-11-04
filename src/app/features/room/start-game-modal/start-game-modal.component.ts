@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { specificPlayerNameWhitecard } from 'src/app/core/constants/card';
-import { Deck, GameSettings, Player, RoomSettings } from 'src/app/core/models/interfaces';
+import { Deck, GameSettings, Player } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomActions, RoomState } from 'src/app/core/state';
 import { DeckState } from 'src/app/core/state/deck';

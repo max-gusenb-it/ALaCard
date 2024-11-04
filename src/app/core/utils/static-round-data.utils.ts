@@ -63,6 +63,7 @@ export namespace StaticRoundDataUtils {
             .filter(ci => gameSettings.drinkingGame || !deck.cards[ci].settings?.drinkingCard)
             .filter(ci => {
                 let neededPlayerCount = Utils.countSubstrings(deck.cards[ci].text, playerNameWhitecard) + Utils.countSubstrings(deck.cards[ci].text, specificPlayerNameWhitecard);
+                // ToDo: include !selfVote in calculations 
                 return activePlayerCount >= neededPlayerCount
             }
         );
