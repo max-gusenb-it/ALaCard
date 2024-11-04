@@ -2,8 +2,9 @@ import firebase from 'firebase/compat/app';
 import { Deck, GameSettings, Player, Round, StaticRoundData } from "../models/interfaces";
 import { CardUtils } from './card.utils';
 import { Utils } from './utils';
-import { PlayerState } from '../models/enums';
+import { CardType, PlayerState } from '../models/enums';
 import { playerNameWhitecard, specificPlayerNameWhitecard } from '../constants/card';
+import { PlayerVotingCardService } from '../services/service/card/player-voting-card.service';
 
 export namespace StaticRoundDataUtils {
     export function createInitialStaticRoundData(deck: Deck, players: Player[], gameSettings: GameSettings) : StaticRoundData {
@@ -62,8 +63,18 @@ export namespace StaticRoundDataUtils {
         return availableCardIndexes
             .filter(ci => gameSettings.drinkingGame || !deck.cards[ci].settings?.drinkingCard)
             .filter(ci => {
-                let neededPlayerCount = Utils.countSubstrings(deck.cards[ci].text, playerNameWhitecard) + Utils.countSubstrings(deck.cards[ci].text, specificPlayerNameWhitecard);
-                // ToDo: include !selfVote in calculations 
+                const card = deck.cards[ci];
+                let neededPlayerCount = Utils.countSubstrings(card.text, playerNameWhitecard) + Utils.countSubstrings(card.text, specificPlayerNameWhitecard);
+                switch(card.type) {
+                    case(CardType.PlayerVoting): {
+                        const service = new PlayerVotingCardService();
+                        let pvCard = service.castCard(card);
+                        if (neededPlayerCount < 2 && pvCard.settings?.selfVoteDisabled) {
+                            neededPlayerCount = 2;
+                        }
+                        break;
+                    }
+                }
                 return activePlayerCount >= neededPlayerCount
             }
         );

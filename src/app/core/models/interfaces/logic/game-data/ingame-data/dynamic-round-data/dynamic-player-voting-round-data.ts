@@ -4,6 +4,5 @@ import { DynamicRoundData } from "./dynamic-round-data";
 export interface DynamicPlayerVotingRoundData extends DynamicRoundData {
     responses: PlayerVotingResponse[];
     /** Player Id who payed to display voting results */
-    // ToDo: rename
     payToDisplayPlayerId: string;
 }
