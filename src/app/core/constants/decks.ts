@@ -1,5 +1,5 @@
 import { CardType } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard } from "../models/interfaces";
+import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode } from "../models/interfaces";
 
 // Test Decks
 export const partyDeck: Deck = {
@@ -22,40 +22,21 @@ export const partyDeck: Deck = {
             }
         } as PlayerVotingCard,
         {
-            text: "Erster :) - %p0 is a echter Wappla",
+            text: "Zweiter :) - %p0 is a echter Wappla",
             type: CardType.PlayerVoting,
             settings: {
-                order: 1,
-                selfVoteDisabled: true,
-                isAnonymous: true,
-                payToDisplay: true
+                order: 2,
+                selfVoteDisabled: false,
+                sipConfig: {
+                    sipMode: PlayerVotingSipMode.LeastVoted
+                }
             }
         } as PlayerVotingCard,
         {
-            text: "Erster :) - %p0 is a echter Wappla",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 1,
-                selfVoteDisabled: true,
-                isAnonymous: true,
-                payToDisplay: true
-            }
-        } as PlayerVotingCard,
-        {
-            text: "Erster :) - %p0 is a echter Wappla",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 1,
-                selfVoteDisabled: true,
-                isAnonymous: true,
-                payToDisplay: true
-            }
-        } as PlayerVotingCard,
-        {
-            text: "Zweiter :)",
+            text: "Dritter :)",
             type: CardType.FreeText,
             settings: {
-                order: 2
+                order: 3
             }
         } as FreeTextCard
     ],

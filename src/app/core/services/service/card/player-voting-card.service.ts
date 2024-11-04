@@ -2,7 +2,7 @@ import { PlayerVotingResponse } from "src/app/core/models/interfaces/logic/game-
 import { CardService } from "./card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResult, Response, Result, SipResult } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResult, PlayerVotingSipMode, Response, Result, SipResult } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 import { defaultCardSips, defaultPayToDisplaySips } from "src/app/core/constants/card";
 
@@ -70,8 +70,8 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
         return text;
     }
 
-    override getSipResults(dynamicRoundData: DynamicRoundData): SipResult[] {
-        let sipResults: SipResult[] = this.calculateRoundSipResults(dynamicRoundData);
+    override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
         // Pay To Disply Sip Calculation
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         if (!!dynamicPlayerVotingRoundData.payToDisplayPlayerId) {
@@ -100,14 +100,24 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
      * @param {DynamicRoundData} dynamicRoundData
      * @returns {SipResult[]}
      */
-    protected calculateRoundSipResults(dynamicRoundData: DynamicRoundData): SipResult[] {
+    protected calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        const pvCard = this.castCard(card);
+
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.votedPlayerId !== null);
+        let sipMode = pvCard.settings?.sipConfig?.sipMode;
+        if (!!!sipMode) sipMode = PlayerVotingSipMode.MostVoted;
+
         let sipResults: SipResult[] = [];
         if (results.length !== 0) {
-            const topVotes = results[0].votes;
+            let votes = 0;
+            if (sipMode === PlayerVotingSipMode.MostVoted) {
+                votes = results[0].votes;
+            } else {
+                votes = results[results.length - 1].votes;
+            }
             sipResults = results
-                .filter(r => r.votes === topVotes)
+                .filter(r => r.votes === votes)
                 .map(r => {
                     return {
                         playerId: r.votedPlayerId,

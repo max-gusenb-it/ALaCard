@@ -56,7 +56,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
         }
         this.dynamicRoundData = d;
         this.results = this.playerVotingService.getResults(this.dynamicRoundData);
-        this.sipResults = this.playerVotingService.getSipResults(this.dynamicRoundData);
+        this.sipResults = this.playerVotingService.getSipResults(this.card, this.dynamicRoundData);
         
         const userSR = this.sipResults.find(s => s.playerId === this.store.selectSnapshot(AuthenticationState.userId));
         if (!!userSR) {

@@ -11,6 +11,8 @@ export { FreeTextCard } from "./logic/cards/freeTextCard/free-text-card";
 export { PlayerVotingCardSettings } from "./logic/cards/playerVotingCard/player-voting-card-settings";
 export { PlayerVotingCard } from "./logic/cards/playerVotingCard/player-voting-card";
 export { PlayerVotingResult } from "./logic/cards/playerVotingCard/player-voting-result";
+export { PlayerVotingSipConfig } from "./logic/cards/playerVotingCard/player-voting-sip-config";
+export { PlayerVotingSipMode } from "./logic/cards/playerVotingCard/player-voting-sip-mode";
 
 export { Card } from "./logic/cards/card";
 export { CardSettings } from "./logic/cards/card-settings";

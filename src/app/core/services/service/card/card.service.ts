@@ -85,7 +85,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
         return "";
     }
 
-    getSipResults(dynamicRoundData: DynamicRoundData) : SipResult[] {
+    getSipResults(card: Card, dynamicRoundData: DynamicRoundData) : SipResult[] {
         return [];
     }
 
