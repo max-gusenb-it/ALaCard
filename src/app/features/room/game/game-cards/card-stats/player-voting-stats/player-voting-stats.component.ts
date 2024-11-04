@@ -115,7 +115,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   displayPayToDisplay() {
-    return this.gameSettings.drinkingGame && this.getCastedCard()?.settings?.payToDisplay && !!!this.getCastedDynamicRoundData()?.payedToDisplayPlayerId;
+    return this.gameSettings.drinkingGame && this.getCastedCard()?.settings?.payToDisplay && !!!this.getCastedDynamicRoundData()?.payToDisplayPlayerId;
   }
 
   async payToDisplay() {
@@ -131,7 +131,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
         this.store.selectSnapshot(RoomState.roomId)!,
         {
           ...this.dynamicRoundData,
-          payedToDisplayPlayerId: this.store.selectSnapshot(AuthenticationState.userId)
+          payToDisplayPlayerId: this.store.selectSnapshot(AuthenticationState.userId)
         } as DynamicPlayerVotingRoundData
       )
     }

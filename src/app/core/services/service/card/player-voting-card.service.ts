@@ -74,15 +74,15 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
         let sipResults: SipResult[] = this.calculateRoundSipResults(dynamicRoundData);
         // Pay To Disply Sip Calculation
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
-        if (!!dynamicPlayerVotingRoundData.payedToDisplayPlayerId) {
-            const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPlayerVotingRoundData.payedToDisplayPlayerId && !sr.distribute);
+        if (!!dynamicPlayerVotingRoundData.payToDisplayPlayerId) {
+            const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPlayerVotingRoundData.payToDisplayPlayerId && !sr.distribute);
             if (payToWinUserIndex !== -1) {
                 sipResults[payToWinUserIndex].sips += defaultPayToDisplaySips
             } else {
                 sipResults = [
                     ...sipResults,
                     {
-                        playerId: dynamicPlayerVotingRoundData.payedToDisplayPlayerId,
+                        playerId: dynamicPlayerVotingRoundData.payToDisplayPlayerId,
                         sips: defaultPayToDisplaySips,
                         distribute: false
                     }
@@ -124,8 +124,8 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
         if (!!!oldDynamicRoundData) return;
         const oldDRD = this.castDynamicRoundData(oldDynamicRoundData);
         const newDRD = this.castDynamicRoundData(newDynamicRoundData);
-        if (!oldDRD.payedToDisplayPlayerId && newDRD.payedToDisplayPlayerId) {
-            return newDRD.payedToDisplayPlayerId;
+        if (!oldDRD.payToDisplayPlayerId && newDRD.payToDisplayPlayerId) {
+            return newDRD.payToDisplayPlayerId;
         }
         return;
     }
