@@ -125,7 +125,9 @@
             "player-voting-stats": {
               "pay-to-display": "Abstimmer?",
               "pay-to-display-explanation": "Für einen kleinen Preis kannst du die Namen der Wähler preisgeben",
-              "pay": "Zahle"
+              "pay": "Zahle",
+              "pay-to-display-drinking-notification-1": "verdient sich",
+              "pay-to-display-drinking-notification-2": "durch die Enthüllung der Nutzernamen"
             }
           },
           "sips": "Schlücke"

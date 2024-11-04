@@ -49,11 +49,15 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
     this.ingameDataDataService.getDynamicRoundData$()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(d => {
-        if (!!!d) return; 
+        if (!!!d) return;
+        const newPayToDisplayPlayerId = this.playerVotingService.getNewPayToDisplayPlayerId(this.dynamicRoundData, d);
+        if (newPayToDisplayPlayerId && this.store.selectSnapshot(AuthenticationState.userId) !== newPayToDisplayPlayerId) {
+          this.popupService.openSnackbar(this.getPayToDisplayNotificationText(newPayToDisplayPlayerId));
+        }
         this.dynamicRoundData = d;
         this.results = this.playerVotingService.getResults(this.dynamicRoundData);
         this.sipResults = this.playerVotingService.getSipResults(this.dynamicRoundData);
-
+        
         const userSR = this.sipResults.find(s => s.playerId === this.store.selectSnapshot(AuthenticationState.userId));
         if (!!userSR) {
           this.userSipResult = userSR;
@@ -61,6 +65,15 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
         }
         this.changeDetectorRef.detectChanges();
     });
+  }
+  
+  getPayToDisplayNotificationText(newPayToDisplayPlayerId: string) : string {
+    const player = this.players.find(p => p.id === newPayToDisplayPlayerId);
+    const notificationPart1 = this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display-drinking-notification-1");
+    const sips = this.translateService.instant("shared.components.display.it-result.sips");
+    const sip = this.translateService.instant("shared.components.display.it-result.sip");
+    const notificationPart2 = this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display-drinking-notification-2")
+    return `${player?.username} ${notificationPart1} ${defaultPayToDisplaySips} ${sips} ${notificationPart2}`;
   }
 
   getCastedCard() {
@@ -110,7 +123,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
       this.popupService.openOptionBottomSheet(
         this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display-explanation"),
         this.translateService.instant("actions.cancel"),
-        `${this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay")} ${defaultPayToDisplaySips} ${this.translateService.instant("features.room.game.game-cards.sips")}`
+        `${this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay")} ${defaultPayToDisplaySips} ${this.translateService.instant("shared.components.display.it-result.sips")}`
       ).closed
     );
     if (payToDisplay) {

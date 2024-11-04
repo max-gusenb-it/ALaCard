@@ -125,7 +125,9 @@
             "player-voting-stats": {
               "pay-to-display": "Display Voters",
               "pay-to-display-explanation": "For a small price you can reveal the names of the voters",
-              "pay": "Pay"
+              "pay": "Pay",
+              "pay-to-display-drinking-notification-1": "earned",
+              "pay-to-display-drinking-notification-2": "through revealing the usernames"
             }
           },
           "sips": "Sips"

@@ -119,6 +119,16 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
         };
         return sipResults;
     }
+
+    getNewPayToDisplayPlayerId(oldDynamicRoundData: DynamicRoundData, newDynamicRoundData: DynamicRoundData) : string | undefined {
+        if (!!!oldDynamicRoundData) return;
+        const oldDRD = this.castDynamicRoundData(oldDynamicRoundData);
+        const newDRD = this.castDynamicRoundData(newDynamicRoundData);
+        if (!oldDRD.payedToDisplayPlayerId && newDRD.payedToDisplayPlayerId) {
+            return newDRD.payedToDisplayPlayerId;
+        }
+        return;
+    }
 }
 
 export const PVCardService = new PlayerVotingCardService();
