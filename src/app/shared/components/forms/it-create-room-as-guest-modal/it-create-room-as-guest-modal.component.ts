@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
-import { ModalController } from "@ionic/angular";
 import { Store } from "@ngxs/store";
 import { filter, firstValueFrom, take } from "rxjs";
 import { CreateRoomFormData, ProfileEditorFormData } from "src/app/core/models/interfaces";
+import { PopupService } from "src/app/core/services/service/popup.service";
 import { AuthenticationActions, AuthenticationState, RoomActions } from "src/app/core/state";
 
 @Component({
@@ -17,13 +17,13 @@ export class ItCreateRoomAsGuestModal {
   createRoomFormData: CreateRoomFormData;
 
   constructor(
-    private modalCtrl: ModalController,
+    private popupService: PopupService,
     private changeDetectorRef: ChangeDetectorRef,
     private store: Store
   ) { }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.popupService.dismissModal();
   }
 
   setProfileFormData(profileFormData: ProfileEditorFormData) {
@@ -82,7 +82,7 @@ export class ItCreateRoomAsGuestModal {
             )));
           }
         ).then(state => {
-          this.modalCtrl.dismiss({
+          this.popupService.dismissModal({
             userId: state?.authentication?.user?.id,
             roomId: state?.authentication?.user?.roomId
           });

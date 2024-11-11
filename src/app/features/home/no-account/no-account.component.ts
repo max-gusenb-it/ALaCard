@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { ItCreateRoomAsGuestModal } from 'src/app/shared/components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
 import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
 import { ItSignUpModal } from 'src/app/shared/components/forms/it-sign-up-modal/it-sign-up-modal.component';
@@ -11,33 +12,30 @@ import { ItSignUpModal } from 'src/app/shared/components/forms/it-sign-up-modal/
 export class NoAccountComponent {
 
   constructor(
-    private modalCtrl: ModalController,
-    private navController: NavController
+    private navController: NavController,
+    private popupService: PopupService
   ) { }
 
-  async openSignInModal() {
-    const modal = await this.modalCtrl.create({
+  openSignInModal() {
+    this.popupService.openModal({
       component: ItSignInModal
     });
-    modal.present();
   }
 
-  async openSignUpModal() {
-    const modal = await this.modalCtrl.create({
+  openSignUpModal() {
+    this.popupService.openModal({
       component: ItSignUpModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"
     });
-    modal.present();
   }
 
   async openCreateRoomAsGuestModal() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.popupService.openModal({
       component: ItCreateRoomAsGuestModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"
     });
-    modal.present();
     modal.onDidDismiss().then(modalResponse => {
       if (modalResponse.data?.roomId != null) {
         this.navController.navigateForward(`room/${modalResponse.data.userId}-${modalResponse.data.roomId}`);

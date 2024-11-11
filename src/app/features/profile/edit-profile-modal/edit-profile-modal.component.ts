@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ProfileEditorFormData, User } from 'src/app/core/models/interfaces';
 import { UserSourceService } from 'src/app/core/services/source/user.source.service';
@@ -20,7 +19,6 @@ export class EditProfileModal implements OnInit {
   };
 
   constructor(
-    private modalCtrl: ModalController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
     private popupService: PopupService,
@@ -37,7 +35,7 @@ export class EditProfileModal implements OnInit {
   }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.popupService.dismissModal();
   }
 
   submit() {

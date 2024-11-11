@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { PopupService } from 'src/app/core/services/service/popup.service';
@@ -17,14 +16,13 @@ export class ItForgotPasswordModal {
   });
 
   constructor(
-    private modalCtrl: ModalController,
     private popupService: PopupService,
     private translateService: TranslateService,
     private store: Store
   ) { }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.popupService.dismissModal();
   }
 
   submit() {

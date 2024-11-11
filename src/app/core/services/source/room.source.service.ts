@@ -9,6 +9,8 @@ import { ItError } from '../../models/classes';
 import { UserUtils } from '../../utils/user.utils';
 import { roomsRef, usersRef } from '../../constants/firestoreReferences';
 import { RoomService } from '../service/room.service';
+import { Store } from '@ngxs/store';
+import { AuthenticationState } from '../../state';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +18,7 @@ import { RoomService } from '../service/room.service';
 export class RoomSourceService {
 
     constructor(
+        private store: Store,
         private firestoreService: FirestoreService<Room>,
         private roomService: RoomService
     ) { }
@@ -51,7 +54,7 @@ export class RoomSourceService {
     }
 
     createRoom(name: string, description: string) {
-        const user = null as any;
+        const user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!user && !!user.id) {
             const player = UserUtils.exportUserToPlayer(user, 0);
             return this.firestoreService.add(

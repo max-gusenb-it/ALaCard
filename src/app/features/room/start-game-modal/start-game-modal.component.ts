@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
@@ -32,7 +31,6 @@ export class StartGameModal extends AngularLifecycle {
   });
 
   constructor(
-    private modalCtrl: ModalController,
     private popupService: PopupService,
     private translateService: TranslateService,
     private store: Store
@@ -84,7 +82,7 @@ export class StartGameModal extends AngularLifecycle {
 
   onSubmitOrCancel(event: boolean) {
     if (!event) {
-      this.modalCtrl.dismiss();
+      this.popupService.dismissModal();
     } else {
       this.startGame();
     }
@@ -119,7 +117,7 @@ export class StartGameModal extends AngularLifecycle {
         drinkingGame: this.gameSettingsForm.controls["drinkingGame"].value
       }
     ));
-    this.modalCtrl.dismiss();
+    this.popupService.dismissModal();
   }
 
 }

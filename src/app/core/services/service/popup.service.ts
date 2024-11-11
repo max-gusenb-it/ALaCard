@@ -19,8 +19,6 @@ export class PopupService {
     private modalCtrl: ModalController
   ) { }
 
-  // ToDo: Add Open modal -> modalCtrl
-
   openBottomSheet(component: ComponentType<unknown>, config?: DialogConfig<unknown, DialogRef<unknown, unknown>, BasePortalOutlet> | undefined) {
     if (config == null) {
       config = {};
@@ -76,5 +74,9 @@ export class PopupService {
     const modal = await this.modalCtrl.create(options);
     modal.present();
     return modal;
+  }
+
+  dismissModal(data?: any) {
+    this.modalCtrl.dismiss(data);
   }
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
 import { CreateRoomFormData } from 'src/app/core/models/interfaces';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomActions } from 'src/app/core/state';
 
 @Component({
@@ -18,12 +18,12 @@ export class CreateRoomModal {
   };
 
   constructor(
-    private modalCtrl: ModalController,
-    private store: Store
+    private store: Store,
+    private popupService: PopupService
   ) { }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.popupService.dismissModal();
   }
 
   setCreateRoomFormData(formData: CreateRoomFormData) {
@@ -36,7 +36,7 @@ export class CreateRoomModal {
       this.createRoomFormData.name,
       this.createRoomFormData.description
     ))).then(state => {
-      this.modalCtrl.dismiss({
+      this.popupService.dismissModal({
         userId: state?.authentication?.user?.id,
         roomId: state?.authentication?.user?.roomId
       });

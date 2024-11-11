@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { AuthenticationActions } from 'src/app/core/state';
 import { ItForgotPasswordModal } from '../it-forgot-password-modal/it-forgot-password-modal.component';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 
 @Component({
   selector: 'it-sign-in-modal',
@@ -17,19 +17,18 @@ export class ItSignInModal {
   });
 
   constructor(
-    private modalCtrl: ModalController,
+    private popupService: PopupService,
     private store: Store
   ) { }
 
   close(succeeded: boolean = false) {
-    this.modalCtrl.dismiss(succeeded);
+    this.popupService.dismissModal(succeeded);
   }
 
-  async forgotPassword() {
-    const modal = await this.modalCtrl.create({
+  forgotPassword() {
+    this.popupService.openModal({
       component: ItForgotPasswordModal
     });
-    modal.present();
   }
 
   signInWithEmail() {

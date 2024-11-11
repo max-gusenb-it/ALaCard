@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
-import { ModalController } from "@ionic/angular";
 import { Store } from "@ngxs/store";
 import { CreateAccountFormData } from "src/app/core/models/interfaces";
+import { PopupService } from "src/app/core/services/service/popup.service";
 import { AuthenticationActions } from "src/app/core/state";
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthenticationActions } from "src/app/core/state";
 export class ItAddAccountModal {
     
     constructor(
-        private modalCtrl: ModalController,
+        private popupService: PopupService,
         private store: Store,
         private changeDetectionRef: ChangeDetectorRef
     ) {}
@@ -25,7 +25,7 @@ export class ItAddAccountModal {
     }
 
     close(succeeded: boolean = false) {
-        this.modalCtrl.dismiss(succeeded);
+        this.popupService.dismissModal(succeeded);
     }
 
     signUp() {

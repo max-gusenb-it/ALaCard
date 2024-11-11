@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { User } from 'src/app/core/models/interfaces/logic/user/user';
@@ -32,7 +32,6 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
 
   constructor(
     private store: Store,
-    private modalCtrl: ModalController,
     private navCtrl: NavController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
@@ -57,16 +56,15 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     });
   }
 
-  async editProfile() {
+  editProfile() {
     const user = this.store.selectSnapshot(AuthenticationState.user);
 
-    const modal = await this.modalCtrl.create({
+    this.popupService.openModal({
       component: EditProfileModal,
       componentProps: {
         user: user
       }
     });
-    modal.present();
   }
 
   getLanguages() {
@@ -104,18 +102,17 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     ]);
   }
 
-  async signUp() {
-    const modal = await this.modalCtrl.create({
+  signUp() {
+    // ToDo: Fix
+    this.popupService.openModal({
       component: ItAddAccountModal
     });
-    modal.present();
   }
 
-  async signIn() {
-    const modal = await this.modalCtrl.create({
+  signIn() {
+    this.popupService.openModal({
       component: ItSignInModal
     });
-    modal.present();
   }
 
   deleteAccount() {

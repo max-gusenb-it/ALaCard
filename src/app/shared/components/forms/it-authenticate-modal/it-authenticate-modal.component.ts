@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { ItSignInModal } from '../it-sign-in-modal/it-sign-in-modal.component';
 import { ItSignUpModal } from '../it-sign-up-modal/it-sign-up-modal.component';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 
 @Component({
   selector: 'it-authenticate-modal',
@@ -9,15 +9,14 @@ import { ItSignUpModal } from '../it-sign-up-modal/it-sign-up-modal.component';
 })
 export class ItAuthenticateModal implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private popupService: PopupService) { }
 
   ngOnInit() {}
 
   async openSignInModal() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.popupService.openModal({
       component: ItSignInModal
     });
-    modal.present();
     const data = await modal.onDidDismiss<boolean>();
     if (data.data) {
       this.close();
@@ -25,10 +24,9 @@ export class ItAuthenticateModal implements OnInit {
   }
 
   async openSignUpModal() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.popupService.openModal({
       component: ItSignUpModal
     });
-    modal.present();
     const data = await modal.onDidDismiss<boolean>();
     if (data.data) {
       this.close();
@@ -36,7 +34,6 @@ export class ItAuthenticateModal implements OnInit {
   }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.popupService.dismissModal();
   }
-
 }

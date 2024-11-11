@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { OptionBottomSheetData, Player, Room, StaticRoundData } from 'src/app/core/models/interfaces';
@@ -44,7 +44,6 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private translateService: TranslateService,
     private staticRoundDataDataService: StaticRoundDataDataService,
     private responseDataDataService: ResponseDataDataService,
-    private modalCtrl: ModalController,
     private roomService: RoomService
   ) {
     super();
@@ -142,11 +141,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     return this.responseDataDataService.getAdminResponseCountInfo(-1);
   }
 
-  async startGame() {
-    const modal = await this.modalCtrl.create({
+  startGame() {
+    this.popupService.openModal({
       component: StartGameModal
     });
-    modal.present();
   }
 
   continueToGame() {

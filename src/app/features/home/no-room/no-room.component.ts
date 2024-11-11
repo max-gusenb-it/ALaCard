@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { CreateRoomModal } from '../create-room-modal/create-room-modal.component';
+import { PopupService } from 'src/app/core/services/service/popup.service';
 
 @Component({
   selector: 'no-room',
@@ -9,15 +10,14 @@ import { CreateRoomModal } from '../create-room-modal/create-room-modal.componen
 export class NoRoomComponent {
 
   constructor(
-    private modalCtrl: ModalController,
-    private navController: NavController
+    private navController: NavController,
+    private popupService: PopupService
   ) { }
 
   async openCreateRoomModal() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.popupService.openModal({
       component: CreateRoomModal
     });
-    modal.present();
     modal.onDidDismiss().then(modalResponse => {
       if (modalResponse.data?.roomId != null) {
         this.navController.navigateForward(`room/${modalResponse.data.userId}-${modalResponse.data.roomId}`);
