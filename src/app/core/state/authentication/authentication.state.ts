@@ -4,13 +4,14 @@ import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@
 import { AuthenticationActions } from './authentication.actions';
 import { AuthDataService } from '../../services/data/auth.data.service';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { Subscription, takeUntil } from 'rxjs';
+import { firstValueFrom, Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/source/user.source.service';
 import { LoadingHelperService } from '../../services/helper/loading.helper.service';
 import { User } from '../../models/interfaces';
 import { systemDefaultValue } from '../../constants/systemDefaultValue';
 import { SettingsService } from '../../services/service/settings.service';
+import { EmailAuthProvider, linkWithCredential } from '@angular/fire/auth';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
@@ -111,6 +112,16 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                 }
             })
         ]);
+    }
+
+    @Action(AuthenticationActions.SignUpAnonymousUser)
+    async signUpAnonymousUser(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SignUpAnonymousUser) {
+        const user = await firstValueFrom(this.authService.getAuthState());
+        if (!!user && user.isAnonymous) {
+            const newCredential = EmailAuthProvider.credential(action.email, action.password);
+            let credential = await linkWithCredential(user, newCredential);
+            ctx.dispatch(new AuthenticationActions.SetUserCredentials(credential.user.uid, credential.user.isAnonymous));
+        }
     }
 
     @Action(AuthenticationActions.SignInUser)

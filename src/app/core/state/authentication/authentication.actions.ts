@@ -6,6 +6,11 @@ export namespace AuthenticationActions {
         constructor(public createAccountFormData: CreateAccountFormData, public profileFormData?: ProfileEditorFormData) {}
     }
 
+    export class SignUpAnonymousUser {
+        static readonly type = '[ItAddAccountModal] SignUpAnonymousUser';
+        constructor(public email: string, public password: string) {}
+    }
+
     export class SignInUser {
         static readonly type = '[SignInModal] SignIn';
         constructor(public email: string, public password: string) {}

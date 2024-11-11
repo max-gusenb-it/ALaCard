@@ -167,6 +167,9 @@ export const demoPartyDecks: Deck[] = [
     partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
 ]
 
+// ToDo: Add Flags to decks like 'All Cards' etc.
+// ToDo: Add recommended game settings
+
 // Leggit Decks
 export const leggitPartyDeck: Deck = {
     icon: "🪅",
@@ -718,6 +721,8 @@ export const leggitPartyDeck: Deck = {
     speficPlayerMandatory: false
 };
 
+
+// ToDo: add custom styles for whole deck
 export const askhole: Deck = {
     icon: "🅰️",
     name: "askhole",

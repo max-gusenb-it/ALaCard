@@ -30,8 +30,9 @@ export class ItAddAccountModal {
 
     signUp() {
         this.store.dispatch(
-            new AuthenticationActions.SignUpUser(
-                this.createAccountFormData
+            new AuthenticationActions.SignUpAnonymousUser(
+                this.createAccountFormData.email,
+                this.createAccountFormData.password
             )
         )
         .subscribe(() => this.close(true));
