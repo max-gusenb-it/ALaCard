@@ -122,8 +122,8 @@ export class CardContainerComponent extends AngularLifecycle{
   continue() {
     const card = this.deck.cards[this.staticRoundData!.round!.cardIndex!];
     
-    // ToDo -> Add is admin check
     if (card.type === CardType.FreeText) {
+      if (!this.roomService.isUserAdmin()) return;
       this.staticRoundDataDataService.startNewRound();
       return;
     }
