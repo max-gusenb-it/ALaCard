@@ -8,6 +8,7 @@ import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper
 import { GameState } from "../../models/enums";
 import { RoomUtils } from "../../utils/room.utils";
 import { InformationState } from "../../state/information";
+import { RoomService } from "../service/room.service";
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,8 @@ export class ResponseDataDataService extends AngularLifecycle {
 
     constructor(
         private store: Store,
-        private responseDataSourceService: ResponseDataSourceService
+        private responseDataSourceService: ResponseDataSourceService,
+        private roomSerivce: RoomService
     ) {
         super();
 
@@ -92,6 +94,6 @@ export class ResponseDataDataService extends AngularLifecycle {
     }
 
     getAdminResponseCountInfo(roundId: number) {
-        return `${this.getAdminResponsesForRound(roundId).length} / ${RoomUtils.getActivePlayerCount(this.store)}`
+        return `${this.getAdminResponsesForRound(roundId).length} / ${this.roomSerivce.getActivePlayerCount()}`
     }
 }

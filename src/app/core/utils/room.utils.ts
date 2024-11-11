@@ -105,10 +105,4 @@ export namespace RoomUtils {
         };
         return newRoom;
     }
-
-    export function getActivePlayerCount(store: Store) {
-        const players = store.selectSnapshot(RoomState.room)!.players;
-        if (!!!players) return 0;
-        return mapPlayersToArray(players).filter(p => p.state === PlayerState.active || p.state === PlayerState.offline).length;
-    }
 }

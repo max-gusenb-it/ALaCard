@@ -10,6 +10,7 @@ import { Room } from "../../models/interfaces";
 import { InformationState } from "../../state/information";
 import { roomsRef, usersRef } from "../../constants/firestoreReferences";
 import { RoomUtils } from "../../utils/room.utils";
+import { PlayerState } from "../../models/enums";
 
 @Injectable({
     providedIn: 'root'
@@ -76,5 +77,11 @@ export class RoomService {
 
     isUserAdmin() {
         return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!)?.id;
+    }
+
+    getActivePlayerCount() {
+        const players = this.store.selectSnapshot(RoomState.room)!.players;
+        if (!!!players) return 0;
+        return RoomUtils.mapPlayersToArray(players).filter(p => p.state === PlayerState.active || p.state === PlayerState.offline).length;
     }
 }

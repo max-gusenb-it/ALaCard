@@ -25,6 +25,3 @@ export namespace Utils {
         return (string.match(new RegExp(subString, "g")) || []).length
     }
 }
-
-// Todo: Think about splitting utils to utils and services -> Dependency injection of store so not passed as argument
-// ToDo: split big logic from store in utils/services
