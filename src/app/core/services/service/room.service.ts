@@ -5,10 +5,11 @@ import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenti
 import { RoomServiceErrors } from "../../constants/errorCodes";
 import { ItError } from "../../models/classes";
 import { PopupService } from "./popup.service";
-import { bufferTime, combineLatest, filter, firstValueFrom, map, of, take } from "rxjs";
-import { RoomSourceService } from "../source/room.source.service";
+import { combineLatest, filter, map, of, take } from "rxjs";
 import { Room } from "../../models/interfaces";
 import { InformationState } from "../../state/information";
+import { roomsRef, usersRef } from "../../constants/firestoreReferences";
+import { RoomUtils } from "../../utils/room.utils";
 
 @Injectable({
     providedIn: 'root'
@@ -16,9 +17,28 @@ import { InformationState } from "../../state/information";
 export class RoomService {
     constructor(
         private store: Store,
-        private popupService: PopupService,
-        private roomSourceService: RoomSourceService
+        private popupService: PopupService
     ) { }
+
+    /**
+     * Returns collection reference for a room
+     *
+     * @export
+     * @param {Store} store
+     * @param {string} creatorId if the method is called at a point, where the room does not exist yet, the id of the room creator has to be provided
+     * @returns {string}
+     */
+    getRoomCollectionRef(creatorId?: string) {
+        const room = this.store.selectSnapshot(RoomState.room);
+        if (!!!room && !!!creatorId) {
+            // Currently joined in no room
+            creatorId = this.store.selectSnapshot(AuthenticationState.userId);
+        }
+        if (!!!creatorId && !!room) {
+            creatorId = RoomUtils.getRoomCreator(room).id;
+        }
+        return `${usersRef}/${creatorId}/${roomsRef}`;
+    }
 
     async checkIfUserExists() {
         let user = this.store.selectSnapshot(AuthenticationState.user);
@@ -31,24 +51,6 @@ export class RoomService {
             if (!!!user) throw new ItError(RoomServiceErrors.joinRoomNoUser, RoomService.name);
         }
         return user;
-    }
-
-    async getInitialRoom(roomId: string, creatorId: string) {
-        return await firstValueFrom(
-            this.roomSourceService.getRoom$(roomId, creatorId)
-                .pipe(
-                    // Wait for 1500 ms so actuall room settings are loaded and not cached value -> singleDeviceMode join bug
-                    bufferTime(1500),
-                    map(buffer => buffer.slice(-1)[0])
-                )
-            ).then(
-                r => {
-                    return r;
-                },
-                e => {
-                    throw e;
-            }
-        );
     }
 
     getRoomLoaded$(roomId: string, initialRoom: Room) {

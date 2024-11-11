@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Store } from "@ngxs/store";
-import { RoomUtils } from "../../utils/room.utils";
 import { gameDataRef, ingameDataRef } from "../../constants/firestoreReferences";
 import { DynamicRoundData, IngameData } from '../../models/interfaces';
 import { FirestoreService } from './firestore.source.service';
+import { RoomService } from '../service/room.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,20 +10,20 @@ import { FirestoreService } from './firestore.source.service';
 export class IngameDataSourceService {
 
     constructor(
-        private store: Store,
-        private firestoreService: FirestoreService<IngameData>
+        private firestoreService: FirestoreService<IngameData>,
+        private roomSerivce: RoomService
     ) {}
 
     getIngameData$(roomId: string) {
         return this.firestoreService.getDocWithId$(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
+            `${this.roomSerivce.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             ingameDataRef
         );
     }
 
     createIngameData(ingameData: IngameData, roomId: string) {
         return this.firestoreService.upsert(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
+            `${this.roomSerivce.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             ingameDataRef,
             ingameData
         );
@@ -32,7 +31,7 @@ export class IngameDataSourceService {
 
     updateIngameData(ingameData: IngameData, roomId: string) {
         return this.firestoreService.update(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
+            `${this.roomSerivce.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             ingameDataRef,
             ingameData
         );
@@ -40,7 +39,7 @@ export class IngameDataSourceService {
     
     updateDynamicRoundData(roomId: string, dynamicRoundData: DynamicRoundData) {
         return this.firestoreService.updateField(
-            `${RoomUtils.getRoomCollectionRef(this.store)}/${roomId}/${gameDataRef}`,
+            `${this.roomSerivce.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             ingameDataRef,
             `dynamicRoundData`,
             dynamicRoundData

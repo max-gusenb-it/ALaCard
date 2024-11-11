@@ -2,15 +2,13 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Room } from "../../models/interfaces/logic/room/room";
 import { FirestoreService } from "./firestore.source.service";
-import { Store } from "@ngxs/store";
-import { AuthenticationState } from "../../state";
 import { RoomSourceServiceErrors } from '../../constants/errorCodes';
-import { catchError } from 'rxjs';
+import { bufferTime, catchError, firstValueFrom, map } from 'rxjs';
 import { Player } from '../../models/interfaces';
 import { ItError } from '../../models/classes';
 import { UserUtils } from '../../utils/user.utils';
-import { RoomUtils } from '../../utils/room.utils';
 import { roomsRef, usersRef } from '../../constants/firestoreReferences';
+import { RoomService } from '../service/room.service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,12 +16,12 @@ import { roomsRef, usersRef } from '../../constants/firestoreReferences';
 export class RoomSourceService {
 
     constructor(
-        private store: Store,
-        private firestoreService: FirestoreService<Room>
+        private firestoreService: FirestoreService<Room>,
+        private roomService: RoomService
     ) { }
 
     getRoom$(roomId: string, roomCreatorId?: string) {
-        return this.firestoreService.getDocWithId$(RoomUtils.getRoomCollectionRef(this.store, roomCreatorId), roomId)
+        return this.firestoreService.getDocWithId$(this.roomService.getRoomCollectionRef(roomCreatorId), roomId)
             .pipe(
                 catchError(e => {
                     throw new ItError(
@@ -34,8 +32,26 @@ export class RoomSourceService {
             );
     }
 
+    async getInitialRoom$(roomId: string, creatorId: string) {
+        return await firstValueFrom(
+            this.getRoom$(roomId, creatorId)
+                .pipe(
+                    // Wait for 1500 ms so actuall room settings are loaded and not cached value -> singleDeviceMode join bug
+                    bufferTime(1500),
+                    map(buffer => buffer.slice(-1)[0])
+                )
+            ).then(
+                r => {
+                    return r;
+                },
+                e => {
+                    throw e;
+            }
+        );
+    }
+
     createRoom(name: string, description: string) {
-        const user = this.store.selectSnapshot(AuthenticationState.user);
+        const user = null as any;
         if (!!user && !!user.id) {
             const player = UserUtils.exportUserToPlayer(user, 0);
             return this.firestoreService.add(
@@ -60,12 +76,12 @@ export class RoomSourceService {
     }
 
     updateRoom(room: Room, roomId: string) {
-        return this.firestoreService.update(`${RoomUtils.getRoomCollectionRef(this.store)}`, roomId, room);
+        return this.firestoreService.update(`${this.roomService.getRoomCollectionRef()}`, roomId, room);
     }
 
     upsertPlayer(roomId: string, userId: string, player: Player, roomCreatorId?: string) {
         return this.firestoreService.updateField(
-            RoomUtils.getRoomCollectionRef(this.store, roomCreatorId),
+            this.roomService.getRoomCollectionRef(roomCreatorId),
             roomId,
             `players.${userId}`,
             player

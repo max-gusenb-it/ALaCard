@@ -4,30 +4,9 @@ import { UserUtils } from "./user.utils";
 import { PlayerState } from "../models/enums";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../state";
-import { roomsRef, usersRef } from "../constants/firestoreReferences";
 import { offlinePlayerProfilePicture } from "../constants/user";
 
-export namespace RoomUtils {    
-    /**
-     * Returns collection reference for a room
-     *
-     * @export
-     * @param {Store} store
-     * @param {string} creatorId if the method is called at a point, where the room does not exist yet, the id of the room creator has to be provided
-     * @returns {string}
-     */
-    export function getRoomCollectionRef(store: Store, creatorId?: string) {
-        const room = store.selectSnapshot(RoomState.room);
-        if (!!!room && !!!creatorId) {
-            // Currently joined in no room
-            creatorId = store.selectSnapshot(AuthenticationState.userId);
-        }
-        if (!!!creatorId && !!room) {
-            creatorId = getRoomCreator(room).id;
-        }
-        return `${usersRef}/${creatorId}/${roomsRef}`;
-    }
-
+export namespace RoomUtils {
     /**
      * Generates a newPlayer for a room from a given user. When the player is already added in the room and active null is returned
      *
