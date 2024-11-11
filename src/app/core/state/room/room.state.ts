@@ -5,10 +5,10 @@ import { RoomActions } from "./room.actions";
 import { RoomSourceService } from "../../services/source/room.source.service";
 import { LoadingHelperService } from "../../services/helper/loading.helper.service";
 import { AuthenticationActions, AuthenticationState } from "../authentication";
-import { Subscription, bufferTime, combineLatest, filter, firstValueFrom, map, of, take, takeUntil } from "rxjs";
+import { Subscription, firstValueFrom, takeUntil } from "rxjs";
 import { LoadingActions } from "../loading";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
-import { ModalController, NavController } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
 import { Deck, GameSettings, Player, Room } from "../../models/interfaces";
 import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
@@ -22,7 +22,7 @@ import { ResponseDataSourceService } from "../../services/source/response-data.s
 import { StaticRoundDataSourceService } from "../../services/source/static-round-data.source.service";
 import { GameState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
-import { InformationActions, InformationState } from "../information";
+import { InformationActions } from "../information";
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { Game } from "../../models/interfaces/logic/game/game";
 import { RoomService } from "../../services/service/room.service";
@@ -103,8 +103,7 @@ export class RoomState extends AngularLifecycle {
         private translateService: TranslateService,
         private store: Store,
         private zone: NgZone,
-        private popupService: PopupService,
-        private modalCtrl: ModalController,
+        private popupService: PopupService
     ) {
         super();
     }
@@ -138,24 +137,7 @@ export class RoomState extends AngularLifecycle {
                 }
             }
 
-            let roomObservable = this.roomSourceService.getRoom$(action.roomId, action.creatorId);
-
-            // check if room exists
-            let initialRoom = await firstValueFrom(
-                this.roomSourceService.getRoom$(action.roomId, action.creatorId)
-                    .pipe(
-                        // Wait for 1500 ms so actuall room settings are loaded and not cached value -> singleDeviceMode join bug
-                        bufferTime(1500),
-                        map(buffer => buffer.slice(-1)[0])
-                    )
-                ).then(
-                    r => {
-                        return r;
-                    },
-                    e => {
-                        throw e;
-                }
-            );
+            let initialRoom = await this.roomService.getInitialRoom(action.roomId, action.creatorId);
 
             if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
@@ -195,7 +177,7 @@ export class RoomState extends AngularLifecycle {
                 }
             }
 
-            this.roomSubscription$ = roomObservable
+            this.roomSubscription$ = this.roomSourceService.getRoom$(action.roomId, action.creatorId)
                 .pipe(
                     takeUntil(this.destroyed$)
                 )
@@ -212,25 +194,10 @@ export class RoomState extends AngularLifecycle {
                 }));
             }
 
-            combineLatest([
-                this.store.select(RoomState.room)
-                    .pipe(
-                        filter(room => !!room && !!room.id && room.id === action.roomId),
-                        take(1)
-                    ),
-                !!initialRoom.game 
-                    ? this.store.select(InformationState.gameInformation)
-                        .pipe(
-                            filter(g => g!.compareValue === initialRoom.game?.compareValue),
-                            take(1)
-                        ) 
-                    : of(null)
-                ])
-                .pipe(take(1))
+            this.roomService.getRoomLoaded$(action.roomId, initialRoom)
                 .subscribe(() => {
                     ctx.dispatch(new LoadingActions.EndLoading());
-                }
-            );
+                });
             
             return Promise.resolve();
         } catch(error) {
