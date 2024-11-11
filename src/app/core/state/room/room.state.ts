@@ -16,7 +16,6 @@ import { PopupService } from "../../services/service/popup.service";
 import { TranslateService } from "@ngx-translate/core";
 import { ItError } from "../../models/classes";
 import { ErrorMonitorActions } from "../error-monitor";
-import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
 import { RoomSettings } from "../../models/interfaces/logic/room/room-settings";
 import { IngameDataSourceService } from "../../services/source/ingame-data.source.service";
 import { ResponseDataSourceService } from "../../services/source/response-data.source.service";
@@ -26,6 +25,7 @@ import { IngameDataUtils } from "../../utils/ingame-data.utils";
 import { InformationActions, InformationState } from "../information";
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { Game } from "../../models/interfaces/logic/game/game";
+import { RoomService } from "../../services/service/room.service";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -93,6 +93,7 @@ export class RoomState extends AngularLifecycle {
     }
 
     constructor(
+        private roomService: RoomService,
         private navController: NavController,
         private roomSourceService: RoomSourceService,
         private ingameDataSourceService: IngameDataSourceService,
@@ -126,16 +127,7 @@ export class RoomState extends AngularLifecycle {
 
         // check if user exists
         try {
-            let user = this.store.selectSnapshot(AuthenticationState.user);
-            if (!!!user) {
-                const modal = await this.modalCtrl.create({
-                    component: ItAuthenticateModal
-                });
-                modal.present();
-                await modal.onDidDismiss();
-                user = this.store.selectSnapshot(AuthenticationState.user);
-                if (!!!user) throw new ItError(RoomStateErrors.joinRoomNoUser, RoomState.name);
-            }
+            let user = await this.roomService.checkIfUserExists();
 
             ctx.dispatch(new LoadingActions.StartLoading);
 

@@ -6,6 +6,7 @@ import { ItSnackbarComponent } from 'src/app/shared/components/display/it-snackb
 import { SnackbarData } from '../../models/interfaces/components/display/it-snackbar/snackbar-data';
 import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { OptionBottomSheetData } from '../../models/interfaces';
+import { ModalController, ModalOptions } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class PopupService {
 
   constructor(
     private dialog: Dialog,
-    public overlay: Overlay
+    public overlay: Overlay,
+    private modalCtrl: ModalController
   ) { }
 
   // ToDo: Add Open modal -> modalCtrl
@@ -68,5 +70,11 @@ export class PopupService {
       hasBackdrop: false,
       autoFocus: "__"
     })
+  }
+
+  async openModal(options: ModalOptions) {
+    const modal = await this.modalCtrl.create(options);
+    modal.present();
+    return modal;
   }
 }
