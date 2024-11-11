@@ -8,9 +8,9 @@ import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.da
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
 import { PopupService } from 'src/app/core/services/service/popup.service';
+import { RoomService } from 'src/app/core/services/service/room.service';
 import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
-import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -38,7 +38,8 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
     private changeDetectorRef: ChangeDetectorRef,
     private popupService: PopupService,
     private ingameDataSourceService: IngameDataSourceService,
-    private ingameDataDataService: IngameDataDataService
+    private ingameDataDataService: IngameDataDataService,
+    private roomService: RoomService
   ) {
     super();
   }
@@ -111,7 +112,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   isUserRoomAdmin() {
-    return RoomUtils.isUserAdmin(this.store);
+    return this.roomService.isUserAdmin();
   }
 
   displayPayToDisplay() {

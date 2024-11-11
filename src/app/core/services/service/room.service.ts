@@ -73,4 +73,8 @@ export class RoomService {
             map(() => true)
         );
     }
+
+    isUserAdmin() {
+        return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!)?.id;
+    }
 }

@@ -106,10 +106,6 @@ export namespace RoomUtils {
         return newRoom;
     }
 
-    export function isUserAdmin(store: Store) {
-        return store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(store.selectSnapshot(RoomState.room)!)?.id;
-    }
-
     export function getActivePlayerCount(store: Store) {
         const players = store.selectSnapshot(RoomState.room)!.players;
         if (!!!players) return 0;

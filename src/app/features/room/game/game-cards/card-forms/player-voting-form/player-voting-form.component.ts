@@ -8,10 +8,10 @@ import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-
 import { IngameDataDataService as IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
+import { RoomService } from 'src/app/core/services/service/room.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
-import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -36,7 +36,8 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     private ingameDataDataDataService: IngameDataDataService,
     private changeDetectorRef: ChangeDetectorRef,
     private playerVotingService: PlayerVotingCardService,
-    private store: Store
+    private store: Store,
+    private roomService: RoomService
   ) {
     super();
 
@@ -111,7 +112,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   isUserRoomAdmin() {
-    return RoomUtils.isUserAdmin(this.store);
+    return this.roomService.isUserAdmin();
   }
 
   getAdminResponseCountInfo() {

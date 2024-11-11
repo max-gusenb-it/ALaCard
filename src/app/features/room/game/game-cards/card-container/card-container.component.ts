@@ -7,10 +7,10 @@ import { Deck, DynamicRoundData, RoundInformation, StaticRoundData } from 'src/a
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { RoomService } from 'src/app/core/services/service/room.service';
 import { TutorialService } from 'src/app/core/services/service/tutorial.service';
 import { RoomState } from 'src/app/core/state';
 import { InformationActions, InformationState } from 'src/app/core/state/information';
-import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 const mobileCardSwipeTutorialLabelId = "features.room.game.card.game-cards.card-container.mobile-swipe-tutorial";
@@ -45,7 +45,8 @@ export class CardContainerComponent extends AngularLifecycle{
     private staticRoundDataDataService: StaticRoundDataDataService,
     private responseDataDataService: ResponseDataDataService,
     private ingameDataDataService: IngameDataDataService,
-    private tutorialService: TutorialService
+    private tutorialService: TutorialService,
+    private roomService: RoomService
   ) {
     super();
 
@@ -68,7 +69,7 @@ export class CardContainerComponent extends AngularLifecycle{
         this.roundInformation = ri;
         if (!!ri?.response &&
             !!this.staticRoundData && this.staticRoundData.round?.id === ri.roundId &&
-            RoomUtils.isUserAdmin(this.store) &&
+            this.roomService.isUserAdmin() &&
             this.getRoundState() === this.getFormState()
         ) {
           this.tutorialService.checkForTutorial(responseCountTutorialLabelId);
@@ -121,6 +122,7 @@ export class CardContainerComponent extends AngularLifecycle{
   continue() {
     const card = this.deck.cards[this.staticRoundData!.round!.cardIndex!];
     
+    // ToDo -> Add is admin check
     if (card.type === CardType.FreeText) {
       this.staticRoundDataDataService.startNewRound();
       return;

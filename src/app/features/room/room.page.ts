@@ -16,6 +16,7 @@ import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { RoomService } from 'src/app/core/services/service/room.service';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
@@ -43,7 +44,8 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private translateService: TranslateService,
     private staticRoundDataDataService: StaticRoundDataDataService,
     private responseDataDataService: ResponseDataDataService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private roomService: RoomService
   ) {
     super();
 
@@ -68,7 +70,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   isUserRoomAdmin() {
-    return RoomUtils.isUserAdmin(this.store);
+    return this.roomService.isUserAdmin();
   }
 
   getMenuItems() {
