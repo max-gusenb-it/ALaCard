@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Deck } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
 import { environment } from "src/environments/environment";
-import { aLotOfPlayersDeck, drinkingDeck, leggitPartyDeck, partyDeck, partyDeckWithRules, partyDeckWithRulesAndSp, partyDeckWithSpMandatory } from "../../constants/decks";
+import { aLotOfPlayersDeck, demoPartyDecks, drinkingDeck, leggitPartyDeck, leggitPartyDecks, partyDeck, partyDeckWithRules, partyDeckWithRulesAndSp, partyDeckWithSpMandatory } from "../../constants/decks";
 
 export const DECK_STATE_TOKEN = new StateToken<DeckStateModel>('deck');
 
@@ -27,10 +27,11 @@ export class DeckState implements NgxsOnInit {
         let decks: Deck[] = [];
 
         if (environment.production) {
-            decks = [leggitPartyDeck];
+            decks = leggitPartyDecks;
         } else {
             decks = [
-                partyDeck, partyDeckWithRules, partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck, leggitPartyDeck
+                ...leggitPartyDecks,
+                ...demoPartyDecks
             ];
         }
 

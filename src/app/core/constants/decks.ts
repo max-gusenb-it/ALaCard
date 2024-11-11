@@ -163,6 +163,10 @@ export const aLotOfPlayersDeck: Deck = {
     speficPlayerMandatory: false
 };
 
+export const demoPartyDecks: Deck[] = [
+    partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
+]
+
 // Leggit Decks
 export const leggitPartyDeck: Deck = {
     icon: "🪅",
@@ -713,3 +717,920 @@ export const leggitPartyDeck: Deck = {
     ],
     speficPlayerMandatory: false
 };
+
+export const askhole: Deck = {
+    icon: "🅰️",
+    name: "askhole",
+    description: "Talk about things you normally wouldn't by answering questions ranging from interesting to very weird",
+    groundRules: [
+        "Each round a new question is drawn from the deck",
+        "Every player can answer the question but it is not mandatory",
+        "After that a new card is drawn. There is no winner, it's just about fun :)",
+        "Be sure to support the original askhole creators! \nhttp://web.askhole.io/"
+    ],
+    cards: [
+        {
+            text: "In what ways are you inhibited from expressing love?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What difficult or painful experience would you recommend to everyone?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's the most intense emotional pain you've ever experienced?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In what ways don't you trust yourself?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How have you disappointed your parents?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What about yourself have you been trying to fix for a long time?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How would you raise a child differently from how your parents raised you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was the last thing you cried about? When was it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was the most difficult thing you've ever had to do?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In what ways do you tend to fail at communication?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is currently your greatest insecurity?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which of your habits conflicts with your values?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What aspect about the person to your left gives you the strongest negative feeling?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What do you still owe someone an apology for?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's the most sick (mental or physical) you've ever been?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Who do you hate most?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is your biggest obstacle toward peace?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What about your appearance would you like to change?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What have you done that you are most ashamed of?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are you afraid of death? Why or why not?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do you heal from painful experiences? How do you know when you're done healing?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was your biggest financial mistake?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's the most intense physical pain you've ever experienced?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How often and in what ways does fear show up in you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which have you planned in greater detail: killing yourself, or killing someone else?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Who in this room would you most like to have sex with?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If everyone in the room were arranged on a spectrum of attractiveness, which two people would you be between?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What problems do you see in the relationships of those around you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You have to marry someone in this room right now. Who is it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is there anything which arouses you that you've never admitted to anybody?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What unusual trait do you find most attractive in a romantic partner?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Out of all your past sexual experiences, what has made you the most uncomfortable?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you were invited to an all-nude party, where all the participants are required to be naked the whole time, would you go?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "When you introspect, away from society and your physical body, deep inside, do you feel a sense of gender?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What were the conditions of your last break-up?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you had to choose one, would you rather double or halve your sex drive?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather fuck your girlfriend who is inhabiting your mother's body, or your mother who is inhabiting your girlfriend's body? (If you date men, switch it to boyfriend and father.)",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In total, have you given or received more oral sex?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's one of the most adventurous things you've ever done in bed?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you date yourself?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What percentage of your preferred age/gender demographic would you be down to have sex with after roughly an hour of flirting?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you ever been in an open or polyamorous relationship? If not, would you consider it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Could you have a serious relationship with someone who expressed that they thought they were unworthy of the relationship?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you ever dated someone who you felt was below your standards?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How easy is it for you to orgasm?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you ever feel guilt or shame for romantically rejecting people who are interested in you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could press a button and double the sex drive of all women on earth, would you do it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you tried, could you list the names of everyone you've had sex with?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are yelling fights in relationships more typical and inevitable, or terrible and avoidable?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was your most disappointing sexual experience?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What emotion/feeling are you currently suppressing or ignoring?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Who in the room do you admire the most?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Did your parents do a good job?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What are the signs that someone understands you uniquely?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is the best advice you've received, and why did you need it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What are you waiting to hear from someone close to you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What do you most admire about the person to your right?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "At the gut level, do you feel that the world is safe or not safe?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather increase the amount that people respect you, or increase the amount they desire you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What relatively common experience have you never had?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you ever enjoy the experience of emotional pain?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you been loved enough?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you ever had (what you consider to be) a spiritual experience? If so, what was it like and what effects did it have on you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you feel a greater sense of satisfaction when you gain approval from people who are very similar to you, or very different from you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could have one but not the other, would you rather love someone or be loved by someone?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What kind of people do you get along best with?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which of your achievements are you most proud of?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Given the guarantee that nobody will ask you the question: What is a question that you would refuse to answer?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How boring are you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you have more thoughts or more feelings?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What are your coping mechanisms for stress?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather double the amount of emotional pain and pleasure you feel on a daily basis, or cut both in half?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is the most interesting fact about you that few people know?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which of your personality traits are you most proud of?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which group is larger: people who trust you, or people you trust?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is the most significant thing you've ever changed your mind about?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could ask everybody in the world one question, what would it be? You don't get to hear their answers.",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are some human lives worth more than others?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You must pick a number right now and live that many years total, in good physical health. You can't die before, and you can't extend after. How many years do you choose to live?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you consider the state of \"unconditionally loving everyone\" to be desirable or undesirable for you, given it were possible?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are there any thoughts so offensive that you would advocate shaming those who think them, even if they don't act on those thoughts?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which of your beliefs would be the most difficult to change, even in the face of overwhelming evidence?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are there any cases in which you would support forced, involuntary brain modification to change someone else's mind, urges, or behavior?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You can make a designer baby. Would you rather optimize it primarily for intelligence or happiness/optimism?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What do you think enlightenment is?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you believe the set of concepts like \"duty\", \"should\", \"obligation\", and \"deserving\" are ultimately more valid or meaningless?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could press a button that would make you feel deeply and permanently that everything was ok, would you? Assume that you'd remain functional in the world.",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Can someone both be a kind person and also hold the exact opposite of your political views?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could, would you wirehead (i.e. hook yourself up to a hypothetical machine that makes you totally and eternally happy and satisfied)?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you (and only you) could see one measurement or statistic over everyone's heads, what would you want it to indicate?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you prefer to date someone 20 IQ points higher or 5 points lower than you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could press a button that would instantly erase every single false belief you have, would you do it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could ask the universe one question and get the truth, what would you want to know?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is torture ever permissible?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "On planet A, everyone's 30% dumber, and you're a genius by comparison. On planet B, everyone's 30% smarter, and you're an idiot by comparison. You stay the same. Which planet would you prefer to live on?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which technology should not have been invented?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you could magically cause a neutral nude photo of every human to be published publicly on the internet every year on their birthday, would you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Of all the beliefs you hold, which is most likely to be considered barbaric in 150 years?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You see a friend getting into their third emotionally abusive relationship in a row. Are they a victim?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you feel that you have conscious control over your beliefs? Could you, right now, decide to believe something else if you tried? If so, which beliefs?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's the most controversial opinion you hold among your own social group?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What viewpoint is the most difficult for you to empathize with?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Does \"no\" always really mean \"no\"?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you had to fuck a cow, would you rather it be dead or alive?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you have any political or social opinions that you're afraid to express to your friends?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In your personal experience, even if the difference is extremely slight, are men or women better at handling suffering?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In a world where different ethnicities had strong genetic differences which caused different moral behavior, would racism be okay or still not okay?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What groups or communities are you most judged for being a member of?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In a world where prostitution becomes totally legal and regulated, should sex workers be allowed to refuse clients on the basis of race?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather have accidentally killed someone, or be a nonoffending pedophile?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you support the use of realistic child sex dolls by pedophiles?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather be raped or falsely (but convincingly) accused of rape?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Does modern western culture encourage women either to overreact or underreact to \"minor\" sexual assaults, such as groping, too-drunk sex, etc.?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do society's morals differ from your own?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Regardless of your conscious beliefs or actions, do you feel in your gut that sex work is degrading?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which stereotype is actually pretty accurate?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you had to eliminate one million people from one ethnicity, which would it be?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "A 14-year-old has sex. How large does the age gap have to be between the 14-year-old and their partner before the child can no longer meaningfully consent to sex?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If a sex worker consents to sex with a customer under expectation of payment, but then the customer refuses to pay, is this closer to rape or to theft?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's your opinion of education that teaches men to be more seductive?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do women have any systemic privilege due to their gender?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is incest wrong? Should it be illegal?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are there any viewpoints so offensive that they deserve to be shut down or suppressed? If so, which ones?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Regardless of your support or personal feelings, does your subconscious view trans-identifying people as closer to their birth or current gender?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is bestiality wrong? Are you a vegan?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "To what do you attribute to your success?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you named your genitals?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Who is your alter ego?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do you predict you will die?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How old do you feel?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's your greatest failure?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is the worst thing anyone has ever done to you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What are your most prized possessions?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's your boring superpower?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "A woman rapes a man and becomes pregnant. Would you support a law that gives the man the right to force termination of the pregnancy?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you view 'social justice warriors' and 'the alt-right' as roughly equivalent in extremism, just on opposite sides?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are there any things on a dating profile that you agree with or also like, but find a turnoff that they listed it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do you personally know when something is immoral?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you ever dated someone who you felt was below your standards?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you had to name one thing you want that drives all your other wants, what would it be?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's a lie you wish you could stop telling yourself?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which is more accurate for you: I do things so that I can make money; or, I make money so that I can do things?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's the best thing someone could know about you that might help them?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather be in the top 1% of wealth bracket in 1530, or the bottom 10% of wealth bracket in a modern-day town or city?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You have a piece of art you really like hanging in your living room. One day you learn the artist has been convicted for rape. What do you do with the art piece?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather lose the ability to sing or to swear?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather drown a puppy or have everyone think you drowned a puppy?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Can rape jokes ever be funny?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you believe plants can feel pain?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How susceptible are you to being brainwashed?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How did your parents discipline you when you were a child?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was your greatest sacrifice?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you press a button that doubled your IQ?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you stomp a puppy to death to save a terminally ill child with < 6 months to live?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you have someone you feel comfortable talking to about everything?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you had to name one thing you think others envy about you, what would it be?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is sex really about power?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's your relationship to buttplugs?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you be willing to show your browsing history to everybody present? What if this didn't include porn?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you date a prostitute?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather change genders every time you sneeze, or be unable to tell the difference between babies and muffins?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather lick someone else's butthole or your own butthole?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather live a life where you are convinced you're doing good but really you're hurting the world, or a life where you're helping the world but you're convinced that you're failing to do so and actually hurting it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather your life be ended by yourself or others?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather date a kind person with the exact opposite of your political views, or an unkind person who strongly agrees with your views?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Assuming legality isn't an issue and all parties are informed and consenting, would you rather have sex with a 15 year old or a 50 year old?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you have any enemies? If not, who is the closest to being your enemy?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do you know when someone is empathizing with you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you woke up to an incredibly physically attractive stranger of your desired sex performing oral on you (without asking), would you feel positively or negatively?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Should male circumcision be legal?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You have the option of moving to one of two cities. In Omelas, 99% of people have 10/10 life quality, while the remaining 1% have 0/10 life quality. In Bergeron, everyone has 5/10 life quality. Which city do you move to?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You're in a monogamous relationship. Your partner gets back late and says \"Honey, I just had sex with the new lifelike sex robot.\" Is this cheating?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "A woman says she's on birth control, and she has sex with a man without a condom. But she was lying \u2014 she was not on birth control. Is this rape?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Are you more concerned with improving the world or improving yourself?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you consider 'being at peace' to be the same thing as 'being happy'?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you have any political or social opinions that you’re afraid to express out loud to your friends?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Given the chance, would you fuck God given He won't judge you for it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you ever woke up from a dream, crying? What was the dream?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you had enough sex this year?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "When was the last time you masturbated?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you masturbated within the last week to someone you know personally, and also would feel uncomfortable telling them about it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do you feel superior to other people?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How do you treat yourself differently from the way you treat others?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How much control do you feel you have over your own emotions?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How often do you feel fear in your life",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How often do you feel pleased at others' misfortunes?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If all sexism were magically and totally eliminated, would gender ratio of all jobs, ideologies, and communities reach 50/50?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If there were a way to painlessly and permanently alter the thoughts of a person you know, who and what would you change?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you had a little teleportation portal, would you fuck yourself in the ass?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you press the button, America gets to elect the primary rulers for every other nation in the world \u2014 and the rest of the world collectively elects America's next president. Do you press the button?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "If you press the button, you enter a magical, permanent state where everything you want is automatically granted right before the want hits your conscious awareness. Besides \"you can't enter a state of desire\" or \"suicide,\" there are no limits in fulfilling what you want. Do you press the button?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is it easier for you to love or hate?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is there any kind of job or employment position in which it should be legal for an employee to refuse to serve a customer based on gender?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is there anyone whose life you value above your own?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "List the people listening to you answer this question in the order they would die in the apocalypse",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "On an instinctual level, do you think of humans as part of nature or separate from nature?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Regardless of how much you personally approve, would you be comfortable having a serious relationship with an active pornstar?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Should people be allowed to sell themselves into slavery, given they are not coerced into the decision, and given full information about what it entails?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "There is a button before you. If you press it, the entire world loses the enchantment it feels when looking at super beautiful faces. Everyone can still see and recognize faces, but all faces feel equally attractive. Would you press the button?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What grudges do you hold?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What in your experience does language fail to capture?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is the most insidious ideology surrounding you in life?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What viscous cycles do you find yourself in?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was your darkest night?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What was your worst habit in your worst relationship?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's died in you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "When was the last time you felt fear?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "When you feel an emotion, how often does it involve a physical bodily sensation in addition to a mental state?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Where do you find fulfillment in your life?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which life lessons that you've learned would be most important for the people in this room to hear?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What is the greatest current existential threat to humanity?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Which race, generally speaking, has experienced greater oppression \u2014 blacks or jews?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You find out your crush messages people more boring/ugly/dumb than you on dating sites. Does this reduce your attraction to them?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "You wake up in a body of the opposite sex. It takes years, but you eventually learn to operate in this body — how to navigate romantic/sexual dynamics and social expectations — about as well as people naturally born into this body. Do you predict you'd feel dysphoria?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "How often do you think about your own death?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Have you ever had a plant that you really cared about?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Who thinks you're dumb?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "\"Women are oversexualized in media and this should be stopped.\" Agree or disagree?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "In one room, a child is about to die. In the other room, a demon is about to increase unemployment in your country by 1% for 3 years. You can either save the child or kill the demon, but not both. Which do you choose?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "The button will turn your body to clay for 5 minutes so you can mold yourself. No undos or takebacks. Do you use the button?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you ever enjoy not getting what you want?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "What's the most likely way that you might hurt those around you?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "When did you last do something for the first time? What was it?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Would you rather be twice your size or half your size?",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Is it okay to become aroused by fantasies of actions that would result in serious harm if done in real life?",
+            type: CardType.FreeText
+        } as FreeTextCard
+    ],
+    speficPlayerMandatory: false
+}
+
+export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole];
