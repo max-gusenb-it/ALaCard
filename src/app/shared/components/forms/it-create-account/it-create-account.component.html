@@ -2,14 +2,14 @@
     [formGroup]="createAccountForm"
     class="flex flex-col gap-4"
 >
-  <h3>{{'shared.forms.sign-up-modal.create-account.title' | translate }}</h3>
+  <h3>{{'shared.components.forms.it-sign-up-modal.create-account.title' | translate }}</h3>
   <it-checkbox-heading
     id="register"
-    [heading]="'shared.forms.sign-up-modal.create-account.want-to-register' | translate"
+    [heading]="'shared.components.forms.it-sign-up-modal.create-account.want-to-register' | translate"
     formControlName="register"
   >
     <div content>
-      {{'shared.forms.sign-up-modal.create-account.description' | translate }} 
+      {{'shared.components.forms.it-sign-up-modal.create-account.description' | translate }} 
     </div>
     <div 
         collapsible
@@ -17,13 +17,13 @@
     >
         <it-input
             id="email"
-            [label]="'shared.forms.sign-in-modal.email' | translate"
+            [label]="'shared.components.forms.it-sign-in-modal.email' | translate"
             formControlName="email"
             type="email"
         />
         <it-input 
             id="password"
-            [label]="'shared.forms.sign-in-modal.password' | translate"
+            [label]="'shared.components.forms.it-sign-in-modal.password' | translate"
             formControlName="password"
             type="password"
         >

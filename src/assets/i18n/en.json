@@ -148,16 +148,16 @@
           "drinking-game-flag": "Drinking Game",
           "player": "Player",
           "players": "Players"
+        },
+        "it-navigation": {
+          "home": "Home",
+          "decks": "Decks",
+          "store": "Store",
+          "profile": "Profile",
+          "no-room-owned": "You have to create a room first",
+          "no-account": "Create an account or sign in",
+          "soon-in-development": "Soon in development :)"
         }
-      },
-      "navigation": {
-        "home": "Home",
-        "decks": "Decks",
-        "store": "Store",
-        "profile": "Profile",
-        "no-room-owned": "You have to create a room first",
-        "no-account": "Create an account or sign in",
-        "soon-in-development": "Soon in development :)"
       },
       "input": {
         "signs": "Signs"
@@ -171,6 +171,22 @@
           "create-profile": "Create your profile",
           "username": "Username",
           "edit-profile": "Edit profile"
+        },
+        "it-sign-in-modal": {
+          "email": "E-Mail",
+          "password": "Password",
+          "forgot-password": "Forgot your password?"
+        },
+        "it-sign-up-modal": {
+          "create-account": {
+            "title": "Create your account",
+            "want-to-register": "Want to register?",
+            "description": "Create a account so you never loose your data and get more features like downloading new decks from the store"
+          }
+        },
+        "it-forgot-password-modal": {
+          "title": "Forgot your password",
+          "mail-sent": "Reset password mail successfully sent!"
         }
       },
       "display": {
@@ -187,24 +203,6 @@
           "title": "Loading Room",
           "subtitle": "Brace yourself for awesomeness!"
         }
-      }
-    },
-    "forms": {
-      "sign-in-modal": {
-        "email": "E-Mail",
-        "password": "Password",
-        "forgot-password": "Forgot your password?"
-      },
-      "sign-up-modal": {
-        "create-account": {
-          "title": "Create your account",
-          "want-to-register": "Want to register?",
-          "description": "Create a account so you never loose your data and get more features like downloading new decks from the store"
-        }
-      },
-      "forgot-password-modal": {
-        "title": "Forgot your password",
-        "mail-sent": "Reset password mail successfully sent!"
       }
     }
   },

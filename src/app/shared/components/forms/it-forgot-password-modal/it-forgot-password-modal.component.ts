@@ -29,7 +29,7 @@ export class ItForgotPasswordModal {
     this.store.dispatch(new AuthenticationActions.ResetPassword(this.forgotPasswordForm.controls['email'].value))
       .subscribe(() => {
         this.popupService.openSnackbar(
-          this.translateService.instant("features.home.forgot-password-modal.mail-sent")
+          this.translateService.instant("shared.components.forms.it-forgot-password-modal.mail-sent")
         );
         this.close();
       });

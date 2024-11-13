@@ -28,7 +28,7 @@ export class ItNavigationComponent {
     if (url !== "/home" && !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ) {
       if (environment.production || !environment.production && url !== '/test') {
         this.popupService.openSnackbar(
-          this.translateService.instant("shared.components.navigation.no-account")
+          this.translateService.instant("shared.components.buttons.it-navigation.no-account")
         );
         return;
       }
@@ -36,7 +36,7 @@ export class ItNavigationComponent {
     if (inDevUrls.includes(url)) {
       if (environment.production || !environment.production && url !== '/test') {
         this.popupService.openSnackbar(
-          this.translateService.instant("shared.components.navigation.soon-in-development")
+          this.translateService.instant("shared.components.buttons.it-navigation.soon-in-development")
         );
         return;
       }
@@ -46,7 +46,7 @@ export class ItNavigationComponent {
       const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
       if (!!!roomId) {
         this.popupService.openSnackbar(
-          this.translateService.instant("shared.components.navigation.no-room-owned")
+          this.translateService.instant("shared.components.buttons.it-navigation.no-room-owned")
         );
         return;
       }

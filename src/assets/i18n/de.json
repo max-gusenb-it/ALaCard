@@ -148,16 +148,16 @@
           "drinking-game-flag": "Drink Spiel",
           "player": "Spieler",
           "players": "Spieler"
+        },
+        "it-navigation": {
+          "decks": "Decks",
+          "store": "Store",
+          "home": "Home",
+          "profile": "Profil",
+          "no-room-owned": "Du zuerst einen Raum erstellen.",
+          "no-account": "Erstelle einen Nutzer oder log dich ein",
+          "soon-in-development": "Bald in Entwicklung :)"
         }
-      },
-      "navigation": {
-        "decks": "Decks",
-        "store": "Store",
-        "home": "Home",
-        "profile": "Profil",
-        "no-room-owned": "Du zuerst einen Raum erstellen.",
-        "no-account": "Erstelle einen Nutzer oder log dich ein",
-        "soon-in-development": "Bald in Entwicklung :)"
       },
       "input": {
         "signs": "Zeichen"
@@ -171,6 +171,22 @@
           "create-profile": "Erstelle dein Profil",
           "username": "Benutzername",
           "edit-profile": "Profil bearbeiten"
+        },
+        "it-sign-in-modal": {
+          "email": "E-Mail",
+          "password": "Passwort",
+          "forgot-password": "Passwort vergessen?"
+        },
+        "it-sign-up-modal": {
+          "create-account": {
+            "title": "Erstelle deinen Account",
+            "want-to-register": "Möchtest du dich registrieren?",
+            "description": "Erstelle einen Account, damit du deine Daten nicht verlierst und weitere Funktionen wie das Herunterladen neuer Decks aus dem Store nutzen kannst."
+          }
+        },
+        "it-forgot-password-modal": {
+          "title": "Passwort vergessen",
+          "mail-sent": "E-Mail zum Passwort ändern erfolgreich gesendet!"
         }
       },
       "display": {
@@ -188,24 +204,6 @@
           "subtitle": "Mach dich bereit für Großartiges!"
         }
       }
-    },
-    "forms": {
-      "sign-in-modal": {
-        "email": "E-Mail",
-        "password": "Passwort",
-        "forgot-password": "Passwort vergessen?"
-      },
-      "sign-up-modal": {
-        "create-account": {
-          "title": "Erstelle deinen Account",
-          "want-to-register": "Möchtest du dich registrieren?",
-          "description": "Erstelle einen Account, damit du deine Daten nicht verlierst und weitere Funktionen wie das Herunterladen neuer Decks aus dem Store nutzen kannst."
-        }
-      },
-      "forgot-password-modal": {
-        "title": "Passwort vergessen",
-        "mail-sent": "E-Mail zum Passwort ändern erfolgreich gesendet!"
-      }
     }
   },
   "actions": {
@@ -218,6 +216,7 @@
     "close": "Schließen",
     "signIn": "Login",
     "signUp": "Registrieren",
+    "signOut": "Ausloggen",
     "register": "Registrieren"
   },
   "errors": {

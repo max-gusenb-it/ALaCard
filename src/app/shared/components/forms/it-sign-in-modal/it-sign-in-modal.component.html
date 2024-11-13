@@ -8,19 +8,19 @@
         <h3>{{'actions.signIn' | translate}}</h3>
         <it-input
             id="email"
-            [label]="'shared.forms.sign-in-modal.email' | translate"
+            [label]="'shared.components.forms.it-sign-in-modal.email' | translate"
             formControlName="email"
             type="email"
         />
         <div class="flex flex-col gap-2">
             <it-input 
                 id="password"
-                [label]="'shared.forms.sign-in-modal.password' | translate"
+                [label]="'shared.components.forms.it-sign-in-modal.password' | translate"
                 formControlName="password"
                 type="password"
             />
             <p class="text-xs cursor-pointer" (click)="forgotPassword()">
-                {{"shared.forms.sign-in-modal.forgot-password" | translate}}
+                {{"shared.components.forms.it-sign-in-modal.forgot-password" | translate}}
             </p>
         </div>
     </div>
