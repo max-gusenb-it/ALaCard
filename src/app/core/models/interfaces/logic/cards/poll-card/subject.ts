@@ -1,5 +1,4 @@
 export interface Subject {
-    // ToDo: remove
-    id: number;
+    id?: number;
     title: string;
 }

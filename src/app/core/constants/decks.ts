@@ -18,11 +18,9 @@ export const partyDeck: Deck = {
             text: "Erster :) - Twinni oder Jolly?",
             subjects: [
                 {
-                    id: 0,
                     title: "Jolly"
                 },
                 {
-                    id: 1,
                     title: "Twinni"
                 }
             ],
@@ -1746,11 +1744,9 @@ export const testingDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    id: 0,
                     title: "200 years into the future" 
                 },
                 {
-                    id: 1,
                     title: "200 years into the past"
                 }
             ]
