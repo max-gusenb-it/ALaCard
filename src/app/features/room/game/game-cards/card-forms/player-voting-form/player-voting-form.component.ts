@@ -2,9 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { CardType, PlayerState } from 'src/app/core/models/enums';
-import { Player, PlayerVotingCard, RoomSettings, Round } from 'src/app/core/models/interfaces';
-import { PlayerVotingResponse } from 'src/app/core/models/interfaces/logic/game-data/response-data/player-voting-response';
+import { CardType } from 'src/app/core/models/enums';
+import { Player, PlayerVotingCard, PlayerVotingResponse, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { IngameDataDataService as IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
