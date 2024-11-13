@@ -1,8 +1,8 @@
 import { Card } from "../card";
-import { Topic } from "./topic";
+import { Subject } from "./subject";
 import { PollCardSettings } from "./poll-card-settings";
 
 export interface PollCard extends Card {
-    topics: Topic[];
+    subjects: Subject[];
     settings?: PollCardSettings;
 }

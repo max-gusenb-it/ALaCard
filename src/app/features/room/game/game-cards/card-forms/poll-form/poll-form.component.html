@@ -9,14 +9,14 @@
         <p class="text-lg">{{ getCardText() }}</p>
         <div class="flex flex-col gap-4">
             <it-select
-                id="votedTopicId"
+                id="votedSubjectId"
                 [label]="'features.room.game.game-cards.forms.answer' | translate "
-                formControlName="votedTopicId"
+                formControlName="votedSubjectId"
                 customColor="blue"
                 *ngIf="!castedCard.settings?.chooseMultiple"
             >
-                <option *ngFor="let topic of castedCard.topics" [value]="topic.id">
-                    {{ topic.title }}
+                <option *ngFor="let subject of castedCard.subjects" [value]="subject.id">
+                    {{ subject.title }}
                 </option>
             </it-select>
             <div class="flex flex-row gap-4">

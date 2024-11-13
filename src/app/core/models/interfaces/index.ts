@@ -16,7 +16,7 @@ export { PlayerVotingSipMode } from "./logic/cards/player-voting-card/player-vot
 
 export { PollCardSettings } from "./logic/cards/poll-card/poll-card-settings";
 export { PollCard } from "./logic/cards/poll-card/poll-card";
-export { Topic } from "./logic/cards/poll-card/topic";
+export { Subject } from "./logic/cards/poll-card/subject";
 
 export { Card } from "./logic/cards/card";
 export { CardSettings } from "./logic/cards/card-settings";

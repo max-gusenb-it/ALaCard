@@ -23,7 +23,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
 
     castedCard: PollCard;
     pollForm: FormGroup = new FormGroup({
-        votedTopicId: new FormControl({ value: "", disabled: false}, Validators.required)
+        votedSubjectId: new FormControl({ value: "", disabled: false}, Validators.required)
     });
 
     roomSettings: RoomSettings;
@@ -52,10 +52,10 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
             const response = this.pollCardService.castResponse(r ?? null);
     
             if (!!response) {
-                this.pollForm.controls["votedTopicId"].disable();
-                this.pollForm.controls["votedTopicId"].setValue(response.votedTopicIds[0]);
+                this.pollForm.controls["votedSubjectId"].disable();
+                this.pollForm.controls["votedSubjectId"].setValue(response.votedSubjectIds[0]);
                 
-                this.pollForm.controls["votedTopicId"].updateValueAndValidity();
+                this.pollForm.controls["votedSubjectId"].updateValueAndValidity();
                 this.changeDetectorRef.detectChanges();
             }
         });
@@ -75,14 +75,14 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     submit(skipped: boolean = false) {
-        if (skipped) this.pollForm.controls["votedTopicId"].setValue("");
-        this.pollForm.controls["votedTopicId"].disable();
-        this.pollForm.controls["votedTopicId"].updateValueAndValidity();
+        if (skipped) this.pollForm.controls["votedSubjectId"].setValue("");
+        this.pollForm.controls["votedSubjectId"].disable();
+        this.pollForm.controls["votedSubjectId"].updateValueAndValidity();
     
         const response : PollResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedTopicIds: !skipped ? [this.pollForm.controls['votedTopicId'].value] as number[] : [],
+          votedSubjectIds: !skipped ? [this.pollForm.controls['votedSubjectId'].value] as number[] : [],
           roundId: this.round.id  
         };
     
