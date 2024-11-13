@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
+import { playerVotingCardSkipValue } from 'src/app/core/constants/card';
 import { CardType } from 'src/app/core/models/enums';
 import { Player, PlayerVotingCard, PlayerVotingResponse, RoomSettings, Round } from 'src/app/core/models/interfaces';
 import { IngameDataDataService as IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
@@ -99,7 +100,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     const response : PlayerVotingResponse = {
       playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
       skipped: skipped,
-      votedPlayerId: !skipped ? this.playerVotingForm.controls['votedPlayerId'].value : null,
+      votedPlayerId: !skipped ? this.playerVotingForm.controls['votedPlayerId'].value : playerVotingCardSkipValue,
       roundId: this.round.id  
     };
 

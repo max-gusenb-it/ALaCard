@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
+import { pollCardSkipValue } from "src/app/core/constants/card";
 import { CardType } from "src/app/core/models/enums";
 import { Card, RoomSettings, Round, PollCard, PollResponse } from "src/app/core/models/interfaces";
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
@@ -23,7 +24,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
 
     castedCard: PollCard;
     pollForm: FormGroup = new FormGroup({
-        votedSubjectId: new FormControl({ value: "", disabled: false}, Validators.required)
+        votedSubjectId: new FormControl({ value: "", disabled: false }, Validators.required)
     });
 
     roomSettings: RoomSettings;
@@ -82,7 +83,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
         const response : PollResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedSubjectIds: !skipped ? [this.pollForm.controls['votedSubjectId'].value] as number[] : [],
+          votedSubjectIds: !skipped ? [Number(this.pollForm.controls['votedSubjectId'].value)] : [pollCardSkipValue],
           roundId: this.round.id  
         };
     
