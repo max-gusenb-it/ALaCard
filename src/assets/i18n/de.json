@@ -143,6 +143,13 @@
   },
   "shared": {
     "components": {
+      "buttons": {
+        "it-deck": {
+          "drinking-game-flag": "Drink Spiel",
+          "player": "Spieler",
+          "players": "Spieler"
+        }
+      },
       "navigation": {
         "decks": "Decks",
         "store": "Store",
@@ -152,11 +159,6 @@
         "no-account": "Erstelle einen Nutzer oder log dich ein",
         "soon-in-development": "Bald in Entwicklung :)"
       },
-      "profile-editor": {
-        "create-profile": "Erstelle dein Profil",
-        "username": "Benutzername",
-        "edit-profile": "Profil bearbeiten"
-      },
       "input": {
         "signs": "Zeichen"
       },
@@ -164,6 +166,11 @@
         "it-authenticate-modal": {
           "title": "Let’s get started",
           "description": "Um einem Raum beizutreten, musst du dich zuerst anmelden oder registrieren. Du kannst dich auch als Gast registrieren, wenn du keinen Account erstellen möchten."
+        },
+        "it-profile-editor-form": {
+          "create-profile": "Erstelle dein Profil",
+          "username": "Benutzername",
+          "edit-profile": "Profil bearbeiten"
         }
       },
       "display": {

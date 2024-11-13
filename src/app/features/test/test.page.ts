@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ExampleComponent } from '../../shared/components/display/example/example.component';
 import { PopupService } from 'src/app/core/services/service/popup.service';
+import { Deck } from 'src/app/core/models/interfaces';
 
 @Component({
   selector: 'app-test',
@@ -51,37 +52,6 @@ export class TestPage {
     { title: "Never have i ever", selected: false },
     { title: "Would you rather", selected: false },
   ];
-
-  decks = [
-    {
-      title: "A la card",
-      cardCount: 300,
-      description: "The first and one of the best decks ever created",
-      icon: "🎉",
-      flags: ["All cards", "2+ Players"]
-    },
-    {
-      title: "Lord of the Rings Quiz",
-      cardCount: 65,
-      description: "Quiz about the famous movie triollogy",
-      icon: "💍",
-      flags: ["Quiz", "2+ Players"]
-    },
-    {
-      title: "Do you know your partner?",
-      cardCount: 48,
-      description: "Funny game to test, how good you know your partner",
-      icon: "💌",
-      flags: ["2 Players", "Player Voting", "Answer Creation", "Quiz", "Never have i ever"]
-    },
-    {
-      title: "Extrem drinking Game",
-      cardCount: 189,
-      description: "Are you ready to get drunk with your friends?",
-      icon: "🍺",
-      flags: ["2+ Players", "All cards"]
-    },
-  ]
 
   constructor(private popupService: PopupService) {}
 

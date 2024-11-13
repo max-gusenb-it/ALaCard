@@ -221,19 +221,6 @@
           </div>
         </div>
       </it-tab>
-      <it-tab title="Cards">
-        <it-selection-list #selectionList>
-          <it-deck 
-            *ngFor="let deck of decks"
-            [title]="deck.title"
-            [cardCount]="deck.cardCount"
-            [description]="deck.description"
-            [icon]="deck.icon"
-            [flags]="deck.flags"
-            (selectionEmitter)="selectionList.onSelectionChanged($event)"
-          ></it-deck>
-        </it-selection-list>
-      </it-tab>
     </it-tab-group>
   </form>
 </ion-content>

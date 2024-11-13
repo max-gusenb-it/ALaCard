@@ -143,6 +143,13 @@
   },
   "shared": {
     "components": {
+      "buttons": {
+        "it-deck": {
+          "drinking-game-flag": "Drinking Game",
+          "player": "Player",
+          "players": "Players"
+        }
+      },
       "navigation": {
         "home": "Home",
         "decks": "Decks",
@@ -152,11 +159,6 @@
         "no-account": "Create an account or sign in",
         "soon-in-development": "Soon in development :)"
       },
-      "profile-editor": {
-        "create-profile": "Create your profile",
-        "username": "Username",
-        "edit-profile": "Edit profile"
-      },
       "input": {
         "signs": "Signs"
       },
@@ -164,6 +166,11 @@
         "it-authenticate-modal": {
           "title": "Let’s get started",
           "description": "To join a room you have to log in or register first. You can register as a guest if you don't want to create an account."
+        },
+        "it-profile-editor-form": {
+          "create-profile": "Create your profile",
+          "username": "Username",
+          "edit-profile": "Edit profile"
         }
       },
       "display": {

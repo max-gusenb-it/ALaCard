@@ -9,18 +9,19 @@
   <div class="flex flex-row gap-2 justify-between items-center">
     <div class="flex flex-col gap-1">
       <div>
-        <h4>{{ title }}</h4>
-        <p class="text-xs font-bold">{{ cardCount }} Cards</p>
+        <h4>{{ deck.name }}</h4>
+        <p class="text-xs font-bold">{{ deck.cards.length }} Cards</p>
       </div>
-      <p class="text-sm font-medium">{{ description }}</p>
+      <p class="text-sm font-medium">{{ deck.description }}</p>
     </div>
-    <h3>{{ icon }}</h3>   
+    <h3>{{ deck.icon }}</h3>   
   </div>
   <div #chipContainer class="overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
     <!-- Using div instead of padding/margin so antimation is displayed correct -->
     <div class="h-2"></div>
     <div class="flex flex-wrap gap-1">
-      <it-chip *ngFor="let flag of flags">{{ flag }}</it-chip>
+      <it-chip>{{ deck.requiredPlayers.playerCount }}{{ deck.requiredPlayers.isExactCount ? '' : '+' }} {{ (deck.requiredPlayers.isExactCount && deck.requiredPlayers.playerCount === 1 ? 'shared.components.buttons.it-deck.player' : 'shared.components.buttons.it-deck.players') | translate }}</it-chip>
+      <it-chip *ngFor="let flag of deck.flags">{{ flag | translate }}</it-chip>
     </div>
   </div>
 </div>

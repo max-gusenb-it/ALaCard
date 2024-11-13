@@ -2,6 +2,9 @@ import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource 
 import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode } from "../models/interfaces";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
+// ToDo: Think about detecting card flags from deck 
+const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
+
 // Test Decks
 export const partyDeck: Deck = {
     icon: "🎉",
@@ -41,6 +44,11 @@ export const partyDeck: Deck = {
             }
         } as FreeTextCard
     ],
+    flags: [],
+    requiredPlayers: {
+        playerCount: 2,
+        isExactCount: false
+    },
     defaultGameSettings: [
         {
             settingName: speficiPlayerIdSettingName,
@@ -80,13 +88,17 @@ export const partyDeckWithRules: Deck = {
         "Don't drink too much ;)",
         "Don't forget to **have fun** :)"
     ],
+    requiredPlayers: {
+        playerCount: 1,
+        isExactCount: false
+    },
     defaultGameSettings: [
         {
             settingName: speficiPlayerIdSettingName,
             valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required
         }
-    ]
+    ],
 };
 export const partyDeckWithSpMandatory: Deck = {
     icon: "🎉",
@@ -113,13 +125,17 @@ export const partyDeckWithSpMandatory: Deck = {
             }
         } as PlayerVotingCard
     ],
+    requiredPlayers: {
+        playerCount: 2,
+        isExactCount: false
+    },
     defaultGameSettings: [
         {
             settingName: speficiPlayerIdSettingName,
             valueSource: DefaultGameSettingValueSource.user,
             requirement: DefaultGameSettingRequirement.required
         }
-    ]
+    ],
 };
 export const partyDeckWithRulesAndSp: Deck = {
     icon: "🎉",
@@ -151,7 +167,11 @@ export const partyDeckWithRulesAndSp: Deck = {
         "The winner is the last one standing :*",
         "Don't drink too much ;)",
         "Don't forget to **have fun** :)"
-    ]
+    ],
+    requiredPlayers: {
+        playerCount: 2,
+        isExactCount: false
+    },
 };
 export const drinkingDeck: Deck = {
     icon: "🍻",
@@ -166,13 +186,24 @@ export const drinkingDeck: Deck = {
             }
         } as FreeTextCard
     ],
+    requiredPlayers: {
+        playerCount: 1,
+        isExactCount: false
+    },
     defaultGameSettings: [
         {
             settingName: speficiPlayerIdSettingName,
             valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required
+        },
+        {
+            settingName: drinkingGameSettingName,
+            value: "true",
+            valueSource: DefaultGameSettingValueSource.value,
+            requirement: DefaultGameSettingRequirement.required
         }
-    ]
+    ],
+    flags: [drinkingGame]
 };
 export const aLotOfPlayersDeck: Deck = {
     icon: "👩‍👧‍👦",
@@ -190,20 +221,21 @@ export const aLotOfPlayersDeck: Deck = {
             valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required
         }
-    ]
+    ],
+    requiredPlayers: {
+        playerCount: 3,
+        isExactCount: false
+    }
 };
 
 export const demoPartyDecks: Deck[] = [
     partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
 ]
 
-// ToDo: Add Flags to decks like 'All Cards' etc.
-// ToDo: Add recommended game settings
-
 // Leggit Decks
 export const leggitPartyDeck: Deck = {
     icon: "🪅",
-    name: "Party Game",
+    name: "aLaCard",
     description: "Very funny Party Game",
     cards: [
         {
@@ -754,10 +786,12 @@ export const leggitPartyDeck: Deck = {
             valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required
         }
-    ]
+    ],
+    requiredPlayers: {
+        playerCount: 2,
+        isExactCount: false
+    },
 };
-
-
 // ToDo: add custom styles for whole deck
 export const askhole: Deck = {
     icon: "🅰️",
@@ -1683,7 +1717,11 @@ export const askhole: Deck = {
             valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required
         }
-    ]
+    ],
+    requiredPlayers: {
+        playerCount: 1,
+        isExactCount: false
+    }
 }
 
 export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole];

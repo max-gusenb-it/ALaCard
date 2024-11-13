@@ -12,11 +12,8 @@
       <div class="flex flex-col flex-grow justify-center">
         <it-selection-list #selectionList [initialSelection]="0" [required]="true" [singleSelect]="true" class="h-min">
           <it-deck *ngFor="let deck of decks"
+            [deck]="deck"
             [title]="deck.name"
-            [description]="deck.description"
-            [cardCount]="deck.cards.length"
-            [icon]="deck.icon"
-            [flags]="['Good Deck', 'All Cards']"
             (selectionEmitter)="selectionList.onSelectionChanged($event)"
             (selectionEmitter)="onDeckSelection($event)"
           />

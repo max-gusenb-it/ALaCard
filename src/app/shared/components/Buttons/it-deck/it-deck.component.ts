@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
+import { Deck } from 'src/app/core/models/interfaces';
 import { ItSelectableComponent } from 'src/app/shared/components/display/it-selectable/it-selectable.component';
 
 @Component({
@@ -9,11 +10,7 @@ import { ItSelectableComponent } from 'src/app/shared/components/display/it-sele
 export class ItDeckComponent extends ItSelectableComponent {
   @ViewChild("chipContainer") chipContainer?: ElementRef<HTMLDivElement>;
 
-  @Input() title: string = null as any;
-  @Input() cardCount: number = 0;
-  @Input() description: string = null as any;
-  @Input() icon: string = null as any;
-  @Input() flags: string[] = [];
+  @Input() deck: Deck;
 
   override quietUnselect(): void {
     super.quietUnselect();
