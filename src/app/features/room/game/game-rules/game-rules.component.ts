@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { firstValueFrom, timer } from 'rxjs';
+import { filter, firstValueFrom, take, takeUntil, timer } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
 import { CardType } from 'src/app/core/models/enums';
 import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/free-text-card/free-text-card';
+import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { TutorialService } from 'src/app/core/services/service/tutorial.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
@@ -30,6 +31,7 @@ export class GameRulesComponent implements AfterViewInit {
   constructor(
     private store: Store,
     private responseDataSourceService: ResponseDataSourceService,
+    private staticRoundDataDataService: StaticRoundDataDataService,
     private tutorialService: TutorialService
   ) {
     this.currentRuleIndex = this.store.selectSnapshot(InformationState.gameRulesCardIndex);
@@ -82,8 +84,20 @@ export class GameRulesComponent implements AfterViewInit {
   emitRulesRead() {
     if (!this.store.selectSnapshot(RoomState.roomSettings)?.singleDeviceMode && !this.store.selectSnapshot(InformationState.gameRulesRead)) {
       this.store.dispatch(new InformationActions.GameRulesRead());
-      firstValueFrom(timer(this.groundRules[this.currentRuleIndex].length * 70))
-        .then(() => this.onRulesRead());
+      timer(this.groundRules[this.currentRuleIndex].length * 50)
+        .pipe(
+          take(1),
+          takeUntil(
+            this.staticRoundDataDataService.getStaticRoundData$()
+              .pipe(
+                filter(srd => !!srd.round && srd.round.id !== -1),
+                take(1)
+              )
+          )
+        )
+        .subscribe(() => {
+          this.onRulesRead();
+        });
     }
   }
 

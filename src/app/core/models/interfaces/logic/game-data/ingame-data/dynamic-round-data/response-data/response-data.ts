@@ -1,4 +1,4 @@
-import { FirestoreBase } from "../../firestore-base";
+import { FirestoreBase } from "../../../../firestore-base";
 import { Response } from "./response"
 
 export interface ResponseData extends FirestoreBase {
