@@ -5,14 +5,18 @@ export { OptionBottomSheetData } from "./components/forms/it-option-bottom-sheet
 
 export { CreateAccountFormData } from "./features/home/create-account-form-data";
 
-export { FreeTextCardSettings } from "./logic/cards/freeTextCard/free-text-card-settings";
-export { FreeTextCard } from "./logic/cards/freeTextCard/free-text-card";
+export { FreeTextCardSettings } from "./logic/cards/free-text-card/free-text-card-settings";
+export { FreeTextCard } from "./logic/cards/free-text-card/free-text-card";
 
-export { PlayerVotingCardSettings } from "./logic/cards/playerVotingCard/player-voting-card-settings";
-export { PlayerVotingCard } from "./logic/cards/playerVotingCard/player-voting-card";
-export { PlayerVotingResult } from "./logic/cards/playerVotingCard/player-voting-result";
-export { PlayerVotingSipConfig } from "./logic/cards/playerVotingCard/player-voting-sip-config";
-export { PlayerVotingSipMode } from "./logic/cards/playerVotingCard/player-voting-sip-mode";
+export { PlayerVotingCardSettings } from "./logic/cards/player-voting-card/player-voting-card-settings";
+export { PlayerVotingCard } from "./logic/cards/player-voting-card/player-voting-card";
+export { PlayerVotingResult } from "./logic/cards/player-voting-card/player-voting-result";
+export { PlayerVotingSipConfig } from "./logic/cards/player-voting-card/player-voting-sip-config";
+export { PlayerVotingSipMode } from "./logic/cards/player-voting-card/player-voting-sip-mode";
+
+export { TopicVotingCardSettings } from "./logic/cards/topic-voting-card/topic-voting-card-settings";
+export { TopicVotingCard } from "./logic/cards/topic-voting-card/topic-voting-card";
+export { Topic } from "./logic/cards/topic-voting-card/topic";
 
 export { Card } from "./logic/cards/card";
 export { CardSettings } from "./logic/cards/card-settings";

@@ -1,5 +1,5 @@
 import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode } from "../models/interfaces";
+import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode, TopicVotingCard } from "../models/interfaces";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -15,15 +15,22 @@ export const partyDeck: Deck = {
             type: CardType.PlayerVoting
         } as PlayerVotingCard,
         {
-            text: "Erster :) - %p0 is a echter Wappla",
-            type: CardType.PlayerVoting,
+            text: "Erster :) - Twinni oder Jolly?",
+            topics: [
+                {
+                    id: 0,
+                    title: "Jolly"
+                },
+                {
+                    id: 1,
+                    title: "Twinni"
+                }
+            ],
+            type: CardType.TopicVotingCard,
             settings: {
-                order: 1,
-                selfVoteDisabled: true,
-                isAnonymous: true,
-                payToDisplay: true
+                order: 1
             }
-        } as PlayerVotingCard,
+        } as TopicVotingCard,
         {
             text: "Zweiter :) - %p0 is a echter Wappla",
             type: CardType.PlayerVoting,
@@ -228,7 +235,7 @@ export const aLotOfPlayersDeck: Deck = {
 };
 
 export const demoPartyDecks: Deck[] = [
-    partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
+    partyDeck, partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
 ]
 
 // Leggit Decks

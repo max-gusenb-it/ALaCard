@@ -43,12 +43,15 @@ export class CardComponent extends AngularLifecycle {
   getBorderCSSClasses() {
     if (!!!this.customCardColor) {
       switch(this.card.type) {
-        case(0):
-        case(1): {
+        case(CardType.GroundRule):
+        case(CardType.FreeText): {
           return "border-it_yellow-500 bg-it_yellow-500";
         };
-        case(2): {
+        case(CardType.PlayerVoting): {
           return "border-red-500 bg-red-500"
+        };
+        case(CardType.TopicVotingCard): {
+          return "border-blue-500 bg-blue-500"
         }
       }
     } else {
@@ -76,12 +79,15 @@ export class CardComponent extends AngularLifecycle {
   getTitleBackgroundCSSClasses() {
     if (!!!this.customCardColor) {
       switch(this.card.type) {
-        case(0):
-        case(1): {
+        case(CardType.GroundRule):
+        case(CardType.FreeText): {
           return "bg-it_yellow-200";
         };
-        case(2): {
+        case(CardType.PlayerVoting): {
           return "bg-red-200"
+        };
+        case(CardType.TopicVotingCard): {
+          return "bg-blue-200"
         }
       }
     } else {
@@ -144,6 +150,9 @@ export class CardComponent extends AngularLifecycle {
       };
       case (CardType.PlayerVoting): {
         return this.translateService.instant("features.room.game.card.playerVoting");
+      };
+      case (CardType.TopicVotingCard): {
+        return this.translateService.instant("features.room.game.card.topic-voting");
       };
     }
   }

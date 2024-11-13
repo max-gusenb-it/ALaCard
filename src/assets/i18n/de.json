@@ -114,7 +114,8 @@
               "desktop-swipe-tutorial": "Kein Button zum Fortsetzen? Klick auf die Karte, um weiter zu spielen!",
               "response-count-tutorial": "Verfolge anhand der Zahlen neben „Weiter“, wie viele Spieler bereits eine Antwort abgegeben haben."
             }
-          }
+          },
+          "topic-voting": "Themen Abstimmung"
         },
         "game-cards": {
           "forms": {
