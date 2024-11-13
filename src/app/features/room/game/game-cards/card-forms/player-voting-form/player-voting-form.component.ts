@@ -19,6 +19,9 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
   templateUrl: './player-voting-form.component.html'
 })
 export class PlayerVotingFormComponent extends AngularLifecycle implements AfterViewInit {
+  
+  @Input() card: PlayerVotingCard;
+  @Input() round: Round;
 
   playerVotingForm: FormGroup = new FormGroup({
     votedPlayerId: new FormControl({ value: "", disabled: false}, Validators.required)
@@ -26,14 +29,11 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   
   players: Player[];
   roomSettings: RoomSettings;
-  
-  @Input() card: PlayerVotingCard;
-  @Input() round: Round;
 
   constructor(
-    private responseSourceService: ResponseDataSourceService,
+    private responseDataSourceService: ResponseDataSourceService,
     private responseDataDataService: ResponseDataDataService,
-    private ingameDataDataDataService: IngameDataDataService,
+    private ingameDataDataService: IngameDataDataService,
     private changeDetectorRef: ChangeDetectorRef,
     private playerVotingService: PlayerVotingCardService,
     private store: Store,
@@ -104,7 +104,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
       roundId: this.round.id  
     };
 
-    this.responseSourceService.addResponse(
+    this.responseDataSourceService.addResponse(
       this.store.selectSnapshot(RoomState.room)!.id!,
       response
     );
@@ -120,7 +120,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   processRound() {
-    this.ingameDataDataDataService.processRound(
+    this.ingameDataDataService.processRound(
       this.round.id,
       CardType.PlayerVoting,
       this.responseDataDataService.getAdminResponsesForRound(this.round.id)

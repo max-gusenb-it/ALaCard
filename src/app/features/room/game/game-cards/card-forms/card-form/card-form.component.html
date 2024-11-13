@@ -10,5 +10,12 @@
         [round]="staticRoundData.round"
       />
     }
+    @case (3) {
+      <topic-voting-form
+        class="w-full"
+        [card]="getPlayerVotingCard(deck.cards[staticRoundData.round.cardIndex])"
+        [round]="staticRoundData.round"
+      />
+    }
   }
 </div>

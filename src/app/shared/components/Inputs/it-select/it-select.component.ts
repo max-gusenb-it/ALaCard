@@ -38,6 +38,9 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
       } break;
       case("red"): {
         css += "bg-red-200 border-red-200 hover:border-b-red-500 focus:border-red-500 disabled:bg-red-100 disabled:border-red-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500";
+      } break;
+      case("blue"): {
+        css += "bg-blue-200 border-blue-200 hover:border-b-blue-500 focus:border-blue-500 disabled:bg-blue-100 disabled:border-blue-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-blue-500";
       }
     }
     

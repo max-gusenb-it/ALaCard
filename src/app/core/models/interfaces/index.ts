@@ -34,8 +34,10 @@ export { DynamicPlayerVotingRoundData } from "./logic/game-data/ingame-data/dyna
 export { IngameData } from "./logic/game-data/ingame-data/ingame-data"
 export { StaticRoundData } from "./logic/game-data/static-round-data/static-round-data";
 
+export { PlayerVotingResponse } from "./logic/game-data/response-data/player-voting-response";
 export { ResponseData } from "./logic/game-data/response-data/response-data";
-export { Response } from "./logic/game-data/response-data/response";;
+export { Response } from "./logic/game-data/response-data/response";
+export { TopicVotingResponse } from "./logic/game-data/response-data/topic-voting-response";
 
 export { Player } from "./logic/room/player";
 export { Room } from "./logic/room/room";
