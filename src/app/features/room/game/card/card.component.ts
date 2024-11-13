@@ -20,8 +20,10 @@ export class CardComponent extends AngularLifecycle {
 
   @Input() card: Card;
   @Input() deckname: string = "";
-  @Input() playerIds: string[] | undefined;
-  @Input() customCardColor: Color | undefined;
+  @Input() playerIds?: string[];
+  @Input() customCardColor?: Color;
+  @Input() customTitle?: string;
+  @Input() hideDeckName?: boolean;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
   @Output() onClick: EventEmitter<boolean> = new EventEmitter();
@@ -141,6 +143,8 @@ export class CardComponent extends AngularLifecycle {
   }
 
   getCardTitle() {
+    // ToDo: adapt string empty checks to this
+    if (this.customTitle) return this.customTitle;
     switch (this.card.type) {
       case (CardType.GroundRule): {
         return this.translateService.instant("features.room.game.card.groundRules");

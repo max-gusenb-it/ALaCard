@@ -88,6 +88,14 @@ export class CardContainerComponent extends AngularLifecycle{
     );
   }
 
+  getCustomCardTitle() {
+    if (!!this.deck.styleSettings) {
+      if (this.deck.styleSettings.customCardTitle) return this.deck.styleSettings.customCardTitle;
+      if (this.deck.styleSettings.displayDeckNameAsCardTitle) return this.deck.name
+    }
+    return undefined;
+  }
+
   getRoundState() : RoundState {
     if (
       !this.cardClicked &&

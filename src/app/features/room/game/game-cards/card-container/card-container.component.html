@@ -18,7 +18,9 @@
         [card]="deck.cards[staticRoundData.round.cardIndex]"
         [playerIds]="staticRoundData.round.playerIds"
         [deckname]="deck.name"
-        [customCardColor]="deck.cardOverwriteColor"
+        [customTitle]="getCustomCardTitle()"
+        [customCardColor]="deck.styleSettings?.cardOverwriteColor"
+        [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
       />
     }
     @case (getFormState()) {

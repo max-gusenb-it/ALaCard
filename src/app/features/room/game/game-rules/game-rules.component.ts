@@ -3,7 +3,7 @@ import { Store } from '@ngxs/store';
 import { firstValueFrom, timer } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
 import { CardType } from 'src/app/core/models/enums';
-import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/freeTextCard/free-text-card';
+import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/free-text-card/free-text-card';
 import { TutorialService } from 'src/app/core/services/service/tutorial.service';
 import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';

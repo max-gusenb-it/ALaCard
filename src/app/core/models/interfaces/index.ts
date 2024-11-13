@@ -24,7 +24,10 @@ export { Result } from "./logic/cards/result";
 export { SipResult } from "./logic/cards/sip-result";
 
 export { Deck } from "./logic/game/deck";
+export { DefaultGameSetting } from "./logic/game/default-game-setting";
 export { GameSettings } from "./logic/game/game-settings";
+export { Game } from "./logic/game/game";
+export { StyleSettings } from "./logic/game/style-settings";
 
 export { IItError } from "./logic/error-monitor/it-error";
 

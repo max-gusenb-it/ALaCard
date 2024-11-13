@@ -806,7 +806,7 @@ export const askhole: Deck = {
         "Each round a new question is drawn from the deck",
         "Every player can answer the question but it is not mandatory",
         "After that a new card is drawn. There is no winner, it's just about fun :)",
-        "Be sure to support the original askhole creators! \nhttp://web.askhole.io/"
+        "Be sure to support the original askhole creators!  \nhttp://web.askhole.io/"
     ],
     cards: [
         {
@@ -1710,7 +1710,11 @@ export const askhole: Deck = {
             type: CardType.FreeText
         } as FreeTextCard
     ],
-    cardOverwriteColor: "pink",
+    styleSettings: {
+        cardOverwriteColor: "pink",
+        customCardTitle: "Askhole",
+        hideDeckNameOnCard: true
+    },
     defaultGameSettings: [
         {
             settingName: drinkingGameSettingName,
@@ -1734,7 +1738,7 @@ export const testingDeck: Deck = {
     name: "Testing Deck",
     description: "Test the new topic voting card which is currently under development.",
     groundRules: [
-        "Keep in mind:\nThe card is currently **under development** which means, the experience could be buggy"
+        "Keep in mind:  \nThe card is currently **under development** which means, the experience could be buggy"
     ],
     cards: [
         {
@@ -1761,6 +1765,11 @@ export const testingDeck: Deck = {
             settingName: drinkingGameSettingName,
             value: "false",
             valueSource: DefaultGameSettingValueSource.value,
+            requirement: DefaultGameSettingRequirement.required
+        },
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required
         }
     ]
