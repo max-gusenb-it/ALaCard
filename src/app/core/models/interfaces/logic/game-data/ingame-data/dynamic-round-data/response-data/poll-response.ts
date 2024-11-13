@@ -1,5 +1,5 @@
 import { Response } from "./response";
 
-export interface TopicVotingResponse extends Response {
+export interface PollResponse extends Response {
     votedTopicIds: number[];
 }

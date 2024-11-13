@@ -22,8 +22,8 @@ import { CardFormComponent } from './game/game-cards/card-forms/card-form/card-f
 import { CardContainerComponent } from './game/game-cards/card-container/card-container.component';
 import { CardStatsComponent } from './game/game-cards/card-stats/card-stats/card-stats.component';
 import { PlayerVotingStatsComponent } from './game/game-cards/card-stats/player-voting-stats/player-voting-stats.component';
-import { TopicVotingFormComponent } from './game/game-cards/card-forms/topic-voting-form/topic-voting-form.component';
-import { TopicVotingStatsComponent } from './game/game-cards/card-stats/topic-voting-stats/topic-voting-stats.component';
+import { PollFormComponent } from './game/game-cards/card-forms/poll-form/poll-form.component';
+import { PollStatsComponent } from './game/game-cards/card-stats/poll-stats/poll-stats.component';
 
 @NgModule({
   imports: [
@@ -45,10 +45,10 @@ import { TopicVotingStatsComponent } from './game/game-cards/card-stats/topic-vo
     CardContainerComponent,
     CardFormComponent,
     PlayerVotingFormComponent,
-    TopicVotingFormComponent,
+    PollFormComponent,
     CardStatsComponent,
     PlayerVotingStatsComponent,
-    TopicVotingStatsComponent,
+    PollStatsComponent,
     GameCardsComponent,
     GameRulesComponent
   ]

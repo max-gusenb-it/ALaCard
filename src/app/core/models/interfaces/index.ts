@@ -14,9 +14,9 @@ export { PlayerVotingResult } from "./logic/cards/player-voting-card/player-voti
 export { PlayerVotingSipConfig } from "./logic/cards/player-voting-card/player-voting-sip-config";
 export { PlayerVotingSipMode } from "./logic/cards/player-voting-card/player-voting-sip-mode";
 
-export { TopicVotingCardSettings } from "./logic/cards/topic-voting-card/topic-voting-card-settings";
-export { TopicVotingCard } from "./logic/cards/topic-voting-card/topic-voting-card";
-export { Topic } from "./logic/cards/topic-voting-card/topic";
+export { PollCardSettings } from "./logic/cards/poll-card/poll-card-settings";
+export { PollCard } from "./logic/cards/poll-card/poll-card";
+export { Topic } from "./logic/cards/poll-card/topic";
 
 export { Card } from "./logic/cards/card";
 export { CardSettings } from "./logic/cards/card-settings";
@@ -40,7 +40,7 @@ export { StaticRoundData } from "./logic/game-data/static-round-data/static-roun
 export { PlayerVotingResponse } from "./logic/game-data/ingame-data/dynamic-round-data/response-data/player-voting-response";
 export { ResponseData } from "./logic/game-data/ingame-data/dynamic-round-data/response-data/response-data";
 export { Response } from "./logic/game-data/ingame-data/dynamic-round-data/response-data/response";
-export { TopicVotingResponse } from "./logic/game-data/ingame-data/dynamic-round-data/response-data/topic-voting-response";
+export { PollResponse } from "./logic/game-data/ingame-data/dynamic-round-data/response-data/poll-response";
 
 export { Player } from "./logic/room/player";
 export { Room } from "./logic/room/room";

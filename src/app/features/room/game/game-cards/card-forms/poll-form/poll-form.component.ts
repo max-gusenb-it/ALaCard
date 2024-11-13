@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { CardType } from "src/app/core/models/enums";
-import { Card, RoomSettings, Round, TopicVotingCard, TopicVotingResponse } from "src/app/core/models/interfaces";
+import { Card, RoomSettings, Round, PollCard, PollResponse } from "src/app/core/models/interfaces";
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
 import { ResponseDataDataService } from "src/app/core/services/data/response-data.data.service";
-import { TopicVotingCardService } from "src/app/core/services/service/card/topic-voting-card.service";
+import { PollCardService } from "src/app/core/services/service/card/poll-card.service";
 import { RoomService } from "src/app/core/services/service/room.service";
 import { ResponseDataSourceService } from "src/app/core/services/source/response-data.source.service";
 import { AuthenticationState, RoomState } from "src/app/core/state";
@@ -14,14 +14,14 @@ import { InformationActions, InformationState } from "src/app/core/state/informa
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
 @Component({
-    selector: 'topic-voting-form',
-    templateUrl: './topic-voting-form.component.html'
+    selector: 'poll-form',
+    templateUrl: './poll-form.component.html'
 })
-export class TopicVotingFormComponent extends AngularLifecycle implements AfterViewInit {
+export class PollFormComponent extends AngularLifecycle implements AfterViewInit {
     @Input() card: Card;
     @Input() round: Round;
 
-    castedCard: TopicVotingCard;
+    castedCard: PollCard;
     topicVotingForm: FormGroup = new FormGroup({
         votedTopicId: new FormControl({ value: "", disabled: false}, Validators.required)
     });
@@ -30,7 +30,7 @@ export class TopicVotingFormComponent extends AngularLifecycle implements AfterV
 
     constructor(
         private store: Store,
-        private topicVotingCardService: TopicVotingCardService,
+        private topicVotingCardService: PollCardService,
         private responseDataSourceService: ResponseDataSourceService,
         private responseDataDataService: ResponseDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -79,7 +79,7 @@ export class TopicVotingFormComponent extends AngularLifecycle implements AfterV
         this.topicVotingForm.controls["votedTopicId"].disable();
         this.topicVotingForm.controls["votedTopicId"].updateValueAndValidity();
     
-        const response : TopicVotingResponse = {
+        const response : PollResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
           votedTopicIds: !skipped ? [this.topicVotingForm.controls['votedTopicId'].value] as number[] : [],

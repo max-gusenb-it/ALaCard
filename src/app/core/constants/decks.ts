@@ -1,5 +1,5 @@
 import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode, TopicVotingCard } from "../models/interfaces";
+import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode, PollCard } from "../models/interfaces";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -30,7 +30,7 @@ export const partyDeck: Deck = {
             settings: {
                 order: 1
             }
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Zweiter :) - %p0 is a echter Wappla",
             type: CardType.PlayerVoting,
@@ -1754,7 +1754,7 @@ export const testingDeck: Deck = {
                     title: "200 years into the past"
                 }
             ]
-        } as TopicVotingCard
+        } as PollCard
     ],
     requiredPlayers: {
         playerCount: 1,
