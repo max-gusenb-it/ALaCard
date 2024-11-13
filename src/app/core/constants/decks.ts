@@ -2,7 +2,6 @@ import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource 
 import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode } from "../models/interfaces";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
-// ToDo: Think about detecting card flags from deck 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
 
 // Test Decks
@@ -792,7 +791,6 @@ export const leggitPartyDeck: Deck = {
         isExactCount: false
     },
 };
-// ToDo: add custom styles for whole deck
 export const askhole: Deck = {
     icon: "🅰️",
     name: "askhole",
@@ -1705,6 +1703,7 @@ export const askhole: Deck = {
             type: CardType.FreeText
         } as FreeTextCard
     ],
+    cardOverwriteColor: "pink",
     defaultGameSettings: [
         {
             settingName: drinkingGameSettingName,
