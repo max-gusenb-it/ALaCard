@@ -22,7 +22,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     @Input() round: Round;
 
     castedCard: PollCard;
-    topicVotingForm: FormGroup = new FormGroup({
+    pollForm: FormGroup = new FormGroup({
         votedTopicId: new FormControl({ value: "", disabled: false}, Validators.required)
     });
 
@@ -30,7 +30,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
 
     constructor(
         private store: Store,
-        private topicVotingCardService: PollCardService,
+        private pollCardService: PollCardService,
         private responseDataSourceService: ResponseDataSourceService,
         private responseDataDataService: ResponseDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -43,26 +43,26 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     ngAfterViewInit(): void {
-        this.castedCard = this.topicVotingCardService.castCard(this.card);
+        this.castedCard = this.pollCardService.castCard(this.card);
         this.changeDetectorRef.detectChanges();
         
         this.store.select(InformationState.response)
             .pipe(takeUntil(this.destroyed$))
             .subscribe(r => {
-            const response = this.topicVotingCardService.castResponse(r ?? null);
+            const response = this.pollCardService.castResponse(r ?? null);
     
             if (!!response) {
-                this.topicVotingForm.controls["votedTopicId"].disable();
-                this.topicVotingForm.controls["votedTopicId"].setValue(response.votedTopicIds[0]);
+                this.pollForm.controls["votedTopicId"].disable();
+                this.pollForm.controls["votedTopicId"].setValue(response.votedTopicIds[0]);
                 
-                this.topicVotingForm.controls["votedTopicId"].updateValueAndValidity();
+                this.pollForm.controls["votedTopicId"].updateValueAndValidity();
                 this.changeDetectorRef.detectChanges();
             }
         });
     }
 
     getCardText() {
-      return this.topicVotingCardService.getCardText(
+      return this.pollCardService.getCardText(
           this.card,
           this.store.selectSnapshot(RoomState.players),
           this.round.playerIds,
@@ -75,14 +75,14 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     submit(skipped: boolean = false) {
-        if (skipped) this.topicVotingForm.controls["votedTopicId"].setValue("");
-        this.topicVotingForm.controls["votedTopicId"].disable();
-        this.topicVotingForm.controls["votedTopicId"].updateValueAndValidity();
+        if (skipped) this.pollForm.controls["votedTopicId"].setValue("");
+        this.pollForm.controls["votedTopicId"].disable();
+        this.pollForm.controls["votedTopicId"].updateValueAndValidity();
     
         const response : PollResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedTopicIds: !skipped ? [this.topicVotingForm.controls['votedTopicId'].value] as number[] : [],
+          votedTopicIds: !skipped ? [this.pollForm.controls['votedTopicId'].value] as number[] : [],
           roundId: this.round.id  
         };
     

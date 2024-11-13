@@ -6,7 +6,6 @@ import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.serv
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
 import { CardType } from "../../models/enums";
-import { CardUtils } from "../../utils/card.utils";
 import { CardService } from "../service/card/card.service";
 
 @Injectable({

@@ -4,8 +4,8 @@ import { StaticRoundData } from "../../models/interfaces";
 import { StaticRoundDataSourceService } from "../source/static-round-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
 import { Store } from "@ngxs/store";
-import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { RoomState } from "../../state";
+import { StaticRoundDataService } from "../service/static-round-data.service";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +15,8 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
 
     constructor(
         private store: Store,
-        private staticRoundDataSourceService: StaticRoundDataSourceService
+        private staticRoundDataSourceService: StaticRoundDataSourceService,
+        private staticRoundDataService: StaticRoundDataService
     ) {
         super();
 
@@ -51,7 +52,7 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
 
         if (!!!staticRoundData) return;
 
-        const round = StaticRoundDataUtils.createGameRound(
+        const round = this.staticRoundDataService.createGameRound(
             this.store.selectSnapshot(RoomState.deck)!,
             staticRoundData,
             this.store.selectSnapshot(RoomState.players),

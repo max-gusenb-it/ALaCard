@@ -139,5 +139,3 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return;
     }
 }
-
-export const PVCardService = new PlayerVotingCardService();

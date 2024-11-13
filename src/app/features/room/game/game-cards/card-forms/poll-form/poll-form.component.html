@@ -1,7 +1,7 @@
 <form
     *ngIf="round !== undefined && !!castedCard"
     class="w-full flex flex-col gap-4"
-    [formGroup]="topicVotingForm"
+    [formGroup]="pollForm"
     (submit)="submit()"
 >
     <div class="flex flex-col gap-2 bg-blue-100 p-4 rounded-lg drop-shadow-card">
@@ -23,7 +23,7 @@
                 <it-button class="flex grow basis-0" [size]="'small'" color="secondary" [disabled]="userResponded()" type="button" (click)="submit(true)">
                     <it-icon color="text-neutral-100">skip_next</it-icon>
                 </it-button>
-                <it-button class="flex grow basis-0" [size]="'small'" color="blue" [disabled]="!topicVotingForm.valid || userResponded()" type="submit">
+                <it-button class="flex grow basis-0" [size]="'small'" color="blue" [disabled]="!pollForm.valid || userResponded()" type="submit">
                     <it-icon color="text-neutral-100">check</it-icon>
                 </it-button>
             </div>

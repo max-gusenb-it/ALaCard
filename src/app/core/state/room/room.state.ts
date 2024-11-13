@@ -23,9 +23,9 @@ import { StaticRoundDataSourceService } from "../../services/source/static-round
 import { GameState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
 import { InformationActions } from "../information";
-import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { Game } from "../../models/interfaces/logic/game/game";
 import { RoomService } from "../../services/service/room.service";
+import { StaticRoundDataService } from "../../services/service/static-round-data.service";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -99,6 +99,7 @@ export class RoomState extends AngularLifecycle {
         private ingameDataSourceService: IngameDataSourceService,
         private responseDataSourceService: ResponseDataSourceService,
         private staticRoundDataSourceService: StaticRoundDataSourceService,
+        private staticRoundDataService: StaticRoundDataService,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
         private store: Store,
@@ -338,7 +339,7 @@ export class RoomState extends AngularLifecycle {
             ),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
             this.staticRoundDataSourceService.createStaticRoundData(
-                StaticRoundDataUtils.createInitialStaticRoundData(
+                this.staticRoundDataService.createInitialStaticRoundData(
                     action.deck,
                     RoomUtils.mapPlayersToArray(state.room.players),
                     action.gameSettings
@@ -359,7 +360,7 @@ export class RoomState extends AngularLifecycle {
             )
         };
 
-        const round = StaticRoundDataUtils.createGameRound(
+        const round = this.staticRoundDataService.createGameRound(
             state.room.game!.deck,
             action.staticRoundData,
             RoomUtils.mapPlayersToArray(state.room.players),

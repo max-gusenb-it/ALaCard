@@ -7,7 +7,6 @@ import { CardType } from 'src/app/core/models/enums';
 import { Card, Player } from 'src/app/core/models/interfaces';
 import { CardService } from 'src/app/core/services/service/card/card.service';
 import { RoomState } from 'src/app/core/state';
-import { CardUtils } from 'src/app/core/utils/card.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({

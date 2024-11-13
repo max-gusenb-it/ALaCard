@@ -14,5 +14,3 @@ export class PollCardService extends BaseCardService<PollCard, PollResponse, Dyn
         return drd;
     }
 }
-
-export const PCardService = new PollCardService();
