@@ -53,7 +53,7 @@ export class TopicVotingFormComponent extends AngularLifecycle implements AfterV
     
             if (!!response) {
                 this.topicVotingForm.controls["votedTopicId"].disable();
-                this.topicVotingForm.controls["votedTopicId"].setValue(response.votedTopicId);
+                this.topicVotingForm.controls["votedTopicId"].setValue(response.votedTopicIds[0]);
                 
                 this.topicVotingForm.controls["votedTopicId"].updateValueAndValidity();
                 this.changeDetectorRef.detectChanges();
@@ -82,7 +82,7 @@ export class TopicVotingFormComponent extends AngularLifecycle implements AfterV
         const response : TopicVotingResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedTopicId: !skipped ? this.topicVotingForm.controls['votedTopicId'].value : null,
+          votedTopicIds: !skipped ? [this.topicVotingForm.controls['votedTopicId'].value] as number[] : [],
           roundId: this.round.id  
         };
     

@@ -13,6 +13,7 @@
                 [label]="'features.room.game.game-cards.forms.answer' | translate "
                 formControlName="votedTopicId"
                 customColor="blue"
+                *ngIf="!castedCard.settings?.chooseMultiple"
             >
                 <option *ngFor="let topic of castedCard.topics" [value]="topic.id">
                     {{ topic.title }}
