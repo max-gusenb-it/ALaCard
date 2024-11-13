@@ -1729,5 +1729,41 @@ export const askhole: Deck = {
         isExactCount: false
     }
 }
+export const testingDeck: Deck = {
+    icon: "🆕",
+    name: "Testing Deck",
+    description: "Test the new topic voting card which is currently under development.",
+    groundRules: [
+        "Keep in mind:\nThe card is currently **under development** which means, the experience could be buggy"
+    ],
+    cards: [
+        {
+            text: "Where would you rather travel?",
+            type: CardType.TopicVotingCard,
+            topics: [
+                {
+                    id: 0,
+                    title: "200 years into the future" 
+                },
+                {
+                    id: 1,
+                    title: "200 years into the past"
+                }
+            ]
+        } as TopicVotingCard
+    ],
+    requiredPlayers: {
+        playerCount: 1,
+        isExactCount: false
+    },
+    defaultGameSettings: [
+        {
+            settingName: drinkingGameSettingName,
+            value: "false",
+            valueSource: DefaultGameSettingValueSource.value,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
+}
 
-export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole];
+export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole, testingDeck];
