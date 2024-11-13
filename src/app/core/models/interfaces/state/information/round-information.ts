@@ -1,4 +1,4 @@
-import { Response } from "../../logic/game-data/ingame-data/dynamic-round-data/response-data/response";
+import { Response } from "../../logic/game-data/response-data/response";
 
 export interface RoundInformation {
     roundId: number;

@@ -1,95 +1,33 @@
 import { Injectable } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
-import { PlayerState } from "src/app/core/models/enums";
-import { Card, DynamicRoundData, GameSettings, Player, Response, Result, Round, SipResult } from "src/app/core/models/interfaces";
-import { Utils } from "src/app/core/utils/utils";
+import { CardType } from "src/app/core/models/enums";
+import { PollCardService } from "./poll-card.service";
+import { BaseCardService } from "./base-card.service";
+import { PlayerVotingCardService } from "./player-voting-card.service";
+import { Card, DynamicRoundData, Response, Result } from "src/app/core/models/interfaces";
+
+export type GameCardService = BaseCardService<Card, Response, DynamicRoundData, Result> | PlayerVotingCardService | PollCardService;
 
 @Injectable({
     providedIn: 'root'
 })
-export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
-    createGameRound(baseRound: Round, card: Card, players: Player[], gameSettings: GameSettings) : Round {
-        players = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline);
+export class CardService {
+    constructor(
+        private baseCardService: BaseCardService<Card, Response, DynamicRoundData, Result>,
+        private plaverVotingCardService: PlayerVotingCardService,
+        private pollCardService: PollCardService
+    ) { }
 
-        let playerWhiteCardCount = Utils.countSubstrings(card.text, playerNameWhitecard);
-        if (card.text.includes(specificPlayerNameWhitecard) && !!!gameSettings.speficiPlayerId) {
-            playerWhiteCardCount = playerWhiteCardCount + 1;    
-        }
-
-        if (playerWhiteCardCount > 0) {
-            baseRound.playerIds = Utils.getNFromArray(players.map(p => p.id), playerWhiteCardCount, !!gameSettings.speficiPlayerId ? [gameSettings.speficiPlayerId] : [])
-        }
-        return baseRound;
-    }
-
-    castCard(card: Card) : C {
-        return <C> card;
-    }
-
-    getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string) : string {
-        let text = card.text;
-
-        if (card.text.includes(specificPlayerNameWhitecard)) {
-            if (!!speficPlayerId) {
-                text = text.split(`${specificPlayerNameWhitecard}`).join(players.find(p => p.id === speficPlayerId)?.username);
-            } else {
-                text = text.replace(specificPlayerNameWhitecard, `${playerNameWhitecard}${playerIds.length - 1}`);
+    getCardService(cardType: CardType) : GameCardService {
+        switch(cardType) {
+            case(CardType.PlayerVoting): {
+                return this.plaverVotingCardService;
             }
+            case(CardType.TopicVotingCard): {
+                return this.pollCardService;
+            }
+            default: return this.baseCardService;
         }
-        
-        if (playerIds.length > 0) {
-            playerIds.forEach((playerId, index) => {
-                text = text.split(`${playerNameWhitecard}${index}`).join(players.find(p => p.id === playerId)?.username);
-            });
-        }
-        return text;
     }
 
-    castResponse(response: Response | null) : R {
-        return <R> response;
-    }
-
-    castResponses(responses: Response[]) : R[] {
-        return <R[]> responses;
-    }
-
-    createDynamicRoundData(roundId: number, responses: Response[]) : D {
-        return {
-            roundId: roundId,
-            processed: true
-        } as D;
-    }
-
-    castDynamicRoundData(dynamicRoundData: DynamicRoundData) : D {
-        return <D> dynamicRoundData;
-    }
-
-    castResult(result: Result) : T {
-        return <T> result;
-    }
-
-    getResults(dynamicRoundData: DynamicRoundData) : T[] {
-        return [];
-    }
-
-    getResultText(result: Result, translateService: TranslateService) {
-        return "";
-    }
-
-    cardHasResultSubText(card: Card): boolean {
-        return false;
-    }
-
-    getResultSubText(result: Result, players: Player[]) {
-        return "";
-    }
-
-    getSipResults(card: Card, dynamicRoundData: DynamicRoundData) : SipResult[] {
-        return [];
-    }
-
-    getPlayerForSipResult(players: Player[], result: SipResult) {
-        return players.find(p => p.id === result.playerId);
-    }
+    // ToDo: Make card Service methods callable from here for easier use
 }

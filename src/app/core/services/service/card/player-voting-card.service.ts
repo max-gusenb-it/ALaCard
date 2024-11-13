@@ -1,4 +1,4 @@
-import { CardService } from "./card.service";
+import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
 import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingSipMode, Response, Result, SipResult } from "src/app/core/models/interfaces";
@@ -8,7 +8,7 @@ import { defaultCardSips, defaultPayToDisplaySips } from "src/app/core/constants
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends CardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
+export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
         const pvResponses = this.castResponses(responses);
         let drd : DynamicPlayerVotingRoundData = super.createDynamicRoundData(roundId, responses);

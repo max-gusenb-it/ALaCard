@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs';
 import { Color, supportedColors } from 'src/app/core/constants/color';
 import { CardType } from 'src/app/core/models/enums';
 import { Card, Player } from 'src/app/core/models/interfaces';
+import { CardService } from 'src/app/core/services/service/card/card.service';
 import { RoomState } from 'src/app/core/state';
 import { CardUtils } from 'src/app/core/utils/card.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
@@ -33,6 +34,7 @@ export class CardComponent extends AngularLifecycle {
 
   constructor(
     private store: Store,
+    private cardService: CardService,
     private translateService: TranslateService
   ) {
     super();
@@ -75,7 +77,6 @@ export class CardComponent extends AngularLifecycle {
         case(supportedColors[14]): return "border-rose-500 bg-rose-500";
       }
     }
-    return;
   }
 
   getTitleBackgroundCSSClasses() {
@@ -111,11 +112,10 @@ export class CardComponent extends AngularLifecycle {
         case(supportedColors[14]): return "bg-rose-200";
       }
     }
-    return;
   }
 
   getCardText() {
-    return CardUtils.getCardService(this.card.type)
+    return this.cardService.getCardService(this.card.type)
       .getCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),

@@ -7,6 +7,7 @@ import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
 import { CardType } from "../../models/enums";
 import { CardUtils } from "../../utils/card.utils";
+import { CardService } from "../service/card/card.service";
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     ingameData$: BehaviorSubject<IngameData> = new BehaviorSubject(null as any);
 
     constructor(
+        private cardService: CardService,
         private ingameDataSourceService: IngameDataSourceService,
         private store: Store
     ) {
@@ -52,7 +54,7 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     }
 
     processRound(roundId: number, cardType: CardType, responses: Response[]) {
-        const cardService = CardUtils.getCardService(cardType);
+        const cardService = this.cardService.getCardService(cardType);
 
         this.ingameDataSourceService.updateDynamicRoundData(
           this.store.selectSnapshot(RoomState.roomId)!,

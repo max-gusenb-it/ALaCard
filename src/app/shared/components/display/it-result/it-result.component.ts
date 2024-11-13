@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Card, Player, Result, SipResult } from 'src/app/core/models/interfaces';
-import { CardUtils } from 'src/app/core/utils/card.utils';
+import { CardService, GameCardService } from 'src/app/core/services/service/card/card.service';
 
 @Component({
   selector: 'it-result',
@@ -10,7 +10,7 @@ import { CardUtils } from 'src/app/core/utils/card.utils';
 })
 export class ItResultComponent implements AfterViewInit {
 
-  cardService: CardUtils.CardService;
+  baseCardService: GameCardService;
 
   @Input() result: Result;
   @Input() sipResult: SipResult;
@@ -23,13 +23,14 @@ export class ItResultComponent implements AfterViewInit {
   // ToDo: Refactor
 
   constructor(
+    private cardService: CardService,
     private translateService: TranslateService,
     private changeDetectornRef: ChangeDetectorRef
   ) { }
 
   ngAfterViewInit(): void {
     if (!!this.card) {
-      this.cardService = CardUtils.getCardService(this.card.type);
+      this.baseCardService = this.cardService.getCardService(this.card.type);
       this.changeDetectornRef.detectChanges();
     }
   }
@@ -46,7 +47,7 @@ export class ItResultComponent implements AfterViewInit {
 
   getResultText() {
     if (!!!this.sipResult) {
-      return this.cardService.getResultText(this.result, this.translateService);
+      return this.baseCardService.getResultText(this.result, this.translateService);
     } else {
       let text = this.sipResult.distribute ? 
         this.translateService.instant("shared.components.display.it-result.distribute") : 
@@ -60,11 +61,11 @@ export class ItResultComponent implements AfterViewInit {
   }
 
   cardHasResultSubText() {
-    return !!!this.sipResult && this.cardService.cardHasResultSubText(this.card, this.overrideAnonymous);
+    return !!!this.sipResult && this.baseCardService.cardHasResultSubText(this.card, this.overrideAnonymous);
   }
 
   getResultSubText() {
-    return this.cardService.getResultSubText(this.result, this.players);
+    return this.baseCardService.getResultSubText(this.result, this.players);
   }
 
 }
