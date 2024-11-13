@@ -1,4 +1,4 @@
-import { PlayerVotingResponse } from "./response-data/player-voting-response";
+import { PlayerVotingResponse } from "../../response-data/player-voting-response";
 import { DynamicRoundData } from "./dynamic-round-data";
 
 export interface DynamicPlayerVotingRoundData extends DynamicRoundData {
