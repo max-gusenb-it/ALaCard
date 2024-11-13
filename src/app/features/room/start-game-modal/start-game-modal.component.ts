@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { specificPlayerNameWhitecard } from 'src/app/core/constants/card';
+import { speficiPlayerIdSettingName } from 'src/app/core/constants/game-settings';
 import { Deck, GameSettings, Player } from 'src/app/core/models/interfaces';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomActions, RoomState } from 'src/app/core/state';
 import { DeckState } from 'src/app/core/state/deck';
+import { GameSettingsUtils } from 'src/app/core/utils/game-settings.utils';
 import { StaticRoundDataUtils } from 'src/app/core/utils/static-round-data.utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
@@ -31,9 +32,9 @@ export class StartGameModal extends AngularLifecycle {
   });
 
   constructor(
+    private store: Store,
     private popupService: PopupService,
-    private translateService: TranslateService,
-    private store: Store
+    private translateService: TranslateService
   ) {
     super();
 
@@ -43,41 +44,27 @@ export class StartGameModal extends AngularLifecycle {
   }
 
   onNavigation(event: string) {
+    if (this.currentTab !== "Settings" && event === "Settings" && GameSettingsUtils.areSettingsPreset(this.selectedDeck.defaultGameSettings)) {
+      this.startGame();
+      return;
+    }
     this.currentTab = event;
     if (event === "Settings") {
       this.showSettings = true;
     }
   }
 
+  specificPersonModeRequired() {
+    return GameSettingsUtils.settingInputRequired(speficiPlayerIdSettingName, undefined, this.selectedDeck.defaultGameSettings);
+  }
+
   specificPersonModeAvailable() {
-    if (!!!this.selectedDeck) return false;
-    else return !!this.selectedDeck.cards.find(c => c.text.includes(specificPlayerNameWhitecard));
+    return GameSettingsUtils.settingAvailable(speficiPlayerIdSettingName, undefined, this.selectedDeck.defaultGameSettings);
   }
 
   onDeckSelection(selectionId: number) {
     this.selectedDeck = this.decks[selectionId];
-    this.prepareSettingsForm();
-  }
-
-  prepareSettingsForm() {
-    this.gameSettingsForm.patchValue({
-      specificPlayerActivated: false,
-      specificPlayerId: null
-    });
-
-    if (this.selectedDeck.speficPlayerMandatory) {
-      this.gameSettingsForm.controls["specificPlayerId"].addValidators(Validators.required);
-    } else {
-      this.gameSettingsForm.controls["specificPlayerId"].clearValidators();
-    }
-    if (!this.specificPersonModeAvailable()) {
-      this.gameSettingsForm.controls["specificPlayerActivated"].disable();
-    } else {
-      this.gameSettingsForm.controls["specificPlayerActivated"].enable();
-    }
-    
-    this.gameSettingsForm.controls['specificPlayerActivated'].updateValueAndValidity();
-    this.gameSettingsForm.controls['specificPlayerId'].updateValueAndValidity();
+    GameSettingsUtils.prepareGameSettingsForm(this.gameSettingsForm, this.selectedDeck.defaultGameSettings);
   }
 
   onSubmitOrCancel(event: boolean) {
@@ -91,8 +78,10 @@ export class StartGameModal extends AngularLifecycle {
   startGame() {
     let speficiPlayerId = null;
     if (
-      this.selectedDeck.speficPlayerMandatory || 
-      this.gameSettingsForm.controls["specificPlayerActivated"].value && this.gameSettingsForm.controls["specificPlayerId"].value != null
+      this.specificPersonModeRequired() || 
+      this.specificPersonModeAvailable() &&
+      this.gameSettingsForm.controls["specificPlayerActivated"].value &&
+      this.gameSettingsForm.controls["specificPlayerId"].value != null
     ) {
       speficiPlayerId = this.gameSettingsForm.controls["specificPlayerId"].value;
     }

@@ -1,5 +1,6 @@
-import { CardType } from "../models/enums";
+import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
 import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode } from "../models/interfaces";
+import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
 // Test Decks
 export const partyDeck: Deck = {
@@ -40,7 +41,13 @@ export const partyDeck: Deck = {
             }
         } as FreeTextCard
     ],
-    speficPlayerMandatory: false
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 };
 export const partyDeckWithRules: Deck = {
     icon: "🎉",
@@ -73,7 +80,13 @@ export const partyDeckWithRules: Deck = {
         "Don't drink too much ;)",
         "Don't forget to **have fun** :)"
     ],
-    speficPlayerMandatory: false
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 };
 export const partyDeckWithSpMandatory: Deck = {
     icon: "🎉",
@@ -100,7 +113,13 @@ export const partyDeckWithSpMandatory: Deck = {
             }
         } as PlayerVotingCard
     ],
-    speficPlayerMandatory: true
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.user,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 };
 export const partyDeckWithRulesAndSp: Deck = {
     icon: "🎉",
@@ -132,8 +151,7 @@ export const partyDeckWithRulesAndSp: Deck = {
         "The winner is the last one standing :*",
         "Don't drink too much ;)",
         "Don't forget to **have fun** :)"
-    ],
-    speficPlayerMandatory: false
+    ]
 };
 export const drinkingDeck: Deck = {
     icon: "🍻",
@@ -148,7 +166,13 @@ export const drinkingDeck: Deck = {
             }
         } as FreeTextCard
     ],
-    speficPlayerMandatory: false
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 };
 export const aLotOfPlayersDeck: Deck = {
     icon: "👩‍👧‍👦",
@@ -160,7 +184,13 @@ export const aLotOfPlayersDeck: Deck = {
             type: CardType.FreeText
         } as FreeTextCard
     ],
-    speficPlayerMandatory: false
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 };
 
 export const demoPartyDecks: Deck[] = [
@@ -718,7 +748,13 @@ export const leggitPartyDeck: Deck = {
         "- **Reminder**  \n- The game is currently under development so the features are limited",
         "Thanks for testing out my game btw. :)"
     ],
-    speficPlayerMandatory: false
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 };
 
 
@@ -1635,7 +1671,19 @@ export const askhole: Deck = {
             type: CardType.FreeText
         } as FreeTextCard
     ],
-    speficPlayerMandatory: false
+    defaultGameSettings: [
+        {
+            settingName: drinkingGameSettingName,
+            value: "false",
+            valueSource: DefaultGameSettingValueSource.value,
+            requirement: DefaultGameSettingRequirement.required
+        },
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ]
 }
 
 export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole];

@@ -5,6 +5,7 @@
   [finishControlDisabled]="!gameSettingsForm.valid"
   class="flex flex-grow p-6"
 >
+  <!-- ToDo: add card number somewhere when changing game settings. Maybe add deck component at top -->
   <it-tab [title]="'features.room.start-game-modal.deck' | translate">
     <div class="h-full flex flex-col">
       <p>{{ 'features.room.start-game-modal.deck-subtitle' | translate }}</p>
@@ -37,7 +38,7 @@
             formControlName="drinkingGame"
           />
           <it-checkbox-accord
-            *ngIf="!selectedDeck.speficPlayerMandatory && specificPersonModeAvailable()"
+            *ngIf="!specificPersonModeRequired() && specificPersonModeAvailable()"
             id="specificPlayerActivated"
             [label]="'features.room.settings-bottom-sheet.specificPlayerActivated' | translate"
             formControlName="specificPlayerActivated"
@@ -56,7 +57,7 @@
             id="specificPlayerId"
             [label]="'features.room.settings-bottom-sheet.specific-player' | translate"
             formControlName="specificPlayerId"
-            *ngIf="selectedDeck.speficPlayerMandatory"
+            *ngIf="specificPersonModeRequired()"
           >
             <option *ngFor="let player of players" [value]="player.id">
               {{ player.username }}

@@ -103,7 +103,6 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   }
 
   signUp() {
-    // ToDo: Fix
     this.popupService.openModal({
       component: ItAddAccountModal
     });

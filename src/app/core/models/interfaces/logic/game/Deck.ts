@@ -1,4 +1,5 @@
 import { Card } from "../cards/card";
+import { DefaultGameSetting } from "./default-game-setting";
 
 export interface Deck {
     name: string;
@@ -7,5 +8,5 @@ export interface Deck {
     cards: Card[];
     groundRules?: string[];
     
-    speficPlayerMandatory: boolean;
+    defaultGameSettings?: DefaultGameSetting[];
 }
