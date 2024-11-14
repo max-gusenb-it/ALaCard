@@ -18,10 +18,9 @@
                 <it-result
                     *ngFor="let result of results"
                     [result]="result"
-                    [username]="getPlayerForResult(result)?.username"
+                    [title]="getPlayerForResult(result)?.username"
                     [profilePicture]="getPlayerForResult(result)?.profilePicture"
                     [card]="card"
-                    [players]="players"
                     [overrideAnonymous]="!!getCastedDynamicRoundData().payToDisplayPlayerId"
                 />
             </div>
@@ -36,14 +35,14 @@
                 default
                 *ngIf="!!userSipResult"
                 [sipResult]="userSipResult"
-                [username]="getPlayerForSipResult(userSipResult)?.username"
+                [title]="getPlayerForSipResult(userSipResult)?.username"
                 [profilePicture]="getPlayerForSipResult(userSipResult)?.profilePicture"
             />
             <it-result
                 collapsible
                 *ngFor="let result of sipResults"
                 [sipResult]="result"
-                [username]="getPlayerForSipResult(result)?.username"
+                [title]="getPlayerForSipResult(result)?.username"
                 [profilePicture]="getPlayerForSipResult(result)?.profilePicture"
             />
         </it-accord>

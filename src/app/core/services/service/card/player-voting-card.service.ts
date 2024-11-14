@@ -9,6 +9,11 @@ import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } f
     providedIn: 'root'
 })
 export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
+
+    constructor(private translateService: TranslateService) {
+        super();
+    }
+
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
         const pvResponses = this.castResponses(responses);
         let drd : DynamicPlayerVotingRoundData = super.createDynamicRoundData(roundId, responses);
@@ -47,9 +52,9 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return results;
     }
 
-    override getResultText(result: Result, translateService: TranslateService): string {
+    override getResultText(result: Result): string {
         const pvResult = this.castResult(result);
-        const translation = pvResult.votes === 1 ? translateService.instant("shared.components.display.it-result.vote") : translateService.instant("shared.components.display.it-result.votes");
+        const translation = pvResult.votes === 1 ? this.translateService.instant("shared.components.display.it-result.vote") : this.translateService.instant("shared.components.display.it-result.votes");
         return `${pvResult.votes} ${translation}`;
     }
 

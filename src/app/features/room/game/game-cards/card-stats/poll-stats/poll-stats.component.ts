@@ -56,6 +56,10 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
     );
   }
 
+  getSubject(subjectId: number) {
+    return this.castedCard.subjects.find(s => s.id! === subjectId);
+  }
+
   getResultsHeading() {
     // ToDo: Move to card service
     const result = this.results[0];

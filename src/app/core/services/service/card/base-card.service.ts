@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
 import { PlayerState } from "src/app/core/models/enums";
 import { Card, DynamicRoundData, GameSettings, Player, Response, Result, Round, SipResult } from "src/app/core/models/interfaces";
+import { BaseCardUtils } from "src/app/core/utils/card/base-card.utils";
 import { Utils } from "src/app/core/utils/utils";
 
 @Injectable({
@@ -24,7 +24,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
     }
 
     castCard(card: Card) : C {
-        return <C> card;
+        return BaseCardUtils.castCard<C>(card);
     }
 
     getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string) : string {
@@ -73,7 +73,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [];
     }
 
-    getResultText(result: Result, translateService: TranslateService) {
+    getResultText(result: Result) {
         return "";
     }
 

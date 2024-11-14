@@ -1,7 +1,16 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngxs/store';
+import { CardType } from 'src/app/core/models/enums';
 import { Card, Player, Result, SipResult } from 'src/app/core/models/interfaces';
 import { CardService, GameCardService } from 'src/app/core/services/service/card/card.service';
+import { RoomState } from 'src/app/core/state';
+
+enum ResultType {
+  PlayerVotingResult,
+  TopicVotingResult,
+  SipVotingResult
+}
 
 @Component({
   selector: 'it-result',
@@ -11,22 +20,23 @@ import { CardService, GameCardService } from 'src/app/core/services/service/card
 export class ItResultComponent implements AfterViewInit {
 
   baseCardService: GameCardService;
+  players: Player[];
 
   @Input() result: Result;
   @Input() sipResult: SipResult;
   @Input() profilePicture?: string;
-  @Input() username?: string;
+  @Input() title?: string;
   @Input() card: Card;
-  @Input() players: Player[];
   @Input() overrideAnonymous: boolean = false;
 
-  // ToDo: Refactor
-
   constructor(
+    private store: Store,
     private cardService: CardService,
     private translateService: TranslateService,
     private changeDetectornRef: ChangeDetectorRef
-  ) { }
+  ) {
+    this.players = this.store.selectSnapshot(RoomState.players);
+  }
 
   ngAfterViewInit(): void {
     if (!!this.card) {
@@ -35,33 +45,69 @@ export class ItResultComponent implements AfterViewInit {
     }
   }
 
-  skipped() {
-    return !!!this.username;
+  get ResultType() {
+    if (!!this.result && !!this.card) {
+      switch(this.card.type) {
+        case(CardType.PlayerVoting): {
+          return ResultType.PlayerVotingResult;
+        }
+        case(CardType.TopicVotingCard): {
+          return ResultType.TopicVotingResult;
+        }
+      }
+    }
+    if (!!this.sipResult) {
+      return ResultType.SipVotingResult;
+    }
+    return null;
   }
 
   getTitle() {
-    return !this.skipped() ? 
-      this.username : 
-      this.translateService.instant("shared.components.display.it-result.skipped");
+    switch(this.ResultType) {
+      case(ResultType.PlayerVotingResult):
+      case(ResultType.TopicVotingResult): {
+        return !this.skipped() ? 
+          this.title : 
+          this.translateService.instant("shared.components.display.it-result.skipped");
+      };
+      case(ResultType.SipVotingResult): {
+        return this.title;
+      }
+    }
   }
 
+  skipped() {
+    return !!!this.title;
+  }
+
+
   getResultText() {
-    if (!!!this.sipResult) {
-      return this.baseCardService.getResultText(this.result, this.translateService);
-    } else {
-      let text = this.sipResult.distribute ? 
-        this.translateService.instant("shared.components.display.it-result.distribute") : 
-        this.translateService.instant("shared.components.display.it-result.drink");
-      text += ` ${this.sipResult.sips} `;
-      text += this.sipResult.sips > 1 ? 
-        this.translateService.instant("shared.components.display.it-result.sips") : 
-        this.translateService.instant("shared.components.display.it-result.sip");
-      return text;
+    switch(this.ResultType) {
+      case(ResultType.PlayerVotingResult):
+      case(ResultType.TopicVotingResult): {
+        return this.baseCardService.getResultText(this.result);
+      };
+      case(ResultType.SipVotingResult): {
+        let text = this.sipResult.distribute ? 
+          this.translateService.instant("shared.components.display.it-result.distribute") : 
+          this.translateService.instant("shared.components.display.it-result.drink");
+        text += ` ${this.sipResult.sips} `;
+        text += this.sipResult.sips > 1 ? 
+          this.translateService.instant("shared.components.display.it-result.sips") : 
+          this.translateService.instant("shared.components.display.it-result.sip");
+        return text;
+      }
     }
   }
 
   cardHasResultSubText() {
-    return !!!this.sipResult && this.baseCardService.cardHasResultSubText(this.card, this.overrideAnonymous);
+    switch(this.ResultType) {
+      case(ResultType.PlayerVotingResult):
+      case(ResultType.TopicVotingResult): {
+        return this.baseCardService.cardHasResultSubText(this.card, this.overrideAnonymous);
+      }
+    }
+    return false;
   }
 
   getResultSubText() {

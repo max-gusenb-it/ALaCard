@@ -1,8 +1,8 @@
-import { Deck, GameSettings, Player } from "../models/interfaces";
+import { Deck, GameSettings, Player, PlayerVotingCard } from "../models/interfaces";
 import { Utils } from './utils';
 import { CardType, PlayerState } from '../models/enums';
 import { playerNameWhitecard, specificPlayerNameWhitecard } from '../constants/card';
-import { PlayerVotingCardService } from '../services/service/card/player-voting-card.service';
+import { BaseCardUtils } from "./card/base-card.utils";
 
 export namespace StaticRoundDataUtils {
     export function isDeckPlayable(deck: Deck, players: Player[], gameSettings: GameSettings) {
@@ -18,8 +18,7 @@ export namespace StaticRoundDataUtils {
                 let neededPlayerCount = Utils.countSubstrings(card.text, playerNameWhitecard) + Utils.countSubstrings(card.text, specificPlayerNameWhitecard);
                 switch(card.type) {
                     case(CardType.PlayerVoting): {
-                        const service = new PlayerVotingCardService();
-                        let pvCard = service.castCard(card);
+                        let pvCard = BaseCardUtils.castCard<PlayerVotingCard>(card);
                         if (neededPlayerCount < 2 && pvCard.settings?.selfVoteDisabled) {
                             neededPlayerCount = 2;
                         }

@@ -12,7 +12,12 @@
     >
         <!-- ToDo: Add max height and scrolling -->
         <div collapsible class="flex flex-col gap-2">
-            
+            <it-result
+                *ngFor="let result of results"
+                [result]="result"
+                [title]="getSubject(result.subjectId)?.title"
+                [card]="card"
+            />
         </div>
     </it-accord>
 </div>
