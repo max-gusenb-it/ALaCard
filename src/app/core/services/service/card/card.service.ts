@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import { CardType } from "src/app/core/models/enums";
-import { PollCardService } from "./poll-card.service";
 import { BaseCardService } from "./base-card.service";
 import { PlayerVotingCardService } from "./player-voting-card.service";
 import { Card, DynamicRoundData, PlayerVotingCard, PollCard, Response, Result } from "src/app/core/models/interfaces";
 import { TopicVotingCardService } from "./topic-voting-card.service";
 
-export type GameCardService = BaseCardService<Card, Response, DynamicRoundData, Result> | PlayerVotingCardService | PollCardService;
+export type GameCardService = BaseCardService<Card, Response, DynamicRoundData, Result> | PlayerVotingCardService | TopicVotingCardService;
 export type GameCard = Card | PlayerVotingCard | PollCard;
 
 @Injectable({

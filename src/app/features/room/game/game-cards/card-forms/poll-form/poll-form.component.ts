@@ -8,11 +8,11 @@ import { Card, RoomSettings, Round, PollCard, PollResponse } from "src/app/core/
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
 import { ResponseDataDataService } from "src/app/core/services/data/response-data.data.service";
 import { CardService } from "src/app/core/services/service/card/card.service";
-import { PollCardService } from "src/app/core/services/service/card/poll-card.service";
 import { RoomService } from "src/app/core/services/service/room.service";
 import { ResponseDataSourceService } from "src/app/core/services/source/response-data.source.service";
 import { AuthenticationState, RoomState } from "src/app/core/state";
 import { InformationActions, InformationState } from "src/app/core/state/information";
+import { BasePollCardService } from "src/app/core/types/card";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
 @Component({
@@ -29,7 +29,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     });
 
     roomSettings: RoomSettings;
-    pollCardService: PollCardService;
+    pollCardService: BasePollCardService;
 
     constructor(
         private store: Store,
@@ -46,7 +46,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     ngAfterViewInit(): void {
-        this.pollCardService = <PollCardService>this.cardService.getCardService(this.card.type);
+        this.pollCardService = <BasePollCardService>this.cardService.getCardService(this.card.type);
         this.castedCard = this.pollCardService.castCard(this.card);
         this.changeDetectorRef.detectChanges();
         

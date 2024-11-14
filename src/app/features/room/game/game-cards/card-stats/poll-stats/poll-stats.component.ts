@@ -9,9 +9,9 @@ import { DynamicPollRoundData } from "src/app/core/models/interfaces/logic/game-
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
 import { StaticRoundDataDataService } from "src/app/core/services/data/static-round-data.data.service";
 import { CardService } from "src/app/core/services/service/card/card.service";
-import { PollCardService } from "src/app/core/services/service/card/poll-card.service";
 import { RoomService } from "src/app/core/services/service/room.service";
 import { RoomState } from "src/app/core/state";
+import { BasePollCardService } from "src/app/core/types/card";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
 @Component({
@@ -22,7 +22,7 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   @Input() card: Card;
   @Input() round: Round;
 
-  pollCardService: PollCardService
+  pollCardService: BasePollCardService
   castedCard: PollCard;
   dynamicRoundData: DynamicPollRoundData;
   results: PollResult[];
@@ -40,7 +40,7 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   }
 
   ngAfterViewInit(): void {
-    this.pollCardService = <PollCardService>this.cardService.getCardService(this.card.type);
+    this.pollCardService = <BasePollCardService>this.cardService.getCardService(this.card.type);
     this.castedCard = this.pollCardService.castCard(this.card);
 
     this.ingameDataDataService.getDynamicRoundData$()

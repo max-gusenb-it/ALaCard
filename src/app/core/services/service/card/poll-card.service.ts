@@ -7,10 +7,10 @@ import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card
 @Injectable({
     providedIn: 'root'
 })
-export class PollCardService extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult> { // ToDo: Think about creating TopicVotingCard for individual settings
-    override castCard(card: Card): PollCard {
+export class PollCardService<C extends PollCard> extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult> { // ToDo: Think about creating TopicVotingCard for individual settings
+    override castCard(card: Card): C {
         let pollCard = super.castCard(card);
-        return {
+        return <C>{
             ...pollCard,
             subjects: pollCard.subjects.map((c, index) => {
                 return {
@@ -18,7 +18,7 @@ export class PollCardService extends BaseCardService<PollCard, PollResponse, Dyn
                     ...c
                 }
             })
-        }
+        };
     }
 
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPollRoundData {

@@ -1,5 +1,6 @@
 import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
 import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingGroup, PollCard } from "../models/interfaces";
+import { TopicVotingCard } from "../models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -1750,7 +1751,7 @@ export const testingDeck: Deck = {
                     title: "200 years into the past"
                 }
             ]
-        } as PollCard,
+        } as TopicVotingCard,
         {
             text: "Would you rather be able to fly or teleport?",
             type: CardType.TopicVotingCard,
@@ -1762,7 +1763,7 @@ export const testingDeck: Deck = {
                     title: "Teleport"
                 }
             ]
-        } as PollCard,
+        } as TopicVotingCard,
         {
             text: "What would you prefer to experience?",
             type: CardType.TopicVotingCard,
@@ -1777,7 +1778,7 @@ export const testingDeck: Deck = {
             settings: {
                 isAnonymous: true
             }
-        } as PollCard
+        } as TopicVotingCard
     ],
     requiredPlayers: {
         playerCount: 1,

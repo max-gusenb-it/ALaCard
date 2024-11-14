@@ -4,11 +4,12 @@ import { Card, DynamicRoundData, Player, Result, SipResult } from "src/app/core/
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
+import { TopicVotingCard } from "src/app/core/models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
 
 @Injectable({
     providedIn: 'root'
 })
-export class TopicVotingCardService extends PollCardService {
+export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
     
     constructor(private translateService: TranslateService) {
         super();
@@ -73,7 +74,7 @@ export class TopicVotingCardService extends PollCardService {
         let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
         return sipResults;
     }
-    
+
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         return[];
     }
