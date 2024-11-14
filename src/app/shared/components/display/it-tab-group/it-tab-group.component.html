@@ -2,8 +2,11 @@
   <div
     class="flex flex-row justify-between pb-4"
   >
+  <div
+    *ngFor="let tab of tabs"
+  >
     <button
-      *ngFor="let tab of tabs"
+      *ngIf="!tab.hidden"
       (click)="selectTab(tab)"
     >
       <h4
@@ -13,6 +16,7 @@
         {{ tab.title }}
       </h4>
     </button>
+  </div>
   </div>
   <ng-content class="h-full"></ng-content>
   <div *ngIf="!hideControls" class="flex gap-x-2 pt-4">

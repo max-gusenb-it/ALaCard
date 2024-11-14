@@ -9,13 +9,14 @@ export class ItTabComponent {
 
   private _active: boolean = false;
 
-  @HostBinding('hidden') public hidden: boolean = true;
+  @HostBinding('hidden') public hiddenBinding: boolean = true;
 
   @Input() set active(value: boolean) {
     this._active = value;
-    this.hidden = !value;
+    this.hiddenBinding = !value;
   }
   @Input() title: string = "Tab";
+  @Input() hidden: boolean = false;
 
   get active() {
     return this._active;

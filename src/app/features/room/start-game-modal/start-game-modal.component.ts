@@ -62,6 +62,11 @@ export class StartGameModal extends AngularLifecycle {
     return GameSettingsUtils.settingAvailable(speficiPlayerIdSettingName, undefined, this.selectedDeck.defaultGameSettings);
   }
 
+  areSettingsPreset() {
+    if (!!!this.selectedDeck) return false;
+    return GameSettingsUtils.areSettingsPreset(this.selectedDeck.defaultGameSettings);
+  }
+
   onDeckSelection(selectionId: number) {
     this.selectedDeck = this.decks[selectionId];
     GameSettingsUtils.prepareGameSettingsForm(this.gameSettingsForm, this.selectedDeck.defaultGameSettings);
