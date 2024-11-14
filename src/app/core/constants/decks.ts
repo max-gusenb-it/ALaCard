@@ -1750,6 +1750,33 @@ export const testingDeck: Deck = {
                     title: "200 years into the past"
                 }
             ]
+        } as PollCard,
+        {
+            text: "Would you rather be able to fly or teleport?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Fly" 
+                },
+                {
+                    title: "Teleport"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "What would you prefer to experience?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Your parents catch you having sex" 
+                },
+                {
+                    title: "You catch your parents having sex"
+                }
+            ],
+            settings: {
+                isAnonymous: true
+            }
         } as PollCard
     ],
     requiredPlayers: {

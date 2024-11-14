@@ -7,7 +7,9 @@ import { Card, PollCard, Round } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { DynamicPollRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
+import { StaticRoundDataDataService } from "src/app/core/services/data/static-round-data.data.service";
 import { PollCardService } from "src/app/core/services/service/card/poll-card.service";
+import { RoomService } from "src/app/core/services/service/room.service";
 import { RoomState } from "src/app/core/state";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
@@ -26,7 +28,9 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   constructor(
     private store: Store,
     private pollCardService: PollCardService,
+    private roomService: RoomService,
     private ingameDataDataService: IngameDataDataService,
+    private staticRoundDataDataService: StaticRoundDataDataService,
     private changeDetectorRef: ChangeDetectorRef,
     private translateService: TranslateService
   ) {
@@ -68,5 +72,13 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
     } else {
       return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
     }
+  }
+
+  isUserRoomAdmin() {
+    return this.roomService.isUserAdmin();
+  }
+
+  startNextRound() {
+    this.staticRoundDataDataService.startNewRound();
   }
 }

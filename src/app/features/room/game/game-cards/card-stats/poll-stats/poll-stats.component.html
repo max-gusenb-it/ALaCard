@@ -20,4 +20,12 @@
             />
         </div>
     </it-accord>
+    <div class="flex flex-row gap-4" *ngIf="isUserRoomAdmin()">
+        <!-- <it-button class="flex grow basis-0" color="red" type="button" *ngIf="displayPayToDisplay()" (click)="payToDisplay()">
+            {{ 'features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display' | translate }}
+        </it-button> -->
+        <it-button class="flex grow basis-0" color="blue" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
+            {{ 'actions.continue' | translate }}
+        </it-button>
+    </div>
 </div>

@@ -77,6 +77,7 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
     override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
         // Pay To Disply Sip Calculation
+        // Maybe move pay to display logic into seperate pay to display special card service
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         if (!!dynamicPlayerVotingRoundData.payToDisplayPlayerId) {
             const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPlayerVotingRoundData.payToDisplayPlayerId && !sr.distribute);
