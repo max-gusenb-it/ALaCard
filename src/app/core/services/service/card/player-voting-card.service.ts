@@ -97,15 +97,7 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return sipResults;
     }
     
-    /**
-     * Calculates sip results for the essential part of the round
-     * Move to card.service.ts if other child card services need this method
-     *
-     * @protected
-     * @param {DynamicRoundData} dynamicRoundData
-     * @returns {SipResult[]}
-     */
-    protected calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const pvCard = this.castCard(card);
 
         const results = this.getResults(dynamicRoundData)

@@ -86,6 +86,17 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
     }
 
     getSipResults(card: Card, dynamicRoundData: DynamicRoundData) : SipResult[] {
+        return this.calculateRoundSipResults(card, dynamicRoundData);
+    }
+    
+    /**
+     * Calculates sip results for the essential part of the round
+     *
+     * @protected
+     * @param {DynamicRoundData} dynamicRoundData
+     * @returns {SipResult[]}
+     */
+    calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         return [];
     }
 
