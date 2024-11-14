@@ -7,6 +7,7 @@ import { CardType } from "src/app/core/models/enums";
 import { Card, RoomSettings, Round, PollCard, PollResponse } from "src/app/core/models/interfaces";
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
 import { ResponseDataDataService } from "src/app/core/services/data/response-data.data.service";
+import { CardService } from "src/app/core/services/service/card/card.service";
 import { PollCardService } from "src/app/core/services/service/card/poll-card.service";
 import { RoomService } from "src/app/core/services/service/room.service";
 import { ResponseDataSourceService } from "src/app/core/services/source/response-data.source.service";
@@ -28,10 +29,11 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     });
 
     roomSettings: RoomSettings;
+    pollCardService: PollCardService;
 
     constructor(
         private store: Store,
-        private pollCardService: PollCardService,
+        private cardService: CardService,
         private responseDataSourceService: ResponseDataSourceService,
         private responseDataDataService: ResponseDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -44,6 +46,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     ngAfterViewInit(): void {
+        this.pollCardService = <PollCardService>this.cardService.getCardService(this.card.type);
         this.castedCard = this.pollCardService.castCard(this.card);
         this.changeDetectorRef.detectChanges();
         
