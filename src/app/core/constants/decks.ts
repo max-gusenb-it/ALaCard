@@ -1,5 +1,5 @@
 import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingSipMode, PollCard } from "../models/interfaces";
+import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingGroup, PollCard } from "../models/interfaces";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -36,7 +36,7 @@ export const partyDeck: Deck = {
                 order: 2,
                 selfVoteDisabled: false,
                 sipConfig: {
-                    sipMode: PlayerVotingSipMode.LeastVoted
+                    group: PlayerVotingGroup.LeastVoted
                 }
             }
         } as PlayerVotingCard,

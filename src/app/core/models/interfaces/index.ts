@@ -12,7 +12,7 @@ export { PlayerVotingCardSettings } from "./logic/cards/player-voting-card/playe
 export { PlayerVotingCard } from "./logic/cards/player-voting-card/player-voting-card";
 export { PlayerVotingResult } from "./logic/cards/player-voting-card/player-voting-result";
 export { PlayerVotingSipConfig } from "./logic/cards/player-voting-card/player-voting-sip-config";
-export { PlayerVotingSipMode } from "./logic/cards/player-voting-card/player-voting-sip-mode";
+export { PlayerVotingGroup } from "./logic/cards/player-voting-card/player-voting-group";
 
 export { PollCardSettings } from "./logic/cards/poll-card/poll-card-settings";
 export { PollCard } from "./logic/cards/poll-card/poll-card";

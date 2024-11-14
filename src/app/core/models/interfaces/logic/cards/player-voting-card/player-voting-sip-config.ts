@@ -1,6 +1,6 @@
-import { PlayerVotingSipMode } from "./player-voting-sip-mode";
+import { PlayerVotingGroup } from "./player-voting-group";
 
 export interface PlayerVotingSipConfig {
-    sipMode: PlayerVotingSipMode;
+    group: PlayerVotingGroup;
     // ToDo: Add sip direction (distribute)
 }

@@ -1,7 +1,7 @@
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingSipMode, Response, Result, SipResult } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "src/app/core/constants/card";
 
@@ -109,13 +109,13 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
 
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.votedPlayerId !== playerVotingCardSkipValue);
-        let sipMode = pvCard.settings?.sipConfig?.sipMode;
-        if (!!!sipMode) sipMode = PlayerVotingSipMode.MostVoted;
+        let group = pvCard.settings?.sipConfig?.group;
+        if (!!!group) group = PlayerVotingGroup.MostVoted;
 
         let sipResults: SipResult[] = [];
         if (results.length !== 0) {
             let votes = 0;
-            if (sipMode === PlayerVotingSipMode.MostVoted) {
+            if (group === PlayerVotingGroup.MostVoted) {
                 votes = results[0].votes;
             } else {
                 votes = results[results.length - 1].votes;
