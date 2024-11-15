@@ -239,7 +239,7 @@ export const demoPartyDecks: Deck[] = [
 
 // Leggit Decks
 export const leggitPartyDeck: Deck = {
-    icon: "🪅",
+    icon: "🎊",
     name: "aLaCard",
     description: "Very funny Party Game",
     cards: [
@@ -798,7 +798,7 @@ export const leggitPartyDeck: Deck = {
     },
 };
 export const askhole: Deck = {
-    icon: "🅰️",
+    icon: "🩷",
     name: "askhole",
     description: "Talk about things you normally wouldn't by answering questions ranging from interesting to very weird",
     groundRules: [
@@ -1733,7 +1733,7 @@ export const askhole: Deck = {
     }
 }
 export const testingDeck: Deck = {
-    icon: "🆕",
+    icon: "🔮",
     name: "Testing Deck",
     description: "Test the new topic voting card which is currently under development.",
     groundRules: [

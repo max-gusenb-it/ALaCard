@@ -11,6 +11,7 @@ export class ItTabGroupComponent implements AfterContentInit {
   @Input() hideControls: boolean = false;
   @Input() advanceControlDisabled: boolean = false;
   @Input() finishControlDisabled: boolean = false;
+  @Input() advanceButtonIcon?: string;
 
   @Output() onTabChange = new EventEmitter<string>();
   @Output() onStatusChange = new EventEmitter<boolean>();

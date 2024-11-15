@@ -27,7 +27,8 @@
       <it-icon>play_arrow</it-icon>
     </it-button>
     <it-button *ngIf="tabs.length > 1" class="flex flex-grow" (click)="nextTab()" [disabled]="advanceControlDisabled ">
-      <it-icon>keyboard_arrow_right</it-icon>
+      <it-icon *ngIf="!advanceButtonIcon">keyboard_arrow_right</it-icon>
+      <it-icon *ngIf="advanceButtonIcon">{{ advanceButtonIcon }}</it-icon>
     </it-button>
   </div>
 </div>
