@@ -9,8 +9,12 @@
     [label]="'shared.components.forms.it-profile-editor-form.username' | translate"
     formControlName="username"
   />
-  <it-drawing-board
-    (drawingChanged)="setProfilePicture($event)"
-    [drawingUrl]="profileEditorFormData.profilePicture"
-  />
+  <div class="flex flex-col gap-2">
+    <p *ngIf="!isRegistered">{{'shared.components.forms.it-profile-editor-form.create-profile-picture' | translate}}</p>
+    <p *ngIf="isRegistered">{{'shared.components.forms.it-profile-editor-form.update-profile-picture' | translate}}</p>
+    <it-drawing-board
+      (drawingChanged)="setProfilePicture($event)"
+      [drawingUrl]="profileEditorFormData.profilePicture"
+    />
+  </div>
 </form>

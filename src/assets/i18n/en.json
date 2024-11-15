@@ -171,7 +171,9 @@
         "it-profile-editor-form": {
           "create-profile": "Create your profile",
           "username": "Username",
-          "edit-profile": "Edit profile"
+          "edit-profile": "Edit profile",
+          "create-profile-picture": "Draw your own avatar",
+          "update-profile-picture": "Edit your avatar"
         },
         "it-sign-in-modal": {
           "email": "E-Mail",
