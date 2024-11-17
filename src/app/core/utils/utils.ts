@@ -24,4 +24,16 @@ export namespace Utils {
     export function countSubstrings(string: string, subString: string): number {
         return (string.match(new RegExp(subString, "g")) || []).length
     }
+
+    export function addComaToStringArray(arr: string[], addAndSign: boolean = false): string {
+        let text = "";
+        arr.forEach((str, index) => {
+            text += str;
+            if (index !== arr.length -1) {
+                if (addAndSign && index === arr.length - 2) text += " & ";
+                else text += ", "
+            };
+        });
+        return text;
+    }
 }

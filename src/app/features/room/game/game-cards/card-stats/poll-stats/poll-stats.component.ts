@@ -68,13 +68,7 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   }
 
   getResultsHeading() {
-    // ToDo: Move to card service
-    const result = this.results[0];
-    if (result.subjectId !== pollCardSkipValue) {
-      return this.castedCard.subjects.find(s => s.id! === result.subjectId)!.title;
-    } else {
-      return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
-    }
+    return this.pollCardService.getResultsHeading(this.results, this.card);
   }
 
   isUserRoomAdmin() {

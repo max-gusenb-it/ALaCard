@@ -4,13 +4,16 @@ import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/log
 import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "src/app/core/constants/card";
+import { Store } from "@ngxs/store";
+import { RoomState } from "src/app/core/state";
+import { Utils } from "src/app/core/utils/utils";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
 
-    constructor(private translateService: TranslateService) {
+    constructor(private store: Store, private translateService: TranslateService) {
         super();
     }
 
@@ -50,6 +53,20 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
             return r2.votes - r1.votes;
         });
         return results;
+    }
+
+    override getResultsHeading(results: PlayerVotingResult[]): string {
+        const players = this.store.selectSnapshot(RoomState.players);
+        const topResults = results
+            .filter(r => r.votes === results[0].votes && r.votedPlayerId !== playerVotingCardSkipValue);
+        if (topResults.length > 0) {
+            return Utils.addComaToStringArray(
+                topResults.map(r => players.find(p => r.votedPlayerId === p.id)!.username),
+                true
+            );
+        } else {
+            return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
+        }
     }
 
     override getResultText(result: Result): string {

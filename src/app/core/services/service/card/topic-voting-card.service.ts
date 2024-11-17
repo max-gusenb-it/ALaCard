@@ -5,6 +5,7 @@ import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card
 import { pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
 import { TopicVotingCard } from "src/app/core/models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
+import { Utils } from "src/app/core/utils/utils";
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +47,20 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
             return r2.votes - r1.votes;
         });
         return results;
+    }
+
+    override getResultsHeading(results: PollResult[], card: Card): string {
+        const castedCard: TopicVotingCard = this.castCard(card);
+        const topResults = results
+            .filter(r => r.votes === results[0].votes && r.subjectId !== pollCardSkipValue);
+        if (topResults.length > 0) {
+            return Utils.addComaToStringArray(
+                topResults.map(r => castedCard.subjects.find(s => r.subjectId === s.id)!.title),
+                true
+            );
+        } else {
+            return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
+        }
     }
 
     override getResultText(result: Result): string {

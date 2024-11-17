@@ -73,6 +73,10 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [];
     }
 
+    getResultsHeading(results: Result[], card: Card) : string {
+        return "";
+    }
+
     getResultText(result: Result) {
         return "";
     }

@@ -95,12 +95,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   getResultsHeading() {
-    const player = this.getPlayerForResult(this.results[0]);
-    if (player) {
-      return player.username;
-    } else {
-      return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
-    }
+    return this.playerVotingService.getResultsHeading(this.results);
   }
 
   getPlayerForResult(result: PlayerVotingResult) {
