@@ -498,7 +498,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting
         } as PlayerVotingCard,
         {
-            text: "Which one of you would be most qualified to be the lead actor in a porn movie?",
+            text: "Which one of you would be most qualified to be the lead actor/actress in a porn movie?",
             type: CardType.PlayerVoting
         } as PlayerVotingCard,
         {
@@ -573,7 +573,7 @@ export const leggitPartyDeck: Deck = {
             }
         } as FreeTextCard,
         {
-            text: "%p0 you have the chance to get really disliked by a player! Choose one player to down 6 sips!",
+            text: "%p0 you have the chance to get really disliked by a player! Choose someone to down 6 sips!",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
@@ -679,7 +679,7 @@ export const leggitPartyDeck: Deck = {
             }
         } as FreeTextCard,
         {
-            text: "All those who can't manage to stand on one leg for one minute have to one sip",
+            text: "All those who can't manage to stand on one leg for one minute have to drink three sips",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
