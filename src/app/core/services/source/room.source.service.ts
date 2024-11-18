@@ -68,7 +68,8 @@ export class RoomSourceService {
                     },
                     settings: {
                         singleDeviceMode: false,
-                        otherAdmin: true
+                        otherAdmin: true,
+                        autoContinueOnAllVotes: true
                     },
                     game: null
                 }

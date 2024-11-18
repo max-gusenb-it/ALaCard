@@ -87,7 +87,8 @@
         "only-single-device-when-offline": "Can't leave single device mode when offline",
         "specificPlayerActivated": "Choose specific player for supported cards?",
         "specific-player": "Specific Player for deck",
-        "drinking-game": "Do you want to play a drinking game?"
+        "drinking-game": "Do you want to play a drinking game?",
+        "auto-continue-on-all-votes": "Automatically continue the game when every active player voted"
       },
       "start-game-modal": {
         "deck": "Deck",

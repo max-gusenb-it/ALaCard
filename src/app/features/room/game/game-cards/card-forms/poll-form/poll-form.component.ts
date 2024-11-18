@@ -107,8 +107,6 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
 
     processRound() {
       this.ingameDataDataService.processRound(
-        this.round.id,
-        CardType.TopicVotingCard,
         this.responseDataDataService.getAdminResponsesForRound(this.round.id)
       );
     }

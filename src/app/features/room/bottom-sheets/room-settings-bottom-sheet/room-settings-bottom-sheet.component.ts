@@ -24,6 +24,7 @@ export class RoomSettingsBottomSheet {
     // ToDo: make work
     singleDeviceMode: new FormControl({value: false, disabled: false}),
     otherAdmin: new FormControl({value: true, disabled: false}),
+    autoContinueOnAllVotes: new FormControl({value: true, disabled: false})
   });
 
   constructor(
@@ -38,6 +39,7 @@ export class RoomSettingsBottomSheet {
     if (!!!settings) this.close();
     this.roomSettingsForm.controls['singleDeviceMode'].setValue(settings?.singleDeviceMode);
     this.roomSettingsForm.controls['otherAdmin'].setValue(settings?.otherAdmin);
+    this.roomSettingsForm.controls['autoContinueOnAllVotes'].setValue(settings?.autoContinueOnAllVotes);
 
     const game = this.store.selectSnapshot(RoomState.game);
     if (!!game) {
@@ -55,7 +57,8 @@ export class RoomSettingsBottomSheet {
     const room = this.store.selectSnapshot(RoomState.room);
     differences = 
       room?.settings.singleDeviceMode !== this.roomSettingsForm.controls['singleDeviceMode'].value ||
-      room?.settings.otherAdmin !== this.roomSettingsForm.controls['otherAdmin'].value;
+      room?.settings.otherAdmin !== this.roomSettingsForm.controls['otherAdmin'].value ||
+      room?.settings.autoContinueOnAllVotes !== this.roomSettingsForm.controls['autoContinueOnAllVotes'].value;
     this.close();
     if (differences) {
       let newRoom = {...room} as Room;
@@ -73,7 +76,8 @@ export class RoomSettingsBottomSheet {
             ...newRoom,
             settings: {
               singleDeviceMode: this.roomSettingsForm.controls['singleDeviceMode'].value,
-              otherAdmin: this.roomSettingsForm.controls['otherAdmin'].value
+              otherAdmin: this.roomSettingsForm.controls['otherAdmin'].value,
+              autoContinueOnAllVotes: this.roomSettingsForm.controls['autoContinueOnAllVotes'].value
             }
           },
           newRoom.id!

@@ -5,8 +5,8 @@ import { IngameDataSourceService } from "../source/ingame-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
-import { CardType } from "../../models/enums";
 import { CardService } from "../service/card/card.service";
+import { StaticRoundDataDataService } from "./static-round-data.data.service";
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +17,7 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     constructor(
         private cardService: CardService,
         private ingameDataSourceService: IngameDataSourceService,
+        private staticRoundDataDataService: StaticRoundDataDataService,
         private store: Store
     ) {
         super();
@@ -52,13 +53,16 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
             );
     }
 
-    processRound(roundId: number, cardType: CardType, responses: Response[]) {
-        const cardService = this.cardService.getCardService(cardType);
+    processRound(responses: Response[]) {
+        const round = this.staticRoundDataDataService.getStaticRoundData()?.round;
+        const deck = this.store.selectSnapshot(RoomState.deck);
+        if (!!!round || !!!deck) return;
+        const cardService = this.cardService.getCardService(deck.cards[round.cardIndex].type);
 
         this.ingameDataSourceService.updateDynamicRoundData(
           this.store.selectSnapshot(RoomState.roomId)!,
           cardService.createDynamicRoundData(
-            roundId, 
+            round.id, 
             responses
           )
         );

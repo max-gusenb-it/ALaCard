@@ -87,7 +87,8 @@
         "only-single-device-when-offline": "Ohne aktiver Internet Verbindung kann nur offline gespielt werden",
         "specificPlayerActivated": "Konkreten Spieler für unterstützte Karten auswählen?",
         "specific-player": "Konkreten Spieler für Deck",
-        "drinking-game": "Willst du ein Trinkspiel spielen?"
+        "drinking-game": "Willst du ein Trinkspiel spielen?",
+        "auto-continue-on-all-votes": "Spiel automatisch fortsetzen, wenn jeder aktive Spieler abgestimmt hat"
       },
       "start-game-modal": {
         "deck": "Deck",

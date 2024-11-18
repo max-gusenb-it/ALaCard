@@ -128,7 +128,6 @@ export class CardContainerComponent extends AngularLifecycle{
   }
 
   continue() {
-    // ToDo: Auto continue when everyone voted
     const card = this.deck.cards[this.staticRoundData!.round!.cardIndex!];
     
     if (card.type === CardType.FreeText) {

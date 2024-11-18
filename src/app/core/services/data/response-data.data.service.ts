@@ -9,6 +9,8 @@ import { GameState } from "../../models/enums";
 import { RoomUtils } from "../../utils/room.utils";
 import { InformationState } from "../../state/information";
 import { RoomService } from "../service/room.service";
+import { StaticRoundDataDataService } from "./static-round-data.data.service";
+import { IngameDataDataService } from "./ingame-data.data.service";
 
 @Injectable({
     providedIn: 'root'
@@ -20,9 +22,13 @@ export class ResponseDataDataService extends AngularLifecycle {
     @Select(RoomState.room) room$!: Observable<Room>;
     room: Room;
 
+    // ToDo: Convert to room-player-load-base service
+
     constructor(
         private store: Store,
         private responseDataSourceService: ResponseDataSourceService,
+        private staticRoundDataDataService: StaticRoundDataDataService,
+        private ingameDataDataService: IngameDataDataService,
         private roomSerivce: RoomService
     ) {
         super();
@@ -48,12 +54,27 @@ export class ResponseDataDataService extends AngularLifecycle {
         this.responseDataSubscription$ = this.responseDataSourceService
             .getResponseData$(roomId)
             .pipe(takeUntil(this.destroyed$))
-            .subscribe(r => this.responseData$.next(r));
+            .subscribe(r => {
+                this.responseData$.next(r);
+                const roomSettings = this.store.selectSnapshot(RoomState.roomSettings);
+                if (!!roomSettings && roomSettings.autoContinueOnAllVotes) this.checkForAutoContinueRound();
+                
+        });
     }
 
     disconnectFromResponseData() {
         this.responseDataSubscription$.unsubscribe();
         this.responseData$.next(null as any);
+    }
+
+    checkForAutoContinueRound() {
+        const roundId = this.staticRoundDataDataService.getStaticRoundData()?.round?.id;
+        if (!!!roundId && roundId !== 0) return;
+        const activePlayerCount = this.store.selectSnapshot(RoomState.activePlayers).length;
+        const responseCount = this.getAdminResponsesForRound(roundId).length;
+        if (responseCount >= activePlayerCount) {
+            this.ingameDataDataService.processRound(this.getAdminResponsesForRound(roundId));
+        }
     }
 
     getAdminResponses$() {
