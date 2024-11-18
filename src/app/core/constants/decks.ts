@@ -244,6 +244,242 @@ export const leggitPartyDeck: Deck = {
     description: "Very funny Party Game",
     cards: [
         {
+            text: "%p0 give four sips to the player you know best",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Give 3 sips to one person if you are not in a relationship.",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Let's distribute some sips! Everyone choose someone to down 3 of them :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 a sorrow shared is a sorrow halved. Drink 2 and distribute 2",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 you have the chance to get really disliked by a player! Choose someone to down 6 sips!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 you are too sober, have three sips :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, time to spin the bottle. If the person chooses dare, feel free to hand out 8 sips to them :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, you're in jail with a player? Drink 2 sips with your cellmate!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, you accidentally killed someone at work. Drink 2 sips with the colleague who would most likely never talk about it",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, drink with the person who is most likely to do weird things in public",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, you're robbing a supermarket. Drink with the confused player who is supposed to be in charge of security that day",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, pick a best man or maid of honor and drink to your wedding",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, the person to your left looks very thirsty. Pass out a 2 sips",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, the desire to marry has taken hold of you. Make a convincing marriage proposal to the person on your left. In return you may hand out 3 sips to drink :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, if you could do anything without suffering the consequences, what would you do right now? Tell or drink 2 sips!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, if you could punch someone without having to suffer the consequences, who would your choice be? Tell or drink 2 sips!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "The smallest player badly needs 4 sips for growth.",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 swap your top or pants with %p1 for the rest of the game. For this you may distribute 5 sips each. If someone refuses the person has to drink 3 sips",
+            // ToDo: Idea for free text card. Split "If someone refuses ..." away from here. Show all players, who are not involved in this card the text.
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 distribute 2 sips to a player thinner than you. If that is not possible drink yourself :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "All those who can't manage to stand on one leg for one minute have to drink three sips",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "All who manage to do a bottle flip on the first try may distribute 4 sips :*",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 distribute 2 sips to the player who is smarter than you. If that is not possible, drink them yourself!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 if you had to leave the planning of your wedding to either %p1 or %p2, who would you choose? Drink to your wedding with this person :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 if you had to leave the planning of your next vacation to either %p1 or %p2, who would you choose? Drink with that person! :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 if you had to leave the planning of your next birthday party to either %p1 or %p2, who would you choose? Drink with that person! :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 imitate another player. The first to guess the player gets to distribute 4 sips!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 guess the color of %p1's underwear. Are you right? Distribute 4 sips, otherwise drink them yourself :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "The player who was on vacation most recently drinks 2 sips!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Men raise your glasses. 3 sips for you!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Women raise your glasses. 3 sips for you!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 do me a favor and start a waterfall :)",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 and %p1: Rock, Paper, Scissors Duel! Loser drinks 3 sips.",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Make a group selfie :)",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0 Roses are red, violets are blue ... finish the poem and give out 4 sips. Otherwise, drink them yourself!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
             text: "Who tolerates the least alcohol?",
             type: CardType.PlayerVoting
         } as PlayerVotingCard,
@@ -545,241 +781,564 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting
         } as PlayerVotingCard,
         {
-            text: "%p0 give four sips to the player you know best",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Where would you rather travel?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "200 years into the future" 
+                },
+                {
+                    title: "200 years into the past"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "Give 3 sips to one person if you are not in a relationship.",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Would you rather be able to fly or teleport?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Fly" 
+                },
+                {
+                    title: "Teleport"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "Let's distribute some sips! Everyone choose someone to down 3 of them :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What would you prefer to experience?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Your parents catch you having sex" 
+                },
+                {
+                    title: "You catch your parents having sex"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 a sorrow shared is a sorrow halved. Drink 2 and distribute 2",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What is your favorite type of M&M's?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "🔵 Blue" 
+                },
+                {
+                    title: "🟡 Yellow"
+                },
+                {
+                    title: "🟤 Brown"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 you have the chance to get really disliked by a player! Choose someone to down 6 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Where do you prefer to spend your vacation?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "In the mountains" 
+                },
+                {
+                    title: "On the beach"
+                },
+                {
+                    title: "In the city"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 you are too sober, have three sips :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What do you prefer to drink?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Beer" 
+                },
+                {
+                    title: "Wein"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, time to spin the bottle. If the person chooses dare, feel free to hand out 8 sips to them :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What do you prefer to drink?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Kakoa 🥛" 
+                },
+                {
+                    title: "Coffee ☕"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, you're in jail with a player? Drink 2 sips with your cellmate!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Where would you rather be stranded?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "On a deserted island" 
+                },
+                {
+                    title: "On a lonely habitable planet"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, you accidentally killed someone at work. Drink 2 sips with the colleague who would most likely never talk about it",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What do you prefer to drink",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Cola" 
+                },
+                {
+                    title: "Pepsi"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, drink with the person who is most likely to do weird things in public",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "How do you prefer to pay?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Cash" 
+                },
+                {
+                    title: "Cashless"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, you're robbing a supermarket. Drink with the confused player who is supposed to be in charge of security that day",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Where do you like to party most?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Disco" 
+                },
+                {
+                    title: "Bar"
+                },
+                {
+                    title: "Home"
+                },
+                {
+                    title: "Not at all"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, pick a best man or maid of honor and drink to your wedding",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What would you rather only listen to one song or to no music at all for the rest of your life?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "No longer listen to music" 
+                },
+                {
+                    title: "Listen to only one song"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, the person to your left looks very thirsty. Pass out a 2 sips",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What item would you take with you to a desert island",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Rope" 
+                },
+                {
+                    title: "Blanket"
+                },
+                {
+                    title: "Map"
+                },
+                {
+                    title: "Backpack"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, the desire to marry has taken hold of you. Make a convincing marriage proposal to the person on your left. In return you may hand out 3 sips to drink :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What item would you take with you to a desert island?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Spoon" 
+                },
+                {
+                    title: "Soap"
+                },
+                {
+                    title: "Condom"
+                },
+                {
+                    title: "Money"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, if you could do anything without suffering the consequences, what would you do right now? Tell or drink 2 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What would you rather give up at dinner?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Chair" 
+                },
+                {
+                    title: "Table"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0, if you could punch someone without having to suffer the consequences, who would your choice be? Tell or drink 2 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which mythical creature would you rather be?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Mermaid" 
+                },
+                {
+                    title: "Vampire"
+                },
+                {
+                    title: "Werewolf"
+                },
+                {
+                    title: "Dragon"
+                },
+                {
+                    title: "Elf"
+                },
+                {
+                    title: "Fairy"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "The smallest player badly needs 4 sips for growth.",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What is the best movie universe?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Lord of the Rings" 
+                },
+                {
+                    title: "Harry Potter"
+                },
+                {
+                    title: "Star Wars"
+                },
+                {
+                    title: "None of the above"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 swap your top or pants with %p1 for the rest of the game. For this you may distribute 5 sips each. If someone refuses the person has to drink 3 sips",
-            // ToDo: Idea for free text card. Split "If someone refuses ..." away from here. Show all players, who are not involved in this card the text.
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which team do you belong to?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Ass" 
+                },
+                {
+                    title: "Boobs"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 distribute 2 sips to a player thinner than you. If that is not possible drink yourself :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which fast food chain is the best?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Burger King" 
+                },
+                {
+                    title: "MC Donalds"
+                },
+                {
+                    title: "Subway"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "All those who can't manage to stand on one leg for one minute have to drink three sips",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which tattoo would you rather get?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "An ugly one that you choose yourself" 
+                },
+                {
+                    title: "A tattoo that your parents choose"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "All who manage to do a bottle flip on the first try may distribute 4 sips :*",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "If you had to choose one thing that will no longer exist, which one would it be?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Streaming Platforms" 
+                },
+                {
+                    title: "Music Streaming Platforms"
+                },
+                {
+                    title: "YouTube and clones"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 distribute 2 sips to the player who is smarter than you. If that is not possible, drink them yourself!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which apocalypse would you rather suffer?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Zombie" 
+                },
+                {
+                    title: "Atomic"
+                },
+                {
+                    title: "Artificial intelligence"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 if you had to leave the planning of your wedding to either %p1 or %p2, who would you choose? Drink to your wedding with this person :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Where would you rather suffer a strong storm?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Airplane" 
+                },
+                {
+                    title: "Ship"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 if you had to leave the planning of your next vacation to either %p1 or %p2, who would you choose? Drink with that person! :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "In which desert would you rather be stranded?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Ice desert" 
+                },
+                {
+                    title: "Sand desert"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 if you had to leave the planning of your next birthday party to either %p1 or %p2, who would you choose? Drink with that person! :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which team do you belong to?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "School/University" 
+                },
+                {
+                    title: "Work"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 imitate another player. The first to guess the player gets to distribute 4 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Which team do you belong to?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Vacation" 
+                },
+                {
+                    title: "Staycation"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 guess the color of %p1's underwear. Are you right? Distribute 4 sips, otherwise drink them yourself :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What do you prefer to do?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Receive gifts" 
+                },
+                {
+                    title: "Present gifts"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "The player who was on vacation most recently drinks 2 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "Do you normally sleep with or without socks?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "with socks" 
+                },
+                {
+                    title: "without socks"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "Men raise your glasses. 3 sips for you!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What hairstyle would you rather have the rest of your life?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Bald (without wig)" 
+                },
+                {
+                    title: "Hair down to the feet"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "Women raise your glasses. 3 sips for you!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "If you didn't have to face the consequences, what would you choose for the rest of your life?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "No food" 
+                },
+                {
+                    title: "No drinks"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 do me a favor and start a waterfall :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Jungle Planet" 
+                },
+                {
+                    title: "Desert Planet"
+                },
+                {
+                    title: "Sea Planet"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 and %p1: Rock, Paper, Scissors Duel! Loser drinks 3 sips.",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
+            text: "What would you rather be a successful actor or musician?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Successful musician" 
+                },
+                {
+                    title: "Successful actor"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "Make a group selfie :)",
-            type: CardType.FreeText
-        } as FreeTextCard,
+            text: "Would you rather never be sedentary or always be sedentary",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Never be sedentary" 
+                },
+                {
+                    title: "Always be sedentary"
+                }
+            ]
+        } as TopicVotingCard,
         {
-            text: "%p0 Roses are red, violets are blue ... finish the poem and give out 4 sips. Otherwise, drink them yourself!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard
+            text: "Which power would you prefer?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Recognizing every lie" 
+                },
+                {
+                    title: "Getting away with every lie"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "Would you rather find true love or be rich?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "True love" 
+                },
+                {
+                    title: "Be rich"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "Would you rather like to be the most intelligent or richest?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "The most intelligent" 
+                },
+                {
+                    title: "The richest"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "What would you rather suffer the rest of your life?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Always being stuck in traffic" 
+                },
+                {
+                    title: "Always having slow internet"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "How would you rather become a millionaire?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Lottery" 
+                },
+                {
+                    title: "Your work"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "Which ice tea flavour do you prefer?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Peach" 
+                },
+                {
+                    title: "Lemon"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "Which side of the Twinni is better?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Green" 
+                },
+                {
+                    title: "Orange"
+                }
+            ]
+        } as TopicVotingCard,
+        // ToDo: Fix sip distribution for the following two cards
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Yes" 
+                },
+                {
+                    title: "No"
+                }
+            ]
+        } as TopicVotingCard,
+        {
+            text: "Ever taken hard drugs?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Yes" 
+                },
+                {
+                    title: "No"
+                }
+            ]
+        } as TopicVotingCard
     ],
     groundRules: [
         "- **Reminder**  \n- The game is currently under development so the features are limited",
