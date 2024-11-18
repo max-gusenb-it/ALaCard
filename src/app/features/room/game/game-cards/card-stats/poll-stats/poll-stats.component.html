@@ -5,22 +5,51 @@
 >
     <h4 *ngIf="card.type === 3">{{ "features.room.game.card.topic-voting" | translate }}</h4>
     <p class="text-lg">{{ getCardText() }}</p>
-    <it-accord
-        [heading]="getResultsHeading()"
-        icon="emoji_events"
-        [selected]="true"
+    <it-selection-list
+        [singleSelect]="true"
+        [required]="true"
+        *ngIf="!!results"
+        #resultSelectionList
     >
-        <!-- ToDo: Add max height and scrolling -->
-        <div collapsible class="flex flex-col gap-2">
+        <it-accord
+            [heading]="getResultsHeading()"
+            icon="emoji_events"
+            [selected]="true"
+            (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
+        >
+            <!-- ToDo: Add max height and scrolling -->
+            <div collapsible class="flex flex-col gap-2">
+                <it-result
+                    *ngFor="let result of results; index as i"
+                    [result]="result"
+                    [title]="getTopResultsCount() === 1  && i !== 0 || getTopResultsCount() !== 1 ? getSubject(result.subjectId)?.title : undefined"
+                    [card]="card"
+                    [skipped]="result.subjectId === pollCardSkipValue"
+                />
+            </div>
+        </it-accord>
+        <it-accord
+            [heading]="'features.room.game.game-cards.sips' | translate"
+            icon="water_loss"
+            *ngIf="gameSettings?.drinkingGame"
+            (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
+        >
             <it-result
-                *ngFor="let result of results; index as i"
-                [result]="result"
-                [title]="getTopResultsCount() === 1  && i !== 0 || getTopResultsCount() !== 1 ? getSubject(result.subjectId)?.title : undefined"
-                [card]="card"
-                [skipped]="result.subjectId === pollCardSkipValue"
+                default
+                *ngIf="!!userSipResult"
+                [sipResult]="userSipResult"
+                [title]="getPlayerForSipResult(userSipResult)?.username"
+                [profilePicture]="getPlayerForSipResult(userSipResult)?.profilePicture"
             />
-        </div>
-    </it-accord>
+            <it-result
+                collapsible
+                *ngFor="let result of sipResults"
+                [sipResult]="result"
+                [title]="getPlayerForSipResult(result)?.username"
+                [profilePicture]="getPlayerForSipResult(result)?.profilePicture"
+            />
+        </it-accord>
+    </it-selection-list>
     <div class="flex flex-row gap-4" *ngIf="isUserRoomAdmin()">
         <!-- <it-button class="flex grow basis-0" color="red" type="button" *ngIf="displayPayToDisplay()" (click)="payToDisplay()">
             {{ 'features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display' | translate }}

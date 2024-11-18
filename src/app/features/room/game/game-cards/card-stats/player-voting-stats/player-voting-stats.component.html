@@ -5,13 +5,13 @@
         [singleSelect]="true"
         [required]="true"
         *ngIf="!!results"
-        #resulSelectionList
+        #resultSelectionList
     >
         <it-accord
             [heading]="getResultsHeading()"
             icon="emoji_events"
             [selected]="true"
-            (selectionEmitter)="resulSelectionList.onSelectionChanged($event)"
+            (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
             <!-- ToDo: Add max height and scrolling -->
             <div collapsible class="flex flex-col gap-2">
@@ -30,7 +30,7 @@
             [heading]="'features.room.game.game-cards.sips' | translate"
             icon="water_loss"
             *ngIf="gameSettings.drinkingGame"
-            (selectionEmitter)="resulSelectionList.onSelectionChanged($event)"
+            (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
             <it-result
                 default

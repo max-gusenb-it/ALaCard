@@ -7,14 +7,15 @@ import { TranslateService } from "@ngx-translate/core";
 import { TopicVotingCard } from "src/app/core/models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
 import { Utils } from "src/app/core/utils/utils";
 import { TopicVotingGroup } from "src/app/core/models/enums";
+import { Store } from "@ngxs/store";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
     
-    constructor(private translateService: TranslateService) {
-        super();
+    constructor(store: Store, private translateService: TranslateService) {
+        super(store);
     }
 
     get defaultTopicVotingGroup() {
@@ -88,11 +89,6 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
             if (index !== pollResult.playerIds.length -1) text += ", ";
         });
         return text;
-    }
-
-    override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
-        return sipResults;
     }
 
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

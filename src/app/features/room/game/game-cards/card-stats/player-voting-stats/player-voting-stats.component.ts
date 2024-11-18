@@ -1,9 +1,9 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, takeUntil } from 'rxjs';
 import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'src/app/core/constants/card';
-import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Result, Round, SipResult } from 'src/app/core/models/interfaces';
+import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Round, SipResult } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
@@ -26,7 +26,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
 
   results: PlayerVotingResult[];
   sipResults: SipResult[];
-  userSipResult: SipResult;
+  userSipResult?: SipResult;
 
   players: Player[];
 
@@ -61,13 +61,10 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
         }
         this.dynamicRoundData = d;
         this.results = this.playerVotingService.getResults(this.dynamicRoundData);
-        this.sipResults = this.playerVotingService.getSipResults(this.card, this.dynamicRoundData);
-        
-        const userSR = this.sipResults.find(s => s.playerId === this.store.selectSnapshot(AuthenticationState.userId));
-        if (!!userSR) {
-          this.userSipResult = userSR;
-          this.sipResults = this.sipResults.filter(s => s.playerId !== this.userSipResult.playerId);
-        }
+        const seperatedSipResults = this.playerVotingService.getSperatedSipResults(this.card, this.dynamicRoundData);
+        this.sipResults = seperatedSipResults[0];
+        this.userSipResult = seperatedSipResults[1];
+
         this.changeDetectorRef.detectChanges();
     });
   }
@@ -107,7 +104,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
   
   getPlayerForSipResult(result: SipResult) {
-    return this.playerVotingService.getPlayerForSipResult(this.players, result);
+    return this.playerVotingService.getPlayerForSipResult(result);
   }
 
   isUserRoomAdmin() {

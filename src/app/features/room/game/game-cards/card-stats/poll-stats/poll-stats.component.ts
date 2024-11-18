@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { pollCardSkipValue } from "src/app/core/constants/card";
-import { Card, PollCard, Round } from "src/app/core/models/interfaces";
+import { Card, PollCard, Round, SipResult } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { DynamicPollRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
@@ -25,6 +25,8 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   castedCard: PollCard;
   dynamicRoundData: DynamicPollRoundData;
   results: PollResult[];
+  sipResults: SipResult[];
+  userSipResult?: SipResult;
 
   constructor(
     private store: Store,
@@ -35,6 +37,10 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
     private changeDetectorRef: ChangeDetectorRef
   ) {
     super();
+  }
+
+  get gameSettings() {
+    return this.store.selectSnapshot(RoomState.gameSettings);
   }
 
   get pollCardSkipValue() {
@@ -51,6 +57,9 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
         if (!!!d) return;
         this.dynamicRoundData = this.pollCardService.castDynamicRoundData(d);
         this.results = this.pollCardService.getResults(this.dynamicRoundData);
+        const seperatedSipResults = this.pollCardService.getSperatedSipResults(this.card, this.dynamicRoundData);
+        this.sipResults = seperatedSipResults[0];
+        this.userSipResult = seperatedSipResults[1];
         
         this.changeDetectorRef.detectChanges();
       });
@@ -75,6 +84,10 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
 
   getResultsHeading() {
     return this.pollCardService.getResultsHeading(this.results, this.card);
+  }
+  
+  getPlayerForSipResult(result: SipResult) {
+    return this.pollCardService.getPlayerForSipResult(result);
   }
 
   isUserRoomAdmin() {

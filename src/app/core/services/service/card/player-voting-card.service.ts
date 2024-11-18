@@ -14,7 +14,7 @@ import { Utils } from "src/app/core/utils/utils";
 export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
 
     constructor(private store: Store, private translateService: TranslateService) {
-        super();
+        super(store);
     }
 
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
@@ -91,7 +91,7 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return text;
     }
 
-    override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+    override getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): [SipResult[], SipResult?] {
         let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
         // Pay To Disply Sip Calculation
         // Maybe move pay to display logic into seperate pay to display special card service
@@ -111,7 +111,8 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
                 ]
             }
         }
-        return sipResults;
+        const userSR = this.getUserSipResult(sipResults);
+        return [sipResults.filter(s => s.playerId !== userSR?.playerId), userSR];
     }
     
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

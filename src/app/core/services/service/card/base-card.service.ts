@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
+import { Store } from "@ngxs/store";
 import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
 import { PlayerState } from "src/app/core/models/enums";
 import { Card, DynamicRoundData, GameSettings, Player, Response, Result, Round, SipResult } from "src/app/core/models/interfaces";
+import { AuthenticationState, RoomState } from "src/app/core/state";
 import { BaseCardUtils } from "src/app/core/utils/card/base-card.utils";
 import { Utils } from "src/app/core/utils/utils";
 
@@ -9,6 +11,9 @@ import { Utils } from "src/app/core/utils/utils";
     providedIn: 'root'
 })
 export class BaseCardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
+
+    constructor(private base_store: Store) { }
+
     createGameRound(baseRound: Round, card: Card, players: Player[], gameSettings: GameSettings) : Round {
         players = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline);
 
@@ -89,8 +94,14 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return "";
     }
 
-    getSipResults(card: Card, dynamicRoundData: DynamicRoundData) : SipResult[] {
-        return this.calculateRoundSipResults(card, dynamicRoundData);
+    getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData) : [SipResult[], SipResult?] {
+        const sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
+        const userSR = this.getUserSipResult(sipResults);
+        return [sipResults.filter(s => s.playerId !== userSR?.playerId), userSR];
+    }
+
+    getUserSipResult(sipResults: SipResult[]) {
+        return sipResults.find(s => s.playerId === this.base_store.selectSnapshot(AuthenticationState.userId));
     }
     
     /**
@@ -104,7 +115,8 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [];
     }
 
-    getPlayerForSipResult(players: Player[], result: SipResult) {
+    getPlayerForSipResult(result: SipResult) {
+        const players = this.base_store.selectSnapshot(RoomState.players);
         return players.find(p => p.id === result.playerId);
     }
 }

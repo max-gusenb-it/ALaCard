@@ -1774,10 +1774,7 @@ export const testingDeck: Deck = {
                 {
                     title: "You catch your parents having sex"
                 }
-            ],
-            settings: {
-                isAnonymous: true
-            }
+            ]
         } as TopicVotingCard
     ],
     requiredPlayers: {
