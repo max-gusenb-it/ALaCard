@@ -71,6 +71,10 @@ export namespace RoomUtils {
     export function mapPlayersToArray(players: { [key: string]: Player }) {
         return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
     }
+
+    export function isPlayerActive(player: Player) {
+        return player.state === PlayerState.active || player.state === PlayerState.offline;
+    }
     
     export function getRoomAdmin(room: Room) : Player {
         if (room.settings.otherAdmin) {

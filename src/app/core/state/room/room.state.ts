@@ -61,6 +61,16 @@ export class RoomState extends AngularLifecycle {
     }
 
     @Selector()
+    static activePlayers(state: RoomStateModel): Player[] {
+        if (!!!state.room) {
+            return [];
+        } else {
+            return RoomUtils.mapPlayersToArray(state.room.players)
+                .filter(p => RoomUtils.isPlayerActive(p));
+        }
+    }
+
+    @Selector()
     static game(state: RoomStateModel): Game | undefined {
         const game = state.room?.game;
         return !!game ? game : undefined;
