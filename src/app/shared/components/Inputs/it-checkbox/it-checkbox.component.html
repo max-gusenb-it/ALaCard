@@ -1,4 +1,4 @@
-<div *ngIf="control" class="flex flex-row items-center cursor-pointer" (click)="toggleValue()">
+<div *ngIf="control" class="flex flex-row gap-3 items-center cursor-pointer" (click)="toggleValue()">
   <input
     type="checkbox"
     [id]="getId()"
@@ -23,7 +23,7 @@
   </div>
   <p
     *ngIf="label !== ''" 
-    class="text-neutral-950 text-sm mx-3"
+    class="text-neutral-950 text-sm flex flex-grow basis-0"
   >
     {{label}}
   </p>
