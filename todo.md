@@ -2,7 +2,6 @@
 
 ## Player Voting Card
 
-* Sort results (Skipped not at bottom)
 * Add max height to all result lists
 * When player revieved all votes -> More sips
 
