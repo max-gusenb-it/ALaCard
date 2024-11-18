@@ -61,7 +61,6 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
         if (topResults.length > 0) {
             return Utils.addComaToStringArray(
                 topResults.map(r => castedCard.subjects.find(s => r.subjectId === s.id)!.title),
-                true,
                 true
             );
         } else {

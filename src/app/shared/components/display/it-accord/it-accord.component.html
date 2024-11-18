@@ -32,7 +32,7 @@
     <div [ngClass]="{'hidden': !wrapperCollapsible.children.length}">
       <div class="h-2"></div>
     </div>
-    <div #wrapperCollapsible>
+    <div #wrapperCollapsible class="flex flex-col gap-2">
       <ng-content select="[collapsible]"></ng-content>
     </div>
   </div>

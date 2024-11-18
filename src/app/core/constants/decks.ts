@@ -1775,6 +1775,21 @@ export const testingDeck: Deck = {
                     title: "You catch your parents having sex"
                 }
             ]
+        } as TopicVotingCard,
+        {
+            text: "What is your favorite type of M&M's?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "🔵 Blue" 
+                },
+                {
+                    title: "🟡 Yellow"
+                },
+                {
+                    title: "🟤 Brown"
+                }
+            ]
         } as TopicVotingCard
     ],
     requiredPlayers: {
