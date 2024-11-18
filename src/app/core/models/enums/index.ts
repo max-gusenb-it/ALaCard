@@ -1,3 +1,6 @@
+export { PlayerVotingGroup } from "./logic/cards/player-voting-card/player-voting-group";
+export { TopicVotingGroup } from "./logic/cards/topic-voting-card/topic-voting-group";
+
 export { CardType } from "./logic/deck/card-type";
 
 export { PlayerState } from "./logic/room/player-state";

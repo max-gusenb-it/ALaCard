@@ -1786,12 +1786,6 @@ export const testingDeck: Deck = {
     },
     defaultGameSettings: [
         {
-            settingName: drinkingGameSettingName,
-            value: "false",
-            valueSource: DefaultGameSettingValueSource.value,
-            requirement: DefaultGameSettingRequirement.required
-        },
-        {
             settingName: speficiPlayerIdSettingName,
             valueSource: DefaultGameSettingValueSource.default,
             requirement: DefaultGameSettingRequirement.required

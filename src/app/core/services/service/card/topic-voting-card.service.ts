@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import { PollCardService } from "./poll-card.service";
 import { Card, DynamicRoundData, Player, Result, SipResult } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
-import { pollCardSkipValue } from "src/app/core/constants/card";
+import { defaultCardSips, pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
 import { TopicVotingCard } from "src/app/core/models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
 import { Utils } from "src/app/core/utils/utils";
+import { TopicVotingGroup } from "src/app/core/models/enums";
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,10 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
     
     constructor(private translateService: TranslateService) {
         super();
+    }
+
+    get defaultTopicVotingGroup() {
+        return TopicVotingGroup.MostVoted;
     }
 
     override getResults(dynamicRoundData: DynamicRoundData): PollResult[] {
@@ -91,6 +96,39 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
     }
 
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        return[];
+        const pollCard = this.castCard(card);
+
+        const results = this.getResultGroup(dynamicRoundData, pollCard.settings?.sipConfig?.group);
+        return results
+            .map(r => {
+                return r.playerIds.map(pId => {
+                    return {
+                        playerId: pId,
+                        sips: defaultCardSips,
+                        distribute: true
+                    } as SipResult
+                });
+            })
+            .flat();
+    }
+
+    getResultGroup(dynamicRoundData: DynamicRoundData, group?: TopicVotingGroup) : PollResult[] {
+        // ToDo: Adapt in Player Voting Card and generalize
+        const results = this.getResults(dynamicRoundData)
+            .filter(r => r.subjectId !== pollCardSkipValue);
+        if (!!!group) group = this.defaultTopicVotingGroup;
+
+        let resultGroup: PollResult[] = [];
+        if (results.length != 0) {
+            let votes = 0;
+            if (group === TopicVotingGroup.MostVoted) {
+                votes = results[0].votes;
+            } else {
+                votes = results[results.length - 1].votes;
+            }
+            resultGroup = results
+                .filter(r => r.votes === votes)
+        }
+        return resultGroup;
     }
 }

@@ -1,4 +1,4 @@
-import { PlayerVotingGroup } from "./player-voting-group";
+import { PlayerVotingGroup } from "../../../../enums/logic/cards/player-voting-card/player-voting-group";
 
 export interface PlayerVotingSipConfig {
     group: PlayerVotingGroup;
