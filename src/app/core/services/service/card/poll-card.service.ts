@@ -7,7 +7,7 @@ import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card
 @Injectable({
     providedIn: 'root'
 })
-export class PollCardService<C extends PollCard> extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult> { // ToDo: Think about creating TopicVotingCard for individual settings
+export class PollCardService<C extends PollCard> extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult> {
     override castCard(card: Card): C {
         let pollCard = super.castCard(card);
         return <C>{

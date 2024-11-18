@@ -11,10 +11,10 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 export class ItProfileEditorComponent extends AngularLifecycle implements AfterViewInit {
 
   @Input() profileEditorFormData: ProfileEditorFormData = null as any;
+  @Input() isRegistered: boolean = false;
 
   @Output() profileEditorFormChanged: EventEmitter<ProfileEditorFormData> = new EventEmitter();
 
-  isRegistered: boolean = false;
   profileForm = new FormGroup({
     username: new FormControl({value: "", disabled: false}, [Validators.required]),
   });
@@ -30,7 +30,6 @@ export class ItProfileEditorComponent extends AngularLifecycle implements AfterV
   }
 
   ngAfterViewInit(): void {
-    this.isRegistered = !!this.profileEditorFormData.username;
     this.profileForm.controls['username'].setValue(!!this.profileEditorFormData.username ? this.profileEditorFormData.username : null);
     this.changeDetectorRef.detectChanges();
   }

@@ -3,8 +3,9 @@
 >
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
     <it-profile-editor
-      [profileEditorFormData]="profileFormData"
-      (profileEditorFormChanged)="setProfileFormData($event)"
+        [isRegistered]="true"
+        [profileEditorFormData]="profileFormData"
+        (profileEditorFormChanged)="setProfileFormData($event)"
     />
     <it-button
         class="flex"

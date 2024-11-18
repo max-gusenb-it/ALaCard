@@ -4,6 +4,7 @@
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
     <it-profile-editor
         *ngIf="stepIndex === 0"
+        [isRegistered]="false"
         (profileEditorFormChanged)="setProfileFormData($event)"
         [profileEditorFormData]="profileFormData"
     />
