@@ -49,7 +49,7 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         });
         results = results.sort((r1, r2) => {
             if (r1.votedPlayerId === playerVotingCardSkipValue) return 1;
-            if (r2.votedPlayerId === playerVotingCardSkipValue) return 1;
+            if (r2.votedPlayerId === playerVotingCardSkipValue) return -1;
             return r2.votes - r1.votes;
         });
         return results;
