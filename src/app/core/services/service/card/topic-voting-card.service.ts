@@ -51,11 +51,11 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
 
     override getResultsHeading(results: PollResult[], card: Card): string {
         const castedCard: TopicVotingCard = this.castCard(card);
-        const topResults = results
-            .filter(r => r.votes === results[0].votes && r.subjectId !== pollCardSkipValue);
+        const topResults = this.getTopResults(results);
         if (topResults.length > 0) {
             return Utils.addComaToStringArray(
                 topResults.map(r => castedCard.subjects.find(s => r.subjectId === s.id)!.title),
+                true,
                 true
             );
         } else {

@@ -13,10 +13,11 @@
         <!-- ToDo: Add max height and scrolling -->
         <div collapsible class="flex flex-col gap-2">
             <it-result
-                *ngFor="let result of results"
+                *ngFor="let result of results; index as i"
                 [result]="result"
-                [title]="getSubject(result.subjectId)?.title"
+                [title]="getTopResultsCount() === 1  && i !== 0 || getTopResultsCount() !== 1 ? getSubject(result.subjectId)?.title : undefined"
                 [card]="card"
+                [skipped]="result.subjectId === pollCardSkipValue"
             />
         </div>
     </it-accord>

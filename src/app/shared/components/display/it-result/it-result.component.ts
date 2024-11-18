@@ -28,6 +28,7 @@ export class ItResultComponent implements AfterViewInit {
   @Input() title?: string;
   @Input() card: Card;
   @Input() overrideAnonymous: boolean = false;
+  @Input() skipped: boolean = false;
 
   constructor(
     private store: Store,
@@ -66,7 +67,7 @@ export class ItResultComponent implements AfterViewInit {
     switch(this.ResultType) {
       case(ResultType.PlayerVotingResult):
       case(ResultType.TopicVotingResult): {
-        return !this.skipped() ? 
+        return !this.skipped ? 
           this.title : 
           this.translateService.instant("shared.components.display.it-result.skipped");
       };
@@ -74,10 +75,6 @@ export class ItResultComponent implements AfterViewInit {
         return this.title;
       }
     }
-  }
-
-  skipped() {
-    return !!!this.title;
   }
 
 

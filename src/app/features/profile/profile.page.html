@@ -45,6 +45,7 @@
           {{ 'features.profile.colors.' + color | translate }}
         </option>
       </it-select>
+      <!-- ToDo: Add card preview setting -->
       <it-button class="flex" [indicateLoading]="true" (click)="updateSettings()" [disabled]="!settingsForm.dirty" size="small">{{ 'actions.save' | translate }}</it-button>
     </form>
     <div class="border-b w-full border-b-neutral-500"></div>

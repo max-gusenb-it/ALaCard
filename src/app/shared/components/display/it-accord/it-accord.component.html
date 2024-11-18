@@ -4,7 +4,7 @@
     (click)="toggleState()"
     *ngIf="!!heading"
   >
-    <h4>{{heading}}</h4>
+    <h4 [innerHTML]="heading"></h4>
     <it-icon
       class="transition-all ease-out"
       [ngClass]="{

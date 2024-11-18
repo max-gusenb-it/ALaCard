@@ -1,5 +1,4 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { pollCardSkipValue } from "src/app/core/constants/card";
@@ -33,10 +32,13 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
     private roomService: RoomService,
     private ingameDataDataService: IngameDataDataService,
     private staticRoundDataDataService: StaticRoundDataDataService,
-    private changeDetectorRef: ChangeDetectorRef,
-    private translateService: TranslateService
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     super();
+  }
+
+  get pollCardSkipValue() {
+    return pollCardSkipValue;
   }
 
   ngAfterViewInit(): void {
@@ -65,6 +67,10 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
 
   getSubject(subjectId: number) {
     return this.castedCard.subjects.find(s => s.id! === subjectId);
+  }
+
+  getTopResultsCount() {
+    return this.pollCardService.getTopResults(this.results).length;
   }
 
   getResultsHeading() {

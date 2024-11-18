@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@ang
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, takeUntil } from 'rxjs';
-import { defaultPayToDisplaySips } from 'src/app/core/constants/card';
+import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'src/app/core/constants/card';
 import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Result, Round, SipResult } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
@@ -42,6 +42,10 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
     private roomService: RoomService
   ) {
     super();
+  }
+
+  get playerVotingCardSkipValue() {
+    return playerVotingCardSkipValue;
   }
 
   ngAfterViewInit(): void {

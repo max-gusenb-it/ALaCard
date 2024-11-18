@@ -25,13 +25,14 @@ export namespace Utils {
         return (string.match(new RegExp(subString, "g")) || []).length
     }
 
-    export function addComaToStringArray(arr: string[], addAndSign: boolean = false): string {
+    export function addComaToStringArray(arr: string[], addAndSign: boolean = false, addParagraph: boolean = false): string {
         let text = "";
         arr.forEach((str, index) => {
             text += str;
             if (index !== arr.length -1) {
                 if (addAndSign && index === arr.length - 2) text += " & ";
                 else text += ", "
+                if (addParagraph) text += "<br>"
             };
         });
         return text;

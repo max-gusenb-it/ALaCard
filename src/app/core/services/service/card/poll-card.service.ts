@@ -3,6 +3,7 @@ import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPollRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
+import { pollCardSkipValue } from "src/app/core/constants/card";
 
 @Injectable({
     providedIn: 'root'
@@ -26,5 +27,10 @@ export class PollCardService<C extends PollCard> extends BaseCardService<PollCar
         let drd : DynamicPollRoundData = super.createDynamicRoundData(roundId, responses);
         drd.responses = pvResponses;
         return drd;
+    }
+
+    getTopResults(results: PollResult[]) : PollResult[] {
+        return results
+            .filter(r => r.votes === results[0].votes && r.subjectId !== pollCardSkipValue);
     }
 }
