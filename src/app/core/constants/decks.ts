@@ -836,13 +836,13 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "In the mountains" 
+                    title: "In the mountains 🏞️" 
                 },
                 {
-                    title: "On the beach"
+                    title: "On the beach 🏖️"
                 },
                 {
-                    title: "In the city"
+                    title: "In the city 🏙️"
                 }
             ]
         } as TopicVotingCard,
@@ -851,10 +851,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Beer" 
+                    title: "Beer 🍺" 
                 },
                 {
-                    title: "Wein"
+                    title: "Wine 🍷"
                 }
             ]
         } as TopicVotingCard,
@@ -875,10 +875,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "On a deserted island" 
+                    title: "On a deserted island 🏝️" 
                 },
                 {
-                    title: "On a lonely habitable planet"
+                    title: "On a lonely habitable planet 🌎"
                 }
             ]
         } as TopicVotingCard,
@@ -899,10 +899,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Cash" 
+                    title: "Cash 💵" 
                 },
                 {
-                    title: "Cashless"
+                    title: "Cashless 💳"
                 }
             ]
         } as TopicVotingCard,
@@ -911,16 +911,16 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Disco" 
+                    title: "Disco 🪩" 
                 },
                 {
-                    title: "Bar"
+                    title: "Bar 🥂"
                 },
                 {
-                    title: "Home"
+                    title: "Home 🏠"
                 },
                 {
-                    title: "Not at all"
+                    title: "Not at all ⛔"
                 }
             ]
         } as TopicVotingCard,
@@ -941,16 +941,16 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Rope" 
+                    title: "Rope 🪢" 
                 },
                 {
-                    title: "Blanket"
+                    title: "Blanket 🛏️"
                 },
                 {
-                    title: "Map"
+                    title: "Map 🗺️"
                 },
                 {
-                    title: "Backpack"
+                    title: "Backpack 🎒"
                 }
             ]
         } as TopicVotingCard,
@@ -959,16 +959,16 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Spoon" 
+                    title: "Spoon 🥄" 
                 },
                 {
-                    title: "Soap"
+                    title: "Soap 🧼"
                 },
                 {
-                    title: "Condom"
+                    title: "Condom 🍆"
                 },
                 {
-                    title: "Money"
+                    title: "Money 💵"
                 }
             ]
         } as TopicVotingCard,
@@ -989,22 +989,22 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Mermaid" 
+                    title: "Mermaid 🧜🏻‍♀️" 
                 },
                 {
-                    title: "Vampire"
+                    title: "Vampire 🧛"
                 },
                 {
-                    title: "Werewolf"
+                    title: "Werewolf 🐺"
                 },
                 {
-                    title: "Dragon"
+                    title: "Dragon 🐲"
                 },
                 {
-                    title: "Elf"
+                    title: "Elf 🧝🏻‍♀️"
                 },
                 {
-                    title: "Fairy"
+                    title: "Fairy 🧚🏿‍♂️"
                 }
             ]
         } as TopicVotingCard,
@@ -1013,16 +1013,16 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Lord of the Rings" 
+                    title: "Lord of the Rings 💍" 
                 },
                 {
-                    title: "Harry Potter"
+                    title: "Harry Potter 🪄"
                 },
                 {
-                    title: "Star Wars"
+                    title: "Star Wars 🪐"
                 },
                 {
-                    title: "None of the above"
+                    title: "None of the above ⛔"
                 }
             ]
         } as TopicVotingCard,
@@ -1070,13 +1070,13 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Streaming Platforms" 
+                    title: "Streaming Platforms 📼"
                 },
                 {
-                    title: "Music Streaming Platforms"
+                    title: "Music Streaming Platforms 🎵"
                 },
                 {
-                    title: "YouTube and clones"
+                    title: "YouTube and clones 💻"
                 }
             ]
         } as TopicVotingCard,
@@ -1100,10 +1100,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Airplane" 
+                    title: "Airplane ✈️" 
                 },
                 {
-                    title: "Ship"
+                    title: "Ship 🛳️"
                 }
             ]
         } as TopicVotingCard,
@@ -1124,10 +1124,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "School/University" 
+                    title: "School/University 📚" 
                 },
                 {
-                    title: "Work"
+                    title: "Work 🔨"
                 }
             ]
         } as TopicVotingCard,
@@ -1160,10 +1160,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "with socks" 
+                    title: "with socks 🧦" 
                 },
                 {
-                    title: "without socks"
+                    title: "without socks 🦶"
                 }
             ]
         } as TopicVotingCard,
@@ -1172,10 +1172,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Bald (without wig)" 
+                    title: "Bald (without wig) 👨🏿‍🦲" 
                 },
                 {
-                    title: "Hair down to the feet"
+                    title: "Hair down to the feet 👩‍🦰"
                 }
             ]
         } as TopicVotingCard,
@@ -1184,10 +1184,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "No food" 
+                    title: "No food 🥤" 
                 },
                 {
-                    title: "No drinks"
+                    title: "No drinks 🍛"
                 }
             ]
         } as TopicVotingCard,
@@ -1196,13 +1196,13 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Jungle Planet" 
+                    title: "Jungle Planet 🦜" 
                 },
                 {
-                    title: "Desert Planet"
+                    title: "Desert Planet 🦂"
                 },
                 {
-                    title: "Sea Planet"
+                    title: "Sea Planet 🐠"
                 }
             ]
         } as TopicVotingCard,
@@ -1211,10 +1211,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Successful musician" 
+                    title: "Successful musician 🎹" 
                 },
                 {
-                    title: "Successful actor"
+                    title: "Successful actor 🎭"
                 }
             ]
         } as TopicVotingCard,
@@ -1247,10 +1247,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "True love" 
+                    title: "True love ❤️‍🔥" 
                 },
                 {
-                    title: "Be rich"
+                    title: "Be rich 💰"
                 }
             ]
         } as TopicVotingCard,
@@ -1259,10 +1259,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "The most intelligent" 
+                    title: "The most intelligent 🧠" 
                 },
                 {
-                    title: "The richest"
+                    title: "The richest 💵"
                 }
             ]
         } as TopicVotingCard,
@@ -1271,10 +1271,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Always being stuck in traffic" 
+                    title: "Always being stuck in traffic 🚦" 
                 },
                 {
-                    title: "Always having slow internet"
+                    title: "Always having slow internet 🌐"
                 }
             ]
         } as TopicVotingCard,
@@ -1295,10 +1295,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Peach" 
+                    title: "Peach 🍑" 
                 },
                 {
-                    title: "Lemon"
+                    title: "Lemon 🍋"
                 }
             ]
         } as TopicVotingCard,
@@ -1307,13 +1307,14 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Green" 
+                    title: "Green 🟢" 
                 },
                 {
-                    title: "Orange"
+                    title: "Orange 🟠"
                 }
             ]
         } as TopicVotingCard,
+        // ToDo: Show anonymous type in form
         // ToDo: Fix sip distribution for the following two cards
         {
             text: "Ever dropped your phone in the toilet?",
