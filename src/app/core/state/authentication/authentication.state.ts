@@ -8,7 +8,7 @@ import { firstValueFrom, Subscription, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/source/user.source.service';
 import { LoadingHelperService } from '../../services/helper/loading.helper.service';
-import { User } from '../../models/interfaces';
+import { TutorialInfo, User } from '../../models/interfaces';
 import { systemDefaultValue } from '../../constants/systemDefaultValue';
 import { SettingsService } from '../../services/service/settings.service';
 import { EmailAuthProvider, linkWithCredential } from '@angular/fire/auth';
@@ -40,6 +40,11 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Selector()
     static userId(state: AuthenticationStateModel): string | undefined {
         return state.user?.id;
+    }
+
+    @Selector()
+    static tutorialInfos(state: AuthenticationStateModel): TutorialInfo[] {
+        return !!state.user?.tutorialInfos ? state.user.tutorialInfos = state.user.tutorialInfos : [];
     }
 
     @Selector()
@@ -104,7 +109,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
                             settings: {
                                 language: systemDefaultValue,
                                 color: systemDefaultValue
-                            }
+                            },
+                            tutorialInfos: []
                         }
                     );
                 } else {

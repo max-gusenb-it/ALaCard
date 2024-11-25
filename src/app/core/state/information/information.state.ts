@@ -1,10 +1,14 @@
-import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
+import { Action, NgxsOnInit, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
 import { InformationStateModel } from "./information.model";
 import { Injectable } from "@angular/core";
 import { InformationActions } from "./information.actions";
 import { GameInformation, Response, RoundInformation, TutorialInfo } from "../../models/interfaces";
 import { ItError } from "../../models/classes";
 import { InformationStateErrors } from "../../constants/errorCodes";
+import { UserSourceService } from "../../services/source/user.source.service";
+import { AuthenticationState } from "../authentication";
+import { filter, takeUntil } from "rxjs";
+import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
 export const INFORMATION_STATE_VERSION = 1;
 export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('information');
@@ -18,7 +22,12 @@ export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('in
     }
 })
 @Injectable()
-export class InformationState implements NgxsOnInit {
+export class InformationState extends AngularLifecycle implements NgxsOnInit {
+
+    constructor(private store: Store, private userSourceService: UserSourceService) {
+        super();
+    }
+
     @Selector()
     static gameInformation(state: InformationStateModel) : undefined | GameInformation {
         return state.gameInformations;
@@ -51,6 +60,14 @@ export class InformationState implements NgxsOnInit {
 
     ngxsOnInit(ctx: StateContext<InformationStateModel>): void {
         const state = ctx.getState();
+        this.store.select(AuthenticationState.tutorialInfos)    
+            .pipe(
+                takeUntil(this.destroyed$),
+                filter(t => !!t && t.length > 0)
+            )
+            .subscribe(tutorialInfos => {
+                ctx.patchState({tutorialInfos: tutorialInfos});
+        });
         if (state.version === INFORMATION_STATE_VERSION) return;
         let tutorialInfos = !!state.tutorialInfos ? state.tutorialInfos : [];
         ctx.patchState({
@@ -199,18 +216,29 @@ export class InformationState implements NgxsOnInit {
     @Action(InformationActions.SetTutorialDisplayed)
     async setTutorialDisplayed(ctx: StateContext<InformationStateModel>, action: InformationActions.SetTutorialDisplayed) {
         const state = ctx.getState();
-
         if (!!state.tutorialInfos.find(t => t.labelId === action.labelId)) return;
 
+        const tutorialInfo : TutorialInfo = {
+            displayDate: new Date(),
+            labelId: action.labelId
+        };
         ctx.patchState({
             ...state,
             tutorialInfos: [
                 ...state.tutorialInfos,
-                {
-                    displayDate: new Date(),
-                    labelId: action.labelId
-                }
+                tutorialInfo
             ]
-        })
+        });
+
+        const user = this.store.selectSnapshot(AuthenticationState.user);
+        if (!!!user) return;
+
+        this.userSourceService.updateUser(
+            user.id!,
+            {
+                ...user,
+                tutorialInfos: [...ctx.getState().tutorialInfos]
+            }
+        );
     }
 } 
