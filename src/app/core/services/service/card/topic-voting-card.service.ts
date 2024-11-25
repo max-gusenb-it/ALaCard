@@ -107,8 +107,8 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
             .flat();
     }
 
-    getResultGroup(dynamicRoundData: DynamicRoundData, group?: TopicVotingGroup) : PollResult[] {
-        // ToDo: Adapt in Player Voting Card and generalize
+    override getResultGroup(dynamicRoundData: DynamicRoundData, group?: TopicVotingGroup) : PollResult[] {
+        // ToDo: Generalize
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.subjectId !== pollCardSkipValue);
         if (!!!group) group = this.defaultTopicVotingGroup;

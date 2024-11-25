@@ -115,6 +115,10 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [];
     }
 
+    getResultGroup(dynamicRoundData: DynamicRoundData, group?: any) : Result[] {
+        return [];
+    }
+
     getPlayerForSipResult(result: SipResult) {
         const players = this.base_store.selectSnapshot(RoomState.players);
         return players.find(p => p.id === result.playerId);

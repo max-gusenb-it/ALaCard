@@ -17,6 +17,10 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         super(store);
     }
 
+    get defaultPlayerVotingGroup() {
+        return PlayerVotingGroup.MostVoted;
+    }
+
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
         const pvResponses = this.castResponses(responses);
         let drd : DynamicPlayerVotingRoundData = super.createDynamicRoundData(roundId, responses);
@@ -118,31 +122,35 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const pvCard = this.castCard(card);
 
+        const results = this.getResultGroup(dynamicRoundData, pvCard.settings?.sipConfig?.group);
+        return results
+            .map(r => {
+                return {
+                    playerId: r.votedPlayerId,
+                    sips: results.length > 1 ? defaultCardSips : defaultCardSips + 1,
+                    distribute: false
+                } as SipResult
+            }
+        );
+    }
+
+    override getResultGroup(dynamicRoundData: DynamicRoundData, group?: PlayerVotingGroup): PlayerVotingResult[] {
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.votedPlayerId !== playerVotingCardSkipValue);
-        let group = pvCard.settings?.sipConfig?.group;
-        if (!!!group) group = PlayerVotingGroup.MostVoted;
+        if (!!!group) group = this.defaultPlayerVotingGroup;
 
-        let sipResults: SipResult[] = [];
-        if (results.length !== 0) {
+        let resultGroup: PlayerVotingResult[] = [];
+        if (results.length != 0) {
             let votes = 0;
             if (group === PlayerVotingGroup.MostVoted) {
                 votes = results[0].votes;
             } else {
                 votes = results[results.length - 1].votes;
             }
-            sipResults = results
+            resultGroup = results
                 .filter(r => r.votes === votes)
-                .map(r => {
-                    return {
-                        playerId: r.votedPlayerId,
-                        sips: defaultCardSips,
-                        distribute: false
-                    } as SipResult
-                }
-            );
-        };
-        return sipResults;
+        }
+        return resultGroup;
     }
 
     getNewPayToDisplayPlayerId(oldDynamicRoundData: DynamicRoundData, newDynamicRoundData: DynamicRoundData) : string | undefined {

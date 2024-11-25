@@ -3,7 +3,6 @@
 ## Player Voting Card
 
 * Add max height to all result lists
-* When player revieved all votes -> More sips
 
 ## Free Text Card
 
