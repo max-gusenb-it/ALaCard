@@ -11,6 +11,7 @@ import { HomePage } from './home.page';
 import { NoAccountComponent } from './no-account/no-account.component';
 import { NoRoomComponent } from './no-room/no-room.component';
 import { CreateRoomModal } from './create-room-modal/create-room-modal.component';
+import { GameHistoryEntryComponent } from './game-history-entry/game-history-entry.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { CreateRoomModal } from './create-room-modal/create-room-modal.component
     CreateRoomModal,
     NoAccountComponent,
     NoRoomComponent,
+    GameHistoryEntryComponent
   ]
 })
 export class HomePageModule {}

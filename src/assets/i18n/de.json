@@ -18,7 +18,8 @@
         "create-room": "Raum erstellen",
         "name": "Name",
         "description": "Beschreibung"
-      }
+      },
+      "last-games": "Letzte Spiele"
     },
     "profile": {
       "title": "Profil",

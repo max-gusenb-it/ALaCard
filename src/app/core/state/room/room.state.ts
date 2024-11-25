@@ -150,6 +150,7 @@ export class RoomState extends AngularLifecycle {
 
             let initialRoom = await this.roomSourceService.getInitialRoom$(action.roomId, action.creatorId);
 
+            // ToDo: Fix this bug
             if (!!!initialRoom) console.log (initialRoom);
             if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
@@ -194,7 +195,12 @@ export class RoomState extends AngularLifecycle {
                     takeUntil(this.destroyed$)
                 )
                 .subscribe(r => {
-                    ctx.dispatch(new RoomActions.SetRoom(action.creatorId, r))
+                    const state = ctx.getState();
+                    if (state.room?.game?.compareValue !== r?.game?.compareValue && r?.game?.compareValue && !this.store.selectSnapshot(AuthenticationState.isAnonymous)) {
+                        this.roomService.checkForGameHistoryAddition(r);
+                    }
+
+                    ctx.dispatch(new RoomActions.SetRoom(action.creatorId, r));
             });
             
             if (!!initialRoom.game?.compareValue) {

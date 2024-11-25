@@ -18,7 +18,8 @@
         "create-room": "Create room",
         "name": "Name",
         "description": "Description"
-      }
+      },
+      "last-games": "Last Games"
     },
     "profile": {
       "title": "Profile",

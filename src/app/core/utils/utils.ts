@@ -1,3 +1,5 @@
+import firebase from 'firebase/compat/app';
+
 export namespace Utils {
     export function getRandomNumber(max: number) {
         return Math.floor(Math.random() * max);
@@ -36,5 +38,15 @@ export namespace Utils {
             };
         });
         return text;
+    }
+
+    export function timestampToDate(timestamp: firebase.firestore.Timestamp) {
+        return new Date(timestamp.seconds * 1000);
+    }
+
+    export function getDateWithoutTime(date: Date) {
+        let d = new Date(date);
+        d.setHours(0, 0, 0, 0);
+        return d;
     }
 }

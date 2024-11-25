@@ -54,6 +54,7 @@ export { GameInformation } from "./state/information/game-information";
 export { TutorialInfo } from "./state/information/tutorial-info";
 export { RoundInformation } from "./state/information/round-information";
 
-export { User } from "./logic/user/user";
+export { GameHistoryEntry } from "./logic/user/game-history-entry";
 export { Settings } from "./logic/user/settings";
+export { User } from "./logic/user/user";
 export { FirestoreBase } from "./logic/firestore-base";
