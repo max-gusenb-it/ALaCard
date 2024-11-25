@@ -55,7 +55,7 @@ export class RoomSourceService {
 
     createRoom(name: string, description: string) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
-        if (!!user && !!user.id) {
+        if (!!user && user.id) {
             const player = UserUtils.exportUserToPlayer(user, 0);
             return this.firestoreService.add(
                 `${usersRef}/${user.id}/${roomsRef}`,

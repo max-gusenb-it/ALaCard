@@ -44,7 +44,7 @@ export class ItNavigationComponent {
     if (url === "/room") {
       const userId = this.store.selectSnapshot(AuthenticationState.userId)!;
       const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
-      if (!!!roomId) {
+      if (!roomId) {
         this.popupService.openSnackbar(
           this.translateService.instant("shared.components.buttons.it-navigation.no-room-owned")
         );

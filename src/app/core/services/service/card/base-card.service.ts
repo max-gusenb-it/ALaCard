@@ -18,12 +18,12 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         players = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline);
 
         let playerWhiteCardCount = Utils.countSubstrings(card.text, playerNameWhitecard);
-        if (card.text.includes(specificPlayerNameWhitecard) && !!!gameSettings.speficiPlayerId) {
+        if (card.text.includes(specificPlayerNameWhitecard) && !gameSettings.speficiPlayerId) {
             playerWhiteCardCount = playerWhiteCardCount + 1;    
         }
 
         if (playerWhiteCardCount > 0) {
-            baseRound.playerIds = Utils.getNFromArray(players.map(p => p.id), playerWhiteCardCount, !!gameSettings.speficiPlayerId ? [gameSettings.speficiPlayerId] : [])
+            baseRound.playerIds = Utils.getNFromArray(players.map(p => p.id), playerWhiteCardCount, gameSettings.speficiPlayerId ? [gameSettings.speficiPlayerId] : [])
         }
         return baseRound;
     }

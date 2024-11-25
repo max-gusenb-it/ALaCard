@@ -31,11 +31,11 @@ export class RoomService {
      */
     getRoomCollectionRef(creatorId?: string) {
         const room = this.store.selectSnapshot(RoomState.room);
-        if (!!!room && !!!creatorId) {
+        if (!!!room && !creatorId) {
             // Currently joined in no room
             creatorId = this.store.selectSnapshot(AuthenticationState.userId);
         }
-        if (!!!creatorId && !!room) {
+        if (!creatorId && !!room) {
             creatorId = RoomUtils.getRoomCreator(room).id;
         }
         return `${usersRef}/${creatorId}/${roomsRef}`;

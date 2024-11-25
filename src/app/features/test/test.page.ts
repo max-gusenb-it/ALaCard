@@ -56,7 +56,7 @@ export class TestPage {
   constructor(private popupService: PopupService) {}
 
   setColor(color: string) {
-    if (!!color) {
+    if (color) {
       let colorShades = [
         "900", "800", "700", "600", "500", "400", "300", "200", "100", "000"
       ];

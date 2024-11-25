@@ -41,9 +41,9 @@ export class ResponseDataDataService extends AngularLifecycle {
                     if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) {
                         this.disconnectFromResponseData();
                     };
-                } else if (!!userId && !!room.game && room.game.state === GameState.started && RoomUtils.getRoomAdmin(room).id === userId && (!!!this.responseDataSubscription$ || this.responseDataSubscription$.closed)) {
+                } else if (userId && !!room.game && room.game.state === GameState.started && RoomUtils.getRoomAdmin(room).id === userId && (!!!this.responseDataSubscription$ || this.responseDataSubscription$.closed)) {
                     this.connectToResponseData(room.id!);
-                } else if (!!userId && RoomUtils.getRoomAdmin(room).id === userId && !!room && !!this.room && this.room.id! !== room.id) {
+                } else if (userId && RoomUtils.getRoomAdmin(room).id === userId && !!room && !!this.room && this.room.id! !== room.id) {
                     if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) this.disconnectFromResponseData();
                     this.connectToResponseData(room.id!);
                 }

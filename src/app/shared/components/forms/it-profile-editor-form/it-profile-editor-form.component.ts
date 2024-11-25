@@ -30,7 +30,7 @@ export class ItProfileEditorComponent extends AngularLifecycle implements AfterV
   }
 
   ngAfterViewInit(): void {
-    this.profileForm.controls['username'].setValue(!!this.profileEditorFormData.username ? this.profileEditorFormData.username : null);
+    this.profileForm.controls['username'].setValue(this.profileEditorFormData.username ? this.profileEditorFormData.username : null);
     this.changeDetectorRef.detectChanges();
   }
 

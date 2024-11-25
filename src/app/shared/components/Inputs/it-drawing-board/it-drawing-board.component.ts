@@ -96,7 +96,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
       return;
     }
 
-    if(!!this.drawingUrl) {
+    if(this.drawingUrl) {
       this.drawingUrls.push({
         drawingUrl: this.drawingUrl,
         action: "init"
@@ -298,7 +298,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
    */
   addDrawingUrl(action: string) {
     const url = this.canvas.toDataURL();
-    if (!!url && (this.drawingUrls.length === 0 || url !== this.drawingUrls[this.drawingUrls.length - 1].drawingUrl) && this.pointerdownCounter !== this.prevPointerdownCounter) {
+    if (url && (this.drawingUrls.length === 0 || url !== this.drawingUrls[this.drawingUrls.length - 1].drawingUrl) && this.pointerdownCounter !== this.prevPointerdownCounter) {
       this.forceAddDrawingUrl(url, action);
     }
   }

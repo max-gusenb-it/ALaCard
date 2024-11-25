@@ -44,7 +44,7 @@ export class CardComponent extends AngularLifecycle {
   }
 
   getBorderCSSClasses() {
-    if (!!!this.customCardColor) {
+    if (!this.customCardColor) {
       switch(this.card.type) {
         case(CardType.GroundRule):
         case(CardType.FreeText): {
@@ -79,7 +79,7 @@ export class CardComponent extends AngularLifecycle {
   }
 
   getTitleBackgroundCSSClasses() {
-    if (!!!this.customCardColor) {
+    if (!this.customCardColor) {
       switch(this.card.type) {
         case(CardType.GroundRule):
         case(CardType.FreeText): {
@@ -142,7 +142,6 @@ export class CardComponent extends AngularLifecycle {
   }
 
   getCardTitle() {
-    // ToDo: adapt string empty checks to this
     if (this.customTitle) return this.customTitle;
     switch (this.card.type) {
       case (CardType.GroundRule): {

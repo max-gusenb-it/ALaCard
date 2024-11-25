@@ -2,17 +2,17 @@
   <div 
     class="flex flex-row justify-between items-center cursor-pointer"
     (click)="toggleState()"
-    *ngIf="!!heading"
+    *ngIf="heading"
   >
     <h4 [innerHTML]="heading"></h4>
     <it-icon
       class="transition-all ease-out"
       [ngClass]="{
-        'rotate-180': selected && !!!icon
+        'rotate-180': selected && !icon
       }"
       [filled]="!!icon && selected"
     >
-      {{ !!icon ? icon : 'expand_more' }}
+      {{ icon ? icon : 'expand_more' }}
     </it-icon>
   </div>
   <div [ngClass]="{'hidden': !wrapperDefault.children.length}">
