@@ -1358,7 +1358,7 @@ export const leggitPartyDeck: Deck = {
     },
 };
 export const askhole: Deck = {
-    icon: "🩷",
+    icon: "🪷",
     name: "askhole",
     description: "Talk about things you normally wouldn't by answering questions ranging from interesting to very weird",
     groundRules: [
