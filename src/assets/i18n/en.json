@@ -19,7 +19,13 @@
         "name": "Name",
         "description": "Description"
       },
-      "last-games": "Last Games"
+      "last-games": "Last Games",
+      "game-history-entry": {
+        "join-dialog": {
+          "title-1": "Do you want to join",
+          "title-2": "'s room?"
+        }
+      }
     },
     "profile": {
       "title": "Profile",
