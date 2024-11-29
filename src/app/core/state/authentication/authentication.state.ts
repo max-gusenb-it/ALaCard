@@ -4,13 +4,12 @@ import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@
 import { AuthenticationActions } from './authentication.actions';
 import { AuthDataService } from '../../services/data/auth.data.service';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { firstValueFrom, Subscription, takeUntil } from 'rxjs';
+import { firstValueFrom, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/source/user.source.service';
 import { LoadingHelperService } from '../../services/helper/loading.helper.service';
 import { GameHistoryEntry, TutorialInfo, User } from '../../models/interfaces';
 import { systemDefaultValue } from '../../constants/systemDefaultValue';
-import { SettingsService } from '../../services/service/settings.service';
 import { EmailAuthProvider, linkWithCredential } from '@angular/fire/auth';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
@@ -20,11 +19,15 @@ export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateMode
 })
 @Injectable()
 export class AuthenticationState extends AngularLifecycle implements NgxsOnInit {
-    userSubscription$: Subscription = null as any;
 
     @Selector()
     static isAuthenticated(state: AuthenticationStateModel): boolean {
         return !!state.uid;
+    }
+
+    @Selector()
+    static uid(state: AuthenticationStateModel): string | undefined {
+        return state.uid;
     }
 
     @Selector()
@@ -68,20 +71,21 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     }
 
     constructor(
-        private authService: AuthDataService,
+        private authDataService: AuthDataService,
         private userSourceService: UserSourceService,
-        private loadingHelperService: LoadingHelperService,
-        private settingsService: SettingsService
+        private loadingHelperService: LoadingHelperService
     ) {
         super();
     }
 
     ngxsOnInit(ctx: StateContext<any>): void {
-        this.authService.getAuthState()
+        this.authDataService.getAuthState()
             .pipe(takeUntil(this.destroyed$))
             .subscribe(s => {
                 ctx.dispatch(new AuthenticationActions.SetUserCredentials(s?.uid, s?.isAnonymous));
         });
+
+        this.authDataService.createAuthBasedUserSubscription();
     }
 
     @Action(AuthenticationActions.SignUpUser)
@@ -98,7 +102,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
         }
 
         return this.loadingHelperService.loadWithLoadingState([
-            this.authService.createAccount(
+            this.authDataService.createAccount(
                 action.createAccountFormData.register,
                 action.createAccountFormData.email,
                 action.createAccountFormData.password
@@ -128,7 +132,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
 
     @Action(AuthenticationActions.SignUpAnonymousUser)
     async signUpAnonymousUser(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SignUpAnonymousUser) {
-        const user = await firstValueFrom(this.authService.getAuthState());
+        const user = await firstValueFrom(this.authDataService.getAuthState());
         if (!!user && user.isAnonymous) {
             const newCredential = EmailAuthProvider.credential(action.email, action.password);
             let credential = await linkWithCredential(user, newCredential);
@@ -139,7 +143,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Action(AuthenticationActions.SignInUser)
     signInUser(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SignInUser) {
         return this.loadingHelperService.loadWithLoadingState([
-            this.authService.signInWithEmailAndPassword(
+            this.authDataService.signInWithEmailAndPassword(
                 action.email,
                 action.password
             )
@@ -149,20 +153,6 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Action(AuthenticationActions.SetUserCredentials)
     setUserCredentials(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SetUserCredentials) {
         const state = ctx.getState();
-
-        if (action.uid !== undefined && (!!!this.userSubscription$ || this.userSubscription$.closed || action.uid !== state.uid)) {
-            if (!!this.userSubscription$ && !this.userSubscription$?.closed) this.userSubscription$.unsubscribe();
-            this.userSubscription$ = this.userSourceService.getUser$(action.uid)
-                .pipe(takeUntil(this.destroyed$))
-                .subscribe(u => {
-                    ctx.dispatch(new AuthenticationActions.SetUser(u));
-                    if (!!u) {
-                        this.settingsService.setAppLanguage(u.settings.language);
-                        this.settingsService.setAppColor(u.settings.color);
-                    }
-                }
-            );
-        }
 
         ctx.patchState({
             ...state,
@@ -174,7 +164,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Action(AuthenticationActions.ResetPassword)
     resetPassword(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.ResetPassword) {
         return this.loadingHelperService.loadWithLoadingState([
-            this.authService.resetPassword(action.email)
+            this.authDataService.resetPassword(action.email)
         ]);
     }
 
@@ -203,9 +193,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
 
     @Action(AuthenticationActions.SignOut)
     signOut(ctx: StateContext<AuthenticationStateModel>) {
-        this.userSubscription$.unsubscribe();
         ctx.dispatch(new AuthenticationActions.SetUser());
         ctx.dispatch(new AuthenticationActions.SetUserCredentials());
-        return this.authService.signOut();
+        return this.authDataService.signOut();
     }
 }
