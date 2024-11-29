@@ -60,15 +60,19 @@ export class RoomService {
 
     checkForGameHistoryAddition(room: Room) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
-        if (!!!room.game || !!!user || !this.store.selectSnapshot(AuthenticationState.isAuthenticated)) return;
-
         let gameHistory = this.store.selectSnapshot(AuthenticationState.gameHistory);
-        if (this.isGameIsInHistory(room, gameHistory)) return;
+        if (
+            !!!room.game || 
+            !!!user || 
+            !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ||
+            !!gameHistory.find(gh => gh.compareValue === room.game!.compareValue)
+        ) return;
 
         const roomCreator = RoomUtils.getRoomCreator(room);
         gameHistory = [
             ...gameHistory,
             {
+                compareValue: room.game.compareValue,
                 roomCreatorUsername: roomCreator.username,
                 roomCreatorId: roomCreator.id,
                 roomId: room.id!,
@@ -88,19 +92,6 @@ export class RoomService {
                 gameHistory: gameHistory
             }
         );
-    }
-
-    isGameIsInHistory(room: Room, gameHistory: GameHistoryEntry[]) {
-        if (!!!room.game || !!!room.game.deck) return false;
-        return !!gameHistory.find(g => {
-            const roomCreator = RoomUtils.getRoomCreator(room);
-            return g.deckname === room.game!.deck.name &&
-                g.icon === room.game!.deck.icon &&
-                g.roomCreatorId === roomCreator.id &&
-                g.roomCreatorUsername === roomCreator.username &&
-                g.roomId === room.id &&
-                Utils.getDateWithoutTime(Utils.timestampToDate(g.date)).getTime() === Utils.getDateWithoutTime(new Date()).getTime()
-        });
     }
 
     getRoomLoaded$(roomId: string, initialRoom: Room) {

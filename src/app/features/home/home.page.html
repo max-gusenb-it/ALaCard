@@ -5,18 +5,18 @@
     </it-button-heading>
     <div
       *ngIf="!(isAuthenticated$ | async) || (isAuthenticated$ | async) && !(ownsRoom$ | async)"
-      class="flex flex-grow items-center"
+      class="flex flex-col flex-grow gap-4 justify-center"
     >
-      <no-account class="flex-grow" *ngIf="!(isAuthenticated$ | async)" ></no-account>
-      <no-room class="flex-grow" *ngIf="(isAuthenticated$ | async) && !(ownsRoom$ | async)" ></no-room>
-    </div>
-    <div
-      *ngIf="!!(user$ | async)"
-      class="flex flex-col gap-4 flex-grow items-start"
-    >
-      <h4>{{'features.home.last-games' | translate}}</h4>
-      <div class="flex flex-col w-full gap-2">
-        <game-history-entry *ngFor="let gameHistoryEntry of (user$ | async)!.gameHistory" [gameHistoryEntry]="gameHistoryEntry"/>
+      <no-account *ngIf="!(isAuthenticated$ | async)" ></no-account>
+      <no-room *ngIf="(isAuthenticated$ | async) && !(ownsRoom$ | async)" ></no-room>
+      <div
+        *ngIf="!!(user$ | async)?.gameHistory && (user$ | async)!.gameHistory.length > 0"
+        class="flex flex-col gap-4 items-start"
+      >
+        <h4>{{'features.home.last-games' | translate}}</h4>
+        <div class="flex flex-col w-full gap-2">
+          <game-history-entry *ngFor="let gameHistoryEntry of (user$ | async)!.gameHistory" [gameHistoryEntry]="gameHistoryEntry"/>
+        </div>
       </div>
     </div>
   </div>

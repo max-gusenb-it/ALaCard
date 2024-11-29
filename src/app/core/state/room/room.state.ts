@@ -195,10 +195,7 @@ export class RoomState extends AngularLifecycle {
                     takeUntil(this.destroyed$)
                 )
                 .subscribe(r => {
-                    const state = ctx.getState();
-                    if (state.room?.game?.compareValue !== r?.game?.compareValue && r?.game?.compareValue && !this.store.selectSnapshot(AuthenticationState.isAnonymous)) {
-                        this.roomService.checkForGameHistoryAddition(r);
-                    }
+                    this.roomService.checkForGameHistoryAddition(r);
 
                     ctx.dispatch(new RoomActions.SetRoom(action.creatorId, r));
             });
