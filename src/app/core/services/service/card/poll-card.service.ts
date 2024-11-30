@@ -1,4 +1,4 @@
-import { PollCard, PollResponse, Response, Card } from "src/app/core/models/interfaces";
+import { PollCard, PollResponse, Response, Card, PollCardResultConfig } from "src/app/core/models/interfaces";
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPollRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
@@ -8,7 +8,7 @@ import { pollCardSkipValue } from "src/app/core/constants/card";
 @Injectable({
     providedIn: 'root'
 })
-export class PollCardService<C extends PollCard> extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult> {
+export class PollCardService<C extends PollCard, S extends PollCardResultConfig> extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult, PollCardResultConfig> {
     override castCard(card: Card): C {
         let pollCard = super.castCard(card);
         return <C>{

@@ -1,7 +1,7 @@
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult, PlayerVotingResultConfig } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "src/app/core/constants/card";
 import { Store } from "@ngxs/store";
@@ -11,7 +11,7 @@ import { Utils } from "src/app/core/utils/utils";
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
+export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
 
     constructor(private store: Store, private translateService: TranslateService) {
         super(store);
@@ -122,7 +122,7 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const pvCard = this.castCard(card);
 
-        const results = this.getResultGroup(dynamicRoundData, pvCard.settings?.sipConfig?.group);
+        const results = this.getResultGroup(dynamicRoundData, pvCard.settings?.sipConfig);
         return results
             .map(r => {
                 return {
@@ -134,15 +134,18 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         );
     }
 
-    override getResultGroup(dynamicRoundData: DynamicRoundData, group?: PlayerVotingGroup): PlayerVotingResult[] {
+    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: PlayerVotingResultConfig): PlayerVotingResult[] {
+        if (!!!resultConfig || !!!resultConfig.group) resultConfig = {
+            group: this.defaultPlayerVotingGroup
+        }
+
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.votedPlayerId !== playerVotingCardSkipValue);
-        if (!!!group) group = this.defaultPlayerVotingGroup;
 
         let resultGroup: PlayerVotingResult[] = [];
         if (results.length != 0) {
             let votes = 0;
-            if (group === PlayerVotingGroup.MostVoted) {
+            if (resultConfig.group === PlayerVotingGroup.MostVoted) {
                 votes = results[0].votes;
             } else {
                 votes = results[results.length - 1].votes;

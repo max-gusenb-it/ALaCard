@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PollCardService } from "./poll-card.service";
-import { Card, DynamicRoundData, Player, Result, SipResult } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { defaultCardSips, pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
@@ -12,7 +12,7 @@ import { Store } from "@ngxs/store";
 @Injectable({
     providedIn: 'root'
 })
-export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
+export class TopicVotingCardService extends PollCardService<TopicVotingCard, TopicVotingResultConfig> {
     
     constructor(store: Store, private translateService: TranslateService) {
         super(store);
@@ -93,7 +93,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const pollCard = this.castCard(card);
 
-        const results = this.getResultGroup(dynamicRoundData, pollCard.settings?.sipConfig?.group);
+        const results = this.getResultGroup(dynamicRoundData, pollCard.settings?.sipConfig);
         return results
             .map(r => {
                 return r.playerIds.map(pId => {
@@ -107,16 +107,20 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard> {
             .flat();
     }
 
-    override getResultGroup(dynamicRoundData: DynamicRoundData, group?: TopicVotingGroup) : PollResult[] {
-        // ToDo: Generalize
+    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingResultConfig) : PollResult[] {
+        if (!!!resultConfig || (!!!resultConfig.group)) resultConfig = {
+            group: this.defaultTopicVotingGroup,
+            specificSubjectId: resultConfig?.specificSubjectId
+        };
+
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.subjectId !== pollCardSkipValue);
-        if (!!!group) group = this.defaultTopicVotingGroup;
 
         let resultGroup: PollResult[] = [];
         if (results.length != 0) {
             let votes = 0;
-            if (group === TopicVotingGroup.MostVoted) {
+            // ToDo: Generalize Reacurring stuff like MostVoted, LeastVoted
+            if (resultConfig.group === TopicVotingGroup.MostVoted) {
                 votes = results[0].votes;
             } else {
                 votes = results[results.length - 1].votes;

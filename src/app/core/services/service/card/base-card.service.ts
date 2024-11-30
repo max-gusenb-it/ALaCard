@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
 import { PlayerState } from "src/app/core/models/enums";
-import { Card, DynamicRoundData, GameSettings, Player, Response, Result, Round, SipResult } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, ResultConfig, GameSettings, Player, Response, Result, Round, SipResult } from "src/app/core/models/interfaces";
 import { AuthenticationState, RoomState } from "src/app/core/state";
 import { BaseCardUtils } from "src/app/core/utils/card/base-card.utils";
 import { Utils } from "src/app/core/utils/utils";
@@ -10,7 +10,7 @@ import { Utils } from "src/app/core/utils/utils";
 @Injectable({
     providedIn: 'root'
 })
-export class BaseCardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
+export class BaseCardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result, S extends ResultConfig> {
 
     constructor(private base_store: Store) { }
 
@@ -115,7 +115,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [];
     }
 
-    getResultGroup(dynamicRoundData: DynamicRoundData, group?: any) : Result[] {
+    getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: S) : Result[] {
         return [];
     }
 

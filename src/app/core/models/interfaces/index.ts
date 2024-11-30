@@ -7,20 +7,22 @@ export { CreateAccountFormData } from "./features/home/create-account-form-data"
 
 export { FreeTextCardSettings } from "./logic/cards/free-text-card/free-text-card-settings";
 export { FreeTextCard } from "./logic/cards/free-text-card/free-text-card";
+export { ResultConfig } from "./logic/cards/result-config";
 
 export { PlayerVotingCardSettings } from "./logic/cards/player-voting-card/player-voting-card-settings";
 export { PlayerVotingCard } from "./logic/cards/player-voting-card/player-voting-card";
 export { PlayerVotingResult } from "./logic/cards/player-voting-card/player-voting-result";
-export { PlayerVotingSipConfig } from "./logic/cards/player-voting-card/player-voting-sip-config";
+export { PlayerVotingResultConfig } from "./logic/cards/player-voting-card/player-voting-result-config";
 export { PlayerVotingGroup } from "../enums/logic/cards/player-voting-card/player-voting-group";
 
+export { PollCardResultConfig } from "./logic/cards/poll-card/poll-card-result-config";
 export { PollCardSettings } from "./logic/cards/poll-card/poll-card-settings";
 export { PollCard } from "./logic/cards/poll-card/poll-card";
 export { Subject } from "./logic/cards/poll-card/subject";
 
 export { TopicVotingCardSettings } from "./logic/cards/topic-voting-card/topic-voting-card-settings";
 export { TopicVotingCard } from "./logic/cards/topic-voting-card/topic-voting-card";
-export { TopicVotingSipConfig } from "./logic/cards/topic-voting-card/topic-voting-sip-config";
+export { TopicVotingResultConfig } from "./logic/cards/topic-voting-card/topic-voting-result-config";
 
 export { Card } from "./logic/cards/card";
 export { CardSettings } from "./logic/cards/card-settings";
