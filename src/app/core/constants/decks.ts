@@ -1326,7 +1326,13 @@ export const leggitPartyDeck: Deck = {
                 {
                     title: "No"
                 }
-            ]
+            ],
+            settings: {
+                sipConfig: {
+                    specificSipSubjectId: 0,
+                    distribute: false
+                }
+            }
         } as TopicVotingCard,
         {
             text: "Ever taken hard drugs?",
@@ -1338,7 +1344,13 @@ export const leggitPartyDeck: Deck = {
                 {
                     title: "No"
                 }
-            ]
+            ],
+            settings: {
+                sipConfig: {
+                    specificSipSubjectId: 0,
+                    distribute: false
+                }
+            }
         } as TopicVotingCard
     ],
     groundRules: [

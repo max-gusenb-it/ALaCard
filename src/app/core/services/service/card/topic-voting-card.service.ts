@@ -22,6 +22,10 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         return TopicVotingGroup.MostVoted;
     }
 
+    get defaultTopicVotingDistribution() {
+        return true;
+    }
+
     override getResults(dynamicRoundData: DynamicRoundData): PollResult[] {
         let results : PollResult[] = [];
         const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
@@ -91,16 +95,27 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
     }
 
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        const pollCard = this.castCard(card);
+        const tvCard = this.castCard(card);
 
-        const results = this.getResultGroup(dynamicRoundData, pollCard.settings?.sipConfig);
+        // ToDo: Gets called on no drinking game. Why?
+
+        let results : PollResult[] = [];
+        if (tvCard.settings?.sipConfig?.specificSipSubjectId === undefined) {
+            results = this.getResultGroup(dynamicRoundData, tvCard.settings?.sipConfig?.resultConfig);
+        } else {
+            results = this.getResults(dynamicRoundData)
+                .filter(r => r.subjectId === tvCard.settings!.sipConfig!.specificSipSubjectId);
+        }
+
         return results
             .map(r => {
                 return r.playerIds.map(pId => {
                     return {
                         playerId: pId,
                         sips: defaultCardSips,
-                        distribute: true
+                        distribute: tvCard.settings?.sipConfig?.distribute !== undefined ? 
+                            tvCard.settings?.sipConfig?.distribute : 
+                            this.defaultTopicVotingDistribution
                     } as SipResult
                 });
             })
@@ -108,9 +123,8 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
     }
 
     override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingResultConfig) : PollResult[] {
-        if (!!!resultConfig || (!!!resultConfig.group)) resultConfig = {
-            group: this.defaultTopicVotingGroup,
-            specificSubjectId: resultConfig?.specificSubjectId
+        if (!!!resultConfig) resultConfig = {
+            group: this.defaultTopicVotingGroup
         };
 
         const results = this.getResults(dynamicRoundData)
@@ -120,6 +134,16 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         if (results.length != 0) {
             let votes = 0;
             // ToDo: Generalize Reacurring stuff like MostVoted, LeastVoted
+            switch(resultConfig.group) {
+                case(TopicVotingGroup.MostVoted): {
+                    votes = results[0].votes;
+                    break;
+                }
+                case(TopicVotingGroup.LeastVoted): {
+                    votes = results[results.length - 1].votes;
+                    break;
+                }
+            }
             if (resultConfig.group === TopicVotingGroup.MostVoted) {
                 votes = results[0].votes;
             } else {

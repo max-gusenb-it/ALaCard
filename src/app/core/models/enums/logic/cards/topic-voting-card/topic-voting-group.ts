@@ -1,5 +1,4 @@
 export enum TopicVotingGroup {
     MostVoted,
-    LeastVoted,
-    SpecificSubjectVoters
+    LeastVoted
 }

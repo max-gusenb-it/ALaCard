@@ -23,6 +23,7 @@ export { Subject } from "./logic/cards/poll-card/subject";
 export { TopicVotingCardSettings } from "./logic/cards/topic-voting-card/topic-voting-card-settings";
 export { TopicVotingCard } from "./logic/cards/topic-voting-card/topic-voting-card";
 export { TopicVotingResultConfig } from "./logic/cards/topic-voting-card/topic-voting-result-config";
+export { TopicVotingSipConfig } from "./logic/cards/topic-voting-card/topic-voting-sip-config";
 
 export { Card } from "./logic/cards/card";
 export { CardSettings } from "./logic/cards/card-settings";
