@@ -62,10 +62,10 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
         const state = ctx.getState();
         this.store.select(AuthenticationState.tutorialInfos)    
             .pipe(
-                takeUntil(this.destroyed$)
+                takeUntil(this.destroyed$),
+                filter(t => !!t && t.length > 0)
             )
             .subscribe(tutorialInfos => {
-                if (!!tutorialInfos) tutorialInfos = [];
                 ctx.patchState({tutorialInfos: tutorialInfos});
         });
         if (state.version === INFORMATION_STATE_VERSION) return;

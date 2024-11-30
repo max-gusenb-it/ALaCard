@@ -4,7 +4,6 @@
       {{'features.home.home' | translate}}
     </it-button-heading>
     <div
-      *ngIf="!(isAuthenticated$ | async) || (isAuthenticated$ | async) && !(ownsRoom$ | async)"
       class="flex flex-col flex-grow gap-4 justify-center"
     >
       <no-account *ngIf="!(isAuthenticated$ | async)" ></no-account>
