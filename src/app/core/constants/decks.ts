@@ -1085,13 +1085,13 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Zombie" 
+                    title: "Zombie 🦠" 
                 },
                 {
-                    title: "Atomic"
+                    title: "Atomic 💥"
                 },
                 {
-                    title: "Artificial intelligence"
+                    title: "Artificial intelligence 🤖"
                 }
             ]
         } as TopicVotingCard,
@@ -1112,10 +1112,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Ice desert" 
+                    title: "Ice desert ❄️" 
                 },
                 {
-                    title: "Sand desert"
+                    title: "Sand desert ☀️"
                 }
             ]
         } as TopicVotingCard,
