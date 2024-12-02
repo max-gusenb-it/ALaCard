@@ -769,7 +769,8 @@ export const leggitPartyDeck: Deck = {
             text: "Who would be more likely to start a relationship with a friend's parent?",
             type: CardType.PlayerVoting,
             settings: {
-                isAnonymous: true
+                isAnonymous: true,
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -863,7 +864,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Kakoa 🥛" 
+                    title: "Kakao 🥛" 
                 },
                 {
                     title: "Coffee ☕"
