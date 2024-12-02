@@ -53,7 +53,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         });
         results = results.sort((r1, r2) => {
             if (r1.subjectId === pollCardSkipValue) return 1;
-            if (r2.subjectId === pollCardSkipValue) return 1;
+            if (r2.subjectId === pollCardSkipValue) return -1;
             return r2.votes - r1.votes;
         });
         return results;
