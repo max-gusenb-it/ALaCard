@@ -12,7 +12,6 @@ import { InformationState } from "../../state/information";
 import { RoomUtils } from "../../utils/room.utils";
 import { UserSourceService } from "../source/user.source.service";
 import { IngameDataDataService } from '../data/ingame-data.data.service';
-import { PlayerState } from '../../models/enums';
 
 @Injectable({
     providedIn: 'root'

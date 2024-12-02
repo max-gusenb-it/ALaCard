@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
@@ -14,14 +14,14 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent extends AngularLifecycle {
+export class CardComponent extends AngularLifecycle implements AfterViewInit {
 
   players: Player[];
 
   @Input() card: Card;
   @Input() deckname: string = "";
   @Input() playerIds?: string[];
-  @Input() customCardColor?: Color;
+  @Input() customColor?: Color;
   @Input() customTitle?: string;
   @Input() hideDeckName?: boolean;
 
@@ -34,7 +34,8 @@ export class CardComponent extends AngularLifecycle {
   constructor(
     private store: Store,
     private cardService: CardService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     super();
 
@@ -43,8 +44,14 @@ export class CardComponent extends AngularLifecycle {
       .subscribe(p => this.players = p);
   }
 
+  ngAfterViewInit(): void {
+    if (!this.customColor && this.card.settings?.customColor) this.customColor = this.card.settings.customColor;
+    if (!this.customTitle && this.card.settings?.customTitle) this.customTitle = this.card.settings.customTitle;
+    this.changeDetectorRef.detectChanges();
+  }
+
   getBorderCSSClasses() {
-    if (!this.customCardColor) {
+    if (!this.customColor) {
       switch(this.card.type) {
         case(CardType.GroundRule):
         case(CardType.FreeText): {
@@ -58,7 +65,7 @@ export class CardComponent extends AngularLifecycle {
         }
       }
     } else {
-      switch(this.customCardColor) {
+      switch(this.customColor) {
         case(supportedColors[0]): return "border-red-500 bg-red-500";
         case(supportedColors[1]): return "border-orange-500 bg-orange-500";
         case(supportedColors[2]): return "border-amber-500 bg-amber-500";
@@ -79,7 +86,7 @@ export class CardComponent extends AngularLifecycle {
   }
 
   getTitleBackgroundCSSClasses() {
-    if (!this.customCardColor) {
+    if (!this.customColor) {
       switch(this.card.type) {
         case(CardType.GroundRule):
         case(CardType.FreeText): {
@@ -93,7 +100,7 @@ export class CardComponent extends AngularLifecycle {
         }
       }
     } else {
-      switch(this.customCardColor) {
+      switch(this.customColor) {
         case(supportedColors[0]): return "bg-red-200";
         case(supportedColors[1]): return "bg-orange-200";
         case(supportedColors[2]): return "bg-amber-200";

@@ -187,7 +187,9 @@ export const drinkingDeck: Deck = {
             text: "%p0 trink fünf Schlücke :)",
             type: CardType.FreeText,
             settings: {
-                drinkingCard: true
+                drinkingCard: true,
+                customColor: "blue",
+                customTitle: "Dring a moi heast"
             }
         } as FreeTextCard
     ],
