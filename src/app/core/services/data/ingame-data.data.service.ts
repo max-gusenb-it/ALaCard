@@ -66,19 +66,18 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
             responses
         );
 
-        let newPlayerData : PlayerData[] = [];
-
-        const responsivePlayerIds = responses.map(r => r.playerId);
-        const unresponsivePlayerIds = players
-            .filter(p => responsivePlayerIds.findIndex(r => r === p.id) === -1)
-            .map(p => p.id);
-
-        responsivePlayerIds.forEach(playerId => {
-            newPlayerData.push({
-                playerId: playerId,
-                inactiveRoundsCount: 0
-            })
+        let newPlayerData : PlayerData[] = responses
+            .map(r => {
+                return {
+                    playerId: r.playerId,
+                    inactiveRoundsCount: 0
+                }
         });
+
+        const unresponsivePlayerIds = players
+            .filter(p => responses.map(r => r.playerId).findIndex(r => r === p.id) === -1)
+            .map(p => p.id);
+        
         unresponsivePlayerIds.forEach(playerId => {
             const existingPlayerData = this.ingameData$.value.playerData.find(pd => pd.playerId === playerId);
             let inactiveRoundsCount = 1;
