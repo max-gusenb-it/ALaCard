@@ -57,9 +57,12 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
         if (!!!d) return;
         this.dynamicRoundData = this.pollCardService.castDynamicRoundData(d);
         this.results = this.pollCardService.getResults(this.dynamicRoundData);
-        const seperatedSipResults = this.pollCardService.getSperatedSipResults(this.card, this.dynamicRoundData);
-        this.sipResults = seperatedSipResults[0];
-        this.userSipResult = seperatedSipResults[1];
+
+        if (this.gameSettings?.drinkingGame) {
+          const seperatedSipResults = this.pollCardService.getSperatedSipResults(this.card, this.dynamicRoundData);
+          this.sipResults = seperatedSipResults[0];
+          this.userSipResult = seperatedSipResults[1];
+        };
         
         this.changeDetectorRef.detectChanges();
       });

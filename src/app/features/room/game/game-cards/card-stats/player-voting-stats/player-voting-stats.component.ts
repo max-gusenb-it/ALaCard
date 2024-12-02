@@ -61,9 +61,12 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
         }
         this.dynamicRoundData = d;
         this.results = this.playerVotingService.getResults(this.dynamicRoundData);
-        const seperatedSipResults = this.playerVotingService.getSperatedSipResults(this.card, this.dynamicRoundData);
-        this.sipResults = seperatedSipResults[0];
-        this.userSipResult = seperatedSipResults[1];
+
+        if (this.gameSettings.drinkingGame) {
+          const seperatedSipResults = this.playerVotingService.getSperatedSipResults(this.card, this.dynamicRoundData);
+          this.sipResults = seperatedSipResults[0];
+          this.userSipResult = seperatedSipResults[1];
+        }
 
         this.changeDetectorRef.detectChanges();
     });

@@ -97,8 +97,6 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const tvCard = this.castCard(card);
 
-        // ToDo: Gets called on no drinking game. Why?
-
         let results : PollResult[] = [];
         if (tvCard.settings?.sipConfig?.specificSipSubjectId === undefined) {
             results = this.getResultGroup(dynamicRoundData, tvCard.settings?.sipConfig?.resultConfig);
