@@ -123,11 +123,13 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         const pvCard = this.castCard(card);
 
         const results = this.getResultGroup(dynamicRoundData, pvCard.settings?.sipConfig);
+        const allResults = this.getResults(dynamicRoundData)
+            .filter(r => r.votedPlayerId !== playerVotingCardSkipValue);
         return results
             .map(r => {
                 return {
                     playerId: r.votedPlayerId,
-                    sips: results.length > 1 ? defaultCardSips : defaultCardSips + 1,
+                    sips: allResults.length > 1 ? defaultCardSips : defaultCardSips + 1,
                     distribute: false
                 } as SipResult
             }
