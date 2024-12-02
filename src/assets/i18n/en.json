@@ -140,7 +140,9 @@
             }
           },
           "sips": "Sips"
-        }
+        },
+        "has-been-set-to-inactive": "has been set to inactive",
+        "have-been-set-to-inactive": "have been set to inactive"
       },
       "start-game": "Start Game",
       "continue": "Continue",

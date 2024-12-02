@@ -6,6 +6,10 @@ import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.serv
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
 import { CardService } from "../service/card/card.service";
+import { PopupService } from "../service/popup.service";
+import { Utils } from "../../utils/utils";
+import { defaultInactiveRoundCount } from "../../constants/game-settings";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +19,8 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
 
     constructor(
         private cardService: CardService,
+        private popupService: PopupService,
+        private translateService: TranslateService,
         private ingameDataSourceService: IngameDataSourceService,
         private store: Store
     ) {
@@ -59,35 +65,10 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
         const cardService = this.cardService.getCardService(deck.cards[round.cardIndex].type);
 
         const newDynamicRoundData = cardService.createDynamicRoundData(
-            round.id, 
+            round.id,
             responses
         );
-
-        let newPlayerData : PlayerData[] = responses
-            .map(r => {
-                return {
-                    playerId: r.playerId,
-                    inactiveRoundsCount: 0
-                }
-        });
-
-        const unresponsivePlayerIds = players
-            .filter(p => responses.map(r => r.playerId).findIndex(r => r === p.id) === -1)
-            .map(p => p.id);
-        
-        unresponsivePlayerIds.forEach(playerId => {
-            const existingPlayerData = this.ingameData$.value.playerData.find(pd => pd.playerId === playerId);
-            let inactiveRoundsCount = 1;
-            if (!!existingPlayerData && existingPlayerData.inactiveRoundsCount > 0) {
-                inactiveRoundsCount = existingPlayerData.inactiveRoundsCount + 1;
-            }
-            newPlayerData.push({
-                playerId: playerId,
-                inactiveRoundsCount: inactiveRoundsCount
-            });
-        });
-
-        const roomId = this.store.selectSnapshot(RoomState.roomId)!;
+        const newPlayerData = this.checkForInactivePlayers(responses);
 
         this.ingameDataSourceService.updateIngameData(
             {
@@ -95,26 +76,73 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
                 dynamicRoundData: newDynamicRoundData,
                 playerData: newPlayerData
             },
-            roomId
+            this.store.selectSnapshot(RoomState.roomId)!
         );
+    }
+
+    checkForInactivePlayers(responses: Response[]) {
+        const players = this.store.selectSnapshot(RoomState.players);
+
+        let responsivePlayerData: PlayerData[] = responses
+            .map(r => {
+                return {
+                    playerId: r.playerId,
+                    inactiveRoundsCount: 0
+                }
+            });
+        let unresponsivePlayerData: PlayerData[] = [];
+
+        const unresponsivePlayerIds = players
+            .filter(p => responses.map(r => r.playerId).findIndex(r => r === p.id) === -1)
+            .map(p => p.id);
+
+        unresponsivePlayerIds.forEach(playerId => {
+            const existingPlayerData = this.ingameData$.value.playerData.find(pd => pd.playerId === playerId);
+            let inactiveRoundsCount = 1;
+            if (!!existingPlayerData && existingPlayerData.inactiveRoundsCount > 0) {
+                inactiveRoundsCount = existingPlayerData.inactiveRoundsCount + 1;
+            }
+            unresponsivePlayerData.push({
+                playerId: playerId,
+                inactiveRoundsCount: inactiveRoundsCount
+            });
+        });
+
+        if (!!unresponsivePlayerData.find(pd => pd.inactiveRoundsCount === defaultInactiveRoundCount)) {
+            const newInactivePlayers = players
+                .filter(p => !!unresponsivePlayerData.find(pd => pd.playerId === p.id && pd.inactiveRoundsCount === defaultInactiveRoundCount));
+            this.popupService.openSnackbar(
+                Utils.addComaToStringArray(
+                    newInactivePlayers.map(p => p.username),
+                    true
+                ) + " " + (newInactivePlayers.length === 1 ? this.translateService.instant("features.room.game.has-been-set-to-inactive") : this.translateService.instant("features.room.game.have-been-set-to-inactive"))
+            );
+        }
+
+        return [
+            ...responsivePlayerData,
+            ...unresponsivePlayerData
+        ]
     }
 
     getActivePlayers() {
         const players = this.store.selectSnapshot(RoomState.players);
-        return this.getActivePlayerIds().map(pId => players.find(p => p.id === pId)!);
+        return this.getActivePlayerIds()
+            .map(pId => players.find(p => p.id === pId)!)
+            .sort((p1, p2) => p1.joinOrder - p2.joinOrder);
     }
 
     getActivePlayerIds() {
         if (!!!this.ingameData$.value?.playerData || this.ingameData$.value.playerData.length === 0) return this.store.selectSnapshot(RoomState.players).map(p => p.id);
         const inactivePlayers = this.store.selectSnapshot(RoomState.inactivePlayers);
         return this.ingameData$.value.playerData
-            .filter(pd => pd.inactiveRoundsCount < 3 && inactivePlayers.findIndex(p => p.id === pd.playerId) === -1)
+            .filter(pd => pd.inactiveRoundsCount < defaultInactiveRoundCount && inactivePlayers.findIndex(p => p.id === pd.playerId) === -1)
             .map(pd => pd.playerId);
     }
 
     roundProcessed(roundId: number) {
         const ingameData = this.getIngameData();
         if (!!ingameData && !!ingameData.dynamicRoundData && ingameData.dynamicRoundData.roundId === roundId) return ingameData.dynamicRoundData.processed;
-        else return false; 
+        else return false;
     }
 }

@@ -19,8 +19,6 @@ export class ResponseDataDataService extends AngularLifecycle {
     @Select(RoomState.room) room$!: Observable<Room>;
     room: Room;
 
-    // ToDo: Convert to room-player-load-base service
-
     constructor(
         private store: Store,
         private roomService: RoomService,

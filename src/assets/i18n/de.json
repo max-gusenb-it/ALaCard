@@ -140,7 +140,9 @@
             }
           },
           "sips": "Schlücke"
-        }
+        },
+        "has-been-set-to-inactive": "wurde auf inaktiv gesetzt",
+        "have-been-set-to-inactive": "wurden auf inaktiv gesetzt"
       },
       "start-game": "Spiel starten",
       "continue": "Weiter",
