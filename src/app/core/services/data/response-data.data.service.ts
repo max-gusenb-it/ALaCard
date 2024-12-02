@@ -6,11 +6,8 @@ import { AuthenticationState, RoomState } from "../../state";
 import { Injectable } from "@angular/core";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { GameState } from "../../models/enums";
-import { RoomUtils } from "../../utils/room.utils";
 import { InformationState } from "../../state/information";
 import { RoomService } from "../service/room.service";
-import { StaticRoundDataDataService } from "./static-round-data.data.service";
-import { IngameDataDataService } from "./ingame-data.data.service";
 
 @Injectable({
     providedIn: 'root'
@@ -26,10 +23,8 @@ export class ResponseDataDataService extends AngularLifecycle {
 
     constructor(
         private store: Store,
-        private responseDataSourceService: ResponseDataSourceService,
-        private staticRoundDataDataService: StaticRoundDataDataService,
-        private ingameDataDataService: IngameDataDataService,
-        private roomSerivce: RoomService
+        private roomService: RoomService,
+        private responseDataSourceService: ResponseDataSourceService
     ) {
         super();
 
@@ -37,13 +32,13 @@ export class ResponseDataDataService extends AngularLifecycle {
             .pipe(takeUntil(this.destroyed$))
             .subscribe(room => {
                 const userId = this.store.selectSnapshot(AuthenticationState.userId);
-                if (!!!room || !!!room.game || room.game.state === GameState.ended || RoomUtils.getRoomAdmin(room).id !== userId) {
+                if (!!!room || !!!room.game || room.game.state === GameState.ended || this.roomService.getRoomAdmin().id !== userId) {
                     if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) {
                         this.disconnectFromResponseData();
                     };
-                } else if (userId && !!room.game && room.game.state === GameState.started && RoomUtils.getRoomAdmin(room).id === userId && (!!!this.responseDataSubscription$ || this.responseDataSubscription$.closed)) {
+                } else if (userId && !!room.game && room.game.state === GameState.started && this.roomService.getRoomAdmin().id === userId && (!!!this.responseDataSubscription$ || this.responseDataSubscription$.closed)) {
                     this.connectToResponseData(room.id!);
-                } else if (userId && RoomUtils.getRoomAdmin(room).id === userId && !!room && !!this.room && this.room.id! !== room.id) {
+                } else if (userId && this.roomService.getRoomAdmin().id === userId && !!room && !!this.room && this.room.id! !== room.id) {
                     if (!!this.responseDataSubscription$ && !this.responseDataSubscription$.closed) this.disconnectFromResponseData();
                     this.connectToResponseData(room.id!);
                 }
@@ -56,25 +51,12 @@ export class ResponseDataDataService extends AngularLifecycle {
             .pipe(takeUntil(this.destroyed$))
             .subscribe(r => {
                 this.responseData$.next(r);
-                const roomSettings = this.store.selectSnapshot(RoomState.roomSettings);
-                if (!!roomSettings && roomSettings.autoContinueOnAllVotes) this.checkForAutoContinueRound();
-                
         });
     }
 
     disconnectFromResponseData() {
         this.responseDataSubscription$.unsubscribe();
         this.responseData$.next(null as any);
-    }
-
-    checkForAutoContinueRound() {
-        const roundId = this.staticRoundDataDataService.getStaticRoundData()?.round?.id;
-        if (!!!roundId && roundId !== 0) return;
-        const activePlayerCount = this.store.selectSnapshot(RoomState.activePlayers).length;
-        const responseCount = this.getAdminResponsesForRound(roundId).length;
-        if (responseCount >= activePlayerCount) {
-            this.ingameDataDataService.processRound(this.getAdminResponsesForRound(roundId));
-        }
     }
 
     getAdminResponses$() {
@@ -112,9 +94,5 @@ export class ResponseDataDataService extends AngularLifecycle {
     userResponded(roundId: number) {
         const response = this.store.selectSnapshot(InformationState.response);
         return !!response && response.roundId == roundId;
-    }
-
-    getAdminResponseCountInfo(roundId: number) {
-        return `${this.getAdminResponsesForRound(roundId).length} / ${this.roomSerivce.getActivePlayerCount()}`
     }
 }

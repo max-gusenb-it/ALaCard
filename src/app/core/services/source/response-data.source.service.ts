@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FirestoreService } from "./firestore.source.service";
 import { gameDataRef, responseDataRef } from "../../constants/firestoreReferences";
 import { Response, ResponseData } from '../../models/interfaces';
-import { RoomService } from '../service/room.service';
+import { RoomRefService } from '../service/room-ref.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,19 +12,19 @@ export class ResponseDataSourceService {
 
     constructor(
         private firestoreService: FirestoreService<ResponseData>,
-        private roomService: RoomService
+        private roomRefService: RoomRefService
     ) {}
 
     getResponseData$(roomId: string) {
         return this.firestoreService.getDocWithId$(
-            `${this.roomService.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
+            `${this.roomRefService.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             responseDataRef
         );
     }
 
     createInitialResponseData(roomId: string) {
         return this.firestoreService.upsert(
-            `${this.roomService.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
+            `${this.roomRefService.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             responseDataRef,
             {
                 creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
@@ -35,7 +35,7 @@ export class ResponseDataSourceService {
 
     addResponse(roomId: string, response: Response) {
         return this.firestoreService.updateField(
-            `${this.roomService.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
+            `${this.roomRefService.getRoomCollectionRef()}/${roomId}/${gameDataRef}`,
             responseDataRef,
             `responses.${response.playerId}`,
             response

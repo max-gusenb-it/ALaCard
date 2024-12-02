@@ -47,7 +47,7 @@ export class StaticRoundDataService {
         let availableCardIndexes = Array.from(Array(deck.cards.length).keys())
             .filter(i => !staticRoundData.playedCardIndexes.includes(i));
 
-        availableCardIndexes = StaticRoundDataUtils.getPlayableCards(availableCardIndexes, deck, players, gameSettings);
+        availableCardIndexes = StaticRoundDataUtils.getPlayableCards(availableCardIndexes, deck, players.length, gameSettings);
 
         const orderCardIndexes = availableCardIndexes.filter(index => deck.cards[index].settings?.order !== undefined);
         if (orderCardIndexes.length !== 0) {

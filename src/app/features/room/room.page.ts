@@ -13,10 +13,10 @@ import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-botto
 import { RoomUtils } from 'src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
-import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { RoomService } from 'src/app/core/services/service/room.service';
+import { GameControlService } from 'src/app/core/services/service/game-control.service';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
@@ -43,7 +43,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private popupService: PopupService,
     private translateService: TranslateService,
     private staticRoundDataDataService: StaticRoundDataDataService,
-    private responseDataDataService: ResponseDataDataService,
+    private gameControlService: GameControlService,
     private roomService: RoomService
   ) {
     super();
@@ -138,7 +138,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   getAdminResponseCountInfo() {
-    return this.responseDataDataService.getAdminResponseCountInfo(-1);
+    return this.gameControlService.getAdminResponseCountInfo(-1);
   }
 
   startGame() {

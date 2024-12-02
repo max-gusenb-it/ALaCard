@@ -1,16 +1,15 @@
-import { Deck, GameSettings, Player, PlayerVotingCard } from "../models/interfaces";
+import { Deck, GameSettings, PlayerVotingCard } from "../models/interfaces";
 import { Utils } from './utils';
-import { CardType, PlayerState } from '../models/enums';
+import { CardType } from '../models/enums';
 import { playerNameWhitecard, specificPlayerNameWhitecard } from '../constants/card';
 import { BaseCardUtils } from "./card/base-card.utils";
 
 export namespace StaticRoundDataUtils {
-    export function isDeckPlayable(deck: Deck, players: Player[], gameSettings: GameSettings) {
-        return getPlayableCards(Array.from(Array(deck.cards.length).keys()), deck, players, gameSettings).length > 0;
+    export function isDeckPlayable(deck: Deck, activePlayerCount: number, gameSettings: GameSettings) {
+        return getPlayableCards(Array.from(Array(deck.cards.length).keys()), deck, activePlayerCount, gameSettings).length > 0;
     }
 
-    export function getPlayableCards(availableCardIndexes: number[], deck: Deck, players: Player[], gameSettings: GameSettings) : number[] {
-        const activePlayerCount = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline).length;
+    export function getPlayableCards(availableCardIndexes: number[], deck: Deck, activePlayerCount: number, gameSettings: GameSettings) : number[] {
         return availableCardIndexes
             .filter(ci => gameSettings.drinkingGame || !deck.cards[ci].settings?.drinkingCard)
             .filter(ci => {

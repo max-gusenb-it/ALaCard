@@ -5,6 +5,7 @@ import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { speficiPlayerIdSettingName } from 'src/app/core/constants/game-settings';
 import { Deck, GameSettings, Player } from 'src/app/core/models/interfaces';
+import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomActions, RoomState } from 'src/app/core/state';
 import { DeckState } from 'src/app/core/state/deck';
@@ -34,7 +35,8 @@ export class StartGameModal extends AngularLifecycle {
   constructor(
     private store: Store,
     private popupService: PopupService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private ingameDataDataService: IngameDataDataService
   ) {
     super();
 
@@ -96,7 +98,7 @@ export class StartGameModal extends AngularLifecycle {
       drinkingGame: this.gameSettingsForm.controls["drinkingGame"].value
     }
     
-    if (!StaticRoundDataUtils.isDeckPlayable(this.selectedDeck, this.store.selectSnapshot(RoomState.players), gameSettings)) {
+    if (!StaticRoundDataUtils.isDeckPlayable(this.selectedDeck, this.ingameDataDataService.getActivePlayerIds().length, gameSettings)) {
       this.popupService.openSnackbar(
         this.translateService.instant("features.room.start-game-modal.deck-not-playable"),
         "check"

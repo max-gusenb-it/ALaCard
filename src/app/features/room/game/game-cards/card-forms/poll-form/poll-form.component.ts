@@ -3,11 +3,10 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { pollCardSkipValue } from "src/app/core/constants/card";
-import { CardType } from "src/app/core/models/enums";
 import { Card, RoomSettings, Round, PollCard, PollResponse } from "src/app/core/models/interfaces";
-import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
 import { ResponseDataDataService } from "src/app/core/services/data/response-data.data.service";
 import { CardService } from "src/app/core/services/service/card/card.service";
+import { GameControlService } from "src/app/core/services/service/game-control.service";
 import { RoomService } from "src/app/core/services/service/room.service";
 import { ResponseDataSourceService } from "src/app/core/services/source/response-data.source.service";
 import { AuthenticationState, RoomState } from "src/app/core/state";
@@ -38,7 +37,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
         private responseDataDataService: ResponseDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
         private roomService: RoomService,
-        private ingameDataDataService: IngameDataDataService
+        private gameControlService: GameControlService
     ) {
         super();
 
@@ -102,12 +101,10 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     getAdminResponseCountInfo() {
-        return this.responseDataDataService.getAdminResponseCountInfo(this.round.id);
+        return this.gameControlService.getAdminResponseCountInfo(this.round.id);
     }
 
     processRound() {
-      this.ingameDataDataService.processRound(
-        this.responseDataDataService.getAdminResponsesForRound(this.round.id)
-      );
+      this.gameControlService.processRound(this.round.id);
     }
 }

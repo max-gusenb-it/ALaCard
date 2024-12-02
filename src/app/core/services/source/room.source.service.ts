@@ -8,9 +8,9 @@ import { Player } from '../../models/interfaces';
 import { ItError } from '../../models/classes';
 import { UserUtils } from '../../utils/user.utils';
 import { roomsRef, usersRef } from '../../constants/firestoreReferences';
-import { RoomService } from '../service/room.service';
 import { Store } from '@ngxs/store';
 import { AuthenticationState } from '../../state';
+import { RoomRefService } from '../service/room-ref.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,11 +20,11 @@ export class RoomSourceService {
     constructor(
         private store: Store,
         private firestoreService: FirestoreService<Room>,
-        private roomService: RoomService
+        private roomRefService: RoomRefService
     ) { }
 
     getRoom$(roomId: string, roomCreatorId?: string) {
-        return this.firestoreService.getDocWithId$(this.roomService.getRoomCollectionRef(roomCreatorId), roomId)
+        return this.firestoreService.getDocWithId$(this.roomRefService.getRoomCollectionRef(roomCreatorId), roomId)
             .pipe(
                 catchError(e => {
                     throw new ItError(
@@ -80,12 +80,12 @@ export class RoomSourceService {
     }
 
     updateRoom(room: Room, roomId: string) {
-        return this.firestoreService.update(`${this.roomService.getRoomCollectionRef()}`, roomId, room);
+        return this.firestoreService.update(`${this.roomRefService.getRoomCollectionRef()}`, roomId, room);
     }
 
     upsertPlayer(roomId: string, userId: string, player: Player, roomCreatorId?: string) {
         return this.firestoreService.updateField(
-            this.roomService.getRoomCollectionRef(roomCreatorId),
+            this.roomRefService.getRoomCollectionRef(roomCreatorId),
             roomId,
             `players.${userId}`,
             player

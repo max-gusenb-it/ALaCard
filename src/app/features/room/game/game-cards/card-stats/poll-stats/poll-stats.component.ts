@@ -6,8 +6,8 @@ import { Card, PollCard, Round, SipResult } from "src/app/core/models/interfaces
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { DynamicPollRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
 import { IngameDataDataService } from "src/app/core/services/data/ingame-data.data.service";
-import { StaticRoundDataDataService } from "src/app/core/services/data/static-round-data.data.service";
 import { CardService } from "src/app/core/services/service/card/card.service";
+import { GameControlService } from "src/app/core/services/service/game-control.service";
 import { RoomService } from "src/app/core/services/service/room.service";
 import { RoomState } from "src/app/core/state";
 import { BasePollCardService } from "src/app/core/types/card";
@@ -30,10 +30,10 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
 
   constructor(
     private store: Store,
+    private gameControlService: GameControlService,
     private cardService: CardService,
     private roomService: RoomService,
     private ingameDataDataService: IngameDataDataService,
-    private staticRoundDataDataService: StaticRoundDataDataService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     super();
@@ -98,6 +98,6 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   }
 
   startNextRound() {
-    this.staticRoundDataDataService.startNewRound();
+    this.gameControlService.startNewRound();
   }
 }

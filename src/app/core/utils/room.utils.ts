@@ -73,14 +73,6 @@ export namespace RoomUtils {
     export function isPlayerActive(player: Player) {
         return player.state === PlayerState.active || player.state === PlayerState.offline;
     }
-    
-    export function getRoomAdmin(room: Room) : Player {
-        if (room.settings.otherAdmin) {
-            return mapPlayersToArray(room.players).filter(p => p.state === PlayerState.active)[0];
-        } else {
-            return getRoomCreator(room);
-        }
-    }
  
     export function getRoomCreator(room: Room) : Player {
         return mapPlayersToArray(room.players)[0];

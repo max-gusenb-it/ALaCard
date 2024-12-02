@@ -5,8 +5,8 @@ import { firstValueFrom, takeUntil } from 'rxjs';
 import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'src/app/core/constants/card';
 import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Round, SipResult } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
-import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
 import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
+import { GameControlService } from 'src/app/core/services/service/game-control.service';
 import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomService } from 'src/app/core/services/service/room.service';
 import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
@@ -31,7 +31,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   players: Player[];
 
   constructor(
-    private staticRoundDataDataService: StaticRoundDataDataService,
+    private gameControlService: GameControlService,
     private playerVotingService: PlayerVotingCardService,
     private translateService: TranslateService,
     private store: Store,
@@ -138,7 +138,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   startNextRound() {
-    this.staticRoundDataDataService.startNewRound();
+    this.gameControlService.startNewRound();
   }
 
 }

@@ -7,6 +7,7 @@ import { Deck, DynamicRoundData, RoundInformation, StaticRoundData } from 'src/a
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { GameControlService } from 'src/app/core/services/service/game-control.service';
 import { RoomService } from 'src/app/core/services/service/room.service';
 import { TutorialService } from 'src/app/core/services/service/tutorial.service';
 import { RoomState } from 'src/app/core/state';
@@ -42,6 +43,7 @@ export class CardContainerComponent extends AngularLifecycle{
 
   constructor(
     private store: Store,
+    private gameControlService: GameControlService,
     private staticRoundDataDataService: StaticRoundDataDataService,
     private responseDataDataService: ResponseDataDataService,
     private ingameDataDataService: IngameDataDataService,
@@ -132,7 +134,7 @@ export class CardContainerComponent extends AngularLifecycle{
     
     if (card.type === CardType.FreeText) {
       if (!this.roomService.isUserAdmin()) return;
-      this.staticRoundDataDataService.startNewRound();
+      this.gameControlService.startNewRound();
       return;
     }
 

@@ -20,7 +20,7 @@ import { RoomSettings } from "../../models/interfaces/logic/room/room-settings";
 import { IngameDataSourceService } from "../../services/source/ingame-data.source.service";
 import { ResponseDataSourceService } from "../../services/source/response-data.source.service";
 import { StaticRoundDataSourceService } from "../../services/source/static-round-data.source.service";
-import { GameState } from "../../models/enums";
+import { GameState, PlayerState } from "../../models/enums";
 import { IngameDataUtils } from "../../utils/ingame-data.utils";
 import { InformationActions } from "../information";
 import { Game } from "../../models/interfaces/logic/game/game";
@@ -61,12 +61,12 @@ export class RoomState extends AngularLifecycle {
     }
 
     @Selector()
-    static activePlayers(state: RoomStateModel): Player[] {
+    static inactivePlayers(state: RoomStateModel): Player[] {
         if (!!!state.room) {
             return [];
         } else {
             return RoomUtils.mapPlayersToArray(state.room.players)
-                .filter(p => RoomUtils.isPlayerActive(p));
+                .filter(p => p.state === PlayerState.left)
         }
     }
 

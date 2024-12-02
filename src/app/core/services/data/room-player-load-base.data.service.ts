@@ -1,4 +1,4 @@
-import { Select } from "@ngxs/store";
+import { Store } from "@ngxs/store";
 import { Observable, Subject, Subscription, take, takeUntil } from "rxjs";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 import { RoomState } from "../../state";
@@ -17,11 +17,13 @@ export class RoomPlayerLoadBaseDataService extends AngularLifecycle {
     dataSubscription$: Subscription = null as any;
     protected constructorDone$ = new Subject<unknown>();
 
-    @Select(RoomState.room) room$!: Observable<Room>;
-    room: Room;
+    room$: Observable<Room | null>;
+    room: Room | null;
 
-    constructor() {
+    constructor(private base_store: Store) {
         super();
+
+        this.room$ = this.base_store.select(RoomState.room);
 
         // Call logic in subsciption -> otherwise derived constructor maybe is not reached yet and injected classes are null
         this.constructorDone$

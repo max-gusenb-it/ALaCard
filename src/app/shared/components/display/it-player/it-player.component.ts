@@ -21,10 +21,8 @@ export class ItPlayerComponent {
     switch(state) {
       case(PlayerState.active): 
         return this.translateService.instant("features.room.playerStates.active");
-      case(PlayerState.inactive): 
-      return this.translateService.instant("features.room.playerStates.inactive");
       case(PlayerState.left): 
-      return this.translateService.instant("features.room.playerStates.left");
+        return this.translateService.instant("features.room.playerStates.left");
     }
   }
 

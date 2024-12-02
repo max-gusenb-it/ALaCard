@@ -7,13 +7,12 @@ import { RoomServiceErrors } from "../../constants/errorCodes";
 import { ItError } from "../../models/classes";
 import { PopupService } from "./popup.service";
 import { combineLatest, filter, map, of, take } from "rxjs";
-import { GameHistoryEntry, Room } from "../../models/interfaces";
+import { Player, Room } from "../../models/interfaces";
 import { InformationState } from "../../state/information";
-import { roomsRef, usersRef } from "../../constants/firestoreReferences";
 import { RoomUtils } from "../../utils/room.utils";
-import { PlayerState } from "../../models/enums";
 import { UserSourceService } from "../source/user.source.service";
-import { Utils } from "../../utils/utils";
+import { IngameDataDataService } from '../data/ingame-data.data.service';
+import { PlayerState } from '../../models/enums';
 
 @Injectable({
     providedIn: 'root'
@@ -22,28 +21,9 @@ export class RoomService {
     constructor(
         private store: Store,
         private userSourceService: UserSourceService,
-        private popupService: PopupService
+        private popupService: PopupService,
+        private ingameDataDataService: IngameDataDataService
     ) { }
-
-    /**
-     * Returns collection reference for a room
-     *
-     * @export
-     * @param {Store} store
-     * @param {string} creatorId if the method is called at a point, where the room does not exist yet, the id of the room creator has to be provided
-     * @returns {string}
-     */
-    getRoomCollectionRef(creatorId?: string) {
-        const room = this.store.selectSnapshot(RoomState.room);
-        if (!!!room && !creatorId) {
-            // Currently joined in no room
-            creatorId = this.store.selectSnapshot(AuthenticationState.userId);
-        }
-        if (!creatorId && !!room) {
-            creatorId = RoomUtils.getRoomCreator(room).id;
-        }
-        return `${usersRef}/${creatorId}/${roomsRef}`;
-    }
 
     async checkIfUserExists() {
         let user = this.store.selectSnapshot(AuthenticationState.user);
@@ -115,13 +95,13 @@ export class RoomService {
         );
     }
 
-    isUserAdmin() {
-        return this.store.selectSnapshot(AuthenticationState.user)?.id === RoomUtils.getRoomAdmin(this.store.selectSnapshot(RoomState.room)!)?.id;
+    getRoomAdmin() : Player {
+        const room = this.store.selectSnapshot(RoomState.room);
+        if (!!!room) throw new Error();
+        return this.ingameDataDataService.getActivePlayers()[0];
     }
 
-    getActivePlayerCount() {
-        const players = this.store.selectSnapshot(RoomState.room)!.players;
-        if (!!!players) return 0;
-        return RoomUtils.mapPlayersToArray(players).filter(p => p.state === PlayerState.active || p.state === PlayerState.offline).length;
+    isUserAdmin() {
+        return this.store.selectSnapshot(AuthenticationState.user)?.id === this.getRoomAdmin()?.id;
     }
 }
