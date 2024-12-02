@@ -13,8 +13,7 @@
             [selected]="true"
             (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
-            <!-- ToDo: Add max height and scrolling -->
-            <div collapsible class="flex flex-col gap-2">
+            <div collapsible class="flex flex-col gap-2 overflow-auto" style="max-height: 20vh;">
                 <it-result
                     *ngFor="let result of results"
                     [result]="result"

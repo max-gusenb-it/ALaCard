@@ -2,7 +2,7 @@
 
 ## Player Voting Card
 
-* Add max height to all result lists
+* Add max height to all result lists (sips)
 
 ## Free Text Card
 
