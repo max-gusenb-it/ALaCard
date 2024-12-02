@@ -49,6 +49,10 @@ export class GameControlService {
     }
 
     getAdminResponseCountInfo(roundId: number) {
-        return `${this.responseDataDataService.getAdminResponsesForRound(roundId).length} / ${this.ingameDataDataService.getActivePlayerIds().length}`
+        const activePlayerIds = this.ingameDataDataService.getActivePlayerIds();
+        const inactivePlayerResponseCount = this.responseDataDataService.getAdminResponsesForRound(roundId)
+            .filter(r => activePlayerIds.findIndex(activePlayerId => activePlayerId === r.playerId) === -1)
+            .length;
+        return `${this.responseDataDataService.getAdminResponsesForRound(roundId).length} / ${this.ingameDataDataService.getActivePlayerIds().length + inactivePlayerResponseCount}`
     }
 } 
