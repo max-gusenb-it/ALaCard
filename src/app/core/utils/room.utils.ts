@@ -89,7 +89,7 @@ export namespace RoomUtils {
     export function generateJoinLink(room: Room) : string {
         const creator = getRoomCreator(room);
         if (environment.production) {
-            return `https://alacard-de849.web.app/room/${creator.id}-${room.id}`;
+            return `https://alacard.org/room/${creator.id}-${room.id}`;
         } else {
             return `http://localhost:8100/room/${creator.id}-${room.id}`;
         }
