@@ -38,16 +38,21 @@ export { StyleSettings } from "./logic/game/style-settings";
 
 export { IItError } from "./logic/error-monitor/it-error";
 
-export { Round } from "./logic/game-data/static-round-data/round/round";
-export { DynamicRoundData } from "./logic/game-data/ingame-data/dynamic-round-data/dynamic-round-data";
 export { DynamicPlayerVotingRoundData } from "./logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
+export { DynamicPollRoundData } from "./logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
+export { DynamicRoundData } from "./logic/game-data/ingame-data/dynamic-round-data/dynamic-round-data";
 export { IngameData } from "./logic/game-data/ingame-data/ingame-data"
-export { StaticRoundData } from "./logic/game-data/static-round-data/static-round-data";
+export { PlayerData } from "./logic/game-data/ingame-data/player-data";
 
 export { PlayerVotingResponse } from "./logic/game-data/response-data/player-voting-response";
+export { PollResponse } from "./logic/game-data/response-data/poll-response";
 export { ResponseData } from "./logic/game-data/response-data/response-data";
 export { Response } from "./logic/game-data/response-data/response";
-export { PollResponse } from "./logic/game-data/response-data/poll-response";
+
+export { PlayerVotingRound } from "./logic/game-data/static-round-data/round/player-voting-round";
+export { Round } from "./logic/game-data/static-round-data/round/round";
+
+export { StaticRoundData } from "./logic/game-data/static-round-data/static-round-data";
 
 export { Player } from "./logic/room/player";
 export { Room } from "./logic/room/room";

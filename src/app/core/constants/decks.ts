@@ -1316,7 +1316,6 @@ export const leggitPartyDeck: Deck = {
             ]
         } as TopicVotingCard,
         // ToDo: Show anonymous type in form
-        // ToDo: Fix sip distribution for the following two cards
         {
             text: "Ever dropped your phone in the toilet?",
             type: CardType.TopicVotingCard,
