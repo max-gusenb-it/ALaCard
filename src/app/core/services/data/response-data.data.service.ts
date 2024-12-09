@@ -16,7 +16,7 @@ export class ResponseDataDataService extends AngularLifecycle {
     responseDataSubscription$: Subscription = null as any;
     responseData$: BehaviorSubject<ResponseData> = new BehaviorSubject(null as any);
 
-    @Select(RoomState.room) room$!: Observable<Room>;
+    room$!: Observable<Room | null>;
     room: Room;
 
     constructor(
@@ -25,6 +25,8 @@ export class ResponseDataDataService extends AngularLifecycle {
         private responseDataSourceService: ResponseDataSourceService
     ) {
         super();
+
+        this.room$ = this.store.select(RoomState.room);
 
         this.room$
             .pipe(takeUntil(this.destroyed$))
