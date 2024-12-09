@@ -1,6 +1,6 @@
-import { Injectable, PlatformRef } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { PollCardService } from "./poll-card.service";
-import { Card, DynamicRoundData, GameSettings, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { defaultCardSips, pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
@@ -20,43 +20,6 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
 
     get defaultTopicVotingGroup() {
         return TopicVotingGroup.MostVoted;
-    }
-
-    get defaultTopicVotingDistribution() {
-        return true;
-    }
-
-    override getResults(dynamicRoundData: DynamicRoundData): PollResult[] {
-        let results : PollResult[] = [];
-        const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
-        dynamicPollRoundData.responses.forEach(response => {
-            response.votedSubjectIds.forEach(subjectId => {
-                let resultIndex = results.findIndex(r => r.subjectId === subjectId);
-                if (resultIndex === -1) {
-                    results.push({
-                        subjectId: subjectId,
-                        playerIds: [response.playerId],
-                        votes: 1
-                    })
-                } else {
-                    const foundResults = results[resultIndex];
-                    results[resultIndex] = {
-                        subjectId: subjectId,
-                        playerIds: [
-                            ...foundResults.playerIds,
-                            response.playerId
-                        ],
-                        votes: foundResults.votes + 1
-                    }
-                }
-            });
-        });
-        results = results.sort((r1, r2) => {
-            if (r1.subjectId === pollCardSkipValue) return 1;
-            if (r2.subjectId === pollCardSkipValue) return -1;
-            return r2.votes - r1.votes;
-        });
-        return results;
     }
 
     override getResultsHeading(results: PollResult[], card: Card): string {
@@ -97,13 +60,11 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const tvCard = this.castCard(card);
 
-        let results : PollResult[] = [];
-        if (tvCard.settings?.sipConfig?.specificSipSubjectId === undefined) {
-            results = this.getResultGroup(dynamicRoundData, tvCard.settings?.sipConfig?.resultConfig);
-        } else {
-            results = this.getResults(dynamicRoundData)
-                .filter(r => r.subjectId === tvCard.settings!.sipConfig!.specificSipSubjectId);
+        if (tvCard.settings?.sipConfig?.specificSipSubjectId !== undefined) {
+            return super.calculateRoundSipResults(card, dynamicRoundData);
         }
+        
+        let results = this.getResultGroup(dynamicRoundData, tvCard.settings?.sipConfig?.resultConfig);
 
         return results
             .map(r => {
@@ -113,7 +74,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
                         sips: defaultCardSips,
                         distribute: tvCard.settings?.sipConfig?.distribute !== undefined ? 
                             tvCard.settings?.sipConfig?.distribute : 
-                            this.defaultTopicVotingDistribution
+                            this.defaultPollVotingDistribution
                     } as SipResult
                 });
             })
