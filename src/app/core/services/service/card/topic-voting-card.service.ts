@@ -26,20 +26,6 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         return true;
     }
 
-    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings): string {
-        let text = this.getCardText(card, players, playerIds, speficPlayerId);
-        text += "<br><br>";
-        const castedCard = this.castCard(card);
-        castedCard.subjects.forEach(subject => {
-            text += `\n* ${subject.title}`
-        });
-        return text;
-    }
-
-    override getOfflineCardTextSizeClass(card: Card, text: string): string {
-        return "text-base";
-    }
-
     override getResults(dynamicRoundData: DynamicRoundData): PollResult[] {
         let results : PollResult[] = [];
         const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
