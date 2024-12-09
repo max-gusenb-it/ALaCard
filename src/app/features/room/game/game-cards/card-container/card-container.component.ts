@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { takeUntil } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
 import { CardType } from 'src/app/core/models/enums';
-import { Deck, DynamicRoundData, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
+import { Deck, DynamicRoundData, RoomSettings, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
@@ -30,6 +30,8 @@ enum RoundState {
   animations: [slideToggle]
 })
 export class CardContainerComponent extends AngularLifecycle{
+
+  roomSettings$: Observable<RoomSettings | undefined> = this.store.select(RoomState.roomSettings);
 
   deck: Deck;
   staticRoundData: StaticRoundData | null;
@@ -132,7 +134,7 @@ export class CardContainerComponent extends AngularLifecycle{
   continue() {
     const card = this.deck.cards[this.staticRoundData!.round!.cardIndex!];
     
-    if (card.type === CardType.FreeText) {
+    if (card.type === CardType.FreeText || this.store.selectSnapshot(RoomState.roomSettings)?.singleDeviceMode) {
       if (!this.roomService.isUserAdmin()) return;
       this.gameControlService.startNewRound();
       return;

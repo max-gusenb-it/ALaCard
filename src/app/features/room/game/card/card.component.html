@@ -11,15 +11,17 @@
     {{ getCardTitle() }}
   </p>
   <div class="rounded-b-xl flex grow flex-col gap-1 p-2 bg-it_yellow-0">
-    <div class="flex grow items-center text-xl font-semibold">
+    <div class="flex grow items-center font-semibold">
       <div
-        *ngIf="card.type === 0"
+        *ngIf="isMarkDown"
         id="markdown"
-        [innerHTML]="(getCardText()| markdown)"
+        [ngClass]="getOfflineTextCSSClasses()"
+        [innerHTML]="(getCardText() | markdown)"
       >
       </div>
       <div
-        *ngIf="card.type !== 0"
+        class="text-xl"
+        *ngIf="!isMarkDown"
       >
         {{ getCardText() }}
       </div>

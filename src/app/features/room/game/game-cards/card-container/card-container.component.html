@@ -21,6 +21,7 @@
         [customTitle]="getCustomCardTitle()"
         [customColor]="deck.styleSettings?.cardOverwriteColor"
         [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
+        [isMarkDown]="(roomSettings$ | async)!.singleDeviceMode"
       />
     }
     @case (getFormState()) {

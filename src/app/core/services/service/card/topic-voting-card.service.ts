@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable, PlatformRef } from "@angular/core";
 import { PollCardService } from "./poll-card.service";
-import { Card, DynamicRoundData, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, GameSettings, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { defaultCardSips, pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
@@ -24,6 +24,20 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
 
     get defaultTopicVotingDistribution() {
         return true;
+    }
+
+    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings): string {
+        let text = this.getCardText(card, players, playerIds, speficPlayerId);
+        text += "<br><br>";
+        const castedCard = this.castCard(card);
+        castedCard.subjects.forEach(subject => {
+            text += `\n* ${subject.title}`
+        });
+        return text;
+    }
+
+    override getOfflineCardTextSizeClass(card: Card, text: string): string {
+        return "text-base";
     }
 
     override getResults(dynamicRoundData: DynamicRoundData): PollResult[] {

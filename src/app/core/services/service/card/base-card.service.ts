@@ -51,6 +51,15 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return text;
     }
 
+    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId: string = "", gameSettings: GameSettings): string {
+        let text = this.getCardText(card, players, playerIds, speficPlayerId);
+        return text;
+    }
+
+    getOfflineCardTextSizeClass(card: Card, text: string): string {
+        return "text-xl";
+    }
+
     castResponse(response: Response | null) : R {
         return <R> response;
     }

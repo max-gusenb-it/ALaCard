@@ -23,6 +23,7 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
   @Input() playerIds?: string[];
   @Input() customColor?: Color;
   @Input() customTitle?: string;
+  @Input() isMarkDown: boolean;
   @Input() hideDeckName?: boolean;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
@@ -30,6 +31,10 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
 
   touchStartX = 0;
   touchEndX = 0;
+
+  get specifiedCardService() {
+    return this.cardService.getCardService(this.card.type)
+  }
 
   constructor(
     private store: Store,
@@ -121,13 +126,26 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardText() {
-    return this.cardService.getCardService(this.card.type)
-      .getCardText(
-        this.card,
-        this.store.selectSnapshot(RoomState.players),
-        this.playerIds,
-        this.store.selectSnapshot(RoomState.specificPlayerId),
-    );
+    if (!this.isMarkDown) { 
+      return this.specifiedCardService.getCardText(
+          this.card,
+          this.store.selectSnapshot(RoomState.players),
+          this.playerIds,
+          this.store.selectSnapshot(RoomState.specificPlayerId),
+      );
+    } else {
+      return this.specifiedCardService.getOfflineCardText(
+          this.card,
+          this.store.selectSnapshot(RoomState.players),
+          this.playerIds,
+          this.store.selectSnapshot(RoomState.specificPlayerId),
+          this.store.selectSnapshot(RoomState.gameSettings)!
+      );
+    }
+  }
+
+  getOfflineTextCSSClasses() {
+    return this.specifiedCardService.getOfflineCardTextSizeClass(this.card, this.getCardText())
   }
 
   cardClicked(event: MouseEvent) {
