@@ -54,6 +54,7 @@ export class ItCreateRoomAsGuestModal {
   }
 
   goForward() {
+    if (this.formInvalid()) return;
     switch (this.stepIndex) {
       case 0: {
         this.stepIndex += 1;

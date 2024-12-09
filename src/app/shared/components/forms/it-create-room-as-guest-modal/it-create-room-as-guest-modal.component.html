@@ -12,6 +12,7 @@
         *ngIf="stepIndex === 1"
         [createRoomFormData]="createRoomFormData"
         (roomFormChanged)="setCreateRoomFormData($event)"
+        (onSubmit)="goForward()"
     ></it-create-room-form>
     <div
         class="flex flex-col gap-2"
