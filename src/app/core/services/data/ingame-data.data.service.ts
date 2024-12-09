@@ -18,7 +18,7 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     ingameData$: BehaviorSubject<IngameData> = new BehaviorSubject(null as any);
 
     constructor(
-        private cardService: CardService,
+        // private cardService: CardService,
         private popupService: PopupService,
         private translateService: TranslateService,
         private ingameDataSourceService: IngameDataSourceService,
@@ -41,6 +41,14 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
             .subscribe(i => this.ingameData$.next(i));
     }
 
+    updateIngameData(ingameData: IngameData, roomId: string) {
+        this.ingameDataSourceService.updateIngameData({
+            ...this.ingameData$.value,
+            dynamicRoundData: ingameData.dynamicRoundData ?? this.ingameData$.value.dynamicRoundData,
+            playerData: ingameData.playerData ?? this.ingameData$.value.playerData,
+        }, roomId);
+    }
+
     getIngameData() {
         return this.ingameData$.value;
     }
@@ -55,29 +63,6 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
                 filter(d => !!d && !!d.dynamicRoundData),
                 map(d => d.dynamicRoundData)
             );
-    }
-
-    processRound(responses: Response[], round: Round) {
-        const players = this.store.selectSnapshot(RoomState.players);
-
-        const deck = this.store.selectSnapshot(RoomState.deck);
-        if (!!!round || !!!deck) return;
-        const cardService = this.cardService.getCardService(deck.cards[round.cardIndex].type);
-
-        const newDynamicRoundData = cardService.createDynamicRoundData(
-            round.id,
-            responses
-        );
-        const newPlayerData = this.checkForInactivePlayers(responses);
-
-        this.ingameDataSourceService.updateIngameData(
-            {
-                ...this.ingameData$.value,
-                dynamicRoundData: newDynamicRoundData,
-                playerData: newPlayerData
-            },
-            this.store.selectSnapshot(RoomState.roomId)!
-        );
     }
 
     checkForInactivePlayers(responses: Response[]) {
