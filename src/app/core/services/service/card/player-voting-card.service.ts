@@ -7,14 +7,23 @@ import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } f
 import { Store } from "@ngxs/store";
 import { RoomState } from "src/app/core/state";
 import { Utils } from "src/app/core/utils/utils";
+import { IngameDataDataService } from "../../data/ingame-data.data.service";
+import { ResponseDataDataService } from "../../data/response-data.data.service";
+import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
 
-    constructor(private store: Store, private translateService: TranslateService) {
-        super(store);
+    constructor(
+        private store: Store,
+        responseDataDataService: ResponseDataDataService,
+        ingameDataDataService: IngameDataDataService,
+        staticRoundDataDataService: StaticRoundDataDataService,
+        private translateService: TranslateService
+    ) {
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
     }
 
     get defaultPlayerVotingGroup() {

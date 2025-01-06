@@ -5,7 +5,6 @@ import { StaticRoundDataSourceService } from "../source/static-round-data.source
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
-import { StaticRoundDataService } from "../service/static-round-data.service";
 
 @Injectable({
     providedIn: 'root'
@@ -14,9 +13,8 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
     staticRoundData$: BehaviorSubject<StaticRoundData | null> = new BehaviorSubject(null as any);
 
     constructor(
-        private store: Store,
-        private staticRoundDataSourceService: StaticRoundDataSourceService,
-        private staticRoundDataService: StaticRoundDataService
+        store: Store,
+        private staticRoundDataSourceService: StaticRoundDataSourceService
     ) {
         super(store);
 
@@ -35,6 +33,13 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
             .subscribe(s => this.staticRoundData$.next(s));
     }
 
+    updateStaticRoundData(staticRoundData: StaticRoundData, roomId: string) {
+        return this.staticRoundDataSourceService.updateStaticRoundData(
+            staticRoundData,
+            roomId
+        )
+    }
+
     getStaticRoundData() {
         return this.staticRoundData$.value;
     }
@@ -45,30 +50,5 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
             .pipe(
                 filter((s): s is StaticRoundData => s !== null)
             );
-    }
-
-    startNewRound(activePlayers: Player[]) {
-        const staticRoundData = this.getStaticRoundData();
-
-        if (!!!staticRoundData) return;
-
-        const round = this.staticRoundDataService.createGameRound(
-            this.store.selectSnapshot(RoomState.deck)!,
-            staticRoundData,
-            activePlayers,
-            this.store.selectSnapshot(RoomState.gameSettings)!
-        );
-
-        return this.staticRoundDataSourceService.updateStaticRoundData(
-            {
-                ...staticRoundData,
-                round: round,
-                playedCardIndexes: [
-                    ...staticRoundData.playedCardIndexes,
-                    round.cardIndex
-                ]
-            },
-            this.store.selectSnapshot(RoomState.roomId)!
-        );
     }
 }

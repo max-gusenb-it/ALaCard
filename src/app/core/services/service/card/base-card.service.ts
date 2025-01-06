@@ -1,25 +1,58 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { playerNameWhitecard, specificPlayerNameWhitecard } from "src/app/core/constants/card";
-import { PlayerState } from "src/app/core/models/enums";
-import { Card, DynamicRoundData, ResultConfig, GameSettings, Player, Response, Result, Round, SipResult } from "src/app/core/models/interfaces";
+import { PlayerState, RoundState } from "src/app/core/models/enums";
+import { Card, DynamicRoundData, ResultConfig, GameSettings, Player, Response, Result, Round, SipResult, RoomSettings, StaticRoundData, RoundInformation } from "src/app/core/models/interfaces";
 import { AuthenticationState, RoomState } from "src/app/core/state";
 import { BaseCardUtils } from "src/app/core/utils/card/base-card.utils";
 import { Utils } from "src/app/core/utils/utils";
+import { ResponseDataDataService } from "../../data/response-data.data.service";
+import { IngameDataDataService } from "../../data/ingame-data.data.service";
+import { InformationState } from "src/app/core/state/information";
+import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class BaseCardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result, S extends ResultConfig> {
 
-    constructor(private base_store: Store) { }
+    constructor(
+        private _store: Store,
+        private _responseDataDataService: ResponseDataDataService,
+        private _ingameDataDataService: IngameDataDataService,
+        private _staticRoundDataDataService: StaticRoundDataDataService
+    ) { }
 
-    createGameRound(baseRound: Round, card: Card, players: Player[], gameSettings: GameSettings) : Round {
+    castCard(card: Card): C {
+        return BaseCardUtils.castCard<C>(card);
+    }
+
+    castDynamicRoundData(dynamicRoundData: DynamicRoundData): D {
+        return <D>dynamicRoundData;
+    }
+
+    castResponse(response: Response | null): R {
+        return <R>response;
+    }
+
+    castResponses(responses: Response[]): R[] {
+        return <R[]>responses;
+    }
+
+    castResult(result: Result): T {
+        return <T>result;
+    }
+
+    getResults(dynamicRoundData: DynamicRoundData): T[] {
+        return [];
+    }
+
+    createGameRound(baseRound: Round, card: Card, players: Player[], gameSettings: GameSettings): Round {
         players = players.filter(p => p.state === PlayerState.active || p.state === PlayerState.offline);
 
         let playerWhiteCardCount = Utils.countSubstrings(card.text, playerNameWhitecard);
         if (card.text.includes(specificPlayerNameWhitecard) && !gameSettings.speficiPlayerId) {
-            playerWhiteCardCount = playerWhiteCardCount + 1;    
+            playerWhiteCardCount = playerWhiteCardCount + 1;
         }
 
         if (playerWhiteCardCount > 0) {
@@ -28,11 +61,38 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return baseRound;
     }
 
-    castCard(card: Card) : C {
-        return BaseCardUtils.castCard<C>(card);
+    createDynamicRoundData(roundId: number, responses: Response[]): D {
+        return {
+            roundId: roundId,
+            processed: true
+        } as D;
     }
 
-    getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string) : string {
+    getRoundState(card: Card, activeSubCardIndex: number): RoundState {
+        const roomSettings = this._store.selectSnapshot(RoomState.roomSettings);
+        const roundInformation = this._store.selectSnapshot(InformationState.roundInformation);
+        const dynamicRoundData = this._ingameDataDataService.getDynamicRoundData();
+        const staticRoundData = this._staticRoundDataDataService.getStaticRoundData();
+        if (
+            roomSettings?.singleDeviceMode ||
+            (this.isSplitCard(card) && activeSubCardIndex < this.getSubCardCount(card)) ||
+            !this._responseDataDataService.userResponded(staticRoundData!.round!.id) &&
+            (!!!roundInformation || roundInformation.roundId !== staticRoundData!.round!.id || roundInformation.activeSubCardIndex < 1) &&
+            (!!!dynamicRoundData || dynamicRoundData.roundId !== staticRoundData!.round!.id || !dynamicRoundData.processed)
+        ) {
+            if (!this.isSplitCard(card)) {
+                return RoundState.card;
+            } else {
+                return activeSubCardIndex % 2 === 1 ? RoundState.card : RoundState.cardHelper;
+            }
+        }
+        if (!this._ingameDataDataService.roundProcessed(staticRoundData!.round!.id)) {
+            return RoundState.form;
+        }
+        return RoundState.stats;
+    }
+
+    getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string): string {
         let text = card.text;
 
         if (card.text.includes(specificPlayerNameWhitecard)) {
@@ -42,7 +102,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
                 text = text.replace(specificPlayerNameWhitecard, `${playerNameWhitecard}${playerIds.length - 1}`);
             }
         }
-        
+
         if (playerIds.length > 0) {
             playerIds.forEach((playerId, index) => {
                 text = text.split(`${playerNameWhitecard}${index}`).join(players.find(p => p.id === playerId)?.username);
@@ -51,7 +111,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return text;
     }
 
-    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId: string = "", gameSettings: GameSettings): string {
+    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId: string = "", gameSettings: GameSettings, activeSubCardIndex: number): string {
         let text = this.getCardText(card, players, playerIds, speficPlayerId);
         return text;
     }
@@ -60,34 +120,15 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return "text-xl";
     }
 
-    castResponse(response: Response | null) : R {
-        return <R> response;
+    isSplitCard(card: Card): boolean {
+        return false;
     }
 
-    castResponses(responses: Response[]) : R[] {
-        return <R[]> responses;
+    getSubCardCount(card: Card): number {
+        return 1;
     }
 
-    createDynamicRoundData(roundId: number, responses: Response[]) : D {
-        return {
-            roundId: roundId,
-            processed: true
-        } as D;
-    }
-
-    castDynamicRoundData(dynamicRoundData: DynamicRoundData) : D {
-        return <D> dynamicRoundData;
-    }
-
-    castResult(result: Result) : T {
-        return <T> result;
-    }
-
-    getResults(dynamicRoundData: DynamicRoundData) : T[] {
-        return [];
-    }
-
-    getResultsHeading(results: Result[], card: Card) : string {
+    getResultsHeading(results: Result[], card: Card): string {
         return "";
     }
 
@@ -103,16 +144,16 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return "";
     }
 
-    getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData) : [SipResult[], SipResult?] {
+    getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): [SipResult[], SipResult?] {
         const sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
         const userSR = this.getUserSipResult(sipResults);
         return [sipResults.filter(s => s.playerId !== userSR?.playerId), userSR];
     }
 
     getUserSipResult(sipResults: SipResult[]) {
-        return sipResults.find(s => s.playerId === this.base_store.selectSnapshot(AuthenticationState.userId));
+        return sipResults.find(s => s.playerId === this._store.selectSnapshot(AuthenticationState.userId));
     }
-    
+
     /**
      * Calculates sip results for the essential part of the round
      *
@@ -124,12 +165,12 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [];
     }
 
-    getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: S) : Result[] {
+    getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: S): Result[] {
         return [];
     }
 
     getPlayerForSipResult(result: SipResult) {
-        const players = this.base_store.selectSnapshot(RoomState.players);
+        const players = this._store.selectSnapshot(RoomState.players);
         return players.find(p => p.id === result.playerId);
     }
 }

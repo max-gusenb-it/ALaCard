@@ -139,7 +139,14 @@
               "pay-to-display-drinking-notification-2": "through revealing the usernames"
             }
           },
-          "sips": "Sips"
+          "sips": "Sips",
+          "offline-sip-display": {
+            "in": "In",
+            "sips-on-next-card": "Sip distribution on next card",
+            "most-voted-topic": "most voted topic",
+            "least-voted-topic": "least voted topic",
+            "voted-for-topic": "Everyone that voted for"
+          }
         },
         "has-been-set-to-inactive": "has been set to inactive",
         "have-been-set-to-inactive": "have been set to inactive"

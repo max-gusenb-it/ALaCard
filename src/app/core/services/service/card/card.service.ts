@@ -18,7 +18,7 @@ export class CardService {
         private topicVotingCardService: TopicVotingCardService
     ) { }
 
-    getCardService(cardType: CardType) : GameCardService {
+    getCardService(cardType?: CardType) : GameCardService {
         switch(cardType) {
             case(CardType.PlayerVoting): {
                 return this.plaverVotingCardService;
@@ -26,7 +26,9 @@ export class CardService {
             case(CardType.TopicVotingCard): {
                 return this.topicVotingCardService;
             }
-            default: return this.baseCardService;
+            default: {
+                return this.baseCardService;
+            }
         }
     }
 }

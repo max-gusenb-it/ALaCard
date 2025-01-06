@@ -1,5 +1,5 @@
 <div
-  *ngIf="staticRoundData && !!staticRoundData.round"
+  *ngIf="staticRoundData && !!staticRoundData.round && this.card"
   [@slideToggle]="{
     value: getRoundState(),
     params: {
@@ -16,6 +16,22 @@
         (click)="continue()"
         (onSwipe)="swipe($event)"
         [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [activeSubCardIndex]="activeSubCardIndex"
+        [playerIds]="staticRoundData.round.playerIds"
+        [deckname]="deck.name"
+        [customTitle]="getCustomCardTitle()"
+        [customColor]="deck.styleSettings?.cardOverwriteColor"
+        [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
+        [isMarkDown]="(roomSettings$ | async)!.singleDeviceMode"
+      />
+    }
+    @case (getHelperCardState()) {
+      <card
+        class="absolute"
+        (click)="continue()"
+        (onSwipe)="swipe($event)"
+        [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [activeSubCardIndex]="activeSubCardIndex"
         [playerIds]="staticRoundData.round.playerIds"
         [deckname]="deck.name"
         [customTitle]="getCustomCardTitle()"

@@ -25,7 +25,7 @@ import { IngameDataUtils } from "../../utils/ingame-data.utils";
 import { InformationActions } from "../information";
 import { Game } from "../../models/interfaces/logic/game/game";
 import { RoomService } from "../../services/service/room.service";
-import { StaticRoundDataService } from "../../services/service/static-round-data.service";
+import { GameControlService } from "../../services/service/game-control.service";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 
@@ -49,6 +49,11 @@ export class RoomState extends AngularLifecycle {
     @Selector()
     static roomSettings(state: RoomStateModel): RoomSettings | undefined {
         return state.room?.settings;
+    }
+
+    @Selector()
+    static singleDeviceModeActive(state: RoomStateModel): boolean {
+        return state.room?.settings?.singleDeviceMode ?? false;
     }
 
     @Selector()
@@ -108,7 +113,7 @@ export class RoomState extends AngularLifecycle {
         private roomSourceService: RoomSourceService,
         private ingameDataSourceService: IngameDataSourceService,
         private responseDataSourceService: ResponseDataSourceService,
-        private staticRoundDataService: StaticRoundDataService,
+        private gameControlService: GameControlService,
         private staticRoundDataSourceService: StaticRoundDataSourceService,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
@@ -353,7 +358,7 @@ export class RoomState extends AngularLifecycle {
             ),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
             this.staticRoundDataSourceService.createStaticRoundData(
-                this.staticRoundDataService.createInitialStaticRoundData(
+                this.gameControlService.createInitialStaticRoundData(
                     action.deck,
                     RoomUtils.mapPlayersToArray(state.room.players),
                     action.gameSettings
@@ -374,7 +379,7 @@ export class RoomState extends AngularLifecycle {
             )
         };
 
-        const round = this.staticRoundDataService.createGameRound(
+        const round = this.gameControlService.createGameRound(
             state.room.game!.deck,
             action.staticRoundData,
             RoomUtils.mapPlayersToArray(state.room.players),

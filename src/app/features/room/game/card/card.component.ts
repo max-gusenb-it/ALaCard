@@ -20,10 +20,11 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
 
   @Input() card: Card;
   @Input() deckname: string = "";
+  @Input() activeSubCardIndex: number = 0;
   @Input() playerIds?: string[];
   @Input() customColor?: Color;
   @Input() customTitle?: string;
-  @Input() isMarkDown: boolean;
+  @Input() isMarkDown?: boolean;
   @Input() hideDeckName?: boolean;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
@@ -139,7 +140,8 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
           this.store.selectSnapshot(RoomState.players),
           this.playerIds,
           this.store.selectSnapshot(RoomState.specificPlayerId),
-          this.store.selectSnapshot(RoomState.gameSettings)!
+          this.store.selectSnapshot(RoomState.gameSettings)!,
+          this.specifiedCardService.isSplitCard(this.card) ? this.activeSubCardIndex : 0
       );
     }
   }

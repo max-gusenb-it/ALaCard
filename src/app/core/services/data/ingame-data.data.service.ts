@@ -5,7 +5,6 @@ import { IngameDataSourceService } from "../source/ingame-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
-import { CardService } from "../service/card/card.service";
 import { PopupService } from "../service/popup.service";
 import { Utils } from "../../utils/utils";
 import { defaultInactiveRoundCount } from "../../constants/game-settings";
@@ -18,7 +17,6 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     ingameData$: BehaviorSubject<IngameData> = new BehaviorSubject(null as any);
 
     constructor(
-        // private cardService: CardService,
         private popupService: PopupService,
         private translateService: TranslateService,
         private ingameDataSourceService: IngameDataSourceService,
@@ -42,11 +40,10 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     }
 
     updateIngameData(ingameData: IngameData, roomId: string) {
-        this.ingameDataSourceService.updateIngameData({
-            ...this.ingameData$.value,
-            dynamicRoundData: ingameData.dynamicRoundData ?? this.ingameData$.value.dynamicRoundData,
-            playerData: ingameData.playerData ?? this.ingameData$.value.playerData,
-        }, roomId);
+        this.ingameDataSourceService.updateIngameData(
+            ingameData,
+            roomId
+        );
     }
 
     getIngameData() {
@@ -55,6 +52,10 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
 
     getIngameData$() {
         return this.ingameData$.asObservable();
+    }
+
+    getDynamicRoundData() {
+        return this.ingameData$?.value?.dynamicRoundData;
     }
 
     getDynamicRoundData$() {

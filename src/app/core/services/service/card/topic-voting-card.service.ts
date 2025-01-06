@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PollCardService } from "./poll-card.service";
-import { Card, DynamicRoundData, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, GameSettings, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
 import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
 import { defaultCardSips, pollCardSkipValue } from "src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
@@ -8,14 +8,24 @@ import { TopicVotingCard } from "src/app/core/models/interfaces/logic/cards/topi
 import { Utils } from "src/app/core/utils/utils";
 import { TopicVotingGroup } from "src/app/core/models/enums";
 import { Store } from "@ngxs/store";
+import { ResponseDataDataService } from "../../data/response-data.data.service";
+import { IngameDataDataService } from "../../data/ingame-data.data.service";
+import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
+import { MarkdownUtils } from "src/app/core/utils/markdown.utils";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TopicVotingCardService extends PollCardService<TopicVotingCard, TopicVotingResultConfig> {
     
-    constructor(store: Store, private translateService: TranslateService) {
-        super(store);
+    constructor(
+        store: Store,
+        responseDataDataService: ResponseDataDataService,
+        ingameDataDataService: IngameDataDataService,
+        staticRoundDataDataService: StaticRoundDataDataService,
+        private translateService: TranslateService
+    ) {
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
     }
 
     get defaultTopicVotingGroup() {
@@ -55,6 +65,59 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
             if (index !== pollResult.playerIds.length -1) text += ", ";
         });
         return text;
+    }
+
+    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings, activeSubCardIndex: number): string {
+        if (activeSubCardIndex === 0) {
+            let text = this.getCardText(card, players, playerIds, speficPlayerId);
+            text += "<br><br>\n";
+            const castedCard = this.castCard(card);
+            castedCard.subjects.forEach(subject => {
+                text += `* ${subject.title}\n`
+            });
+            if (gameSettings.drinkingGame) {
+                text += "<br><br>\n  \n";
+                let sipText = "";
+                if (this.isSplitCard(card)) {
+                    sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
+                } else {
+                    sipText = this.getOfflineSipText(card);
+                }
+                text += MarkdownUtils.addTagToContent(sipText, "span", ["text-sm"])
+            }
+            return text;
+        } else {
+            return this.getOfflineSipText(card);
+        }
+    }
+
+    getOfflineSipText(card: Card) {
+        const castedCard = this.castCard(card);
+        let inclusion = "";
+        let group = "";
+
+        if (Utils.isNumberDefined(castedCard.settings?.sipConfig?.specificSipSubjectId)) {
+            inclusion = this.translateService.instant("features.room.game.game-cards.offline-sip-display.voted-for-topic");
+            group = castedCard.subjects[castedCard.settings!.sipConfig!.specificSipSubjectId!].title;
+        } else {
+            inclusion = this.translateService.instant("features.room.game.game-cards.offline-sip-display.in");
+            switch(castedCard.settings?.sipConfig?.resultConfig?.group) {
+                default:
+                case(TopicVotingGroup.MostVoted): {
+                    group = this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topic");
+                } break;
+                case(TopicVotingGroup.LeastVoted): {
+                    group = this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topic")
+                } break;
+            }
+        }
+
+        const distribution = castedCard.settings?.sipConfig?.distribute ?? this.defaultPollVotingDistribution
+            ? this.translateService.instant("shared.components.display.it-result.distribute") 
+            : this.translateService.instant("shared.components.display.it-result.drink");
+        const sip = this.translateService.instant("shared.components.display.it-result.sip")
+
+        return `${inclusion} ${group} <br> ${distribution} ${defaultCardSips} ${sip}`
     }
 
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

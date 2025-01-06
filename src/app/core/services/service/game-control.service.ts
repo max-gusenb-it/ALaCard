@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { IngameDataDataService } from "../data/ingame-data.data.service";
 import { StaticRoundDataDataService } from "../data/static-round-data.data.service";
@@ -5,6 +6,9 @@ import { ResponseDataDataService } from "../data/response-data.data.service";
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
 import { CardService } from "./card/card.service";
+import { Deck, GameSettings, Player, Round, StaticRoundData } from "../../models/interfaces";
+import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
+import { Utils } from "../../utils/utils";
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +28,53 @@ export class GameControlService {
                 if (!!roomSettings && roomSettings.autoContinueOnAllVotes) this.checkForAutoContinueRound();
             }
         );
+    }
+    
+    createInitialStaticRoundData(deck: Deck, players: Player[], gameSettings: GameSettings) : StaticRoundData {
+        let staticRoundData: StaticRoundData = {
+            creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
+            round: null,
+            playedCardIndexes: [],
+        };
+        if (!!!deck.groundRules || deck.groundRules.length === 0) {
+            staticRoundData.round = this.createGameRound(deck, staticRoundData, players, gameSettings);
+            staticRoundData.playedCardIndexes = [staticRoundData.round.cardIndex]
+        }
+        return staticRoundData;
+    }
+
+    createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) : Round {
+        const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);        
+        
+        const card = deck.cards[newCardIndex];
+        const cardService = this.cardService.getCardService(card.type);
+        
+        return cardService.createGameRound(
+            {
+                id: staticRoundData.playedCardIndexes.length,
+                cardIndex: newCardIndex
+            },
+            card,
+            players,
+            gameSettings
+        );
+    }
+    
+    private getNewCardIndex(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) {
+        let availableCardIndexes = Array.from(Array(deck.cards.length).keys())
+            .filter(i => !staticRoundData.playedCardIndexes.includes(i));
+
+        availableCardIndexes = StaticRoundDataUtils.getPlayableCards(availableCardIndexes, deck, players.length, gameSettings);
+
+        const orderCardIndexes = availableCardIndexes.filter(index => deck.cards[index].settings?.order !== undefined);
+        if (orderCardIndexes.length !== 0) {
+            return orderCardIndexes.map(i => { return {
+                cardOrder: deck.cards[i].settings!.order!,
+                index: i
+            }}).sort((c1, c2) => c1.cardOrder - c2.cardOrder)[0].index;
+        } else {
+            return Utils.getNFromArray(availableCardIndexes, 1)[0];
+        }
     }
 
     checkForAutoContinueRound() {
@@ -56,8 +107,7 @@ export class GameControlService {
 
         this.ingameDataDataService.updateIngameData(
             {
-                id: null as any,
-                creationDate: null as any,
+                ...this.ingameDataDataService.getIngameData(),
                 dynamicRoundData: newDynamicRoundData,
                 playerData: newPlayerData
             },
@@ -66,7 +116,28 @@ export class GameControlService {
     }
 
     startNewRound() {
-        this.staticRoundDataDataService.startNewRound(this.ingameDataDataService.getActivePlayers());
+        const staticRoundData = this.staticRoundDataDataService.getStaticRoundData();
+
+        if (!!!staticRoundData) return;
+
+        const round = this.createGameRound(
+            this.store.selectSnapshot(RoomState.deck)!,
+            staticRoundData,
+            this.ingameDataDataService.getActivePlayers(),
+            this.store.selectSnapshot(RoomState.gameSettings)!
+        );
+
+        return this.staticRoundDataDataService.updateStaticRoundData(
+            {
+                ...staticRoundData,
+                round: round,
+                playedCardIndexes: [
+                    ...staticRoundData.playedCardIndexes,
+                    round.cardIndex
+                ]
+            },
+            this.store.selectSnapshot(RoomState.roomId)!
+        );
     }
 
     getAdminResponseCountInfo(roundId: number) {

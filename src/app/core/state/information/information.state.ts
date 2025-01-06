@@ -145,14 +145,14 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
                 ...state.gameInformations,
                 roundInformation: {
                     roundId: action.roundId,
-                    cardClicked: false
+                    activeSubCardIndex: 0
                 }
             }
         });
     }
 
-    @Action(InformationActions.SetRoundCardClicked)
-    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetRoundCardClicked) {
+    @Action(InformationActions.SetActiveSubCardIndex)
+    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetActiveSubCardIndex) {
         const state = ctx.getState();
         
         if (!!!state.gameInformations) {
@@ -176,7 +176,7 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
                 ...state.gameInformations,
                 roundInformation: {
                     ...state.gameInformations.roundInformation,
-                    cardClicked: true
+                    activeSubCardIndex: action.activeSubCardIndex
                 }
             }
         });

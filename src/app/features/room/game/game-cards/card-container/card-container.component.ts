@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
 import { slideToggle } from 'src/app/core/animations/slideToggle';
-import { CardType } from 'src/app/core/models/enums';
-import { Deck, DynamicRoundData, RoomSettings, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
+import { CardType, RoundState } from 'src/app/core/models/enums';
+import { Card, Deck, DynamicRoundData, RoomSettings, RoundInformation, StaticRoundData } from 'src/app/core/models/interfaces';
 import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
-import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
 import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { CardService } from 'src/app/core/services/service/card/card.service';
 import { GameControlService } from 'src/app/core/services/service/game-control.service';
 import { RoomService } from 'src/app/core/services/service/room.service';
 import { TutorialService } from 'src/app/core/services/service/tutorial.service';
@@ -17,12 +17,6 @@ import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper
 const mobileCardSwipeTutorialLabelId = "features.room.game.card.game-cards.card-container.mobile-swipe-tutorial";
 const desktopCardSwipeTutorialLabelId = "features.room.game.card.game-cards.card-container.desktop-swipe-tutorial";
 const responseCountTutorialLabelId = "features.room.game.card.game-cards.card-container.response-count-tutorial";
-
-enum RoundState {
-  card,
-  form,
-  stats
-}
 
 @Component({
   selector: 'card-container',
@@ -37,20 +31,35 @@ export class CardContainerComponent extends AngularLifecycle{
   staticRoundData: StaticRoundData | null;
   dynamicRoundData: DynamicRoundData | null;
   
-  cardClicked: boolean = false;
+  /**
+   * Index of the active sub card
+   * If card is no sub card -> 0 is not clicked and 1 is clickd
+   *
+   * @type {number}
+   */
+  activeSubCardIndex: number = 0;
 
   roundInformation?: RoundInformation;
 
   state: RoundState;
 
+  get card() : Card | null {
+    if (this.staticRoundData?.round?.cardIndex === undefined) return null;
+    return this.deck.cards[this.staticRoundData.round.cardIndex];
+  }
+
+  get specifiedCardService() {
+    return this.cardService.getCardService(this.card?.type);
+  }
+
   constructor(
     private store: Store,
     private gameControlService: GameControlService,
     private staticRoundDataDataService: StaticRoundDataDataService,
-    private responseDataDataService: ResponseDataDataService,
     private ingameDataDataService: IngameDataDataService,
     private tutorialService: TutorialService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private cardService: CardService
   ) {
     super();
 
@@ -100,23 +109,18 @@ export class CardContainerComponent extends AngularLifecycle{
     return undefined;
   }
 
+  roundState: RoundState = undefined as any;
+
   getRoundState() : RoundState {
-    if (
-      !this.cardClicked &&
-      !this.responseDataDataService.userResponded(this.staticRoundData!.round!.id) && 
-      (!!!this.roundInformation || this.roundInformation.roundId !== this.staticRoundData!.round!.id || !this.roundInformation.cardClicked) &&
-      (!!!this.dynamicRoundData || this.dynamicRoundData.roundId !== this.staticRoundData!.round!.id || !this.dynamicRoundData.processed)
-    ) {
-      return RoundState.card;
-    }
-    if (!this.ingameDataDataService.roundProcessed(this.staticRoundData!.round!.id)) {
-      return RoundState.form;
-    }
-    return RoundState.stats;
+    return this.specifiedCardService.getRoundState(this.card!, this.activeSubCardIndex);
   }
 
   getCardState() {
     return RoundState.card;
+  }
+
+  getHelperCardState() {
+    return RoundState.cardHelper;
   }
 
   getFormState() {
@@ -132,15 +136,31 @@ export class CardContainerComponent extends AngularLifecycle{
   }
 
   continue() {
-    const card = this.deck.cards[this.staticRoundData!.round!.cardIndex!];
-    
-    if (card.type === CardType.FreeText || this.store.selectSnapshot(RoomState.roomSettings)?.singleDeviceMode) {
-      if (!this.roomService.isUserAdmin()) return;
-      this.gameControlService.startNewRound();
+    const singleDeviceModeActive = this.store.selectSnapshot(RoomState.singleDeviceModeActive);
+
+    if (
+      (
+        singleDeviceModeActive &&
+        !this.specifiedCardService.isSplitCard(this.card!)
+      ) ||
+      this.card!.type === CardType.FreeText
+    ) {
+      if (this.roomService.isUserAdmin()) {
+        this.gameControlService.startNewRound();
+      }
       return;
     }
 
-    this.cardClicked = true;
-    this.store.dispatch(new InformationActions.SetRoundCardClicked());
+    if (
+      this.activeSubCardIndex === 0 ||
+      (this.activeSubCardIndex + 1) < this.specifiedCardService.getSubCardCount(this.card!)
+    ) {
+      this.activeSubCardIndex += 1;
+      this.store.dispatch(new InformationActions.SetActiveSubCardIndex(this.activeSubCardIndex))
+      return;
+    }
+
+    if (!this.roomService.isUserAdmin()) return;
+    this.gameControlService.startNewRound();
   }
 }

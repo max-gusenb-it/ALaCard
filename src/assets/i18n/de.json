@@ -139,7 +139,14 @@
               "pay-to-display-drinking-notification-2": "durch die Enthüllung der Nutzernamen"
             }
           },
-          "sips": "Schlücke"
+          "sips": "Schlücke",
+          "offline-sip-display": {
+            "in": "In",
+            "sips-on-next-card": "Schluckverteilung auf nächster Karte",
+            "most-voted-topic": "meist gewähltes Thema",
+            "least-voted-topic": "am wenigsten gewählten Thema",
+            "voted-for-topic": "Jeder in"
+          }
         },
         "has-been-set-to-inactive": "wurde auf inaktiv gesetzt",
         "have-been-set-to-inactive": "wurden auf inaktiv gesetzt"
