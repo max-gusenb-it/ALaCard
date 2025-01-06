@@ -49,4 +49,8 @@ export namespace Utils {
         d.setHours(0, 0, 0, 0);
         return d;
     }
+
+    export function isNumberDefined(n?: number) {
+        return typeof n !== 'undefined' && n !== null;
+    }
 }
