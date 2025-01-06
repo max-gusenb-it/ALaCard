@@ -145,7 +145,10 @@
             "sips-on-next-card": "Schluckverteilung auf nächster Karte",
             "most-voted-topic": "meist gewähltes Thema",
             "least-voted-topic": "am wenigsten gewählten Thema",
-            "voted-for-topic": "Jeder in"
+            "voted-for-topic": "Jeder in",
+            "most-voted-player": "Meistgewählte Spieler ",
+            "least-voted-player": "Am wenigsten gewählte Spieler",
+            "drink-sips": "Trinke {{sipCount}} {{sips}}"
           }
         },
         "has-been-set-to-inactive": "wurde auf inaktiv gesetzt",

@@ -1,7 +1,7 @@
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult, PlayerVotingResultConfig } from "src/app/core/models/interfaces";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult, PlayerVotingResultConfig, GameSettings } from "src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
 import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "src/app/core/constants/card";
 import { Store } from "@ngxs/store";
@@ -10,6 +10,7 @@ import { Utils } from "src/app/core/utils/utils";
 import { IngameDataDataService } from "../../data/ingame-data.data.service";
 import { ResponseDataDataService } from "../../data/response-data.data.service";
 import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
+import { MarkdownUtils } from "src/app/core/utils/markdown.utils";
 
 @Injectable({
     providedIn: 'root'
@@ -104,10 +105,36 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return text;
     }
 
+    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings, activeSubCardIndex: number): string {
+        let text = this.getCardText(card, players, playerIds, speficPlayerId);
+        if (gameSettings.drinkingGame) {
+            text += "<br><br>\n";
+            let sipText = "";
+
+            const castedCard = this.castCard(card);
+            const group = castedCard.settings?.sipConfig?.group ?? this.defaultPlayerVotingGroup;
+            switch(group) {
+                case(PlayerVotingGroup.MostVoted): {
+                    sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-player");
+                } break;
+                case(PlayerVotingGroup.LeastVoted): {
+                    sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-player");
+                }
+            }
+            sipText += "<br>";
+            sipText += this.translateService.instant("features.room.game.game-cards.offline-sip-display.drink-sips", {
+                sipCount: defaultCardSips,
+                sips: this.translateService.instant("shared.components.display.it-result.sip")
+            })
+            text += MarkdownUtils.addTagToContent(sipText, "span", ["text-sm"])
+        }
+        return text;
+    }
+
     override getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): [SipResult[], SipResult?] {
         let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
         // Pay To Disply Sip Calculation
-        // Maybe move pay to display logic into seperate pay to display special card service
+        // ToDo: Maybe move pay to display logic into seperate pay to display special card service
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         if (!!dynamicPlayerVotingRoundData.payToDisplayPlayerId) {
             const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPlayerVotingRoundData.payToDisplayPlayerId && !sr.distribute);

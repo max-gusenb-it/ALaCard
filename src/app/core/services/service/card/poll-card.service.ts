@@ -86,6 +86,10 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
     }
 
     override isSplitCard(card: Card): boolean {
+        return this.isSpecificSipSubjectIdDefined(card);
+    }
+
+    isSpecificSipSubjectIdDefined(card: Card) {
         const pollCard = this.castCard(card);
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
         const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;

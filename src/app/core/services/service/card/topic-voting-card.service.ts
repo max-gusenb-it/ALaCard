@@ -68,7 +68,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
     }
 
     override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings, activeSubCardIndex: number): string {
-        if (activeSubCardIndex === 0) {
+        if (!this.isSpecificSipSubjectIdDefined(card) && activeSubCardIndex === 0) {
             let text = this.getCardText(card, players, playerIds, speficPlayerId);
             text += "<br><br>\n";
             const castedCard = this.castCard(card);

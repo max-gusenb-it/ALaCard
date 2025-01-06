@@ -145,7 +145,10 @@
             "sips-on-next-card": "Sip distribution on next card",
             "most-voted-topic": "most voted topic",
             "least-voted-topic": "least voted topic",
-            "voted-for-topic": "Everyone that voted for"
+            "voted-for-topic": "Everyone that voted for",
+            "most-voted-player": "Most voted players",
+            "least-voted-player": "Least voted players",
+            "drink-sips": "Drink {{sipCount}} {{sips}}"
           }
         },
         "has-been-set-to-inactive": "has been set to inactive",
