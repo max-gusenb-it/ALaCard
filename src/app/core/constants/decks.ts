@@ -1139,10 +1139,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Vacation" 
+                    title: "Vacation ✈️" 
                 },
                 {
-                    title: "Staycation"
+                    title: "Staycation 🏠"
                 }
             ]
         } as TopicVotingCard,
@@ -1187,10 +1187,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "No food 🥤" 
+                    title: "No food 🍛" 
                 },
                 {
-                    title: "No drinks 🍛"
+                    title: "No drinks 🥤"
                 }
             ]
         } as TopicVotingCard,
@@ -1286,10 +1286,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Lottery" 
+                    title: "Lottery 🎰" 
                 },
                 {
-                    title: "Your work"
+                    title: "Your work 🛠️"
                 }
             ]
         } as TopicVotingCard,
@@ -1323,10 +1323,10 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Yes" 
+                    title: "Yes ✅" 
                 },
                 {
-                    title: "No"
+                    title: "No ❎"
                 }
             ],
             settings: {
@@ -1341,15 +1341,15 @@ export const leggitPartyDeck: Deck = {
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Yes" 
+                    title: "Yes ✅" 
                 },
                 {
-                    title: "No"
+                    title: "No ❎"
                 }
             ],
             settings: {
                 sipConfig: {
-                    specificSipSubjectId: 0,
+                    specificSipSubjectId: 1,
                     distribute: false
                 }
             }
