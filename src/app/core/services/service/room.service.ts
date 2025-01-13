@@ -118,13 +118,19 @@ export class RoomService {
             ...room,
             players: {...room.players}
         } as Room;
-        let newPlayer = {
-            ...newRoom.players[playerId]
-        };
-        if (!!!newPlayer) return;
-        
-        newPlayer.state = PlayerState.left;
-        newRoom.players[playerId] = newPlayer;
+        if (!!!newRoom.players[playerId]) return;
+
+        if (newRoom.players[playerId].state === PlayerState.offline) {
+            const players = RoomUtils.mapPlayersToArray(newRoom.players);
+            newRoom.players = RoomUtils.mapPlayersToObject(players.filter(p => p.id !== playerId));
+        } else {
+            let newPlayer = {
+                ...newRoom.players[playerId]
+            };
+            
+            newPlayer.state = PlayerState.left;
+            newRoom.players[playerId] = newPlayer;
+        }
 
         this.roomSourceService.updateRoom(newRoom, newRoom.id!);
     }
