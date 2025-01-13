@@ -17,6 +17,7 @@ export class ItTabComponent {
   }
   @Input() title: string = "Tab";
   @Input() hidden: boolean = false;
+  @Input() id: string = "";
 
   get active() {
     return this._active;

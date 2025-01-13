@@ -32,6 +32,14 @@ export class StartGameModal extends AngularLifecycle {
     specificPlayerId: new FormControl({value: null, disabled: false}),
   });
 
+  get decksTabId() {
+    return "decks";
+  }
+
+  get settingsTabId() {
+    return "settings";
+  } 
+
   constructor(
     private store: Store,
     private popupService: PopupService,
@@ -46,12 +54,12 @@ export class StartGameModal extends AngularLifecycle {
   }
 
   onNavigation(event: string) {
-    if (this.currentTab !== "Settings" && event === "Settings" && GameSettingsUtils.areSettingsPreset(this.selectedDeck.defaultGameSettings)) {
+    if (this.currentTab !== this.settingsTabId && event === this.settingsTabId && GameSettingsUtils.areSettingsPreset(this.selectedDeck.defaultGameSettings)) {
       this.startGame();
       return;
     }
     this.currentTab = event;
-    if (event === "Settings") {
+    if (event === this.settingsTabId) {
       this.showSettings = true;
     }
   }

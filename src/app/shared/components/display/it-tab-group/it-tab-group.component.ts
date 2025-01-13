@@ -29,7 +29,7 @@ export class ItTabGroupComponent implements AfterContentInit {
   selectTab(tab: ItTabComponent) {
     this.tabs.toArray().forEach(tab => (tab.active = false));
     tab.active = true;
-    this.onTabChange.emit(tab.title);
+    this.onTabChange.emit(tab.id);
   }
 
   getActiveTabIndex() {
@@ -52,7 +52,7 @@ export class ItTabGroupComponent implements AfterContentInit {
     if ((activeTabIndex + 1) >= tabs.length) {
       this.finishTabs();
     } else {
-      this.onTabChange.emit(tabs[activeTabIndex + 1].title);
+      this.onTabChange.emit(tabs[activeTabIndex + 1].id);
       this.selectTab(tabs[activeTabIndex + 1]);
     }
   }
@@ -66,7 +66,7 @@ export class ItTabGroupComponent implements AfterContentInit {
     if (this.isFirstTab()) {
       this.cancelTabs();
     } else {
-      this.onTabChange.emit(tabs[activeTabIndex - 1].title);
+      this.onTabChange.emit(tabs[activeTabIndex - 1].id);
       this.selectTab(tabs[activeTabIndex - 1]);
     }
   }
