@@ -9,6 +9,7 @@ export namespace RoomStateErrors {
     export const startGameReadRoomNotFound = "room-state.start-game.room-not-found";
     export const continueToGameReadGameNotFound = "room-state.continue-to-game.game-not-found";
     export const endGameReadGameNotFound = "room-state.end-game.game-not-found";
+    export const setRoomUserNotFound = "room-state.set-room.user-not-found";
 }
 
 export namespace RoomServiceErrors {

@@ -127,6 +127,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     }
   }
 
+  kickPlayer(playerId: string) {
+    this.roomService.kickPlayerFromRoom(playerId);
+  }
+
   addOfflinePlayer() {
     this.popupService.openBottomSheet(
       AddOfflinePlayerBottomSheet

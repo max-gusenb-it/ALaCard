@@ -242,9 +242,8 @@ export class RoomState extends AngularLifecycle {
     setRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.SetRoom) {
         try {
             const user = this.store.selectSnapshot(AuthenticationState.user);
-            if (!!action.room && (!!!user || !!!action.room.players[user.id!])) {
-                // ToDo: User was removed from in this case but why? -> throw meaningfull error message
-                throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
+            if (!!action.room && (!!!user || !!!action.room.players[user.id!] || action.room.players[user.id!].state >= PlayerState.left)) {
+                throw new ItError(RoomStateErrors.setRoomUserNotFound, RoomState.name);
             }
 
             let connectionData: RoomConnectionData | null = null;

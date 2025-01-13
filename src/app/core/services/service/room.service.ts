@@ -12,6 +12,8 @@ import { InformationState } from "../../state/information";
 import { RoomUtils } from "../../utils/room.utils";
 import { UserSourceService } from "../source/user.source.service";
 import { IngameDataDataService } from '../data/ingame-data.data.service';
+import { RoomSourceService } from '../source/room.source.service';
+import { PlayerState } from '../../models/enums';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +21,7 @@ import { IngameDataDataService } from '../data/ingame-data.data.service';
 export class RoomService {
     constructor(
         private store: Store,
+        private roomSourceService: RoomSourceService,
         private userSourceService: UserSourceService,
         private popupService: PopupService,
         private ingameDataDataService: IngameDataDataService
@@ -42,6 +45,7 @@ export class RoomService {
         let gameHistory = this.store.selectSnapshot(AuthenticationState.gameHistory);
         if (
             !!!room.game || 
+            !!!room.game.deck || 
             !!!user || 
             !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ||
             !!gameHistory.find(gh => gh.compareValue === room.game!.compareValue)
@@ -102,5 +106,26 @@ export class RoomService {
 
     isUserAdmin() {
         return this.store.selectSnapshot(AuthenticationState.user)?.id === this.getRoomAdmin()?.id;
+    }
+
+    kickPlayerFromRoom(playerId: string) {
+        if (this.getRoomAdmin().id !== this.store.selectSnapshot(AuthenticationState.uid)) return;
+
+        const room = this.store.selectSnapshot(RoomState.room);
+        if (!!!room || !!!room.players[playerId]) return;
+
+        let newRoom = {
+            ...room,
+            players: {...room.players}
+        } as Room;
+        let newPlayer = {
+            ...newRoom.players[playerId]
+        };
+        if (!!!newPlayer) return;
+        
+        newPlayer.state = PlayerState.left;
+        newRoom.players[playerId] = newPlayer;
+
+        this.roomSourceService.updateRoom(newRoom, newRoom.id!);
     }
 }

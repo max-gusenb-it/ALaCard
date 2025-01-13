@@ -70,6 +70,12 @@ export namespace RoomUtils {
         return Object.values(players).sort((p1, p2) => p1.joinOrder - p2.joinOrder);
     }
 
+    export function mapPlayersToObject(players: Player[]) : { [key: string]: Player } {
+        return players.reduce((accumulator, player) => {
+            return {...accumulator, [player.id]: player};
+        }, {});
+    }
+
     export function isPlayerActive(player: Player) {
         return player.state === PlayerState.active || player.state === PlayerState.offline;
     }

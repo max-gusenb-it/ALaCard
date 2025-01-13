@@ -26,9 +26,11 @@
         >
           <it-player
             *ngFor="let player of mapPlayersToArray((room$ | async)!.players)"
+            [playerId]="player.id"
             [profilePicture]="player.profilePicture"
             [username]="player.username"
             [state]="player.state"
+            (kickPlayer)="kickPlayer($event)"
           />
         </div>
       </div>

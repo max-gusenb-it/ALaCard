@@ -52,6 +52,7 @@ export class RoomSettingsBottomSheet {
   }
 
   updateSettings() {
+    // ToDo: Move to RoomService
     let differences = false;
     const room = this.store.selectSnapshot(RoomState.room);
     differences = 

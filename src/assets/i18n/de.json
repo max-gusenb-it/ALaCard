@@ -252,6 +252,7 @@
     "room-source-service.get-room.room-not-found": "Raum konnte nicht gefunden werden",
     "room-state.join-room.no-user-found": "Du musst einen Nutzer erstellen, bevor du einen Raum beitretten kannst",
     "room-state.join-room.cant-join-room-when-offline": "Wenn du offline bist, kannst du nur deinen eigenen Raum beitretten",
-    "room-state.join-room.cant-join-offline-room": "Ein Raum im ein Gerät Modus kann nicht beigetreten werden"
+    "room-state.join-room.cant-join-offline-room": "Ein Raum im ein Gerät Modus kann nicht beigetreten werden",
+    "room-state.set-room.user-not-found": "Du wurdest vom Admin gekickt"
   }
 }

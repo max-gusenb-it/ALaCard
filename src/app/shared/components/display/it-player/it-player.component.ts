@@ -1,7 +1,9 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngxs/store';
 import { PlayerState } from 'src/app/core/models/enums';
 import { RoomService } from 'src/app/core/services/service/room.service';
+import { AuthenticationState } from 'src/app/core/state';
 
 @Component({
   selector: 'it-player',
@@ -13,15 +15,19 @@ export class ItPlayerComponent {
   @ViewChild("player") playerContainerRef?: ElementRef<HTMLDivElement>;
   @ViewChild("controls") controlsContainerRef?: ElementRef<HTMLDivElement>;
 
+  @Input() playerId: string = "";
   @Input() profilePicture: string = "";
   @Input() username: string = "";
   @Input() state: PlayerState = null as any;
+
+  @Output() kickPlayer: EventEmitter<string> = new EventEmitter();
 
   displayControls: boolean = false;
 
   constructor(
     private translateService: TranslateService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private store: Store
   ) { }
 
   getStateTranslation(state: PlayerState) {
@@ -34,7 +40,7 @@ export class ItPlayerComponent {
   }
 
   toggleControls() {
-    if (!!!this.controlsContainerRef || !this.roomService.isUserAdmin()) return;
+    if (!!!this.controlsContainerRef || !this.roomService.isUserAdmin() || this.playerId === this.store.selectSnapshot(AuthenticationState.userId)) return;
 
     this.displayControls = !this.displayControls;
     
@@ -47,5 +53,9 @@ export class ItPlayerComponent {
 
   onMouseLeave() {
     if (this.displayControls) this.toggleControls();
+  }
+
+  kickPlayerClicked() {
+    this.kickPlayer.emit(this.playerId);
   }
 }
