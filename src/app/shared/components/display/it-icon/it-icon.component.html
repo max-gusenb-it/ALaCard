@@ -3,7 +3,10 @@
     material-symbols-rounded
     transition-all
   "
-  [ngStyle]="{'font-size.rem': size}"
+  [ngStyle]="{
+    'font-size.rem': size,
+    'height': size + 'rem'
+  }"
   [class.unfilled]="!filled"
   [ngClass]="color"
 >
