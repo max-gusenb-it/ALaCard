@@ -1,9 +1,9 @@
 <it-tab-group 
   (onStatusChange)="onSubmitOrCancel($event)"
   (onTabChange)="onNavigation($event)"
-  [advanceControlDisabled]="!gameSettingsForm.valid && currentTab === 'Settings'"
+  [advanceControlDisabled]="!gameSettingsForm.valid && currentTab === settingsTabId"
   [finishControlDisabled]="!gameSettingsForm.valid"
-  [advanceButtonIcon]="this.currentTab !== 'Settings' && !areSettingsPreset() ? 'settings' : undefined"
+  [advanceButtonIcon]="this.currentTab !== settingsTabId && !areSettingsPreset() ? 'settings' : undefined"
   class="flex flex-grow p-6"
 >
   <!-- ToDo: add card number somewhere when changing game settings. Maybe add deck component at top -->
