@@ -1,9 +1,20 @@
-<div class="flex flex-row w-full items-center gap-2">
-  <div id="image-container" class="rounded-full overflow-hidden" style="width: 3.25rem; height: 3.25rem;">
-    <img id="rect-img" [src]="profilePicture" />
+<div 
+  (mouseleave)="onMouseLeave()"
+  class="flex w-full cursor-pointer rounded-md hover:bg-primary-300 transition-all"
+>
+  <div class="flex flex-row flex-grow items-center gap-2 min-w-0 overflow-hidden mr-auto" (click)="toggleControls()">
+    <div id="image-container" class="rounded-full overflow-hidden" style="min-width: 3.25rem; min-height: 3.25rem;">
+      <img id="rect-img" [src]="profilePicture" />
+    </div>
+    <div class="flex flex-col flex-grow">
+      <p class="font-medium">{{ username }}</p>
+      <p *ngIf="state !== null" class="text-sm">{{ getStateTranslation(state) }}</p>
+    </div>
   </div>
-  <div class="flex flex-col">
-    <p class="font-medium">{{ username }}</p>
-    <p *ngIf="state !== null" class="text-sm">{{ getStateTranslation(state) }}</p>
+  <div
+    #controls
+    class="flex max-w-0 overflow-hidden items-center transition-all duration-300 ease-in-out"
+  >
+    <it-icon-button color="tertiary">person_remove</it-icon-button>
   </div>
 </div>
