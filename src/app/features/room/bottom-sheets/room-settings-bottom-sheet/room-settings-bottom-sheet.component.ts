@@ -21,7 +21,6 @@ export class RoomSettingsBottomSheet {
   @Select(RoomState.roomSettings) settings$!: Observable<RoomSettings>;
 
   roomSettingsForm: FormGroup = new FormGroup({
-    // ToDo: make work
     singleDeviceMode: new FormControl({value: false, disabled: false}),
     otherAdmin: new FormControl({value: true, disabled: false}),
     autoContinueOnAllVotes: new FormControl({value: true, disabled: false})
