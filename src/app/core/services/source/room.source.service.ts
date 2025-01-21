@@ -24,9 +24,12 @@ export class RoomSourceService {
     ) { }
 
     getRoom$(roomId: string, roomCreatorId?: string) {
+        const roomCollectionRef = this.roomRefService.getRoomCollectionRef(roomCreatorId);
+        console.log ("Room collection ref:", roomCollectionRef);
+        console.log ("Room id:", roomId)
         return this.firestoreService.getDocWithId$(this.roomRefService.getRoomCollectionRef(roomCreatorId), roomId)
             .pipe(
-                catchError(e => {
+                catchError(() => {
                     throw new ItError(
                         RoomSourceServiceErrors.roomNotFound,
                         RoomSourceService.name
@@ -36,6 +39,9 @@ export class RoomSourceService {
     }
 
     async getInitialRoom$(roomId: string, creatorId: string) {
+        const roomCollectionRef = this.roomRefService.getRoomCollectionRef(creatorId);
+        let test = await this.firestoreService.getDocVersionTwo$(roomCollectionRef, roomId);
+        console.log ("Room 2: ", test.docs.length > 0 ? test.docs[0].data() : "No docs loaded")
         return await firstValueFrom(
             this.getRoom$(roomId, creatorId)
                 .pipe(
@@ -45,9 +51,11 @@ export class RoomSourceService {
                 )
             ).then(
                 r => {
+                    console.log ("Initial load room - success: ", r);
                     return r;
                 },
                 e => {
+                    console.log ("Initial load room - error: ", e);
                     throw e;
             }
         );

@@ -5,6 +5,7 @@ import { FirestoreBase } from "../../models/interfaces";
 import { getFirestore } from "@angular/fire/firestore";
 import { initializeApp } from "@angular/fire/app";
 import { environment } from "src/environments/environment";
+import firebase from 'firebase/compat/app';
 
 @Injectable({
     providedIn: 'root'
@@ -28,12 +29,23 @@ export class FirestoreService<T extends FirestoreBase> {
                 var keys = Object.keys(data);
                 if (keys.length === 1 && keys[0] === 'id') {
                     console.warn("Document with only id loaded");
-                    return null;
+                    throw new Error();
                 } else {
                     return data;
                 }
             })
         ) as Observable<T>;
+    }
+
+    getDocVersionTwo$(
+        ref: string,
+        id: string
+    ) {
+        return firebase
+            .firestore()
+            .collection(ref)
+            .orderBy("creationDate")
+            .get();
     }
 
     add(ref: string, data: T) {
