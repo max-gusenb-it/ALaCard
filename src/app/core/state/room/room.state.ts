@@ -1,4 +1,4 @@
-import { Action, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
+import { Action, NgxsOnInit, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
 import { RoomConnectionData, RoomStateModel } from "./room.model";
 import { Injectable, NgZone } from "@angular/core";
 import { RoomActions } from "./room.actions";
@@ -33,7 +33,7 @@ export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
     name: ROOM_STATE_TOKEN
 })
 @Injectable()
-export class RoomState extends AngularLifecycle {
+export class RoomState extends AngularLifecycle implements NgxsOnInit {
     roomSubscription$: Subscription = null as any;
 
     @Selector()
@@ -122,6 +122,18 @@ export class RoomState extends AngularLifecycle {
         private popupService: PopupService
     ) {
         super();
+    }
+
+    ngxsOnInit(ctx: StateContext<any>): void {
+        this.store.select(AuthenticationState.isAuthenticated)
+            .subscribe(isAutenticated => {
+                if (!isAutenticated) {
+                    ctx.patchState({
+                        roomConnectionData: null,
+                        room: null
+                    });
+                }
+            });
     }
 
     @Action(RoomActions.CreateRoom)

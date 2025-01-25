@@ -28,7 +28,7 @@ export class FirestoreService<T extends FirestoreBase> {
             map((data: any) => {
                 var keys = Object.keys(data);
                 if (keys.length === 1 && keys[0] === 'id') {
-                    console.warn("Document with only id loaded");
+                    console.warn("Document could not be found", `${ref}/${id}`);
                     throw new Error();
                 } else {
                     return data;
