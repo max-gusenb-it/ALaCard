@@ -1,5 +1,5 @@
 import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard, PlayerVotingGroup, PollCard } from "../models/interfaces";
+import { Deck, FreeTextCard, PlayerVotingCard } from "../models/interfaces";
 import { TopicVotingCard } from "../models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
