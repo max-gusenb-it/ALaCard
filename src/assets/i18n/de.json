@@ -225,6 +225,10 @@
         "it-loading-screen": {
           "title": "Lade Raum",
           "subtitle": "Mach dich bereit für Großartiges!"
+        },
+        "it-sip-result": {
+          "distribution": "verteile",
+          "drink": "trink"
         }
       }
     }

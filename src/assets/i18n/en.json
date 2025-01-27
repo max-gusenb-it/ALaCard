@@ -225,6 +225,10 @@
         "it-loading-screen": {
           "title": "Loading Room",
           "subtitle": "Brace yourself for awesomeness!"
+        },
+        "it-sip-result": {
+          "distribution": "distribute",
+          "drink": "drink"
         }
       }
     }
