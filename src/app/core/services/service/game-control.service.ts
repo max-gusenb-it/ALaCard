@@ -35,6 +35,7 @@ export class GameControlService {
             creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
             round: null,
             playedCardIndexes: [],
+            followUpCardSchedules: []
         };
         if (!!!deck.groundRules || deck.groundRules.length === 0) {
             staticRoundData.round = this.createGameRound(deck, staticRoundData, players, gameSettings);
@@ -44,20 +45,51 @@ export class GameControlService {
     }
 
     createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) : Round {
+        if (staticRoundData.followUpCardSchedules.length > 0 && Utils.isNumberDefined(staticRoundData.round?.id)) {
+            const newRoundIndex = staticRoundData.playedCardIndexes.length;
+            const followUpCardSchedule = staticRoundData.followUpCardSchedules.find(f => f.scheduledRoundId === newRoundIndex);
+            if (!!followUpCardSchedule) {
+                return {
+                    cardIndex: followUpCardSchedule.sourceCardIndex,
+                    id: newRoundIndex,
+                    followUpCard: true,
+                    playerIds: followUpCardSchedule.sourceCardPlayerIds ?? []
+                };
+            }
+        }
+
         const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);        
         
         const card = deck.cards[newCardIndex];
         const cardService = this.cardService.getCardService(card.type);
         
-        return cardService.createGameRound(
+        const newRound = cardService.createGameRound(
             {
                 id: staticRoundData.playedCardIndexes.length,
-                cardIndex: newCardIndex
+                cardIndex: newCardIndex,
+                followUpCard: false
             },
             card,
             players,
             gameSettings
         );
+
+        if (cardService.hasFollowUpCard(card)) {
+            staticRoundData.followUpCardSchedules = [
+                ...staticRoundData.followUpCardSchedules,
+                {
+                    sourceCardIndex: newCardIndex,
+                    scheduledRoundId: (staticRoundData.round?.id ?? 0) + (card.followUpCard?.roundDelay ?? 1),
+                    sourceCardPlayerIds: newRound.playerIds ?? []
+                }
+            ]
+        }
+
+        return newRound;
+    }
+
+    private creatFollowUpGameRound() {
+
     }
     
     private getNewCardIndex(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) {

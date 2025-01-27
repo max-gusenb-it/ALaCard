@@ -7,47 +7,48 @@ const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-fl
 
 // Test Decks
 export const partyDeck: Deck = {
-    icon: "🎉",
-    name: "Party Game",
+    icon: "💻",
+    name: "Development Deck",
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Bitte zeige diese Karte an",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            text: "%p0 du bist jetzt Daumenmeister, nutze deinen macht!",
+            type: CardType.FreeText,
+            followUpCard: {
+                card: {
+                    text: "%p0 ich hoffe du hast deine Macht als Daumenmeister ausgenutzt :*",
+                    type: CardType.FreeText
+                },
+                roundDelay: 2
+            },
+            settings: {
+                order: 0
+            }
+        } as FreeTextCard,
         {
-            text: "Erster :) - Twinni oder Jolly?",
+            text: "What do you prefer to drink?",
+            type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Jolly"
+                    title: "Kakao 🥛" 
                 },
                 {
-                    title: "Twinni"
+                    title: "Coffee ☕"
                 }
-            ],
+            ]
+        } as TopicVotingCard,
+        {
+            text: "Where would you rather be stranded?",
             type: CardType.TopicVotingCard,
-            settings: {
-                order: 1
-            }
-        } as PollCard,
-        {
-            text: "Zweiter :) - %p0 is a echter Wappla",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 2,
-                selfVoteDisabled: false,
-                sipConfig: {
-                    group: PlayerVotingGroup.LeastVoted
+            subjects: [
+                {
+                    title: "On a deserted island 🏝️" 
+                },
+                {
+                    title: "On a lonely habitable planet 🌎"
                 }
-            }
-        } as PlayerVotingCard,
-        {
-            text: "Dritter :)",
-            type: CardType.FreeText,
-            settings: {
-                order: 3
-            }
-        } as FreeTextCard
+            ]
+        } as TopicVotingCard
     ],
     flags: [],
     requiredPlayers: {

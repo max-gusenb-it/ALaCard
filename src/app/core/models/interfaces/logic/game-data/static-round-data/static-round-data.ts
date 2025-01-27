@@ -1,4 +1,5 @@
 import { FirestoreBase } from "../../firestore-base";
+import { FollowUpCardSchedule } from "./FollowUpCardSchedule";
 import { Round } from "./round/round";
 
 /**
@@ -12,4 +13,5 @@ import { Round } from "./round/round";
 export interface StaticRoundData extends FirestoreBase {
     round: Round | null;
     playedCardIndexes: number[];
+    followUpCardSchedules: FollowUpCardSchedule[];
 }
