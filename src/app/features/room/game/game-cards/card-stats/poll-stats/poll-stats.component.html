@@ -33,20 +33,27 @@
             *ngIf="gameSettings?.drinkingGame"
             (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
-            <it-result
+            <div
                 default
-                *ngIf="!!userSipResult"
-                [sipResult]="userSipResult"
-                [title]="getPlayerForSipResult(userSipResult)?.username"
-                [profilePicture]="getPlayerForSipResult(userSipResult)?.profilePicture"
-            />
-            <it-result
+                class="flex flex-row gap-2 w-full justify-between"
+            >
+                <it-sip-result
+                    *ngFor="let result of defaultVisibleSipResults"
+                    [sipResult]="result"
+                    [profilePicture]="getPlayerForSipResult(result)!.profilePicture"
+                />
+                <div style="width: 3.25rem; height: 3.25rem;" *ngFor="let spaceUpDiv of getMissingRowElements(defaultVisibleSipResults)"></div>
+            </div>
+            <div
                 collapsible
-                *ngFor="let result of sipResults"
-                [sipResult]="result"
-                [title]="getPlayerForSipResult(result)?.username"
-                [profilePicture]="getPlayerForSipResult(result)?.profilePicture"
-            />
+                class="flex flex-row gap-2 w-full justify-between"
+            >
+                <it-sip-result
+                    *ngFor="let result of hiddenSipResults"
+                    [sipResult]="result"
+                    [profilePicture]="getPlayerForSipResult(result)!.profilePicture"
+                />
+            </div>
         </it-accord>
     </it-selection-list>
     <div class="flex flex-row gap-4" *ngIf="isUserRoomAdmin()">

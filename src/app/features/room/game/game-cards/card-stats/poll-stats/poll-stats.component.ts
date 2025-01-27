@@ -25,8 +25,8 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   castedCard: PollCard;
   dynamicRoundData: DynamicPollRoundData;
   results: PollResult[];
-  sipResults: SipResult[];
-  userSipResult?: SipResult;
+  defaultVisibleSipResults?: SipResult[];
+  hiddenSipResults: SipResult[];
 
   constructor(
     private store: Store,
@@ -47,6 +47,13 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
     return pollCardSkipValue;
   }
 
+  get sipResultColumnCount() {
+    if (window.innerWidth >= 380)
+      return 5;
+    else
+      return 4;
+  }
+
   ngAfterViewInit(): void {
     this.pollCardService = <BasePollCardService>this.cardService.getCardService(this.card.type);
     this.castedCard = this.pollCardService.castCard(this.card);
@@ -59,9 +66,10 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
         this.results = this.pollCardService.getResults(this.dynamicRoundData);
 
         if (this.gameSettings?.drinkingGame) {
-          const seperatedSipResults = this.pollCardService.getSperatedSipResults(this.card, this.dynamicRoundData);
-          this.sipResults = seperatedSipResults[0];
-          this.userSipResult = seperatedSipResults[1];
+          let sipResults = this.pollCardService.getNewSeperatedSipResults(this.card, this.dynamicRoundData);
+          sipResults = sipResults.splice(0, 5);
+          this.defaultVisibleSipResults = sipResults.splice(0, this.sipResultColumnCount);
+          this.hiddenSipResults = sipResults;
         };
         
         this.changeDetectorRef.detectChanges();
@@ -99,5 +107,22 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
 
   startNextRound() {
     this.gameControlService.startNewRound();
+  }
+
+  /**
+   * Checks, how many sip results would be needed to fill up a row.
+   *
+   * @returns An array containing the amount needed to fill up the sip result row with number values
+   */
+  getMissingRowElements(sipResults?: SipResult[]) : number[] {
+    let missingRowElementCount = this.sipResultColumnCount;
+    if (!!sipResults) {
+      if (sipResults.length < this.sipResultColumnCount) {
+        missingRowElementCount = this.sipResultColumnCount - sipResults.length;
+      } else {
+        missingRowElementCount = sipResults.length - Math.trunc(sipResults.length / this.sipResultColumnCount) * this.sipResultColumnCount;
+      }
+    }
+    return Array.from(Array(missingRowElementCount).keys());
   }
 }

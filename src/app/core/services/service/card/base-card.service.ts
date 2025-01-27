@@ -150,6 +150,27 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return [sipResults.filter(s => s.playerId !== userSR?.playerId), userSR];
     }
 
+    
+    /**
+     * Calculates, formats and returns sip results.
+     * If a user specific sip result is found, it is placed at the start of the result array
+     *
+     * @param {Card} card 
+     * @param {DynamicRoundData} dynamicRoundData 
+     * @returns {SipResult[]} 
+     */
+    getNewSeperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        let sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
+        const userSR = this.getUserSipResult(sipResults);
+        if (!!userSR) {
+            sipResults = [
+                userSR,
+                ...sipResults.filter(s => s.playerId !== userSR?.playerId)
+            ]
+        }
+        return sipResults;
+    }
+
     getUserSipResult(sipResults: SipResult[]) {
         return sipResults.find(s => s.playerId === this._store.selectSnapshot(AuthenticationState.userId));
     }
