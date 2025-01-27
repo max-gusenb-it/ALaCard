@@ -18,7 +18,7 @@ export class ItSnackbarComponent extends AngularLifecycle {
     super();
 
     if (data.autoClose) {
-      timer(3000)
+      timer(data.autoCloseTime ?? 3000)
         .pipe(
           takeUntil(this.destroyed$)
         )

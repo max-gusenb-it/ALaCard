@@ -52,12 +52,15 @@ export class PopupService {
     )
   }
 
-  openSnackbar(text: string, icon?: string, autoClose: boolean = true) {
+  openSnackbar(text: string, icon?: string, hideIcon: boolean = false, autoClose: boolean = true, autoCloseTime?: number) {
     let snackbarData: SnackbarData = {
       text,
       icon,
-      autoClose
+      hideIcon,
+      autoClose,
+      autoCloseTime
     }
+    DialogConfig
     return this.dialog.open(ItSnackbarComponent, {
       data: snackbarData,
       positionStrategy: this.overlay

@@ -31,6 +31,7 @@ export class TutorialService {
         this.popupService.openSnackbar(
             this.translateService.instant(labelId),
             icon,
+            false,
             false
         );
     }
