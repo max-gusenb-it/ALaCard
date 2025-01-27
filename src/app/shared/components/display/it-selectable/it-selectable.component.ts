@@ -5,6 +5,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from "@angu
 })
 export abstract class ItSelectableComponent {
     @Input() selected: boolean = false;
+    @Input() disabled: boolean;
 
     @Output() selectionEmitter: EventEmitter<number> = new EventEmitter();
 
@@ -29,6 +30,7 @@ export abstract class ItSelectableComponent {
     }
 
     quietSelect() {
+        if (this.disabled) return;
         this.selected = true;
     }
 

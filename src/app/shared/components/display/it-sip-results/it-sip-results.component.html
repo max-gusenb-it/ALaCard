@@ -1,5 +1,6 @@
 <it-accord
   [heading]="'features.room.game.game-cards.sips' | translate"
+  [disabled]="!!!hiddenSipResults || hiddenSipResults.length === 0"
   icon="water_loss"
   (selectionEmitter)="selectionList.onSelectionChanged($event)"
   *ngIf="!!defaultVisibleSipResults"
@@ -16,6 +17,7 @@
       <div style="width: 3.25rem; height: 3.25rem;" *ngFor="let spaceUpDiv of getMissingRowElements(defaultVisibleSipResults)"></div>
   </div>
   <div
+      *ngIf="!!hiddenSipResults && hiddenSipResults.length !== 0"
       collapsible
       class="flex flex-row gap-2 w-full justify-between"
   >
