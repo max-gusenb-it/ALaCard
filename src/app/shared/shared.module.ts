@@ -44,7 +44,8 @@ import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-crea
 import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accord/it-checkbox-accord.component';
 import { ItResultComponent } from './components/display/it-result/it-result.component';
 import { ItLoadingScreenComponent } from './components/display/it-loading-screen/it-loading-screen.component';
-import { ItSipResult } from './components/display/it-sip-result/it-sip-result.component';
+import { ItSipResultComponent } from './components/display/it-sip-result/it-sip-result.component';
+import { ItSipResultsComponent } from './components/display/it-sip-results/it-sip-results.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ItSipResult } from './components/display/it-sip-result/it-sip-result.co
     ItPlayerComponent,
     ItResultComponent,
     ItSelectionListComponent,
-    ItSipResult,
+    ItSipResultComponent,
+    ItSipResultsComponent,
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,
@@ -113,7 +115,8 @@ import { ItSipResult } from './components/display/it-sip-result/it-sip-result.co
     ItPlayerComponent,
     ItResultComponent,
     ItSelectionListComponent,
-    ItSipResult,
+    ItSipResultComponent,
+    ItSipResultsComponent,
     ItSnackbarComponent,
     ItTabComponent,
     ItTabGroupComponent,

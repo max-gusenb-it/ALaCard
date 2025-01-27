@@ -6,7 +6,7 @@ import { SipResult } from "src/app/core/models/interfaces";
   templateUrl: './it-sip-result.component.html',
   styleUrl: './it-sip-result.component.scss'
 })
-export class ItSipResult {
+export class ItSipResultComponent {
     @Input() profilePicture: string;
     @Input() sipResult: SipResult;
 }
