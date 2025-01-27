@@ -25,27 +25,12 @@
                 />
             </div>
         </it-accord>
-        <it-accord
-            [heading]="'features.room.game.game-cards.sips' | translate"
-            icon="water_loss"
-            *ngIf="gameSettings.drinkingGame"
-            (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
-        >
-            <it-result
-                default
-                *ngIf="!!userSipResult"
-                [sipResult]="userSipResult"
-                [title]="getPlayerForSipResult(userSipResult)?.username"
-                [profilePicture]="getPlayerForSipResult(userSipResult)?.profilePicture"
-            />
-            <it-result
-                collapsible
-                *ngFor="let result of sipResults"
-                [sipResult]="result"
-                [title]="getPlayerForSipResult(result)?.username"
-                [profilePicture]="getPlayerForSipResult(result)?.profilePicture"
-            />
-        </it-accord>
+        <it-sip-results
+            *ngIf="gameSettings?.drinkingGame"
+            [selectionList]="resultSelectionList"
+            [card]="card"
+            [dynamicRoundData]="dynamicRoundData"
+        ></it-sip-results>
     </it-selection-list>
     <div class="flex flex-row gap-4" *ngIf="isUserRoomAdmin() || displayPayToDisplay()">
         <it-button class="flex grow basis-0" color="red" type="button" *ngIf="displayPayToDisplay()" (click)="payToDisplay()">
