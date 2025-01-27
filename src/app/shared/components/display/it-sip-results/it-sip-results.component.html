@@ -2,5 +2,28 @@
   [heading]="'features.room.game.game-cards.sips' | translate"
   icon="water_loss"
   (selectionEmitter)="selectionList.onSelectionChanged($event)"
+  *ngIf="!!defaultVisibleSipResults"
 >
+  <div
+      default
+      class="flex flex-row gap-2 w-full justify-between"
+  >
+      <it-sip-result
+          *ngFor="let result of defaultVisibleSipResults"
+          [sipResult]="result"
+          [profilePicture]="getPlayerForSipResult(result)!.profilePicture"
+      />
+      <div style="width: 3.25rem; height: 3.25rem;" *ngFor="let spaceUpDiv of getMissingRowElements(defaultVisibleSipResults)"></div>
+  </div>
+  <div
+      collapsible
+      class="flex flex-row gap-2 w-full justify-between"
+  >
+      <it-sip-result
+          *ngFor="let result of hiddenSipResults"
+          [sipResult]="result"
+          [profilePicture]="getPlayerForSipResult(result)!.profilePicture"
+      />
+      <div style="width: 3.25rem; height: 3.25rem;" *ngFor="let spaceUpDiv of getMissingRowElements(hiddenSipResults)"></div>
+  </div>
 </it-accord>
