@@ -140,8 +140,8 @@ export class CardContainerComponent extends AngularLifecycle{
 
     if (
       (
-        singleDeviceModeActive &&
-        !this.specifiedCardService.isSplitCard(this.card!)
+        singleDeviceModeActive // &&
+        // !this.specifiedCardService.isSplitCard(this.card!)
       ) ||
       this.card!.type === CardType.FreeText
     ) {
@@ -152,8 +152,7 @@ export class CardContainerComponent extends AngularLifecycle{
     }
 
     if (
-      this.activeSubCardIndex === 0 ||
-      (this.activeSubCardIndex + 1) < this.specifiedCardService.getSubCardCount(this.card!)
+      this.activeSubCardIndex === 0
     ) {
       this.activeSubCardIndex += 1;
       this.store.dispatch(new InformationActions.SetActiveSubCardIndex(this.activeSubCardIndex))

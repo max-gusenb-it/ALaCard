@@ -6,11 +6,30 @@ import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-sett
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
 
 // Test Decks
-export const partyDeck: Deck = {
+export const developmentDeck: Deck = {
     icon: "💻",
     name: "Development Deck",
     description: "Very funny Party Game for your whole family",
     cards: [
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                order: 1,
+                sipConfig: {
+                    specificSipSubjectId: 0,
+                    distribute: false
+                }
+            }
+        } as TopicVotingCard,
         {
             text: "%p0 du bist jetzt Daumenmeister, nutze deinen macht!",
             type: CardType.FreeText,
@@ -237,7 +256,7 @@ export const aLotOfPlayersDeck: Deck = {
 };
 
 export const demoPartyDecks: Deck[] = [
-    partyDeck, partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
+    developmentDeck, partyDeckWithSpMandatory, partyDeckWithRulesAndSp, drinkingDeck, aLotOfPlayersDeck
 ]
 
 // Leggit Decks
@@ -2380,4 +2399,4 @@ export const testingDeck: Deck = {
     ]
 }
 
-export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole, testingDeck];
+export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole];

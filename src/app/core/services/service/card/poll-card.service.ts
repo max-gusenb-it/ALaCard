@@ -85,11 +85,15 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         return results;
     }
 
-    override isSplitCard(card: Card): boolean {
-        return this.isSpecificSipSubjectIdDefined(card);
+    override hasFollowUpCard(card: Card): boolean {
+        return this.isDefaultFollowUpCardRequired(card);
     }
 
-    isSpecificSipSubjectIdDefined(card: Card) {
+    override isSplitCard(card: Card): boolean {
+        return this.isDefaultFollowUpCardRequired(card);
+    }
+
+    isDefaultFollowUpCardRequired(card: Card) {
         const pollCard = this.castCard(card);
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
         const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;

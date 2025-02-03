@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Deck } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
 import { environment } from "src/environments/environment";
-import { aLotOfPlayersDeck, demoPartyDecks, drinkingDeck, leggitPartyDeck, leggitPartyDecks, partyDeck, partyDeckWithRules, partyDeckWithRulesAndSp, partyDeckWithSpMandatory } from "../../constants/decks";
+import { demoPartyDecks, leggitPartyDecks } from "../../constants/decks";
 
 export const DECK_STATE_TOKEN = new StateToken<DeckStateModel>('deck');
 
