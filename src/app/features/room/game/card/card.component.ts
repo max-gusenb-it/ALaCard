@@ -20,7 +20,6 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
 
   @Input() card: Card;
   @Input() deckname: string = "";
-  @Input() activeSubCardIndex: number = 0;
   @Input() playerIds?: string[];
   @Input() customColor?: Color;
   @Input() customTitle?: string;
@@ -140,8 +139,7 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
           this.store.selectSnapshot(RoomState.players),
           this.playerIds,
           this.store.selectSnapshot(RoomState.specificPlayerId),
-          this.store.selectSnapshot(RoomState.gameSettings)!,
-          this.specifiedCardService.isSplitCard(this.card) ? this.activeSubCardIndex : 0
+          this.store.selectSnapshot(RoomState.gameSettings)!
       );
     }
   }

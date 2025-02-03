@@ -30,14 +30,6 @@ export class CardContainerComponent extends AngularLifecycle{
   deck: Deck;
   staticRoundData: StaticRoundData | null;
   dynamicRoundData: DynamicRoundData | null;
-  
-  /**
-   * Index of the active sub card
-   * If card is no sub card -> 0 is not clicked and 1 is clickd
-   *
-   * @type {number}
-   */
-  activeSubCardIndex: number = 0;
 
   roundInformation?: RoundInformation;
 
@@ -112,7 +104,7 @@ export class CardContainerComponent extends AngularLifecycle{
   roundState: RoundState = undefined as any;
 
   getRoundState() : RoundState {
-    return this.specifiedCardService.getRoundState(this.card!, this.activeSubCardIndex);
+    return this.specifiedCardService.getRoundState();
   }
 
   getCardState() {
@@ -138,24 +130,15 @@ export class CardContainerComponent extends AngularLifecycle{
   continue() {
     const singleDeviceModeActive = this.store.selectSnapshot(RoomState.singleDeviceModeActive);
 
-    if (
-      (
-        singleDeviceModeActive // &&
-        // !this.specifiedCardService.isSplitCard(this.card!)
-      ) ||
-      this.card!.type === CardType.FreeText
-    ) {
+    if (singleDeviceModeActive || this.card!.type === CardType.FreeText) {
       if (this.roomService.isUserAdmin()) {
         this.gameControlService.startNewRound();
       }
       return;
     }
 
-    if (
-      this.activeSubCardIndex === 0
-    ) {
-      this.activeSubCardIndex += 1;
-      this.store.dispatch(new InformationActions.SetActiveSubCardIndex(this.activeSubCardIndex))
+    if (!this.store.selectSnapshot(InformationState.cardAnimationSkipped)) {
+      this.store.dispatch(new InformationActions.SetCardAnimationSkippedClicked(true))
       return;
     }
 

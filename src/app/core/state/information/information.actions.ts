@@ -21,9 +21,9 @@ export namespace InformationActions {
         constructor(public roundId: number) {};
     }
     
-    export class SetActiveSubCardIndex {
+    export class SetCardAnimationSkippedClicked {
         static readonly type = '[CardContainer] SetRoundCardClicked';
-        constructor(public activeSubCardIndex: number) {};
+        constructor(public cardAnimationSkipped: boolean) {};
     }
 
     export class SetRoundResponded {

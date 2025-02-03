@@ -89,20 +89,11 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         return this.isDefaultFollowUpCardRequired(card);
     }
 
-    override isSplitCard(card: Card): boolean {
-        return this.isDefaultFollowUpCardRequired(card);
-    }
-
     isDefaultFollowUpCardRequired(card: Card) {
         const pollCard = this.castCard(card);
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
         const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
         return gameSettings.drinkingGame && roomSettings.singleDeviceMode && pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined;
-    }
-
-    override getSubCardCount(card: Card): number {
-        if (this.isSplitCard(card)) return 2;
-        else return super.getSubCardCount(card);
     }
 
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

@@ -72,23 +72,18 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         } as D;
     }
 
-    getRoundState(card: Card, activeSubCardIndex: number): RoundState {
+    getRoundState(): RoundState {
         const roomSettings = this._store.selectSnapshot(RoomState.roomSettings);
         const roundInformation = this._store.selectSnapshot(InformationState.roundInformation);
         const dynamicRoundData = this._ingameDataDataService.getDynamicRoundData();
         const staticRoundData = this._staticRoundDataDataService.getStaticRoundData();
         if (
             roomSettings?.singleDeviceMode ||
-            (this.isSplitCard(card) && activeSubCardIndex < this.getSubCardCount(card)) ||
             !this._responseDataDataService.userResponded(staticRoundData!.round!.id) &&
-            (!!!roundInformation || roundInformation.roundId !== staticRoundData!.round!.id || roundInformation.activeSubCardIndex < 1) &&
+            (!!!roundInformation || roundInformation.roundId !== staticRoundData!.round!.id || !roundInformation.cardAnimationSkipped) &&
             (!!!dynamicRoundData || dynamicRoundData.roundId !== staticRoundData!.round!.id || !dynamicRoundData.processed)
         ) {
-            if (!this.isSplitCard(card)) {
-                return RoundState.card;
-            } else {
-                return activeSubCardIndex % 2 === 1 ? RoundState.card : RoundState.cardHelper;
-            }
+            return RoundState.card;
         }
         if (!this._ingameDataDataService.roundProcessed(staticRoundData!.round!.id)) {
             return RoundState.form;
@@ -115,21 +110,13 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return text;
     }
 
-    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId: string = "", gameSettings: GameSettings, activeSubCardIndex: number): string {
+    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId: string = "", gameSettings: GameSettings): string {
         let text = this.getCardText(card, players, playerIds, speficPlayerId);
         return text;
     }
 
     getOfflineCardTextSizeClass(card: Card, text: string): string {
         return "text-xl";
-    }
-
-    isSplitCard(card: Card): boolean {
-        return false;
-    }
-
-    getSubCardCount(card: Card): number {
-        return 1;
     }
 
     getResultsHeading(results: Result[], card: Card): string {

@@ -58,6 +58,11 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
         return state.tutorialInfos;
     }
 
+    @Selector()
+    static cardAnimationSkipped(state: InformationStateModel) : boolean {
+        return state.gameInformations?.roundInformation?.cardAnimationSkipped ?? false;
+    }
+
     ngxsOnInit(ctx: StateContext<InformationStateModel>): void {
         const state = ctx.getState();
         this.store.select(AuthenticationState.tutorialInfos)    
@@ -145,14 +150,14 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
                 ...state.gameInformations,
                 roundInformation: {
                     roundId: action.roundId,
-                    activeSubCardIndex: 0
+                    cardAnimationSkipped: false
                 }
             }
         });
     }
 
-    @Action(InformationActions.SetActiveSubCardIndex)
-    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetActiveSubCardIndex) {
+    @Action(InformationActions.SetCardAnimationSkippedClicked)
+    async setRoundCardClicked(ctx: StateContext<InformationStateModel>, action: InformationActions.SetCardAnimationSkippedClicked) {
         const state = ctx.getState();
         
         if (!!!state.gameInformations) {
@@ -176,7 +181,7 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
                 ...state.gameInformations,
                 roundInformation: {
                     ...state.gameInformations.roundInformation,
-                    activeSubCardIndex: action.activeSubCardIndex
+                    cardAnimationSkipped: action.cardAnimationSkipped
                 }
             }
         });

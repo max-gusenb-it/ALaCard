@@ -105,7 +105,7 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return text;
     }
 
-    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings, activeSubCardIndex: number): string {
+    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings): string {
         let text = this.getCardText(card, players, playerIds, speficPlayerId);
         if (gameSettings.drinkingGame) {
             text += "<br><br>\n";
