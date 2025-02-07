@@ -86,10 +86,14 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
     }
 
     override hasFollowUpCard(card: Card): boolean {
-        return this.isDefaultFollowUpCardRequired(card);
+        return this.hasDefaultFollowUpCard(card);
     }
 
-    isDefaultFollowUpCardRequired(card: Card) {
+    override isDefaultFollowUpRound(card: Card, followUpCardIndex: number): boolean {
+        return this.hasDefaultFollowUpCard(card) && followUpCardIndex === 1;
+    }
+
+    override hasDefaultFollowUpCard(card: Card) {
         const pollCard = this.castCard(card);
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
         const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;

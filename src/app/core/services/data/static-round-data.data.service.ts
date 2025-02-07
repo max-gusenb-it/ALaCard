@@ -12,6 +12,11 @@ import { RoomState } from "../../state";
 export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
     staticRoundData$: BehaviorSubject<StaticRoundData | null> = new BehaviorSubject(null as any);
 
+    get followUpIndex() : number {
+        const staticRoundData = this.getStaticRoundData();
+        return staticRoundData?.round?.followUpCardIndex ?? 0;
+    }
+
     constructor(
         store: Store,
         private staticRoundDataSourceService: StaticRoundDataSourceService
@@ -50,5 +55,9 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
             .pipe(
                 filter((s): s is StaticRoundData => s !== null)
             );
+    }
+
+    isFollowUpRound() {
+        return this.followUpIndex > 0;
     }
 }

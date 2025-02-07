@@ -65,6 +65,14 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return !!card.followUpCard;
     }
 
+    hasDefaultFollowUpCard(card: Card) {
+        return false;
+    }
+
+    isDefaultFollowUpRound(card: Card, followUpCardIndex: number) {
+        return false;
+    }
+
     createDynamicRoundData(roundId: number, responses: Response[]): D {
         return {
             roundId: roundId,
