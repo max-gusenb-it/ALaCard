@@ -257,6 +257,7 @@
     "room-state.join-room.no-user-found": "You must create a user before you can join a room",
     "room-state.join-room.cant-join-room-when-offline": "You can only join your own room when you are offline",
     "room-state.join-room.cant-join-offline-room": "Can't join room in single device mode",
-    "room-state.set-room.user-not-found": "You have been kicked by the admin"
+    "room-state.set-room.user-not-found": "You have been kicked by the admin",
+    "game-control-service.create-game-round.no-cards-left": "There are no cards left in the deck"
   }
 }

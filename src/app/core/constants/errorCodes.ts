@@ -24,3 +24,7 @@ export namespace InformationStateErrors {
     export const gameInformationNotFound = "information-state.set-round-card-clicked.gi-not-found"
     export const roundInfomrationNotFound = "information-state.round-information-not-found";
 }
+
+export namespace GameControlServiceErros {
+    export const noCardsLeft = "game-control-service.create-game-round.no-cards-left";
+}

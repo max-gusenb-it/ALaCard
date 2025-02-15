@@ -10,6 +10,9 @@ import { Card, Deck, GameSettings, Player, Round, StaticRoundData } from "../../
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { Utils } from "../../utils/utils";
 import { CardStates } from '../../models/interfaces/logic/cards/card-states';
+import { ItError } from '../../models/classes';
+import { GameControlServiceErros } from '../../constants/errorCodes';
+import { ErrorMonitorActions } from '../../state/error-monitor';
 
 @Injectable({
     providedIn: 'root'
@@ -73,7 +76,13 @@ export class GameControlService {
         }
 
         if (!newRound) {
-            const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);        
+            const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);
+            if (!Utils.isNumberDefined(newCardIndex)) {
+                throw new ItError(
+                    GameControlServiceErros.noCardsLeft,
+                    GameControlService.name
+                )
+            }
             
             newCard = deck.cards[newCardIndex];
             cardService = this.cardService.getCardService(newCard.type);
@@ -174,24 +183,30 @@ export class GameControlService {
 
         if (!!!staticRoundData) return;
 
-        const round = this.createGameRound(
-            this.store.selectSnapshot(RoomState.deck)!,
-            staticRoundData,
-            this.ingameDataDataService.getActivePlayers(),
-            this.store.selectSnapshot(RoomState.gameSettings)!
-        );
+        try {
+            const round = this.createGameRound(
+                this.store.selectSnapshot(RoomState.deck)!,
+                staticRoundData,
+                this.ingameDataDataService.getActivePlayers(),
+                this.store.selectSnapshot(RoomState.gameSettings)!
+            );
 
-        return this.staticRoundDataDataService.updateStaticRoundData(
-            {
-                ...staticRoundData,
-                round: round,
-                playedCardIndexes: [
-                    ...staticRoundData.playedCardIndexes,
-                    round.cardIndex
-                ]
-            },
-            this.store.selectSnapshot(RoomState.roomId)!
-        );
+             this.staticRoundDataDataService.updateStaticRoundData(
+                {
+                    ...staticRoundData,
+                    round: round,
+                    playedCardIndexes: [
+                        ...staticRoundData.playedCardIndexes,
+                        round.cardIndex
+                    ]
+                },
+                this.store.selectSnapshot(RoomState.roomId)!
+            );
+        } catch (error) {
+            if (error instanceof ItError) {
+                this.store.dispatch(new ErrorMonitorActions.SetError(error.exportError()))
+            }
+        }
     }
 
     getAdminResponseCountInfo(roundId: number) {
