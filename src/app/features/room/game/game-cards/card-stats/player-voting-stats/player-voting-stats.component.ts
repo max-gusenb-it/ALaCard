@@ -11,6 +11,7 @@ import { PopupService } from 'src/app/core/services/service/popup.service';
 import { RoomService } from 'src/app/core/services/service/room.service';
 import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
 import { AuthenticationState, RoomState } from 'src/app/core/state';
+import { Utils } from 'src/app/core/utils/utils';
 import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
@@ -21,12 +22,16 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   
   @Input() card: Card;
   @Input() round: Round;
-  @Input() dynamicRoundData: DynamicRoundData;
+  @Input() _dynamicRoundData: DynamicRoundData;
   @Input() gameSettings: GameSettings;
 
   results: PlayerVotingResult[];
 
   players: Player[];
+
+  get dynamicRoundData() {
+    return this.playerVotingService.castDynamicRoundData(this._dynamicRoundData);
+  }
 
   constructor(
     private gameControlService: GameControlService,
@@ -53,12 +58,12 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
       .pipe(takeUntil(this.destroyed$))
       .subscribe(d => {
         if (!!!d) return;
-        const newPayToDisplayPlayerId = this.playerVotingService.getNewPayToDisplayPlayerId(this.dynamicRoundData, d);
+        const newPayToDisplayPlayerId = this.playerVotingService.getNewPayToDisplayPlayerId(this._dynamicRoundData, d);
         if (newPayToDisplayPlayerId && this.store.selectSnapshot(AuthenticationState.userId) !== newPayToDisplayPlayerId) {
           this.popupService.openSnackbar(this.getPayToDisplayNotificationText(newPayToDisplayPlayerId));
         }
-        this.dynamicRoundData = d;
-        this.results = this.playerVotingService.getResults(this.dynamicRoundData);
+        this._dynamicRoundData = d;
+        this.results = this.playerVotingService.getResults(this._dynamicRoundData);
 
         this.changeDetectorRef.detectChanges();
     });
@@ -74,10 +79,6 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
 
   getCastedCard() {
     return this.playerVotingService.castCard(this.card);
-  }
-
-  getCastedDynamicRoundData() {
-    return this.playerVotingService.castDynamicRoundData(this.dynamicRoundData);
   }
 
   getCardText() {
@@ -106,7 +107,10 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   displayPayToDisplay() {
-    return this.gameSettings.drinkingGame && this.getCastedCard()?.settings?.payToDisplay && !!!this.getCastedDynamicRoundData()?.payToDisplayPlayerId;
+    return this.gameSettings.drinkingGame && 
+      this.getCastedCard()?.settings?.payToDisplay && 
+      this.dynamicRoundData && 
+      !Utils.isStringDefinedAndNotEmpty(this.dynamicRoundData.payToDisplayPlayerId);
   }
 
   async payToDisplay() {
@@ -117,11 +121,11 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
         `${this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay")} ${defaultPayToDisplaySips} ${this.translateService.instant("shared.components.display.it-result.sips")}`
       ).closed
     );
-    if (payToDisplay) {
+    if (payToDisplay && !Utils.isStringDefinedAndNotEmpty(this.dynamicRoundData.payToDisplayPlayerId)) {
       this.ingameDataSourceService.updateDynamicRoundData(
         this.store.selectSnapshot(RoomState.roomId)!,
         {
-          ...this.dynamicRoundData,
+          ...this._dynamicRoundData,
           payToDisplayPlayerId: this.store.selectSnapshot(AuthenticationState.userId)
         } as DynamicPlayerVotingRoundData
       )

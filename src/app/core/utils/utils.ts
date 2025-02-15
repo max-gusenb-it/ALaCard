@@ -51,6 +51,10 @@ export namespace Utils {
     }
 
     export function isNumberDefined(n?: number) {
-        return typeof n !== 'undefined' && n !== null;
+        return typeof n !== "undefined" && n !== null;
+    }
+
+    export function isStringDefinedAndNotEmpty(s?: string) {
+        return s && s !== "";
     }
 }

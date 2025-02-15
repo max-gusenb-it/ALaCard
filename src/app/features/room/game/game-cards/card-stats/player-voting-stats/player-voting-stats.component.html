@@ -20,7 +20,7 @@
                     [title]="getPlayerForResult(result)?.username"
                     [profilePicture]="getPlayerForResult(result)?.profilePicture"
                     [card]="card"
-                    [overrideAnonymous]="!!getCastedDynamicRoundData().payToDisplayPlayerId"
+                    [overrideAnonymous]="!!dynamicRoundData.payToDisplayPlayerId"
                     [skipped]="result.votedPlayerId === playerVotingCardSkipValue"
                 />
             </div>
