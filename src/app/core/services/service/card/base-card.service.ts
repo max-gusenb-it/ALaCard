@@ -143,13 +143,6 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
     getResultSubText(result: Result, players: Player[]) {
         return "";
     }
-
-    getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): [SipResult[], SipResult?] {
-        const sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
-        const userSR = this.getUserSipResult(sipResults);
-        return [sipResults.filter(s => s.playerId !== userSR?.playerId), userSR];
-    }
-
     
     /**
      * Calculates, formats and returns sip results.
@@ -159,7 +152,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
      * @param {DynamicRoundData} dynamicRoundData 
      * @returns {SipResult[]} 
      */
-    getNewSeperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+    getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         let sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
         const userSR = this.getUserSipResult(sipResults);
         if (!!userSR) {

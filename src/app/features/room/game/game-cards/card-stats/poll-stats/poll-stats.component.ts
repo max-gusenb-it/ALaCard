@@ -25,8 +25,6 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   castedCard: PollCard;
   dynamicRoundData: DynamicPollRoundData;
   results: PollResult[];
-  defaultVisibleSipResults?: SipResult[];
-  hiddenSipResults: SipResult[];
 
   constructor(
     private store: Store,
@@ -60,17 +58,9 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
 
     this.ingameDataDataService.getDynamicRoundData$()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(d => {
-        if (!!!d) return;
-        this.dynamicRoundData = this.pollCardService.castDynamicRoundData(d);
-        this.results = this.pollCardService.getResults(this.dynamicRoundData);
-
-        if (this.gameSettings?.drinkingGame) {
-          let sipResults = this.pollCardService.getNewSeperatedSipResults(this.card, this.dynamicRoundData);
-          this.defaultVisibleSipResults = sipResults.splice(0, this.sipResultColumnCount);
-          this.hiddenSipResults = sipResults;
-        };
-        
+      .subscribe(dynamicRoundData => {
+        if (!!!dynamicRoundData) return;
+        this.results = this.pollCardService.getResults(dynamicRoundData);
         this.changeDetectorRef.detectChanges();
       });
   }

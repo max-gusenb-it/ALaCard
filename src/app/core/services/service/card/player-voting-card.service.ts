@@ -131,8 +131,9 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
         return text;
     }
 
-    override getSperatedSipResults(card: Card, dynamicRoundData: DynamicRoundData): [SipResult[], SipResult?] {
-        let sipResults: SipResult[] = this.calculateRoundSipResults(card, dynamicRoundData);
+    override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        let sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
+        
         // Pay To Disply Sip Calculation
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         if (!!dynamicPlayerVotingRoundData.payToDisplayPlayerId) {
@@ -150,8 +151,15 @@ export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, P
                 ]
             }
         }
+
         const userSR = this.getUserSipResult(sipResults);
-        return [sipResults.filter(s => s.playerId !== userSR?.playerId), userSR];
+        if (!!userSR) {
+            sipResults = [
+                userSR,
+                ...sipResults.filter(s => s.playerId !== userSR?.playerId)
+            ]
+        }
+        return sipResults;
     }
     
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

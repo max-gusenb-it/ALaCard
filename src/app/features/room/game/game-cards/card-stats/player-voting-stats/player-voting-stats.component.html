@@ -29,7 +29,6 @@
             *ngIf="gameSettings?.drinkingGame"
             [selectionList]="resultSelectionList"
             [card]="card"
-            [dynamicRoundData]="dynamicRoundData"
         ></it-sip-results>
     </it-selection-list>
     <div class="flex flex-row gap-4" *ngIf="isUserRoomAdmin() || displayPayToDisplay()">

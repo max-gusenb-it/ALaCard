@@ -1,9 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, HostListener, Input, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, QueryList, ViewChild } from '@angular/core';
 import { ItSelectionListComponent } from '../it-selection-list/it-selection-list.component';
 import { ItSelectableComponent } from '../it-selectable/it-selectable.component';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Card, DynamicRoundData, SipResult } from 'src/app/core/models/interfaces';
 import { CardService, GameCardService } from 'src/app/core/services/service/card/card.service';
+import { takeUntil } from 'rxjs';
+import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
 
 @Component({
   selector: 'it-sip-results',
@@ -15,21 +17,30 @@ import { CardService, GameCardService } from 'src/app/core/services/service/card
     }
   ]
 })
-export class ItSipResultsComponent implements AfterViewInit {
+export class ItSipResultsComponent extends AngularLifecycle implements AfterViewInit {
   
   // Create template for provider & viewChild if ever needed again
   @ViewChild(ItSelectableComponent) selectable: QueryList<ItSelectableComponent> = null as any;
 
   @Input() selectionList: ItSelectionListComponent;
   @Input() card: Card;
-  @Input() dynamicRoundData: DynamicRoundData;
 
+  dynamicRoundData: DynamicRoundData;
   gameCardService: GameCardService;
-  isInWidthRange?: boolean = undefined;
 
-  sipResults: SipResult[];
-  defaultVisibleSipResults: SipResult[];
-  hiddenSipResults: SipResult[];
+  sipResults: SipResult[] = [];
+
+  get defaultVisibleSipResults() {
+    return this.sipResults.slice(0, this.sipResultColumnCount);
+  }
+
+  get hiddenSipResults() {
+    if (this.sipResults.length <= this.sipResultColumnCount) {
+      return [];
+    } else {
+      return this.sipResults.slice(this.sipResultColumnCount + 1, this.sipResults.length - 1);
+    }
+  }
 
   get sipResultColumnCount() {
     if (window.innerWidth >= 380)
@@ -40,25 +51,22 @@ export class ItSipResultsComponent implements AfterViewInit {
 
   constructor(
     private cardService: CardService,
-    private breakpointObserver: BreakpointObserver,
+    private ingameDataDataService: IngameDataDataService,
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) {
+    super();
+  }
 
   ngAfterViewInit(): void {
     this.gameCardService = this.cardService.getCardService(this.card.type);
-    this.sipResults = this.gameCardService.getNewSeperatedSipResults(this.card, this.dynamicRoundData);
-
-    this.breakpointObserver.observe("(max-width: 380px)")
-      .subscribe((result: BreakpointState) => {
-        if (!!!this.isInWidthRange || this.isInWidthRange != result.matches) {
-          let sipResultsCopy = this.sipResults.slice();
-          this.defaultVisibleSipResults = sipResultsCopy.splice(0, this.sipResultColumnCount);
-          this.hiddenSipResults = sipResultsCopy;
-          this.changeDetectorRef.detectChanges();
-
-          this.isInWidthRange = result.matches;
-        }
-    });
+    this.ingameDataDataService.getDynamicRoundData$()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(dynamicRoundData => {
+        if (!dynamicRoundData) return;
+        this.dynamicRoundData = dynamicRoundData;
+        this.sipResults = this.gameCardService.getSipResults(this.card, this.dynamicRoundData);
+        this.changeDetectorRef.detectChanges();
+      });
   }
   
   getPlayerForSipResult(result: SipResult) {
