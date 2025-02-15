@@ -63,7 +63,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
     }
 
     hasFollowUpCard(card: Card, cardState: string) {
-        return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardIndex);
+        return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID);
     }
 
     hasDefaultFollowUpCard(card: Card) {
@@ -71,7 +71,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
     }
 
     getNextCardState() : string{
-        throw Error();
+        return CardStates.card_initial;
     }
 
     createDynamicRoundData(roundId: number, responses: Response[]): D {

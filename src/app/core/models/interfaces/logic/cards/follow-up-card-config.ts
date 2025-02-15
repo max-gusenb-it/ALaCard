@@ -1,4 +1,4 @@
 export interface FollowUpCardConfig {
-    followUpCardIndex?: number;
+    followUpCardID?: number;
     roundDelay?: number;
 }

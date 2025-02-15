@@ -93,8 +93,8 @@ export class GameControlService {
         if (cardService.hasFollowUpCard(newCard!, newRound.cardState)) {
                 staticRoundData.followUpCardSchedules = [
                 {
-                    cardIndex: Utils.isNumberDefined(newCard.followUpCardConfig?.followUpCardIndex) ? 
-                        newCard.followUpCardConfig!.followUpCardIndex! : 
+                    cardIndex: Utils.isNumberDefined(newCard.followUpCardConfig?.followUpCardID) ? 
+                        deck.cards.findIndex(c => c.followUpCardID === newCard.followUpCardConfig!.followUpCardID!) : 
                         newRound.cardIndex,
                     scheduledRoundId: newRound.id + (newCard.followUpCardConfig?.roundDelay ?? 1),
                     sourceCardPlayerIds: newRound.playerIds ?? [],
@@ -109,8 +109,8 @@ export class GameControlService {
     
     private getNewCardIndex(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) {
         const childCardIndexes = deck.cards
-            .filter(c => Utils.isNumberDefined(c.followUpCardConfig?.followUpCardIndex))
-            .map(c => c.followUpCardConfig!.followUpCardIndex!);
+            .filter(c => Utils.isNumberDefined(c.followUpCardID))
+            .map(c => deck.cards.findIndex(card => card === c));
 
         let availableCardIndexes = Array.from(Array(deck.cards.length).keys())
             .filter(i => !staticRoundData.playedCardIndexes.includes(i))

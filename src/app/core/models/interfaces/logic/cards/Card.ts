@@ -7,4 +7,6 @@ export interface Card {
     type: CardType;
     settings?: CardSettings;
     followUpCardConfig?: FollowUpCardConfig;
+    /** Special ID to track follow up Cards */
+    followUpCardID?: number;
 }
