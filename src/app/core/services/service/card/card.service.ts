@@ -4,7 +4,6 @@ import { BaseCardService } from "./base-card.service";
 import { PlayerVotingCardService } from "./player-voting-card.service";
 import { Card, DynamicRoundData, PlayerVotingCard, PollCard, Response, Result, ResultConfig } from "src/app/core/models/interfaces";
 import { TopicVotingCardService } from "./topic-voting-card.service";
-import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
 
 export type GameCardService = BaseCardService<Card, Response, DynamicRoundData, Result, ResultConfig> | PlayerVotingCardService | TopicVotingCardService;
 export type GameCard = Card | PlayerVotingCard | PollCard;
@@ -16,8 +15,7 @@ export class CardService {
     constructor(
         private baseCardService: BaseCardService<Card, Response, DynamicRoundData, Result, ResultConfig>,
         private plaverVotingCardService: PlayerVotingCardService,
-        private topicVotingCardService: TopicVotingCardService,
-        private staticRoundDataDataServic: StaticRoundDataDataService
+        private topicVotingCardService: TopicVotingCardService
     ) { }
 
     getCardService(cardType?: CardType) : GameCardService {
@@ -30,19 +28,6 @@ export class CardService {
             }
             default: {
                 return this.baseCardService;
-            }
-        }
-    }
-
-    getActiveCard(parentCard: Card) {
-        const cardService = this.getCardService(parentCard.type);
-        if (!cardService.hasFollowUpCard(parentCard) || this.staticRoundDataDataServic.followUpIndex === 0) {
-            return parentCard;
-        } else {
-            if (cardService.hasDefaultFollowUpCard(parentCard) && this.staticRoundDataDataServic.followUpIndex === 1) {
-                return parentCard
-            } else {
-                return parentCard.followUpCard!.card;
             }
         }
     }

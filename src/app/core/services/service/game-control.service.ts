@@ -5,10 +5,11 @@ import { StaticRoundDataDataService } from "../data/static-round-data.data.servi
 import { ResponseDataDataService } from "../data/response-data.data.service";
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
-import { CardService } from "./card/card.service";
-import { Deck, GameSettings, Player, Round, StaticRoundData } from "../../models/interfaces";
+import { CardService, GameCardService } from "./card/card.service";
+import { Card, Deck, GameSettings, Player, Round, StaticRoundData } from "../../models/interfaces";
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
 import { Utils } from "../../utils/utils";
+import { CardStates } from '../../models/interfaces/logic/cards/card-states';
 
 @Injectable({
     providedIn: 'root'
@@ -45,46 +46,59 @@ export class GameControlService {
     }
 
     createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) : Round {
+        const newRoundIndex = staticRoundData.playedCardIndexes.length;
+
+        let cardService!: GameCardService;
+        let newRound!: Round;
+        let newCard!: Card;
+        
         if (staticRoundData.followUpCardSchedules.length > 0 && Utils.isNumberDefined(staticRoundData.round?.id)) {
-            const newRoundIndex = staticRoundData.playedCardIndexes.length;
             const followUpCardSchedule = staticRoundData.followUpCardSchedules.find(f => f.scheduledRoundId <= newRoundIndex);
             if (!!followUpCardSchedule) {
                 staticRoundData.followUpCardSchedules = staticRoundData.followUpCardSchedules.filter(fs => {
-                    return fs.scheduledRoundId !== followUpCardSchedule.scheduledRoundId || fs.sourceCardIndex !== followUpCardSchedule.sourceCardIndex
+                    return (
+                        fs.scheduledRoundId !== followUpCardSchedule.scheduledRoundId || 
+                        fs.cardIndex !== followUpCardSchedule.cardIndex
+                    );
                 });
-                return {
-                    cardIndex: followUpCardSchedule.sourceCardIndex,
+                newCard = deck.cards[followUpCardSchedule.cardIndex];
+                cardService = this.cardService.getCardService(newCard.type);
+                newRound = {
+                    cardIndex: followUpCardSchedule.cardIndex,
                     id: newRoundIndex,
-                    followUpCard: true,
-                    playerIds: followUpCardSchedule.sourceCardPlayerIds ?? [],
-                    followUpCardIndex: 1
+                    playerIds: followUpCardSchedule.sourceCardPlayerIds,
+                    cardState: followUpCardSchedule.cardState
                 };
             }
         }
 
-        const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);        
-        
-        const card = deck.cards[newCardIndex];
-        const cardService = this.cardService.getCardService(card.type);
-        
-        const newRound = cardService.createGameRound(
-            {
-                id: staticRoundData.playedCardIndexes.length,
-                cardIndex: newCardIndex,
-                followUpCard: false,
-                followUpCardIndex: 0
-            },
-            card,
-            players,
-            gameSettings
-        );
-
-        if (cardService.hasFollowUpCard(card)) {
-            staticRoundData.followUpCardSchedules = [
+        if (!newRound) {
+            const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);        
+            
+            newCard = deck.cards[newCardIndex];
+            cardService = this.cardService.getCardService(newCard.type);
+            
+            newRound = cardService.createGameRound(
                 {
-                    sourceCardIndex: newCardIndex,
-                    scheduledRoundId: newRound.id + (card.followUpCard?.roundDelay ?? 1),
-                    sourceCardPlayerIds: newRound.playerIds ?? []
+                    id: newRoundIndex,
+                    cardIndex: newCardIndex,
+                    cardState: CardStates.card_initial
+                },
+                newCard,
+                players,
+                gameSettings
+            );
+        }
+        
+        if (cardService.hasFollowUpCard(newCard!, newRound.cardState)) {
+                staticRoundData.followUpCardSchedules = [
+                {
+                    cardIndex: Utils.isNumberDefined(newCard.followUpCardConfig?.followUpCardIndex) ? 
+                        newCard.followUpCardConfig!.followUpCardIndex! : 
+                        newRound.cardIndex,
+                    scheduledRoundId: newRound.id + (newCard.followUpCardConfig?.roundDelay ?? 1),
+                    sourceCardPlayerIds: newRound.playerIds ?? [],
+                    cardState: cardService.getNextCardState()
                 },
                 ...staticRoundData.followUpCardSchedules
             ]
@@ -94,8 +108,13 @@ export class GameControlService {
     }
     
     private getNewCardIndex(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) {
+        const childCardIndexes = deck.cards
+            .filter(c => Utils.isNumberDefined(c.followUpCardConfig?.followUpCardIndex))
+            .map(c => c.followUpCardConfig!.followUpCardIndex!);
+
         let availableCardIndexes = Array.from(Array(deck.cards.length).keys())
-            .filter(i => !staticRoundData.playedCardIndexes.includes(i));
+            .filter(i => !staticRoundData.playedCardIndexes.includes(i))
+            .filter(i => !childCardIndexes.includes(i));
 
         availableCardIndexes = StaticRoundDataUtils.getPlayableCards(availableCardIndexes, deck, players.length, gameSettings);
 

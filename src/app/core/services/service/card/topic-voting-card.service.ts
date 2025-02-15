@@ -12,6 +12,7 @@ import { ResponseDataDataService } from "../../data/response-data.data.service";
 import { IngameDataDataService } from "../../data/ingame-data.data.service";
 import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
 import { MarkdownUtils } from "src/app/core/utils/markdown.utils";
+import { PollCardStates } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-card-states";
 
 @Injectable({
     providedIn: 'root'
@@ -77,7 +78,10 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         if (gameSettings.drinkingGame) {
             text += "<br><br>\n  \n";
             let sipText = "";
-            if (this.hasFollowUpCard(card) && this.staticRoundDataDataService.followUpIndex === 0) {
+            if (
+                this.hasDefaultFollowUpCard(card) && 
+                this.staticRoundDataDataService.cardState !== PollCardStates.pollCard_offlineSpecifcSipSubject
+            ) {
                 sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
             } else {
                 sipText = this.getOfflineSipText(card);

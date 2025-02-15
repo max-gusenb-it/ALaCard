@@ -37,7 +37,7 @@ export class CardContainerComponent extends AngularLifecycle{
 
   get card() : Card | null {
     if (this.staticRoundData?.round?.cardIndex === undefined) return null;
-    return this.cardService.getActiveCard(this.deck.cards[this.staticRoundData.round.cardIndex]);
+    return this.deck.cards[this.staticRoundData.round.cardIndex];
   }
 
   get specifiedCardService() {

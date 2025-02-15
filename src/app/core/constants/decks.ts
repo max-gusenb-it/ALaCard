@@ -5,6 +5,8 @@ import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-sett
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
 
+// ToDo: add index to cards in deck
+
 // Test Decks
 export const developmentDeck: Deck = {
     icon: "💻",
@@ -33,16 +35,17 @@ export const developmentDeck: Deck = {
         {
             text: "%p0 du bist jetzt Daumenmeister, nutze deinen macht!",
             type: CardType.FreeText,
-            followUpCard: {
-                card: {
-                    text: "%p0 ich hoffe du hast deine Macht als Daumenmeister ausgenutzt :*",
-                    type: CardType.FreeText
-                },
+            followUpCardConfig: {
+                followUpCardIndex: 2,
                 roundDelay: 2
             },
             settings: {
                 order: 0
             }
+        } as FreeTextCard,
+        {
+            text: "%p0 ich hoffe du hast deine Macht als Daumenmeister genutzt!",
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "What do you prefer to drink?",

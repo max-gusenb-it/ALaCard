@@ -1,5 +1,5 @@
 import { FirestoreBase } from "../../firestore-base";
-import { FollowUpCardSchedule } from "./FollowUpCardSchedule";
+import { FollowUpCardSchedule } from "./follow-up-card-schedule";
 import { Round } from "./round/round";
 
 /**

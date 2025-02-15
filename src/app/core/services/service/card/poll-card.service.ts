@@ -9,6 +9,8 @@ import { RoomState } from "src/app/core/state";
 import { ResponseDataDataService } from "../../data/response-data.data.service";
 import { IngameDataDataService } from "../../data/ingame-data.data.service";
 import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
+import { CardStates } from "src/app/core/models/interfaces/logic/cards/card-states";
+import { PollCardStates } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-card-states";
 
 @Injectable({
     providedIn: 'root'
@@ -85,12 +87,16 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         return results;
     }
 
-    override hasFollowUpCard(card: Card): boolean {
-        return this.hasDefaultFollowUpCard(card);
-    }
-
-    override isDefaultFollowUpRound(card: Card, followUpCardIndex: number): boolean {
-        return this.hasDefaultFollowUpCard(card) && followUpCardIndex === 1;
+    override hasFollowUpCard(card: Card, cardState: string): boolean {
+        switch(cardState) {
+            case(CardStates.card_initial): {
+                return this.hasDefaultFollowUpCard(card) || super.hasFollowUpCard(card, cardState);
+            }
+            case(PollCardStates.pollCard_offlineSpecifcSipSubject): {
+                return super.hasFollowUpCard(card, cardState);
+            }
+            default: return false;
+        }
     }
 
     override hasDefaultFollowUpCard(card: Card) {
@@ -98,6 +104,10 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
         const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
         return gameSettings.drinkingGame && roomSettings.singleDeviceMode && pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined;
+    }
+
+    override getNextCardState(): string {
+        return PollCardStates.pollCard_offlineSpecifcSipSubject;
     }
 
     override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

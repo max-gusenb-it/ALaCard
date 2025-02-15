@@ -10,6 +10,7 @@ import { ResponseDataDataService } from "../../data/response-data.data.service";
 import { IngameDataDataService } from "../../data/ingame-data.data.service";
 import { InformationState } from "src/app/core/state/information";
 import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
+import { CardStates } from "src/app/core/models/interfaces/logic/cards/card-states";
 
 @Injectable({
     providedIn: 'root'
@@ -61,16 +62,16 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
         return baseRound;
     }
 
-    hasFollowUpCard(card: Card) {
-        return !!card.followUpCard;
+    hasFollowUpCard(card: Card, cardState: string) {
+        return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardIndex);
     }
 
     hasDefaultFollowUpCard(card: Card) {
         return false;
     }
 
-    isDefaultFollowUpRound(card: Card, followUpCardIndex: number) {
-        return false;
+    getNextCardState() : string{
+        throw Error();
     }
 
     createDynamicRoundData(roundId: number, responses: Response[]): D {

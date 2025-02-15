@@ -1,10 +1,10 @@
 import { CardType } from "../../../enums";
 import { CardSettings } from "./card-settings";
-import { FollowUpCard } from "./FollowUpCard";
+import { FollowUpCardConfig } from "./follow-up-card-config";
 
 export interface Card {
     text: string;
     type: CardType;
     settings?: CardSettings;
-    followUpCard?: FollowUpCard;
+    followUpCardConfig?: FollowUpCardConfig;
 }

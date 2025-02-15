@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, filter, Observable, takeUntil } from "rxjs";
-import { Player, StaticRoundData } from "../../models/interfaces";
+import { StaticRoundData } from "../../models/interfaces";
 import { StaticRoundDataSourceService } from "../source/static-round-data.source.service";
 import { RoomPlayerLoadBaseDataService } from "./room-player-load-base.data.service";
 import { Store } from "@ngxs/store";
-import { RoomState } from "../../state";
+import { CardStates } from "../../models/interfaces/logic/cards/card-states";
 
 @Injectable({
     providedIn: 'root'
@@ -12,9 +12,8 @@ import { RoomState } from "../../state";
 export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
     staticRoundData$: BehaviorSubject<StaticRoundData | null> = new BehaviorSubject(null as any);
 
-    get followUpIndex() : number {
-        const staticRoundData = this.getStaticRoundData();
-        return staticRoundData?.round?.followUpCardIndex ?? 0;
+    get cardState() : string {
+        return this.staticRoundData$.value?.round?.cardState ?? CardStates.card_initial;
     }
 
     constructor(
@@ -55,9 +54,5 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
             .pipe(
                 filter((s): s is StaticRoundData => s !== null)
             );
-    }
-
-    isFollowUpRound() {
-        return this.followUpIndex > 0;
     }
 }

@@ -1,5 +1,6 @@
 export interface FollowUpCardSchedule {
     scheduledRoundId: number;
-    sourceCardIndex: number;
+    cardState: string;
+    cardIndex: number;
     sourceCardPlayerIds?: string[];
 }
