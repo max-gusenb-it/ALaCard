@@ -140,9 +140,7 @@ export class GameControlService {
 
     checkForAutoContinueRound() {
         const roundId = this.staticRoundDataDataService.getStaticRoundData()?.round?.id;
-        // Fix bug -> auto continue does not work anymore
-        const roundProcessed = this.ingameDataDataService.getDynamicRoundData()?.processed;
-        if ((!!!roundId && roundId !== 0) || roundProcessed) return;
+        if ((!!!roundId && roundId !== 0) || this.ingameDataDataService.roundProcessed(roundId)) return;
         const activePlayerIds = this.ingameDataDataService.getActivePlayerIds();
         const responses = this.responseDataDataService.getAdminResponsesForRound(roundId);
         const responseCount = responses

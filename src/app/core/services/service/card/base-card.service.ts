@@ -90,7 +90,7 @@ export class BaseCardService<C extends Card, R extends Response, D extends Dynam
             roomSettings?.singleDeviceMode ||
             !this._responseDataDataService.userResponded(staticRoundData!.round!.id) &&
             (!!!roundInformation || roundInformation.roundId !== staticRoundData!.round!.id || !roundInformation.cardAnimationSkipped) &&
-            (!!!dynamicRoundData || dynamicRoundData.roundId !== staticRoundData!.round!.id || !dynamicRoundData.processed)
+            (!!!dynamicRoundData || dynamicRoundData.roundId !== staticRoundData!.round!.id || !this._ingameDataDataService.roundProcessed(staticRoundData!.round!.id))
         ) {
             return RoundState.card;
         }
