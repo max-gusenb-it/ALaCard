@@ -2359,6 +2359,13 @@ export const testingDeck: Deck = {
             }
         } as FreeTextCard,
         {
+            text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 2
+            }
+        } as PlayerVotingCard,
+        {
             followUpCardID: 0,
             text: "Hey, do you remember me? 🍌",
             type: CardType.TopicVotingCard,
@@ -2423,10 +2430,6 @@ export const testingDeck: Deck = {
                 drinkingCard: true
             }
         } as FreeTextCard,
-        {
-            text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
         {
             text: "If you didn't sing happy birthday for %sp, please continue to do so :)",
             type: CardType.FreeText
