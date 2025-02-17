@@ -1,5 +1,5 @@
 import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard } from "../models/interfaces";
+import { Deck, FreeTextCard, PlayerVotingCard, PollCardSettings } from "../models/interfaces";
 import { TopicVotingCard } from "../models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
@@ -266,6 +266,10 @@ export const leggitPartyDeck: Deck = {
     icon: "🎊",
     name: "aLaCard",
     description: "Very funny Party Game",
+    groundRules: [
+        "- **Reminder**  \n- The game is currently under development so the features are limited",
+        "Thanks for testing out my game btw. :)"
+    ],
     cards: [
         {
             text: "%p0 give four sips to the player you know best",
@@ -1377,10 +1381,6 @@ export const leggitPartyDeck: Deck = {
             }
         } as TopicVotingCard
     ],
-    groundRules: [
-        "- **Reminder**  \n- The game is currently under development so the features are limited",
-        "Thanks for testing out my game btw. :)"
-    ],
     defaultGameSettings: [
         {
             settingName: speficiPlayerIdSettingName,
@@ -2329,64 +2329,98 @@ export const askhole: Deck = {
     }
 }
 export const testingDeck: Deck = {
-    icon: "🔮",
+    icon: "🍰",
     name: "Testing Deck",
-    description: "Test the new topic voting card which is currently under development.",
+    description: "Test the new specific player functionality & follow up card in a birthday themed deck",
     groundRules: [
-        "Keep in mind:  \nThe card is currently **under development** which means, the experience could be buggy"
+        "**Specific Player**  \nChoose a player of your party to fill a specific spot in the cards",
+        "**Follow Up Cards**  \nCards that consist of multiple cards which can accour with a delay",
     ],
     cards: [
         {
-            text: "Where would you rather travel?",
+            text: "First of all, happy birthday to you %sp!",
+            type: CardType.FreeText,
+            settings: {
+                order: 0
+            }
+        } as FreeTextCard,
+        {
+            text: "Hey, remember me 🙉",
+            type: CardType.FreeText,
+            settings: {
+                order: 1,
+                drinkingCard: true
+            },
+            followUpCardConfig: {
+                followUpCardID: 0,
+                roundDelay: 4
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 0,
+            text: "Hey, do you remember me? 🍌",
             type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "200 years into the future" 
+                    title: "🙊"
                 },
                 {
-                    title: "200 years into the past"
+                    title: "🙉"
+                },
+                {
+                    title: "🙈"
+                }
+            ],
+            settings: {
+                sipConfig: {
+                    specificSipSubjectId: 1,
+                    distribute: true
+                }
+            } as PollCardSettings
+        } as TopicVotingCard,
+        {
+            text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",
+            type: CardType.FreeText,
+            settings: {
+                order: 2,
+            },
+            followUpCardConfig: {
+                followUpCardID: 1,
+                roundDelay: 4
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 1,
+            text: "%sp sadly your reign as Thumb Master must end now",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you think %sp is happy with his/her presents?",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "Yes" 
+                },
+                {
+                    title: "No"
                 }
             ]
         } as TopicVotingCard,
         {
-            text: "Would you rather be able to fly or teleport?",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "Fly" 
-                },
-                {
-                    title: "Teleport"
-                }
-            ]
-        } as TopicVotingCard,
+            text: "Raise your glasses to %sp and drink 2 sips!",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
         {
-            text: "What would you prefer to experience?",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "Your parents catch you having sex" 
-                },
-                {
-                    title: "You catch your parents having sex"
-                }
-            ]
-        } as TopicVotingCard,
+            text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
+            type: CardType.PlayerVoting
+        } as PlayerVotingCard,
         {
-            text: "What is your favorite type of M&M's?",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "🔵 Blue" 
-                },
-                {
-                    title: "🟡 Yellow"
-                },
-                {
-                    title: "🟤 Brown"
-                }
-            ]
-        } as TopicVotingCard
+            text: "If you didn't sing happy birthday for %sp, please continue to do so :)",
+            type: CardType.FreeText
+        } as FreeTextCard
     ],
     requiredPlayers: {
         playerCount: 1,
@@ -2395,10 +2429,10 @@ export const testingDeck: Deck = {
     defaultGameSettings: [
         {
             settingName: speficiPlayerIdSettingName,
-            valueSource: DefaultGameSettingValueSource.default,
+            valueSource: DefaultGameSettingValueSource.user,
             requirement: DefaultGameSettingRequirement.required
         }
     ]
 }
 
-export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole];
+export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole, testingDeck];
