@@ -14,7 +14,7 @@ import { InformationActions, InformationState } from "projects/app/src/app/core/
 import { BasePollCardService } from "projects/app/src/app/core/types/card";
 import { CardFormUtils } from "projects/app/src/app/core/utils/card-form.utils";
 import { Utils } from "projects/app/src/app/core/utils/utils";
-import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from '@shared';
 
 @Component({
     selector: 'poll-form',

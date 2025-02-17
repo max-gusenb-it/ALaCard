@@ -12,7 +12,7 @@ import { RoomService } from 'projects/app/src/app/core/services/service/room.ser
 import { TutorialService } from 'projects/app/src/app/core/services/service/tutorial.service';
 import { RoomState } from 'projects/app/src/app/core/state';
 import { InformationActions, InformationState } from 'projects/app/src/app/core/state/information';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 const mobileCardSwipeTutorialLabelId = "features.room.game.card.game-cards.card-container.mobile-swipe-tutorial";
 const desktopCardSwipeTutorialLabelId = "features.room.game.card.game-cards.card-container.desktop-swipe-tutorial";

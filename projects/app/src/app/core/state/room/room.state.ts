@@ -7,7 +7,7 @@ import { LoadingHelperService } from "../../services/helper/loading.helper.servi
 import { AuthenticationActions, AuthenticationState } from "../authentication";
 import { Subscription, firstValueFrom, takeUntil } from "rxjs";
 import { LoadingActions } from "../loading";
-import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from '@shared';
 import { NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
 import { Deck, GameSettings, Player, Room } from "../../models/interfaces";

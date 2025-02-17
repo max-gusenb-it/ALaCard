@@ -11,7 +11,7 @@ import { RoomService } from 'projects/app/src/app/core/services/service/room.ser
 import { ResponseDataSourceService } from 'projects/app/src/app/core/services/source/response-data.source.service';
 import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
 import { InformationActions, InformationState } from 'projects/app/src/app/core/state/information';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'player-voting-form',

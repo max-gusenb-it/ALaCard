@@ -1,6 +1,6 @@
 import { Store } from "@ngxs/store";
 import { Observable, Subject, Subscription, take, takeUntil } from "rxjs";
-import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from '@shared';
 import { RoomState } from "../../state";
 import { Room } from "../../models/interfaces";
 import { GameState } from "../../models/enums";

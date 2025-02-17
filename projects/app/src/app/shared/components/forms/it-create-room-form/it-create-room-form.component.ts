@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, Output } from "@angular/
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { takeUntil } from "rxjs";
 import { CreateRoomFormData } from "projects/app/src/app/core/models/interfaces";
-import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from '@shared';
 
 @Component({
     selector: 'it-create-room-form',

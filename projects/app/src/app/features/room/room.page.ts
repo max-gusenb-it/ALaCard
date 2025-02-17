@@ -6,7 +6,7 @@ import { firstValueFrom, Observable, takeUntil } from 'rxjs';
 import { OptionBottomSheetData, Player, Room, StaticRoundData } from 'projects/app/src/app/core/models/interfaces';
 import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
 import { AuthenticationState, LoadingState, RoomActions, RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 import { ItOptionBottomSheet } from 'projects/app/src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';

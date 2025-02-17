@@ -1,10 +1,10 @@
 import { BehaviorSubject, filter, map, Observable, Subscription, takeUntil } from "rxjs";
 import { ResponseData, Room } from "../../models/interfaces";
 import { ResponseDataSourceService } from "../source/response-data.source.service";
-import { Select, Store } from "@ngxs/store";
+import { Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../../state";
 import { Injectable } from "@angular/core";
-import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from '@shared';
 import { GameState } from "../../models/enums";
 import { InformationState } from "../../state/information";
 import { RoomService } from "../service/room.service";

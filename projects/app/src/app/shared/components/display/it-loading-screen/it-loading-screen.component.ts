@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { User } from 'projects/app/src/app/core/models/interfaces';
 import { AuthenticationState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'it-loading-screen',

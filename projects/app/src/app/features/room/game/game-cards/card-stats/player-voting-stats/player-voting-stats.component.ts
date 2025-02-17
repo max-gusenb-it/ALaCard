@@ -12,7 +12,7 @@ import { RoomService } from 'projects/app/src/app/core/services/service/room.ser
 import { IngameDataSourceService } from 'projects/app/src/app/core/services/source/ingame-data.source.service';
 import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
 import { Utils } from 'projects/app/src/app/core/utils/utils';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'player-voting-stats',

@@ -5,7 +5,7 @@ import { Deck, DynamicRoundData, GameSettings, StaticRoundData } from 'projects/
 import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
 import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 import { RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'card-stats',

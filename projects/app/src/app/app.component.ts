@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { LoadingState } from './core/state';
 import { Observable, interval, takeUntil } from 'rxjs';
-import { AngularLifecycle } from './shared/helper/angular-lifecycle.helper';
 import { PopupService } from './core/services/service/popup.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IItError } from './core/models/interfaces';
 import { ErrorMonitorState } from './core/state/error-monitor';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'app-root',

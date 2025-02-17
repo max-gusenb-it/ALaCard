@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { supportedLanguages } from 'projects/app/src/app/core/constants/languages';
 import { UserSourceService } from 'projects/app/src/app/core/services/source/user.source.service';
 import { supportedColors } from 'projects/app/src/app/core/constants/color';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 import { ItSignInModal } from 'projects/app/src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
 import { ItAddAccountModal } from 'projects/app/src/app/shared/components/forms/it-add-account-modal/it-add-account-modal.component';
 import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';

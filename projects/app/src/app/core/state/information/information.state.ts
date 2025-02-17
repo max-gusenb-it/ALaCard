@@ -8,7 +8,7 @@ import { InformationStateErrors } from "../../constants/errorCodes";
 import { UserSourceService } from "../../services/source/user.source.service";
 import { AuthenticationState } from "../authentication";
 import { filter, takeUntil } from "rxjs";
-import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from '@shared';
 
 export const INFORMATION_STATE_VERSION = 1;
 export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('information');

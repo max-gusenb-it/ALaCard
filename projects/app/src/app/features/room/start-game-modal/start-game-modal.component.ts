@@ -11,7 +11,7 @@ import { RoomActions, RoomState } from 'projects/app/src/app/core/state';
 import { DeckState } from 'projects/app/src/app/core/state/deck';
 import { GameSettingsUtils } from 'projects/app/src/app/core/utils/game-settings.utils';
 import { StaticRoundDataUtils } from 'projects/app/src/app/core/utils/static-round-data.utils';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'app-start-game-modal',

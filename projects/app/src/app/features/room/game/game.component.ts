@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
 import { Room, StaticRoundData } from 'projects/app/src/app/core/models/interfaces';
 import { RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 
 @Component({

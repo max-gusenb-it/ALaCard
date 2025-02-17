@@ -7,7 +7,7 @@ import { CardType } from 'projects/app/src/app/core/models/enums';
 import { Card, Player } from 'projects/app/src/app/core/models/interfaces';
 import { CardService } from 'projects/app/src/app/core/services/service/card/card.service';
 import { RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'card',
