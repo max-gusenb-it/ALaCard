@@ -1,7 +1,7 @@
 import { Component, ElementRef, forwardRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ControlValueAccessorDirective } from '../../../directives/control-value-accessor.directive';
+import { ControlValueAccessorDirective } from '@shared';
 
 @Component({
   selector: 'it-checkbox-accord',

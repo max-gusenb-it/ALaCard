@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ControlValueAccessorDirective } from '../../../directives/control-value-accessor.directive';
+import { ControlValueAccessorDirective } from '@shared';
 import { Color } from 'projects/app/src/app/core/constants/color';
 
 @Component({

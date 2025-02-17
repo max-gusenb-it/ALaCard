@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, forwardRef } from '@angular/core';
-import { ControlValueAccessorDirective } from '../../../directives/control-value-accessor.directive';
+import { ControlValueAccessorDirective } from '@shared';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 type InputType = "text" | "number" | "email" | "password";
