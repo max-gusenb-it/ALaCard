@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { CreateRoomModal } from '../create-room-modal/create-room-modal.component';
-import { PopupService } from 'src/app/core/services/service/popup.service';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
 
 @Component({
   selector: 'no-room',

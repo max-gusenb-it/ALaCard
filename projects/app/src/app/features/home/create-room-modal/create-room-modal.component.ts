@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
-import { CreateRoomFormData } from 'src/app/core/models/interfaces';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { RoomActions } from 'src/app/core/state';
+import { CreateRoomFormData } from 'projects/app/src/app/core/models/interfaces';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { RoomActions } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'app-create-room-modal',

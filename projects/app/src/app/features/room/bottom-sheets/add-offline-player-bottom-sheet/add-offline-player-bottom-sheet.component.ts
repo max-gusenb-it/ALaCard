@@ -2,7 +2,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { RoomActions } from 'src/app/core/state';
+import { RoomActions } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'add-offline-player-sheet',

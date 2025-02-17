@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItSignInModal } from '../it-sign-in-modal/it-sign-in-modal.component';
 import { ItSignUpModal } from '../it-sign-up-modal/it-sign-up-modal.component';
-import { PopupService } from 'src/app/core/services/service/popup.service';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
 
 @Component({
   selector: 'it-authenticate-modal',

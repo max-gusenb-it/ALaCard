@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../../state";
-import { ItAuthenticateModal } from "src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
+import { ItAuthenticateModal } from "projects/app/src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
 import { RoomServiceErrors } from "../../constants/errorCodes";
 import { ItError } from "../../models/classes";
 import { PopupService } from "./popup.service";

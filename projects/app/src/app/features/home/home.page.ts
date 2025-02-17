@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/core/models/interfaces';
-import { AuthenticationState } from 'src/app/core/state/authentication/authentication.state';
+import { User } from 'projects/app/src/app/core/models/interfaces';
+import { AuthenticationState } from 'projects/app/src/app/core/state/authentication/authentication.state';
 
 @Component({
   selector: 'home',

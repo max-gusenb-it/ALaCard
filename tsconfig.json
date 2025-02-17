@@ -17,8 +17,9 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "paths": {
-      "shared": [
-        "./dist/shared"
+      "@shared": [
+        "dist/shared",
+        "projects/shared/src/public-api"
       ]
     },
     "importHelpers": true,

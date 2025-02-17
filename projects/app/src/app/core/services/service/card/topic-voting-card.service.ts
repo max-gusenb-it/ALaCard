@@ -1,18 +1,18 @@
 import { Injectable } from "@angular/core";
 import { PollCardService } from "./poll-card.service";
-import { Card, DynamicRoundData, GameSettings, Player, Result, SipResult, TopicVotingResultConfig } from "src/app/core/models/interfaces";
-import { PollResult } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
-import { defaultCardSips, pollCardSkipValue } from "src/app/core/constants/card";
+import { Card, DynamicRoundData, GameSettings, Player, Result, SipResult, TopicVotingResultConfig } from "projects/app/src/app/core/models/interfaces";
+import { PollResult } from "projects/app/src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
+import { defaultCardSips, pollCardSkipValue } from "projects/app/src/app/core/constants/card";
 import { TranslateService } from "@ngx-translate/core";
-import { TopicVotingCard } from "src/app/core/models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
-import { Utils } from "src/app/core/utils/utils";
-import { TopicVotingGroup } from "src/app/core/models/enums";
+import { TopicVotingCard } from "projects/app/src/app/core/models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
+import { Utils } from "projects/app/src/app/core/utils/utils";
+import { TopicVotingGroup } from "projects/app/src/app/core/models/enums";
 import { Store } from "@ngxs/store";
 import { ResponseDataDataService } from "../../data/response-data.data.service";
 import { IngameDataDataService } from "../../data/ingame-data.data.service";
 import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
-import { MarkdownUtils } from "src/app/core/utils/markdown.utils";
-import { PollCardStates } from "src/app/core/models/interfaces/logic/cards/poll-card/poll-card-states";
+import { MarkdownUtils } from "projects/app/src/app/core/utils/markdown.utils";
+import { PollCardStates } from "projects/app/src/app/core/models/interfaces/logic/cards/poll-card/poll-card-states";
 
 @Injectable({
     providedIn: 'root'

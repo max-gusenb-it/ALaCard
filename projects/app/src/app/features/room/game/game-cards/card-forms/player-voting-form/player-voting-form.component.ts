@@ -2,16 +2,16 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { playerVotingCardSkipValue } from 'src/app/core/constants/card';
-import { Player, PlayerVotingCard, PlayerVotingResponse, RoomSettings, Round } from 'src/app/core/models/interfaces';
-import { ResponseDataDataService } from 'src/app/core/services/data/response-data.data.service';
-import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
-import { GameControlService } from 'src/app/core/services/service/game-control.service';
-import { RoomService } from 'src/app/core/services/service/room.service';
-import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
-import { AuthenticationState, RoomState } from 'src/app/core/state';
-import { InformationActions, InformationState } from 'src/app/core/state/information';
-import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { playerVotingCardSkipValue } from 'projects/app/src/app/core/constants/card';
+import { Player, PlayerVotingCard, PlayerVotingResponse, RoomSettings, Round } from 'projects/app/src/app/core/models/interfaces';
+import { ResponseDataDataService } from 'projects/app/src/app/core/services/data/response-data.data.service';
+import { PlayerVotingCardService } from 'projects/app/src/app/core/services/service/card/player-voting-card.service';
+import { GameControlService } from 'projects/app/src/app/core/services/service/game-control.service';
+import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
+import { ResponseDataSourceService } from 'projects/app/src/app/core/services/source/response-data.source.service';
+import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
+import { InformationActions, InformationState } from 'projects/app/src/app/core/state/information';
+import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'player-voting-form',

@@ -4,13 +4,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Room } from 'src/app/core/models/interfaces';
-import { RoomSettings } from 'src/app/core/models/interfaces/logic/room/room-settings';
-import { RoomSourceService } from 'src/app/core/services/source/room.source.service';
-import { LoadingHelperService } from 'src/app/core/services/helper/loading.helper.service';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { AuthenticationState, RoomState } from 'src/app/core/state';
-import { RoomUtils } from 'src/app/core/utils/room.utils';
+import { Room } from 'projects/app/src/app/core/models/interfaces';
+import { RoomSettings } from 'projects/app/src/app/core/models/interfaces/logic/room/room-settings';
+import { RoomSourceService } from 'projects/app/src/app/core/services/source/room.source.service';
+import { LoadingHelperService } from 'projects/app/src/app/core/services/helper/loading.helper.service';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
+import { RoomUtils } from 'projects/app/src/app/core/utils/room.utils';
 
 @Component({
   selector: 'app-room-settings-bottom-sheet',

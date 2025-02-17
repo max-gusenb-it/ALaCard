@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
-import { Room, StaticRoundData } from 'src/app/core/models/interfaces';
-import { RoomState } from 'src/app/core/state';
-import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
-import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
+import { Room, StaticRoundData } from 'projects/app/src/app/core/models/interfaces';
+import { RoomState } from 'projects/app/src/app/core/state';
+import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
+import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 
 @Component({
   selector: 'game',

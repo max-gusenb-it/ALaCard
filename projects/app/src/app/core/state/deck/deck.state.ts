@@ -3,7 +3,7 @@ import { DeckStateModel } from "./deck.model";
 import { Injectable } from "@angular/core";
 import { Deck } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
-import { environment } from "src/environments/environment";
+import { environment } from "projects/app/src/environments/environment";
 import { demoPartyDecks, leggitPartyDecks } from "../../constants/decks";
 
 export const DECK_STATE_TOKEN = new StateToken<DeckStateModel>('deck');

@@ -1,11 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { CardType } from 'src/app/core/models/enums';
-import { Card, Player, Result, SipResult } from 'src/app/core/models/interfaces';
-import { CardService, GameCardService } from 'src/app/core/services/service/card/card.service';
-import { RoomState } from 'src/app/core/state';
-
+import { CardType } from 'projects/app/src/app/core/models/enums';
+import { Card, Player, Result, SipResult } from 'projects/app/src/app/core/models/interfaces';
+import { CardService, GameCardService } from 'projects/app/src/app/core/services/service/card/card.service';
+import { RoomState } from 'projects/app/src/app/core/state';
 enum ResultType {
   PlayerVotingResult,
   TopicVotingResult,

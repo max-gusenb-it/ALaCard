@@ -2,17 +2,17 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, takeUntil } from 'rxjs';
-import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'src/app/core/constants/card';
-import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Round, SipResult } from 'src/app/core/models/interfaces';
-import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
-import { PlayerVotingCardService } from 'src/app/core/services/service/card/player-voting-card.service';
-import { GameControlService } from 'src/app/core/services/service/game-control.service';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { RoomService } from 'src/app/core/services/service/room.service';
-import { IngameDataSourceService } from 'src/app/core/services/source/ingame-data.source.service';
-import { AuthenticationState, RoomState } from 'src/app/core/state';
-import { Utils } from 'src/app/core/utils/utils';
-import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'projects/app/src/app/core/constants/card';
+import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Round, SipResult } from 'projects/app/src/app/core/models/interfaces';
+import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
+import { PlayerVotingCardService } from 'projects/app/src/app/core/services/service/card/player-voting-card.service';
+import { GameControlService } from 'projects/app/src/app/core/services/service/game-control.service';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
+import { IngameDataSourceService } from 'projects/app/src/app/core/services/source/ingame-data.source.service';
+import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
+import { Utils } from 'projects/app/src/app/core/utils/utils';
+import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'player-voting-stats',

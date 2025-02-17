@@ -1,16 +1,16 @@
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
-import { DynamicPlayerVotingRoundData } from "src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult, PlayerVotingResultConfig, GameSettings } from "src/app/core/models/interfaces";
+import { DynamicPlayerVotingRoundData } from "projects/app/src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
+import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult, PlayerVotingResultConfig, GameSettings } from "projects/app/src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
-import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "src/app/core/constants/card";
+import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "projects/app/src/app/core/constants/card";
 import { Store } from "@ngxs/store";
-import { RoomState } from "src/app/core/state";
-import { Utils } from "src/app/core/utils/utils";
+import { RoomState } from "projects/app/src/app/core/state";
+import { Utils } from "projects/app/src/app/core/utils/utils";
 import { IngameDataDataService } from "../../data/ingame-data.data.service";
 import { ResponseDataDataService } from "../../data/response-data.data.service";
 import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
-import { MarkdownUtils } from "src/app/core/utils/markdown.utils";
+import { MarkdownUtils } from "projects/app/src/app/core/utils/markdown.utils";
 
 @Injectable({
     providedIn: 'root'

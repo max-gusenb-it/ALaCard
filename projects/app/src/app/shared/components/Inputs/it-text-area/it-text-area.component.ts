@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ControlValueAccessorDirective } from 'src/app/shared/directives/control-value-accessor.directive';
+import { ControlValueAccessorDirective } from '../../../directives/control-value-accessor.directive';
 
 @Component({
   selector: 'it-text-area',

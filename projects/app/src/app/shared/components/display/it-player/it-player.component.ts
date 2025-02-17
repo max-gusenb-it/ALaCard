@@ -1,9 +1,9 @@
 import { Component, ElementRef, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PlayerState } from 'src/app/core/models/enums';
-import { RoomService } from 'src/app/core/services/service/room.service';
-import { AuthenticationState } from 'src/app/core/state';
+import { PlayerState } from 'projects/app/src/app/core/models/enums';
+import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
+import { AuthenticationState } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'it-player',

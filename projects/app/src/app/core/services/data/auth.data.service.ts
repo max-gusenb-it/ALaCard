@@ -5,7 +5,7 @@ import { Store } from "@ngxs/store";
 import { AuthenticationActions, AuthenticationState } from "../../state";
 import { Subscription, takeUntil } from "rxjs";
 import { UserSourceService } from "../source/user.source.service";
-import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
 import { SettingsService } from "../service/settings.service";
 import { systemDefaultValue } from "../../constants/systemDefaultValue";
 

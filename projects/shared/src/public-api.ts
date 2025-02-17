@@ -1,0 +1,1 @@
+export { NewSharedModule } from "./lib/new-shared.module";

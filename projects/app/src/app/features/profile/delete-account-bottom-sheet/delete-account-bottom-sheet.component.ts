@@ -2,9 +2,9 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { interval, Observable, take } from 'rxjs';
-import { User } from 'src/app/core/models/interfaces';
-import { AuthenticationState } from 'src/app/core/state';
-import { environment } from 'src/environments/environment';
+import { User } from 'projects/app/src/app/core/models/interfaces';
+import { AuthenticationState } from 'projects/app/src/app/core/state';
+import { environment } from 'projects/app/src/environments/environment';
 
 const secondsUntilDeleteEnabled = environment.production ? 5 : 1;
 

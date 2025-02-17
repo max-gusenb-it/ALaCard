@@ -1,7 +1,7 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
 import { Share } from '@capacitor/share';
-import { ClipboardUtils } from 'src/app/core/utils/clipboard.utils';
+import { ClipboardUtils } from 'projects/app/src/app/core/utils/clipboard.utils';
 
 @Component({
   selector: 'share-bottom-sheet',

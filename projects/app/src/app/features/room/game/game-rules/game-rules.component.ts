@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { filter, firstValueFrom, take, takeUntil, timer } from 'rxjs';
-import { slideToggle } from 'src/app/core/animations/slideToggle';
-import { CardType } from 'src/app/core/models/enums';
-import { FreeTextCard } from 'src/app/core/models/interfaces/logic/cards/free-text-card/free-text-card';
-import { StaticRoundDataDataService } from 'src/app/core/services/data/static-round-data.data.service';
-import { TutorialService } from 'src/app/core/services/service/tutorial.service';
-import { ResponseDataSourceService } from 'src/app/core/services/source/response-data.source.service';
-import { AuthenticationState, RoomState } from 'src/app/core/state';
-import { InformationActions, InformationState } from 'src/app/core/state/information';
+import { filter, take, takeUntil, timer } from 'rxjs';
+import { slideToggle } from 'projects/app/src/app/core/animations/slideToggle';
+import { CardType } from 'projects/app/src/app/core/models/enums';
+import { FreeTextCard } from 'projects/app/src/app/core/models/interfaces/logic/cards/free-text-card/free-text-card';
+import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
+import { TutorialService } from 'projects/app/src/app/core/services/service/tutorial.service';
+import { ResponseDataSourceService } from 'projects/app/src/app/core/services/source/response-data.source.service';
+import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
+import { InformationActions, InformationState } from 'projects/app/src/app/core/state/information';
 
 const mobileRuleTutorialLabelId : string = "features.room.game.card.game-rules.mobile-tutorial";
 const desktopRuleTutorialLabelId : string = "features.room.game.card.game-rules.desktop-tutorial";

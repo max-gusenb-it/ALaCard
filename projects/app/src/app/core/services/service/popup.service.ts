@@ -2,9 +2,9 @@ import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { BasePortalOutlet } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { ItSnackbarComponent } from 'src/app/shared/components/display/it-snackbar/it-snackbar.component';
+import { ItSnackbarComponent } from 'projects/app/src/app/shared/components/display/it-snackbar/it-snackbar.component';
 import { SnackbarData } from '../../models/interfaces/components/display/it-snackbar/snackbar-data';
-import { ItOptionBottomSheet } from 'src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
+import { ItOptionBottomSheet } from 'projects/app/src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { OptionBottomSheetData } from '../../models/interfaces';
 import { ModalController, ModalOptions } from '@ionic/angular';
 

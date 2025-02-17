@@ -3,15 +3,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { speficiPlayerIdSettingName } from 'src/app/core/constants/game-settings';
-import { Deck, GameSettings, Player } from 'src/app/core/models/interfaces';
-import { IngameDataDataService } from 'src/app/core/services/data/ingame-data.data.service';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { RoomActions, RoomState } from 'src/app/core/state';
-import { DeckState } from 'src/app/core/state/deck';
-import { GameSettingsUtils } from 'src/app/core/utils/game-settings.utils';
-import { StaticRoundDataUtils } from 'src/app/core/utils/static-round-data.utils';
-import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { speficiPlayerIdSettingName } from 'projects/app/src/app/core/constants/game-settings';
+import { Deck, GameSettings, Player } from 'projects/app/src/app/core/models/interfaces';
+import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { RoomActions, RoomState } from 'projects/app/src/app/core/state';
+import { DeckState } from 'projects/app/src/app/core/state/deck';
+import { GameSettingsUtils } from 'projects/app/src/app/core/utils/game-settings.utils';
+import { StaticRoundDataUtils } from 'projects/app/src/app/core/utils/static-round-data.utils';
+import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'app-start-game-modal',

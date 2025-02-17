@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, Inject, Injector, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, Validators, NgControl, FormControlName, FormGroupDirective, FormControlDirective } from '@angular/forms';
+import { environment } from 'projects/app/src/environments/environment';
 import { Subject, takeUntil, startWith, distinctUntilChanged, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Directive({
   selector: '[appControlValueAccessor]'

@@ -13,7 +13,7 @@ import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingServ
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { environment } from 'src/environments/environment';
+import { environment } from 'projects/app/src/environments/environment';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -34,6 +34,7 @@ import { ErrorMonitorState } from './core/state/error-monitor';
 import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { INFORMATION_STATE_TOKEN, InformationState } from './core/state/information';
+import { NewSharedModule } from '@shared';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    NewSharedModule,
     SharedModule,
     HttpClientModule,
     NgxsModule.forRoot(

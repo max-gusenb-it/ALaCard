@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { AuthenticationActions } from 'src/app/core/state';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { AuthenticationActions } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'it-forgot-password-modal',

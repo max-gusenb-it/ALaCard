@@ -2,19 +2,19 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
-import { pollCardSkipValue } from "src/app/core/constants/card";
-import { Card, RoomSettings, Round, PollCard, PollResponse } from "src/app/core/models/interfaces";
-import { ResponseDataDataService } from "src/app/core/services/data/response-data.data.service";
-import { CardService } from "src/app/core/services/service/card/card.service";
-import { GameControlService } from "src/app/core/services/service/game-control.service";
-import { RoomService } from "src/app/core/services/service/room.service";
-import { ResponseDataSourceService } from "src/app/core/services/source/response-data.source.service";
-import { AuthenticationState, RoomState } from "src/app/core/state";
-import { InformationActions, InformationState } from "src/app/core/state/information";
-import { BasePollCardService } from "src/app/core/types/card";
-import { CardFormUtils } from "src/app/core/utils/card-form.utils";
-import { Utils } from "src/app/core/utils/utils";
-import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
+import { pollCardSkipValue } from "projects/app/src/app/core/constants/card";
+import { Card, RoomSettings, Round, PollCard, PollResponse } from "projects/app/src/app/core/models/interfaces";
+import { ResponseDataDataService } from "projects/app/src/app/core/services/data/response-data.data.service";
+import { CardService } from "projects/app/src/app/core/services/service/card/card.service";
+import { GameControlService } from "projects/app/src/app/core/services/service/game-control.service";
+import { RoomService } from "projects/app/src/app/core/services/service/room.service";
+import { ResponseDataSourceService } from "projects/app/src/app/core/services/source/response-data.source.service";
+import { AuthenticationState, RoomState } from "projects/app/src/app/core/state";
+import { InformationActions, InformationState } from "projects/app/src/app/core/state/information";
+import { BasePollCardService } from "projects/app/src/app/core/types/card";
+import { CardFormUtils } from "projects/app/src/app/core/utils/card-form.utils";
+import { Utils } from "projects/app/src/app/core/utils/utils";
+import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
 
 @Component({
     selector: 'poll-form',

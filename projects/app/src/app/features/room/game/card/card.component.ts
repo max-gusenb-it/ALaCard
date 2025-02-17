@@ -2,12 +2,12 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { Color, supportedColors } from 'src/app/core/constants/color';
-import { CardType } from 'src/app/core/models/enums';
-import { Card, Player } from 'src/app/core/models/interfaces';
-import { CardService } from 'src/app/core/services/service/card/card.service';
-import { RoomState } from 'src/app/core/state';
-import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { Color, supportedColors } from 'projects/app/src/app/core/constants/color';
+import { CardType } from 'projects/app/src/app/core/models/enums';
+import { Card, Player } from 'projects/app/src/app/core/models/interfaces';
+import { CardService } from 'projects/app/src/app/core/services/service/card/card.service';
+import { RoomState } from 'projects/app/src/app/core/state';
+import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
 
 @Component({
   selector: 'card',

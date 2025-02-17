@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { CreateAccountFormData, ProfileEditorFormData } from 'src/app/core/models/interfaces';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { AuthenticationActions } from 'src/app/core/state';
+import { CreateAccountFormData, ProfileEditorFormData } from 'projects/app/src/app/core/models/interfaces';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { AuthenticationActions } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'it-sign-up-modal',

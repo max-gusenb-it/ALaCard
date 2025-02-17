@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, forwardRef, } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ControlValueAccessorDirective } from 'src/app/shared/directives/control-value-accessor.directive';
+import { ControlValueAccessorDirective } from 'projects/app/src/app/shared/directives/control-value-accessor.directive';
 
 @Component({
   selector: 'it-checkbox-heading',

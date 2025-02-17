@@ -1,4 +1,4 @@
-import { TopicVotingGroup } from "src/app/core/models/enums";
+import { TopicVotingGroup } from "projects/app/src/app/core/models/enums";
 import { ResultConfig } from "../result-config";
 
 export interface TopicVotingResultConfig extends ResultConfig {

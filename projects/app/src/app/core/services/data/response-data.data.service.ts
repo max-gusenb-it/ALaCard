@@ -4,7 +4,7 @@ import { ResponseDataSourceService } from "../source/response-data.source.servic
 import { Select, Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../../state";
 import { Injectable } from "@angular/core";
-import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
+import { AngularLifecycle } from "projects/app/src/app/shared/helper/angular-lifecycle.helper";
 import { GameState } from "../../models/enums";
 import { InformationState } from "../../state/information";
 import { RoomService } from "../service/room.service";

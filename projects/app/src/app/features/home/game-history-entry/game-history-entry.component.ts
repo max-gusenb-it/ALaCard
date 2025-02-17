@@ -2,8 +2,8 @@ import { Component, HostListener, Input } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
 import { firstValueFrom } from "rxjs";
-import { GameHistoryEntry } from "src/app/core/models/interfaces";
-import { PopupService } from "src/app/core/services/service/popup.service";
+import { GameHistoryEntry } from "projects/app/src/app/core/models/interfaces";
+import { PopupService } from "projects/app/src/app/core/services/service/popup.service";
 
 @Component({
     selector: 'game-history-entry',

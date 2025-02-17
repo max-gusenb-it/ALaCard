@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { AuthenticationActions } from './authentication.actions';
 import { AuthDataService } from '../../services/data/auth.data.service';
-import { AngularLifecycle } from 'src/app/shared/helper/angular-lifecycle.helper';
+import { AngularLifecycle } from 'projects/app/src/app/shared/helper/angular-lifecycle.helper';
 import { firstValueFrom, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/source/user.source.service';

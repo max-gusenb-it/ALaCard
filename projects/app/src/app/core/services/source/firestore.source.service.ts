@@ -4,7 +4,7 @@ import { Observable, map } from "rxjs";
 import { FirestoreBase } from "../../models/interfaces";
 import { getFirestore } from "@angular/fire/firestore";
 import { initializeApp } from "@angular/fire/app";
-import { environment } from "src/environments/environment";
+import { environment } from "projects/app/src/environments/environment";
 import firebase from 'firebase/compat/app';
 
 @Injectable({

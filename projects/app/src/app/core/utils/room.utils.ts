@@ -1,4 +1,4 @@
-import { environment } from "src/environments/environment";
+import { environment } from "projects/app/src/environments/environment";
 import { Player, Room, User } from "../models/interfaces";
 import { UserUtils } from "./user.utils";
 import { PlayerState } from "../models/enums";

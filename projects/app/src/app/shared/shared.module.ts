@@ -30,7 +30,6 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor-form/it-profile-editor-form.component';
 import { FireDatePipe } from './pipes/fire-date.pipe';
-import { ItPlayerComponent } from './components/display/it-player/it-player.component';
 import { ItOptionBottomSheet } from './components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { ItForgotPasswordModal } from './components/forms/it-forgot-password-modal/it-forgot-password-modal.component';
 import { ItSignInModal } from './components/forms/it-sign-in-modal/it-sign-in-modal.component';
@@ -38,7 +37,6 @@ import { ItSignUpModal } from './components/forms/it-sign-up-modal/it-sign-up-mo
 import { ItCreateAccountComponent } from './components/forms/it-create-account/it-create-account.component';
 import { ItAuthenticateModal } from './components/forms/it-authenticate-modal/it-authenticate-modal.component';
 import { ItAddAccountModal } from './components/forms/it-add-account-modal/it-add-account-modal.component';
-import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ItCreateRoomAsGuestModal } from './components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
 import { ItCreateRoomForm } from './components/forms/it-create-room-form/it-create-room-form.component';
 import { ItCheckboxAccordComponent } from './components/inputs/it-checkbox-accord/it-checkbox-accord.component';
@@ -46,6 +44,7 @@ import { ItResultComponent } from './components/display/it-result/it-result.comp
 import { ItLoadingScreenComponent } from './components/display/it-loading-screen/it-loading-screen.component';
 import { ItSipResultComponent } from './components/display/it-sip-result/it-sip-result.component';
 import { ItSipResultsComponent } from './components/display/it-sip-results/it-sip-results.component';
+import { ItPlayerComponent } from './components/display/it-player/it-player.component';
 
 @NgModule({
   declarations: [
@@ -88,8 +87,7 @@ import { ItSipResultsComponent } from './components/display/it-sip-results/it-si
     ItSelectComponent,
     ItTextAreaComponent,
     ExampleComponent,
-    FireDatePipe,
-    MarkdownPipe
+    FireDatePipe
   ],
   imports: [
     CommonModule,
@@ -140,8 +138,7 @@ import { ItSipResultsComponent } from './components/display/it-sip-results/it-si
     ItSelectComponent,
     ItTextAreaComponent,
     ExampleComponent,
-    FireDatePipe,
-    MarkdownPipe
+    FireDatePipe
   ],
   providers: [
   ]

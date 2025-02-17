@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Color } from 'src/app/core/constants/color';
-import { LoadingState } from 'src/app/core/state';
+import { Color } from 'projects/app/src/app/core/constants/color';
+import { LoadingState } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'it-button',

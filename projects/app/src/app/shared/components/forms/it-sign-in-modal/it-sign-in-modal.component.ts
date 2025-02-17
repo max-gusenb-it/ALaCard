@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { AuthenticationActions } from 'src/app/core/state';
 import { ItForgotPasswordModal } from '../it-forgot-password-modal/it-forgot-password-modal.component';
-import { PopupService } from 'src/app/core/services/service/popup.service';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { AuthenticationActions } from 'projects/app/src/app/core/state';
 
 @Component({
   selector: 'it-sign-in-modal',

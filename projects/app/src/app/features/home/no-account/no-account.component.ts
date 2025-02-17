@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { PopupService } from 'src/app/core/services/service/popup.service';
-import { ItCreateRoomAsGuestModal } from 'src/app/shared/components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
-import { ItSignInModal } from 'src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
-import { ItSignUpModal } from 'src/app/shared/components/forms/it-sign-up-modal/it-sign-up-modal.component';
+import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { ItCreateRoomAsGuestModal } from 'projects/app/src/app/shared/components/forms/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
+import { ItSignInModal } from 'projects/app/src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
+import { ItSignUpModal } from 'projects/app/src/app/shared/components/forms/it-sign-up-modal/it-sign-up-modal.component';
 
 @Component({
   selector: 'no-account',
