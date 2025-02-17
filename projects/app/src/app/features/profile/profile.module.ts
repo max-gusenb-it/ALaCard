@@ -10,6 +10,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
 import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
+import { NewSharedModule } from '@shared';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    SharedModule
+    SharedModule,
+    NewSharedModule
   ],
   declarations: [
     ProfilePage,

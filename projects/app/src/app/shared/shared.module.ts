@@ -18,7 +18,6 @@ import { ItCheckboxHeadingComponent } from './components/headings/it-checkbox-he
 import { ItDrawingBoardComponent } from './components/inputs/it-drawing-board/it-drawing-board.component';
 import { ItMenuButtonComponent } from './components/buttons/it-menu-button/it-menu-button.component';
 import { ItSnackbarComponent } from './components/display/it-snackbar/it-snackbar.component';
-import { ExampleComponent } from './components/display/example/example.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ItAccordComponent } from './components/display/it-accord/it-accord.component';
 import { ItTabGroupComponent } from './components/display/it-tab-group/it-tab-group.component';
@@ -29,7 +28,6 @@ import { ItSelectionListComponent } from './components/display/it-selection-list
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ItProfileEditorComponent } from './components/forms/it-profile-editor-form/it-profile-editor-form.component';
-import { FireDatePipe } from './pipes/fire-date.pipe';
 import { ItOptionBottomSheet } from './components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { ItForgotPasswordModal } from './components/forms/it-forgot-password-modal/it-forgot-password-modal.component';
 import { ItSignInModal } from './components/forms/it-sign-in-modal/it-sign-in-modal.component';
@@ -85,9 +83,7 @@ import { ItPlayerComponent } from './components/display/it-player/it-player.comp
     ItDrawingBoardComponent,
     ItInputComponent,
     ItSelectComponent,
-    ItTextAreaComponent,
-    ExampleComponent,
-    FireDatePipe
+    ItTextAreaComponent
   ],
   imports: [
     CommonModule,
@@ -136,9 +132,7 @@ import { ItPlayerComponent } from './components/display/it-player/it-player.comp
     ItDrawingBoardComponent,
     ItInputComponent,
     ItSelectComponent,
-    ItTextAreaComponent,
-    ExampleComponent,
-    FireDatePipe
+    ItTextAreaComponent
   ],
   providers: [
   ]

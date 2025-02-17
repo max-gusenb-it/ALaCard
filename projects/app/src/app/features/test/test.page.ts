@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ExampleComponent } from '../../shared/components/display/example/example.component';
 import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
 
 @Component({
@@ -74,16 +73,6 @@ export class TestPage {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
-  }
-
-  openBottomSheet() {
-    const ref = this.popupService.openBottomSheet(
-      ExampleComponent
-    );
-
-    ref.closed.subscribe(() => {
-      console.log ("closed");
-    });
   }
 
   openSnackbar() {

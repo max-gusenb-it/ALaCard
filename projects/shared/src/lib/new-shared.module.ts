@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { MarkdownPipe } from './logic/pipes/markdown.pipe';
+import { FireDatePipe } from './logic/pipes/fire-date.pipe';
 
 @NgModule({
     declarations: [
-      MarkdownPipe
+      MarkdownPipe,
+      FireDatePipe
     ],
     imports: [
     ],
     exports: [
-      MarkdownPipe
+      MarkdownPipe,
+      FireDatePipe
     ],
     providers: [
     ]
