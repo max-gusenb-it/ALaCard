@@ -4,7 +4,10 @@
     [formGroup]="pollForm"
     (submit)="submit()"
 >
-    <div class="flex flex-col gap-2 bg-blue-100 p-4 rounded-lg drop-shadow-card">
+    <div 
+        class="flex flex-col gap-2 p-4 rounded-lg drop-shadow-card"
+        [ngClass]="formBackgroundCSS"
+    >
         <h4>{{ "features.room.game.card.topic-voting" | translate }}</h4>
         <p class="text-lg">{{ getCardText() }}</p>
         <div class="flex flex-col gap-4">
@@ -12,7 +15,7 @@
                 id="votedSubjectId"
                 [label]="'features.room.game.game-cards.forms.answer' | translate "
                 formControlName="votedSubjectId"
-                customColor="blue"
+                [customColor]="cardColor"
                 *ngIf="!castedCard.settings?.chooseMultiple"
             >
                 <option *ngFor="let subject of castedCard.subjects" [value]="subject.id">
@@ -23,13 +26,13 @@
                 <it-button class="flex grow basis-0" [size]="'small'" color="secondary" [disabled]="userResponded()" type="button" (click)="submit(true)">
                     <it-icon color="text-neutral-100">skip_next</it-icon>
                 </it-button>
-                <it-button class="flex grow basis-0" [size]="'small'" color="blue" [disabled]="!pollForm.valid || userResponded()" type="submit">
+                <it-button class="flex grow basis-0" [size]="'small'" [color]="cardColor" [disabled]="!pollForm.valid || userResponded()" type="submit">
                     <it-icon color="text-neutral-100">check</it-icon>
                 </it-button>
             </div>
         </div>
     </div>
-    <it-button class="flex grow" color="blue" *ngIf="userResponded() && isUserRoomAdmin()" type="button" (click)="processRound()">
+    <it-button class="flex grow" [color]="cardColor" *ngIf="userResponded() && isUserRoomAdmin()" type="button" (click)="processRound()">
         {{ 'actions.continue' | translate }} {{(!roomSettings.singleDeviceMode) ? getAdminResponseCountInfo() : null}}
     </it-button>
 </form>

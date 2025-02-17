@@ -32,6 +32,7 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
     let css = "";
     
     if (!!!this.customColor) color = "primary";
+    // ToDo: Use new color Utils
     switch(color) {
       case("primary"): {
         css += "bg-primary-200 border-primary-200 hover:border-b-primary-500 focus:border-primary-500 disabled:bg-primary-100 disabled:border-primary-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500";
@@ -41,7 +42,10 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
       } break;
       case("blue"): {
         css += "bg-blue-200 border-blue-200 hover:border-b-blue-500 focus:border-blue-500 disabled:bg-blue-100 disabled:border-blue-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-blue-500";
-      }
+      } break;
+      case("violet"): {
+        css += "bg-violet-200 border-violet-200 hover:border-b-violet-500 focus:border-violet-500 disabled:bg-violet-100 disabled:border-violet-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-violet-500";
+      } break;
     }
     
     if (this.hideLabel) css += " text-transparent";

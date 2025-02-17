@@ -2349,7 +2349,9 @@ export const testingDeck: Deck = {
             type: CardType.FreeText,
             settings: {
                 order: 1,
-                drinkingCard: true
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Follow Up Card"
             },
             followUpCardConfig: {
                 followUpCardID: 0,
@@ -2372,6 +2374,8 @@ export const testingDeck: Deck = {
                 }
             ],
             settings: {
+                customColor: "violet",
+                customTitle: "Follow Up Card",
                 sipConfig: {
                     specificSipSubjectId: 1,
                     distribute: true
@@ -2382,6 +2386,8 @@ export const testingDeck: Deck = {
             text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",
             type: CardType.FreeText,
             settings: {
+                customColor: "violet",
+                customTitle: "Follow Up Card",
                 order: 2,
             },
             followUpCardConfig: {
@@ -2392,6 +2398,10 @@ export const testingDeck: Deck = {
         {
             followUpCardID: 1,
             text: "%sp sadly your reign as Thumb Master must end now",
+            settings: {
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            },
             type: CardType.FreeText
         } as FreeTextCard,
         {

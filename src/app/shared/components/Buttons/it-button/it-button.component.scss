@@ -55,6 +55,12 @@
     @apply bg-green-500 text-white; 
 }
 
+.violet-button {
+    @extend #button;
+    @extend .button-states;
+    @apply bg-violet-500 text-white; 
+}
+
 .orange-button {
     @extend #button;
     @extend .button-states;

@@ -12,6 +12,8 @@ import { ResponseDataSourceService } from "src/app/core/services/source/response
 import { AuthenticationState, RoomState } from "src/app/core/state";
 import { InformationActions, InformationState } from "src/app/core/state/information";
 import { BasePollCardService } from "src/app/core/types/card";
+import { CardFormUtils } from "src/app/core/utils/card-form.utils";
+import { Utils } from "src/app/core/utils/utils";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
 @Component({
@@ -29,6 +31,16 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
 
     roomSettings: RoomSettings;
     pollCardService: BasePollCardService;
+
+    get formBackgroundCSS() {
+        return CardFormUtils.getInteractiveFormBackgroundCSS(this.cardColor)
+    }
+
+    get cardColor()  {
+        return Utils.isStringDefinedAndNotEmpty(this.castedCard.settings?.customColor) ? 
+            this.castedCard.settings!.customColor! : 
+            "blue";
+    }
 
     constructor(
         private store: Store,

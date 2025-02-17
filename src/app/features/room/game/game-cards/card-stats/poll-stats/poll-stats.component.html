@@ -1,7 +1,7 @@
 <div
     *ngIf="!!castedCard"
     class="flex flex-col gap-4 p-4 rounded-lg drop-shadow-card"
-    [ngClass]="{'bg-blue-100': card.type === 3}"
+    [ngClass]="statsBackgroundCSS"
 >
     <h4 *ngIf="card.type === 3">{{ "features.room.game.card.topic-voting" | translate }}</h4>
     <p class="text-lg">{{ getCardText() }}</p>
@@ -37,7 +37,7 @@
         <!-- <it-button class="flex grow basis-0" color="red" type="button" *ngIf="displayPayToDisplay()" (click)="payToDisplay()">
             {{ 'features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display' | translate }}
         </it-button> -->
-        <it-button class="flex grow basis-0" color="blue" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
+        <it-button class="flex grow basis-0" [color]="cardColor" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
             {{ 'actions.continue' | translate }}
         </it-button>
     </div>

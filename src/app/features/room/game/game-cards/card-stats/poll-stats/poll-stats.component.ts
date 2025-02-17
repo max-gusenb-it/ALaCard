@@ -11,6 +11,8 @@ import { GameControlService } from "src/app/core/services/service/game-control.s
 import { RoomService } from "src/app/core/services/service/room.service";
 import { RoomState } from "src/app/core/state";
 import { BasePollCardService } from "src/app/core/types/card";
+import { CardFormUtils } from "src/app/core/utils/card-form.utils";
+import { Utils } from "src/app/core/utils/utils";
 import { AngularLifecycle } from "src/app/shared/helper/angular-lifecycle.helper";
 
 @Component({
@@ -25,6 +27,16 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   castedCard: PollCard;
   dynamicRoundData: DynamicPollRoundData;
   results: PollResult[];
+  
+  get statsBackgroundCSS() {
+      return CardFormUtils.getInteractiveFormBackgroundCSS(this.cardColor)
+  }
+
+  get cardColor()  {
+      return Utils.isStringDefinedAndNotEmpty(this.castedCard.settings?.customColor) ? 
+          this.castedCard.settings!.customColor! : 
+          "blue";
+  }
 
   constructor(
     private store: Store,
