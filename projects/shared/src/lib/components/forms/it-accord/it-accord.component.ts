@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
-import { ItSelectableComponent } from 'projects/app/src/app/shared/components/display/it-selectable/it-selectable.component';
+import { ItSelectableComponent } from '../it-selectable/it-selectable.component';
 
 @Component({
   selector: 'it-accord',

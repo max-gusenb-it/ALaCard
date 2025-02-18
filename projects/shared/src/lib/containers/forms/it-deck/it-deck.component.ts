@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
 import { Deck } from 'projects/app/src/app/core/models/interfaces';
-import { ItSelectableComponent } from 'projects/app/src/app/shared/components/display/it-selectable/it-selectable.component';
+import { ItSelectableComponent } from '../../../components/forms/it-selectable/it-selectable.component';
 
 @Component({
   selector: 'it-deck',

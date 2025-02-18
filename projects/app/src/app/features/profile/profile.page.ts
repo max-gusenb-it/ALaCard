@@ -9,13 +9,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { supportedLanguages } from 'projects/app/src/app/core/constants/languages';
 import { UserSourceService } from 'projects/app/src/app/core/services/source/user.source.service';
 import { supportedColors } from 'projects/app/src/app/core/constants/color';
-import { AngularLifecycle } from '@shared';
-import { ItSignInModal } from 'projects/app/src/app/shared/components/forms/it-sign-in-modal/it-sign-in-modal.component';
-import { ItAddAccountModal } from 'projects/app/src/app/shared/components/forms/it-add-account-modal/it-add-account-modal.component';
 import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
 import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
 import { systemDefaultValue } from 'projects/app/src/app/core/constants/systemDefaultValue';
 import { LoadingHelperService } from 'projects/app/src/app/core/services/helper/loading.helper.service';
+import { AngularLifecycle } from '@shared';
+import { ItSignInModal } from '@shared';
+import { ItAddAccountModal } from '@shared';
 
 @Component({
   selector: 'profile',

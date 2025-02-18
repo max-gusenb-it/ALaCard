@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, mapToCanActivate } from '@angular/router';
-import { ItNavigationComponent } from './shared/components/buttons/it-navigation/it-navigation.component';
+import { ItNavigationComponent } from '../../../shared/src/lib/containers/core/it-navigation/it-navigation.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [

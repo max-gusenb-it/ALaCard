@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from 'projects/app/src/app/shared/shared.module';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -12,7 +11,7 @@ import { NoAccountComponent } from './no-account/no-account.component';
 import { NoRoomComponent } from './no-room/no-room.component';
 import { CreateRoomModal } from './create-room-modal/create-room-modal.component';
 import { GameHistoryEntryComponent } from './game-history-entry/game-history-entry.component';
-import { NewSharedModule } from '@shared';
+import { SharedModule } from '@shared';
 
 @NgModule({
   imports: [
@@ -20,8 +19,7 @@ import { NewSharedModule } from '@shared';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedModule,
-    NewSharedModule
+    SharedModule
   ],
   declarations: [
     HomePage,

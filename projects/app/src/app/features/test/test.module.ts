@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TestPage } from './test.page';
 
 import { TestPageRoutingModule } from './test-routing.module';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared';
 
 @NgModule({
   imports: [

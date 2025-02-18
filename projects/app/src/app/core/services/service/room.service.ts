@@ -2,7 +2,6 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, RoomState } from "../../state";
-import { ItAuthenticateModal } from "projects/app/src/app/shared/components/forms/it-authenticate-modal/it-authenticate-modal.component";
 import { RoomServiceErrors } from "../../constants/errorCodes";
 import { ItError } from "../../models/classes";
 import { PopupService } from "./popup.service";
@@ -14,6 +13,7 @@ import { UserSourceService } from "../source/user.source.service";
 import { IngameDataDataService } from '../data/ingame-data.data.service';
 import { RoomSourceService } from '../source/room.source.service';
 import { PlayerState } from '../../models/enums';
+import { ItAuthenticateModal } from "@shared";
 
 @Injectable({
     providedIn: 'root'

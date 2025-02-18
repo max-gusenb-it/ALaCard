@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./projects/app/src/**/*.{html,scss,ts}",
+    "./projects/shared/src/**/*.{html,scss,ts}",
   ],
   theme: {
     extend: {

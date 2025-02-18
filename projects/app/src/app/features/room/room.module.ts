@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { RoomPageRoutingModule } from './room-routing.module';
 
 import { RoomPage } from './room.page';
-import { SharedModule } from 'projects/app/src/app/shared/shared.module';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
@@ -24,7 +23,7 @@ import { CardStatsComponent } from './game/game-cards/card-stats/card-stats/card
 import { PlayerVotingStatsComponent } from './game/game-cards/card-stats/player-voting-stats/player-voting-stats.component';
 import { PollFormComponent } from './game/game-cards/card-forms/poll-form/poll-form.component';
 import { PollStatsComponent } from './game/game-cards/card-stats/poll-stats/poll-stats.component';
-import { NewSharedModule } from '@shared';
+import { SharedModule } from '@shared';
 
 @NgModule({
   imports: [
@@ -33,7 +32,6 @@ import { NewSharedModule } from '@shared';
     IonicModule,
     RoomPageRoutingModule,
     SharedModule,
-    NewSharedModule,
     QRCodeModule
   ],
   declarations: [

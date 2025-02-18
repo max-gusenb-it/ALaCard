@@ -23,7 +23,6 @@ import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
 import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { SharedModule } from './shared/shared.module';
 import { LanguageUtils } from './core/utils/language.util';
 import { AUTHENTICATION_STATE_TOKEN, AuthenticationState } from './core/state/authentication/authentication.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
@@ -34,7 +33,7 @@ import { ErrorMonitorState } from './core/state/error-monitor';
 import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { INFORMATION_STATE_TOKEN, InformationState } from './core/state/information';
-import { NewSharedModule } from '@shared';
+import { SharedModule } from '@shared';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -47,7 +46,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    NewSharedModule,
     SharedModule,
     HttpClientModule,
     NgxsModule.forRoot(

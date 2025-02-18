@@ -7,7 +7,6 @@ import { OptionBottomSheetData, Player, Room, StaticRoundData } from 'projects/a
 import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
 import { AuthenticationState, LoadingState, RoomActions, RoomState } from 'projects/app/src/app/core/state';
 import { AngularLifecycle } from '@shared';
-import { ItOptionBottomSheet } from 'projects/app/src/app/shared/components/forms/it-option-bottom-sheet/it-option-bottom-sheet.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { RoomUtils } from 'projects/app/src/app/core/utils/room.utils';
@@ -17,6 +16,7 @@ import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-
 import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
 import { GameControlService } from 'projects/app/src/app/core/services/service/game-control.service';
+import { ItOptionBottomSheet } from '@shared';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
