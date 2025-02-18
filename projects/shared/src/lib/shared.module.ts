@@ -40,7 +40,7 @@ import { ItOptionBottomSheet } from './containers/popups/it-option-bottom-sheet/
 import { ItProfileEditorComponent } from './containers/forms/it-profile-editor-form/it-profile-editor-form.component';
 import { ItSignInModal } from './containers/popups/it-sign-in-modal/it-sign-in-modal.component';
 import { ItSignUpModal } from './containers/popups/it-sign-up-modal/it-sign-up-modal.component';
-import { ItCreateAccountComponent } from './containers/forms/it-create-account/it-create-account.component';
+import { ItCreateAccountFormComponent } from './containers/forms/it-create-account-form/it-create-account-form.component';
 import { ItCreateRoomAsGuestModal } from './containers/popups/it-create-room-as-guest-modal/it-create-room-as-guest-modal.component';
 import { ItCreateRoomForm } from './containers/forms/it-create-room-form/it-create-room-form.component';
 import { ItButtonHeadingComponent } from './components/buttons/it-button-heading/it-button-heading.component';
@@ -83,7 +83,7 @@ import { ItDetailHeadingComponent } from './components/display/it-detail-heading
     ItProfileEditorComponent,
     ItSignInModal,
     ItSignUpModal,
-    ItCreateAccountComponent,
+    ItCreateAccountFormComponent,
     ItCreateRoomAsGuestModal,
     ItCreateRoomForm,
     ItButtonHeadingComponent,
@@ -134,7 +134,7 @@ import { ItDetailHeadingComponent } from './components/display/it-detail-heading
     ItProfileEditorComponent,
     ItSignInModal,
     ItSignUpModal,
-    ItCreateAccountComponent,
+    ItCreateAccountFormComponent,
     ItCreateRoomAsGuestModal,
     ItCreateRoomForm,
     ItButtonHeadingComponent,

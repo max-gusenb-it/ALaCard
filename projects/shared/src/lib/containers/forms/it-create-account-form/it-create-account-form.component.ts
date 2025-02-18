@@ -5,10 +5,10 @@ import { CreateAccountFormData } from 'projects/app/src/app/core/models/interfac
 import { AngularLifecycle } from '@shared';
 
 @Component({
-  selector: 'it-create-account',
-  templateUrl: './it-create-account.component.html'
+  selector: 'it-create-account-form',
+  templateUrl: './it-create-account-form.component.html'
 })
-export class ItCreateAccountComponent extends AngularLifecycle implements AfterViewInit {
+export class ItCreateAccountFormComponent extends AngularLifecycle implements AfterViewInit {
 
   @Input() registerMandatory: boolean = false;
   @Input() createAccountFormData: CreateAccountFormData = null as any;

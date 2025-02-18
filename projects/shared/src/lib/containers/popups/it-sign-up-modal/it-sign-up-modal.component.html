@@ -8,7 +8,7 @@
         (profileEditorFormChanged)="setProfileFormData($event)"
         [profileEditorFormData]="profileFormData"
     />
-    <it-create-account
+    <it-create-account-form
         *ngIf="stepIndex === 1"
         (createAccountFormChanges)="setCreateAccountFormData($event)"
         [createAccountFormData]="createAccountFormData"
