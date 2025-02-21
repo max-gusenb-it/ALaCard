@@ -4,14 +4,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { speficiPlayerIdSettingName } from 'projects/app/src/app/core/constants/game-settings';
-import { Deck, GameSettings, Player } from 'projects/app/src/app/core/models/interfaces';
-import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
-import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { Player } from 'projects/app/src/app/core/models/interfaces';
+import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
 import { RoomActions, RoomState } from 'projects/app/src/app/core/state';
 import { DeckState } from 'projects/app/src/app/core/state/deck';
 import { GameSettingsUtils } from 'projects/app/src/app/core/utils/game-settings.utils';
 import { StaticRoundDataUtils } from 'projects/app/src/app/core/utils/static-round-data.utils';
-import { AngularLifecycle } from '@shared';
+import { AngularLifecycle, Deck, GameSettings, IngameDataDataService } from '@shared';
 
 @Component({
   selector: 'app-start-game-modal',

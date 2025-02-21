@@ -1,17 +1,28 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { playerNameWhitecard, specificPlayerNameWhitecard } from "projects/app/src/app/core/constants/card";
-import { PlayerState, RoundState } from "projects/app/src/app/core/models/enums";
-import { Card, DynamicRoundData, ResultConfig, GameSettings, Player, Response, Result, Round, SipResult, RoomSettings, StaticRoundData, RoundInformation } from "projects/app/src/app/core/models/interfaces";
-import { AuthenticationState, RoomState } from "projects/app/src/app/core/state";
+import { playerNameWhitecard, specificPlayerNameWhitecard } from "projects/shared/src/lib/utils/constants/card";
+import { RoomState } from "projects/app/src/app/core/state";
 import { BaseCardUtils } from "projects/app/src/app/core/utils/card/base-card.utils";
-import { Utils } from "projects/app/src/app/core/utils/utils";
-import { ResponseDataDataService } from "../../data/response-data.data.service";
-import { IngameDataDataService } from "../../data/ingame-data.data.service";
-import { InformationState } from "projects/app/src/app/core/state/information";
-import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
-import { CardStates } from "projects/app/src/app/core/models/interfaces/logic/cards/card-states";
-
+import { Utils } from "projects/shared/src/lib/utils/utils/utils";
+import { Player } from "../../../models/interfaces";
+import {
+    AuthenticationState,
+    Card,
+    CardStates,
+    DynamicRoundData,
+    GameSettings,
+    InformationState,
+    IngameDataDataService,
+    PlayerState,
+    ResponseDataDataService,
+    Result,
+    ResultConfig,
+    Round,
+    RoundState,
+    SipResult,
+    StaticRoundDataDataService,
+    Response 
+} from "@shared";
 @Injectable({
     providedIn: 'root'
 })

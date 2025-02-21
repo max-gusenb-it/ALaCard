@@ -1,5 +1,5 @@
 import firebase from 'firebase/compat/app';
-import { IngameData } from "../models/interfaces";
+import { IngameData } from '@shared';
 
 export namespace IngameDataUtils {
     export function createInitialIngameData() : IngameData {

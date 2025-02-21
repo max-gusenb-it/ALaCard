@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { LoadingState } from './core/state';
 import { Observable, interval, takeUntil } from 'rxjs';
-import { PopupService } from './core/services/service/popup.service';
+import { PopupService } from '../../../shared/src/lib/logic/services/helper/popup.service';
 import { TranslateService } from '@ngx-translate/core';
-import { IItError } from './core/models/interfaces';
-import { ErrorMonitorState } from './core/state/error-monitor';
-import { AngularLifecycle } from '@shared';
+import { AngularLifecycle, ErrorMonitorState, IItError, LoadingState } from '@shared';
 
 @Component({
   selector: 'app-root',

@@ -2,30 +2,36 @@ import { Action, NgxsOnInit, Selector, State, StateContext, StateToken, Store } 
 import { RoomConnectionData, RoomStateModel } from "./room.model";
 import { Injectable, NgZone } from "@angular/core";
 import { RoomActions } from "./room.actions";
-import { RoomSourceService } from "../../services/source/room.source.service";
-import { LoadingHelperService } from "../../services/helper/loading.helper.service";
-import { AuthenticationActions, AuthenticationState } from "../authentication";
 import { Subscription, firstValueFrom, takeUntil } from "rxjs";
-import { LoadingActions } from "../loading";
-import { AngularLifecycle } from '@shared';
 import { NavController } from "@ionic/angular";
 import { RoomUtils } from "../../utils/room.utils";
-import { Deck, GameSettings, Player, Room } from "../../models/interfaces";
-import { SharedErrors, RoomStateErrors } from "../../constants/errorCodes";
-import { PopupService } from "../../services/service/popup.service";
+import { Player, Room } from "../../models/interfaces";
+import { SharedErrors, RoomStateErrors } from "../../../../../../shared/src/lib/utils/constants/errorCodes";
+import { PopupService } from "../../../../../../shared/src/lib/logic/services/helper/popup.service";
 import { TranslateService } from "@ngx-translate/core";
-import { ItError } from "../../models/classes";
-import { ErrorMonitorActions } from "../error-monitor";
 import { RoomSettings } from "../../models/interfaces/logic/room/room-settings";
-import { IngameDataSourceService } from "../../services/source/ingame-data.source.service";
-import { ResponseDataSourceService } from "../../services/source/response-data.source.service";
-import { StaticRoundDataSourceService } from "../../services/source/static-round-data.source.service";
-import { GameState, PlayerState } from "../../models/enums";
-import { IngameDataUtils } from "../../utils/ingame-data.utils";
-import { InformationActions } from "../information";
-import { Game } from "../../models/interfaces/logic/game/game";
 import { RoomService } from "../../services/service/room.service";
 import { GameControlService } from "../../services/service/game-control.service";
+import { 
+    AngularLifecycle, 
+    AuthenticationActions, 
+    AuthenticationState, 
+    Deck, 
+    ErrorMonitorActions, 
+    Game, 
+    GameSettings, 
+    GameState, 
+    InformationActions, 
+    IngameDataSourceService, 
+    ItError, 
+    LoadingActions, 
+    LoadingHelperService, 
+    PlayerState,
+    ResponseDataSourceService,
+    RoomSourceService,
+    StaticRoundDataSourceService
+} from '@shared';
+import { IngameDataUtils } from "../../utils/ingame-data.utils";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');
 

@@ -1,4 +1,4 @@
-import { PlayerState } from "../../../enums";
+import { PlayerState } from "@shared";
 
 /**
  * Player that is saved in room. Holds the same information as user but in more minimalistic way

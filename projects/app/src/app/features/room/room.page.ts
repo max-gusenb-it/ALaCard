@@ -3,20 +3,26 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { OptionBottomSheetData, Player, Room, StaticRoundData } from 'projects/app/src/app/core/models/interfaces';
-import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
-import { AuthenticationState, LoadingState, RoomActions, RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from '@shared';
+import { Player, Room } from 'projects/app/src/app/core/models/interfaces';
+import { RoomActions, RoomState } from 'projects/app/src/app/core/state';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareBottomSheet } from './bottom-sheets/share-bottom-sheet/share-bottom-sheet.component';
 import { RoomUtils } from 'projects/app/src/app/core/utils/room.utils';
 import { RoomSettingsBottomSheet } from './bottom-sheets/room-settings-bottom-sheet/room-settings-bottom-sheet.component';
 import { StartGameModal } from './start-game-modal/start-game-modal.component';
 import { AddOfflinePlayerBottomSheet } from './bottom-sheets/add-offline-player-bottom-sheet/add-offline-player-bottom-sheet.component';
-import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
 import { GameControlService } from 'projects/app/src/app/core/services/service/game-control.service';
-import { ItOptionBottomSheet } from '@shared';
+import { 
+  AngularLifecycle,
+  LoadingState,
+  StaticRoundData,
+  ItOptionBottomSheet,
+  PopupService,
+  StaticRoundDataDataService,
+  AuthenticationState,
+  OptionBottomSheetData
+} from '@shared';
 
 const leaveRoomMenuItem = 'exit_to_app';
 const shareMenuItem = 'share';
@@ -94,7 +100,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
               title: this.translateService.instant("features.room.leave-bottom-sheet.title"),
               optionOne: this.translateService.instant("actions.cancel"),
               optionTwo: this.translateService.instant("features.room.leave-bottom-sheet.leave-room")
-            } as OptionBottomSheetData 
+            } as OptionBottomSheetData
           }
         );
         firstValueFrom(ref.closed)

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
-import { ItCreateRoomAsGuestModal } from '@shared';
-import { ItSignInModal } from '@shared';
-import { ItSignUpModal } from '@shared';
+import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
+import { 
+  ItCreateRoomAsGuestModal,
+  ItSignInModal,
+  ItSignUpModal
+} from '@shared';
 
 @Component({
   selector: 'no-account',

@@ -1,19 +1,24 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
-import { pollCardSkipValue } from "projects/app/src/app/core/constants/card";
-import { Card, PollCard, Round, SipResult } from "projects/app/src/app/core/models/interfaces";
-import { PollResult } from "projects/app/src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
-import { DynamicPollRoundData } from "projects/app/src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
-import { IngameDataDataService } from "projects/app/src/app/core/services/data/ingame-data.data.service";
+import { pollCardSkipValue } from "projects/shared/src/lib/utils/constants/card";
 import { CardService } from "projects/app/src/app/core/services/service/card/card.service";
 import { GameControlService } from "projects/app/src/app/core/services/service/game-control.service";
 import { RoomService } from "projects/app/src/app/core/services/service/room.service";
 import { RoomState } from "projects/app/src/app/core/state";
 import { BasePollCardService } from "projects/app/src/app/core/types/card";
 import { CardFormUtils } from "projects/app/src/app/core/utils/card-form.utils";
-import { Utils } from "projects/app/src/app/core/utils/utils";
-import { AngularLifecycle } from '@shared';
+import { Utils } from "projects/shared/src/lib/utils/utils/utils";
+import { 
+  AngularLifecycle,
+  Card,
+  DynamicPollRoundData,
+  IngameDataDataService,
+  PollCard,
+  PollResult,
+  Round,
+  SipResult
+} from '@shared';
 
 @Component({
   selector: 'poll-stats',

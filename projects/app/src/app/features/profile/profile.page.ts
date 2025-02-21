@@ -2,20 +2,23 @@ import { AfterViewInit, Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { firstValueFrom, Observable, takeUntil } from 'rxjs';
-import { User } from 'projects/app/src/app/core/models/interfaces/logic/user/user';
-import { AuthenticationActions, AuthenticationState } from 'projects/app/src/app/core/state';
 import { EditProfileModal } from './edit-profile-modal/edit-profile-modal.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { supportedLanguages } from 'projects/app/src/app/core/constants/languages';
-import { UserSourceService } from 'projects/app/src/app/core/services/source/user.source.service';
-import { supportedColors } from 'projects/app/src/app/core/constants/color';
-import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { supportedColors } from 'projects/shared/src/lib/utils/constants/color';
+import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
 import { DeleteAccountBottomSheetComponent } from './delete-account-bottom-sheet/delete-account-bottom-sheet.component';
-import { systemDefaultValue } from 'projects/app/src/app/core/constants/systemDefaultValue';
-import { LoadingHelperService } from 'projects/app/src/app/core/services/helper/loading.helper.service';
-import { AngularLifecycle } from '@shared';
-import { ItSignInModal } from '@shared';
-import { ItAddAccountModal } from '@shared';
+import { systemDefaultValue } from 'projects/shared/src/lib/utils/constants/systemDefaultValue';
+import { 
+  AngularLifecycle,
+  ItSignInModal,
+  ItAddAccountModal,
+  AuthenticationState,
+  User,
+  LoadingHelperService,
+  UserSourceService,
+  AuthenticationActions
+} from '@shared';
 
 @Component({
   selector: 'profile',

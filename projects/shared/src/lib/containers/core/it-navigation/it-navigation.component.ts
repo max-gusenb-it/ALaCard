@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
-import { AuthenticationState } from 'projects/app/src/app/core/state';
+import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
 import { environment } from 'projects/app/src/environments/environment';
+import { AuthenticationState } from '@shared';
 
 const inDevUrls = ['/test', '/store'];
 

@@ -1,6 +1,7 @@
-import { PlayerState } from "../models/enums";
-import { Player, User } from "../models/interfaces";
+import { Player } from "../models/interfaces";
+import { PlayerState, User } from "@shared";
 
+// ToDo: rename to player
 export namespace UserUtils {
     export function exportUserToPlayer(user: User, joinOrder: number) : Player {
         return {

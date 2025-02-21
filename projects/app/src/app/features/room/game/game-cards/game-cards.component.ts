@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { slideToggle } from 'projects/app/src/app/core/animations/slideToggle';
-import { Deck, StaticRoundData } from 'projects/app/src/app/core/models/interfaces';
-import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 import { RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from '@shared';
+import { AngularLifecycle, Deck, StaticRoundData, StaticRoundDataDataService } from '@shared';
 
 @Component({
   selector: 'game-cards',

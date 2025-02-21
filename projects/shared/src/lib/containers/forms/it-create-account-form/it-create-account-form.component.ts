@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
-import { CreateAccountFormData } from 'projects/app/src/app/core/models/interfaces/features/home/create-account-form-data';
+import { CreateAccountFormData } from 'projects/shared/src/lib/models/interfaces/forms/it-create-account-form/create-account-form-data';
 import { AngularLifecycle } from '@shared';
 
 @Component({

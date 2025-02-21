@@ -1,7 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { Player, SipResult } from "projects/app/src/app/core/models/interfaces";
-import { PopupService } from "projects/app/src/app/core/services/service/popup.service";
+import { Player } from "projects/app/src/app/core/models/interfaces";
+import { PopupService } from "projects/shared/src/lib/logic/services/helper/popup.service";
+import { SipResult } from "@shared";
 
 @Component({
   selector: 'it-sip-result',

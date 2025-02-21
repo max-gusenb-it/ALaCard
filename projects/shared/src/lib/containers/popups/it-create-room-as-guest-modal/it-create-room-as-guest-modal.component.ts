@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { CreateRoomFormData, ProfileEditorFormData } from "projects/app/src/app/core/models/interfaces";
-import { PopupService } from "projects/app/src/app/core/services/service/popup.service";
-import { AuthenticationActions, AuthenticationState, RoomActions } from "projects/app/src/app/core/state";
+import { PopupService } from "projects/shared/src/lib/logic/services/helper/popup.service";
 import { filter, firstValueFrom, take } from "rxjs";
+import { AuthenticationActions, AuthenticationState, CreateRoomFormData, ProfileEditorFormData } from "@shared";
+import { RoomActions } from "projects/app/src/app/core/state";
 
 @Component({
   selector: 'it-create-room-as-guest-modal',

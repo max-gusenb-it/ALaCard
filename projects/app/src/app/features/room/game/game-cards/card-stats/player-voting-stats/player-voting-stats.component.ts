@@ -2,17 +2,27 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, takeUntil } from 'rxjs';
-import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'projects/app/src/app/core/constants/card';
-import { Card, DynamicPlayerVotingRoundData, DynamicRoundData, GameSettings, Player, PlayerVotingResult, Round, SipResult } from 'projects/app/src/app/core/models/interfaces';
-import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
+import { defaultPayToDisplaySips, playerVotingCardSkipValue } from 'projects/shared/src/lib/utils/constants/card';
 import { PlayerVotingCardService } from 'projects/app/src/app/core/services/service/card/player-voting-card.service';
 import { GameControlService } from 'projects/app/src/app/core/services/service/game-control.service';
-import { PopupService } from 'projects/app/src/app/core/services/service/popup.service';
+import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
 import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
-import { IngameDataSourceService } from 'projects/app/src/app/core/services/source/ingame-data.source.service';
-import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
-import { Utils } from 'projects/app/src/app/core/utils/utils';
-import { AngularLifecycle } from '@shared';
+import { RoomState } from 'projects/app/src/app/core/state';
+import { Utils } from 'projects/shared/src/lib/utils/utils/utils';
+import { 
+  AngularLifecycle,
+  AuthenticationState,
+  Card,
+  DynamicPlayerVotingRoundData,
+  DynamicRoundData,
+  GameSettings,
+  IngameDataDataService,
+  IngameDataSourceService,
+  PlayerVotingResult,
+  Round,
+  SipResult
+} from '@shared';
+import { Player } from 'projects/app/src/app/core/models/interfaces';
 
 @Component({
   selector: 'player-voting-stats',

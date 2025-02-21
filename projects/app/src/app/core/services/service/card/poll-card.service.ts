@@ -1,16 +1,24 @@
-import { PollCard, PollResponse, Response, Card, PollCardResultConfig, Player, GameSettings, DynamicRoundData, SipResult, RoomSettings } from "projects/app/src/app/core/models/interfaces";
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
-import { DynamicPollRoundData } from "projects/app/src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-poll-card-round.data";
-import { PollResult } from "projects/app/src/app/core/models/interfaces/logic/cards/poll-card/poll-result";
-import { defaultCardSips, pollCardSkipValue } from "projects/app/src/app/core/constants/card";
+import { defaultCardSips, pollCardSkipValue } from "projects/shared/src/lib/utils/constants/card";
 import { Store } from "@ngxs/store";
 import { RoomState } from "projects/app/src/app/core/state";
-import { ResponseDataDataService } from "../../data/response-data.data.service";
-import { IngameDataDataService } from "../../data/ingame-data.data.service";
-import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
-import { CardStates } from "projects/app/src/app/core/models/interfaces/logic/cards/card-states";
-import { PollCardStates } from "projects/app/src/app/core/models/interfaces/logic/cards/poll-card/poll-card-states";
+import { 
+    Card,
+    DynamicPollRoundData,
+    IngameDataDataService,
+    PollCard,
+    PollCardResultConfig,
+    PollResponse,
+    Response,
+    PollResult,
+    ResponseDataDataService,
+    StaticRoundDataDataService,
+    DynamicRoundData,
+    CardStates,
+    PollCardStates,
+    SipResult
+} from "@shared";
 
 @Injectable({
     providedIn: 'root'

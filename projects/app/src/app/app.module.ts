@@ -24,16 +24,20 @@ import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '
 import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { LanguageUtils } from './core/utils/language.util';
-import { AUTHENTICATION_STATE_TOKEN, AuthenticationState } from './core/state/authentication/authentication.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { LoadingState } from './core/state';
 import { DatePipe } from '@angular/common';
 import { ROOM_STATE_TOKEN, RoomState } from './core/state/room/room.state';
-import { ErrorMonitorState } from './core/state/error-monitor';
 import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { INFORMATION_STATE_TOKEN, InformationState } from './core/state/information';
-import { SharedModule } from '@shared';
+import { 
+  AUTHENTICATION_STATE_TOKEN,
+  AuthenticationState,
+  ErrorMonitorState,
+  INFORMATION_STATE_TOKEN,
+  InformationState,
+  LoadingState,
+  SharedModule
+} from '@shared';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

@@ -1,8 +1,7 @@
-import { Deck, GameSettings, PlayerVotingCard } from "../models/interfaces";
-import { Utils } from './utils';
-import { CardType } from '../models/enums';
-import { playerNameWhitecard, specificPlayerNameWhitecard } from '../constants/card';
+import { Utils } from '../../../../../shared/src/lib/utils/utils/utils';
+import { playerNameWhitecard, specificPlayerNameWhitecard } from '../../../../../shared/src/lib/utils/constants/card';
 import { BaseCardUtils } from "./card/base-card.utils";
+import { CardType, Deck, GameSettings, PlayerVotingCard } from '@shared';
 
 export namespace StaticRoundDataUtils {
     export function isDeckPlayable(deck: Deck, activePlayerCount: number, gameSettings: GameSettings) {

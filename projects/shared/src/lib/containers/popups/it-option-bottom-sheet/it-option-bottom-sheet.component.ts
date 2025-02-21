@@ -1,6 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
-import { OptionBottomSheetData } from 'projects/app/src/app/core/models/interfaces';
+import { OptionBottomSheetData } from '@shared';
 
 @Component({
   selector: 'it-option-bottom-sheet',

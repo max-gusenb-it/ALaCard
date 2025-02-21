@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { AuthenticationState } from "../state";
+import { AuthenticationState } from "@shared";
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard {

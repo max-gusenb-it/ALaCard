@@ -1,11 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, QueryList, ViewChild } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { AngularLifecycle } from '@shared';
-import { Card, DynamicRoundData, SipResult } from 'projects/app/src/app/core/models/interfaces';
 import { CardService, GameCardService } from 'projects/app/src/app/core/services/service/card/card.service';
-import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
 import { ItSelectableComponent } from '../../../components/forms/it-selectable/it-selectable.component';
 import { ItSelectionListComponent } from '../../../components/forms/it-selection-list/it-selection-list.component';
+import { IngameDataDataService } from '../../../../../../app/src/app/core/services/ingame-data.data.service';
+import { AngularLifecycle, Card, DynamicRoundData, SipResult } from '@shared';
 
 @Component({
   selector: 'it-sip-results',

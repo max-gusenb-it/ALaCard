@@ -1,6 +1,4 @@
-import { CardType, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
-import { Deck, FreeTextCard, PlayerVotingCard, PollCardSettings } from "../models/interfaces";
-import { TopicVotingCard } from "../models/interfaces/logic/cards/topic-voting-card/topic-voting-card";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCardSettings, TopicVotingCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "./game-settings";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";

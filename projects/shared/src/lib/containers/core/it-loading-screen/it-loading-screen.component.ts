@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { User } from 'projects/app/src/app/core/models/interfaces';
-import { AuthenticationState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from '@shared';
+import { AngularLifecycle, AuthenticationState, User } from '@shared';
 
 @Component({
   selector: 'it-loading-screen',

@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
-import { Deck, DynamicRoundData, GameSettings, StaticRoundData } from 'projects/app/src/app/core/models/interfaces';
-import { IngameDataDataService } from 'projects/app/src/app/core/services/data/ingame-data.data.service';
-import { StaticRoundDataDataService } from 'projects/app/src/app/core/services/data/static-round-data.data.service';
 import { RoomState } from 'projects/app/src/app/core/state';
-import { AngularLifecycle } from '@shared';
+import { 
+  AngularLifecycle,
+  Deck,
+  DynamicRoundData,
+  GameSettings,
+  IngameDataDataService,
+  StaticRoundData,
+  StaticRoundDataDataService
+} from '@shared';
 
 @Component({
   selector: 'card-stats',

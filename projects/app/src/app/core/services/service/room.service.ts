@@ -1,19 +1,22 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { AuthenticationState, RoomState } from "../../state";
-import { RoomServiceErrors } from "../../constants/errorCodes";
-import { ItError } from "../../models/classes";
-import { PopupService } from "./popup.service";
+import { RoomState } from "../../state";
+import { RoomServiceErrors } from "../../../../../../shared/src/lib/utils/constants/errorCodes";
+import { PopupService } from "../../../../../../shared/src/lib/logic/services/helper/popup.service";
 import { combineLatest, filter, map, of, take } from "rxjs";
 import { Player, Room } from "../../models/interfaces";
-import { InformationState } from "../../state/information";
 import { RoomUtils } from "../../utils/room.utils";
-import { UserSourceService } from "../source/user.source.service";
-import { IngameDataDataService } from '../data/ingame-data.data.service';
-import { RoomSourceService } from '../source/room.source.service';
-import { PlayerState } from '../../models/enums';
-import { ItAuthenticateModal } from "@shared";
+import { 
+    AuthenticationState,
+    InformationState,
+    IngameDataDataService,
+    ItAuthenticateModal,
+    ItError,
+    PlayerState,
+    RoomSourceService,
+    UserSourceService
+} from "@shared";
 
 @Injectable({
     providedIn: 'root'

@@ -1,4 +1,9 @@
-import { Deck, GameSettings, Room, StaticRoundData } from "../../models/interfaces";
+import { Room } from "../../models/interfaces";
+import { 
+    Deck,
+    GameSettings,
+    StaticRoundData
+} from "@shared";
 
 export namespace RoomActions {
     

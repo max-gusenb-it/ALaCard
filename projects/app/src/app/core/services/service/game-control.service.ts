@@ -1,18 +1,25 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
-import { IngameDataDataService } from "../data/ingame-data.data.service";
-import { StaticRoundDataDataService } from "../data/static-round-data.data.service";
-import { ResponseDataDataService } from "../data/response-data.data.service";
 import { Store } from "@ngxs/store";
 import { RoomState } from "../../state";
 import { CardService, GameCardService } from "./card/card.service";
-import { Card, Deck, GameSettings, Player, Round, StaticRoundData } from "../../models/interfaces";
 import { StaticRoundDataUtils } from "../../utils/static-round-data.utils";
-import { Utils } from "../../utils/utils";
-import { CardStates } from '../../models/interfaces/logic/cards/card-states';
-import { ItError } from '../../models/classes';
-import { GameControlServiceErros } from '../../constants/errorCodes';
-import { ErrorMonitorActions } from '../../state/error-monitor';
+import { Utils } from "../../../../../../shared/src/lib/utils/utils/utils";
+import { GameControlServiceErros } from '../../../../../../shared/src/lib/utils/constants/errorCodes';
+import { 
+    Card,
+    Deck,
+    GameSettings,
+    IngameDataDataService,
+    ResponseDataDataService,
+    Round,
+    StaticRoundData,
+    StaticRoundDataDataService,
+    ItError,
+    CardStates,
+    ErrorMonitorActions
+} from '@shared';
+import { Player } from '../../models/interfaces';
 
 @Injectable({
     providedIn: 'root'

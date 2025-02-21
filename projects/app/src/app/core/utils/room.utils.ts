@@ -1,8 +1,8 @@
 import { environment } from "projects/app/src/environments/environment";
-import { Player, Room, User } from "../models/interfaces";
+import { Player, Room } from "../models/interfaces";
 import { UserUtils } from "./user.utils";
-import { PlayerState } from "../models/enums";
 import { offlinePlayerProfilePicture } from "../constants/user";
+import { PlayerState, User } from "@shared";
 
 export namespace RoomUtils {
     /**

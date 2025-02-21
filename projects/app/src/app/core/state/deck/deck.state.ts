@@ -1,10 +1,10 @@
 import { Action, NgxsOnInit, Selector, State, StateContext, StateToken } from "@ngxs/store";
 import { DeckStateModel } from "./deck.model";
 import { Injectable } from "@angular/core";
-import { Deck } from "../../models/interfaces";
 import { DeckActions } from "./deck.actions";
 import { environment } from "projects/app/src/environments/environment";
 import { demoPartyDecks, leggitPartyDecks } from "../../constants/decks";
+import { Deck } from "@shared";
 
 export const DECK_STATE_TOKEN = new StateToken<DeckStateModel>('deck');
 

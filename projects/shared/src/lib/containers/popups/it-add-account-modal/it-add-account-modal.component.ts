@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { CreateAccountFormData } from "projects/app/src/app/core/models/interfaces";
-import { PopupService } from "projects/app/src/app/core/services/service/popup.service";
-import { AuthenticationActions } from "projects/app/src/app/core/state";
+import { PopupService } from "projects/shared/src/lib/logic/services/helper/popup.service";
+import { AuthenticationActions, CreateAccountFormData } from "@shared";
 
 @Component({
     selector: 'it-add-account-modal',

@@ -1,7 +1,6 @@
 import { FormGroup, Validators } from "@angular/forms";
-import { DefaultGameSetting } from "../models/interfaces/logic/game/default-game-setting";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "../constants/game-settings";
-import { DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "../models/enums";
+import { DefaultGameSetting, DefaultGameSettingRequirement, DefaultGameSettingValueSource } from "@shared";
 
 export namespace GameSettingsUtils {
     export function prepareGameSettingsForm(gameSettingsForm: FormGroup, defaultGameSettings?: DefaultGameSetting[]) {

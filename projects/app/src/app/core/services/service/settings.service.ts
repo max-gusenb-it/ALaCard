@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { systemDefaultValue } from '../../constants/systemDefaultValue';
+import { systemDefaultValue } from '../../../../../../shared/src/lib/utils/constants/systemDefaultValue';
 import { LanguageUtils } from '../../utils/language.util';
 import { TranslateService } from '@ngx-translate/core';
+
+// ToDo - structure: Think about location and usage
 
 @Injectable({
   providedIn: 'root'

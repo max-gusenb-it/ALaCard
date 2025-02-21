@@ -1,21 +1,35 @@
 import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
-import { DynamicPlayerVotingRoundData } from "projects/app/src/app/core/models/interfaces/logic/game-data/ingame-data/dynamic-round-data/dynamic-player-voting-round-data";
-import { Card, DynamicRoundData, Player, PlayerVotingCard, PlayerVotingResponse, PlayerVotingResult, PlayerVotingGroup, Response, Result, SipResult, PlayerVotingResultConfig, GameSettings } from "projects/app/src/app/core/models/interfaces";
 import { TranslateService } from "@ngx-translate/core";
-import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "projects/app/src/app/core/constants/card";
+import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "projects/shared/src/lib/utils/constants/card";
 import { Store } from "@ngxs/store";
 import { RoomState } from "projects/app/src/app/core/state";
-import { Utils } from "projects/app/src/app/core/utils/utils";
-import { IngameDataDataService } from "../../data/ingame-data.data.service";
-import { ResponseDataDataService } from "../../data/response-data.data.service";
-import { StaticRoundDataDataService } from "../../data/static-round-data.data.service";
+import { Utils } from "projects/shared/src/lib/utils/utils/utils";
 import { MarkdownUtils } from "projects/app/src/app/core/utils/markdown.utils";
+import { 
+    DynamicPlayerVotingRoundData,
+    IngameDataDataService,
+    PlayerVotingCard,
+    PlayerVotingGroup,
+    PlayerVotingResponse,
+    PlayerVotingResult,
+    PlayerVotingResultConfig,
+    ResponseDataDataService,
+    StaticRoundDataDataService,
+    Response,
+    DynamicRoundData,
+    Result,
+    Card,
+    SipResult,
+    GameSettings
+} from "@shared";
+import { Player } from "../../../models/interfaces";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
+export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard,
+PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
 
     constructor(
         private store: Store,

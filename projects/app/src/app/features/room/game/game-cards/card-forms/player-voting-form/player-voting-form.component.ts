@@ -2,16 +2,23 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { playerVotingCardSkipValue } from 'projects/app/src/app/core/constants/card';
-import { Player, PlayerVotingCard, PlayerVotingResponse, RoomSettings, Round } from 'projects/app/src/app/core/models/interfaces';
-import { ResponseDataDataService } from 'projects/app/src/app/core/services/data/response-data.data.service';
+import { playerVotingCardSkipValue } from 'projects/shared/src/lib/utils/constants/card';
+import { Player, RoomSettings } from 'projects/app/src/app/core/models/interfaces';
 import { PlayerVotingCardService } from 'projects/app/src/app/core/services/service/card/player-voting-card.service';
 import { GameControlService } from 'projects/app/src/app/core/services/service/game-control.service';
 import { RoomService } from 'projects/app/src/app/core/services/service/room.service';
-import { ResponseDataSourceService } from 'projects/app/src/app/core/services/source/response-data.source.service';
-import { AuthenticationState, RoomState } from 'projects/app/src/app/core/state';
-import { InformationActions, InformationState } from 'projects/app/src/app/core/state/information';
-import { AngularLifecycle } from '@shared';
+import { RoomState } from 'projects/app/src/app/core/state';
+import { 
+  AngularLifecycle,
+  AuthenticationState,
+  InformationActions,
+  InformationState,
+  PlayerVotingCard,
+  PlayerVotingResponse,
+  ResponseDataDataService,
+  ResponseDataSourceService,
+  Round
+} from '@shared';
 
 @Component({
   selector: 'player-voting-form',
