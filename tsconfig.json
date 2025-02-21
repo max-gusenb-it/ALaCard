@@ -20,6 +20,10 @@
       "@shared": [
         "dist/shared",
         "projects/shared/src/public-api"
+      ],
+      "@features": [
+        "dist/features",
+        "projects/features/src/public-api"
       ]
     },
     "importHelpers": true,

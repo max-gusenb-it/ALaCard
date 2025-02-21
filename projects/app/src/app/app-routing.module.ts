@@ -10,7 +10,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'test',
-        loadChildren: () => import('./features/test/test.module').then(m => m.TestPageModule)
+        loadChildren: () => import('@features').then(m => m.TestPageModule)
       },
       {
         path: 'profile',
