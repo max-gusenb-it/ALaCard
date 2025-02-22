@@ -2,26 +2,32 @@ import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { RoomState } from "@features";
 import { Utils } from "projects/shared/src/lib/utils/utils/utils";
-import { MarkdownUtils } from "projects/features/src/lib/room/utils/utils/markdown.utils";
 import { 
-    IngameDataDataService,
     PlayerVotingCard,
     PlayerVotingGroup,
     PlayerVotingResult,
     PlayerVotingResultConfig,
-    ResponseDataDataService,
-    StaticRoundDataDataService,
     Result,
     Card,
     SipResult
 } from "@shared";
-import { Player } from "../../../../../../../features/src/lib/room/models";
-import { PlayerVotingResponse, Response } from "../../../models/interfaces/response-data";
-import { DynamicPlayerVotingRoundData, DynamicRoundData } from "../../../models/interfaces/ingame-data";
-import { defaultCardSips, defaultPayToDisplaySips, playerVotingCardSkipValue } from "../../../utils/constants/card";
-import { GameSettings } from "../../../models/interfaces/game";
+import { 
+    RoomState,
+    IngameDataDataService,
+    ResponseDataDataService,
+    StaticRoundDataDataService,
+    MarkdownUtils,
+    Player,
+    PlayerVotingResponse,
+    Response,
+    DynamicPlayerVotingRoundData,
+    DynamicRoundData,
+    defaultCardSips,
+    defaultPayToDisplaySips,
+    playerVotingCardSkipValue,
+    GameSettings
+} from "@features";
 
 @Injectable({
     providedIn: 'root'

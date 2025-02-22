@@ -1,26 +1,29 @@
 import { Injectable } from "@angular/core";
-import { PollCardService } from "./poll-card.service";
 import { TranslateService } from "@ngx-translate/core";
-import { Utils } from "projects/shared/src/lib/utils/utils/utils";
 import { Store } from "@ngxs/store";
-import { MarkdownUtils } from "projects/features/src/lib/room/utils/utils/markdown.utils";
 import { 
     Card,
-    IngameDataDataService,
     PollCardStates,
     PollResult,
-    ResponseDataDataService,
     Result,
     SipResult,
-    StaticRoundDataDataService,
     TopicVotingCard,
     TopicVotingGroup,
-    TopicVotingResultConfig
+    TopicVotingResultConfig,
+    Utils
 } from "@shared";
-import { Player } from "../../../../../../../features/src/lib/room/models";
-import { defaultCardSips, pollCardSkipValue } from "../../../utils/constants/card";
-import { DynamicRoundData } from "../../../models/interfaces/ingame-data";
-import { GameSettings } from "../../../models/interfaces/game";
+import { 
+    Player,
+    IngameDataDataService,
+    ResponseDataDataService,
+    StaticRoundDataDataService,
+    defaultCardSips,
+    pollCardSkipValue,
+    DynamicRoundData,
+    GameSettings,
+    MarkdownUtils,
+    PollCardService,
+} from "@features";
 
 @Injectable({
     providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, takeUntil } from 'rxjs';
-import { RoomState, StaticRoundData, Room } from '@features';
-import { AngularLifecycle, StaticRoundDataDataService } from '@shared';
+import { RoomState, StaticRoundData, Room, StaticRoundDataDataService } from '@features';
+import { AngularLifecycle } from '@shared';
 
 @Component({
   selector: 'game',

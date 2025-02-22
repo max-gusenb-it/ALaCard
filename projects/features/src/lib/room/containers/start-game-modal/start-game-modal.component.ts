@@ -6,7 +6,6 @@ import { takeUntil } from 'rxjs';
 import {
   AngularLifecycle,
   Deck,
-  IngameDataDataService,
   speficiPlayerIdSettingName,
   PopupService
 } from '@shared';
@@ -15,6 +14,7 @@ import {
   GameSettings,
   StaticRoundDataUtils,
   GameSettingsUtils,
+  IngameDataDataService,
   RoomActions,
   RoomState,
   DeckState,

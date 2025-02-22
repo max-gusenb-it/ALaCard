@@ -7,7 +7,8 @@ import { firstValueFrom, takeUntil } from 'rxjs';
 import { AuthenticationStateModel } from './authentication.model';
 import { UserSourceService } from '../../services/source/user.source.service';
 import { EmailAuthProvider, linkWithCredential } from '@angular/fire/auth';
-import { AngularLifecycle, GameHistoryEntry, LoadingHelperService, systemDefaultValue, TutorialInfo, User } from '@shared';
+import { AngularLifecycle, GameHistoryEntry, LoadingHelperService, systemDefaultValue, TutorialInfo, User, Utils } from '@shared';
+import { SettingsService } from '../../services/settings.service';
 
 export const AUTHENTICATION_STATE_TOKEN = new StateToken<AuthenticationStateModel>('authentication');
 
@@ -70,7 +71,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     constructor(
         private authDataService: AuthDataService,
         private userSourceService: UserSourceService,
-        private loadingHelperService: LoadingHelperService
+        private loadingHelperService: LoadingHelperService,
+        // private settingsService: SettingsService
     ) {
         super();
     }
@@ -150,6 +152,11 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     @Action(AuthenticationActions.SetUserCredentials)
     setUserCredentials(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SetUserCredentials) {
         const state = ctx.getState();
+
+        if (Utils.isStringDefinedAndNotEmpty(action.uid)) {
+            // this.settingsService.setAppLanguage(u.settings.language);
+            // this.settingsService.setAppColor(u.settings.color);
+        }
 
         ctx.patchState({
             ...state,

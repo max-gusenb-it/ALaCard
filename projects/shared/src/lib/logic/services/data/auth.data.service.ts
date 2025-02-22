@@ -8,10 +8,14 @@ import { AngularLifecycle, AuthenticationActions, AuthenticationState, ItError, 
 
 // Todo - structure: refactor settings service outh from here
 
+// * create user-data-service 
+// * use new user data service in auth state to load user
+// * call settings service
+
 @Injectable({
     providedIn: 'root'
 })
-export class AuthDataService extends AngularLifecycle{
+export class AuthDataService extends AngularLifecycle {
     userSubscription$: Subscription = null as any;
 
     constructor(

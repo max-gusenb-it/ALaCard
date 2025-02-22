@@ -10,14 +10,10 @@ import {
     Deck, 
     ErrorMonitorActions, 
     InformationActions, 
-    IngameDataSourceService, 
     ItError, 
     LoadingActions, 
     LoadingHelperService, 
     PlayerState,
-    ResponseDataSourceService,
-    RoomSourceService,
-    StaticRoundDataSourceService,
     PopupService,
     SharedErrors,
     RoomStateErrors
@@ -35,6 +31,10 @@ import {
     IngameDataUtils,
     RoomActions,
     RoomConnectionData,
+    IngameDataSourceService, 
+    ResponseDataSourceService,
+    RoomSourceService,
+    StaticRoundDataSourceService,
     RoomStateModel
 } from "@features";
 

@@ -8,7 +8,6 @@ import {
   AngularLifecycle,
   LoadingState,
   PopupService,
-  StaticRoundDataDataService,
   AuthenticationState
 } from '@shared';
 import {
@@ -16,6 +15,7 @@ import {
   RoomSettingsBottomSheet,
   StartGameModal,
   AddOfflinePlayerBottomSheet,
+  StaticRoundDataDataService,
   GameControlService,
   Player,
   Room,

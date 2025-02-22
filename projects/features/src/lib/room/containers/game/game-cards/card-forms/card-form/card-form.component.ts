@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { AngularLifecycle, Card, Deck, StaticRoundDataDataService } from '@shared';
-import { StaticRoundData, PlayerVotingCardService, RoomState } from '@features';
+import { AngularLifecycle, Card, Deck } from '@shared';
+import { StaticRoundData, PlayerVotingCardService, StaticRoundDataDataService, RoomState } from '@features';
 
 @Component({
   selector: 'card-form',

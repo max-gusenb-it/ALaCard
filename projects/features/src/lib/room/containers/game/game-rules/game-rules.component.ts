@@ -1,15 +1,13 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { filter, take, takeUntil, timer } from 'rxjs';
-import { RoomState, slideToggle } from '@features';
+import { RoomState, slideToggle, ResponseDataSourceService, StaticRoundDataDataService, } from '@features';
 import {
   AuthenticationState,
   CardType,
   FreeTextCard,
   InformationActions,
   InformationState,
-  ResponseDataSourceService,
-  StaticRoundDataDataService,
   TutorialService
 } from '@shared';
 

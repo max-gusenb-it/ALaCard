@@ -5,13 +5,13 @@ import {
   RoomState,
   DynamicRoundData,
   GameSettings,
-  StaticRoundData
+  StaticRoundData,
+  IngameDataDataService,
+  StaticRoundDataDataService
 } from '@features';
 import { 
   AngularLifecycle,
-  Deck,
-  IngameDataDataService,
-  StaticRoundDataDataService
+  Deck
 } from '@shared';
 
 @Component({

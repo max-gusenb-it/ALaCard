@@ -10,7 +10,9 @@ import {
   RoomService,
   DynamicRoundData,
   RoundState,
-  StaticRoundData
+  StaticRoundData,
+  IngameDataDataService,
+  StaticRoundDataDataService
 } from '@features';
 import { 
   AngularLifecycle,
@@ -19,9 +21,7 @@ import {
   Deck,
   InformationActions,
   InformationState,
-  IngameDataDataService,
   RoundInformation,
-  StaticRoundDataDataService,
   TutorialService
 } from '@shared';
 

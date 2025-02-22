@@ -4,7 +4,6 @@ import { Store } from "@ngxs/store";
 import { TranslateService } from "@ngx-translate/core";
 import { 
     PopupService,
-    RoomPlayerLoadBaseDataService,
     Utils
 } from "@shared";
 import { 
@@ -13,6 +12,7 @@ import {
     PlayerData,
     Response,
     defaultInactiveRoundCount,
+    RoomPlayerLoadBaseDataService,
     IngameDataSourceService
 } from "@features";
 

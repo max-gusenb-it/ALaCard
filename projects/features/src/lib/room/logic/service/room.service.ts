@@ -2,14 +2,12 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { combineLatest, filter, map, of, take } from "rxjs";
-import { RoomState, ItAuthenticateModal, RoomUtils, Player, Room } from '@features';
+import { RoomState, ItAuthenticateModal, RoomUtils, Player, Room, IngameDataDataService, RoomSourceService } from '@features';
 import { 
     AuthenticationState,
     InformationState,
-    IngameDataDataService,
     ItError,
     PlayerState,
-    RoomSourceService,
     UserSourceService,
     RoomServiceErrors,
     PopupService

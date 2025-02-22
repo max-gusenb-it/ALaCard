@@ -3,8 +3,6 @@ import { systemDefaultValue } from '../../utils/constants/systemDefaultValue';
 import { LanguageUtils } from '../../utils/utils/language.util';
 import { TranslateService } from '@ngx-translate/core';
 
-// ToDo - structure: Think about location and usage
-
 @Injectable({
   providedIn: 'root'
 })

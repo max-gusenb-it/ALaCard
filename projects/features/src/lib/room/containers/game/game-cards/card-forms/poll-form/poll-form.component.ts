@@ -12,7 +12,9 @@ import {
     RoomState,
     CardService,
     pollCardSkipValue,
-    PollResponse
+    PollResponse,
+    ResponseDataDataService,
+    ResponseDataSourceService
 } from "@features";
 import { 
     AngularLifecycle,
@@ -21,8 +23,6 @@ import {
     InformationActions,
     InformationState,
     PollCard,
-    ResponseDataDataService,
-    ResponseDataSourceService,
     Utils
 } from '@shared';
 

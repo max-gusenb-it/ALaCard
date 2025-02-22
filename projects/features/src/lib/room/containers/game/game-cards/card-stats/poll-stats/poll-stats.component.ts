@@ -7,6 +7,7 @@ import {
   CardService,
   DynamicPollRoundData,
   GameControlService,
+  IngameDataDataService,
   pollCardSkipValue,
   RoomService,
   RoomState,
@@ -15,7 +16,6 @@ import {
 import { 
   AngularLifecycle,
   Card,
-  IngameDataDataService,
   PollCard,
   PollResult,
   SipResult,

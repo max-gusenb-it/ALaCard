@@ -11,7 +11,9 @@ import {
   RoomSettings,
   PlayerVotingCardService,
   PlayerVotingResponse,
-  playerVotingCardSkipValue
+  playerVotingCardSkipValue,
+  ResponseDataDataService,
+  ResponseDataSourceService
 } from '@features';
 import { 
   AngularLifecycle,
@@ -19,8 +21,6 @@ import {
   InformationActions,
   InformationState,
   PlayerVotingCard,
-  ResponseDataDataService,
-  ResponseDataSourceService,
 } from '@shared';
 
 @Component({

@@ -4,9 +4,6 @@ import { Store } from "@ngxs/store";
 import { 
     Card,
     Deck,
-    IngameDataDataService,
-    ResponseDataDataService,
-    StaticRoundDataDataService,
     CardStates,
     ErrorMonitorActions,
     ItError,
@@ -21,6 +18,9 @@ import {
     GameSettings,
     Round,
     StaticRoundData,
+    IngameDataDataService,
+    ResponseDataDataService,
+    StaticRoundDataDataService,
     StaticRoundDataUtils
 } from '@features';
 

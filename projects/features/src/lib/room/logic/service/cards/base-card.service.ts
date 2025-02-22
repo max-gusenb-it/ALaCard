@@ -5,13 +5,10 @@ import {
     Card,
     CardStates,
     InformationState,
-    IngameDataDataService,
     PlayerState,
-    ResponseDataDataService,
     Result,
     ResultConfig,
     SipResult,
-    StaticRoundDataDataService,
     Utils,
     playerNameWhitecard,
     specificPlayerNameWhitecard
@@ -24,7 +21,10 @@ import {
     BaseCardUtils,
     Round,
     RoundState,
-    Response
+    Response,
+    IngameDataDataService,
+    ResponseDataDataService,
+    StaticRoundDataDataService
 } from "@features";
 @Injectable({
     providedIn: 'root'

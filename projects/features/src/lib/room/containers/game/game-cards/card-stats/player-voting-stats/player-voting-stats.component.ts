@@ -12,6 +12,8 @@ import {
   GameSettings,
   Player,
   PlayerVotingCardService,
+  IngameDataDataService,
+  IngameDataSourceService,
   playerVotingCardSkipValue,
   RoomState,
   Round
@@ -20,8 +22,6 @@ import {
   AngularLifecycle,
   AuthenticationState,
   Card,
-  IngameDataDataService,
-  IngameDataSourceService,
   PlayerVotingResult,
   SipResult,
   Utils
