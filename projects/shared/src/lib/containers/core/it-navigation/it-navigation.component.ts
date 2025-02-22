@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
+import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
 import { environment } from 'projects/app/src/environments/environment';
 import { AuthenticationState } from '@shared';
 

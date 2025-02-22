@@ -5,7 +5,10 @@ import { InformationActions } from "./information.actions";
 import { UserSourceService } from "../../services/source/user.source.service";
 import { AuthenticationState } from "../authentication";
 import { filter, takeUntil } from "rxjs";
-import { AngularLifecycle, GameInformation, InformationStateErrors, ItError, RoundInformation, TutorialInfo, Response } from '@shared';
+import { AngularLifecycle, GameInformation, InformationStateErrors, ItError, RoundInformation, TutorialInfo } from '@shared';
+import { Response } from "@features";
+
+// ToDo - structure: remove response type from here and just use any
 
 export const INFORMATION_STATE_VERSION = 1;
 export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('information');

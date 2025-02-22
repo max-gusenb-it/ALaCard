@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, interval, takeUntil } from 'rxjs';
-import { PopupService } from '../../../shared/src/lib/logic/services/helper/popup.service';
+import { PopupService } from '../../../shared/src/lib/logic/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AngularLifecycle, ErrorMonitorState, IItError, LoadingState } from '@shared';
 

@@ -23,11 +23,9 @@ import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
 import { USE_EMULATOR as USE_STORAGE_EMULATOR } from '@angular/fire/compat/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { LanguageUtils } from './core/utils/language.util';
+import { LanguageUtils } from '../../../shared/src/lib/utils/utils/language.util';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { DatePipe } from '@angular/common';
-import { ROOM_STATE_TOKEN, RoomState } from './core/state/room/room.state';
-import { DECK_STATE_TOKEN, DeckState } from './core/state/deck';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
   AUTHENTICATION_STATE_TOKEN,
@@ -38,6 +36,7 @@ import {
   LoadingState,
   SharedModule
 } from '@shared';
+import { RoomState, DeckState, ROOM_STATE_TOKEN, DECK_STATE_TOKEN } from '@features';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

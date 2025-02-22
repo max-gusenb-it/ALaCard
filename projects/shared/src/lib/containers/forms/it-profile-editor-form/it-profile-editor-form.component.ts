@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
 import { AngularLifecycle, ProfileEditorFormData } from '@shared';
 
+// ToDo - structure: rename selector 
 @Component({
   selector: 'it-profile-editor',
   templateUrl: './it-profile-editor-form.component.html'

@@ -14,12 +14,12 @@ export const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfilePageModule),
+        loadChildren: () => import('@features').then(m => m.ProfilePageModule),
         canActivate: mapToCanActivate([AuthGuard])
       },
       {
         path: 'home',
-        loadChildren: () => import('./features/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('@features').then(m => m.HomePageModule)
       },
       {
         path: '',
@@ -30,7 +30,7 @@ export const routes: Routes = [
   },
   {
     path: 'room/:connectionData',
-    loadChildren: () => import('./features/room/room.module').then( m => m.RoomPageModule)
+    loadChildren: () => import('@features').then( m => m.RoomPageModule)
   },
 ];
 

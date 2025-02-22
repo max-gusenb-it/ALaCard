@@ -3,8 +3,10 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { Subscription, takeUntil } from "rxjs";
 import { UserSourceService } from "../source/user.source.service";
-import { SettingsService } from "projects/app/src/app/core/services/service/settings.service";
+import { SettingsService } from "projects/shared/src/lib/logic/services/settings.service";
 import { AngularLifecycle, AuthenticationActions, AuthenticationState, ItError, systemDefaultValue } from '@shared';
+
+// Todo - structure: refactor settings service outh from here
 
 @Injectable({
     providedIn: 'root'

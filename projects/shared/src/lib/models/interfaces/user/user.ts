@@ -1,5 +1,5 @@
-import { TutorialInfo } from "../information/tutorial-info";
 import { FirestoreBase } from "../data/firestore-base";
+import { TutorialInfo } from "../state.information";
 import { GameHistoryEntry } from "./game-history-entry";
 import { Settings } from "./settings";
 

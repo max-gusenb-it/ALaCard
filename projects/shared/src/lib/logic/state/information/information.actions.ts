@@ -1,4 +1,5 @@
-import { GameInformation, Response } from "@shared";
+import { Response } from "@features";
+import { GameInformation } from "@shared";
 
 export namespace InformationActions {
     export class SetGameInformation {

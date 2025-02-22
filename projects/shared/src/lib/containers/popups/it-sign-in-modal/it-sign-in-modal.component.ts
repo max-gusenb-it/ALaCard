@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { ItForgotPasswordModal } from '../it-forgot-password-modal/it-forgot-password-modal.component';
-import { PopupService } from 'projects/shared/src/lib/logic/services/helper/popup.service';
+import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
 import { AuthenticationActions } from '@shared';
 
 @Component({
