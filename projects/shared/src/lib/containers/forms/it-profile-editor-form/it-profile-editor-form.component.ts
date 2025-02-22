@@ -3,9 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
 import { AngularLifecycle, ProfileEditorFormData } from '@shared';
 
-// ToDo - structure: rename selector 
 @Component({
-  selector: 'it-profile-editor',
+  selector: 'it-profile-editor-form',
   templateUrl: './it-profile-editor-form.component.html'
 })
 export class ItProfileEditorComponent extends AngularLifecycle implements AfterViewInit {

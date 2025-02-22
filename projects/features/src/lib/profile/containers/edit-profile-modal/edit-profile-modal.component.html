@@ -2,7 +2,7 @@
     class="h-full flex flex-col p-6 justify-between"
 >
     <it-icon-button color="tertiary" size="large" (click)="close()">close</it-icon-button>
-    <it-profile-editor
+    <it-profile-editor-form
         [isRegistered]="true"
         [profileEditorFormData]="profileFormData"
         (profileEditorFormChanged)="setProfileFormData($event)"
