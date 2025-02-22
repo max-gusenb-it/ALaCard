@@ -37,13 +37,19 @@ import {
   SharedModule
 } from '@shared';
 import { RoomState, DeckState, ROOM_STATE_TOKEN, DECK_STATE_TOKEN } from '@features';
+import { ItNavigationComponent } from './it-navigation/it-navigation.component';
+import { ItNavItemComponent } from './it-navigation/it-nav-item/it-nav-item.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    ItNavigationComponent,
+    ItNavItemComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

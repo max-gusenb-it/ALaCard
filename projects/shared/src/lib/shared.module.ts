@@ -20,8 +20,6 @@ import { ItInputComponent } from './components/forms/it-input/it-input.component
 import { ItSelectComponent } from './components/forms/it-select/it-select.component';
 import { ItTextAreaComponent } from './components/forms/it-text-area/it-text-area.component';
 import { ItCheckboxAccordComponent } from './components/forms/it-checkbox-accord/it-checkbox-accord.component';
-import { ItNavigationComponent } from './containers/core/it-navigation/it-navigation.component';
-import { ItNavItemComponent } from './containers/core/it-navigation/it-nav-item/it-nav-item.component';
 import { ItAccordComponent } from './components/forms/it-accord/it-accord.component';
 import { ItLoadingScreenComponent } from './containers/core/it-loading-screen/it-loading-screen.component';
 import { ItSelectionListComponent } from './components/forms/it-selection-list/it-selection-list.component';
@@ -55,8 +53,6 @@ import { ItDetailHeadingComponent } from './components/display/it-detail-heading
     ItSelectComponent,
     ItTextAreaComponent,
     ItCheckboxAccordComponent,
-    ItNavigationComponent,
-    ItNavItemComponent,
     ItAccordComponent,
     ItLoadingScreenComponent,
     ItSelectionListComponent,
@@ -98,8 +94,6 @@ import { ItDetailHeadingComponent } from './components/display/it-detail-heading
     ItSelectComponent,
     ItTextAreaComponent,
     ItCheckboxAccordComponent,
-    ItNavigationComponent,
-    ItNavItemComponent,
     ItAccordComponent,
     ItLoadingScreenComponent,
     ItSelectionListComponent,
