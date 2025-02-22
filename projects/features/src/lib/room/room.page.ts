@@ -7,11 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { 
   AngularLifecycle,
   LoadingState,
-  ItOptionBottomSheet,
   PopupService,
   StaticRoundDataDataService,
-  AuthenticationState,
-  OptionBottomSheetData
+  AuthenticationState
 } from '@shared';
 import {
   ShareBottomSheet,
@@ -97,15 +95,10 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   handleMenuAction(actionType: string) {
     switch(actionType) {
       case(leaveRoomMenuItem):
-        const ref = this.popupService.openBottomSheet(
-          ItOptionBottomSheet, 
-          {
-            data: { 
-              title: this.translateService.instant("features.room.leave-bottom-sheet.title"),
-              optionOne: this.translateService.instant("actions.cancel"),
-              optionTwo: this.translateService.instant("features.room.leave-bottom-sheet.leave-room")
-            } as OptionBottomSheetData
-          }
+        const ref = this.popupService.openOptionBottomSheet(
+          this.translateService.instant("features.room.leave-bottom-sheet.title"),
+          this.translateService.instant("actions.cancel"),
+          this.translateService.instant("features.room.leave-bottom-sheet.leave-room")
         );
         firstValueFrom(ref.closed)
           .then((data: any) => {

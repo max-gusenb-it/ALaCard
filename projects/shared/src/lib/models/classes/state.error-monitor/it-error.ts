@@ -1,7 +1,5 @@
 import { IItError } from "@shared";
 
-// ToDo - structure: Check if any of the models can be moved to features
-
 export class ItError extends Error {
     location: string;
 

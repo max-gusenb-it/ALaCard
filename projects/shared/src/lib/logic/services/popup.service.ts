@@ -2,10 +2,8 @@ import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { BasePortalOutlet } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { ItSnackbarComponent } from 'projects/shared/src/lib/containers/popups/it-snackbar/it-snackbar.component';
 import { ModalController, ModalOptions } from '@ionic/angular';
-import { ItOptionBottomSheet, OptionBottomSheetData, SnackbarData } from '@shared';
-// ToDo - structure: refactor so that components are only used from service
+import { ItSnackbarComponent, ItOptionBottomSheet, OptionBottomSheetData, SnackbarData } from '@shared';
 
 // ToDo: rename to PopUp
 @Injectable({
