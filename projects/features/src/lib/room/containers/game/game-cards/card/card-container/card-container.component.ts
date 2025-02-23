@@ -122,10 +122,6 @@ export class CardContainerComponent extends AngularLifecycle{
     return RoundState.card;
   }
 
-  getHelperCardState() {
-    return RoundState.cardHelper;
-  }
-
   getFormState() {
     return RoundState.form;
   }

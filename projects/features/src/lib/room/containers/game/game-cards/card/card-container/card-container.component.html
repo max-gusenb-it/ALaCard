@@ -24,21 +24,6 @@
         [isMarkDown]="(roomSettings$ | async)!.singleDeviceMode"
       />
     }
-    <!-- ToDo: structure - This or second card-container in game component can probably be removed -->
-    @case (getHelperCardState()) {
-      <card
-        class="absolute"
-        (click)="continue()"
-        (onSwipe)="swipe($event)"
-        [card]="card"
-        [playerIds]="staticRoundData.round.playerIds"
-        [deckname]="deck.name"
-        [customTitle]="getCustomCardTitle()"
-        [customColor]="deck.styleSettings?.cardOverwriteColor"
-        [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
-        [isMarkDown]="(roomSettings$ | async)!.singleDeviceMode"
-      />
-    }
     @case (getFormState()) {
       <card-form
         class="absolute w-full"

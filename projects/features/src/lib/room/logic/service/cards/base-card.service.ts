@@ -26,6 +26,11 @@ import {
     ResponseDataDataService,
     StaticRoundDataDataService
 } from "@features";
+
+// ToDo - structure:
+// * rename card services
+// * rename components to it or remove all it's
+
 @Injectable({
     providedIn: 'root'
 })
