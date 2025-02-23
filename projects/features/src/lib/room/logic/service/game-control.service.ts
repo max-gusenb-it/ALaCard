@@ -7,7 +7,6 @@ import {
     CardStates,
     ErrorMonitorActions,
     ItError,
-    GameControlServiceErros,
     Utils
 } from '@shared';
 import { 
@@ -21,6 +20,7 @@ import {
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService,
+    GameControlServiceErros,
     StaticRoundDataUtils
 } from '@features';
 

@@ -72,7 +72,7 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
         private authDataService: AuthDataService,
         private userSourceService: UserSourceService,
         private loadingHelperService: LoadingHelperService,
-        // private settingsService: SettingsService
+        private settingsService: SettingsService
     ) {
         super();
     }
@@ -153,9 +153,9 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     setUserCredentials(ctx: StateContext<AuthenticationStateModel>, action: AuthenticationActions.SetUserCredentials) {
         const state = ctx.getState();
 
-        if (Utils.isStringDefinedAndNotEmpty(action.uid)) {
-            // this.settingsService.setAppLanguage(u.settings.language);
-            // this.settingsService.setAppColor(u.settings.color);
+        if (state.user) {
+            this.settingsService.setAppLanguage(state.user.settings.language);
+            this.settingsService.setAppColor(state.user.settings.color);
         }
 
         ctx.patchState({
@@ -199,6 +199,8 @@ export class AuthenticationState extends AngularLifecycle implements NgxsOnInit 
     signOut(ctx: StateContext<AuthenticationStateModel>) {
         ctx.dispatch(new AuthenticationActions.SetUser());
         ctx.dispatch(new AuthenticationActions.SetUserCredentials());
+        this.settingsService.setAppLanguage(systemDefaultValue);
+        this.settingsService.setAppColor(systemDefaultValue);
         return this.authDataService.signOut();
     }
 }

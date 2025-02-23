@@ -1,5 +1,4 @@
 export * from "./data/auth.data.service";
-export * from "./data/user.data.service"
 
 export * from "./helper/angular-lifecycle.helper";
 export * from "./helper/loading.helper.service";

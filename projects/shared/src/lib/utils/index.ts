@@ -1,6 +1,6 @@
 export * from "./constants/card";
 export * from "./constants/color";
-export * from "./constants/errorCodes";
+export * from "./constants/error-codes";
 export * from "./constants/firestoreReferences";
 export * from "./constants/game-settings";
 export * from "./constants/languages";

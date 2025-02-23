@@ -15,8 +15,7 @@ import {
     LoadingHelperService, 
     PlayerState,
     PopupService,
-    SharedErrors,
-    RoomStateErrors
+    SharedErrors
 } from '@shared';
 import { 
     RoomService,
@@ -35,7 +34,8 @@ import {
     ResponseDataSourceService,
     RoomSourceService,
     StaticRoundDataSourceService,
-    RoomStateModel
+    RoomStateModel,
+    RoomStateErrors
 } from "@features";
 
 export const ROOM_STATE_TOKEN = new StateToken<RoomStateModel>('room');

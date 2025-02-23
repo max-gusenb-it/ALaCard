@@ -14,7 +14,8 @@ import {
   supportedLanguages,
   supportedColors,
   PopupService,
-  systemDefaultValue
+  systemDefaultValue,
+  SettingsService
 } from '@shared';
 import { ItAddAccountModal, EditProfileModal, DeleteAccountBottomSheetComponent } from "@features";
 
@@ -36,7 +37,8 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     private navCtrl: NavController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
-    private popupService: PopupService
+    private popupService: PopupService,
+    private settingsService: SettingsService
   ) {
     super();
   }
@@ -89,6 +91,8 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
 
   updateSettings() {
     const user = this.store.selectSnapshot(AuthenticationState.user);
+
+    this.settingsService.setAppColor(this.settingsForm.controls['color'].value);
 
     this.loadingHelperService.loadWithLoadingState([
       this.userSourceService.updateUser(

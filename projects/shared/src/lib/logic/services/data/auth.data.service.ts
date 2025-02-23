@@ -3,14 +3,9 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { Subscription, takeUntil } from "rxjs";
 import { UserSourceService } from "../source/user.source.service";
-import { SettingsService } from "projects/shared/src/lib/logic/services/settings.service";
-import { AngularLifecycle, AuthenticationActions, AuthenticationState, ItError, systemDefaultValue } from '@shared';
+import { AngularLifecycle, AuthenticationActions, AuthenticationState, ItError } from '@shared';
 
-// Todo - structure: refactor settings service outh from here
-
-// * create user-data-service 
-// * use new user data service in auth state to load user
-// * call settings service
+// Todo - structure: make helper service or move back to auth state as functions?
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +16,6 @@ export class AuthDataService extends AngularLifecycle {
     constructor(
         private store: Store,
         private fireAuth: AngularFireAuth,
-        private settingsService: SettingsService,
         private userSourceService: UserSourceService
     ) {
         super();
@@ -46,10 +40,6 @@ export class AuthDataService extends AngularLifecycle {
                         .pipe(takeUntil(this.destroyed$))
                         .subscribe(u => {
                             this.store.dispatch(new AuthenticationActions.SetUser(u));
-                            if (!!u) {
-                                this.settingsService.setAppLanguage(u.settings.language);
-                                this.settingsService.setAppColor(u.settings.color);
-                            }
                         }
                     );
                 }
@@ -107,8 +97,6 @@ export class AuthDataService extends AngularLifecycle {
 
     signOut() {
         this.userSubscription$.unsubscribe();
-        this.settingsService.setAppLanguage(systemDefaultValue);
-        this.settingsService.setAppColor(systemDefaultValue);
         return this.fireAuth.signOut();
     }
 }

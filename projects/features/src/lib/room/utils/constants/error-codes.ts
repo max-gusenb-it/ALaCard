@@ -1,5 +1,3 @@
-// ToDo - structure: split into multipe files
-
 export namespace RoomSourceServiceErrors {
     export const getRoomNoUser = "room-source-service.get-room.no-user-found";
     export const roomNotFound = "room-source-service.get-room.room-not-found";
@@ -16,15 +14,6 @@ export namespace RoomStateErrors {
 
 export namespace RoomServiceErrors {
     export const joinRoomNoUser = "room-state.join-room.no-user-found";
-}
-
-export namespace SharedErrors {
-    export const unknownError = "unknown-error";
-}
-
-export namespace InformationStateErrors {
-    export const gameInformationNotFound = "information-state.set-round-card-clicked.gi-not-found"
-    export const roundInfomrationNotFound = "information-state.round-information-not-found";
 }
 
 export namespace GameControlServiceErros {

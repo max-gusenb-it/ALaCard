@@ -1,12 +1,9 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
-import { FirestoreService } from "../../../../../../../shared/src/lib/logic/services/source/firestore.source.service";
 import { bufferTime, catchError, firstValueFrom, map } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { RoomRefHelperService } from '../helper/room-ref.helper.service';
-import { Player, Room } from 'projects/features/src/lib/room/models';
-import { AuthenticationState, ItError, RoomSourceServiceErrors, roomsRef, usersRef } from '@shared';
-import { UserUtils } from 'projects/features/src/lib/room/utils/utils/user.utils';
+import { RoomRefHelperService, RoomSourceServiceErrors, Player, Room, UserUtils } from '@features';
+import { AuthenticationState, ItError, roomsRef, usersRef, FirestoreService } from '@shared';
 
 @Injectable({
     providedIn: 'root'
