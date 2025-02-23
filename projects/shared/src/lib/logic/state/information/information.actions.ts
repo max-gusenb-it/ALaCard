@@ -1,4 +1,3 @@
-import { Response } from "@features";
 import { GameInformation } from "@shared";
 
 export namespace InformationActions {
@@ -29,7 +28,7 @@ export namespace InformationActions {
 
     export class SetRoundResponded {
         static readonly type = "[CardForm] SetRoundResponded";
-        constructor(public response: Response) {};
+        constructor(public response: any) {};
     }
 
     export class SetTutorialDisplayed {
