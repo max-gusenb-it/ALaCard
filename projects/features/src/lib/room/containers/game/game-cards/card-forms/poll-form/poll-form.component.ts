@@ -5,7 +5,7 @@ import { takeUntil } from "rxjs";
 import { 
     RoomSettings,
     Round,
-    GameControlService,
+    GameService,
     RoomService,
     CardFormUtils,
     RoomState,
@@ -64,7 +64,7 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
         private responseDataDataService: ResponseDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
         private roomService: RoomService,
-        private gameControlService: GameControlService
+        private gameService: GameService
     ) {
         super();
 
@@ -127,10 +127,10 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     getAdminResponseCountInfo() {
-        return this.gameControlService.getAdminResponseCountInfo(this.round.id);
+        return this.gameService.getAdminResponseCountInfo(this.round.id);
     }
 
     processRound() {
-      this.gameControlService.processRound(this.round.id);
+      this.gameService.processRound(this.round.id);
     }
 }

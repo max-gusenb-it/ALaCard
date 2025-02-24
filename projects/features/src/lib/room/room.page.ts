@@ -16,7 +16,7 @@ import {
   StartGameModal,
   AddOfflinePlayerBottomSheet,
   StaticRoundDataDataService,
-  GameControlService,
+  GameService,
   Player,
   Room,
   RoomActions,
@@ -51,7 +51,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private popupService: PopupService,
     private translateService: TranslateService,
     private staticRoundDataDataService: StaticRoundDataDataService,
-    private gameControlService: GameControlService,
+    private gameService: GameService,
     private roomService: RoomService
   ) {
     super();
@@ -145,7 +145,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   getAdminResponseCountInfo() {
-    return this.gameControlService.getAdminResponseCountInfo(-1);
+    return this.gameService.getAdminResponseCountInfo(-1);
   }
 
   startGame() {

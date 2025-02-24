@@ -22,7 +22,7 @@ import {
     Game, 
     GameSettings, 
     GameState,
-    GameControlService,
+    GameService,
     Player,
     Room,
     RoomSettings,
@@ -124,7 +124,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
         private roomSourceService: RoomSourceService,
         private ingameDataSourceService: IngameDataSourceService,
         private responseDataSourceService: ResponseDataSourceService,
-        private gameControlService: GameControlService,
+        private gameService: GameService,
         private staticRoundDataSourceService: StaticRoundDataSourceService,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
@@ -380,7 +380,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
             ),
             this.responseDataSourceService.createInitialResponseData(state.room.id!),
             this.staticRoundDataSourceService.createStaticRoundData(
-                this.gameControlService.createInitialStaticRoundData(
+                this.gameService.createInitialStaticRoundData(
                     action.deck,
                     RoomUtils.mapPlayersToArray(state.room.players),
                     action.gameSettings
@@ -401,7 +401,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
             )
         };
 
-        const round = this.gameControlService.createGameRound(
+        const round = this.gameService.createGameRound(
             state.room.game!.deck,
             action.staticRoundData,
             RoomUtils.mapPlayersToArray(state.room.players),

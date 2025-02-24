@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, takeUntil } from 'rxjs';
-import { GameControlService } from 'projects/features/src/lib/room/logic/service/game-control.service';
+import { GameService } from 'projects/features/src/lib/room/logic/service/game-control.service';
 import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
 import { RoomService } from 'projects/features/src/lib/room/logic/service/room.service';
 import { 
@@ -47,7 +47,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   constructor(
-    private gameControlService: GameControlService,
+    private gameService: GameService,
     private playerVotingCardService: PlayerVotingCardService,
     private translateService: TranslateService,
     private store: Store,
@@ -146,7 +146,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   startNextRound() {
-    this.gameControlService.startNewRound();
+    this.gameService.startNewRound();
   }
 
 }

@@ -6,7 +6,7 @@ import {
   RoomState,
   Round,
   RoomService,
-  GameControlService,
+  GameService,
   Player,
   RoomSettings,
   PlayerVotingCardService,
@@ -42,7 +42,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   constructor(
     private responseDataSourceService: ResponseDataSourceService,
     private responseDataDataService: ResponseDataDataService,
-    private gameControleService: GameControlService,
+    private gameService: GameService,
     private changeDetectorRef: ChangeDetectorRef,
     private playerVotingCardService: PlayerVotingCardService,
     private store: Store,
@@ -125,10 +125,10 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   getAdminResponseCountInfo() {
-   return this.gameControleService.getAdminResponseCountInfo(this.round.id);
+   return this.gameService.getAdminResponseCountInfo(this.round.id);
   }
 
   processRound() {
-    this.gameControleService.processRound(this.round.id);
+    this.gameService.processRound(this.round.id);
   }
 }

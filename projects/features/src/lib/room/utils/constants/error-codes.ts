@@ -16,6 +16,6 @@ export namespace RoomServiceErrors {
     export const joinRoomNoUser = "room-state.join-room.no-user-found";
 }
 
-export namespace GameControlServiceErros {
+export namespace GameServiceErros {
     export const noCardsLeft = "game-control-service.create-game-round.no-cards-left";
 }

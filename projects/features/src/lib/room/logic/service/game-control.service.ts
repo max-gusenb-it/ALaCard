@@ -12,7 +12,7 @@ import {
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService,
-    GameControlServiceErros,
+    GameServiceErros,
     StaticRoundDataUtils
 } from '@features';
 import { 
@@ -27,7 +27,7 @@ import {
 @Injectable({
     providedIn: 'root'
 })
-export class GameControlService {
+export class GameService {
 
     constructor(
         private store: Store,
@@ -91,8 +91,8 @@ export class GameControlService {
             const newCardIndex = this.getNewCardIndex(deck, staticRoundData, players, gameSettings);
             if (!Utils.isNumberDefined(newCardIndex)) {
                 throw new ItError(
-                    GameControlServiceErros.noCardsLeft,
-                    GameControlService.name
+                    GameServiceErros.noCardsLeft,
+                    GameService.name
                 )
             }
             

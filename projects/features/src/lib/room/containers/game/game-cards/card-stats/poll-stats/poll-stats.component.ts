@@ -5,7 +5,7 @@ import {
   CardFormUtils,
   CardServiceFactory,
   DynamicPollRoundData,
-  GameControlService,
+  GameService,
   IngameDataDataService,
   pollCardSkipValue,
   RoomService,
@@ -51,7 +51,7 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
 
   constructor(
     private store: Store,
-    private gameControlService: GameControlService,
+    private gameService: GameService,
     private cardServiceFactory: CardServiceFactory,
     private roomService: RoomService,
     private ingameDataDataService: IngameDataDataService,
@@ -117,7 +117,7 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   }
 
   startNextRound() {
-    this.gameControlService.startNewRound();
+    this.gameService.startNewRound();
   }
 
   /**

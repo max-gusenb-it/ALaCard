@@ -6,7 +6,7 @@ import {
   slideToggle,
   CardServiceFactory,
   RoomSettings,
-  GameControlService,
+  GameService,
   RoomService,
   DynamicRoundData,
   RoundState,
@@ -57,7 +57,7 @@ export class CardContainerComponent extends AngularLifecycle{
 
   constructor(
     private store: Store,
-    private gameControlService: GameControlService,
+    private gameService: GameService,
     private staticRoundDataDataService: StaticRoundDataDataService,
     private ingameDataDataService: IngameDataDataService,
     private tutorialService: TutorialService,
@@ -139,7 +139,7 @@ export class CardContainerComponent extends AngularLifecycle{
 
     if (singleDeviceModeActive || this.card!.type === CardType.FreeText) {
       if (this.roomService.isUserAdmin()) {
-        this.gameControlService.startNewRound();
+        this.gameService.startNewRound();
       }
       return;
     }
@@ -150,6 +150,6 @@ export class CardContainerComponent extends AngularLifecycle{
     }
 
     if (!this.roomService.isUserAdmin()) return;
-    this.gameControlService.startNewRound();
+    this.gameService.startNewRound();
   }
 }
