@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardUtils, DynamicRoundData, IngameDataDataService, TopicVotingCardResultConfig, PollResult, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
+import { CardUtils, DynamicRoundData, IngameDataDataService, TopicVotingCardResultConfig, TopicVotingResult, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { Card, TopicVotingCard, QuizCard, Utils } from "@shared";
@@ -19,7 +19,7 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
         super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
-    override getResults(dynamicRoundData: DynamicRoundData, card: Card): PollResult[] {
+    override getResults(dynamicRoundData: DynamicRoundData, card: Card): TopicVotingResult[] {
         let results = super.getResults(dynamicRoundData, card);
         const quizCard = this.castCard(card);
 
@@ -30,7 +30,7 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
                 subjectId: sID,
                 playerIds: [],
                 votes: 0
-            } as PollResult
+            } as TopicVotingResult
         })
         results = [
             ...missingSubjectResults,
@@ -58,7 +58,7 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
         return results;
     }
 
-    override getResultsHeading(results: PollResult[], card: Card): string {
+    override getResultsHeading(results: TopicVotingResult[], card: Card): string {
         const castedCard: QuizCard = this.castCard(card);
         const targetSubjects = castedCard.subjects.filter(s => s.isTarget);
         return Utils.addComaToStringArray(

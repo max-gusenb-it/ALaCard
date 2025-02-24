@@ -1,6 +1,6 @@
 import { TopicVotingCardResultConfig } from "@features";
 
-export interface PollSipConfig {
+export interface TopicVotingSipConfig {
     resultConfig: TopicVotingCardResultConfig;
     specificSipSubjectId?: number;
     distribute?: boolean;

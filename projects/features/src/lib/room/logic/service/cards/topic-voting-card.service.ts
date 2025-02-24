@@ -13,7 +13,7 @@ import {
     Response,
     CardService,
     SipResult,
-    PollResult,
+    TopicVotingResult,
     TopicVotingCardResultConfig,
     TopicVotingCardStates,
     CardStates,
@@ -34,9 +34,9 @@ import { TranslateService } from "@ngx-translate/core";
 @Injectable({
     providedIn: 'root'
 })
-export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVotingCardResultConfig> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, PollResult, TopicVotingCardResultConfig> {
+export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVotingCardResultConfig> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, TopicVotingResult, TopicVotingCardResultConfig> {
 
-    get defaultPollVotingDistribution() {
+    get defaultTopicVotingVotingDistribution() {
         return true;
     }
 
@@ -78,10 +78,10 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         return drd;
     }
 
-    override getResults(dynamicRoundData: DynamicRoundData, card?: Card): PollResult[] {
-        let results: PollResult[] = [];
-        const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
-        dynamicPollRoundData.responses.forEach(response => {
+    override getResults(dynamicRoundData: DynamicRoundData, card?: Card): TopicVotingResult[] {
+        let results: TopicVotingResult[] = [];
+        const dynamicTopicVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
+        dynamicTopicVotingRoundData.responses.forEach(response => {
             response.votedSubjectIds.forEach(subjectId => {
                 let resultIndex = results.findIndex(r => r.subjectId === subjectId);
                 if (resultIndex === -1) {
@@ -147,14 +147,14 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
                         sips: defaultCardSips,
                         distribute: topicVotingCard.settings?.sipConfig?.distribute !== undefined ? 
                             topicVotingCard.settings?.sipConfig?.distribute : 
-                            this.defaultPollVotingDistribution
+                            this.defaultTopicVotingVotingDistribution
                     } as SipResult
                 });
             })
             .flat();
     }
 
-    override getResultsHeading(results: PollResult[], card: Card): string {
+    override getResultsHeading(results: TopicVotingResult[], card: Card): string {
         const castedCard: TopicVotingCard = this.castCard(card);
         const topResults = this.getTopResults(results);
         if (topResults.length > 0) {
@@ -211,7 +211,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
             }
         }
 
-        const distribution = castedCard.settings?.sipConfig?.distribute ?? this.defaultPollVotingDistribution
+        const distribution = castedCard.settings?.sipConfig?.distribute ?? this.defaultTopicVotingVotingDistribution
             ? this.translateService.instant("shared.components.display.it-result.distribute") 
             : this.translateService.instant("shared.components.display.it-result.drink");
         const sip = this.translateService.instant("shared.components.display.it-result.sip")
@@ -220,9 +220,9 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
     }
 
     override getResultText(result: Result): string {
-        const pollResult = this.castResult(result);
-        const translation = pollResult.votes === 1 ? this.translateService.instant("shared.components.display.it-result.vote") : this.translateService.instant("shared.components.display.it-result.votes");
-        return `${pollResult.votes} ${translation}`;
+        const topicVotingResult = this.castResult(result);
+        const translation = topicVotingResult.votes === 1 ? this.translateService.instant("shared.components.display.it-result.vote") : this.translateService.instant("shared.components.display.it-result.votes");
+        return `${topicVotingResult.votes} ${translation}`;
     }
     
     override cardHasResultSubText(card: Card): boolean {
@@ -232,16 +232,16 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
     }
     
     override getResultSubText(result: Result, players: Player[]): string {
-        const pollResult = this.castResult(result);
+        const topicVotingResult = this.castResult(result);
         let text = "";
-        pollResult.playerIds.forEach((playerId, index) => {
+        topicVotingResult.playerIds.forEach((playerId, index) => {
             text += players.find(p => p.id === playerId)!.username;
-            if (index !== pollResult.playerIds.length -1) text += ", ";
+            if (index !== topicVotingResult.playerIds.length -1) text += ", ";
         });
         return text;
     }
 
-    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingCardResultConfig) : PollResult[] {
+    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingCardResultConfig) : TopicVotingResult[] {
         if (!!!resultConfig) resultConfig = {
             group: this.defaultTopicVotingGroup
         };
@@ -249,7 +249,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         const results = this.getResults(dynamicRoundData)
             .filter(r => r.subjectId !== topicVotingCardSkipValue);
 
-        let resultGroup: PollResult[] = [];
+        let resultGroup: TopicVotingResult[] = [];
         if (results.length != 0) {
             let votes = 0;
             // ToDo: Generalize Reacurring stuff like MostVoted, LeastVoted
@@ -275,7 +275,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
     }
 
     // ToDo: move to topic voting card
-    getTopResults(results: PollResult[]): PollResult[] {
+    getTopResults(results: TopicVotingResult[]): TopicVotingResult[] {
         return results
             .filter(r => r.votes === results[0].votes && r.subjectId !== topicVotingCardSkipValue);
     }

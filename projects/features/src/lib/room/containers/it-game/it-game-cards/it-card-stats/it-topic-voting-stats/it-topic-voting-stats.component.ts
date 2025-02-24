@@ -11,7 +11,7 @@ import {
   RoomState,
   Round,
   TopicVotingCardResultConfig,
-  PollResult,
+  TopicVotingResult,
   SipResult,
   TopicVotingCardService,
   ColorUtils,
@@ -25,10 +25,10 @@ import {
 } from '@shared';
 
 @Component({
-  selector: 'it-poll-stats',
-  templateUrl: './it-poll-stats.component.html'
+  selector: 'it-topic-voting-stats',
+  templateUrl: './it-topic-voting-stats.component.html'
 })
-export class ItPollStatsComponent extends AngularLifecycle implements AfterViewInit {
+export class ItTopicVotingStatsComponent extends AngularLifecycle implements AfterViewInit {
   @Input() card: Card;
   @Input() round: Round;
 
@@ -61,7 +61,7 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
 
   castedCard: TopicVotingCard;
   dynamicRoundData: DynamicTopicVotingRoundData;
-  results: PollResult[];
+  results: TopicVotingResult[];
 
   constructor(
     private store: Store,
@@ -109,7 +109,7 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
 
   // ToDo: structure: move into card service 
 
-  getResultTitle(result: PollResult, resultIndex: number) {
+  getResultTitle(result: TopicVotingResult, resultIndex: number) {
     if (this.card.type === CardType.TopicVotingCard) {
       return this.getTopResultsCount() === 1 && resultIndex !== 0 || this.getTopResultsCount() !== 1 ? this.getSubject(result.subjectId)?.title : undefined
     } else {

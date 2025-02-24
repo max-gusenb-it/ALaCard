@@ -29,10 +29,10 @@ import {
 
 
 @Component({
-    selector: 'it-poll-form',
-    templateUrl: './it-poll-form.component.html'
+    selector: 'it-topic-voting-form',
+    templateUrl: './it-topic-voting-form.component.html'
 })
-export class ItPollFormComponent extends AngularLifecycle implements AfterViewInit {
+export class ItTopicVotingFormComponent extends AngularLifecycle implements AfterViewInit {
     @Input() card: Card;
     @Input() round: Round;
 
@@ -49,7 +49,7 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
     }
 
     castedCard: TopicVotingCard;
-    pollForm: FormGroup = new FormGroup({
+    topicVotingForm: FormGroup = new FormGroup({
         votedSubjectId: new FormControl({ value: "", disabled: false }, Validators.required)
     });
 
@@ -79,10 +79,10 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
             const response = this.topicVotingCardService.castResponse(r ?? null);
     
             if (!!response) {
-                this.pollForm.controls["votedSubjectId"].disable();
-                this.pollForm.controls["votedSubjectId"].setValue(response.votedSubjectIds[0]);
+                this.topicVotingForm.controls["votedSubjectId"].disable();
+                this.topicVotingForm.controls["votedSubjectId"].setValue(response.votedSubjectIds[0]);
                 
-                this.pollForm.controls["votedSubjectId"].updateValueAndValidity();
+                this.topicVotingForm.controls["votedSubjectId"].updateValueAndValidity();
                 this.changeDetectorRef.detectChanges();
             }
         });
@@ -102,14 +102,14 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
     }
 
     submit(skipped: boolean = false) {
-        if (skipped) this.pollForm.controls["votedSubjectId"].setValue("");
-        this.pollForm.controls["votedSubjectId"].disable();
-        this.pollForm.controls["votedSubjectId"].updateValueAndValidity();
+        if (skipped) this.topicVotingForm.controls["votedSubjectId"].setValue("");
+        this.topicVotingForm.controls["votedSubjectId"].disable();
+        this.topicVotingForm.controls["votedSubjectId"].updateValueAndValidity();
     
         const response : TopicVotingResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedSubjectIds: !skipped ? [Number(this.pollForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
+          votedSubjectIds: !skipped ? [Number(this.topicVotingForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
           roundId: this.round.id  
         };
     
