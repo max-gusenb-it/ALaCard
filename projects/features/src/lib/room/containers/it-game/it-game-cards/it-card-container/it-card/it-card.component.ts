@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { RoomState, CardServiceFactory, Player } from '@features';
+import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils } from '@features';
 import { AngularLifecycle, Card, CardType, supportedColors, Color } from '@shared';
 
 @Component({
@@ -51,82 +51,14 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  // ToDo: use new color utils
-
   getBorderCSSClasses() {
-    if (!this.customColor) {
-      switch(this.card.type) {
-        case(CardType.GroundRule):
-        case(CardType.FreeText): {
-          return "border-it_yellow-500 bg-it_yellow-500";
-        };
-        case(CardType.PlayerVoting): {
-          return "border-red-500 bg-red-500"
-        };
-        case(CardType.TopicVotingCard): {
-          return "border-blue-500 bg-blue-500"
-        }
-        case(CardType.QuizCard): {
-          return "border-emerald-500 bg-emerald-500"
-        }
-      }
-    } else {
-      switch(this.customColor) {
-        case(supportedColors[0]): return "border-red-500 bg-red-500";
-        case(supportedColors[1]): return "border-orange-500 bg-orange-500";
-        case(supportedColors[2]): return "border-amber-500 bg-amber-500";
-        case(supportedColors[3]): return "border-it_yellow-500 bg-it_yellow-500";
-        case(supportedColors[4]): return "border-lime-500 bg-lime-500";
-        case(supportedColors[5]): return "border-green-500 bg-green-500";
-        case(supportedColors[6]): return "border-emerald-500 bg-emerald-500";
-        case(supportedColors[7]): return "border-teal-500 bg-teal-500";
-        case(supportedColors[8]): return "border-cyan-500 bg-cyan-500";
-        case(supportedColors[9]): return "border-sky-500 bg-sky-500";
-        case(supportedColors[10]): return "border-blue-500 bg-blue-500";
-        case(supportedColors[11]): return "border-indigo-500 bg-indigo-500";
-        case(supportedColors[12]): return "border-violet-500 bg-violet-500";
-        case(supportedColors[13]): return "border-pink-500 bg-pink-500";
-        case(supportedColors[14]): return "border-rose-500 bg-rose-500";
-      }
-    }
+    const color = CardUtils.getCardColor(this.card);
+    return ColorUtils.getCardBorderCSS(color);
   }
 
   getTitleBackgroundCSSClasses() {
-    if (!this.customColor) {
-      switch(this.card.type) {
-        case(CardType.GroundRule):
-        case(CardType.FreeText): {
-          return "bg-it_yellow-200";
-        }
-        case(CardType.PlayerVoting): {
-          return "bg-red-200"
-        }
-        case(CardType.TopicVotingCard): {
-          return "bg-blue-200"
-        }
-        case(CardType.QuizCard): {
-          return "bg-green-200"
-        }
-      }
-    } else {
-      switch(this.customColor) {
-        case(supportedColors[0]): return "bg-red-200";
-        case(supportedColors[1]): return "bg-orange-200";
-        case(supportedColors[2]): return "bg-amber-200";
-        case(supportedColors[3]): return "bg-it_yellow-200";
-        case(supportedColors[4]): return "bg-lime-200";
-        case(supportedColors[5]): return "bg-green-200";
-        case(supportedColors[6]): return "bg-emerald-200";
-        case(supportedColors[7]): return "bg-teal-200";
-        case(supportedColors[8]): return "bg-cyan-200";
-        case(supportedColors[9]): return "bg-sky-200";
-        case(supportedColors[10]): return "bg-blue-200";
-        case(supportedColors[11]): return "bg-indigo-200";
-        case(supportedColors[12]): return "bg-violet-200";
-        case(supportedColors[13]): return "bg-pink-200";
-        case(supportedColors[14]): return "bg-rose-200";
-      }
-    }
+    const color = CardUtils.getCardColor(this.card);
+    return ColorUtils.getBackground200CSS(color);
   }
 
   getCardText() {

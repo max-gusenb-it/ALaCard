@@ -1,5 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ColorUtils } from '@features';
 import { ControlValueAccessorDirective } from '@shared';
 import { Color } from '@shared';
 
@@ -32,28 +33,8 @@ export class ItSelectComponent<T> extends ControlValueAccessorDirective<T> {
     let css = "";
     
     if (!!!this.customColor) color = "primary";
-    // ToDo: Use new color Utils
-    switch(color) {
-      case("primary"): {
-        css += "bg-primary-200 border-primary-200 hover:border-b-primary-500 focus:border-primary-500 disabled:bg-primary-100 disabled:border-primary-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500";
-      } break;
-      case("red"): {
-        css += "bg-red-200 border-red-200 hover:border-b-red-500 focus:border-red-500 disabled:bg-red-100 disabled:border-red-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500";
-      } break;
-      case("blue"): {
-        css += "bg-blue-200 border-blue-200 hover:border-b-blue-500 focus:border-blue-500 disabled:bg-blue-100 disabled:border-blue-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-blue-500";
-      } break;
-      case("emerald"): {
-        css += "bg-emerald-200 border-emerald-200 hover:border-b-emerald-500 focus:border-emerald-500 disabled:bg-emerald-100 disabled:border-emerald-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-emerald-500";
-      } break;
-      case("green"): {
-        css += "bg-green-200 border-green-200 hover:border-b-green-500 focus:border-green-500 disabled:bg-green-100 disabled:border-green-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-green-500";
-      } break;
-      case("violet"): {
-        css += "bg-violet-200 border-violet-200 hover:border-b-violet-500 focus:border-violet-500 disabled:bg-violet-100 disabled:border-violet-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-violet-500";
-      } break;
-    }
     
+    css += ColorUtils.getSelectCSS(color!);
     if (this.hideLabel) css += " text-transparent";
     return css;
   }

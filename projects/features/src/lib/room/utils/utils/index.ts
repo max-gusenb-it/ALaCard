@@ -1,5 +1,4 @@
-export * from "./base-card.utils";
-export * from "./card-form.utils";
+export * from "./card.utils";
 export * from "./color.utils";
 export * from "./game-settings.utils";
 export * from "./ingame-data.utils";

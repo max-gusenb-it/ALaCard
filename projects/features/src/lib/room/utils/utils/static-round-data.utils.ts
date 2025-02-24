@@ -1,4 +1,4 @@
-import { GameSettings, BaseCardUtils } from "@features";
+import { GameSettings, CardUtils } from "@features";
 import { CardType, Deck, PlayerVotingCard, playerNameWhitecard, specificPlayerNameWhitecard, Utils } from '@shared';
 
 export namespace StaticRoundDataUtils {
@@ -14,7 +14,7 @@ export namespace StaticRoundDataUtils {
                 let neededPlayerCount = Utils.countSubstrings(card.text, playerNameWhitecard) + Utils.countSubstrings(card.text, specificPlayerNameWhitecard);
                 switch(card.type) {
                     case(CardType.PlayerVoting): {
-                        let pvCard = BaseCardUtils.castCard<PlayerVotingCard>(card);
+                        let pvCard = CardUtils.castCard<PlayerVotingCard>(card);
                         if (neededPlayerCount < 2 && pvCard.settings?.selfVoteDisabled) {
                             neededPlayerCount = 2;
                         }

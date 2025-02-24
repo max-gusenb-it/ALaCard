@@ -5,7 +5,7 @@ import {
     DynamicRoundData,
     GameSettings,
     RoomState,
-    BaseCardUtils,
+    CardUtils,
     Round,
     RoundState,
     CardStates,
@@ -40,7 +40,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     ) { }
 
     castCard(card: Card): C {
-        return BaseCardUtils.castCard<C>(card);
+        return CardUtils.castCard<C>(card);
     }
 
     castDynamicRoundData(dynamicRoundData: DynamicRoundData): D {

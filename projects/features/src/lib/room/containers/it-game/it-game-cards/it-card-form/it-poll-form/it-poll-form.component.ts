@@ -7,7 +7,6 @@ import {
     Round,
     GameService,
     RoomService,
-    CardFormUtils,
     RoomState,
     CardServiceFactory,
     pollCardSkipValue,
@@ -15,17 +14,17 @@ import {
     ResponseDataDataService,
     ResponseDataSourceService,
     PollCardResultConfig,
-    PollCardService
+    PollCardService,
+    ColorUtils,
+    CardUtils
 } from "@features";
 import { 
     AngularLifecycle,
     AuthenticationState,
     Card,
-    CardType,
     InformationActions,
     InformationState,
-    PollCard,
-    Utils
+    PollCard
 } from '@shared';
 
 
@@ -42,13 +41,11 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
     }
 
     get formBackgroundCSS() {
-        return CardFormUtils.getInteractiveFormBackgroundCSS(this.cardColor)
+        return ColorUtils.getBackground100CSS(this.cardColor)
     }
 
     get cardColor()  {
-        return Utils.isStringDefinedAndNotEmpty(this.castedCard.settings?.customColor) ? 
-            this.castedCard.settings!.customColor! :
-            this.card.type === CardType.TopicVotingCard ? "blue" : "green";
+        return CardUtils.getCardColor(this.card);
     }
 
     castedCard: PollCard;

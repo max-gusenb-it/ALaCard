@@ -2,7 +2,6 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { 
-  CardFormUtils,
   CardServiceFactory,
   DynamicPollRoundData,
   GameService,
@@ -14,13 +13,14 @@ import {
   PollCardResultConfig,
   PollResult,
   SipResult,
-  PollCardService
+  PollCardService,
+  ColorUtils,
+  CardUtils
 } from "@features";
 import { 
   AngularLifecycle,
   Card,
-  PollCard,
-  Utils
+  PollCard
 } from '@shared';
 
 @Component({
@@ -36,13 +36,11 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
   }
   
   get statsBackgroundCSS() {
-      return CardFormUtils.getInteractiveFormBackgroundCSS(this.cardColor)
+      return ColorUtils.getBackground100CSS(this.cardColor)
   }
 
   get cardColor()  {
-      return Utils.isStringDefinedAndNotEmpty(this.castedCard.settings?.customColor) ? 
-          this.castedCard.settings!.customColor! : 
-          "blue";
+      return CardUtils.getCardColor(this.card);
   }
 
   castedCard: PollCard;
