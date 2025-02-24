@@ -6,12 +6,12 @@ import {
     DynamicRoundData,
     Response,
     GameCardService,
+    Result,
 } from "@features";
 import {
     Card,
     CardType,
     TopicVotingCard,
-    Result,
     ResultConfig,
     TopicVotingCardResultConfig
 } from "@shared";

@@ -1,6 +1,4 @@
-import { Result } from "@shared";
-
-// ToDo - structure: think about moving results to feature?
+import { Result } from "@features";
 
 export interface VotingResult<S> extends Result{
     /** Id of Player that has been voted */

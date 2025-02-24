@@ -17,16 +17,16 @@ import {
     defaultPayToDisplaySips,
     playerVotingCardSkipValue,
     GameSettings,
+    Result,
+    SipResult,
+    PlayerVotingResult,
     CardService
 } from "@features";
 import { 
     PlayerVotingCard,
     PlayerVotingGroup,
     PlayerVotingResultConfig,
-    Result,
-    SipResult,
     Card,
-    PlayerVotingResult,
 } from "@shared";
 
 @Injectable({

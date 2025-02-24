@@ -12,17 +12,16 @@ import {
   TopicVotingCardService,
   ColorUtils,
   CardUtils,
-  topicVotingCardSkipValue
+  topicVotingCardSkipValue,
+  SipResult,
+  TopicVotingResult
 } from "@features";
 import { 
   AngularLifecycle,
   Card,
   TopicVotingCardResultConfig,
-  VotingResult,
-  SipResult,
   CardType,
   TopicVotingCard,
-  TopicVotingResult
 } from '@shared';
 
 @Component({

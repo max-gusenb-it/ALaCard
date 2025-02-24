@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, QueryList, ViewChild } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { CardServiceFactory, DynamicRoundData, GameCardService, IngameDataDataService } from '@features';
-import { AngularLifecycle, Card, ItSelectableComponent, ItSelectionListComponent, SipResult } from '@shared';
+import { CardServiceFactory, DynamicRoundData, GameCardService, IngameDataDataService, SipResult } from '@features';
+import { AngularLifecycle, Card, ItSelectableComponent, ItSelectionListComponent } from '@shared';
 
 @Component({
   selector: 'it-sip-results',

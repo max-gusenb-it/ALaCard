@@ -10,6 +10,8 @@ import {
     RoundState,
     CardStates,
     Response,
+    Result,
+    SipResult,
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService
@@ -21,9 +23,7 @@ import {
     PlayerState,
     Utils,
     playerNameWhitecard,
-    Result,
     ResultConfig,
-    SipResult,
     specificPlayerNameWhitecard,
     CardType
 } from "@shared";

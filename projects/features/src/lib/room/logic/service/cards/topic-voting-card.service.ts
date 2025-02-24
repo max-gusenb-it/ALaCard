@@ -15,6 +15,9 @@ import {
     CardStates,
     Player,
     MarkdownUtils,
+    SipResult,
+    Result,
+    TopicVotingResult,
     CardUtils,
     GameSettings,
     topicVotingCardSkipValue
@@ -23,11 +26,8 @@ import {
     Card,
     TopicVotingCard,
     TopicVotingGroup,
-    SipResult,
     TopicVotingCardResultConfig,
-    Result,
     Utils,
-    TopicVotingResult,
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
 
