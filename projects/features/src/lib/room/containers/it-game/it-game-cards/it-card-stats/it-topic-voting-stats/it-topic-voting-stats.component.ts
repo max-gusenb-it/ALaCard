@@ -10,9 +10,6 @@ import {
   RoomService,
   RoomState,
   Round,
-  TopicVotingCardResultConfig,
-  TopicVotingResult,
-  SipResult,
   TopicVotingCardService,
   ColorUtils,
   CardUtils
@@ -20,6 +17,9 @@ import {
 import { 
   AngularLifecycle,
   Card,
+  TopicVotingCardResultConfig,
+  TopicVotingResult,
+  SipResult,
   CardType,
   TopicVotingCard
 } from '@shared';

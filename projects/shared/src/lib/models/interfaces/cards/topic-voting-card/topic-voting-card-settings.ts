@@ -1,5 +1,4 @@
-import { TopicVotingSipConfig } from "@features";
-import { CardSettings } from "../card-settings";
+import { TopicVotingSipConfig, CardSettings } from "@shared";
 
 export interface TopicVotingCardSettings extends CardSettings {
     sipConfig?: TopicVotingSipConfig;

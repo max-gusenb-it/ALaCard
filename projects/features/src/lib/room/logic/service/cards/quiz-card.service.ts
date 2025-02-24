@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { CardUtils, DynamicRoundData, IngameDataDataService, TopicVotingCardResultConfig, TopicVotingResult, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
+import { DynamicRoundData, IngameDataDataService, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { Card, TopicVotingCard, QuizCard, Utils } from "@shared";
+import { Card, TopicVotingCardResultConfig, TopicVotingResult, QuizCard, Utils } from "@shared";
 
 @Injectable({
     providedIn: 'root'

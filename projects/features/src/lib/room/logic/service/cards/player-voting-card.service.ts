@@ -17,15 +17,15 @@ import {
     defaultPayToDisplaySips,
     playerVotingCardSkipValue,
     GameSettings,
-    PlayerVotingResult,
-    PlayerVotingResultConfig,
-    Result,
-    SipResult,
     CardService
 } from "@features";
 import { 
     PlayerVotingCard,
     PlayerVotingGroup,
+    PlayerVotingResult,
+    PlayerVotingResultConfig,
+    Result,
+    SipResult,
     Card,
 } from "@shared";
 

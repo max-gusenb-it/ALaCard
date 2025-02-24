@@ -1,5 +1,4 @@
-import { ResultConfig } from "../result-config";
-import { PlayerVotingGroup } from "@shared";
+import { PlayerVotingGroup, ResultConfig } from "@shared";
 
 export interface PlayerVotingResultConfig extends ResultConfig {
     group: PlayerVotingGroup;

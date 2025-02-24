@@ -13,7 +13,6 @@ import {
     TopicVotingResponse,
     ResponseDataDataService,
     ResponseDataSourceService,
-    TopicVotingCardResultConfig,
     TopicVotingCardService,
     ColorUtils,
     CardUtils
@@ -23,6 +22,7 @@ import {
     AuthenticationState,
     Card,
     InformationActions,
+    TopicVotingCardResultConfig,
     InformationState,
     TopicVotingCard
 } from '@shared';

@@ -5,15 +5,15 @@ import {
     TopicVotingCardService,
     DynamicRoundData,
     Response,
-    Result,
-    ResultConfig,
     GameCardService,
-    TopicVotingCardResultConfig
 } from "@features";
 import {
     Card,
     CardType,
-    TopicVotingCard
+    TopicVotingCard,
+    Result,
+    ResultConfig,
+    TopicVotingCardResultConfig
 } from "@shared";
 import { QuizCardService } from "./cards/quiz-card.service";
 

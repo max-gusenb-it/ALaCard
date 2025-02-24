@@ -1,4 +1,4 @@
-import { TopicVotingCardResultConfig } from "@features";
+import { TopicVotingCardResultConfig } from "@shared";
 
 export interface TopicVotingSipConfig {
     resultConfig: TopicVotingCardResultConfig;

@@ -16,14 +16,14 @@ import {
   IngameDataSourceService,
   playerVotingCardSkipValue,
   RoomState,
-  PlayerVotingResult,
-  SipResult,
   Round
 } from '@features';
 import { 
   AngularLifecycle,
   AuthenticationState,
   Card,
+  PlayerVotingResult,
+  SipResult,
   Utils
 } from '@shared';
 

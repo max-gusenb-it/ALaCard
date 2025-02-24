@@ -12,12 +12,8 @@ import {
     StaticRoundDataDataService,
     Response,
     CardService,
-    SipResult,
-    TopicVotingResult,
-    TopicVotingCardResultConfig,
     TopicVotingCardStates,
     CardStates,
-    Result,
     Player,
     MarkdownUtils,
     CardUtils,
@@ -27,6 +23,10 @@ import {
     Card,
     TopicVotingCard,
     TopicVotingGroup,
+    SipResult,
+    TopicVotingResult,
+    TopicVotingCardResultConfig,
+    Result,
     Utils,
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
