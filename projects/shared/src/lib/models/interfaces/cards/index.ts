@@ -15,8 +15,8 @@ export * from "./poll-card/poll-card-settings";
 export * from "./poll-card/poll-group";
 export * from "./poll-card/subject";
 
-export * from "./quiz-card/quiz-card-settings";
 export * from "./quiz-card/quiz-card";
+export * from "./quiz-card/quiz-subject";
 
 export * from "./topic-voting-card/topic-voting-card";
 export * from "./topic-voting-card/topic-voting-card-settings";

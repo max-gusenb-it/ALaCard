@@ -3,7 +3,6 @@ import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { 
     PollResult,
-    Result,
     SipResult,
     Player,
     TopicVotingResultConfig,
@@ -35,9 +34,9 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         responseDataDataService: ResponseDataDataService,
         ingameDataDataService: IngameDataDataService,
         private staticRoundDataDataService: StaticRoundDataDataService,
-        private translateService: TranslateService
+        override translateService: TranslateService
     ) {
-        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
     get defaultTopicVotingGroup() {
@@ -55,28 +54,6 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         } else {
             return this.translateService.instant("features.room.game.game-cards.card-stats.skipped")
         }
-    }
-
-    override getResultText(result: Result): string {
-        const pollResult = this.castResult(result);
-        const translation = pollResult.votes === 1 ? this.translateService.instant("shared.components.display.it-result.vote") : this.translateService.instant("shared.components.display.it-result.votes");
-        return `${pollResult.votes} ${translation}`;
-    }
-
-    override cardHasResultSubText(card: Card): boolean {
-        const pollCard = this.castCard(card);
-        if (pollCard.settings?.isAnonymous) return false;
-        return true;
-    }
-
-    override getResultSubText(result: Result, players: Player[]): string {
-        const pollResult = this.castResult(result);
-        let text = "";
-        pollResult.playerIds.forEach((playerId, index) => {
-            text += players.find(p => p.id === playerId)!.username;
-            if (index !== pollResult.playerIds.length -1) text += ", ";
-        });
-        return text;
     }
 
     override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, speficPlayerId: string | undefined, gameSettings: GameSettings): string {
@@ -138,7 +115,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
             return super.calculateRoundSipResults(card, dynamicRoundData);
         }
         
-        let results = this.getResultGroup(dynamicRoundData, tvCard.settings?.sipConfig?.resultConfig);
+        let results = this.getResultGroup(dynamicRoundData, card, tvCard.settings?.sipConfig?.resultConfig);
 
         return results
             .map(r => {
@@ -155,12 +132,12 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
             .flat();
     }
 
-    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingResultConfig) : PollResult[] {
+    override getResultGroup(dynamicRoundData: DynamicRoundData, card: Card, resultConfig?: TopicVotingResultConfig) : PollResult[] {
         if (!!!resultConfig) resultConfig = {
             group: this.defaultTopicVotingGroup
         };
 
-        const results = this.getResults(dynamicRoundData)
+        const results = this.getResults(dynamicRoundData, card)
             .filter(r => r.subjectId !== pollCardSkipValue);
 
         let resultGroup: PollResult[] = [];

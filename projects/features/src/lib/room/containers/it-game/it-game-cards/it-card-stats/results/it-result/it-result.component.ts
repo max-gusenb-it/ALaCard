@@ -46,6 +46,8 @@ export class ItResultComponent implements AfterViewInit {
     }
   }
 
+  // ToDo: structure: Move switch thingies into card services
+
   get ResultType() {
     if (!!this.result && !!this.card) {
       switch(this.card.type) {
@@ -53,6 +55,9 @@ export class ItResultComponent implements AfterViewInit {
           return ResultType.PlayerVotingResult;
         }
         case(CardType.TopicVotingCard): {
+          return ResultType.TopicVotingResult;
+        }
+        case(CardType.QuizCard): {
           return ResultType.TopicVotingResult;
         }
       }

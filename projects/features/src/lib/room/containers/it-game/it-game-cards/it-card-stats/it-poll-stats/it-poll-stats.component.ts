@@ -20,6 +20,7 @@ import {
 import { 
   AngularLifecycle,
   Card,
+  CardType,
   PollCard
 } from '@shared';
 
@@ -36,11 +37,11 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
   }
   
   get statsBackgroundCSS() {
-      return ColorUtils.getBackground100CSS(this.cardColor)
+    return ColorUtils.getBackground100CSS(this.cardColor)
   }
 
   get cardColor()  {
-      return CardUtils.getCardColor(this.card);
+    return CardUtils.getCardColor(this.card);
   }
 
   castedCard: PollCard;
@@ -80,7 +81,7 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
       .pipe(takeUntil(this.destroyed$))
       .subscribe(dynamicRoundData => {
         if (!!!dynamicRoundData) return;
-        this.results = this.pollCardService.getResults(dynamicRoundData);
+        this.results = this.pollCardService.getResults(dynamicRoundData, this.card);
         this.changeDetectorRef.detectChanges();
       });
   }
@@ -104,6 +105,18 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
 
   getResultsHeading() {
     return this.pollCardService.getResultsHeading(this.results, this.card);
+  }
+
+  // ToDo: structure: move into card service 
+
+  getResultTitle(result: PollResult, resultIndex: number) {
+    if (this.card.type === CardType.TopicVotingCard) {
+      return this.getTopResultsCount() === 1 && resultIndex !== 0 || this.getTopResultsCount() !== 1 ? this.getSubject(result.subjectId)?.title : undefined
+    } else {
+      if (resultIndex !== 0)
+        return this.getSubject(result.subjectId)?.title;
+    }
+    return undefined;
   }
   
   getPlayerForSipResult(result: SipResult) {

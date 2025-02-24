@@ -1,5 +1,7 @@
 import { Result } from "../result";
 
+// ToDo - structure: rename id properties
+
 export interface PollResult extends Result {
     /** Id of Subject that has been voted */
     subjectId: number;

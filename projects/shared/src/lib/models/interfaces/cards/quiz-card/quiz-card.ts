@@ -1,5 +1,5 @@
-import { PollCard, QuizCardSettings } from "@shared";
+import { PollCard, QuizSubject } from "@shared";
 
 export interface QuizCard extends PollCard {
-    settings: QuizCardSettings;
+    subjects: QuizSubject[];
 }

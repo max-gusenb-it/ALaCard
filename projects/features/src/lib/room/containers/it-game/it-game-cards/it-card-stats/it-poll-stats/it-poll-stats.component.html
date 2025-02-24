@@ -4,6 +4,7 @@
     [ngClass]="statsBackgroundCSS"
 >
     <h4 *ngIf="card.type === 3">{{ "features.room.game.card.topic-voting" | translate }}</h4>
+    <h4 *ngIf="card.type === 4">{{ "features.room.game.card.quiz" | translate }}</h4>
     <p class="text-lg">{{ getCardText() }}</p>
     <it-selection-list
         [singleSelect]="true"
@@ -11,6 +12,7 @@
         *ngIf="!!results"
         #resultSelectionList
     >
+        <!-- ToDo - structure: move it-results also in a component like it-sip-results -->
         <it-accord
             [heading]="getResultsHeading()"
             icon="emoji_events"
@@ -21,7 +23,7 @@
                 <it-result
                     *ngFor="let result of results; index as i"
                     [result]="result"
-                    [title]="getTopResultsCount() === 1  && i !== 0 || getTopResultsCount() !== 1 ? getSubject(result.subjectId)?.title : undefined"
+                    [title]="getResultTitle(result, i)"
                     [card]="card"
                     [skipped]="result.subjectId === pollCardSkipValue"
                 />

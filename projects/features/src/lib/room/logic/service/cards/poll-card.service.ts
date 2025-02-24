@@ -16,12 +16,15 @@ import {
     PollResult,
     PollCardResultConfig,
     PollCardStates,
-    CardStates
+    CardStates,
+    Result,
+    Player
 } from "@features";
 import { 
     Card,
     PollCard,
 } from "@shared";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +35,8 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         private store: Store,
         responseDataDataService: ResponseDataDataService,
         ingameDataDataService: IngameDataDataService,
-        staticRoundDataDataService: StaticRoundDataDataService
+        staticRoundDataDataService: StaticRoundDataDataService,
+        protected translateService: TranslateService
     ) {
         super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
     }
@@ -65,7 +69,7 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         return drd;
     }
 
-    override getResults(dynamicRoundData: DynamicRoundData): PollResult[] {
+    override getResults(dynamicRoundData: DynamicRoundData, card: Card): PollResult[] {
         let results: PollResult[] = [];
         const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
         dynamicPollRoundData.responses.forEach(response => {
@@ -114,7 +118,7 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         const pollCard = this.castCard(card);
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
         const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
-        return gameSettings.drinkingGame && roomSettings.singleDeviceMode && pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined;
+        return gameSettings?.drinkingGame && roomSettings.singleDeviceMode && pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined;
     }
 
     override getNextCardState(): string {
@@ -126,7 +130,7 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
         let results: PollResult[] = [];
 
         if (pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined) {
-            results = this.getResults(dynamicRoundData)
+            results = this.getResults(dynamicRoundData, card)
                 .filter(r => r.subjectId === pollCard.settings!.sipConfig!.specificSipSubjectId);
         }
 
@@ -145,6 +149,29 @@ export class PollCardService<C extends PollCard, S extends PollCardResultConfig>
             .flat();
     }
 
+    override getResultText(result: Result): string {
+        const pollResult = this.castResult(result);
+        const translation = pollResult.votes === 1 ? this.translateService.instant("shared.components.display.it-result.vote") : this.translateService.instant("shared.components.display.it-result.votes");
+        return `${pollResult.votes} ${translation}`;
+    }
+    
+    override cardHasResultSubText(card: Card): boolean {
+        const pollCard = this.castCard(card);
+        if (pollCard.settings?.isAnonymous) return false;
+        return true;
+    }
+    
+    override getResultSubText(result: Result, players: Player[]): string {
+        const pollResult = this.castResult(result);
+        let text = "";
+        pollResult.playerIds.forEach((playerId, index) => {
+            text += players.find(p => p.id === playerId)!.username;
+            if (index !== pollResult.playerIds.length -1) text += ", ";
+        });
+        return text;
+    }
+
+    // ToDo: move to topic voting card
     getTopResults(results: PollResult[]): PollResult[] {
         return results
             .filter(r => r.votes === results[0].votes && r.subjectId !== pollCardSkipValue);

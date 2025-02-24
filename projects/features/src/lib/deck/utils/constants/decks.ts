@@ -14,10 +14,12 @@ export const developmentDeck: Deck = {
             type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Yes ✅" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
-                    title: "No ❎"
+                    title: "No ❎",
+                    isTarget: false
                 }
             ],
             settings: {
@@ -29,10 +31,12 @@ export const developmentDeck: Deck = {
             type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Yes ✅" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
-                    title: "No ❎"
+                    title: "No ❎",
+                    isTarget: false
                 }
             ],
             settings: {
@@ -44,10 +48,12 @@ export const developmentDeck: Deck = {
             type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Yes ✅" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
-                    title: "No ❎"
+                    title: "No ❎",
+                    isTarget: false
                 }
             ],
             settings: {
@@ -59,7 +65,14 @@ export const developmentDeck: Deck = {
     requiredPlayers: {
         playerCount: 2,
         isExactCount: false
-    }
+    },
+    defaultGameSettings: [
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ],
 };
 export const partyDeckWithRules: Deck = {
     icon: "🎉",

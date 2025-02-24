@@ -59,7 +59,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
         return <T>result;
     }
 
-    getResults(dynamicRoundData: DynamicRoundData): T[] {
+    getResults(dynamicRoundData: DynamicRoundData, card?: Card): T[] {
         return [];
     }
 
