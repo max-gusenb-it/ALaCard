@@ -3,15 +3,6 @@ import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { Utils } from "projects/shared/src/lib/utils/utils/utils";
 import { 
-    PlayerVotingCard,
-    PlayerVotingGroup,
-    PlayerVotingResult,
-    PlayerVotingResultConfig,
-    Result,
-    Card,
-    SipResult
-} from "@shared";
-import { 
     RoomState,
     IngameDataDataService,
     ResponseDataDataService,
@@ -26,8 +17,17 @@ import {
     defaultPayToDisplaySips,
     playerVotingCardSkipValue,
     GameSettings,
+    PlayerVotingResult,
+    PlayerVotingResultConfig,
+    Result,
+    SipResult,
     CardService
 } from "@features";
+import { 
+    PlayerVotingCard,
+    PlayerVotingGroup,
+    Card,
+} from "@shared";
 
 @Injectable({
     providedIn: 'root'

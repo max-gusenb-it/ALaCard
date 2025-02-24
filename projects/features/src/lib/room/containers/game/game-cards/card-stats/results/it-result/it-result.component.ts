@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { RoomState, CardServiceFactory, GameCardService, Player } from '@features';
-import { Card, CardType, Result, SipResult } from '@shared';
+import { RoomState, CardServiceFactory, GameCardService, Player, Result, SipResult } from '@features';
+import { Card, CardType } from '@shared';
 
 enum ResultType {
   PlayerVotingResult,

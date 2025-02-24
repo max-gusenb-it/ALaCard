@@ -11,16 +11,16 @@ import {
     ResponseDataDataService,
     StaticRoundDataDataService,
     Response,
-    CardService
+    CardService,
+    SipResult,
+    PollResult,
+    PollCardResultConfig,
 } from "@features";
 import { 
     Card,
     PollCard,
-    PollCardResultConfig,
-    PollResult,
-    CardStates,
     PollCardStates,
-    SipResult
+    CardStates
 } from "@shared";
 
 @Injectable({

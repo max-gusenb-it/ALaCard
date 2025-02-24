@@ -1,19 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import {
-    AuthenticationState,
-    Card,
-    CardStates,
-    InformationState,
-    PlayerState,
-    Result,
-    ResultConfig,
-    SipResult,
-    Utils,
-    playerNameWhitecard,
-    specificPlayerNameWhitecard
-} from "@shared";
-import {
     Player,
     DynamicRoundData,
     GameSettings,
@@ -21,11 +8,24 @@ import {
     BaseCardUtils,
     Round,
     RoundState,
+    Result,
+    ResultConfig,
+    SipResult,
     Response,
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService
 } from "@features";
+import {
+    AuthenticationState,
+    Card,
+    CardStates,
+    InformationState,
+    PlayerState,
+    Utils,
+    playerNameWhitecard,
+    specificPlayerNameWhitecard
+} from "@shared";
 
 // ToDo - structure:
 // * rename components to it or remove all it's

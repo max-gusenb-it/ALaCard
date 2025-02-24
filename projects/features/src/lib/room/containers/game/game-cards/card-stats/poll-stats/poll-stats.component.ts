@@ -11,15 +11,15 @@ import {
   RoomService,
   RoomState,
   Round,
+  PollCardResultConfig,
+  PollResult,
+  SipResult,
   PollCardService
 } from "@features";
 import { 
   AngularLifecycle,
   Card,
   PollCard,
-  PollCardResultConfig,
-  PollResult,
-  SipResult,
   Utils
 } from '@shared';
 

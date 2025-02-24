@@ -2,18 +2,11 @@ import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { 
-    Card,
-    PollCardStates,
     PollResult,
     Result,
     SipResult,
-    TopicVotingCard,
-    TopicVotingGroup,
-    TopicVotingResultConfig,
-    Utils
-} from "@shared";
-import { 
     Player,
+    TopicVotingResultConfig,
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService,
@@ -24,6 +17,13 @@ import {
     MarkdownUtils,
     PollCardService,
 } from "@features";
+import { 
+    Card,
+    PollCardStates,
+    TopicVotingCard,
+    TopicVotingGroup,
+    Utils
+} from "@shared";
 
 @Injectable({
     providedIn: 'root'

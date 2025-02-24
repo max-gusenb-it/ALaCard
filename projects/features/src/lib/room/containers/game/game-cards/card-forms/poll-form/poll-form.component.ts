@@ -14,6 +14,7 @@ import {
     PollResponse,
     ResponseDataDataService,
     ResponseDataSourceService,
+    PollCardResultConfig,
     PollCardService
 } from "@features";
 import { 
@@ -23,7 +24,6 @@ import {
     InformationActions,
     InformationState,
     PollCard,
-    PollCardResultConfig,
     Utils
 } from '@shared';
 
