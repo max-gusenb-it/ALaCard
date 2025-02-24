@@ -2,21 +2,22 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { 
-  BasePollCardService,
   CardFormUtils,
-  CardService,
+  CardServiceFactory,
   DynamicPollRoundData,
   GameControlService,
   IngameDataDataService,
   pollCardSkipValue,
   RoomService,
   RoomState,
-  Round
+  Round,
+  PollCardService
 } from "@features";
 import { 
   AngularLifecycle,
   Card,
   PollCard,
+  PollCardResultConfig,
   PollResult,
   SipResult,
   Utils
@@ -30,10 +31,9 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   @Input() card: Card;
   @Input() round: Round;
 
-  pollCardService: BasePollCardService
-  castedCard: PollCard;
-  dynamicRoundData: DynamicPollRoundData;
-  results: PollResult[];
+  get pollCardService(): PollCardService<PollCard, PollCardResultConfig> {
+    return <PollCardService<PollCard, PollCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
+  }
   
   get statsBackgroundCSS() {
       return CardFormUtils.getInteractiveFormBackgroundCSS(this.cardColor)
@@ -45,10 +45,14 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
           "blue";
   }
 
+  castedCard: PollCard;
+  dynamicRoundData: DynamicPollRoundData;
+  results: PollResult[];
+
   constructor(
     private store: Store,
     private gameControlService: GameControlService,
-    private cardService: CardService,
+    private cardServiceFactory: CardServiceFactory,
     private roomService: RoomService,
     private ingameDataDataService: IngameDataDataService,
     private changeDetectorRef: ChangeDetectorRef
@@ -72,7 +76,6 @@ export class PollStatsComponent extends AngularLifecycle implements AfterViewIni
   }
 
   ngAfterViewInit(): void {
-    this.pollCardService = <BasePollCardService>this.cardService.getCardService(this.card.type);
     this.castedCard = this.pollCardService.castCard(this.card);
 
     this.ingameDataDataService.getDynamicRoundData$()

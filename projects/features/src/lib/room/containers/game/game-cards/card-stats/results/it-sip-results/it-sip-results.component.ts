@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, QueryList, ViewChild } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { AngularLifecycle, Card, SipResult, ItSelectableComponent, ItSelectionListComponent } from '@shared';
-import { CardService, DynamicRoundData, GameCardService, IngameDataDataService } from '@features';
+import { CardServiceFactory, DynamicRoundData, GameCardService, IngameDataDataService } from '@features';
 
 @Component({
   selector: 'it-sip-results',
@@ -21,8 +21,11 @@ export class ItSipResultsComponent extends AngularLifecycle implements AfterView
   @Input() selectionList: ItSelectionListComponent;
   @Input() card: Card;
 
+  get cardService(): GameCardService {
+    return this.cardServiceFactory.getCardService(this.card.type);
+  }
+
   dynamicRoundData: DynamicRoundData;
-  gameCardService: GameCardService;
 
   sipResults: SipResult[] = [];
 
@@ -46,7 +49,7 @@ export class ItSipResultsComponent extends AngularLifecycle implements AfterView
   }
 
   constructor(
-    private cardService: CardService,
+    private cardServiceFactory: CardServiceFactory,
     private ingameDataDataService: IngameDataDataService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
@@ -54,19 +57,18 @@ export class ItSipResultsComponent extends AngularLifecycle implements AfterView
   }
 
   ngAfterViewInit(): void {
-    this.gameCardService = this.cardService.getCardService(this.card.type);
     this.ingameDataDataService.getDynamicRoundData$()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(dynamicRoundData => {
         if (!dynamicRoundData) return;
         this.dynamicRoundData = dynamicRoundData;
-        this.sipResults = this.gameCardService.getSipResults(this.card, this.dynamicRoundData);
+        this.sipResults = this.cardService.getSipResults(this.card, this.dynamicRoundData);
         this.changeDetectorRef.detectChanges();
       });
   }
   
   getPlayerForSipResult(result: SipResult) {
-    return this.gameCardService.getPlayerForSipResult(result);
+    return this.cardService.getPlayerForSipResult(result);
   }
 
   /**

@@ -43,12 +43,12 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   players: Player[];
 
   get dynamicRoundData() {
-    return this.playerVotingService.castDynamicRoundData(this._dynamicRoundData);
+    return this.playerVotingCardService.castDynamicRoundData(this._dynamicRoundData);
   }
 
   constructor(
     private gameControlService: GameControlService,
-    private playerVotingService: PlayerVotingCardService,
+    private playerVotingCardService: PlayerVotingCardService,
     private translateService: TranslateService,
     private store: Store,
     private changeDetectorRef: ChangeDetectorRef,
@@ -71,12 +71,12 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
       .pipe(takeUntil(this.destroyed$))
       .subscribe(d => {
         if (!!!d) return;
-        const newPayToDisplayPlayerId = this.playerVotingService.getNewPayToDisplayPlayerId(this._dynamicRoundData, d);
+        const newPayToDisplayPlayerId = this.playerVotingCardService.getNewPayToDisplayPlayerId(this._dynamicRoundData, d);
         if (newPayToDisplayPlayerId && this.store.selectSnapshot(AuthenticationState.userId) !== newPayToDisplayPlayerId) {
           this.popupService.openSnackbar(this.getPayToDisplayNotificationText(newPayToDisplayPlayerId));
         }
         this._dynamicRoundData = d;
-        this.results = this.playerVotingService.getResults(this._dynamicRoundData);
+        this.results = this.playerVotingCardService.getResults(this._dynamicRoundData);
 
         this.changeDetectorRef.detectChanges();
     });
@@ -91,11 +91,11 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   getCastedCard() {
-    return this.playerVotingService.castCard(this.card);
+    return this.playerVotingCardService.castCard(this.card);
   }
 
   getCardText() {
-    return this.playerVotingService.getCardText(
+    return this.playerVotingCardService.getCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
         this.round.playerIds,
@@ -104,7 +104,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
 
   getResultsHeading() {
-    return this.playerVotingService.getResultsHeading(this.results);
+    return this.playerVotingCardService.getResultsHeading(this.results);
   }
 
   getPlayerForResult(result: PlayerVotingResult) {
@@ -112,7 +112,7 @@ export class PlayerVotingStatsComponent extends AngularLifecycle implements Afte
   }
   
   getPlayerForSipResult(result: SipResult) {
-    return this.playerVotingService.getPlayerForSipResult(result);
+    return this.playerVotingCardService.getPlayerForSipResult(result);
   }
 
   isUserRoomAdmin() {

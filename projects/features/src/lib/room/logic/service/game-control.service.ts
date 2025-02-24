@@ -7,13 +7,13 @@ import {
     CardStates,
     ErrorMonitorActions,
     ItError,
-    Utils
+    Utils,
+    CardType
 } from '@shared';
 import { 
     Player,
     RoomState,
-    CardService,
-    GameCardService,
+    CardServiceFactory,
     GameSettings,
     Round,
     StaticRoundData,
@@ -34,7 +34,7 @@ export class GameControlService {
         private ingameDataDataService: IngameDataDataService,
         private responseDataDataService: ResponseDataDataService,
         private staticRoundDataDataService: StaticRoundDataDataService,
-        private cardService: CardService
+        private cardServiceFactory: CardServiceFactory
     ) {
         this.responseDataDataService.getAdminResponses$()
             .subscribe(() => {
@@ -42,6 +42,10 @@ export class GameControlService {
                 if (!!roomSettings && roomSettings.autoContinueOnAllVotes) this.checkForAutoContinueRound();
             }
         );
+    }
+
+    getCardService(cardType: CardType) {
+        return this.cardServiceFactory.getCardService(cardType);
     }
     
     createInitialStaticRoundData(deck: Deck, players: Player[], gameSettings: GameSettings) : StaticRoundData {
@@ -61,7 +65,6 @@ export class GameControlService {
     createGameRound(deck: Deck, staticRoundData: StaticRoundData, players: Player[], gameSettings: GameSettings) : Round {
         const newRoundIndex = staticRoundData.playedCardIndexes.length;
 
-        let cardService!: GameCardService;
         let newRound!: Round;
         let newCard!: Card;
         
@@ -75,7 +78,6 @@ export class GameControlService {
                     );
                 });
                 newCard = deck.cards[followUpCardSchedule.cardIndex];
-                cardService = this.cardService.getCardService(newCard.type);
                 newRound = {
                     cardIndex: followUpCardSchedule.cardIndex,
                     id: newRoundIndex,
@@ -95,9 +97,8 @@ export class GameControlService {
             }
             
             newCard = deck.cards[newCardIndex];
-            cardService = this.cardService.getCardService(newCard.type);
             
-            newRound = cardService.createGameRound(
+            newRound = this.getCardService(newCard.type).createGameRound(
                 {
                     id: newRoundIndex,
                     cardIndex: newCardIndex,
@@ -109,7 +110,7 @@ export class GameControlService {
             );
         }
         
-        if (cardService.hasFollowUpCard(newCard!, newRound.cardState)) {
+        if (this.getCardService(newCard.type).hasFollowUpCard(newCard!, newRound.cardState)) {
                 staticRoundData.followUpCardSchedules = [
                 {
                     cardIndex: Utils.isNumberDefined(newCard.followUpCardConfig?.followUpCardID) ? 
@@ -117,7 +118,7 @@ export class GameControlService {
                         newRound.cardIndex,
                     scheduledRoundId: newRound.id + (newCard.followUpCardConfig?.roundDelay ?? 1),
                     sourceCardPlayerIds: newRound.playerIds ?? [],
-                    cardState: cardService.getNextCardState()
+                    cardState: this.getCardService(newCard.type).getNextCardState()
                 },
                 ...staticRoundData.followUpCardSchedules
             ]
@@ -166,11 +167,9 @@ export class GameControlService {
         const round = this.staticRoundDataDataService.getStaticRoundData()!.round!
 
         if (!!!round || !!!deck) return;
-        const cardService = this.cardService.getCardService(deck.cards[round.cardIndex].type);
 
         const responses = this.responseDataDataService.getAdminResponsesForRound(roundId);
-
-        const newDynamicRoundData = cardService.createDynamicRoundData(
+        const newDynamicRoundData = this.getCardService(deck.cards[round.cardIndex].type).createDynamicRoundData(
             round.id,
             responses
         );

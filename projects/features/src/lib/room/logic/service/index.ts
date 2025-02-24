@@ -1,4 +1,4 @@
-export * from "./cards/base-card.service";
+export * from "./cards/card.service";
 export * from "./cards/player-voting-card.service";
 export * from "./cards/poll-card.service";
 export * from "./cards/topic-voting-card.service";
@@ -15,6 +15,6 @@ export * from "./source/response-data.source.service";
 export * from "./source/room.source.service";
 export * from "./source/static-round-data.source.service";
 
-export * from "./card.service";
+export * from "./card-service.factory";
 export * from "./game-control.service";
 export * from "./room.service";

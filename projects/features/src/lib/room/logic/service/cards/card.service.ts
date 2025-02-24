@@ -28,19 +28,18 @@ import {
 } from "@features";
 
 // ToDo - structure:
-// * rename card services
 // * rename components to it or remove all it's
 
 @Injectable({
     providedIn: 'root'
 })
-export class BaseCardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result, S extends ResultConfig> {
+export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result, S extends ResultConfig> {
 
     constructor(
         private _store: Store,
         private _responseDataDataService: ResponseDataDataService,
         private _ingameDataDataService: IngameDataDataService,
-        private _staticRoundDataDataService: StaticRoundDataDataService
+        private _staticRoundDataDataService: StaticRoundDataDataService,
     ) { }
 
     castCard(card: Card): C {

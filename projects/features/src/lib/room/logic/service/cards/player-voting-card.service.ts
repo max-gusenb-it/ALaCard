@@ -1,4 +1,3 @@
-import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
@@ -26,13 +25,14 @@ import {
     defaultCardSips,
     defaultPayToDisplaySips,
     playerVotingCardSkipValue,
-    GameSettings
+    GameSettings,
+    CardService
 } from "@features";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends BaseCardService<PlayerVotingCard,
+export class PlayerVotingCardService extends CardService<PlayerVotingCard,
 PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
 
     constructor(

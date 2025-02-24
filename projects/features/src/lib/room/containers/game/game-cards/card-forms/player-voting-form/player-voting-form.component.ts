@@ -44,7 +44,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     private responseDataDataService: ResponseDataDataService,
     private gameControleService: GameControlService,
     private changeDetectorRef: ChangeDetectorRef,
-    private playerVotingService: PlayerVotingCardService,
+    private playerVotingCardService: PlayerVotingCardService,
     private store: Store,
     private roomService: RoomService
   ) {
@@ -72,7 +72,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
     this.store.select(InformationState.response)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(r => {
-        const response = this.playerVotingService.castResponse(r ?? null);
+        const response = this.playerVotingCardService.castResponse(r ?? null);
 
         if (!!response) {
           this.playerVotingForm.controls["votedPlayerId"].disable();
@@ -85,7 +85,7 @@ export class PlayerVotingFormComponent extends AngularLifecycle implements After
   }
 
   getCardText() {
-    return this.playerVotingService.getCardText(
+    return this.playerVotingCardService.getCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
         this.round.playerIds,

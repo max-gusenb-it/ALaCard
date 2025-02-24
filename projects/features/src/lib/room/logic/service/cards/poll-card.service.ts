@@ -1,4 +1,3 @@
-import { BaseCardService } from "./base-card.service";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import {
@@ -11,7 +10,8 @@ import {
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService,
-    Response
+    Response,
+    CardService
 } from "@features";
 import { 
     Card,
@@ -26,7 +26,7 @@ import {
 @Injectable({
     providedIn: 'root'
 })
-export class PollCardService<C extends PollCard, S extends PollCardResultConfig> extends BaseCardService<PollCard, PollResponse, DynamicPollRoundData, PollResult, PollCardResultConfig> {
+export class PollCardService<C extends PollCard, S extends PollCardResultConfig> extends CardService<PollCard, PollResponse, DynamicPollRoundData, PollResult, PollCardResultConfig> {
 
     constructor(
         private store: Store,

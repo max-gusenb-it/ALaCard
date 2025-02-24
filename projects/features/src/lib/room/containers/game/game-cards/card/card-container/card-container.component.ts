@@ -4,7 +4,7 @@ import { Observable, takeUntil } from 'rxjs';
 import {
   RoomState,
   slideToggle,
-  CardService,
+  CardServiceFactory,
   RoomSettings,
   GameControlService,
   RoomService,
@@ -51,8 +51,8 @@ export class CardContainerComponent extends AngularLifecycle{
     return this.deck.cards[this.staticRoundData.round.cardIndex];
   }
 
-  get specifiedCardService() {
-    return this.cardService.getCardService(this.card?.type);
+  get cardService() {
+    return this.cardServiceFactory.getCardService(this.card?.type);
   }
 
   constructor(
@@ -62,7 +62,7 @@ export class CardContainerComponent extends AngularLifecycle{
     private ingameDataDataService: IngameDataDataService,
     private tutorialService: TutorialService,
     private roomService: RoomService,
-    private cardService: CardService
+    private cardServiceFactory: CardServiceFactory
   ) {
     super();
 
@@ -115,7 +115,7 @@ export class CardContainerComponent extends AngularLifecycle{
   roundState: RoundState = undefined as any;
 
   getRoundState() : RoundState {
-    return this.specifiedCardService.getRoundState();
+    return this.cardService.getRoundState();
   }
 
   getCardState() {

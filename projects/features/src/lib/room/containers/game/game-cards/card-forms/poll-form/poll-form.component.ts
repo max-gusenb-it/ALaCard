@@ -8,13 +8,13 @@ import {
     GameControlService,
     RoomService,
     CardFormUtils,
-    BasePollCardService,
     RoomState,
-    CardService,
+    CardServiceFactory,
     pollCardSkipValue,
     PollResponse,
     ResponseDataDataService,
-    ResponseDataSourceService
+    ResponseDataSourceService,
+    PollCardService
 } from "@features";
 import { 
     AngularLifecycle,
@@ -23,6 +23,7 @@ import {
     InformationActions,
     InformationState,
     PollCard,
+    PollCardResultConfig,
     Utils
 } from '@shared';
 
@@ -35,13 +36,9 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     @Input() card: Card;
     @Input() round: Round;
 
-    castedCard: PollCard;
-    pollForm: FormGroup = new FormGroup({
-        votedSubjectId: new FormControl({ value: "", disabled: false }, Validators.required)
-    });
-
-    roomSettings: RoomSettings;
-    pollCardService: BasePollCardService;
+    get pollCardService(): PollCardService<PollCard, PollCardResultConfig> {
+      return <PollCardService<PollCard, PollCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
+    }
 
     get formBackgroundCSS() {
         return CardFormUtils.getInteractiveFormBackgroundCSS(this.cardColor)
@@ -53,9 +50,16 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
             "blue";
     }
 
+    castedCard: PollCard;
+    pollForm: FormGroup = new FormGroup({
+        votedSubjectId: new FormControl({ value: "", disabled: false }, Validators.required)
+    });
+
+    roomSettings: RoomSettings;
+
     constructor(
         private store: Store,
-        private cardService: CardService,
+        private cardServiceFactory: CardServiceFactory,
         private responseDataSourceService: ResponseDataSourceService,
         private responseDataDataService: ResponseDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -68,7 +72,6 @@ export class PollFormComponent extends AngularLifecycle implements AfterViewInit
     }
 
     ngAfterViewInit(): void {
-        this.pollCardService = <BasePollCardService>this.cardService.getCardService(this.card.type);
         this.castedCard = this.pollCardService.castCard(this.card);
         this.changeDetectorRef.detectChanges();
         

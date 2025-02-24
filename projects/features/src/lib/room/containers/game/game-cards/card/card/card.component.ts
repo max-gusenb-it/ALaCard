@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { RoomState, CardService, Player } from '@features';
+import { RoomState, CardServiceFactory, Player } from '@features';
 import { AngularLifecycle, Card, CardType, supportedColors, Color } from '@shared';
 
 @Component({
@@ -28,13 +28,13 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
   touchStartX = 0;
   touchEndX = 0;
 
-  get specifiedCardService() {
-    return this.cardService.getCardService(this.card.type)
+  get cardService() {
+    return this.cardServiceFactory.getCardService(this.card.type)
   }
 
   constructor(
     private store: Store,
-    private cardService: CardService,
+    private cardServiceFactory: CardServiceFactory,
     private translateService: TranslateService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
@@ -123,14 +123,14 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
 
   getCardText() {
     if (!this.isMarkDown) { 
-      return this.specifiedCardService.getCardText(
+      return this.cardService.getCardText(
           this.card,
           this.store.selectSnapshot(RoomState.players),
           this.playerIds,
           this.store.selectSnapshot(RoomState.specificPlayerId),
       );
     } else {
-      return this.specifiedCardService.getOfflineCardText(
+      return this.cardService.getOfflineCardText(
           this.card,
           this.store.selectSnapshot(RoomState.players),
           this.playerIds,
@@ -141,7 +141,7 @@ export class CardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getOfflineTextCSSClasses() {
-    return this.specifiedCardService.getOfflineCardTextSizeClass(this.card, this.getCardText())
+    return this.cardService.getOfflineCardTextSizeClass(this.card, this.getCardText())
   }
 
   cardClicked(event: MouseEvent) {

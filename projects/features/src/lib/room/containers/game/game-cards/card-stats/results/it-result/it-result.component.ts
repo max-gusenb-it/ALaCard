@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { RoomState, CardService, GameCardService, Player } from '@features';
+import { RoomState, CardServiceFactory, GameCardService, Player } from '@features';
 import { Card, CardType, Result, SipResult } from '@shared';
 
 enum ResultType {
@@ -17,7 +17,6 @@ enum ResultType {
 })
 export class ItResultComponent implements AfterViewInit {
 
-  baseCardService: GameCardService;
   players: Player[];
 
   @Input() result: Result;
@@ -28,9 +27,13 @@ export class ItResultComponent implements AfterViewInit {
   @Input() overrideAnonymous: boolean = false;
   @Input() skipped: boolean = false;
 
+  get cardService(): GameCardService {
+    return this.cardServiceFactory.getCardService(this.card.type);
+  }
+
   constructor(
     private store: Store,
-    private cardService: CardService,
+    private cardServiceFactory: CardServiceFactory,
     private translateService: TranslateService,
     private changeDetectornRef: ChangeDetectorRef
   ) {
@@ -39,7 +42,6 @@ export class ItResultComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!!this.card) {
-      this.baseCardService = this.cardService.getCardService(this.card.type);
       this.changeDetectornRef.detectChanges();
     }
   }
@@ -80,7 +82,7 @@ export class ItResultComponent implements AfterViewInit {
     switch(this.ResultType) {
       case(ResultType.PlayerVotingResult):
       case(ResultType.TopicVotingResult): {
-        return this.baseCardService.getResultText(this.result);
+        return this.cardService.getResultText(this.result);
       };
       case(ResultType.SipVotingResult): {
         let text = this.sipResult.distribute ? 
@@ -99,14 +101,14 @@ export class ItResultComponent implements AfterViewInit {
     switch(this.ResultType) {
       case(ResultType.PlayerVotingResult):
       case(ResultType.TopicVotingResult): {
-        return this.baseCardService.cardHasResultSubText(this.card, this.overrideAnonymous);
+        return this.cardService.cardHasResultSubText(this.card, this.overrideAnonymous);
       }
     }
     return false;
   }
 
   getResultSubText() {
-    return this.baseCardService.getResultSubText(this.result, this.players);
+    return this.cardService.getResultSubText(this.result, this.players);
   }
 
 }

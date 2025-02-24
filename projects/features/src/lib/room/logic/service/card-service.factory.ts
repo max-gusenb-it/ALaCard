@@ -1,29 +1,25 @@
 import { Injectable } from "@angular/core";
 import {
     PlayerVotingCardService,
-    BaseCardService,
+    CardService,
     TopicVotingCardService,
     DynamicRoundData,
-    Response
+    Response,
+    GameCardService
 } from "@features";
 import {
     Card,
-    PlayerVotingCard,
-    PollCard,
     Result,
     ResultConfig,
     CardType
 } from "@shared";
 
-export type GameCardService = BaseCardService<Card, Response, DynamicRoundData, Result, ResultConfig> | PlayerVotingCardService | TopicVotingCardService;
-export type GameCard = Card | PlayerVotingCard | PollCard;
-
 @Injectable({
     providedIn: 'root'
 })
-export class CardService {
+export class CardServiceFactory {
     constructor(
-        private baseCardService: BaseCardService<Card, Response, DynamicRoundData, Result, ResultConfig>,
+        private cardService: CardService<Card, Response, DynamicRoundData, Result, ResultConfig>,
         private plaverVotingCardService: PlayerVotingCardService,
         private topicVotingCardService: TopicVotingCardService
     ) { }
@@ -37,7 +33,7 @@ export class CardService {
                 return this.topicVotingCardService;
             }
             default: {
-                return this.baseCardService;
+                return this.cardService;
             }
         }
     }
