@@ -20,13 +20,15 @@ import {
     Result,
     SipResult,
     PlayerVotingResult,
-    CardService
+    CardService,
+    GroupUtils
 } from "@features";
 import { 
     PlayerVotingCard,
-    PlayerVotingGroup,
+    VotingCardGroup,
     PlayerVotingResultConfig,
     Card,
+    AuthenticationState,
 } from "@shared";
 
 @Injectable({
@@ -45,7 +47,7 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
     }
 
     get defaultPlayerVotingGroup() {
-        return PlayerVotingGroup.MostVoted;
+        return VotingCardGroup.MostVoted;
     }
 
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
@@ -131,10 +133,10 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
             const castedCard = this.castCard(card);
             const group = castedCard.settings?.sipConfig?.group ?? this.defaultPlayerVotingGroup;
             switch(group) {
-                case(PlayerVotingGroup.MostVoted): {
+                case(VotingCardGroup.MostVoted): {
                     sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-player");
                 } break;
-                case(PlayerVotingGroup.LeastVoted): {
+                case(VotingCardGroup.LeastVoted): {
                     sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-player");
                 }
             }
@@ -149,7 +151,7 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
     }
 
     override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        let sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
+        let sipResults = this.calculateSipResults(card, dynamicRoundData);
         
         // Pay To Disply Sip Calculation
         const dynamicPlayerVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
@@ -168,54 +170,36 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
                 ]
             }
         }
-
-        const userSR = this.getUserSipResult(sipResults);
-        if (!!userSR) {
-            sipResults = [
-                userSR,
-                ...sipResults.filter(s => s.playerId !== userSR?.playerId)
-            ]
-        }
-        return sipResults;
+        
+        return sipResults.sort((s1, s2) => {
+            if (s1.playerId === this.store.selectSnapshot(AuthenticationState.userId)) return -1;
+            if (s2.playerId !== this.store.selectSnapshot(AuthenticationState.userId)) return 1;
+            return 0;
+        });
     }
     
-    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+    override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const pvCard = this.castCard(card);
 
-        const results = this.getResultGroup(dynamicRoundData, pvCard.settings?.sipConfig);
-        const allResults = this.getResults(dynamicRoundData)
-            .filter(r => r.subjectID !== playerVotingCardSkipValue);
-        return results
+        const filteredResults = GroupUtils.getResultsForGroup(
+            this.getResults(dynamicRoundData)
+                .filter(r => r.subjectID !== playerVotingCardSkipValue),
+            pvCard.settings?.sipConfig?.group ?? this.defaultPlayerVotingGroup
+        )
+
+        const resultsCount = this.getResults(dynamicRoundData)
+            .filter(r => r.subjectID !== playerVotingCardSkipValue)
+            .length;
+
+        return filteredResults
             .map(r => {
                 return {
                     playerId: r.subjectID,
-                    sips: allResults.length > 1 ? defaultCardSips : defaultCardSips + 1,
+                    sips: resultsCount > 1 ? defaultCardSips : defaultCardSips + 1,
                     distribute: false
                 } as SipResult
             }
         );
-    }
-
-    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: PlayerVotingResultConfig): PlayerVotingResult[] {
-        if (!!!resultConfig || !!!resultConfig.group) resultConfig = {
-            group: this.defaultPlayerVotingGroup
-        }
-
-        const results = this.getResults(dynamicRoundData)
-            .filter(r => r.subjectID !== playerVotingCardSkipValue);
-
-        let resultGroup: PlayerVotingResult[] = [];
-        if (results.length != 0) {
-            let votes = 0;
-            if (resultConfig.group === PlayerVotingGroup.MostVoted) {
-                votes = results[0].votes;
-            } else {
-                votes = results[results.length - 1].votes;
-            }
-            resultGroup = results
-                .filter(r => r.votes === votes)
-        }
-        return resultGroup;
     }
 
     getNewPayToDisplayPlayerId(oldDynamicRoundData: DynamicRoundData, newDynamicRoundData: DynamicRoundData) : string | undefined {

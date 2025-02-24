@@ -118,7 +118,7 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
         const response : TopicVotingResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedSubjectIds: !skipped ? [this.topicVotingForm.controls['votedSubjectId'].value] : [topicVotingCardSkipValue],
+          votedSubjectIds: !skipped ? [Number(this.topicVotingForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
           roundId: this.round.id  
         };
     

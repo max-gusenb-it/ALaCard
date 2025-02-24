@@ -67,7 +67,7 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
         );
     }
 
-    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+    override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const quizCard = this.castCard(card);
         let results: TopicVotingResult[] = this.getResults(dynamicRoundData, card)
             .filter(r => quizCard.subjects.find(s => s.id! === r.subjectID)!.isTarget);

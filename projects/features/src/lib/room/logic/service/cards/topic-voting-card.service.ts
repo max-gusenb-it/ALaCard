@@ -20,12 +20,13 @@ import {
     TopicVotingResult,
     CardUtils,
     GameSettings,
-    topicVotingCardSkipValue
+    topicVotingCardSkipValue,
+    GroupUtils
 } from "@features";
 import { 
     Card,
     TopicVotingCard,
-    TopicVotingGroup,
+    VotingCardGroup,
     TopicVotingCardResultConfig,
     Utils,
 } from "@shared";
@@ -41,7 +42,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
     }
 
     get defaultTopicVotingGroup() {
-        return TopicVotingGroup.MostVoted;
+        return VotingCardGroup.MostVoted;
     }
 
     constructor(
@@ -134,12 +135,16 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         return TopicVotingCardStates.topicVotingCard_offlineSpecifcSipSubject;
     }
 
-    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+    override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const topicVotingCard = this.castCard(card);
     
-        let results = this.getResultGroup(dynamicRoundData);
+        const filteredResults = GroupUtils.getResultsForGroup(
+            this.getResults(dynamicRoundData)
+                .filter(r => r.subjectID !== topicVotingCardSkipValue),
+            this.defaultTopicVotingGroup
+        );
 
-        return results
+        return filteredResults
             .map(r => {
                 return r.playerIds.map(pId => {
                     return {
@@ -202,10 +207,10 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
             inclusion = this.translateService.instant("features.room.game.game-cards.offline-sip-display.in");
             switch(castedCard.settings?.sipConfig?.resultConfig?.group) {
                 default:
-                case(TopicVotingGroup.MostVoted): {
+                case(VotingCardGroup.MostVoted): {
                     group = this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topic");
                 } break;
-                case(TopicVotingGroup.LeastVoted): {
+                case(VotingCardGroup.LeastVoted): {
                     group = this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topic")
                 } break;
             }
@@ -239,39 +244,6 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
             if (index !== topicVotingResult.playerIds.length -1) text += ", ";
         });
         return text;
-    }
-
-    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingCardResultConfig) : TopicVotingResult[] {
-        if (!!!resultConfig) resultConfig = {
-            group: this.defaultTopicVotingGroup
-        };
-
-        const results = this.getResults(dynamicRoundData)
-            .filter(r => r.subjectID !== topicVotingCardSkipValue);
-
-        let resultGroup: TopicVotingResult[] = [];
-        if (results.length != 0) {
-            let votes = 0;
-            // ToDo: Generalize Reacurring stuff like MostVoted, LeastVoted
-            switch(resultConfig.group) {
-                case(TopicVotingGroup.MostVoted): {
-                    votes = results[0].votes;
-                    break;
-                }
-                case(TopicVotingGroup.LeastVoted): {
-                    votes = results[results.length - 1].votes;
-                    break;
-                }
-            }
-            if (resultConfig.group === TopicVotingGroup.MostVoted) {
-                votes = results[0].votes;
-            } else {
-                votes = results[results.length - 1].votes;
-            }
-            resultGroup = results
-                .filter(r => r.votes === votes)
-        }
-        return resultGroup;
     }
 
     // ToDo: move to topic voting card

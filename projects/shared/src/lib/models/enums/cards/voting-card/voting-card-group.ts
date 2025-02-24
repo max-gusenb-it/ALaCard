@@ -1,4 +1,4 @@
-export enum PlayerVotingGroup {
+export enum VotingCardGroup {
     MostVoted,
     // WasVoted,
     LeastVoted

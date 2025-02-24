@@ -188,19 +188,12 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
      * @returns {SipResult[]} 
      */
     getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        let sipResults = this.calculateRoundSipResults(card, dynamicRoundData);
-        const userSR = this.getUserSipResult(sipResults);
-        if (!!userSR) {
-            sipResults = [
-                userSR,
-                ...sipResults.filter(s => s.playerId !== userSR?.playerId)
-            ]
-        }
-        return sipResults;
-    }
-
-    getUserSipResult(sipResults: SipResult[]) {
-        return sipResults.find(s => s.playerId === this._store.selectSnapshot(AuthenticationState.userId));
+        let sipResults = this.calculateSipResults(card, dynamicRoundData);
+        return sipResults.sort((s1, s2) => {
+            if (s1.playerId === this._store.selectSnapshot(AuthenticationState.userId)) return -1;
+            if (s2.playerId !== this._store.selectSnapshot(AuthenticationState.userId)) return 1;
+            return 0;
+        });
     }
 
     /**
@@ -210,11 +203,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
      * @param {DynamicRoundData} dynamicRoundData
      * @returns {SipResult[]}
      */
-    calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        return [];
-    }
-
-    getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: S): Result[] {
+    calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         return [];
     }
 

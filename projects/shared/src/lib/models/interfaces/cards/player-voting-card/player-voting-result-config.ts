@@ -1,6 +1,6 @@
-import { PlayerVotingGroup, ResultConfig } from "@shared";
+import { ResultConfig, VotingCardGroup } from "@shared";
 
 export interface PlayerVotingResultConfig extends ResultConfig {
-    group: PlayerVotingGroup;
+    group: VotingCardGroup;
     // ToDo: Add sip direction (distribute)
 }

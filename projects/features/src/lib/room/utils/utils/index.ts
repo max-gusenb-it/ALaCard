@@ -1,6 +1,7 @@
 export * from "./card.utils";
 export * from "./color.utils";
 export * from "./game-settings.utils";
+export * from "./group.utils";
 export * from "./ingame-data.utils";
 export * from "./markdown.utils";
 export * from "./room.utils";

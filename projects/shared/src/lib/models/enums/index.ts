@@ -1,5 +1,4 @@
-export * from "./cards/player-voting-card/player-voting-group";
-export * from "./cards/topic-voting-card/topic-voting-group";
+export * from "./cards/voting-card/voting-card-group";
 export * from "./deck/card-type";
 export * from "./game/default-game-setting-requirement";
 export * from "./game/default-game-setting-value-source";
