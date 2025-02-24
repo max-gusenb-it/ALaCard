@@ -9,12 +9,12 @@ import {
     RoomService,
     RoomState,
     CardServiceFactory,
-    pollCardSkipValue,
-    PollResponse,
+    topicVotingCardSkipValue,
+    TopicVotingResponse,
     ResponseDataDataService,
     ResponseDataSourceService,
-    PollCardResultConfig,
-    PollCardService,
+    TopicVotingCardResultConfig,
+    TopicVotingCardService,
     ColorUtils,
     CardUtils
 } from "@features";
@@ -24,7 +24,7 @@ import {
     Card,
     InformationActions,
     InformationState,
-    PollCard
+    TopicVotingCard
 } from '@shared';
 
 
@@ -36,8 +36,8 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
     @Input() card: Card;
     @Input() round: Round;
 
-    get pollCardService(): PollCardService<PollCard, PollCardResultConfig> {
-      return <PollCardService<PollCard, PollCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
+    get topicVotingCardService(): TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig> {
+      return <TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
     }
 
     get formBackgroundCSS() {
@@ -48,7 +48,7 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
         return CardUtils.getCardColor(this.card);
     }
 
-    castedCard: PollCard;
+    castedCard: TopicVotingCard;
     pollForm: FormGroup = new FormGroup({
         votedSubjectId: new FormControl({ value: "", disabled: false }, Validators.required)
     });
@@ -70,13 +70,13 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
     }
 
     ngAfterViewInit(): void {
-        this.castedCard = this.pollCardService.castCard(this.card);
+        this.castedCard = this.topicVotingCardService.castCard(this.card);
         this.changeDetectorRef.detectChanges();
         
         this.store.select(InformationState.response)
             .pipe(takeUntil(this.destroyed$))
             .subscribe(r => {
-            const response = this.pollCardService.castResponse(r ?? null);
+            const response = this.topicVotingCardService.castResponse(r ?? null);
     
             if (!!response) {
                 this.pollForm.controls["votedSubjectId"].disable();
@@ -89,7 +89,7 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
     }
 
     getCardText() {
-      return this.pollCardService.getCardText(
+      return this.topicVotingCardService.getCardText(
           this.card,
           this.store.selectSnapshot(RoomState.players),
           this.round.playerIds,
@@ -106,10 +106,10 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
         this.pollForm.controls["votedSubjectId"].disable();
         this.pollForm.controls["votedSubjectId"].updateValueAndValidity();
     
-        const response : PollResponse = {
+        const response : TopicVotingResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedSubjectIds: !skipped ? [Number(this.pollForm.controls['votedSubjectId'].value)] : [pollCardSkipValue],
+          votedSubjectIds: !skipped ? [Number(this.pollForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
           roundId: this.round.id  
         };
     

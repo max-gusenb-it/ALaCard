@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCardSettings, QuizCard, TopicVotingCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, QuizCard, TopicVotingCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -10,56 +10,48 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
+            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
+            type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Yes ✅",
-                    isTarget: true
+                    title: "Jungle Planet 🦜" 
                 },
                 {
-                    title: "No ❎",
-                    isTarget: false
+                    title: "Desert Planet 🦂"
+                },
+                {
+                    title: "Sea Planet 🐠"
                 }
-            ],
-            settings: {
-                targetSubjectIDs: [0]
-            },
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
+            ]
+        } as TopicVotingCard,        {
+            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
+            type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Yes ✅",
-                    isTarget: true
+                    title: "Jungle Planet 🦜" 
                 },
                 {
-                    title: "No ❎",
-                    isTarget: false
+                    title: "Desert Planet 🦂"
+                },
+                {
+                    title: "Sea Planet 🐠"
                 }
-            ],
-            settings: {
-                targetSubjectIDs: [0]
-            },
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
+            ]
+        } as TopicVotingCard,        {
+            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
+            type: CardType.TopicVotingCard,
             subjects: [
                 {
-                    title: "Yes ✅",
-                    isTarget: true
+                    title: "Jungle Planet 🦜" 
                 },
                 {
-                    title: "No ❎",
-                    isTarget: false
+                    title: "Desert Planet 🦂"
+                },
+                {
+                    title: "Sea Planet 🐠"
                 }
-            ],
-            settings: {
-                targetSubjectIDs: [0]
-            },
-        } as QuizCard
+            ]
+        } as TopicVotingCard
     ],
     flags: [],
     requiredPlayers: {
@@ -74,6 +66,22 @@ export const developmentDeck: Deck = {
         }
     ],
 };
+
+// {
+//     text: "Ever dropped your phone in the toilet?",
+//     type: CardType.QuizCard,
+//     subjects: [
+//         {
+//             title: "Yes ✅",
+//             isTarget: true
+//         },
+//         {
+//             title: "No ❎",
+//             isTarget: false
+//         }
+//     ]
+// } as QuizCard
+
 export const partyDeckWithRules: Deck = {
     icon: "🎉",
     name: "Party Game with Rules",
@@ -2377,7 +2385,7 @@ export const testingDeck: Deck = {
                     specificSipSubjectId: 1,
                     distribute: true
                 }
-            } as PollCardSettings
+            } as TopicVotingCardSettings
         } as TopicVotingCard,
         {
             text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",

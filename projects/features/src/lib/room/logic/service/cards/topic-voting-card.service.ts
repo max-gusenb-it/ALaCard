@@ -1,46 +1,157 @@
 import { Injectable } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { 
-    PollResult,
-    SipResult,
-    Player,
-    TopicVotingResultConfig,
+import {
+    RoomState,
+    TopicVotingResponse,
+    DynamicTopicVotingRoundData,
+    DynamicRoundData,
+    defaultCardSips,
+    topicVotingCardSkipValue,
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService,
-    defaultCardSips,
-    pollCardSkipValue,
-    DynamicRoundData,
-    GameSettings,
+    Response,
+    CardService,
+    SipResult,
+    PollResult,
+    TopicVotingCardResultConfig,
+    TopicVotingCardStates,
+    CardStates,
+    Result,
+    Player,
     MarkdownUtils,
-    PollCardStates,
-    PollCardService,
+    CardUtils,
+    GameSettings
 } from "@features";
 import { 
     Card,
     TopicVotingCard,
     TopicVotingGroup,
-    Utils
+    Utils,
 } from "@shared";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
 })
-export class TopicVotingCardService extends PollCardService<TopicVotingCard, TopicVotingResultConfig> {
-    
-    constructor(
-        store: Store,
-        responseDataDataService: ResponseDataDataService,
-        ingameDataDataService: IngameDataDataService,
-        private staticRoundDataDataService: StaticRoundDataDataService,
-        override translateService: TranslateService
-    ) {
-        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
+export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVotingCardResultConfig> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, PollResult, TopicVotingCardResultConfig> {
+
+    get defaultPollVotingDistribution() {
+        return true;
     }
 
     get defaultTopicVotingGroup() {
         return TopicVotingGroup.MostVoted;
+    }
+
+    constructor(
+        private store: Store,
+        responseDataDataService: ResponseDataDataService,
+        ingameDataDataService: IngameDataDataService,
+        private staticRoundDataDataService: StaticRoundDataDataService,
+        protected translateService: TranslateService
+    ) {
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
+    }
+
+    override castCard(card: Card): C {
+        let topicVotingCard = super.castCard(card);
+        return <C>{
+            ...topicVotingCard,
+            subjects: topicVotingCard.subjects.map((c, index) => {
+                return {
+                    id: index,
+                    ...c
+                }
+            })
+        };
+    }
+
+    override getOfflineCardTextSizeClass(card: Card, text: string): string {
+        return "text-base";
+    }
+
+    override createDynamicRoundData(roundId: number, responses: Response[]): DynamicTopicVotingRoundData {
+        const pvResponses = this.castResponses(responses);
+        let drd: DynamicTopicVotingRoundData = super.createDynamicRoundData(roundId, responses);
+        drd.responses = pvResponses;
+        return drd;
+    }
+
+    override getResults(dynamicRoundData: DynamicRoundData, card?: Card): PollResult[] {
+        let results: PollResult[] = [];
+        const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
+        dynamicPollRoundData.responses.forEach(response => {
+            response.votedSubjectIds.forEach(subjectId => {
+                let resultIndex = results.findIndex(r => r.subjectId === subjectId);
+                if (resultIndex === -1) {
+                    results.push({
+                        subjectId: subjectId,
+                        playerIds: [response.playerId],
+                        votes: 1
+                    })
+                } else {
+                    const foundResults = results[resultIndex];
+                    results[resultIndex] = {
+                        subjectId: subjectId,
+                        playerIds: [
+                            ...foundResults.playerIds,
+                            response.playerId
+                        ],
+                        votes: foundResults.votes + 1
+                    }
+                }
+            });
+        });
+        results = results.sort((r1, r2) => {
+            if (r1.subjectId === topicVotingCardSkipValue) return 1;
+            if (r2.subjectId === topicVotingCardSkipValue) return -1;
+            return r2.votes - r1.votes;
+        });
+        return results;
+    }
+
+    override hasFollowUpCard(card: Card, cardState: string): boolean {
+        switch(cardState) {
+            case(CardStates.card_initial): {
+                return this.hasDefaultFollowUpCard(card) || super.hasFollowUpCard(card, cardState);
+            }
+            case(TopicVotingCardStates.topicVotingCard_offlineSpecifcSipSubject): {
+                return super.hasFollowUpCard(card, cardState);
+            }
+            default: return false;
+        }
+    }
+
+    override hasDefaultFollowUpCard(card: Card) {
+        const topicVotingCard = this.castCard(card);
+        const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
+        const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
+        return gameSettings?.drinkingGame && roomSettings.singleDeviceMode && topicVotingCard.settings?.sipConfig?.specificSipSubjectId !== undefined;
+    }
+
+    override getNextCardState(): string {
+        return TopicVotingCardStates.topicVotingCard_offlineSpecifcSipSubject;
+    }
+
+    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        const topicVotingCard = this.castCard(card);
+    
+        let results = this.getResultGroup(dynamicRoundData);
+
+        return results
+            .map(r => {
+                return r.playerIds.map(pId => {
+                    return {
+                        playerId: pId,
+                        sips: defaultCardSips,
+                        distribute: topicVotingCard.settings?.sipConfig?.distribute !== undefined ? 
+                            topicVotingCard.settings?.sipConfig?.distribute : 
+                            this.defaultPollVotingDistribution
+                    } as SipResult
+                });
+            })
+            .flat();
     }
 
     override getResultsHeading(results: PollResult[], card: Card): string {
@@ -68,7 +179,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
             let sipText = "";
             if (
                 this.hasDefaultFollowUpCard(card) && 
-                this.staticRoundDataDataService.cardState !== PollCardStates.pollCard_offlineSpecifcSipSubject
+                this.staticRoundDataDataService.cardState !== TopicVotingCardStates.topicVotingCard_offlineSpecifcSipSubject
             ) {
                 sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
             } else {
@@ -80,7 +191,7 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
     }
 
     getOfflineSipText(card: Card) {
-        const castedCard = this.castCard(card);
+        const castedCard = CardUtils.castCard<TopicVotingCard>(card);
         let inclusion = "";
         let group = "";
 
@@ -108,37 +219,35 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
         return `${inclusion} ${group} <br> ${distribution} ${defaultCardSips} ${sip}`
     }
 
-    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        const tvCard = this.castCard(card);
-
-        if (tvCard.settings?.sipConfig?.specificSipSubjectId !== undefined) {
-            return super.calculateRoundSipResults(card, dynamicRoundData);
-        }
-        
-        let results = this.getResultGroup(dynamicRoundData, card, tvCard.settings?.sipConfig?.resultConfig);
-
-        return results
-            .map(r => {
-                return r.playerIds.map(pId => {
-                    return {
-                        playerId: pId,
-                        sips: defaultCardSips,
-                        distribute: tvCard.settings?.sipConfig?.distribute !== undefined ? 
-                            tvCard.settings?.sipConfig?.distribute : 
-                            this.defaultPollVotingDistribution
-                    } as SipResult
-                });
-            })
-            .flat();
+    override getResultText(result: Result): string {
+        const pollResult = this.castResult(result);
+        const translation = pollResult.votes === 1 ? this.translateService.instant("shared.components.display.it-result.vote") : this.translateService.instant("shared.components.display.it-result.votes");
+        return `${pollResult.votes} ${translation}`;
+    }
+    
+    override cardHasResultSubText(card: Card): boolean {
+        const topicVotingCard = this.castCard(card);
+        if (topicVotingCard.settings?.isAnonymous) return false;
+        return true;
+    }
+    
+    override getResultSubText(result: Result, players: Player[]): string {
+        const pollResult = this.castResult(result);
+        let text = "";
+        pollResult.playerIds.forEach((playerId, index) => {
+            text += players.find(p => p.id === playerId)!.username;
+            if (index !== pollResult.playerIds.length -1) text += ", ";
+        });
+        return text;
     }
 
-    override getResultGroup(dynamicRoundData: DynamicRoundData, card: Card, resultConfig?: TopicVotingResultConfig) : PollResult[] {
+    override getResultGroup(dynamicRoundData: DynamicRoundData, resultConfig?: TopicVotingCardResultConfig) : PollResult[] {
         if (!!!resultConfig) resultConfig = {
             group: this.defaultTopicVotingGroup
         };
 
-        const results = this.getResults(dynamicRoundData, card)
-            .filter(r => r.subjectId !== pollCardSkipValue);
+        const results = this.getResults(dynamicRoundData)
+            .filter(r => r.subjectId !== topicVotingCardSkipValue);
 
         let resultGroup: PollResult[] = [];
         if (results.length != 0) {
@@ -163,5 +272,11 @@ export class TopicVotingCardService extends PollCardService<TopicVotingCard, Top
                 .filter(r => r.votes === votes)
         }
         return resultGroup;
+    }
+
+    // ToDo: move to topic voting card
+    getTopResults(results: PollResult[]): PollResult[] {
+        return results
+            .filter(r => r.votes === results[0].votes && r.subjectId !== topicVotingCardSkipValue);
     }
 }

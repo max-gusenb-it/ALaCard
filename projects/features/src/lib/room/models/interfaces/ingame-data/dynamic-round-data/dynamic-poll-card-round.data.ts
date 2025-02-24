@@ -1,6 +1,6 @@
-import { PollResponse } from "../../response-data/poll-response";
+import { TopicVotingResponse } from "../../response-data/poll-response";
 import { DynamicRoundData } from "./dynamic-round-data";
 
-export interface DynamicPollRoundData extends DynamicRoundData {
-    responses: PollResponse[];
+export interface DynamicTopicVotingRoundData extends DynamicRoundData {
+    responses: TopicVotingResponse[];
 }

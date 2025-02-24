@@ -10,13 +10,9 @@ export * from "./free-text-card/free-text-card-settings";
 export * from "./player-voting-card/player-voting-card";
 export * from "./player-voting-card/player-voting-card-settings";
 
-export * from "./poll-card/poll-card";
-export * from "./poll-card/poll-card-settings";
-export * from "./poll-card/poll-group";
-export * from "./poll-card/subject";
+export * from "./topic-voting-card/topic-voting-card";
+export * from "./topic-voting-card/topic-voting-card-settings";
+export * from "./topic-voting-card/subject";
 
 export * from "./quiz-card/quiz-card";
 export * from "./quiz-card/quiz-subject";
-
-export * from "./topic-voting-card/topic-voting-card";
-export * from "./topic-voting-card/topic-voting-card-settings";

@@ -1,6 +1,8 @@
-import { PollCardSettings } from "../poll-card/poll-card-settings";
-import { TopicVotingSipConfig } from "../../../../../../../features/src/lib/room/models/interfaces/cards/results/topic-voting-card/topic-voting-sip-config";
+import { CardSettings } from "../card-settings";
+import { PollSipConfig } from "../../../../../../../features/src/lib/room/models/interfaces/cards/results/poll-card/poll-sip-config";
 
-export interface TopicVotingCardSettings extends PollCardSettings {
-    sipConfig?: TopicVotingSipConfig;
+export interface TopicVotingCardSettings extends CardSettings {
+    sipConfig?: PollSipConfig;
+    chooseMultiple?: boolean;
+    isAnonymous?: boolean;
 }

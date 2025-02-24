@@ -3,17 +3,17 @@ import { Store } from "@ngxs/store";
 import { takeUntil } from "rxjs";
 import { 
   CardServiceFactory,
-  DynamicPollRoundData,
+  DynamicTopicVotingRoundData,
   GameService,
   IngameDataDataService,
-  pollCardSkipValue,
+  topicVotingCardSkipValue,
   RoomService,
   RoomState,
   Round,
-  PollCardResultConfig,
+  TopicVotingCardResultConfig,
   PollResult,
   SipResult,
-  PollCardService,
+  TopicVotingCardService,
   ColorUtils,
   CardUtils
 } from "@features";
@@ -21,7 +21,7 @@ import {
   AngularLifecycle,
   Card,
   CardType,
-  PollCard
+  TopicVotingCard
 } from '@shared';
 
 @Component({
@@ -32,8 +32,8 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
   @Input() card: Card;
   @Input() round: Round;
 
-  get pollCardService(): PollCardService<PollCard, PollCardResultConfig> {
-    return <PollCardService<PollCard, PollCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
+  get topicVotingCardService(): TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig> {
+    return <TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
   }
   
   get statsBackgroundCSS() {
@@ -44,8 +44,23 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
     return CardUtils.getCardColor(this.card);
   }
 
-  castedCard: PollCard;
-  dynamicRoundData: DynamicPollRoundData;
+  get gameSettings() {
+    return this.store.selectSnapshot(RoomState.gameSettings);
+  }
+
+  get topicVotingCardSkipValue() {
+    return topicVotingCardSkipValue;
+  }
+
+  get sipResultColumnCount() {
+    if (window.innerWidth >= 380)
+      return 5;
+    else
+      return 4;
+  }
+
+  castedCard: TopicVotingCard;
+  dynamicRoundData: DynamicTopicVotingRoundData;
   results: PollResult[];
 
   constructor(
@@ -59,35 +74,20 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
     super();
   }
 
-  get gameSettings() {
-    return this.store.selectSnapshot(RoomState.gameSettings);
-  }
-
-  get pollCardSkipValue() {
-    return pollCardSkipValue;
-  }
-
-  get sipResultColumnCount() {
-    if (window.innerWidth >= 380)
-      return 5;
-    else
-      return 4;
-  }
-
   ngAfterViewInit(): void {
-    this.castedCard = this.pollCardService.castCard(this.card);
+    this.castedCard = this.topicVotingCardService.castCard(this.card);
 
     this.ingameDataDataService.getDynamicRoundData$()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(dynamicRoundData => {
         if (!!!dynamicRoundData) return;
-        this.results = this.pollCardService.getResults(dynamicRoundData, this.card);
+        this.results = this.topicVotingCardService.getResults(dynamicRoundData, this.card);
         this.changeDetectorRef.detectChanges();
       });
   }
 
   getCardText() {
-    return this.pollCardService.getCardText(
+    return this.topicVotingCardService.getCardText(
       this.card,
       this.store.selectSnapshot(RoomState.players),
       this.round.playerIds,
@@ -100,11 +100,11 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
   }
 
   getTopResultsCount() {
-    return this.pollCardService.getTopResults(this.results).length;
+    return this.topicVotingCardService.getTopResults(this.results).length;
   }
 
   getResultsHeading() {
-    return this.pollCardService.getResultsHeading(this.results, this.card);
+    return this.topicVotingCardService.getResultsHeading(this.results, this.card);
   }
 
   // ToDo: structure: move into card service 
@@ -120,7 +120,7 @@ export class ItPollStatsComponent extends AngularLifecycle implements AfterViewI
   }
   
   getPlayerForSipResult(result: SipResult) {
-    return this.pollCardService.getPlayerForSipResult(result);
+    return this.topicVotingCardService.getPlayerForSipResult(result);
   }
 
   isUserRoomAdmin() {

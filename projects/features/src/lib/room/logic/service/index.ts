@@ -1,6 +1,6 @@
 export * from "./cards/card.service";
 export * from "./cards/player-voting-card.service";
-export * from "./cards/poll-card.service";
+export * from "./cards/quiz-card.service";
 export * from "./cards/topic-voting-card.service";
 
 export * from "./data/ingame-data.data.service";

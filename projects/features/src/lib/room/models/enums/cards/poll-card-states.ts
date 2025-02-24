@@ -1,3 +1,3 @@
-export enum PollCardStates {
-    pollCard_offlineSpecifcSipSubject = "pollCard_offlineSpecifcSipSubject"
+export enum TopicVotingCardStates {
+    topicVotingCard_offlineSpecifcSipSubject = "topicVotingCard_offlineSpecifcSipSubject"
 }

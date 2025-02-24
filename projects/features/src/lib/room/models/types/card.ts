@@ -1,5 +1,5 @@
-import { CardService, DynamicRoundData, PlayerVotingCardService, Response, TopicVotingCardService, Result, ResultConfig } from "@features";
-import { Card, PlayerVotingCard, PollCard } from "@shared";
+import { CardService, DynamicRoundData, PlayerVotingCardService, Response, TopicVotingCardService, Result, ResultConfig, TopicVotingCardResultConfig } from "@features";
+import { Card, PlayerVotingCard, TopicVotingCard } from "@shared";
 
-export type GameCardService = CardService<Card, Response, DynamicRoundData, Result, ResultConfig> | PlayerVotingCardService | TopicVotingCardService;
-export type GameCard = Card | PlayerVotingCard | PollCard;
+export type GameCardService = CardService<Card, Response, DynamicRoundData, Result, ResultConfig> | PlayerVotingCardService | TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig>;
+export type GameCard = Card | PlayerVotingCard | TopicVotingCard;

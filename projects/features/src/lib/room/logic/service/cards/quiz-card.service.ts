@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
-import { CardUtils, DynamicRoundData, IngameDataDataService, PollCardResultConfig, PollCardService, PollResult, ResponseDataDataService, SipResult, StaticRoundDataDataService } from "@features";
+import { CardUtils, DynamicRoundData, IngameDataDataService, TopicVotingCardResultConfig, PollResult, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { Card, PollCard, QuizCard, Utils } from "@shared";
+import { Card, TopicVotingCard, QuizCard, Utils } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
-export class QuizCardService extends PollCardService<QuizCard, PollCardResultConfig> {
+export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotingCardResultConfig> {
     
     constructor(
         store: Store,
@@ -66,4 +66,26 @@ export class QuizCardService extends PollCardService<QuizCard, PollCardResultCon
             true
         );
     }
+    
+    // const pollCard = this.castCard(card);
+    // let results: PollResult[] = [];
+
+    // if (pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined) {
+    //     results = this.getResults(dynamicRoundData, card)
+    //         .filter(r => r.subjectId === pollCard.settings!.sipConfig!.specificSipSubjectId);
+    // }
+
+    // return results
+    //     .map(r => {
+    //         return r.playerIds.map(pId => {
+    //             return {
+    //                 playerId: pId,
+    //                 sips: defaultCardSips,
+    //                 distribute: pollCard.settings?.sipConfig?.distribute !== undefined ?
+    //                     pollCard.settings?.sipConfig?.distribute :
+    //                     this.defaultPollVotingDistribution
+    //             } as SipResult
+    //         });
+    //     })
+    //     .flat();
 }
