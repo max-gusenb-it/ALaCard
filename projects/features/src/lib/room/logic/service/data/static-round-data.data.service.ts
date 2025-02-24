@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, filter, Observable, takeUntil } from "rxjs";
-import { RoomPlayerLoadBaseDataService, StaticRoundDataSourceService, StaticRoundData } from "@features";
-import { CardStates } from "@shared";
 import { Store } from "@ngxs/store";
+import { BehaviorSubject, filter, Observable, takeUntil } from "rxjs";
+import { RoomPlayerLoadBaseDataService, StaticRoundDataSourceService, StaticRoundData, CardStates } from "@features";
 
 @Injectable({
     providedIn: 'root'

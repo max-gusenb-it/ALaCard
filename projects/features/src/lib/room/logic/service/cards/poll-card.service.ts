@@ -15,12 +15,12 @@ import {
     SipResult,
     PollResult,
     PollCardResultConfig,
+    PollCardStates,
+    CardStates
 } from "@features";
 import { 
     Card,
     PollCard,
-    PollCardStates,
-    CardStates
 } from "@shared";
 
 @Injectable({

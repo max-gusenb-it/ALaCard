@@ -2,16 +2,8 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { 
-    Card,
-    Deck,
-    CardStates,
-    ErrorMonitorActions,
-    ItError,
-    Utils,
-    CardType
-} from '@shared';
-import { 
     Player,
+    CardStates,
     RoomState,
     CardServiceFactory,
     GameSettings,
@@ -23,6 +15,14 @@ import {
     GameControlServiceErros,
     StaticRoundDataUtils
 } from '@features';
+import { 
+    Card,
+    Deck,
+    ErrorMonitorActions,
+    ItError,
+    Utils,
+    CardType
+} from '@shared';
 
 @Injectable({
     providedIn: 'root'

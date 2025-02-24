@@ -8,6 +8,7 @@ import {
     BaseCardUtils,
     Round,
     RoundState,
+    CardStates,
     Result,
     ResultConfig,
     SipResult,
@@ -19,7 +20,6 @@ import {
 import {
     AuthenticationState,
     Card,
-    CardStates,
     InformationState,
     PlayerState,
     Utils,
