@@ -12,6 +12,14 @@ export namespace CardFormUtils {
                 {
                     color: "violet",
                     value: "bg-violet-100"
+                },
+                {
+                    color: "emerald",
+                    value: "bg-emerald-100"
+                },
+                {
+                    color: "green",
+                    value: "bg-green-100"
                 }
             ]
         );

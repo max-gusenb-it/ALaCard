@@ -13,7 +13,14 @@
     @case (3) {
       <it-poll-form
         class="w-full sm:w-3/5 max-w-xl"
-        [card]="getPlayerVotingCard(deck.cards[staticRoundData.round.cardIndex])"
+        [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [round]="staticRoundData.round"
+      />
+    }
+    @case (4) {
+      <it-poll-form
+        class="w-full sm:w-3/5 max-w-xl"
+        [card]="deck.cards[staticRoundData.round.cardIndex]"
         [round]="staticRoundData.round"
       />
     }

@@ -123,7 +123,8 @@
               "response-count-tutorial": "Verfolge anhand der Zahlen neben „Weiter“, wie viele Spieler bereits eine Antwort abgegeben haben."
             }
           },
-          "topic-voting": "Themen Abstimmung"
+          "topic-voting": "Themen Abstimmung",
+          "quiz": "Quiz"
         },
         "game-cards": {
           "forms": {

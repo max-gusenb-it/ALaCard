@@ -49,6 +49,12 @@
     @apply bg-blue-500 text-white; 
 }
 
+.emerald-button {
+    @extend #button;
+    @extend .button-states;
+    @apply bg-emerald-500 text-white; 
+}
+
 .green-button {
     @extend #button;
     @extend .button-states;

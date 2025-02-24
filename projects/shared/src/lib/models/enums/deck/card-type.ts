@@ -2,5 +2,6 @@ export enum CardType {
     "GroundRule",
     "FreeText",
     "PlayerVoting",
-    "TopicVotingCard"
+    "TopicVotingCard",
+    "QuizCard"
 }

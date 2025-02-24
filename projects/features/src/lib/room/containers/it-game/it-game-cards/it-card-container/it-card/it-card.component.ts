@@ -51,6 +51,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  // ToDo: use new color utils
+
   getBorderCSSClasses() {
     if (!this.customColor) {
       switch(this.card.type) {
@@ -63,6 +65,9 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
         };
         case(CardType.TopicVotingCard): {
           return "border-blue-500 bg-blue-500"
+        }
+        case(CardType.QuizCard): {
+          return "border-emerald-500 bg-emerald-500"
         }
       }
     } else {
@@ -92,12 +97,15 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
         case(CardType.GroundRule):
         case(CardType.FreeText): {
           return "bg-it_yellow-200";
-        };
+        }
         case(CardType.PlayerVoting): {
           return "bg-red-200"
-        };
+        }
         case(CardType.TopicVotingCard): {
           return "bg-blue-200"
+        }
+        case(CardType.QuizCard): {
+          return "bg-green-200"
         }
       }
     } else {
@@ -176,6 +184,9 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
       };
       case (CardType.TopicVotingCard): {
         return this.translateService.instant("features.room.game.card.topic-voting");
+      };
+      case (CardType.QuizCard): {
+        return this.translateService.instant("features.room.game.card.quiz");
       };
     }
   }

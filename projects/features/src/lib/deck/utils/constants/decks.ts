@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCardSettings, TopicVotingCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCardSettings, QuizCard, TopicVotingCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -11,7 +11,7 @@ export const developmentDeck: Deck = {
     cards: [
         {
             text: "Ever dropped your phone in the toilet?",
-            type: CardType.TopicVotingCard,
+            type: CardType.QuizCard,
             subjects: [
                 {
                     title: "Yes ✅" 
@@ -21,66 +21,45 @@ export const developmentDeck: Deck = {
                 }
             ],
             settings: {
-                order: 1,
-                sipConfig: {
-                    specificSipSubjectId: 0,
-                    distribute: false
-                }
-            }
-        } as TopicVotingCard,
-        {
-            text: "%p0 du bist jetzt Daumenmeister, nutze deinen macht!",
-            type: CardType.FreeText,
-            followUpCardConfig: {
-                followUpCardID: 0,
-                roundDelay: 2
+                targetSubjectIDs: [0]
             },
+        } as QuizCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
             settings: {
-                order: 0
-            }
-        } as FreeTextCard,
+                targetSubjectIDs: [0]
+            },
+        } as QuizCard,
         {
-            followUpCardID: 0,
-            text: "%p0 ich hoffe du hast deine Macht als Daumenmeister genutzt!",
-            type: CardType.FreeText
-        } as FreeTextCard,
-        {
-            text: "What do you prefer to drink?",
-            type: CardType.TopicVotingCard,
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Kakao 🥛" 
+                    title: "Yes ✅" 
                 },
                 {
-                    title: "Coffee ☕"
+                    title: "No ❎"
                 }
-            ]
-        } as TopicVotingCard,
-        {
-            text: "Where would you rather be stranded?",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "On a deserted island 🏝️" 
-                },
-                {
-                    title: "On a lonely habitable planet 🌎"
-                }
-            ]
-        } as TopicVotingCard
+            ],
+            settings: {
+                targetSubjectIDs: [0]
+            },
+        } as QuizCard
     ],
     flags: [],
     requiredPlayers: {
         playerCount: 2,
         isExactCount: false
-    },
-    defaultGameSettings: [
-        {
-            settingName: speficiPlayerIdSettingName,
-            valueSource: DefaultGameSettingValueSource.default,
-            requirement: DefaultGameSettingRequirement.required
-        }
-    ]
+    }
 };
 export const partyDeckWithRules: Deck = {
     icon: "🎉",

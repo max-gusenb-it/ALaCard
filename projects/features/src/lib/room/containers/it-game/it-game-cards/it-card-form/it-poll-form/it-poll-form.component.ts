@@ -21,6 +21,7 @@ import {
     AngularLifecycle,
     AuthenticationState,
     Card,
+    CardType,
     InformationActions,
     InformationState,
     PollCard,
@@ -46,8 +47,8 @@ export class ItPollFormComponent extends AngularLifecycle implements AfterViewIn
 
     get cardColor()  {
         return Utils.isStringDefinedAndNotEmpty(this.castedCard.settings?.customColor) ? 
-            this.castedCard.settings!.customColor! : 
-            "blue";
+            this.castedCard.settings!.customColor! :
+            this.card.type === CardType.TopicVotingCard ? "blue" : "green";
     }
 
     castedCard: PollCard;
