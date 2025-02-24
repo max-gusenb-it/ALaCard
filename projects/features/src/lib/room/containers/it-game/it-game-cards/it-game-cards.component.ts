@@ -9,7 +9,7 @@ import { AngularLifecycle, Deck } from '@shared';
   templateUrl: './it-game-cards.component.html',
   animations: [slideToggle]
 })
-export class GameCardsComponent extends AngularLifecycle {
+export class ItGameCardsComponent extends AngularLifecycle {
   
   deck: Deck;
 

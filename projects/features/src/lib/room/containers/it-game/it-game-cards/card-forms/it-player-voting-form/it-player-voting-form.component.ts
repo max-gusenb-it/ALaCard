@@ -27,7 +27,7 @@ import {
   selector: 'it-player-voting-form',
   templateUrl: './it-player-voting-form.component.html'
 })
-export class PlayerVotingFormComponent extends AngularLifecycle implements AfterViewInit {
+export class ItPlayerVotingFormComponent extends AngularLifecycle implements AfterViewInit {
   
   @Input() card: PlayerVotingCard;
   @Input() round: Round;

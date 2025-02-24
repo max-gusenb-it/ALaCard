@@ -18,7 +18,7 @@ import {
   selector: 'it-card-stats',
   templateUrl: './it-card-stats.component.html',
 })
-export class CardStatsComponent extends AngularLifecycle {
+export class ItCardStatsComponent extends AngularLifecycle {
 
   deck: Deck;
   staticRoundData: StaticRoundData;

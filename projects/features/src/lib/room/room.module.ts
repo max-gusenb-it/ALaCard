@@ -10,29 +10,29 @@ import { RoomPage } from './room.page';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SharedModule } from '@shared';
 import {
-  CardComponent,
-  CardContainerComponent,
+  ItCardComponent,
+  ItCardContainerComponent,
   ItAuthenticateModal,
   ItDeckComponent,
   ItPlayerComponent,
   ItResultComponent,
   ItSipResultComponent,
   ItSipResultsComponent,
-  RoomSettingsBottomSheet,
-  AddOfflinePlayerBottomSheet,
-  GameComponent,
-  CardFormComponent,
-  PollFormComponent,
-  CardStatsComponent,
-  PlayerVotingStatsComponent,
-  PollStatsComponent,
-  GameCardsComponent,
-  GameRulesComponent,
+  ItRoomSettingsBottomSheet,
+  ItAddOfflinePlayerBottomSheet,
+  ItGameComponent,
+  ItCardFormComponent,
+  ItPollFormComponent,
+  ItCardStatsComponent,
+  ItPlayerVotingStatsComponent,
+  ItPollStatsComponent,
+  ItGameCardsComponent,
+  ItGameRulesComponent,
   ItAddAccountModal,
   ItCreateRoomAsGuestModal,
-  ShareBottomSheet,
-  StartGameModal,
-  PlayerVotingFormComponent
+  ItShareBottomSheet,
+  ItStartGameModal,
+  ItPlayerVotingFormComponent
 } from '@features';
 
 @NgModule({
@@ -46,19 +46,19 @@ import {
   ],
   declarations: [
     RoomPage,
-    RoomSettingsBottomSheet,
-    ShareBottomSheet,
-    StartGameModal,
-    AddOfflinePlayerBottomSheet,
-    GameComponent,
-    CardFormComponent,
-    PlayerVotingFormComponent,
-    PollFormComponent,
-    CardStatsComponent,
-    PlayerVotingStatsComponent,
-    PollStatsComponent,
-    GameCardsComponent,
-    GameRulesComponent,
+    ItRoomSettingsBottomSheet,
+    ItShareBottomSheet,
+    ItStartGameModal,
+    ItAddOfflinePlayerBottomSheet,
+    ItGameComponent,
+    ItCardFormComponent,
+    ItPlayerVotingFormComponent,
+    ItPollFormComponent,
+    ItCardStatsComponent,
+    ItPlayerVotingStatsComponent,
+    ItPollStatsComponent,
+    ItGameCardsComponent,
+    ItGameRulesComponent,
     ItSipResultComponent,
     ItDeckComponent,
     ItPlayerComponent,
@@ -67,8 +67,8 @@ import {
     ItAddAccountModal,
     ItAuthenticateModal,
     ItCreateRoomAsGuestModal,
-    CardComponent,
-    CardContainerComponent
+    ItCardComponent,
+    ItCardContainerComponent
   ]
 })
 export class RoomPageModule {}

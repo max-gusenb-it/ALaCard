@@ -11,10 +11,10 @@ import {
   AuthenticationState
 } from '@shared';
 import {
-  ShareBottomSheet,
-  RoomSettingsBottomSheet,
-  StartGameModal,
-  AddOfflinePlayerBottomSheet,
+  ItShareBottomSheet,
+  ItRoomSettingsBottomSheet,
+  ItStartGameModal,
+  ItAddOfflinePlayerBottomSheet,
   StaticRoundDataDataService,
   GameService,
   Player,
@@ -112,7 +112,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
         const room = this.store.selectSnapshot(RoomState.room);
         if (!!room) {
           this.popupService.openBottomSheet(
-            ShareBottomSheet,
+            ItShareBottomSheet,
             {
               data: RoomUtils.generateJoinLink(room)
             }
@@ -120,7 +120,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
         }
         break;
       case(settingsMenuItem): {
-          this.popupService.openBottomSheet(RoomSettingsBottomSheet);
+          this.popupService.openBottomSheet(ItRoomSettingsBottomSheet);
         }
         break;
       case(endGameMenuItem): {
@@ -136,7 +136,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   addOfflinePlayer() {
     this.popupService.openBottomSheet(
-      AddOfflinePlayerBottomSheet
+      ItAddOfflinePlayerBottomSheet
     )
   }
 
@@ -150,7 +150,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
 
   startGame() {
     this.popupService.openModal({
-      component: StartGameModal
+      component: ItStartGameModal
     });
   }
 

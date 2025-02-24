@@ -10,7 +10,7 @@ import { AngularLifecycle, Card, CardType, supportedColors, Color } from '@share
   templateUrl: './it-card.component.html',
   styleUrls: ['./it-card.component.scss']
 })
-export class CardComponent extends AngularLifecycle implements AfterViewInit {
+export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
 
   players: Player[];
 

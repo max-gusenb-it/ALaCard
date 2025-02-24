@@ -34,7 +34,7 @@ const responseCountTutorialLabelId = "features.room.game.card.game-cards.card-co
   templateUrl: './it-card-container.component.html',
   animations: [slideToggle]
 })
-export class CardContainerComponent extends AngularLifecycle{
+export class ItCardContainerComponent extends AngularLifecycle{
 
   roomSettings$: Observable<RoomSettings | undefined> = this.store.select(RoomState.roomSettings);
 

@@ -9,7 +9,7 @@ import { RoomActions } from '@features';
   templateUrl: './it-add-offline-player-bottom-sheet.component.html',
   styleUrls: ['./it-add-offline-player-bottom-sheet.component.scss']
 })
-export class AddOfflinePlayerBottomSheet {
+export class ItAddOfflinePlayerBottomSheet {
 
   addOfflinePlayerForm: FormGroup = new FormGroup({
     name: new FormControl({value: "", disabled: false}, [Validators.required]),

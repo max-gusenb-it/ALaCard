@@ -31,7 +31,7 @@ import {
   selector: 'it-player-voting-stats',
   templateUrl: './it-player-voting-stats.component.html'
 })
-export class PlayerVotingStatsComponent extends AngularLifecycle implements AfterViewInit {
+export class ItPlayerVotingStatsComponent extends AngularLifecycle implements AfterViewInit {
   
   @Input() card: Card;
   @Input() round: Round;

@@ -8,7 +8,7 @@ import { AngularLifecycle } from '@shared';
   selector: 'it-game',
   templateUrl: './it-game.component.html'
 })
-export class GameComponent extends AngularLifecycle {
+export class ItGameComponent extends AngularLifecycle {
 
   room: Room;
   staticRoundData: StaticRoundData;

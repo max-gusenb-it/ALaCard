@@ -11,7 +11,7 @@ import {
   selector: 'it-no-account',
   templateUrl: './it-no-account.component.html'
 })
-export class NoAccountComponent {
+export class ItNoAccountComponent {
 
   constructor(
     private navController: NavController,

@@ -9,7 +9,7 @@ import { CreateRoomFormData } from '@shared';
   selector: 'it-create-room-modal',
   templateUrl: './it-create-room-modal.component.html'
 })
-export class CreateRoomModal {
+export class ItCreateRoomModal {
   
   createRoomFormData: CreateRoomFormData = {
     name: "",

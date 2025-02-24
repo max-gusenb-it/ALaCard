@@ -24,7 +24,7 @@ import {
   selector: 'it-start-game-modal',
   templateUrl: './it-start-game-modal.component.html'
 })
-export class StartGameModal extends AngularLifecycle {
+export class ItStartGameModal extends AngularLifecycle {
 
   currentTab: string = "";
   players: Player[];

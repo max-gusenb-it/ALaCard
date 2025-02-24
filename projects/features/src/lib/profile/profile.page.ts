@@ -17,7 +17,7 @@ import {
   systemDefaultValue,
   SettingsService
 } from '@shared';
-import { ItAddAccountModal, EditProfileModal, DeleteAccountBottomSheetComponent } from "@features";
+import { ItAddAccountModal, ItEditProfileModal, ItDeleteAccountBottomSheetComponent } from "@features";
 
 @Component({
   selector: 'profile',
@@ -63,7 +63,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     const user = this.store.selectSnapshot(AuthenticationState.user);
 
     this.popupService.openModal({
-      component: EditProfileModal,
+      component: ItEditProfileModal,
       componentProps: {
         user: user
       }
@@ -120,7 +120,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   }
 
   deleteAccount() {
-    const ref = this.popupService.openBottomSheet(DeleteAccountBottomSheetComponent);
+    const ref = this.popupService.openBottomSheet(ItDeleteAccountBottomSheetComponent);
     firstValueFrom(ref.closed).then(del => {
       if (del) {
         this.signOut();

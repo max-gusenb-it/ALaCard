@@ -12,7 +12,7 @@ const secondsUntilDeleteEnabled = environment.production ? 5 : 1;
   templateUrl: './it-delete-account-bottom-sheet.component.html',
   styleUrls: ['./it-delete-account-bottom-sheet.component.scss'],
 })
-export class DeleteAccountBottomSheetComponent {
+export class ItDeleteAccountBottomSheetComponent {
   @Select(AuthenticationState.user) user$!: Observable<User>;
 
   countDown: number = secondsUntilDeleteEnabled;

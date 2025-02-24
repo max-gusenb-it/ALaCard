@@ -9,7 +9,7 @@ import { GameHistoryEntry } from "@shared";
     selector: 'it-game-history-entry',
     templateUrl: './it-game-history-entry.component.html'
 })
-export class GameHistoryEntryComponent {
+export class ItGameHistoryEntryComponent {
     @Input() gameHistoryEntry: GameHistoryEntry;
 
     constructor(

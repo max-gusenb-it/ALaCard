@@ -8,7 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SharedModule } from '@shared';
-import { CreateRoomModal, GameHistoryEntryComponent, NoAccountComponent, NoRoomComponent } from '@features';
+import { ItCreateRoomModal, ItGameHistoryEntryComponent, ItNoAccountComponent, ItNoRoomComponent } from '@features';
 
 @NgModule({
   imports: [
@@ -20,10 +20,10 @@ import { CreateRoomModal, GameHistoryEntryComponent, NoAccountComponent, NoRoomC
   ],
   declarations: [
     HomePage,
-    CreateRoomModal,
-    NoAccountComponent,
-    NoRoomComponent,
-    GameHistoryEntryComponent
+    ItCreateRoomModal,
+    ItNoAccountComponent,
+    ItNoRoomComponent,
+    ItGameHistoryEntryComponent
   ]
 })
 export class HomePageModule {}

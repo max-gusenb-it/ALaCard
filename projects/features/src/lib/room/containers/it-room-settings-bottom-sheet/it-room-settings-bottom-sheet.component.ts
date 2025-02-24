@@ -12,7 +12,7 @@ import { AuthenticationState, LoadingHelperService, PopupService } from '@shared
   templateUrl: './it-room-settings-bottom-sheet.component.html',
   styleUrls: ['./it-room-settings-bottom-sheet.component.scss'],
 })
-export class RoomSettingsBottomSheet {
+export class ItRoomSettingsBottomSheet {
   @Select(RoomState.roomSettings) settings$!: Observable<RoomSettings>;
 
   roomSettingsForm: FormGroup = new FormGroup({

@@ -27,7 +27,7 @@ import {
   selector: 'it-poll-stats',
   templateUrl: './it-poll-stats.component.html'
 })
-export class PollStatsComponent extends AngularLifecycle implements AfterViewInit {
+export class ItPollStatsComponent extends AngularLifecycle implements AfterViewInit {
   @Input() card: Card;
   @Input() round: Round;
 

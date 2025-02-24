@@ -8,7 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { SharedModule } from '@shared';
-import { DeleteAccountBottomSheetComponent, EditProfileModal } from '@features';
+import { ItDeleteAccountBottomSheetComponent, ItEditProfileModal } from '@features';
 
 @NgModule({
   imports: [
@@ -20,8 +20,8 @@ import { DeleteAccountBottomSheetComponent, EditProfileModal } from '@features';
   ],
   declarations: [
     ProfilePage,
-    EditProfileModal,
-    DeleteAccountBottomSheetComponent
+    ItEditProfileModal,
+    ItDeleteAccountBottomSheetComponent
   ]
 })
 export class ProfilePageModule {}

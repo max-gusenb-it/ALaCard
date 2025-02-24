@@ -20,7 +20,7 @@ const desktopRuleTutorialLabelId : string = "features.room.game.card.game-rules.
   styleUrls: ['./it-game-rules.component.scss'],
   animations: [slideToggle]
 })
-export class GameRulesComponent implements AfterViewInit {
+export class ItGameRulesComponent implements AfterViewInit {
 
   currentRuleIndex: number = 0;
 

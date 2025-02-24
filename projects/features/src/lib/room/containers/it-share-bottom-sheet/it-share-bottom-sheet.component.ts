@@ -8,7 +8,7 @@ import { ClipboardUtils } from 'projects/shared/src/lib/utils/utils/clipboard.ut
   templateUrl: './it-share-bottom-sheet.component.html',
   styleUrls: ['./it-share-bottom-sheet.component.scss'],
 })
-export class ShareBottomSheet {
+export class ItShareBottomSheet {
 
   constructor(
     @Inject(DIALOG_DATA) public data: string,

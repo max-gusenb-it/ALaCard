@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CreateRoomModal } from '@features';
+import { ItCreateRoomModal } from '@features';
 import { PopupService } from '@shared';
 import { NavController } from '@ionic/angular';
 
@@ -7,7 +7,7 @@ import { NavController } from '@ionic/angular';
   selector: 'it-no-room',
   templateUrl: './it-no-room.component.html'
 })
-export class NoRoomComponent {
+export class ItNoRoomComponent {
 
   constructor(
     private navController: NavController,
@@ -16,7 +16,7 @@ export class NoRoomComponent {
 
   async openCreateRoomModal() {
     const modal = await this.popupService.openModal({
-      component: CreateRoomModal
+      component: ItCreateRoomModal
     });
     modal.onDidDismiss().then(modalResponse => {
       if (modalResponse.data?.roomId != null) {

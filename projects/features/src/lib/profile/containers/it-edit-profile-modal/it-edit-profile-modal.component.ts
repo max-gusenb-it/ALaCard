@@ -6,7 +6,7 @@ import { LoadingHelperService, ProfileEditorFormData, User, UserSourceService, P
   selector: 'it-edit-profile-modal',
   templateUrl: './it-edit-profile-modal.component.html'
 })
-export class EditProfileModal implements OnInit {
+export class ItEditProfileModal implements OnInit {
 
   user: User | undefined;
   profileFormData: ProfileEditorFormData = {

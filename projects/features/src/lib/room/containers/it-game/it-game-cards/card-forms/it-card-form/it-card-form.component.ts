@@ -8,7 +8,7 @@ import { StaticRoundData, PlayerVotingCardService, StaticRoundDataDataService, R
   selector: 'it-card-form',
   templateUrl: './it-card-form.component.html',
 })
-export class CardFormComponent extends AngularLifecycle {
+export class ItCardFormComponent extends AngularLifecycle {
 
   deck: Deck;
   staticRoundData: StaticRoundData;

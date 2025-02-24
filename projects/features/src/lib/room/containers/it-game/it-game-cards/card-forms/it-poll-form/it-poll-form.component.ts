@@ -32,7 +32,7 @@ import {
     selector: 'it-poll-form',
     templateUrl: './it-poll-form.component.html'
 })
-export class PollFormComponent extends AngularLifecycle implements AfterViewInit {
+export class ItPollFormComponent extends AngularLifecycle implements AfterViewInit {
     @Input() card: Card;
     @Input() round: Round;
 
