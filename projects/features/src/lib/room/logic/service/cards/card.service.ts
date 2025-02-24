@@ -27,9 +27,6 @@ import {
     specificPlayerNameWhitecard
 } from "@shared";
 
-// ToDo - structure:
-// * rename components to it or remove all it's
-
 @Injectable({
     providedIn: 'root'
 })
