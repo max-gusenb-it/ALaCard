@@ -1,9 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils } from '@features';
-import { AngularLifecycle, Card, CardType, supportedColors, Color } from '@shared';
+import { AngularLifecycle, Card, Color } from '@shared';
 
 @Component({
   selector: 'it-card',
@@ -35,7 +34,6 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   constructor(
     private store: Store,
     private cardServiceFactory: CardServiceFactory,
-    private translateService: TranslateService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     super();
@@ -62,6 +60,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardText() {
+    // ToDo: Refactor
     if (!this.isMarkDown) { 
       return this.cardService.getCardText(
           this.card,
@@ -103,24 +102,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardTitle() {
-    if (this.customTitle) return this.customTitle;
-    switch (this.card.type) {
-      case (CardType.GroundRule): {
-        return this.translateService.instant("features.room.game.card.groundRules");
-      };
-      case (CardType.FreeText): {
-        return this.translateService.instant("features.room.game.card.freeText");
-      };
-      case (CardType.PlayerVoting): {
-        return this.translateService.instant("features.room.game.card.playerVoting");
-      };
-      case (CardType.TopicVotingCard): {
-        return this.translateService.instant("features.room.game.card.topic-voting");
-      };
-      case (CardType.QuizCard): {
-        return this.translateService.instant("features.room.game.card.quiz");
-      };
-    }
+    return this.cardService.getCardTitle(this.card);
   }
 
 }

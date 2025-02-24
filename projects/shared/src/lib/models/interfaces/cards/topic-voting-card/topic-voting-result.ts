@@ -1,11 +1,3 @@
-import { Result } from "../result";
+import { VotingResult } from "@shared";
 
-// ToDo - structure: rename id properties
-
-export interface TopicVotingResult extends Result {
-    /** Id of Subject that has been voted */
-    subjectId: number;
-    votes: number;
-    /** Id's of Players that have voted */
-    playerIds: string[];
-}
+export interface TopicVotingResult extends VotingResult<number> { }

@@ -24,8 +24,10 @@ import {
     Result,
     ResultConfig,
     SipResult,
-    specificPlayerNameWhitecard
+    specificPlayerNameWhitecard,
+    CardType
 } from "@shared";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
@@ -37,6 +39,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
         private _responseDataDataService: ResponseDataDataService,
         private _ingameDataDataService: IngameDataDataService,
         private _staticRoundDataDataService: StaticRoundDataDataService,
+        protected translateService: TranslateService
     ) { }
 
     castCard(card: Card): C {
@@ -113,6 +116,23 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
             return RoundState.form;
         }
         return RoundState.stats;
+    }
+
+    getCardTitle(card: Card) {
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
+            return card.settings!.customTitle;
+        switch(card.type) {
+            case(CardType.GroundRule):
+                return this.translateService.instant("features.room.game.card.groundRules");
+            case(CardType.FreeText):
+                return this.translateService.instant("features.room.game.card.freeText")
+            case(CardType.PlayerVoting):
+                return this.translateService.instant("features.room.game.card.playerVoting")
+            case(CardType.TopicVotingCard):
+                return this.translateService.instant("features.room.game.card.topic-voting")
+            case(CardType.QuizCard):
+                return this.translateService.instant("features.room.game.card.quiz")
+        }
     }
 
     getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string): string {

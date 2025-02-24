@@ -6,22 +6,23 @@ import {
   DynamicTopicVotingRoundData,
   GameService,
   IngameDataDataService,
-  topicVotingCardSkipValue,
   RoomService,
   RoomState,
   Round,
   TopicVotingCardService,
   ColorUtils,
-  CardUtils
+  CardUtils,
+  topicVotingCardSkipValue
 } from "@features";
 import { 
   AngularLifecycle,
   Card,
   TopicVotingCardResultConfig,
-  TopicVotingResult,
+  VotingResult,
   SipResult,
   CardType,
-  TopicVotingCard
+  TopicVotingCard,
+  TopicVotingResult
 } from '@shared';
 
 @Component({
@@ -111,10 +112,10 @@ export class ItTopicVotingStatsComponent extends AngularLifecycle implements Aft
 
   getResultTitle(result: TopicVotingResult, resultIndex: number) {
     if (this.card.type === CardType.TopicVotingCard) {
-      return this.getTopResultsCount() === 1 && resultIndex !== 0 || this.getTopResultsCount() !== 1 ? this.getSubject(result.subjectId)?.title : undefined
+      return this.getTopResultsCount() === 1 && resultIndex !== 0 || this.getTopResultsCount() !== 1 ? this.getSubject(result.subjectID)?.title : undefined
     } else {
       if (resultIndex !== 0)
-        return this.getSubject(result.subjectId)?.title;
+        return this.getSubject(result.subjectID)?.title;
     }
     return undefined;
   }

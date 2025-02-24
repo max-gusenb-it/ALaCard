@@ -21,7 +21,7 @@
                     [profilePicture]="getPlayerForResult(result)?.profilePicture"
                     [card]="card"
                     [overrideAnonymous]="!!dynamicRoundData.payToDisplayPlayerId"
-                    [skipped]="result.votedPlayerId === playerVotingCardSkipValue"
+                    [skipped]="result.subjectID === playerVotingCardSkipValue"
                 />
             </div>
         </it-accord>

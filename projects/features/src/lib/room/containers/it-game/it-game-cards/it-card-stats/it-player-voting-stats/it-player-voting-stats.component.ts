@@ -22,9 +22,9 @@ import {
   AngularLifecycle,
   AuthenticationState,
   Card,
-  PlayerVotingResult,
   SipResult,
-  Utils
+  Utils,
+  PlayerVotingResult
 } from '@shared';
 
 @Component({
@@ -108,7 +108,7 @@ export class ItPlayerVotingStatsComponent extends AngularLifecycle implements Af
   }
 
   getPlayerForResult(result: PlayerVotingResult) {
-    return this.players.find(p => p.id === result.votedPlayerId);
+    return this.players.find(p => p.id === result.subjectID);
   }
   
   getPlayerForSipResult(result: SipResult) {

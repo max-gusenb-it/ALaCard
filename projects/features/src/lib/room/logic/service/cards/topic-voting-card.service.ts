@@ -6,7 +6,6 @@ import {
     DynamicTopicVotingRoundData,
     DynamicRoundData,
     defaultCardSips,
-    topicVotingCardSkipValue,
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService,
@@ -17,17 +16,18 @@ import {
     Player,
     MarkdownUtils,
     CardUtils,
-    GameSettings
+    GameSettings,
+    topicVotingCardSkipValue
 } from "@features";
 import { 
     Card,
     TopicVotingCard,
     TopicVotingGroup,
     SipResult,
-    TopicVotingResult,
     TopicVotingCardResultConfig,
     Result,
     Utils,
+    TopicVotingResult,
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -49,9 +49,9 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         responseDataDataService: ResponseDataDataService,
         ingameDataDataService: IngameDataDataService,
         private staticRoundDataDataService: StaticRoundDataDataService,
-        protected translateService: TranslateService
+        override translateService: TranslateService
     ) {
-        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
     override castCard(card: Card): C {
@@ -83,17 +83,17 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         const dynamicTopicVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         dynamicTopicVotingRoundData.responses.forEach(response => {
             response.votedSubjectIds.forEach(subjectId => {
-                let resultIndex = results.findIndex(r => r.subjectId === subjectId);
+                let resultIndex = results.findIndex(r => r.subjectID === subjectId);
                 if (resultIndex === -1) {
                     results.push({
-                        subjectId: subjectId,
+                        subjectID: subjectId,
                         playerIds: [response.playerId],
                         votes: 1
                     })
                 } else {
                     const foundResults = results[resultIndex];
                     results[resultIndex] = {
-                        subjectId: subjectId,
+                        subjectID: subjectId,
                         playerIds: [
                             ...foundResults.playerIds,
                             response.playerId
@@ -104,8 +104,8 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
             });
         });
         results = results.sort((r1, r2) => {
-            if (r1.subjectId === topicVotingCardSkipValue) return 1;
-            if (r2.subjectId === topicVotingCardSkipValue) return -1;
+            if (r1.subjectID === topicVotingCardSkipValue) return 1;
+            if (r2.subjectID === topicVotingCardSkipValue) return -1;
             return r2.votes - r1.votes;
         });
         return results;
@@ -159,7 +159,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         const topResults = this.getTopResults(results);
         if (topResults.length > 0) {
             return Utils.addComaToStringArray(
-                topResults.map(r => castedCard.subjects.find(s => r.subjectId === s.id)!.title),
+                topResults.map(r => castedCard.subjects.find(s => r.subjectID === s.id)!.title),
                 true
             );
         } else {
@@ -247,7 +247,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         };
 
         const results = this.getResults(dynamicRoundData)
-            .filter(r => r.subjectId !== topicVotingCardSkipValue);
+            .filter(r => r.subjectID !== topicVotingCardSkipValue);
 
         let resultGroup: TopicVotingResult[] = [];
         if (results.length != 0) {
@@ -277,6 +277,6 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
     // ToDo: move to topic voting card
     getTopResults(results: TopicVotingResult[]): TopicVotingResult[] {
         return results
-            .filter(r => r.votes === results[0].votes && r.subjectId !== topicVotingCardSkipValue);
+            .filter(r => r.votes === results[0].votes && r.subjectID !== topicVotingCardSkipValue);
     }
 }

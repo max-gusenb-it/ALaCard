@@ -22,27 +22,26 @@ import {
 import { 
     PlayerVotingCard,
     PlayerVotingGroup,
-    PlayerVotingResult,
     PlayerVotingResultConfig,
     Result,
     SipResult,
     Card,
+    PlayerVotingResult,
 } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends CardService<PlayerVotingCard,
-PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
+export class PlayerVotingCardService extends CardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
 
     constructor(
         private store: Store,
         responseDataDataService: ResponseDataDataService,
         ingameDataDataService: IngameDataDataService,
         staticRoundDataDataService: StaticRoundDataDataService,
-        private translateService: TranslateService
+        override translateService: TranslateService
     ) {
-        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService);
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
     get defaultPlayerVotingGroup() {
@@ -60,17 +59,17 @@ PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVo
         let results : PlayerVotingResult[] = [];
         const pvDynamicRoundData = this.castDynamicRoundData(dynamicRoundData);
         pvDynamicRoundData.responses.forEach(response => {
-            let resultIndex = results.findIndex(r => r.votedPlayerId === response.votedPlayerId);
+            let resultIndex = results.findIndex(r => r.subjectID === response.votedPlayerId);
             if (resultIndex === -1) {
                 results.push({
-                    votedPlayerId: response.votedPlayerId,
+                    subjectID: response.votedPlayerId,
                     playerIds: [response.playerId],
                     votes: 1
                 })
             } else {
                 const foundResults = results[resultIndex];
                 results[resultIndex] = {
-                    votedPlayerId: foundResults.votedPlayerId,
+                    subjectID: foundResults.subjectID,
                     playerIds: [
                         ...foundResults.playerIds,
                         response.playerId
@@ -80,8 +79,8 @@ PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVo
             }
         });
         results = results.sort((r1, r2) => {
-            if (r1.votedPlayerId === playerVotingCardSkipValue) return 1;
-            if (r2.votedPlayerId === playerVotingCardSkipValue) return -1;
+            if (r1.subjectID === playerVotingCardSkipValue) return 1;
+            if (r2.subjectID === playerVotingCardSkipValue) return -1;
             return r2.votes - r1.votes;
         });
         return results;
@@ -90,10 +89,10 @@ PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVo
     override getResultsHeading(results: PlayerVotingResult[]): string {
         const players = this.store.selectSnapshot(RoomState.players);
         const topResults = results
-            .filter(r => r.votes === results[0].votes && r.votedPlayerId !== playerVotingCardSkipValue);
+            .filter(r => r.votes === results[0].votes && r.subjectID !== playerVotingCardSkipValue);
         if (topResults.length > 0) {
             return Utils.addComaToStringArray(
-                topResults.map(r => players.find(p => r.votedPlayerId === p.id)!.username),
+                topResults.map(r => players.find(p => r.subjectID === p.id)!.username),
                 true
             );
         } else {
@@ -185,11 +184,11 @@ PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVo
 
         const results = this.getResultGroup(dynamicRoundData, pvCard.settings?.sipConfig);
         const allResults = this.getResults(dynamicRoundData)
-            .filter(r => r.votedPlayerId !== playerVotingCardSkipValue);
+            .filter(r => r.subjectID !== playerVotingCardSkipValue);
         return results
             .map(r => {
                 return {
-                    playerId: r.votedPlayerId,
+                    playerId: r.subjectID,
                     sips: allResults.length > 1 ? defaultCardSips : defaultCardSips + 1,
                     distribute: false
                 } as SipResult
@@ -203,7 +202,7 @@ PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVo
         }
 
         const results = this.getResults(dynamicRoundData)
-            .filter(r => r.votedPlayerId !== playerVotingCardSkipValue);
+            .filter(r => r.subjectID !== playerVotingCardSkipValue);
 
         let resultGroup: PlayerVotingResult[] = [];
         if (results.length != 0) {

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { DynamicRoundData, IngameDataDataService, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
+import { defaultCardSips, DynamicRoundData, IngameDataDataService, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { Card, TopicVotingCardResultConfig, TopicVotingResult, QuizCard, Utils } from "@shared";
+import { Card, TopicVotingCardResultConfig, QuizCard, Utils, SipResult, TopicVotingResult } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -24,10 +24,10 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
         const quizCard = this.castCard(card);
 
         let missingSubjectResultIDs = [...quizCard.subjects.map(s => s.id!)]
-            .filter(sID => !results.find(r => r.subjectId === sID));
+            .filter(sID => !results.find(r => r.subjectID === sID));
         const missingSubjectResults = missingSubjectResultIDs.map(sID => {
             return {
-                subjectId: sID,
+                subjectID: sID,
                 playerIds: [],
                 votes: 0
             } as TopicVotingResult
@@ -45,8 +45,8 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
         ); 
         results = results.sort((a, b) => {
             // 1. Sort by correctness
-            const aIsTarget = targetSubjectIDsSet.has(a.subjectId);
-            const bIsTarget = targetSubjectIDsSet.has(b.subjectId);
+            const aIsTarget = targetSubjectIDsSet.has(a.subjectID);
+            const bIsTarget = targetSubjectIDsSet.has(b.subjectID);
         
             if (aIsTarget && !bIsTarget) return -1; // a comes first
             if (!aIsTarget && bIsTarget) return 1;  // b comes first
@@ -66,26 +66,23 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
             true
         );
     }
+
+    override calculateRoundSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        const quizCard = this.castCard(card);
+        let results: TopicVotingResult[] = this.getResults(dynamicRoundData, card)
+            .filter(r => quizCard.subjects.find(s => s.id! === r.subjectID)!.isTarget);
     
-    // const pollCard = this.castCard(card);
-    // let results: PollResult[] = [];
-
-    // if (pollCard.settings?.sipConfig?.specificSipSubjectId !== undefined) {
-    //     results = this.getResults(dynamicRoundData, card)
-    //         .filter(r => r.subjectId === pollCard.settings!.sipConfig!.specificSipSubjectId);
-    // }
-
-    // return results
-    //     .map(r => {
-    //         return r.playerIds.map(pId => {
-    //             return {
-    //                 playerId: pId,
-    //                 sips: defaultCardSips,
-    //                 distribute: pollCard.settings?.sipConfig?.distribute !== undefined ?
-    //                     pollCard.settings?.sipConfig?.distribute :
-    //                     this.defaultPollVotingDistribution
-    //             } as SipResult
-    //         });
-    //     })
-    //     .flat();
+        return results
+            .map(r => {
+                return r.playerIds.map(pId => {
+                    return {
+                        playerId: pId,
+                        sips: defaultCardSips,
+                        distribute: true
+                    } as SipResult
+                });
+            })
+            .flat();
+    }
+    
 }

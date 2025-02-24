@@ -10,48 +10,89 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
-            type: CardType.TopicVotingCard,
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Jungle Planet 🦜" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
-                    title: "Desert Planet 🦂"
-                },
-                {
-                    title: "Sea Planet 🐠"
+                    title: "No ❎",
+                    isTarget: false
                 }
             ]
-        } as TopicVotingCard,        {
-            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
-            type: CardType.TopicVotingCard,
+        } as QuizCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Jungle Planet 🦜" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
-                    title: "Desert Planet 🦂"
-                },
-                {
-                    title: "Sea Planet 🐠"
+                    title: "No ❎",
+                    isTarget: false
                 }
             ]
-        } as TopicVotingCard,        {
-            text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
-            type: CardType.TopicVotingCard,
+        } as QuizCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
             subjects: [
                 {
-                    title: "Jungle Planet 🦜" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
-                    title: "Desert Planet 🦂"
-                },
-                {
-                    title: "Sea Planet 🐠"
+                    title: "No ❎",
+                    isTarget: false
                 }
             ]
-        } as TopicVotingCard
+        } as QuizCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
+            subjects: [
+                {
+                    title: "Yes ✅",
+                    isTarget: true
+                },
+                {
+                    title: "No ❎",
+                    isTarget: false
+                }
+            ]
+        } as QuizCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
+            subjects: [
+                {
+                    title: "Yes ✅",
+                    isTarget: true
+                },
+                {
+                    title: "No ❎",
+                    isTarget: false
+                }
+            ]
+        } as QuizCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.QuizCard,
+            subjects: [
+                {
+                    title: "Yes ✅",
+                    isTarget: true
+                },
+                {
+                    title: "No ❎",
+                    isTarget: false
+                }
+            ]
+        } as QuizCard
     ],
     flags: [],
     requiredPlayers: {
@@ -67,20 +108,7 @@ export const developmentDeck: Deck = {
     ],
 };
 
-// {
-//     text: "Ever dropped your phone in the toilet?",
-//     type: CardType.QuizCard,
-//     subjects: [
-//         {
-//             title: "Yes ✅",
-//             isTarget: true
-//         },
-//         {
-//             title: "No ❎",
-//             isTarget: false
-//         }
-//     ]
-// } as QuizCard
+
 
 export const partyDeckWithRules: Deck = {
     icon: "🎉",

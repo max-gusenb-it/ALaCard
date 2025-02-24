@@ -1,9 +1,3 @@
-import { Result } from "../result";
+import { VotingResult } from "@shared";
 
-export interface PlayerVotingResult extends Result {
-    /** Id of Player that has been voted */
-    votedPlayerId: string;
-    votes: number;
-    /** Id's of Players that have voted */
-    playerIds: string[];
-}
+export interface PlayerVotingResult extends VotingResult<string> { }

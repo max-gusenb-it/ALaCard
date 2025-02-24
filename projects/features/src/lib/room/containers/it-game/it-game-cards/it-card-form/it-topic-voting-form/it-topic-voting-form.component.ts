@@ -9,13 +9,13 @@ import {
     RoomService,
     RoomState,
     CardServiceFactory,
-    topicVotingCardSkipValue,
     TopicVotingResponse,
     ResponseDataDataService,
     ResponseDataSourceService,
     TopicVotingCardService,
     ColorUtils,
-    CardUtils
+    CardUtils,
+    topicVotingCardSkipValue
 } from "@features";
 import { 
     AngularLifecycle,
@@ -24,7 +24,8 @@ import {
     InformationActions,
     TopicVotingCardResultConfig,
     InformationState,
-    TopicVotingCard
+    TopicVotingCard,
+    CardType
 } from '@shared';
 
 
@@ -46,6 +47,10 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
 
     get cardColor()  {
         return CardUtils.getCardColor(this.card);
+    }
+
+    get topicVotingCardType() {
+        return CardType.TopicVotingCard;
     }
 
     castedCard: TopicVotingCard;
@@ -88,6 +93,10 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
         });
     }
 
+    getCardTitle() {
+        return this.topicVotingCardService.getCardTitle(this.card)
+    }
+
     getCardText() {
       return this.topicVotingCardService.getCardText(
           this.card,
@@ -109,7 +118,7 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
         const response : TopicVotingResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedSubjectIds: !skipped ? [Number(this.topicVotingForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
+          votedSubjectIds: !skipped ? [this.topicVotingForm.controls['votedSubjectId'].value] : [topicVotingCardSkipValue],
           roundId: this.round.id  
         };
     
