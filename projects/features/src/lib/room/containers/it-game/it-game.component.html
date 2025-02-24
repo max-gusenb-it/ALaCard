@@ -1,0 +1,12 @@
+<div class="flex grow" *ngIf="!!room && !!staticRoundData">
+  <it-game-rules
+    class="flex grow"
+    *ngIf="staticRoundData.round === null"
+    [deckname]="(deckname$ | async)!"
+    [groundRules]="room.game!.deck!.groundRules!"
+  ></it-game-rules>
+  <it-game-cards
+    class="flex grow"
+    *ngIf="staticRoundData.round !== null"
+  ></it-game-cards>
+</div>

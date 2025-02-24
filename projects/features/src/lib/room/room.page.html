@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <game class="flex grow" *ngIf="gameStarted$ | async"></game>
+    <it-game class="flex grow" *ngIf="gameStarted$ | async"></it-game>
     <div class="flex gap-x-4 justify-end">
       <it-button class="flex grow" size="big" *ngIf="isUserRoomCreator() && !(gameStarted$ | async)" (click)="startGame()">
         {{ "features.room.start-game" | translate }}

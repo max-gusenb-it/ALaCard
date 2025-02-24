@@ -8,8 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { SharedModule } from '@shared';
-import { EditProfileModal } from './containers/edit-profile-modal/edit-profile-modal.component';
-import { DeleteAccountBottomSheetComponent } from './containers/delete-account-bottom-sheet/delete-account-bottom-sheet.component';
+import { DeleteAccountBottomSheetComponent, EditProfileModal } from '@features';
 
 @NgModule({
   imports: [

@@ -1,0 +1,38 @@
+<div
+  *ngIf="staticRoundData && !!staticRoundData.round && this.card"
+  [@slideToggle]="{
+    value: getRoundState(),
+    params: {
+      leaveEnd: '-150%',
+      enterStart: '150%'
+    }
+  }"
+  class="flex grow items-center justify-center relative"
+  >
+  @switch(getRoundState()) {
+    @case (getCardState()) {
+      <it-card
+        class="absolute"
+        (click)="continue()"
+        (onSwipe)="swipe($event)"
+        [card]="card"
+        [playerIds]="staticRoundData.round.playerIds"
+        [deckname]="deck.name"
+        [customTitle]="getCustomCardTitle()"
+        [customColor]="deck.styleSettings?.cardOverwriteColor"
+        [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
+        [isMarkDown]="(roomSettings$ | async)!.singleDeviceMode"
+      />
+    }
+    @case (getFormState()) {
+      <it-card-form
+        class="absolute w-full"
+      />
+    }
+    @case (getStatsState()) {
+      <it-card-stats
+        class="w-full"
+      ></it-card-stats>
+    }
+  }
+</div>
