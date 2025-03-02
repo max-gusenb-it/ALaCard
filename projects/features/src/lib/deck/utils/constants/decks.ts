@@ -1405,7 +1405,214 @@ export const leggitPartyDeck: Deck = {
                     distribute: false
                 }
             }
-        } as TopicVotingCard
+        } as TopicVotingCard,
+        // ------------------------------
+        // - New Cards
+        // ------------------------------
+        {
+            text: "Hey, remember me 🙉",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            },
+            followUpCardConfig: {
+                followUpCardID: 0,
+                roundDelay: 6
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 0,
+            text: "Hey, do you remember me? 🍌",
+            type: CardType.TopicVotingCard,
+            subjects: [
+                {
+                    title: "🙊"
+                },
+                {
+                    title: "🙉"
+                },
+                {
+                    title: "🙈"
+                }
+            ],
+            settings: {
+                customColor: "violet",
+                customTitle: "Follow Up Card",
+                sipConfig: {
+                    specificSipSubjectId: 1,
+                    distribute: true
+                }
+            } as TopicVotingCardSettings
+        } as TopicVotingCard,
+        {
+            text: "%p0 your are crowned Thumb Master. Use your power to distribute 1 sip to those who don't follow your reign 👑",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Thumb Master 👍",
+            },
+            followUpCardConfig: {
+                followUpCardID: 1,
+                roundDelay: 15
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 your reign as Thumb Master is over. Hopefully you used your power well 👌",
+            followUpCardID: 1,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Thumb Master 👍"
+            }
+        } as FreeTextCard, 
+        {
+            text: "Everyone now has the name of the person sitting to their left. You have to drink 1 sip for switching up names 🗿",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Confusion is fun, right?",
+            },
+            followUpCardConfig: {
+                followUpCardID: 2,
+                roundDelay: 15
+            }
+        } as FreeTextCard,
+        {
+            text: "Okay this gets boring. You get your real names back 😘",
+            followUpCardID: 2,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Confusion is fun, right?",
+            }
+        } as FreeTextCard, 
+        {
+            text: "Hey gang, %p0 wants a drink. Mix up something good for them to enjoy 🧉",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Mix it up 🍸",
+            },
+            followUpCardConfig: {
+                followUpCardID: 3,
+                roundDelay: 1
+            }
+        } as FreeTextCard,
+        {
+            text: "Now it's your turn %p0. Choose someone to share half of the good stuff with 😈",
+            followUpCardID: 3,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Mix it up 🍸",
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 it’s your lucky day! Now you are Question Master and everyone who answers one of your questions has to drink 2 sips ⁉️",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Question Master",
+            },
+            followUpCardConfig: {
+                followUpCardID: 4,
+                roundDelay: 15
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 you are no longer Question Master 🗿",
+            followUpCardID: 4,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Question Master",
+            }
+        } as FreeTextCard,
+        {
+            text: "Let’s make intoxicating yourself a little harder. Everyone is only allowed to drink with their none dominant hand 🫱",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Switch Up",
+            },
+            followUpCardConfig: {
+                followUpCardID: 5,
+                roundDelay: 15
+            }
+        } as FreeTextCard,
+        {
+            text: "Which hand you drink with is again up to you. Did anyone spill something? 🫗",
+            followUpCardID: 5,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Switch Up",
+            }
+        } as FreeTextCard,
+        {
+            text: "Hey guys good news, everyone got a promotion! Ammm that’s everyone but %p0 you slacker. You now have to address everyone as if they were your boss at work. 😪",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Promotions baby!",
+            },
+            followUpCardConfig: {
+                followUpCardID: 6,
+                roundDelay: 1
+            }
+        } as FreeTextCard,
+        {
+            text: "Corporate Rules: On violation %p0 has to drink one sip 🍺",
+            followUpCardID: 6,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Promotions baby!",
+            },
+            followUpCardConfig: {
+                followUpCardID: 7,
+                roundDelay: 15
+            }
+        } as FreeTextCard,
+        {
+            text: "Ah better late than never. %p0 you also got a promotion. Good work 😉",
+            followUpCardID: 7,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Promotions baby!",
+            }
+        } as FreeTextCard,
+        {
+            text: "Guys did you hear it, dabbing is still cool. Everyone please do a dab before you drink or drink again. So cool 🙃",
+            followUpCardID: 8,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Dabbing",
+            },
+            followUpCardConfig: {
+                followUpCardID: 8,
+                roundDelay: 15
+            }
+        } as FreeTextCard,
+        {
+            text: "Okay i can't take it anymore. Please stop the dabbing. You are making fools of yourselfs 🤡",
+            followUpCardID: 7,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Dabbing",
+            }
+        } as FreeTextCard
     ],
     defaultGameSettings: [
         {
@@ -2385,13 +2592,6 @@ export const testingDeck: Deck = {
             }
         } as FreeTextCard,
         {
-            text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 2
-            }
-        } as PlayerVotingCard,
-        {
             followUpCardID: 0,
             text: "Hey, do you remember me? 🍌",
             type: CardType.TopicVotingCard,
@@ -2415,6 +2615,13 @@ export const testingDeck: Deck = {
                 }
             } as TopicVotingCardSettings
         } as TopicVotingCard,
+        {
+            text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 2
+            }
+        } as PlayerVotingCard,
         {
             text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",
             type: CardType.FreeText,
