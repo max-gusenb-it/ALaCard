@@ -37,8 +37,8 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
     @Input() card: Card;
     @Input() round: Round;
 
-    get topicVotingCardService(): TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig> {
-      return <TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
+    get topicVotingCardService(): TopicVotingCardService<TopicVotingCard> {
+      return <TopicVotingCardService<TopicVotingCard>>this.cardServiceFactory.getCardService(this.card.type);
     }
 
     get formBackgroundCSS() {
@@ -85,7 +85,7 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
     
             if (!!response) {
                 this.topicVotingForm.controls["votedSubjectId"].disable();
-                this.topicVotingForm.controls["votedSubjectId"].setValue(response.votedSubjectIds[0]);
+                this.topicVotingForm.controls["votedSubjectId"].setValue(response.votedSubjectIDs[0]);
                 
                 this.topicVotingForm.controls["votedSubjectId"].updateValueAndValidity();
                 this.changeDetectorRef.detectChanges();
@@ -118,7 +118,7 @@ export class ItTopicVotingFormComponent extends AngularLifecycle implements Afte
         const response : TopicVotingResponse = {
           playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
           skipped: skipped,
-          votedSubjectIds: !skipped ? [Number(this.topicVotingForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
+          votedSubjectIDs: !skipped ? [Number(this.topicVotingForm.controls['votedSubjectId'].value)] : [topicVotingCardSkipValue],
           roundId: this.round.id  
         };
     

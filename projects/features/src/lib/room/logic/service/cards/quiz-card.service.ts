@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { defaultCardSips, DynamicRoundData, IngameDataDataService, ResponseDataDataService, StaticRoundDataDataService, TopicVotingCardService, SipResult, TopicVotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { Card, TopicVotingCardResultConfig, QuizCard, Utils } from "@shared";
+import { Card, QuizCard, Utils } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
-export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotingCardResultConfig> {
+export class QuizCardService extends TopicVotingCardService<QuizCard> {
     
     constructor(
         store: Store,
@@ -28,7 +28,7 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
         const missingSubjectResults = missingSubjectResultIDs.map(sID => {
             return {
                 subjectID: sID,
-                playerIds: [],
+                playerIDs: [],
                 votes: 0
             } as TopicVotingResult
         })
@@ -74,7 +74,7 @@ export class QuizCardService extends TopicVotingCardService<QuizCard, TopicVotin
     
         return results
             .map(r => {
-                return r.playerIds.map(pId => {
+                return r.playerIDs.map(pId => {
                     return {
                         playerId: pId,
                         sips: defaultCardSips,

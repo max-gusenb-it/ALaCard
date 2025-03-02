@@ -27,15 +27,15 @@ import {
     Card,
     TopicVotingCard,
     VotingCardGroup,
-    TopicVotingCardResultConfig,
     Utils,
+    TopicVotingCardResultConfig,
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
 })
-export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVotingCardResultConfig> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, TopicVotingResult, TopicVotingCardResultConfig> {
+export class TopicVotingCardService<C extends TopicVotingCard> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, TopicVotingResult, TopicVotingCardResultConfig> {
 
     get defaultTopicVotingVotingDistribution() {
         return true;
@@ -83,20 +83,20 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         let results: TopicVotingResult[] = [];
         const dynamicTopicVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         dynamicTopicVotingRoundData.responses.forEach(response => {
-            response.votedSubjectIds.forEach(subjectId => {
+            response.votedSubjectIDs.forEach(subjectId => {
                 let resultIndex = results.findIndex(r => r.subjectID === subjectId);
                 if (resultIndex === -1) {
                     results.push({
                         subjectID: subjectId,
-                        playerIds: [response.playerId],
+                        playerIDs: [response.playerId],
                         votes: 1
                     })
                 } else {
                     const foundResults = results[resultIndex];
                     results[resultIndex] = {
                         subjectID: subjectId,
-                        playerIds: [
-                            ...foundResults.playerIds,
+                        playerIDs: [
+                            ...foundResults.playerIDs,
                             response.playerId
                         ],
                         votes: foundResults.votes + 1
@@ -124,6 +124,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
         }
     }
 
+    // ToDo - structure: remove
     override hasDefaultFollowUpCard(card: Card) {
         const topicVotingCard = this.castCard(card);
         const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
@@ -146,7 +147,7 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
 
         return filteredResults
             .map(r => {
-                return r.playerIds.map(pId => {
+                return r.playerIDs.map(pId => {
                     return {
                         playerId: pId,
                         sips: defaultCardSips,
@@ -239,14 +240,13 @@ export class TopicVotingCardService<C extends TopicVotingCard, S extends TopicVo
     override getResultSubText(result: Result, players: Player[]): string {
         const topicVotingResult = this.castResult(result);
         let text = "";
-        topicVotingResult.playerIds.forEach((playerId, index) => {
+        topicVotingResult.playerIDs.forEach((playerId, index) => {
             text += players.find(p => p.id === playerId)!.username;
-            if (index !== topicVotingResult.playerIds.length -1) text += ", ";
+            if (index !== topicVotingResult.playerIDs.length -1) text += ", ";
         });
         return text;
     }
 
-    // ToDo: move to topic voting card
     getTopResults(results: TopicVotingResult[]): TopicVotingResult[] {
         return results
             .filter(r => r.votes === results[0].votes && r.subjectID !== topicVotingCardSkipValue);

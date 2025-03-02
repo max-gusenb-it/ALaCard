@@ -65,15 +65,15 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
             if (resultIndex === -1) {
                 results.push({
                     subjectID: response.votedPlayerId,
-                    playerIds: [response.playerId],
+                    playerIDs: [response.playerId],
                     votes: 1
                 })
             } else {
                 const foundResults = results[resultIndex];
                 results[resultIndex] = {
                     subjectID: foundResults.subjectID,
-                    playerIds: [
-                        ...foundResults.playerIds,
+                    playerIDs: [
+                        ...foundResults.playerIDs,
                         response.playerId
                     ],
                     votes: foundResults.votes + 1
@@ -117,9 +117,9 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
     override getResultSubText(result: Result, players: Player[]): string {
         const pvResult = this.castResult(result);
         let text = "";
-        pvResult.playerIds.forEach((playerId, index) => {
+        pvResult.playerIDs.forEach((playerId, index) => {
             text += players.find(p => p.id === playerId)!.username;
-            if (index !== pvResult.playerIds.length -1) text += ", ";
+            if (index !== pvResult.playerIDs.length -1) text += ", ";
         });
         return text;
     }

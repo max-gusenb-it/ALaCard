@@ -29,6 +29,8 @@ import {
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
 
+// ToDo - structure: remove resultsConfig
+
 @Injectable({
     providedIn: 'root'
 })
@@ -92,7 +94,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
         return CardStates.card_initial;
     }
 
-    createDynamicRoundData(roundId: number, responses: Response[]): D {
+    createDynamicRoundData(roundId: number, responses?: Response[]): D {
         return {
             roundId: roundId,
             processed: true

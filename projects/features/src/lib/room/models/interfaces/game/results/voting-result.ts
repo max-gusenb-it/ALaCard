@@ -5,5 +5,5 @@ export interface VotingResult<S> extends Result{
     subjectID: S;
     votes: number;
     /** Id's of Players that have voted */
-    playerIds: string[];
+    playerIDs: string[];
 }

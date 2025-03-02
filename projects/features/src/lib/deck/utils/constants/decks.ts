@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, QuizCard, TopicVotingCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, QuizCard, TopicVotingCard, VotingCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -22,77 +22,7 @@ export const developmentDeck: Deck = {
                     isTarget: false
                 }
             ]
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
-            subjects: [
-                {
-                    title: "Yes ✅",
-                    isTarget: true
-                },
-                {
-                    title: "No ❎",
-                    isTarget: false
-                }
-            ]
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
-            subjects: [
-                {
-                    title: "Yes ✅",
-                    isTarget: true
-                },
-                {
-                    title: "No ❎",
-                    isTarget: false
-                }
-            ]
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
-            subjects: [
-                {
-                    title: "Yes ✅",
-                    isTarget: true
-                },
-                {
-                    title: "No ❎",
-                    isTarget: false
-                }
-            ]
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
-            subjects: [
-                {
-                    title: "Yes ✅",
-                    isTarget: true
-                },
-                {
-                    title: "No ❎",
-                    isTarget: false
-                }
-            ]
-        } as QuizCard,
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
-            subjects: [
-                {
-                    title: "Yes ✅",
-                    isTarget: true
-                },
-                {
-                    title: "No ❎",
-                    isTarget: false
-                }
-            ]
-        } as QuizCard
+        } as VotingCard,
     ],
     flags: [],
     requiredPlayers: {

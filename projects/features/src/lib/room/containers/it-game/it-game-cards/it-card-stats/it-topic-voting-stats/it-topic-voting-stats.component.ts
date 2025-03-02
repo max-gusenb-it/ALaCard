@@ -32,8 +32,8 @@ export class ItTopicVotingStatsComponent extends AngularLifecycle implements Aft
   @Input() card: Card;
   @Input() round: Round;
 
-  get topicVotingCardService(): TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig> {
-    return <TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig>>this.cardServiceFactory.getCardService(this.card.type);
+  get topicVotingCardService(): TopicVotingCardService<TopicVotingCard> {
+    return <TopicVotingCardService<TopicVotingCard>>this.cardServiceFactory.getCardService(this.card.type);
   }
   
   get statsBackgroundCSS() {

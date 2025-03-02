@@ -24,7 +24,7 @@ export class CardServiceFactory {
     constructor(
         private cardService: CardService<Card, Response, DynamicRoundData, Result, ResultConfig>,
         private plaverVotingCardService: PlayerVotingCardService,
-        private topicVotingCardService: TopicVotingCardService<TopicVotingCard, TopicVotingCardResultConfig>,
+        private topicVotingCardService: TopicVotingCardService<TopicVotingCard>,
         private quizCardService: QuizCardService
     ) { }
 
