@@ -1,5 +1,8 @@
-import { CardService, DynamicRoundData, PlayerVotingCardService, Response, TopicVotingCardService, Result } from "@features";
-import { Card, PlayerVotingCard, TopicVotingCard } from "@shared";
+import { CardService, DynamicRoundData, PlayerVotingCardService, Response, TopicVotingCardService, Result, CardTranslationService, VotingCardTranslationService } from "@features";
+import { Card, PlayerVotingCard, TopicVotingCard, VotingCard } from "@shared";
+import { PollCardTranslationService } from "../../logic/service/cards/translation/poll-card-translation.service";
 
 export type GameCardService = CardService<Card, Response, DynamicRoundData, Result> | PlayerVotingCardService | TopicVotingCardService<TopicVotingCard>;
 export type GameCard = Card | PlayerVotingCard | TopicVotingCard;
+
+export type GameCardTranslationService = CardTranslationService<Card> | VotingCardTranslationService<VotingCard> | PollCardTranslationService;

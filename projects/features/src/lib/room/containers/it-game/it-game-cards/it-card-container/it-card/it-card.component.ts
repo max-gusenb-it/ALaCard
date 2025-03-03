@@ -31,11 +31,14 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     return this.cardServiceFactory.getCardService(this.card.type)
   }
 
+  get cardTranslationService() {
+    return this.cardServiceFactory.getCardTranslationService(this.card.type);
+  }
+
   constructor(
     private store: Store,
     private cardServiceFactory: CardServiceFactory,
-    private changeDetectorRef: ChangeDetectorRef,
-    private cardTranslationService: CardTranslationService
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     super();
 

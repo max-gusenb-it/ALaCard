@@ -8,6 +8,8 @@ import {
     GameCardService,
     PollCardService,
     Result,
+    CardTranslationService,
+    GameCardTranslationService,
 } from "@features";
 import {
     Card,
@@ -15,6 +17,7 @@ import {
     TopicVotingCard
 } from "@shared";
 import { QuizCardService } from "./cards/quiz-card.service";
+import { PollCardTranslationService } from "./cards/translation/poll-card-translation.service";
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +28,9 @@ export class CardServiceFactory {
         private plaverVotingCardService: PlayerVotingCardService,
         private topicVotingCardService: TopicVotingCardService<TopicVotingCard>,
         private quizCardService: QuizCardService,
-        private pollCardService: PollCardService
+        private pollCardService: PollCardService,
+        private cardTranslationService: CardTranslationService<Card>,
+        private pollCardTranslationService: PollCardTranslationService
     ) { }
 
     getCardService(cardType?: CardType) : GameCardService {
@@ -45,6 +50,15 @@ export class CardServiceFactory {
             default: {
                 return this.cardService;
             }
+        }
+    }
+
+    getCardTranslationService<C extends Card>(cardType?: CardType) : GameCardTranslationService  {
+        switch(cardType) {
+            case(CardType.PollCard):
+                return this.pollCardTranslationService;
+            default:
+                return this.cardTranslationService;
         }
     }
 }

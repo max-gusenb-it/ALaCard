@@ -17,6 +17,7 @@ export * from "./it-game/it-game.component";
         export * from "./it-game/it-game-cards/it-card-stats/it-card-stats.component";
             export * from "./it-game/it-game-cards/it-card-stats/it-player-voting-stats/it-player-voting-stats.component";
             export * from "./it-game/it-game-cards/it-card-stats/it-topic-voting-stats/it-topic-voting-stats.component";
+            export * from "./it-game/it-game-cards/it-card-stats/it-voting-stats/it-voting-stats.component";
             export * from "./it-game/it-game-cards/it-card-stats/results/it-sip-results/it-sip-results.component";
                 export * from "./it-game/it-game-cards/it-card-stats/results/it-result/it-result.component";
                 export * from "./it-game/it-game-cards/it-card-stats/results/it-sip-result/it-sip-result.component";

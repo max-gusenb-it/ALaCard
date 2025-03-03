@@ -17,6 +17,10 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
         return <VotingCardService<VotingCard>>this.cardServiceFactory.getCardService(this.card.type);
     }
 
+    get votingCardTranslationService() {
+        return this.cardServiceFactory.getCardTranslationService(this.card.type);
+    }
+
     get subjects() {
         return this.votingCardService.getSubjects(this.card);
     }
@@ -32,7 +36,6 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
     constructor(
         private store: Store,
         private cardServiceFactory: CardServiceFactory,
-        private cardTranslationService: CardTranslationService,
         private responseDataDataService: ResponseDataDataService,
         private responseDataSourceService: ResponseDataSourceService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -63,12 +66,12 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
     });
 
     getCardTitle() {
-        return this.cardTranslationService.getCardTitle(this.card);
+        return this.votingCardTranslationService.getCardTitle(this.card);
     }
 
     getCardText() {
-        return this.cardTranslationService.getCardText(
-            this.card,
+        return this.votingCardTranslationService.getCardText(
+            this.votingCardService.castCard(this.card),
             this.store.selectSnapshot(RoomState.players),
             this.round.playerIds,
             this.store.selectSnapshot(RoomState.specificPlayerId)
