@@ -14,7 +14,6 @@ export * from "./player-voting-card/player-voting-result-config";
 
 export * from "./poll-card/poll-card";
 export * from "./poll-card/poll-card-settings";
-export * from "./poll-card/subject";
 
 export * from "./quiz-card/quiz-card";
 export * from "./quiz-card/quiz-subject";
@@ -25,6 +24,7 @@ export * from "./topic-voting-card/topic-voting-card-settings";
 export * from "./topic-voting-card/topic-voting-card";
 export * from "./topic-voting-card/topic-voting-sip-config";
 
+export * from "./voting-card/subject";
 export * from "./voting-card/voting-card-sip-config";
 export * from "./voting-card/voting-card";
 export * from "./voting-card/voting-card-settings";

@@ -1,3 +1,3 @@
-import { VotingResult } from "@features";
+import { OldVotingResult } from "@features";
 
-export interface PlayerVotingResult extends VotingResult<string> { }
+export interface PlayerVotingResult extends OldVotingResult<string> { }

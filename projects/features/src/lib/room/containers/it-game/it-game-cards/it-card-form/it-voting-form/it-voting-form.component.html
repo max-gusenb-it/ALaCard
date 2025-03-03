@@ -31,4 +31,7 @@
             </div>
         </div>
     </div>
+    <it-button class="flex grow" [color]="cardColor" *ngIf="userResponded() && isUserRoomAdmin()" type="button" (click)="processRound()">
+        {{ 'actions.continue' | translate }} {{ getAdminResponseCountInfo() }}
+    </it-button>
 </form>

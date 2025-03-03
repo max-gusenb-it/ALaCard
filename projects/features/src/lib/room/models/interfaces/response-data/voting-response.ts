@@ -1,5 +1,5 @@
 import { Response } from "@features";
 
-export interface VotingResponse<S> extends Response {
-    votedSubjectIDs: S[];
+export interface VotingResponse extends Response {
+    votedSubjectIDs: string[];
 }

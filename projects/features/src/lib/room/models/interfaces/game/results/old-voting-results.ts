@@ -1,8 +1,8 @@
 import { Result } from "@features";
 
-export interface VotingResult extends Result{
+export interface OldVotingResult<S> extends Result{
     /** Id of Player that has been voted */
-    subjectID: string;
+    subjectID: S;
     votes: number;
     /** Id's of Players that have voted */
     playerIDs: string[];

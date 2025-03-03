@@ -1,9 +1,9 @@
-import { TopicVotingResult, VotingResult } from "@features";
+import { OldVotingResult, TopicVotingResult, VotingResult } from "@features";
 import { QuizCard, VotingCardGroup } from "@shared";
 import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
 export namespace GroupUtils {
-    export function getResultsForGroup<S>(results: VotingResult<S>[], votingGroup: VotingCardGroup) {
+    export function getResultsForGroup<S>(results: OldVotingResult<S>[], votingGroup: VotingCardGroup) {
         if (results.length == 0) return [];
         switch(votingGroup) {
             case(VotingCardGroup.MostVoted):

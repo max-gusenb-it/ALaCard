@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResponse, VotingResult } from "@features";
+import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, Card, NewSubject, VotingCard, VotingCardGroup } from "@shared";
@@ -7,10 +7,10 @@ import { AuthenticationState, Card, NewSubject, VotingCard, VotingCardGroup } fr
 @Injectable({
     providedIn: 'root'
 })
-export class VotingCardService<C extends VotingCard, S> extends CardService<C, VotingResponse<S>, DynamicVotingRoundData<S>, VotingResult<S>> {
+export class VotingCardService<C extends VotingCard> extends CardService<C, VotingResponse, DynamicVotingRoundData, VotingResult> {
 
-    get skipValue() : S {
-        throw new Error();
+    get skipValue() {
+        return playerVotingCardSkipValue;
     }
 
     get defaultVotingGroup() {
@@ -35,25 +35,25 @@ export class VotingCardService<C extends VotingCard, S> extends CardService<C, V
         return [];
     }
 
-    createResponse(votedSubjectIDs: S[], roundID: number) : VotingResponse<S> {
+    createResponse(votedSubjectIDs: string[], roundID: number) : VotingResponse {
         const skipped = !votedSubjectIDs;
         return {
             playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
             skipped: skipped,
             votedSubjectIDs: !skipped ? votedSubjectIDs : [this.skipValue],
             roundId: roundID  
-        } as VotingResponse<S>;
+        } as VotingResponse;
     }
     
-    override createDynamicRoundData(roundId: number, responses: Response[]): DynamicVotingRoundData<S> {
+    override createDynamicRoundData(roundId: number, responses: Response[]): DynamicVotingRoundData {
         const votingResponses = this.castResponses(responses);
-        let drd : DynamicVotingRoundData<S> = super.createDynamicRoundData(roundId);
+        let drd : DynamicVotingRoundData = super.createDynamicRoundData(roundId);
         drd.responses = votingResponses;
         return drd;
     }
     
-    override getResults(dynamicRoundData: DynamicRoundData, card?: Card): VotingResult<S>[] {
-        let results: VotingResult<S>[] = [];
+    override getResults(dynamicRoundData: DynamicRoundData, card?: Card): VotingResult[] {
+        let results: VotingResult[] = [];
         const dynamicVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         dynamicVotingRoundData.responses.forEach(response => {
             response.votedSubjectIDs.forEach(subjectID => {
@@ -109,7 +109,7 @@ export class VotingCardService<C extends VotingCard, S> extends CardService<C, V
             .flat();
     }
     
-    getTopResults(results: Result[]): VotingResult<S>[] {
+    getTopResults(results: Result[]): VotingResult[] {
         const votingResults = results
             .map(r => this.castResult(r));
         return votingResults

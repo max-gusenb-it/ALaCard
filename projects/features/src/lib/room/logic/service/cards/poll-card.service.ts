@@ -1,16 +1,11 @@
 import { Injectable } from "@angular/core";
 import { VotingCardService } from "./voting-card.service";
 import { Card, NewSubject, PollCard } from "@shared";
-import { topicVotingCardSkipValue } from "@features";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PollCardService extends VotingCardService<PollCard, number> {
-
-    override get skipValue(): number {
-        return topicVotingCardSkipValue;
-    }
+export class PollCardService extends VotingCardService<PollCard> {
 
     override castCard(card: Card): PollCard {
         let pollCard = super.castCard(card);
