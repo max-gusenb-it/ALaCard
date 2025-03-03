@@ -6,6 +6,7 @@ import {
     DynamicRoundData,
     Response,
     GameCardService,
+    PollCardService,
     Result,
 } from "@features";
 import {
@@ -23,7 +24,8 @@ export class CardServiceFactory {
         private cardService: CardService<Card, Response, DynamicRoundData, Result>,
         private plaverVotingCardService: PlayerVotingCardService,
         private topicVotingCardService: TopicVotingCardService<TopicVotingCard>,
-        private quizCardService: QuizCardService
+        private quizCardService: QuizCardService,
+        private pollCardService: PollCardService
     ) { }
 
     getCardService(cardType?: CardType) : GameCardService {
@@ -36,6 +38,9 @@ export class CardServiceFactory {
             }
             case(CardType.QuizCard): {
                 return this.quizCardService;
+            }
+            case(CardType.PollCard): {
+                return this.pollCardService;
             }
             default: {
                 return this.cardService;

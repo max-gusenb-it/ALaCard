@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
-import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, Response, Result, SipResult, VotingResponse, VotingResult } from "@features";
-import { Card, VotingCard, VotingCardGroup } from "@shared";
+import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResponse, VotingResult } from "@features";
+import { TranslateService } from "@ngx-translate/core";
+import { Store } from "@ngxs/store";
+import { AuthenticationState, Card, NewSubject, VotingCard, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
 export class VotingCardService<C extends VotingCard, S> extends CardService<C, VotingResponse<S>, DynamicVotingRoundData<S>, VotingResult<S>> {
 
-    get skipValue() {
+    get skipValue() : S {
         throw new Error();
     }
 
@@ -17,6 +19,30 @@ export class VotingCardService<C extends VotingCard, S> extends CardService<C, V
 
     get defaultVotingDistribution() {
         return true;
+    }
+    
+    constructor(
+        private store: Store,
+        responseDataDataService: ResponseDataDataService,
+        ingameDataDataService: IngameDataDataService,
+        staticRoundDataDataService: StaticRoundDataDataService,
+        translateService: TranslateService
+    ) {
+        super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
+    }
+
+    getSubjects(card?: Card): NewSubject[] {
+        return [];
+    }
+
+    createResponse(votedSubjectIDs: S[], roundID: number) : VotingResponse<S> {
+        const skipped = !votedSubjectIDs;
+        return {
+            playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
+            skipped: skipped,
+            votedSubjectIDs: !skipped ? votedSubjectIDs : [this.skipValue],
+            roundId: roundID  
+        } as VotingResponse<S>;
     }
     
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicVotingRoundData<S> {

@@ -13,6 +13,7 @@ export * from "./it-game/it-game.component";
         export * from "./it-game/it-game-cards/it-card-form/it-card-form.component";
             export * from "./it-game/it-game-cards/it-card-form/it-player-voting-form/it-player-voting-form.component";
             export * from "./it-game/it-game-cards/it-card-form/it-topic-voting-form/it-topic-voting-form.component";
+            export * from "./it-game/it-game-cards/it-card-form/it-voting-form/it-voting-form.component";
         export * from "./it-game/it-game-cards/it-card-stats/it-card-stats.component";
             export * from "./it-game/it-game-cards/it-card-stats/it-player-voting-stats/it-player-voting-stats.component";
             export * from "./it-game/it-game-cards/it-card-stats/it-topic-voting-stats/it-topic-voting-stats.component";
