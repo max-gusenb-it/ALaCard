@@ -82,7 +82,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
 
     getCardText() {
         return this.votingCardTranslationService.getCardText(
-            this.votingCardService.castCard(this.card),
+            this.card,
             this.store.selectSnapshot(RoomState.players),
             this.round.playerIds,
             this.store.selectSnapshot(RoomState.specificPlayerId)

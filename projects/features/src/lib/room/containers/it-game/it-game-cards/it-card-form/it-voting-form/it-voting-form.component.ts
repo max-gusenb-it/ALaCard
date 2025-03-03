@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
-import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, CardTranslationService, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService } from "@features";
+import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService } from "@features";
 import { AngularLifecycle, Card, InformationActions, InformationState, NewSubject, VotingCard, } from "@shared";
 import { takeUntil } from "rxjs";
 
@@ -71,7 +71,7 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
 
     getCardText() {
         return this.votingCardTranslationService.getCardText(
-            this.votingCardService.castCard(this.card),
+            this.card,
             this.store.selectSnapshot(RoomState.players),
             this.round.playerIds,
             this.store.selectSnapshot(RoomState.specificPlayerId)

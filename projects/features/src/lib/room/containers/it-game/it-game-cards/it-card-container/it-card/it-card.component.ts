@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils, CardTranslationService } from '@features';
-import { AngularLifecycle, Card, Color } from '@shared';
+import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils, GameCardTranslationService } from '@features';
+import { AngularLifecycle, Card, CardType, Color } from '@shared';
 
 @Component({
   selector: 'it-card',
@@ -18,7 +18,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   @Input() playerIds?: string[];
   @Input() customColor?: Color;
   @Input() customTitle?: string;
-  @Input() isMarkDown?: boolean;
+  @Input() offline?: boolean;
   @Input() hideDeckName?: boolean;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
@@ -31,7 +31,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     return this.cardServiceFactory.getCardService(this.card.type)
   }
 
-  get cardTranslationService() {
+  get cardTranslationService() : GameCardTranslationService {
     return this.cardServiceFactory.getCardTranslationService(this.card.type);
   }
 
@@ -64,26 +64,44 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardText() {
-    // ToDo: Refactor
-    if (!this.isMarkDown) { 
-      return this.cardService.getCardText(
-          this.card,
-          this.store.selectSnapshot(RoomState.players),
-          this.playerIds,
-          this.store.selectSnapshot(RoomState.specificPlayerId),
-      );
-    } else {
-      return this.cardService.getOfflineCardText(
-          this.card,
-          this.store.selectSnapshot(RoomState.players),
-          this.playerIds,
-          this.store.selectSnapshot(RoomState.specificPlayerId),
-          this.store.selectSnapshot(RoomState.gameSettings)!
-      );
+    if (this.card.type === CardType.PollCard) {
+      return this.cardTranslationService.getCardText(
+        this.card,
+        this.store.selectSnapshot(RoomState.players),
+        this.playerIds,
+        this.store.selectSnapshot(RoomState.specificPlayerId)
+      )
     }
+    return this.cardService.getCardText(
+        this.card,
+        this.store.selectSnapshot(RoomState.players),
+        this.playerIds,
+        this.store.selectSnapshot(RoomState.specificPlayerId),
+    );
+  }
+
+  getOfflineCardText() {
+    if (this.card.type === CardType.PollCard) {
+      return this.cardTranslationService.getOfflineCardText(
+        this.card,
+        this.store.selectSnapshot(RoomState.players),
+        this.playerIds,
+        this.store.selectSnapshot(RoomState.specificPlayerId)
+      )
+    }
+    return this.cardService.getOfflineCardText(
+      this.card,
+      this.store.selectSnapshot(RoomState.players),
+      this.playerIds,
+      this.store.selectSnapshot(RoomState.specificPlayerId),
+      this.store.selectSnapshot(RoomState.gameSettings)!
+  );
   }
 
   getOfflineTextCSSClasses() {
+    if (this.card.type === CardType.PollCard) {
+      return this.cardTranslationService.getOfflineCardTextClasses();
+    }
     return this.cardService.getOfflineCardTextSizeClass(this.card, this.getCardText())
   }
 

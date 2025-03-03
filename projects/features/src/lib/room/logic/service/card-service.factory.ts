@@ -53,7 +53,7 @@ export class CardServiceFactory {
         }
     }
 
-    getCardTranslationService<C extends Card>(cardType?: CardType) : GameCardTranslationService  {
+    getCardTranslationService(cardType?: CardType) : GameCardTranslationService  {
         switch(cardType) {
             case(CardType.PollCard):
                 return this.pollCardTranslationService;

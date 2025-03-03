@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Utils, CardType, specificPlayerNameWhitecard, playerNameWhitecard } from "@shared";
-import { Player, VotingResult } from "@features";
+import { Player } from "@features";
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +28,7 @@ export class CardTranslationService<C extends Card> {
         }
     }
 
-    getCardText(card: C, players: Player[], playerIds: string[] = [], specificPlayerID?: string): string {
+    getCardText(card: Card, players: Player[], playerIds: string[] = [], specificPlayerID?: string): string {
         let text = card.text;
 
         if (card.text.includes(specificPlayerNameWhitecard)) {
@@ -45,5 +45,13 @@ export class CardTranslationService<C extends Card> {
             });
         }
         return text;
+    }
+
+    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], specificPlayerID?: string) {
+        return this.getCardText(card, players, playerIds, specificPlayerID);
+    }
+
+    getOfflineCardTextClasses() {
+        return "text-xl"
     }
 }
