@@ -22,4 +22,5 @@ export * from "./it-game/it-game.component";
                 export * from "./it-game/it-game-cards/it-card-stats/results/it-result/it-result.component";
                 export * from "./it-game/it-game-cards/it-card-stats/results/it-sip-result/it-sip-result.component";
                 export * from "./it-game/it-game-cards/it-card-stats/results/it-sip-results/it-sip-results.component";
+                export * from "./it-game/it-game-cards/it-card-stats/results/new-it-result/it-result.component";
     export * from "./it-game/it-game-rules/it-game-rules.component";

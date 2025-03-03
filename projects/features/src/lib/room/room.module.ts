@@ -15,7 +15,7 @@ import {
   ItAuthenticateModal,
   ItDeckComponent,
   ItPlayerComponent,
-  ItResultComponent,
+  NewItResultComponent,
   ItSipResultComponent,
   ItSipResultsComponent,
   ItRoomSettingsBottomSheet,
@@ -34,7 +34,8 @@ import {
   ItCreateRoomAsGuestModal,
   ItShareBottomSheet,
   ItStartGameModal,
-  ItPlayerVotingFormComponent
+  ItPlayerVotingFormComponent,
+  ItResultComponent
 } from '@features';
 
 @NgModule({
@@ -66,6 +67,7 @@ import {
     ItSipResultComponent,
     ItDeckComponent,
     ItPlayerComponent,
+    NewItResultComponent,
     ItResultComponent,
     ItSipResultsComponent,
     ItAddAccountModal,

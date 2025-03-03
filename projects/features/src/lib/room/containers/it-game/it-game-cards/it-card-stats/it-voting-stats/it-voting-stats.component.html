@@ -19,20 +19,19 @@
             (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
             <div collapsible class="flex flex-col gap-2 overflow-auto" style="max-height: 20vh;">
-                Das ist ein Test Test Test
-                <!-- <it-result
+                <new-it-result
                     *ngFor="let result of results; index as i"
                     [result]="result"
                     [title]="getResultTitle(result, i)"
                     [card]="card"
                     [skipped]="result.subjectID === skipValue"
-                /> -->
+                />
             </div>
         </it-accord>
-        <it-sip-results
-            *ngIf="false"
+        <!-- <it-sip-results
+            *ngIf="drinkingGame"
             [selectionList]="resultSelectionList"
             [card]="card"
-        ></it-sip-results>
+        ></it-sip-results> -->
     </it-selection-list>
 </div>

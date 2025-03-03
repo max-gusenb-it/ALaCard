@@ -32,6 +32,10 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
         return CardUtils.getCardColor(this.card);
     }
 
+    get drinkingGame() {
+        return this.store.selectSnapshot(RoomState.gameSettings)?.drinkingGame;
+    }
+
     constructor(
         private store: Store,
         private cardServiceFactory: CardServiceFactory,

@@ -1,25 +1,24 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { RoomState, CardServiceFactory, GameCardService, Player, Result, SipResult, GameCardTranslationService } from '@features';
-import { Card, CardType } from '@shared';
+import { RoomState, CardServiceFactory, GameCardService, Player, Result, SipResult, GameCardTranslationService, VotingCardTranslationService, VotingResult } from '@features';
+import { Card, VotingCard } from '@shared';
 
 enum ResultType {
-  PlayerVotingResult,
-  TopicVotingResult,
-  SipVotingResult
+  VotingResult,
+  SipResult
 }
 
 @Component({
-  selector: 'it-result',
+  selector: 'new-it-result',
   templateUrl: './it-result.component.html',
   styleUrls: ['./it-result.component.scss']
 })
-export class ItResultComponent implements AfterViewInit {
+export class NewItResultComponent implements AfterViewInit {
 
   players: Player[];
 
-  @Input() result: Result;
+  @Input() result: VotingResult;
   @Input() sipResult: SipResult;
   @Input() profilePicture?: string;
   @Input() title?: string;
@@ -31,8 +30,8 @@ export class ItResultComponent implements AfterViewInit {
     return this.cardServiceFactory.getCardService(this.card.type);
   }
 
-  get cardTranslationService(): GameCardTranslationService {
-    return this.cardServiceFactory.getCardTranslationService(this.card.type);
+  get cardTranslationService(): VotingCardTranslationService<VotingCard> {
+    return <VotingCardTranslationService<VotingCard>>this.cardServiceFactory.getCardTranslationService(this.card.type);
   }
 
   constructor(
@@ -50,36 +49,20 @@ export class ItResultComponent implements AfterViewInit {
     }
   }
 
-  // ToDo: structure: Move switch thingies into card services
-
   get ResultType() {
-    if (!!this.result && !!this.card) {
-      switch(this.card.type) {
-        case(CardType.PlayerVoting): {
-          return ResultType.PlayerVotingResult;
-        }
-        case(CardType.PollCard):
-        case(CardType.TopicVotingCard): {
-          return ResultType.TopicVotingResult;
-        }
-        case(CardType.QuizCard): {
-          return ResultType.TopicVotingResult;
-        }
-      }
-    }
-    if (!!this.sipResult) {
-      return ResultType.SipVotingResult;
-    }
+    if (!!this.result && !!this.card)
+      return ResultType.VotingResult
+    if (!!this.sipResult)
+      return ResultType.SipResult;
     return null;
   }
 
   getResultText() {
     switch(this.ResultType) {
-      case(ResultType.PlayerVotingResult):
-      case(ResultType.TopicVotingResult): {
-        return this.cardService.getResultText(this.result);
+      case(ResultType.VotingResult): {
+        return this.cardTranslationService.getResultText(this.result);
       };
-      case(ResultType.SipVotingResult): {
+      case(ResultType.SipResult): {
         let text = this.sipResult.distribute ? 
           this.translateService.instant("shared.components.display.it-result.distribute") : 
           this.translateService.instant("shared.components.display.it-result.drink");
@@ -94,16 +77,15 @@ export class ItResultComponent implements AfterViewInit {
 
   cardHasResultSubText() {
     switch(this.ResultType) {
-      case(ResultType.PlayerVotingResult):
-      case(ResultType.TopicVotingResult): {
-        return this.cardService.cardHasResultSubText(this.card, this.overrideAnonymous);
+      case(ResultType.VotingResult): {
+        return this.cardTranslationService.hasResultSubText(this.card, this.overrideAnonymous);
       }
     }
     return false;
   }
 
   getResultSubText() {
-    return this.cardService.getResultSubText(this.result, this.players);
+    return this.cardTranslationService.getResultSubText(this.result, this.players);
   }
 
 }
