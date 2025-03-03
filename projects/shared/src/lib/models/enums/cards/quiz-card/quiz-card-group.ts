@@ -1,4 +1,4 @@
 export enum QuizCardGroup {
-    AllTargets,
-    NoTargets
+    QuizCard_AllTargets = "QuizCard_AllTargets",
+    QuizCard_NoTargets = "QuizCard_NoTargets"
 }

@@ -1,8 +1,25 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
-import { CardUtils, ColorUtils, RoomState, Round, VotingCardTranslationService, VotingCardService, CardServiceFactory, IngameDataDataService, VotingResult, playerVotingCardSkipValue } from "@features";
 import { Store } from "@ngxs/store";
-import { AngularLifecycle, Card, VotingCard } from "@shared";
 import { takeUntil } from "rxjs";
+import {
+    CardUtils,
+    ColorUtils,
+    RoomState,
+    Round,
+    VotingCardTranslationService,
+    VotingCardService,
+    CardServiceFactory,
+    IngameDataDataService,
+    VotingResult,
+    playerVotingCardSkipValue,
+    RoomService,
+    GameService
+} from "@features";
+import {
+    AngularLifecycle,
+    Card,
+    VotingCard
+} from "@shared";
 
 @Component({
     selector: 'it-voting-stats',
@@ -40,7 +57,9 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
         private store: Store,
         private cardServiceFactory: CardServiceFactory,
         private ingameDataDataService: IngameDataDataService,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private roomService: RoomService,
+        private gameService: GameService
     ) {
         super();
     }
@@ -84,5 +103,13 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
             this.votingCardService.getSubjects(this.card),
             this.votingCardService.getTopResults(this.results)
         );
+    }
+
+    isUserRoomAdmin() {
+        return this.roomService.isUserAdmin();
+    }
+
+    startNextRound() {
+        this.gameService.startNewRound();
     }
 }

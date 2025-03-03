@@ -6,10 +6,10 @@ export namespace GroupUtils {
     export function getResultsForGroup<S>(results: OldVotingResult<S>[], votingGroup: VotingCardGroup) {
         if (results.length == 0) return [];
         switch(votingGroup) {
-            case(VotingCardGroup.MostVoted):
-            case(VotingCardGroup.LeastVoted): {
+            case(VotingCardGroup.VotingCard_MostVoted):
+            case(VotingCardGroup.VotingCard_LeastVoted): {
                 let votes = 0;
-                if (votingGroup === VotingCardGroup.MostVoted) {
+                if (votingGroup === VotingCardGroup.VotingCard_MostVoted) {
                     votes = results[0].votes;
                 } else {
                     votes = results[results.length - 1].votes;
@@ -23,9 +23,9 @@ export namespace GroupUtils {
     export function getResultsForQuizCardGroup(card: QuizCard, results: TopicVotingResult[], votingGroup: VotingCardGroup | QuizCardGroup) {
         if (results.length == 0) return [];
         switch(votingGroup) {
-            case(QuizCardGroup.AllTargets):
-            case(QuizCardGroup.NoTargets): {
-                let isTarget = votingGroup === QuizCardGroup.AllTargets;
+            case(QuizCardGroup.QuizCard_AllTargets):
+            case(QuizCardGroup.QuizCard_NoTargets): {
+                let isTarget = votingGroup === QuizCardGroup.QuizCard_AllTargets;
                 const targetSubjectIDs = card.subjects
                     .filter(s => s.isTarget)
                     .map(s => s.id!);

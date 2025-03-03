@@ -19,7 +19,10 @@ export const developmentDeck: Deck = {
                 {
                     title: "No ❎"
                 }
-            ]
+            ],
+            settings: {
+                isAnonymous: true
+            }
         } as PollCard,
     ],
     flags: [],

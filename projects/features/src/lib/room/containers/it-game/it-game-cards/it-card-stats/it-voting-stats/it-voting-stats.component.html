@@ -28,10 +28,13 @@
                 />
             </div>
         </it-accord>
-        <!-- <it-sip-results
+        <it-sip-results
             *ngIf="drinkingGame"
             [selectionList]="resultSelectionList"
             [card]="card"
-        ></it-sip-results> -->
+        ></it-sip-results>
     </it-selection-list>
+    <it-button class="flex grow basis-0" [color]="cardColor" type="button" *ngIf="isUserRoomAdmin()" (click)="startNextRound()">
+        {{ 'actions.continue' | translate }}
+    </it-button>
 </div>

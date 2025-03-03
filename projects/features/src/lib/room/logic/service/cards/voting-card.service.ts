@@ -14,7 +14,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     }
 
     get defaultVotingGroup() {
-        return VotingCardGroup.MostVoted;
+        return VotingCardGroup.VotingCard_MostVoted;
     }
 
     get defaultVotingDistribution() {
@@ -29,6 +29,10 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         translateService: TranslateService
     ) {
         super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
+    }
+
+    castGroup(group?: string) {
+        return VotingCardGroup[group as keyof typeof VotingCardGroup];
     }
 
     getSubjects(card?: Card): NewSubject[] {
@@ -88,10 +92,10 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const votingCard = this.castCard(card);
     
-        const filteredResults = GroupUtils.getResultsForGroup(
+        const filteredResults = this.getResultsForGroup(
             this.getResults(dynamicRoundData)
                 .filter(r => r.subjectID !== this.skipValue),
-            this.defaultVotingGroup
+            votingCard.settings?.sipConfig?.group ?? this.defaultVotingGroup
         );
 
         return filteredResults
@@ -100,13 +104,29 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
                     return {
                         playerId: pID,
                         sips: defaultCardSips,
-                        distribute: votingCard.settings?.sipConfig?.distribute !== undefined ? 
-                            votingCard.settings?.sipConfig?.distribute : 
-                            this.defaultVotingDistribution
+                        distribute: votingCard.settings?.sipConfig?.distribute ?? this.defaultVotingDistribution
                     } as SipResult
                 });
             })
             .flat();
+    }
+
+    getResultsForGroup(results: VotingResult[], groupString: string) {
+        const votingGroup = this.castGroup(groupString); 
+        if (results.length == 0) return [];
+        switch(votingGroup) {
+            case(VotingCardGroup.VotingCard_MostVoted):
+            case(VotingCardGroup.VotingCard_LeastVoted): {
+                let votes = 0;
+                if (votingGroup === VotingCardGroup.VotingCard_MostVoted) {
+                    votes = results[0].votes;
+                } else {
+                    votes = results[results.length - 1].votes;
+                }
+                return results
+                    .filter(r => r.votes === votes);
+            }
+        }
     }
     
     getTopResults(results: Result[]): VotingResult[] {
