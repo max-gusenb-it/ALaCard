@@ -1,13 +1,14 @@
-import { Component, Input } from "@angular/core";
-import { CardUtils, ColorUtils, RoomState, Round, VotingCardTranslationService, CardTranslationService, VotingCardService, CardServiceFactory } from "@features";
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
+import { CardUtils, ColorUtils, RoomState, Round, VotingCardTranslationService, VotingCardService, CardServiceFactory, IngameDataDataService, VotingResult, playerVotingCardSkipValue } from "@features";
 import { Store } from "@ngxs/store";
-import { Card, VotingCard } from "@shared";
+import { AngularLifecycle, Card, VotingCard } from "@shared";
+import { takeUntil } from "rxjs";
 
 @Component({
     selector: 'it-voting-stats',
     templateUrl: './it-voting-stats.component.html'
 })
-export class ItVotingStatsComponent {
+export class ItVotingStatsComponent extends AngularLifecycle implements AfterViewInit {
     @Input() card: Card;
     @Input() round: Round;
         
@@ -17,6 +18,10 @@ export class ItVotingStatsComponent {
 
     get votingCardTranslationService() {
         return <VotingCardTranslationService<VotingCard>>this.cardServiceFactory.getCardTranslationService(this.card.type);
+    }
+
+    get skipValue() {
+        return playerVotingCardSkipValue;
     }
   
     get statsBackgroundCSS() {
@@ -29,8 +34,24 @@ export class ItVotingStatsComponent {
 
     constructor(
         private store: Store,
-        private cardServiceFactory: CardServiceFactory
-    ) { }
+        private cardServiceFactory: CardServiceFactory,
+        private ingameDataDataService: IngameDataDataService,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {
+        super();
+    }
+
+    results: VotingResult[];
+
+    ngAfterViewInit(): void {
+        this.ingameDataDataService.getDynamicRoundData$()
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe(dynamicRoundData => {
+                if (!!!dynamicRoundData) return;
+                this.results = this.votingCardService.getResults(dynamicRoundData, this.card);
+                this.changeDetectorRef.detectChanges();
+            });
+    }
 
     getCardTitle() {
         return this.votingCardTranslationService.getCardTitle(this.card);
@@ -47,8 +68,17 @@ export class ItVotingStatsComponent {
 
     getResultsHeading() {
         return this.votingCardTranslationService.getResultsHeading(
-            this.votingCardService.castCard(this.card),
-            []
+            this.votingCardService.getSubjects(this.card),
+            this.votingCardService.getTopResults(this.results)
+        );
+    }
+
+    getResultTitle(result: VotingResult, resultIndex: number) {
+        return this.votingCardTranslationService.getResultTitle(
+            result,
+            resultIndex,
+            this.votingCardService.getSubjects(this.card),
+            this.votingCardService.getTopResults(this.results)
         );
     }
 }

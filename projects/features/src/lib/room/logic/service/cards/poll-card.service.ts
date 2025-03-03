@@ -13,7 +13,7 @@ export class PollCardService extends VotingCardService<PollCard> {
             ...pollCard,
             subjects: pollCard.subjects.map((c, index) => {
                 return {
-                    ID: index,
+                    ID: index.toString(),
                     ...c
                 } as NewSubject
             })

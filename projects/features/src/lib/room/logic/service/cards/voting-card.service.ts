@@ -110,6 +110,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     }
     
     getTopResults(results: Result[]): VotingResult[] {
+        if (!results) return [];
         const votingResults = results
             .map(r => this.castResult(r));
         return votingResults

@@ -7,7 +7,7 @@ import { Player, VotingResult } from "@features";
     providedIn: 'root'
 })
 export class CardTranslationService<C extends Card> {
-    constructor(private translateService: TranslateService) { }
+    constructor(protected translateService: TranslateService) { }
 
     getCardTitle(card: Card) {
         if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
@@ -45,9 +45,5 @@ export class CardTranslationService<C extends Card> {
             });
         }
         return text;
-    }
-
-    getResultsHeading(card: C, topResults: VotingResult[]) : string {
-        return "";
     }
 }

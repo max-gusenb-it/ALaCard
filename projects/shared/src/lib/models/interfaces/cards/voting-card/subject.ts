@@ -1,4 +1,4 @@
 export interface NewSubject {
-    ID?: number;
+    ID?: string;
     title: string;
 }
