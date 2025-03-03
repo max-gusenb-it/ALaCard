@@ -19,7 +19,6 @@ import {
 import { 
   AngularLifecycle,
   Card,
-  TopicVotingCardResultConfig,
   CardType,
   TopicVotingCard,
 } from '@shared';

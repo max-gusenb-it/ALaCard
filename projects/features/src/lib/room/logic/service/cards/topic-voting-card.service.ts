@@ -27,15 +27,14 @@ import {
     Card,
     TopicVotingCard,
     VotingCardGroup,
-    Utils,
-    TopicVotingCardResultConfig,
+    Utils
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root'
 })
-export class TopicVotingCardService<C extends TopicVotingCard> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, TopicVotingResult, TopicVotingCardResultConfig> {
+export class TopicVotingCardService<C extends TopicVotingCard> extends CardService<TopicVotingCard, TopicVotingResponse, DynamicTopicVotingRoundData, TopicVotingResult> {
 
     get defaultTopicVotingVotingDistribution() {
         return true;

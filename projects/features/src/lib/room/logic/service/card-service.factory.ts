@@ -11,9 +11,7 @@ import {
 import {
     Card,
     CardType,
-    TopicVotingCard,
-    ResultConfig,
-    TopicVotingCardResultConfig
+    TopicVotingCard
 } from "@shared";
 import { QuizCardService } from "./cards/quiz-card.service";
 
@@ -22,7 +20,7 @@ import { QuizCardService } from "./cards/quiz-card.service";
 })
 export class CardServiceFactory {
     constructor(
-        private cardService: CardService<Card, Response, DynamicRoundData, Result, ResultConfig>,
+        private cardService: CardService<Card, Response, DynamicRoundData, Result>,
         private plaverVotingCardService: PlayerVotingCardService,
         private topicVotingCardService: TopicVotingCardService<TopicVotingCard>,
         private quizCardService: QuizCardService

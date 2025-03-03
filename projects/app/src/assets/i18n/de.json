@@ -124,6 +124,7 @@
             }
           },
           "topic-voting": "Themen Abstimmung",
+          "poll": "Abstimmung",
           "quiz": "Quiz"
         },
         "game-cards": {

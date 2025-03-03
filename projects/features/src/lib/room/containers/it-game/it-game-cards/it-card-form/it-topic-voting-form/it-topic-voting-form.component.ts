@@ -22,7 +22,6 @@ import {
     AuthenticationState,
     Card,
     InformationActions,
-    TopicVotingCardResultConfig,
     InformationState,
     TopicVotingCard,
     CardType

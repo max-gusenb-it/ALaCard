@@ -26,7 +26,6 @@ import {
 import { 
     PlayerVotingCard,
     VotingCardGroup,
-    PlayerVotingResultConfig,
     Card,
     AuthenticationState,
 } from "@shared";
@@ -34,7 +33,7 @@ import {
 @Injectable({
     providedIn: 'root'
 })
-export class PlayerVotingCardService extends CardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult, PlayerVotingResultConfig> {
+export class PlayerVotingCardService extends CardService<PlayerVotingCard, PlayerVotingResponse, DynamicPlayerVotingRoundData, PlayerVotingResult> {
 
     constructor(
         private store: Store,

@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, QuizCard, TopicVotingCard, VotingCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, TopicVotingCard, PollCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -11,18 +11,16 @@ export const developmentDeck: Deck = {
     cards: [
         {
             text: "Ever dropped your phone in the toilet?",
-            type: CardType.QuizCard,
+            type: CardType.PollCard,
             subjects: [
                 {
-                    title: "Yes ✅",
-                    isTarget: true
+                    title: "Yes ✅"
                 },
                 {
-                    title: "No ❎",
-                    isTarget: false
+                    title: "No ❎"
                 }
             ]
-        } as VotingCard,
+        } as PollCard,
     ],
     flags: [],
     requiredPlayers: {

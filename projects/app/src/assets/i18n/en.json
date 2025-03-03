@@ -124,6 +124,7 @@
             }
           },
           "topic-voting": "Topic Voting",
+          "poll": "Poll",
           "quiz": "Quiz"
         },
         "game-cards": {

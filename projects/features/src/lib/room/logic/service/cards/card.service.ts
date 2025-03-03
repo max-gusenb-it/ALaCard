@@ -23,7 +23,6 @@ import {
     PlayerState,
     Utils,
     playerNameWhitecard,
-    ResultConfig,
     specificPlayerNameWhitecard,
     CardType
 } from "@shared";
@@ -34,7 +33,7 @@ import { TranslateService } from "@ngx-translate/core";
 @Injectable({
     providedIn: 'root'
 })
-export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result, S extends ResultConfig> {
+export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
 
     constructor(
         private _store: Store,

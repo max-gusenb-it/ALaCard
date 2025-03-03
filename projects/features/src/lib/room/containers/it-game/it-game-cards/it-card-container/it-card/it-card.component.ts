@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
-import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils } from '@features';
+import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils, CardTranslationService } from '@features';
 import { AngularLifecycle, Card, Color } from '@shared';
 
 @Component({
@@ -34,7 +34,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   constructor(
     private store: Store,
     private cardServiceFactory: CardServiceFactory,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private cardTranslationService: CardTranslationService
   ) {
     super();
 
@@ -102,7 +103,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardTitle() {
-    return this.cardService.getCardTitle(this.card);
+    return this.cardTranslationService.getCardTitle(this.card);
   }
 
 }

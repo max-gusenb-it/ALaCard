@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, Response, Result, SipResult, VotingResponse, VotingResult } from "@features";
-import { Card, ResultConfig, VotingCard, VotingCardGroup } from "@shared";
+import { Card, VotingCard, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
-export class VotingCardService<S> extends CardService<VotingCard, VotingResponse<S>, DynamicVotingRoundData<S>, VotingResult<S>, ResultConfig> {
+export class VotingCardService<C extends VotingCard, S> extends CardService<C, VotingResponse<S>, DynamicVotingRoundData<S>, VotingResult<S>> {
 
     get skipValue() {
         throw new Error();

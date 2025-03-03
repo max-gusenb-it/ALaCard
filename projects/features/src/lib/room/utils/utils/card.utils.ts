@@ -17,6 +17,7 @@ export namespace CardUtils {
               case(CardType.PlayerVoting): {
                 return "red"
               }
+              case(CardType.PollCard):
               case(CardType.TopicVotingCard): {
                 return "blue"
               }

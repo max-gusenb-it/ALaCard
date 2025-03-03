@@ -3,5 +3,6 @@ export enum CardType {
     "FreeText",
     "PlayerVoting",
     "TopicVotingCard",
-    "QuizCard"
+    "QuizCard",
+    "PollCard"
 }
