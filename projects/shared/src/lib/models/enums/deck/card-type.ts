@@ -4,5 +4,6 @@ export enum CardType {
     "PlayerVoting",
     "TopicVotingCard",
     "QuizCard",
-    "PollCard"
+    "PollCard",
+    "NewPlayerVotingCard"
 }

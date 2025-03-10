@@ -17,6 +17,7 @@ export class CardTranslationService<C extends Card> {
                 return this.translateService.instant("features.room.game.card.groundRules");
             case(CardType.FreeText):
                 return this.translateService.instant("features.room.game.card.freeText")
+            case(CardType.NewPlayerVotingCard):
             case(CardType.PlayerVoting):
                 return this.translateService.instant("features.room.game.card.playerVoting")
             case(CardType.TopicVotingCard):

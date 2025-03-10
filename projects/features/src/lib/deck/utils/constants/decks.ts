@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, TopicVotingCard, PollCard, VotingCardGroup } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, TopicVotingCard, NewPlayerVotingCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -10,61 +10,37 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.PollCard,
-            subjects: [
-                {
-                    title: "Yes ✅"
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
+            text: "Who would rather lie about themselves to get someone into bed?",
+            type: CardType.NewPlayerVotingCard,
             settings: {
-                order: 0,
-                isAnonymous: true,
-                sipConfig: {
-                    distribute: false
-                }
+                order: 0
             }
-        } as PollCard,
+        } as NewPlayerVotingCard,
         {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.PollCard,
-            subjects: [
-                {
-                    title: "Yes ✅"
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
+            text: "Who would rather lie about themselves to get someone into bed?",
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 1,
-                isAnonymous: false,
-                sipConfig: {
-                    distribute: true,
-                    group: VotingCardGroup.VotingCard_LeastVoted
-                }
+                selfVoteDisabled: true
             }
-        } as PollCard,
+        } as NewPlayerVotingCard,
         {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.PollCard,
-            subjects: [
-                {
-                    title: "Yes ✅"
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
+            text: "Who would rather lie about themselves to get someone into bed?",
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 2,
-                payToDisplay: true,
                 isAnonymous: true
             }
-        } as PollCard,
+        } as NewPlayerVotingCard,
+        {
+            text: "Who would rather lie about themselves to get someone into bed?",
+            type: CardType.NewPlayerVotingCard,
+            settings: {
+                order: 3,
+                isAnonymous: true,
+                payToDisplay: true
+            }
+        } as NewPlayerVotingCard,
     ],
     flags: [],
     requiredPlayers: {

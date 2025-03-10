@@ -14,6 +14,7 @@ export namespace CardUtils {
               case(CardType.FreeText): {
                 return systemDefaultValue;
               }
+              case(CardType.NewPlayerVotingCard):
               case(CardType.PlayerVoting): {
                 return "red"
               }

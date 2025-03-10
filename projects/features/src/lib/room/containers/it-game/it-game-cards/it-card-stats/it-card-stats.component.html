@@ -32,5 +32,12 @@
         [round]="staticRoundData.round"
       />
     }
+    @case(6) {
+      <it-voting-stats
+        class="w-full sm:w-3/5 max-w-xl"
+        [card]="deck.cards[staticRoundData.round.cardIndex]"
+        [round]="staticRoundData.round"
+      />
+    }
   }
 </div>
