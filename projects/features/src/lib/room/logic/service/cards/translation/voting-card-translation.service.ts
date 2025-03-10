@@ -1,14 +1,28 @@
 import { Injectable } from "@angular/core";
-import { CardTranslationService, CardUtils, Player, playerVotingCardSkipValue, VotingResult } from "@features";
+import { CardTranslationService, CardUtils, defaultCardSips, defaultPlayerVotingCardGroup, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, playerVotingCardSkipValue, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
-import { Card, NewSubject, Utils, VotingCard } from "@shared";
+import { Card, CardType, NewSubject, PlayerVotingCardGroup, Utils, VotingCard, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
 export class VotingCardTranslationService<C extends VotingCard> extends CardTranslationService<VotingCard> {
+
     constructor(override translateService: TranslateService) {
         super(translateService);
+    }
+
+    getDefaultSipDistributionGroup(cardType: CardType) {
+        switch(cardType) {
+            case(CardType.NewPlayerVotingCard): {
+                return defaultPlayerVotingCardGroup;
+            }
+            default: return defaultVotingCardGroup;
+        }
+    }
+
+    getDefaultSipDistribution() {
+        return defaultVotingCardDistribution;
     }
 
     getResultsHeading(subjects: NewSubject[], topResults: VotingResult[]) : string {
@@ -49,5 +63,37 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
                 .map(ID => players.find(p => p.id === ID)!.username),
             true
         );
+    }
+
+    override getCardDrinkingText(card: Card): string {
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.drinkingText)) return super.getCardDrinkingText(card);
+
+        let text = "";
+
+        const votingCard = CardUtils.castCard<VotingCard>(card);
+        const group = votingCard.settings?.sipConfig?.group ?? this.getDefaultSipDistributionGroup(card.type);
+
+        text += this.getSipTextForGroup(group.toString()) + "<br>";
+        text += votingCard.settings?.sipConfig?.distribute ?? this.getDefaultSipDistribution()
+            ? this.translateService.instant("shared.components.display.it-result.distribute") 
+            : this.translateService.instant("shared.components.display.it-result.drink");
+            
+        text += " " + defaultCardSips + " " + this.translateService.instant("shared.components.display.it-result.sip")
+
+        return MarkdownUtils.addTagToContent(text, "span", ["text-base"]);
+    }
+
+    getSipTextForGroup(group: string) {
+        switch(group) {
+            case(VotingCardGroup.VotingCard_MostVotedSubject): {
+                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topic");
+            }
+            case(VotingCardGroup.VotingCard_LeastVotedSubject): {
+                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topic");
+            }
+            case(PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer): {
+                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-player");
+            }
+        }
     }
 }

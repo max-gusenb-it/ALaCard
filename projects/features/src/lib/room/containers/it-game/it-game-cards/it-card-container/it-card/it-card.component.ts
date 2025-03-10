@@ -64,7 +64,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardText() {
-    if (this.card.type === CardType.PollCard) {
+    if (this.card.type === CardType.PollCard || this.card.type === CardType.NewPlayerVotingCard) {
       return this.cardTranslationService.getCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
@@ -81,12 +81,13 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getOfflineCardText() {
-    if (this.card.type === CardType.PollCard) {
+    if (this.card.type === CardType.PollCard || this.card.type === CardType.NewPlayerVotingCard) {
       return this.cardTranslationService.getOfflineCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
         this.playerIds,
-        this.store.selectSnapshot(RoomState.specificPlayerId)
+        this.store.selectSnapshot(RoomState.specificPlayerId),
+        this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame
       )
     }
     return this.cardService.getOfflineCardText(

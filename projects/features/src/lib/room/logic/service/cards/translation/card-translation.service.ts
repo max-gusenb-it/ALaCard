@@ -48,8 +48,19 @@ export class CardTranslationService<C extends Card> {
         return text;
     }
 
-    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], specificPlayerID?: string) {
-        return this.getCardText(card, players, playerIds, specificPlayerID);
+    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], specificPlayerID: string = "", isDrinkingGame: boolean) {
+        let text = this.getCardText(card, players, playerIds, specificPlayerID);
+        if (isDrinkingGame) {
+            text += "<br><br>\n\n" + this.getCardDrinkingText(card)
+        }
+        return text;
+    }
+
+    getCardDrinkingText(card: Card) : string {
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.drinkingText)) {
+            return card.settings!.drinkingText!;
+        }
+        return "";
     }
 
     getOfflineCardTextClasses() {

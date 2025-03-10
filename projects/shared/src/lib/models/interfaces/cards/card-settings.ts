@@ -5,6 +5,8 @@ export interface CardSettings {
     customTitle?: string;
     customColor?: Color;
     drinkingCard?: boolean;
+    // ToDo: Display in stats
+    drinkingText?: string;
     // ToDo - structure
     delaySipText?: boolean;
 }
