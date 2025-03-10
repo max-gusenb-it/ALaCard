@@ -22,7 +22,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     }
     
     constructor(
-        private store: Store,
+        protected store: Store,
         responseDataDataService: ResponseDataDataService,
         ingameDataDataService: IngameDataDataService,
         staticRoundDataDataService: StaticRoundDataDataService,

@@ -35,6 +35,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
 
+    // ToDo - structure: fix
     constructor(
         private _store: Store,
         private _responseDataDataService: ResponseDataDataService,

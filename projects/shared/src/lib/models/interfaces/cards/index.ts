@@ -8,6 +8,8 @@ export * from "./result-config";
 export * from "./free-text-card/free-text-card";
 export * from "./free-text-card/free-text-card-settings";
 
+export * from "./player-voting-card/new-player-voting-card";
+export * from "./player-voting-card/new-player-voting-card-settings";
 export * from "./player-voting-card/player-voting-card";
 export * from "./player-voting-card/player-voting-card-settings";
 export * from "./player-voting-card/player-voting-result-config";
