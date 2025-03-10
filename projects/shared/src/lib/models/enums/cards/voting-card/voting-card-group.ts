@@ -1,4 +1,4 @@
 export enum VotingCardGroup {
-    VotingCard_MostVoted = "VotingCard_MostVoted",
-    VotingCard_LeastVoted = "VotingCard_LeastVoted"
+    VotingCard_MostVotedSubject = "VotingCard_MostVotedSubject",
+    VotingCard_LeastVotedSubject = "VotingCard_LeastVotedSubject"
 }

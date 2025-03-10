@@ -6,10 +6,10 @@ export namespace GroupUtils {
     export function getResultsForGroup<S>(results: OldVotingResult<S>[], votingGroup: VotingCardGroup) {
         if (results.length == 0) return [];
         switch(votingGroup) {
-            case(VotingCardGroup.VotingCard_MostVoted):
-            case(VotingCardGroup.VotingCard_LeastVoted): {
+            case(VotingCardGroup.VotingCard_MostVotedSubject):
+            case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                 let votes = 0;
-                if (votingGroup === VotingCardGroup.VotingCard_MostVoted) {
+                if (votingGroup === VotingCardGroup.VotingCard_MostVotedSubject) {
                     votes = results[0].votes;
                 } else {
                     votes = results[results.length - 1].votes;

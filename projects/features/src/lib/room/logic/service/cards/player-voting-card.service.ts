@@ -46,7 +46,7 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
     }
 
     get defaultPlayerVotingGroup() {
-        return VotingCardGroup.VotingCard_MostVoted;
+        return VotingCardGroup.VotingCard_MostVotedSubject;
     }
 
     override createDynamicRoundData(roundId: number, responses: Response[]): DynamicPlayerVotingRoundData {
@@ -132,10 +132,10 @@ export class PlayerVotingCardService extends CardService<PlayerVotingCard, Playe
             const castedCard = this.castCard(card);
             const group = castedCard.settings?.sipConfig?.group ?? this.defaultPlayerVotingGroup;
             switch(group) {
-                case(VotingCardGroup.VotingCard_MostVoted): {
+                case(VotingCardGroup.VotingCard_MostVotedSubject): {
                     sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-player");
                 } break;
-                case(VotingCardGroup.VotingCard_LeastVoted): {
+                case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                     sipText = this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-player");
                 }
             }

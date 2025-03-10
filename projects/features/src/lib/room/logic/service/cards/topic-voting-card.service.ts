@@ -41,7 +41,7 @@ export class TopicVotingCardService<C extends TopicVotingCard> extends CardServi
     }
 
     get defaultTopicVotingGroup() {
-        return VotingCardGroup.VotingCard_MostVoted;
+        return VotingCardGroup.VotingCard_MostVotedSubject;
     }
 
     constructor(
@@ -207,10 +207,10 @@ export class TopicVotingCardService<C extends TopicVotingCard> extends CardServi
             inclusion = this.translateService.instant("features.room.game.game-cards.offline-sip-display.in");
             switch(castedCard.settings?.sipConfig?.resultConfig?.group) {
                 default:
-                case(VotingCardGroup.VotingCard_MostVoted): {
+                case(VotingCardGroup.VotingCard_MostVotedSubject): {
                     group = this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topic");
                 } break;
-                case(VotingCardGroup.VotingCard_LeastVoted): {
+                case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                     group = this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topic")
                 } break;
             }

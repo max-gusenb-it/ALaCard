@@ -14,7 +14,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     }
 
     get defaultVotingGroup() {
-        return VotingCardGroup.VotingCard_MostVoted;
+        return VotingCardGroup.VotingCard_MostVotedSubject;
     }
 
     get defaultVotingDistribution() {
@@ -147,10 +147,10 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         const votingGroup = this.castGroup(groupString); 
         if (results.length == 0) return [];
         switch(votingGroup) {
-            case(VotingCardGroup.VotingCard_MostVoted):
-            case(VotingCardGroup.VotingCard_LeastVoted): {
+            case(VotingCardGroup.VotingCard_MostVotedSubject):
+            case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                 let votes = 0;
-                if (votingGroup === VotingCardGroup.VotingCard_MostVoted) {
+                if (votingGroup === VotingCardGroup.VotingCard_MostVotedSubject) {
                     votes = results[0].votes;
                 } else {
                     votes = results[results.length - 1].votes;
