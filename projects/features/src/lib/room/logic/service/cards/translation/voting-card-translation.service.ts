@@ -86,7 +86,7 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
     getSipTextForGroup(group: string) {
         switch(group) {
             case(VotingCardGroup.VotingCard_MostVotedSubject): {
-                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topic");
+                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topics");
             }
             case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                 return this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topic");
