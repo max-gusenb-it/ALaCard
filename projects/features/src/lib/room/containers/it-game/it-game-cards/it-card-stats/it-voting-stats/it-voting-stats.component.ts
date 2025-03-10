@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { takeUntil } from "rxjs";
+import { firstValueFrom, takeUntil } from "rxjs";
 import {
     CardUtils,
     ColorUtils,
@@ -13,13 +13,20 @@ import {
     VotingResult,
     playerVotingCardSkipValue,
     RoomService,
-    GameService
+    GameService,
+    defaultPayToDisplaySips,
+    IngameDataSourceService,
+    DynamicVotingRoundData
 } from "@features";
 import {
     AngularLifecycle,
+    AuthenticationState,
     Card,
+    PopupService,
+    Utils,
     VotingCard
 } from "@shared";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: 'it-voting-stats',
@@ -35,6 +42,10 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
 
     get votingCardTranslationService() {
         return <VotingCardTranslationService<VotingCard>>this.cardServiceFactory.getCardTranslationService(this.card.type);
+    }
+
+    get votingCard() {
+        return this.votingCardService.castCard(this.card);
     }
 
     get skipValue() {
@@ -56,24 +67,44 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     constructor(
         private store: Store,
         private cardServiceFactory: CardServiceFactory,
+        private ingameDataSourceService: IngameDataSourceService,
         private ingameDataDataService: IngameDataDataService,
         private changeDetectorRef: ChangeDetectorRef,
         private roomService: RoomService,
-        private gameService: GameService
+        private gameService: GameService,
+        private popUpService: PopupService,
+        private translateService: TranslateService
     ) {
         super();
     }
 
     results: VotingResult[];
+    payToDisplayPlayerId: string;
 
     ngAfterViewInit(): void {
         this.ingameDataDataService.getDynamicRoundData$()
             .pipe(takeUntil(this.destroyed$))
             .subscribe(dynamicRoundData => {
                 if (!!!dynamicRoundData) return;
+                const newPayToDisplayPlayerId = this.votingCardService.castDynamicRoundData(dynamicRoundData).payToDisplayPlayerId;
+                if (
+                    !Utils.isStringDefinedAndNotEmpty(this.payToDisplayPlayerId) &&
+                    Utils.isStringDefinedAndNotEmpty(newPayToDisplayPlayerId)
+                ) {
+                    this.popUpService.openSnackbar(this.getPayToDisplayNotificationText(newPayToDisplayPlayerId));
+                }
+                this.payToDisplayPlayerId = newPayToDisplayPlayerId;
                 this.results = this.votingCardService.getResults(dynamicRoundData, this.card);
                 this.changeDetectorRef.detectChanges();
             });
+    }
+    
+    getPayToDisplayNotificationText(newPayToDisplayPlayerId: string) : string {
+        const player = this.store.selectSnapshot(RoomState.players).find(p => p.id === newPayToDisplayPlayerId);
+        const notificationPart1 = this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display-drinking-notification-1");
+        const sips = this.translateService.instant("shared.components.display.it-result.sips");
+        const notificationPart2 = this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display-drinking-notification-2")
+        return `${player?.username} ${notificationPart1} ${defaultPayToDisplaySips} ${sips} ${notificationPart2}`;
     }
 
     getCardTitle() {
@@ -103,6 +134,31 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
             this.votingCardService.getSubjects(this.card),
             this.votingCardService.getTopResults(this.results)
         );
+    }
+
+    displayPayToDisplay() {
+        return this.drinkingGame && 
+            this.votingCard.settings?.payToDisplay && 
+            !Utils.isStringDefinedAndNotEmpty(this.payToDisplayPlayerId);
+    }
+    
+    async payToDisplay() {
+        const payToDisplay = await firstValueFrom(
+            this.popUpService.openOptionBottomSheet(
+                this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay-to-display-explanation"),
+                this.translateService.instant("actions.cancel"),
+                `${this.translateService.instant("features.room.game.game-cards.card-stats.player-voting-stats.pay")} ${defaultPayToDisplaySips} ${this.translateService.instant("shared.components.display.it-result.sips")}`
+            ).closed
+        );
+        if (payToDisplay && !Utils.isStringDefinedAndNotEmpty(this.payToDisplayPlayerId)) {
+            this.ingameDataSourceService.updateDynamicRoundData(
+                this.store.selectSnapshot(RoomState.roomId)!,
+                {
+                    ...this.ingameDataDataService.getDynamicRoundData(),
+                    payToDisplayPlayerId: this.store.selectSnapshot(AuthenticationState.userId)
+                } as DynamicVotingRoundData
+            )
+        }
     }
 
     isUserRoomAdmin() {

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue } from "@features";
+import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, Card, NewSubject, VotingCard, VotingCardGroup } from "@shared";
@@ -87,6 +87,38 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
             return r2.votes - r1.votes;
         });
         return results;
+    }
+
+    override getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
+        let sipResults = this.calculateSipResults(card, dynamicRoundData);
+
+        sipResults = this.addPayToDisplaySipResult(sipResults, dynamicRoundData);
+
+        return sipResults.sort((s1, s2) => {
+            if (s1.playerId === this.store.selectSnapshot(AuthenticationState.userId)) return -1;
+            if (s2.playerId !== this.store.selectSnapshot(AuthenticationState.userId)) return 1;
+            return 0;
+        });
+    }
+
+    addPayToDisplaySipResult(sipResults: SipResult[], dynamicRoundData: DynamicRoundData) {
+        const dynamicPollRoundData = this.castDynamicRoundData(dynamicRoundData);
+        if (!!dynamicPollRoundData.payToDisplayPlayerId) {
+            const payToWinUserIndex = sipResults.findIndex(sr => sr.playerId === dynamicPollRoundData.payToDisplayPlayerId && !sr.distribute);
+            if (payToWinUserIndex !== -1) {
+                sipResults[payToWinUserIndex].sips += defaultPayToDisplaySips;
+            } else {
+                sipResults = [
+                    ...sipResults,
+                    {
+                        playerId: dynamicPollRoundData.payToDisplayPlayerId,
+                        sips: defaultPayToDisplaySips,
+                        distribute: false
+                    }
+                ];
+            }
+        }
+        return sipResults;
     }
     
     override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {

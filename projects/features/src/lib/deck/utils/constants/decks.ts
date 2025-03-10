@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, TopicVotingCard, PollCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, TopicVotingCard, PollCard, VotingCardGroup } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -21,6 +21,47 @@ export const developmentDeck: Deck = {
                 }
             ],
             settings: {
+                order: 0,
+                isAnonymous: true,
+                sipConfig: {
+                    distribute: false
+                }
+            }
+        } as PollCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.PollCard,
+            subjects: [
+                {
+                    title: "Yes ✅"
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                order: 1,
+                isAnonymous: false,
+                sipConfig: {
+                    distribute: true,
+                    group: VotingCardGroup.VotingCard_LeastVoted
+                }
+            }
+        } as PollCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.PollCard,
+            subjects: [
+                {
+                    title: "Yes ✅"
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                order: 2,
+                payToDisplay: true,
                 isAnonymous: true
             }
         } as PollCard,
