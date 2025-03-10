@@ -15,7 +15,6 @@ export * from "./player-voting-card/player-voting-card-settings";
 export * from "./player-voting-card/player-voting-result-config";
 
 export * from "./poll-card/poll-card";
-export * from "./poll-card/poll-card-settings";
 
 export * from "./quiz-card/quiz-card";
 export * from "./quiz-card/quiz-subject";

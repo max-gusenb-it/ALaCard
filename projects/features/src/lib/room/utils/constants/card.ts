@@ -1,4 +1,4 @@
-export const playerVotingCardSkipValue = null;
+export const playerVotingCardSkipValue = "-1";
 export const topicVotingCardSkipValue = -1;
 
 export const defaultCardSips = 1;

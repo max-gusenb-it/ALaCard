@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, GroupUtils, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips } from "@features";
+import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, Card, NewSubject, VotingCard, VotingCardGroup } from "@shared";
@@ -40,11 +40,11 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     }
 
     createResponse(votedSubjectIDs: string[], roundID: number) : VotingResponse {
-        const skipped = !votedSubjectIDs;
+        const skipped = !votedSubjectIDs || votedSubjectIDs.length <= 0;
         return {
             playerId: this.store.selectSnapshot(AuthenticationState.userId)!,
             skipped: skipped,
-            votedSubjectIDs: !skipped ? votedSubjectIDs : [this.skipValue],
+            votedSubjectIDs: !skipped ? votedSubjectIDs : [],
             roundId: roundID  
         } as VotingResponse;
     }
@@ -60,6 +60,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         let results: VotingResult[] = [];
         const dynamicVotingRoundData = this.castDynamicRoundData(dynamicRoundData);
         dynamicVotingRoundData.responses.forEach(response => {
+            if (response.skipped) response.votedSubjectIDs = [this.skipValue]
             response.votedSubjectIDs.forEach(subjectID => {
                 let resultIndex = results.findIndex(r => r.subjectID === subjectID);
                 if (resultIndex === -1) {
@@ -81,6 +82,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
                 }
             });
         });
+        
         results = results.sort((r1, r2) => {
             if (r1.subjectID === this.skipValue) return 1;
             if (r2.subjectID === this.skipValue) return -1;

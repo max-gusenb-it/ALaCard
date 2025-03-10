@@ -1,11 +1,16 @@
 import { Injectable } from "@angular/core";
-import { CardTranslationService, CardUtils, Player, VotingResult } from "@features";
+import { CardTranslationService, CardUtils, Player, playerVotingCardSkipValue, VotingResult } from "@features";
+import { TranslateService } from "@ngx-translate/core";
 import { Card, NewSubject, Utils, VotingCard } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
 export class VotingCardTranslationService<C extends VotingCard> extends CardTranslationService<VotingCard> {
+    constructor(override translateService: TranslateService) {
+        super(translateService);
+    }
+
     getResultsHeading(subjects: NewSubject[], topResults: VotingResult[]) : string {
         if (topResults.length > 0) {
             return Utils.addComaToStringArray(
@@ -18,6 +23,7 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
     }
 
     getResultTitle(result: VotingResult, resultIndex: number, subjects: NewSubject[], topResults: VotingResult[]) : string {
+        if (result.subjectID === playerVotingCardSkipValue) return this.translateService.instant("shared.components.display.it-result.skipped");
         const topResultCount = topResults.length;
         if (topResultCount === 1 && resultIndex === 0) return "";
         return subjects.find(s => s.ID === result.subjectID)!.title;

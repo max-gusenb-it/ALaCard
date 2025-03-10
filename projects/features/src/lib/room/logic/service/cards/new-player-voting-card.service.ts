@@ -43,7 +43,7 @@ export class NewPlayerVotingCardService extends VotingCardService<NewPlayerVotin
         
         let subjects = this.getSubjects(card);
 
-        if (playerVotingCard.settings.selfVoteDisabled) {
+        if (playerVotingCard.settings?.selfVoteDisabled) {
             subjects = subjects.filter(s => s.ID !== this.store.selectSnapshot(AuthenticationState.userId));
         }
         return subjects;
@@ -52,21 +52,23 @@ export class NewPlayerVotingCardService extends VotingCardService<NewPlayerVotin
     override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const playerVotingCard = this.castCard(card);
 
-        const group = playerVotingCard.settings.sipConfig?.group ?? this.defaultVotingGroup;
+        const group = playerVotingCard.settings?.sipConfig?.group ?? this.defaultVotingGroup;
         if (group in VotingCardGroup) super.calculateSipResults(card, dynamicRoundData);
 
+        const results = this.getResults(dynamicRoundData)
+            .filter(r => r.subjectID !== this.skipValue);
+
         const filteredResults = this.getResultsForGroup(
-            this.getResults(dynamicRoundData)
-                .filter(r => r.subjectID !== this.skipValue),
+            results,
             group
         );
 
         return filteredResults
             .map(r => {
                 return {
-                    distribute: playerVotingCard.settings.sipConfig?.distribute ?? this.defaultVotingDistribution,
+                    distribute: playerVotingCard.settings?.sipConfig?.distribute ?? this.defaultVotingDistribution,
                     playerId: r.subjectID,
-                    sips: filteredResults.length === 1 ? defaultCardSips * 2 : defaultCardSips
+                    sips: results.length > 1 ? defaultCardSips : defaultCardSips * 2
                 } as SipResult
             });
     }
