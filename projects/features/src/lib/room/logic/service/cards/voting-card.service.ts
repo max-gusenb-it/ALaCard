@@ -13,7 +13,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         return playerVotingCardSkipValue;
     }
 
-    get defaultVotingGroup() {
+    get defaultVotingGroup() : string {
         return VotingCardGroup.VotingCard_MostVotedSubject;
     }
 
@@ -31,12 +31,12 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
-    castGroup(group?: string) {
-        return VotingCardGroup[group as keyof typeof VotingCardGroup];
-    }
-
     getSubjects(card?: Card): NewSubject[] {
         return [];
+    }
+
+    getSubjectsForPlayer(card?: Card): NewSubject[] {
+        return this.getSubjects(card);
     }
 
     createResponse(votedSubjectIDs: string[], roundID: number) : VotingResponse {
@@ -144,13 +144,12 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
     }
 
     getResultsForGroup(results: VotingResult[], groupString: string) {
-        const votingGroup = this.castGroup(groupString); 
         if (results.length == 0) return [];
-        switch(votingGroup) {
+        switch(groupString) {
             case(VotingCardGroup.VotingCard_MostVotedSubject):
             case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                 let votes = 0;
-                if (votingGroup === VotingCardGroup.VotingCard_MostVotedSubject) {
+                if (groupString === VotingCardGroup.VotingCard_MostVotedSubject) {
                     votes = results[0].votes;
                 } else {
                     votes = results[results.length - 1].votes;
@@ -158,6 +157,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
                 return results
                     .filter(r => r.votes === votes);
             }
+            default: return [];
         }
     }
     

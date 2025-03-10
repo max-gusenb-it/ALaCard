@@ -22,7 +22,7 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
     }
 
     get subjects() {
-        return this.votingCardService.getSubjects(this.card);
+        return this.votingCardService.getSubjectsForPlayer(this.card);
     }
     
     get formBackgroundCSS() {
