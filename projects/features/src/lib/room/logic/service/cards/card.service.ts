@@ -78,11 +78,19 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     }
 
     hasFollowUpCard(card: Card, cardState: string) {
-        return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID);
+        switch(cardState) {
+            case(CardState.Card_Initial): {
+                const votingCard = this.castCard(card);
+                const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
+                const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
+                return votingCard.settings?.delaySipText === true && gameSettings?.drinkingGame && roomSettings.singleDeviceMode;
+            };
+            default: return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID);;
+        }
     }
 
     getNextCardState() : string {
-        return CardState.Card_Initial;
+        return CardState.Card_SipText;
     }
 
     createDynamicRoundData(roundId: number, responses?: Response[]): D {

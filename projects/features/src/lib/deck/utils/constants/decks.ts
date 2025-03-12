@@ -27,35 +27,16 @@ export const developmentDeck: Deck = {
                 }
             ],
             settings: {
-                delaySipText: true
-            }
-        } as QuizCard,
-        {
-            text: "Drink 2 sips if you ever dropped your phone in the toilet",
-            type: CardType.Quiz,
-            subjects: [
-                {
-                    title: "Yes 🪠",
-                    isTarget: true
-                },
-                {
-                    title: "No 📱",
-                    isTarget: false
-                }
-            ],
-            settings: {
-                drinkingCard: true,
-                sipConfig: {
-                    distribute: false
-                }
+                delaySipText: true,
+                sipText: "He dring a moi"
             }
         } as QuizCard,
         {
             text: "Who watches the most trash TV?",
             type: CardType.PlayerVoting,
             settings: {
-                order: 1,
-                delaySipText: true
+                delaySipText: true,
+                sipText: "He dring a moi"
             }
         } as PlayerVotingCard,
         {
@@ -70,10 +51,18 @@ export const developmentDeck: Deck = {
                 }
             ],
             settings: {
-                order: 0,
-                delaySipText: true
+                delaySipText: true,
+                sipText: "He dring a moi"
             }
-        } as PollCard
+        } as PollCard,
+        {
+            text: "%p0 give four sips to the player you know best",
+            type: CardType.FreeText,
+            settings: {
+                delaySipText: true,
+                sipText: "He dring a moi"
+            }
+        } as FreeTextCard
     ],
     flags: [],
     requiredPlayers: {

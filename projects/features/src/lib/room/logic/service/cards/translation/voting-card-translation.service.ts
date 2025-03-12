@@ -61,7 +61,7 @@ export class VotingCardTranslationService extends CardTranslationService {
     }
 
     override getCardDrinkingText(card: Card): string {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.drinkingText)) return super.getCardDrinkingText(card);
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return super.getCardDrinkingText(card);
 
         let text = "";
 

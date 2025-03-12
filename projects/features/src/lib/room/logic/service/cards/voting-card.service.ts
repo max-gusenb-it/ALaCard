@@ -55,22 +55,6 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         drd.responses = votingResponses;
         return drd;
     }
-
-    override hasFollowUpCard(card: Card, cardState: string): boolean {
-        switch(cardState) {
-            case(CardState.Card_Initial): {
-                const votingCard = this.castCard(card);
-                const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
-                const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
-                return votingCard.settings?.delaySipText === true && gameSettings?.drinkingGame && roomSettings.singleDeviceMode;
-            };
-            default: return false;
-        }
-    }
-
-    override getNextCardState(): string {
-        return CardState.Card_SipText;
-    }
     
     override getResults(dynamicRoundData: DynamicRoundData, card?: Card): VotingResult[] {
         let results: VotingResult[] = [];

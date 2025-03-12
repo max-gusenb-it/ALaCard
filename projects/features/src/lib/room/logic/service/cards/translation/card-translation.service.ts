@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Utils, CardType, specificPlayerNameWhitecard, playerNameWhitecard } from "@shared";
-import { Player } from "@features";
+import { CardState, CardUtils, MarkdownUtils, Player } from "@features";
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +9,7 @@ import { Player } from "@features";
 export class CardTranslationService {
     constructor(protected translateService: TranslateService) { }
 
+    // ToDo: structure 
     getCardTitle(card: Card) {
         if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
             return card.settings!.customTitle;
@@ -53,20 +54,32 @@ export class CardTranslationService {
     getOfflineCardText(
         card: Card,
         players: Player[],
-        playerIds: string[] = [],
+        playerIds: string[] | undefined,
         specificPlayerID: string = "",
-        isDrinkingGame: boolean
-    ) {
+        isDrinkingGame: boolean,
+        cardState: string = CardState.Card_Initial
+    ): string {
         let text = this.getCardText(card, players, playerIds, specificPlayerID);
+
+        const delaySipText = CardUtils.castCard<Card>(card).settings?.delaySipText;
         if (isDrinkingGame) {
-            text += "<br><br>\n\n" + this.getCardDrinkingText(card)
+            text += "<br><br>\n";
+            if (delaySipText && cardState === CardState.Card_Initial) {
+                text += MarkdownUtils.addTagToContent(
+                    this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
+                    "span",
+                    ["text-base"]
+                );
+            } else {
+                text += this.getCardDrinkingText(card)
+            }
         }
         return text;
     }
 
     getCardDrinkingText(card: Card) : string {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.drinkingText)) {
-            return card.settings!.drinkingText!;
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) {
+            return card.settings!.sipText!;
         }
         return "";
     }
