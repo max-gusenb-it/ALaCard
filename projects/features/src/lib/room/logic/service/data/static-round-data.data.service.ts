@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { BehaviorSubject, filter, Observable, takeUntil } from "rxjs";
-import { RoomPlayerLoadBaseDataService, StaticRoundDataSourceService, StaticRoundData, CardStates } from "@features";
+import { RoomPlayerLoadBaseDataService, StaticRoundDataSourceService, StaticRoundData, CardState } from "@features";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,7 @@ export class StaticRoundDataDataService extends RoomPlayerLoadBaseDataService {
     staticRoundData$: BehaviorSubject<StaticRoundData | null> = new BehaviorSubject(null as any);
 
     get cardState() : string {
-        return this.staticRoundData$.value?.round?.cardState ?? CardStates.card_initial;
+        return this.staticRoundData$.value?.round?.cardState ?? CardState.Card_Initial;
     }
 
     constructor(

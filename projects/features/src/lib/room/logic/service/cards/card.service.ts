@@ -8,7 +8,7 @@ import {
     CardUtils,
     Round,
     RoundState,
-    CardStates,
+    CardState,
     Response,
     Result,
     SipResult,
@@ -81,12 +81,8 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
         return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID);
     }
 
-    hasDefaultFollowUpCard(card: Card) {
-        return false;
-    }
-
-    getNextCardState() : string{
-        return CardStates.card_initial;
+    getNextCardState() : string {
+        return CardState.Card_Initial;
     }
 
     createDynamicRoundData(roundId: number, responses?: Response[]): D {

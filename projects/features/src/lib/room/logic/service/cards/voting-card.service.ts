@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips } from "@features";
+import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips, CardState, RoomState } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, Card, Subject, VotingCard, VotingCardGroup } from "@shared";
@@ -54,6 +54,22 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         let drd : DynamicVotingRoundData = super.createDynamicRoundData(roundId);
         drd.responses = votingResponses;
         return drd;
+    }
+
+    override hasFollowUpCard(card: Card, cardState: string): boolean {
+        switch(cardState) {
+            case(CardState.Card_Initial): {
+                const votingCard = this.castCard(card);
+                const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
+                const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
+                return votingCard.settings?.delaySipText === true && gameSettings?.drinkingGame && roomSettings.singleDeviceMode;
+            };
+            default: return false;
+        }
+    }
+
+    override getNextCardState(): string {
+        return CardState.Card_SipText;
     }
     
     override getResults(dynamicRoundData: DynamicRoundData, card?: Card): VotingResult[] {

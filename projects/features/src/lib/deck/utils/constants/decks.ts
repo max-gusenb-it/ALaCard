@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCard, QuizCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -10,48 +10,43 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Where do you prefer to spend your vacation?",
-            type: CardType.Poll,
+            text: "What was my breakfast?",
+            type: CardType.Quiz,
             subjects: [
                 {
-                    title: "In the mountains 🏞️" 
+                    title: "Soup 🍜",
+                    isTarget: false
                 },
                 {
-                    title: "On the beach 🏖️"
+                    title: "Croissant 🥐",
+                    isTarget: true
                 },
                 {
-                    title: "In the city 🏙️"
+                    title: "Sandwich 🥪",
+                    isTarget: false
+                }
+            ]
+        } as QuizCard,
+        {
+            text: "Drink 2 sips if you ever dropped your phone in the toilet",
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "Yes 🪠",
+                    isTarget: true
+                },
+                {
+                    title: "No 📱",
+                    isTarget: false
                 }
             ],
             settings: {
-                order: 0
+                drinkingCard: true,
+                sipConfig: {
+                    distribute: false
+                }
             }
-        } as PollCard,
-        {
-            text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 1,
-                selfVoteDisabled: true
-            }
-        } as PlayerVotingCard,
-        {
-            text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 2,
-                isAnonymous: true
-            }
-        } as PlayerVotingCard,
-        {
-            text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.PlayerVoting,
-            settings: {
-                order: 3,
-                isAnonymous: true,
-                payToDisplay: true
-            }
-        } as PlayerVotingCard,
+        } as QuizCard
     ],
     flags: [],
     requiredPlayers: {
@@ -66,8 +61,6 @@ export const developmentDeck: Deck = {
         }
     ],
 };
-
-
 
 export const partyDeckWithRules: Deck = {
     icon: "🎉",

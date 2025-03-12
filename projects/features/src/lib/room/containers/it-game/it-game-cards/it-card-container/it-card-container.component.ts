@@ -55,6 +55,10 @@ export class ItCardContainerComponent extends AngularLifecycle{
     return this.cardServiceFactory.getCardService(this.card?.type);
   }
 
+  get cardState() {
+    return this.staticRoundDataDataService.cardState;
+  }
+
   constructor(
     private store: Store,
     private gameService: GameService,

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
 import { 
     Player,
-    CardStates,
+    CardState,
     RoomState,
     CardServiceFactory,
     GameSettings,
@@ -102,7 +102,7 @@ export class GameService {
                 {
                     id: newRoundIndex,
                     cardIndex: newCardIndex,
-                    cardState: CardStates.card_initial
+                    cardState: CardState.Card_Initial
                 },
                 newCard,
                 players,

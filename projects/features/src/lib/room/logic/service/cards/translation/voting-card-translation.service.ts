@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { CardTranslationService, CardUtils, defaultCardSips, defaultPlayerVotingCardGroup, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, playerVotingCardSkipValue, VotingResult } from "@features";
+import { CardTranslationService, CardUtils, defaultCardSips, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, playerVotingCardSkipValue, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
-import { Card, CardType, Subject, PlayerVotingCardGroup, Utils, VotingCard, VotingCardGroup } from "@shared";
+import { Card, Subject, Utils, VotingCard, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -12,16 +12,11 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
         super(translateService);
     }
 
-    getDefaultSipDistributionGroup(cardType: CardType) {
-        switch(cardType) {
-            case(CardType.PlayerVoting): {
-                return defaultPlayerVotingCardGroup;
-            }
-            default: return defaultVotingCardGroup;
-        }
+    get defaultSipDistributionGroup() : string {
+        return defaultVotingCardGroup;
     }
 
-    getDefaultSipDistribution() {
+    get defaultSipDistribution() {
         return defaultVotingCardDistribution;
     }
 
@@ -71,10 +66,10 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
         let text = "";
 
         const votingCard = CardUtils.castCard<VotingCard>(card);
-        const group = votingCard.settings?.sipConfig?.group ?? this.getDefaultSipDistributionGroup(card.type);
+        const group = votingCard.settings?.sipConfig?.group ?? this.defaultSipDistributionGroup;
 
         text += this.getSipTextForGroup(group.toString()) + "<br>";
-        text += votingCard.settings?.sipConfig?.distribute ?? this.getDefaultSipDistribution()
+        text += votingCard.settings?.sipConfig?.distribute ?? this.defaultSipDistribution
             ? this.translateService.instant("shared.components.display.it-result.distribute") 
             : this.translateService.instant("shared.components.display.it-result.drink");
             
@@ -90,9 +85,6 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
             }
             case(VotingCardGroup.VotingCard_LeastVotedSubject): {
                 return this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topics");
-            }
-            case(PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer): {
-                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-player");
             }
         }
     }

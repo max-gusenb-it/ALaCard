@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { PollCardTranslationService, VotingResult } from "@features";
-import { QuizSubject, Subject, Utils } from "@shared";
+import { CardState, CardUtils, MarkdownUtils, Player, PollCardTranslationService, VotingResult } from "@features";
+import { Card, QuizCard, QuizSubject, Subject, Utils } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +8,25 @@ import { QuizSubject, Subject, Utils } from "@shared";
 export class QuizCardTranslationService extends PollCardTranslationService {
     castSubjects(subjects: Subject[]) : QuizSubject[] {
         return <QuizSubject[]>subjects;
+    }
+
+    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, specificPlayerID: string | undefined, isDrinkingGame: boolean, cardState: CardState = CardState.Card_Initial): string {
+        let text = this.getCardText(card, players, playerIds, specificPlayerID);
+        text += "<br><br>\n";
+
+        const quizCard = CardUtils.castCard<QuizCard>(card);
+        text += "<ul>";
+        quizCard.subjects.forEach(subject => {
+            let cssClass = "";
+            if (cardState !== CardState.Card_Initial) cssClass = subject.isTarget ? "target-subject" : "none-target-subject"
+            text += MarkdownUtils.addTagToContent(subject.title, "li", [cssClass]);
+        });
+        text += "</ul>";
+
+        if (isDrinkingGame) {
+            text += "<br>\n\n" + this.getCardDrinkingText(card)
+        }
+        return text;
     }
 
     override getResultsHeading(subjects: Subject[], topResults: VotingResult[]): string {

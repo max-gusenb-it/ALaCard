@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils, GameCardTranslationService } from '@features';
-import { AngularLifecycle, Card, CardType, Color } from '@shared';
+import { AngularLifecycle, Card, Color } from '@shared';
 
 @Component({
   selector: 'it-card',
@@ -20,6 +20,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   @Input() customTitle?: string;
   @Input() offline?: boolean;
   @Input() hideDeckName?: boolean;
+  @Input() cardState: string;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
   @Output() onClick: EventEmitter<boolean> = new EventEmitter();
@@ -74,7 +75,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
       this.store.selectSnapshot(RoomState.players),
       this.playerIds,
       this.store.selectSnapshot(RoomState.specificPlayerId),
-      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame
+      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame,
+      this.cardState
     );
   }
 

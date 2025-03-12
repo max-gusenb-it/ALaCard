@@ -1,3 +1,4 @@
-export enum CardStates {
-    card_initial = "card_initial"
+export enum CardState {
+    Card_Initial = "Card_Initial",
+    Card_SipText = "Card_SipText"
 }
