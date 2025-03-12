@@ -152,7 +152,9 @@
             "least-voted-player": "Least voted players",
             "drink-sips": "Drink {{sipCount}} {{sips}}",
             "most-voted-topics": "Voted top subject",
-            "least-voted-topics": "Voted least subject"
+            "least-voted-topics": "Voted least subject",
+            "all_targets": "Voted correct answer(s)",
+            "not_all_targets": "Voted incorrect answer(s)"
           }
         },
         "has-been-set-to-inactive": "has been set to inactive",

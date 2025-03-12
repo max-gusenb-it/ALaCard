@@ -152,7 +152,9 @@
             "least-voted-player": "Am wenigsten gewählte Spieler",
             "drink-sips": "Trinke {{sipCount}} {{sips}}",
             "most-voted-topics": "Top Thema gewählt",
-            "least-voted-topics": "Letztes Thema gewählt"
+            "least-voted-topics": "Letztes Thema gewählt",
+            "all_targets": "Richtige Antwort(en) gewählt",
+            "not_all_targets": "Falsche Antwort(en) gewählt"
           }
         },
         "has-been-set-to-inactive": "wurde auf inaktiv gesetzt",

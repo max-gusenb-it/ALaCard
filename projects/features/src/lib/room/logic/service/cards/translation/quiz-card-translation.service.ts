@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CardState, CardUtils, MarkdownUtils, Player, PollCardTranslationService, VotingResult } from "@features";
 import { Card, QuizCard, QuizSubject, Subject, Utils } from "@shared";
+import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,14 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         return <QuizSubject[]>subjects;
     }
 
-    override getOfflineCardText(card: Card, players: Player[], playerIds: string[] | undefined, specificPlayerID: string | undefined, isDrinkingGame: boolean, cardState: CardState = CardState.Card_Initial): string {
+    override getOfflineCardText(
+        card: Card,
+        players: Player[],
+        playerIds: string[] | undefined,
+        specificPlayerID: string | undefined,
+        isDrinkingGame: boolean,
+        cardState: CardState = CardState.Card_Initial
+    ): string {
         let text = this.getCardText(card, players, playerIds, specificPlayerID);
         text += "<br><br>\n";
 
@@ -23,8 +31,13 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         });
         text += "</ul>";
 
+        const delaySipText = quizCard.settings?.delaySipText;
         if (isDrinkingGame) {
-            text += "<br>\n\n" + this.getCardDrinkingText(card)
+            if (delaySipText && cardState === CardState.Card_Initial) {
+                text += "<br>\n\n" + this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
+            } else {
+                text += "<br>\n\n" + this.getCardDrinkingText(card)
+            }
         }
         return text;
     }
@@ -46,5 +59,15 @@ export class QuizCardTranslationService extends PollCardTranslationService {
             .length;
         if (targetSubjectCount === 1 && resultIndex === 0) return "";
         return quizSubjects.find(s => s.ID === result.subjectID)!.title;
+    }
+
+    override getSipTextForGroup(group: string) {
+        switch(group) {
+            case(QuizCardGroup.QuizCard_AllTargets):
+                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.all_targets");
+            case(QuizCardGroup.QuizCard_NotAllTargets):
+                return  this.translateService.instant("features.room.game.game-cards.offline-sip-display.not_all_targets")
+            default: return super.getSipTextForGroup(group);
+        }
     }
 }

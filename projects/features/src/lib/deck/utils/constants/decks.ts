@@ -25,7 +25,10 @@ export const developmentDeck: Deck = {
                     title: "Sandwich 🥪",
                     isTarget: false
                 }
-            ]
+            ],
+            settings: {
+                delaySipText: true
+            }
         } as QuizCard,
         {
             text: "Drink 2 sips if you ever dropped your phone in the toilet",
