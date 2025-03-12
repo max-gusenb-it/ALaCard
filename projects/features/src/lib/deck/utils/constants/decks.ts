@@ -548,9 +548,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -558,9 +556,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -572,9 +568,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -598,9 +592,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -619,10 +611,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                order: 1,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -634,9 +623,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -644,9 +631,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -658,9 +643,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -735,9 +718,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -757,9 +738,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -803,9 +782,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -813,9 +790,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
@@ -827,9 +802,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
-                sipConfig: {
-                    payToDisplay: true
-                }
+                payToDisplay: true
             }
         } as PlayerVotingCard,
         {
