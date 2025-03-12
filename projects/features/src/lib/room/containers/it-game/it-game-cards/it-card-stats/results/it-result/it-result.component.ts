@@ -33,8 +33,8 @@ export class ItResultComponent implements AfterViewInit {
     return this.cardServiceFactory.getCardService(this.card.type);
   }
 
-  get cardTranslationService(): VotingCardTranslationService<VotingCard> {
-    return <VotingCardTranslationService<VotingCard>>this.cardServiceFactory.getCardTranslationService(this.card.type);
+  get cardTranslationService(): VotingCardTranslationService {
+    return <VotingCardTranslationService>this.cardServiceFactory.getCardTranslationService(this.card.type);
   }
 
   constructor(

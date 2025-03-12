@@ -7,6 +7,10 @@ import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-c
     providedIn: 'root'
 })
 export class QuizCardTranslationService extends PollCardTranslationService {
+    override get defaultSipDistributionGroup(): string {
+        return QuizCardGroup.QuizCard_AllTargets;
+    }
+
     castSubjects(subjects: Subject[]) : QuizSubject[] {
         return <QuizSubject[]>subjects;
     }
@@ -34,7 +38,11 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         const delaySipText = quizCard.settings?.delaySipText;
         if (isDrinkingGame) {
             if (delaySipText && cardState === CardState.Card_Initial) {
-                text += "<br>\n\n" + this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
+                text += "<br>\n\n" + MarkdownUtils.addTagToContent(
+                    this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
+                    "span",
+                    ["text-base"]
+                );
             } else {
                 text += "<br>\n\n" + this.getCardDrinkingText(card)
             }

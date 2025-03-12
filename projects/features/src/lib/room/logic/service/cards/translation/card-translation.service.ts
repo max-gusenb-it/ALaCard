@@ -6,7 +6,7 @@ import { Player } from "@features";
 @Injectable({
     providedIn: 'root'
 })
-export class CardTranslationService<C extends Card> {
+export class CardTranslationService {
     constructor(protected translateService: TranslateService) { }
 
     getCardTitle(card: Card) {

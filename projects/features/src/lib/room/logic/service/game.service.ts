@@ -111,7 +111,7 @@ export class GameService {
         }
         
         if (this.getCardService(newCard.type).hasFollowUpCard(newCard!, newRound.cardState)) {
-                staticRoundData.followUpCardSchedules = [
+            staticRoundData.followUpCardSchedules = [
                 {
                     cardIndex: Utils.isNumberDefined(newCard.followUpCardConfig?.followUpCardID) ? 
                         deck.cards.findIndex(c => c.followUpCardID === newCard.followUpCardConfig!.followUpCardID!) : 

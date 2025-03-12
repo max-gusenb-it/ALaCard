@@ -6,7 +6,7 @@ import { Card, Subject, Utils, VotingCard, VotingCardGroup } from "@shared";
 @Injectable({
     providedIn: 'root'
 })
-export class VotingCardTranslationService<C extends VotingCard> extends CardTranslationService<VotingCard> {
+export class VotingCardTranslationService extends CardTranslationService {
 
     constructor(override translateService: TranslateService) {
         super(translateService);

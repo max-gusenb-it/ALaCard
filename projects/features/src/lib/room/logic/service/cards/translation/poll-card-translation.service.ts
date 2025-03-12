@@ -1,16 +1,11 @@
 import { Injectable } from "@angular/core";
-import { CardState, CardUtils, Player, VotingCardTranslationService } from "@features";
+import { CardState, CardUtils, MarkdownUtils, Player, VotingCardTranslationService } from "@features";
 import { Card, PollCard } from "@shared";
-import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PollCardTranslationService extends VotingCardTranslationService<PollCard> {
-    override get defaultSipDistributionGroup(): string {
-        return QuizCardGroup.QuizCard_AllTargets;
-    }
-
+export class PollCardTranslationService extends VotingCardTranslationService {
     override getOfflineCardText(
         card: Card,
         players: Player[],
@@ -30,7 +25,11 @@ export class PollCardTranslationService extends VotingCardTranslationService<Pol
         const delaySipText = pollCard.settings?.delaySipText;
         if (isDrinkingGame) {
             if (delaySipText && cardState === CardState.Card_Initial) {
-                text += "<br><br>\n\n" + this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
+                text += "<br><br>\n\n" + MarkdownUtils.addTagToContent(
+                    this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
+                    "span",
+                    ["text-base"]
+                );
             } else {
                 text += "<br><br>\n\n" + this.getCardDrinkingText(card)
             }

@@ -49,7 +49,47 @@ export const developmentDeck: Deck = {
                     distribute: false
                 }
             }
-        } as QuizCard
+        } as QuizCard,
+        {
+            text: "Who watches the most trash TV?",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 1,
+                delaySipText: true
+            }
+        } as PlayerVotingCard,
+        {
+            text: "Who watches the most trash TV?",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 1,
+                delaySipText: true
+            }
+        } as PlayerVotingCard,
+        {
+            text: "Who watches the most trash TV?",
+            type: CardType.PlayerVoting,
+            settings: {
+                order: 1,
+                delaySipText: true
+            }
+        } as PlayerVotingCard,
+        {
+            text: "Where would you rather travel?",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "200 years into the future" 
+                },
+                {
+                    title: "200 years into the past"
+                }
+            ],
+            settings: {
+                order: 0,
+                delaySipText: true
+            }
+        } as PollCard
     ],
     flags: [],
     requiredPlayers: {

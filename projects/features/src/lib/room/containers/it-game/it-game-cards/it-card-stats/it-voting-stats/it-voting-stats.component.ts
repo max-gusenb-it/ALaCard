@@ -41,7 +41,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     }
 
     get votingCardTranslationService() {
-        return <VotingCardTranslationService<VotingCard>>this.cardServiceFactory.getCardTranslationService(this.card.type);
+        return <VotingCardTranslationService>this.cardServiceFactory.getCardTranslationService(this.card.type);
     }
 
     get votingCard() {
