@@ -19,7 +19,7 @@
             (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
             <div collapsible class="flex flex-col gap-2 overflow-auto" style="max-height: 20vh;">
-                <new-it-result
+                <it-result
                     *ngFor="let result of results; index as i"
                     [result]="result"
                     [title]="getResultTitle(result, i)"

@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { defaultCardSips, DynamicRoundData, IngameDataDataService, ResponseDataDataService, RoomState, SipResult, StaticRoundDataDataService, VotingCardService, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { AuthenticationState, Card, NewPlayerVotingCard, NewSubject, PlayerVotingCardGroup, VotingCardGroup } from "@shared";
+import { AuthenticationState, Card, PlayerVotingCard, NewSubject, PlayerVotingCardGroup, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
-export class NewPlayerVotingCardService extends VotingCardService<NewPlayerVotingCard> {
+export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard> {
     
     override get defaultVotingGroup() : string {
         return PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer;

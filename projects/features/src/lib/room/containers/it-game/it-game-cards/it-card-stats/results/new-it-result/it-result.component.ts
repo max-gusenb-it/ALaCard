@@ -10,11 +10,11 @@ enum ResultType {
 }
 
 @Component({
-  selector: 'new-it-result',
+  selector: 'it-result',
   templateUrl: './it-result.component.html',
   styleUrls: ['./it-result.component.scss']
 })
-export class NewItResultComponent implements AfterViewInit {
+export class ItResultComponent implements AfterViewInit {
 
   players: Player[];
 

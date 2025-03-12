@@ -15,7 +15,7 @@ import {
     CardType,
     PollCard
 } from "@shared";
-import { NewPlayerVotingCardService } from "./cards/new-player-voting-card.service";
+import { PlayerVotingCardService } from "./cards/player-voting-card.service";
 import { PollCardTranslationService } from "./cards/translation/poll-card-translation.service";
 
 @Injectable({
@@ -25,7 +25,7 @@ export class CardServiceFactory {
     constructor(
         private cardService: CardService<Card, Response, DynamicRoundData, Result>,
         private pollCardService: PollCardService,
-        private newPlayerVotingCardService: NewPlayerVotingCardService,
+        private newPlayerVotingCardService: PlayerVotingCardService,
         private cardTranslationService: CardTranslationService<Card>,
         private votingCardTranslationService: VotingCardTranslationService<PollCard>,
         private pollCardTranslationService: PollCardTranslationService

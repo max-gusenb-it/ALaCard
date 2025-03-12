@@ -1,5 +1,5 @@
 import { VotingCardSettings } from "@shared";
 
-export interface NewPlayerVotingCardSettings extends VotingCardSettings {
+export interface PlayerVotingCardSettings extends VotingCardSettings {
     selfVoteDisabled?: boolean;
 }
