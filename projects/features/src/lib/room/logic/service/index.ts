@@ -20,5 +20,5 @@ export * from "./source/room.source.service";
 export * from "./source/static-round-data.source.service";
 
 export * from "./card-service.factory";
-export * from "./game-control.service";
+export * from "./game.service";
 export * from "./room.service";

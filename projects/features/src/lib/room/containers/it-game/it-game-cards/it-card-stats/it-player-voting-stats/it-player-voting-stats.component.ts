@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom, takeUntil } from 'rxjs';
-import { GameService } from 'projects/features/src/lib/room/logic/service/game-control.service';
+import { GameService } from 'projects/features/src/lib/room/logic/service/game.service';
 import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
 import { RoomService } from 'projects/features/src/lib/room/logic/service/room.service';
 import { 
