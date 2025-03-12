@@ -33,24 +33,21 @@ export class CardServiceFactory {
 
     getCardService(cardType?: CardType) : GameCardService {
         switch(cardType) {
-            case(CardType.Poll): {
+            case(CardType.Poll):
                 return this.pollCardService;
-            }
-            case(CardType.PlayerVoting): {
+            case(CardType.PlayerVoting):
                 return this.newPlayerVotingCardService;
-            }
-            default: {
+            default:
                 return this.cardService;
-            }
         }
     }
 
     getCardTranslationService(cardType?: CardType) : GameCardTranslationService  {
         switch(cardType) {
-            case(CardType.PlayerVoting):
-                return this.votingCardTranslationService;
             case(CardType.Poll):
                 return this.pollCardTranslationService;
+            case(CardType.PlayerVoting):
+                return this.votingCardTranslationService;
             default:
                 return this.cardTranslationService;
         }

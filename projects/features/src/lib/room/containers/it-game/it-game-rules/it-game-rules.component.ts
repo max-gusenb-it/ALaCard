@@ -17,7 +17,6 @@ const desktopRuleTutorialLabelId : string = "features.room.game.card.game-rules.
 @Component({
   selector: 'it-game-rules',
   templateUrl: './it-game-rules.component.html',
-  styleUrls: ['./it-game-rules.component.scss'],
   animations: [slideToggle]
 })
 export class ItGameRulesComponent implements AfterViewInit {

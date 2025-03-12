@@ -27,10 +27,6 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   touchStartX = 0;
   touchEndX = 0;
 
-  get cardService() {
-    return this.cardServiceFactory.getCardService(this.card.type)
-  }
-
   get cardTranslationService() : GameCardTranslationService {
     return this.cardServiceFactory.getCardTranslationService(this.card.type);
   }
