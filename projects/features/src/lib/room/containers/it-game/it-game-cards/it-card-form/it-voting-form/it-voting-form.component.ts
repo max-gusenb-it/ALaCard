@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService, playerVotingCardSkipValue } from "@features";
-import { AngularLifecycle, Card, InformationActions, InformationState, NewSubject, VotingCard, } from "@shared";
+import { AngularLifecycle, Card, InformationActions, InformationState, Subject, VotingCard, } from "@shared";
 import { takeUntil } from "rxjs";
 
 @Component({
@@ -78,7 +78,7 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
         );
     }
     
-    identifySubject(index: number, subject: NewSubject) {
+    identifySubject(index: number, subject: Subject) {
         return subject.ID;
     }
 

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { AuthenticationState, Card, NewSubject, VotingCard, VotingCardGroup } from "@shared";
+import { AuthenticationState, Card, Subject, VotingCard, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -31,11 +31,11 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
-    getSubjects(card?: Card): NewSubject[] {
+    getSubjects(card?: Card): Subject[] {
         return [];
     }
 
-    getSubjectsForPlayer(card?: Card): NewSubject[] {
+    getSubjectsForPlayer(card?: Card): Subject[] {
         return this.getSubjects(card);
     }
 

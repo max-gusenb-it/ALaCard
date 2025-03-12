@@ -1,5 +1,5 @@
-import { VotingCard, NewSubject } from "@shared";
+import { VotingCard, Subject } from "@shared";
 
 export interface PollCard extends VotingCard {
-    subjects: NewSubject[];
+    subjects: Subject[];
 }

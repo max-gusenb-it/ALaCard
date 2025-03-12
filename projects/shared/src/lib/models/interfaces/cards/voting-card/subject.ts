@@ -1,4 +1,4 @@
-export interface NewSubject {
+export interface Subject {
     ID?: string;
     title: string;
 }

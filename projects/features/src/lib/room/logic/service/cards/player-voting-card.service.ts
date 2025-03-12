@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { defaultCardSips, DynamicRoundData, IngameDataDataService, ResponseDataDataService, RoomState, SipResult, StaticRoundDataDataService, VotingCardService, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { AuthenticationState, Card, PlayerVotingCard, NewSubject, PlayerVotingCardGroup, VotingCardGroup } from "@shared";
+import { AuthenticationState, Card, PlayerVotingCard, Subject, PlayerVotingCardGroup, VotingCardGroup } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -27,7 +27,7 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
         super(store, responseDataDataService, ingameDataDataService, staticRoundDataDataService, translateService);
     }
 
-    override getSubjects(card: Card): NewSubject[] {
+    override getSubjects(card: Card): Subject[] {
         let players = this.store.selectSnapshot(RoomState.players);
         return players
             .map(p => {
@@ -38,7 +38,7 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
             });
     }
 
-    override getSubjectsForPlayer(card: Card): NewSubject[] {
+    override getSubjectsForPlayer(card: Card): Subject[] {
         const playerVotingCard = this.castCard(card);
         
         let subjects = this.getSubjects(card);

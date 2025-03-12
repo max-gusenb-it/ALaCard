@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { VotingCardService } from "./voting-card.service";
-import { Card, NewSubject, PollCard } from "@shared";
+import { Card, Subject, PollCard } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -15,12 +15,12 @@ export class PollCardService extends VotingCardService<PollCard> {
                 return {
                     ID: index.toString(),
                     ...c
-                } as NewSubject
+                } as Subject
             })
         };
     }
 
-    override getSubjects(card: Card): NewSubject[] {
+    override getSubjects(card: Card): Subject[] {
         const pollCard = this.castCard(card);
         return pollCard.subjects;
     }
