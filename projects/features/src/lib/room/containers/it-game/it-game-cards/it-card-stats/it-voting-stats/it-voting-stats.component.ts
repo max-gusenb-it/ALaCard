@@ -138,7 +138,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
 
     displayPayToDisplay() {
         return this.drinkingGame && 
-            this.votingCard.settings?.payToDisplay && 
+            this.votingCard.settings?.sipConfig?.payToDisplay && 
             !Utils.isStringDefinedAndNotEmpty(this.payToDisplayPlayerId);
     }
     
