@@ -3,35 +3,14 @@
   class="w-full flex flex-col gap-4 items-center"
 >
   @switch(deck.cards[staticRoundData.round.cardIndex].type) {
-    @case(2) {
-      <it-player-voting-form
-        class="w-full sm:w-3/5 max-w-xl"
-        [card]="getPlayerVotingCard(deck.cards[staticRoundData.round.cardIndex])"
-        [round]="staticRoundData.round"
-      />
-    }
-    @case (3) {
-      <it-topic-voting-form
-        class="w-full sm:w-3/5 max-w-xl"
-        [card]="deck.cards[staticRoundData.round.cardIndex]"
-        [round]="staticRoundData.round"
-      />
-    }
-    @case (4) {
-      <it-topic-voting-form
-        class="w-full sm:w-3/5 max-w-xl"
-        [card]="deck.cards[staticRoundData.round.cardIndex]"
-        [round]="staticRoundData.round"
-      />
-    }
-    @case (5) {
+    @case (cardType.PollCard) {
       <it-voting-form
         class="w-full sm:w-3/5 max-w-xl"
         [card]="deck.cards[staticRoundData.round.cardIndex]"
         [round]="staticRoundData.round"
       />
     }
-    @case (6) {
+    @case (cardType.NewPlayerVotingCard) {
       <it-voting-form
         class="w-full sm:w-3/5 max-w-xl"
         [card]="deck.cards[staticRoundData.round.cardIndex]"

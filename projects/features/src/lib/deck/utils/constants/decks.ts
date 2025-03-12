@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, TopicVotingCardSettings, TopicVotingCard, NewPlayerVotingCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, NewPlayerVotingCard, PollCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -10,12 +10,23 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.NewPlayerVotingCard,
+            text: "Where do you prefer to spend your vacation?",
+            type: CardType.PollCard,
+            subjects: [
+                {
+                    title: "In the mountains 🏞️" 
+                },
+                {
+                    title: "On the beach 🏖️"
+                },
+                {
+                    title: "In the city 🏙️"
+                }
+            ],
             settings: {
                 order: 0
             }
-        } as NewPlayerVotingCard,
+        } as PollCard,
         {
             text: "Who would rather lie about themselves to get someone into bed?",
             type: CardType.NewPlayerVotingCard,
@@ -65,23 +76,23 @@ export const partyDeckWithRules: Deck = {
     cards: [
         {
             text: "Bitte zeige diese Karte an",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Erster :) - %p0 is a echter Wappla",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 1
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Zweiter :)",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 2
 
             }
-        } as PlayerVotingCard
+        } as NewPlayerVotingCard
     ],
     groundRules: [
         "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
@@ -108,23 +119,23 @@ export const partyDeckWithSpMandatory: Deck = {
     cards: [
         {
             text: "Bitte zeige diese Karte an",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Erster :) - %sp is a echter Wappla",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 1
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Zweiter :)",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 2
 
             }
-        } as PlayerVotingCard
+        } as NewPlayerVotingCard
     ],
     requiredPlayers: {
         playerCount: 2,
@@ -145,23 +156,23 @@ export const partyDeckWithRulesAndSp: Deck = {
     cards: [
         {
             text: "Bitte zeige diese Karte an",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Erster :) - %sp und %p0 san echter Wappla",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 1
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Zweiter :)",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 2
 
             }
-        } as PlayerVotingCard
+        } as NewPlayerVotingCard
     ],
     groundRules: [
         "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
@@ -236,6 +247,1344 @@ export const demoPartyDecks: Deck[] = [
 ]
 
 // Leggit Decks
+// export const leggitPartyDeck: Deck = {
+//     icon: "🎊",
+//     name: "aLaCard",
+//     description: "Very funny Party Game",
+//     groundRules: [
+//         "- **Reminder**  \n- The game is currently under development so the features are limited",
+//         "Thanks for testing out my game btw. :)"
+//     ],
+//     cards: [
+//         {
+//             text: "%p0 give four sips to the player you know best",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Give 3 sips to one person if you are not in a relationship.",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Let's distribute some sips! Everyone choose someone to down 3 of them :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 a sorrow shared is a sorrow halved. Drink 2 and distribute 2",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 you have the chance to get really disliked by a player! Choose someone to down 6 sips!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 you are too sober, have three sips :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, time to spin the bottle. If the person chooses dare, feel free to hand out 8 sips to them :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, you're in jail with a player? Drink 2 sips with your cellmate!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, you accidentally killed someone at work. Drink 2 sips with the colleague who would most likely never talk about it",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, drink with the person who is most likely to do weird things in public",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, you're robbing a supermarket. Drink with the confused player who is supposed to be in charge of security that day",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, pick a best man or maid of honor and drink to your wedding",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, the person to your left looks very thirsty. Pass out a 2 sips",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, the desire to marry has taken hold of you. Make a convincing marriage proposal to the person on your left. In return you may hand out 3 sips to drink :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, if you could do anything without suffering the consequences, what would you do right now? Tell or drink 2 sips!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0, if you could punch someone without having to suffer the consequences, who would your choice be? Tell or drink 2 sips!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "The smallest player badly needs 4 sips for growth.",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 swap your top or pants with %p1 for the rest of the game. For this you may distribute 5 sips each. If someone refuses the person has to drink 3 sips",
+//             // ToDo: Idea for free text card. Split "If someone refuses ..." away from here. Show all players, who are not involved in this card the text.
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 distribute 2 sips to a player thinner than you. If that is not possible drink yourself :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "All those who can't manage to stand on one leg for one minute have to drink three sips",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "All who manage to do a bottle flip on the first try may distribute 4 sips :*",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 distribute 2 sips to the player who is smarter than you. If that is not possible, drink them yourself!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 if you had to leave the planning of your wedding to either %p1 or %p2, who would you choose? Drink to your wedding with this person :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 if you had to leave the planning of your next vacation to either %p1 or %p2, who would you choose? Drink with that person! :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 if you had to leave the planning of your next birthday party to either %p1 or %p2, who would you choose? Drink with that person! :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 imitate another player. The first to guess the player gets to distribute 4 sips!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 guess the color of %p1's underwear. Are you right? Distribute 4 sips, otherwise drink them yourself :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "The player who was on vacation most recently drinks 2 sips!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Men raise your glasses. 3 sips for you!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Women raise your glasses. 3 sips for you!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 do me a favor and start a waterfall :)",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 and %p1: Rock, Paper, Scissors Duel! Loser drinks 3 sips.",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Make a group selfie :)",
+//             type: CardType.FreeText
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 Roses are red, violets are blue ... finish the poem and give out 4 sips. Otherwise, drink them yourself!",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Who tolerates the least alcohol?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who throws up the most from too much alcohol?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather accidentally set their hair on fire?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to get a intimate piercing?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be most likely to survive on a deserted island?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be most likely to wear a Borat for a swim?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the biggest nerd?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be the most likely to slip on their own cat?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the most vain?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather grow old alone with cats?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to ride a bike to the drive-in?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather photograph naked people as a hobby?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who has the blackest sense of humor?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the biggest couch potato?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to help old people cross the street?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who nags the most as a co-driver?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the worst driver?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to use public transportation without a ticket?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the biggest peeping Tom?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather lie about themselves to get someone into bed?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who can lie the most believably?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather destroy a child's sandcastle in front of his eyes?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "With whom you can not be seen in public?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the easiest to entertain?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather prostitute themselves?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to buy followers?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who's on the most dating platforms?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to undergo cosmetic surgery?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who cheats the most when playing games?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the biggest \"class clown\"?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who surfs the darknet the most?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to get arrested?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would die first in an apocalypse?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is best prepared for an apocalypse?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the worst at flirting?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the best at flirting?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather go out of the house without underwear?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather steal a traffic sign?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather get a tattoo while drunk?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather get married in Las Vegas?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to go overboard with pranks?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather forget their date's name?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would accidentally spill the last sip of water on a desert trip?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is most afraid of insects?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to buy a round of drinks?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to propose on the third date?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather go to work drunk?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to push a child?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is the biggest series junkie?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Which player is the stingiest?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would rather start a philosophical conversation while drunk?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Which one of you would be the most corrupt judge?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Which one of you would be most qualified to be the lead actor/actress in a porn movie?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who of you is more likely to be arrested for harassing a police officer?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who has the funniest story about losing their virginity, do you think?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who is most likely to have a one-night stand?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who wet his/her bed the longest?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who's the leftover eater among you?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who would be more likely to start a relationship with a friend's parent?",
+//             type: CardType.PlayerVoting,
+//             settings: {
+//                 isAnonymous: true,
+//                 payToDisplay: true
+//             }
+//         } as PlayerVotingCard,
+//         {
+//             text: "Whose cooking skills are only good enough for finished products?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Who watches the most trash TV?",
+//             type: CardType.PlayerVoting
+//         } as PlayerVotingCard,
+//         {
+//             text: "Where would you rather travel?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "200 years into the future" 
+//                 },
+//                 {
+//                     title: "200 years into the past"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Would you rather be able to fly or teleport?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Fly" 
+//                 },
+//                 {
+//                     title: "Teleport"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What would you prefer to experience?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Your parents catch you having sex" 
+//                 },
+//                 {
+//                     title: "You catch your parents having sex"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What is your favorite type of M&M's?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "🔵 Blue" 
+//                 },
+//                 {
+//                     title: "🟡 Yellow"
+//                 },
+//                 {
+//                     title: "🟤 Brown"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Where do you prefer to spend your vacation?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "In the mountains 🏞️" 
+//                 },
+//                 {
+//                     title: "On the beach 🏖️"
+//                 },
+//                 {
+//                     title: "In the city 🏙️"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What do you prefer to drink?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Beer 🍺" 
+//                 },
+//                 {
+//                     title: "Wine 🍷"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What do you prefer to drink?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Kakao 🥛" 
+//                 },
+//                 {
+//                     title: "Coffee ☕"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Where would you rather be stranded?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "On a deserted island 🏝️" 
+//                 },
+//                 {
+//                     title: "On a lonely habitable planet 🌎"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What do you prefer to drink",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Cola" 
+//                 },
+//                 {
+//                     title: "Pepsi"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "How do you prefer to pay?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Cash 💵" 
+//                 },
+//                 {
+//                     title: "Cashless 💳"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Where do you like to party most?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Disco 🪩" 
+//                 },
+//                 {
+//                     title: "Bar 🥂"
+//                 },
+//                 {
+//                     title: "Home 🏠"
+//                 },
+//                 {
+//                     title: "Not at all ⛔"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What would you rather only listen to one song or to no music at all for the rest of your life?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "No longer listen to music" 
+//                 },
+//                 {
+//                     title: "Listen to only one song"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What item would you take with you to a desert island",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Rope 🪢" 
+//                 },
+//                 {
+//                     title: "Blanket 🛏️"
+//                 },
+//                 {
+//                     title: "Map 🗺️"
+//                 },
+//                 {
+//                     title: "Backpack 🎒"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What item would you take with you to a desert island?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Spoon 🥄" 
+//                 },
+//                 {
+//                     title: "Soap 🧼"
+//                 },
+//                 {
+//                     title: "Condom 🍆"
+//                 },
+//                 {
+//                     title: "Money 💵"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What would you rather give up at dinner?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Chair" 
+//                 },
+//                 {
+//                     title: "Table"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which mythical creature would you rather be?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Mermaid 🧜🏻‍♀️" 
+//                 },
+//                 {
+//                     title: "Vampire 🧛"
+//                 },
+//                 {
+//                     title: "Werewolf 🐺"
+//                 },
+//                 {
+//                     title: "Dragon 🐲"
+//                 },
+//                 {
+//                     title: "Elf 🧝🏻‍♀️"
+//                 },
+//                 {
+//                     title: "Fairy 🧚🏿‍♂️"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What is the best movie universe?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Lord of the Rings 💍" 
+//                 },
+//                 {
+//                     title: "Harry Potter 🪄"
+//                 },
+//                 {
+//                     title: "Star Wars 🪐"
+//                 },
+//                 {
+//                     title: "None of the above ⛔"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which team do you belong to?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Ass" 
+//                 },
+//                 {
+//                     title: "Boobs"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which fast food chain is the best?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Burger King" 
+//                 },
+//                 {
+//                     title: "MC Donalds"
+//                 },
+//                 {
+//                     title: "Subway"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which tattoo would you rather get?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "An ugly one that you choose yourself" 
+//                 },
+//                 {
+//                     title: "A tattoo that your parents choose"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "If you had to choose one thing that will no longer exist, which one would it be?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Streaming Platforms 📼"
+//                 },
+//                 {
+//                     title: "Music Streaming Platforms 🎵"
+//                 },
+//                 {
+//                     title: "YouTube and clones 💻"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which apocalypse would you rather suffer?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Zombie 🦠" 
+//                 },
+//                 {
+//                     title: "Atomic 💥"
+//                 },
+//                 {
+//                     title: "Artificial intelligence 🤖"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Where would you rather suffer a strong storm?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Airplane ✈️" 
+//                 },
+//                 {
+//                     title: "Ship 🛳️"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "In which desert would you rather be stranded?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Ice desert ❄️" 
+//                 },
+//                 {
+//                     title: "Sand desert ☀️"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which team do you belong to?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "School/University 📚" 
+//                 },
+//                 {
+//                     title: "Work 🔨"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which team do you belong to?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Vacation ✈️" 
+//                 },
+//                 {
+//                     title: "Staycation 🏠"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What do you prefer to do?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Receive gifts" 
+//                 },
+//                 {
+//                     title: "Present gifts"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Do you normally sleep with or without socks?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "with socks 🧦" 
+//                 },
+//                 {
+//                     title: "without socks 🦶"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What hairstyle would you rather have the rest of your life?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Bald (without wig) 👨🏿‍🦲" 
+//                 },
+//                 {
+//                     title: "Hair down to the feet 👩‍🦰"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "If you didn't have to face the consequences, what would you choose for the rest of your life?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "No food 🍛" 
+//                 },
+//                 {
+//                     title: "No drinks 🥤"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Jungle Planet 🦜" 
+//                 },
+//                 {
+//                     title: "Desert Planet 🦂"
+//                 },
+//                 {
+//                     title: "Sea Planet 🐠"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What would you rather be a successful actor or musician?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Successful musician 🎹" 
+//                 },
+//                 {
+//                     title: "Successful actor 🎭"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Would you rather never be sedentary or always be sedentary",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Never be sedentary" 
+//                 },
+//                 {
+//                     title: "Always be sedentary"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which power would you prefer?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Recognizing every lie" 
+//                 },
+//                 {
+//                     title: "Getting away with every lie"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Would you rather find true love or be rich?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "True love ❤️‍🔥" 
+//                 },
+//                 {
+//                     title: "Be rich 💰"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Would you rather like to be the most intelligent or richest?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "The most intelligent 🧠" 
+//                 },
+//                 {
+//                     title: "The richest 💵"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "What would you rather suffer the rest of your life?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Always being stuck in traffic 🚦" 
+//                 },
+//                 {
+//                     title: "Always having slow internet 🌐"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "How would you rather become a millionaire?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Lottery 🎰" 
+//                 },
+//                 {
+//                     title: "Your work 🛠️"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which ice tea flavour do you prefer?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Peach 🍑" 
+//                 },
+//                 {
+//                     title: "Lemon 🍋"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         {
+//             text: "Which side of the Twinni is better?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Green 🟢" 
+//                 },
+//                 {
+//                     title: "Orange 🟠"
+//                 }
+//             ]
+//         } as TopicVotingCard,
+//         // ToDo: Show anonymous type in form
+//         {
+//             text: "Ever dropped your phone in the toilet?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Yes ✅" 
+//                 },
+//                 {
+//                     title: "No ❎"
+//                 }
+//             ],
+//             settings: {
+//                 sipConfig: {
+//                     specificSipSubjectId: 0,
+//                     distribute: false
+//                 }
+//             }
+//         } as TopicVotingCard,
+//         {
+//             text: "Ever taken hard drugs?",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "Yes ✅" 
+//                 },
+//                 {
+//                     title: "No ❎"
+//                 }
+//             ],
+//             settings: {
+//                 sipConfig: {
+//                     specificSipSubjectId: 1,
+//                     distribute: false
+//                 }
+//             }
+//         } as TopicVotingCard,
+//         // ------------------------------
+//         // - New Cards
+//         // ------------------------------
+//         {
+//             text: "Hey, remember me 🙉",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Follow Up Card"
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 0,
+//                 roundDelay: 6
+//             }
+//         } as FreeTextCard,
+//         {
+//             followUpCardID: 0,
+//             text: "Hey, do you remember me? 🍌",
+//             type: CardType.TopicVotingCard,
+//             subjects: [
+//                 {
+//                     title: "🙊"
+//                 },
+//                 {
+//                     title: "🙉"
+//                 },
+//                 {
+//                     title: "🙈"
+//                 }
+//             ],
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Follow Up Card",
+//                 sipConfig: {
+//                     specificSipSubjectId: 1,
+//                     distribute: true
+//                 }
+//             } as TopicVotingCardSettings
+//         } as TopicVotingCard,
+//         {
+//             text: "%p0 your are crowned Thumb Master. Use your power to distribute 1 sip to those who don't follow your reign 👑",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Thumb Master 👍",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 1,
+//                 roundDelay: 15
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 your reign as Thumb Master is over. Hopefully you used your power well 👌",
+//             followUpCardID: 1,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Thumb Master 👍"
+//             }
+//         } as FreeTextCard, 
+//         {
+//             text: "Everyone now has the name of the person sitting to their left. You have to drink 1 sip for switching up names 🗿",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Confusion is fun, right?",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 2,
+//                 roundDelay: 15
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Okay this gets boring. You get your real names back 😘",
+//             followUpCardID: 2,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Confusion is fun, right?",
+//             }
+//         } as FreeTextCard, 
+//         {
+//             text: "Hey gang, %p0 wants a drink. Mix up something good for them to enjoy 🧉",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Mix it up 🍸",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 3,
+//                 roundDelay: 1
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Now it's your turn %p0. Choose someone to share half of the good stuff with 😈",
+//             followUpCardID: 3,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Mix it up 🍸",
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 it’s your lucky day! Now you are Question Master and everyone who answers one of your questions has to drink 2 sips ⁉️",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Question Master",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 4,
+//                 roundDelay: 15
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "%p0 you are no longer Question Master 🗿",
+//             followUpCardID: 4,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Question Master",
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Let’s make intoxicating yourself a little harder. Everyone is only allowed to drink with their none dominant hand 🫱",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Switch Up",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 5,
+//                 roundDelay: 15
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Which hand you drink with is again up to you. Did anyone spill something? 🫗",
+//             followUpCardID: 5,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Switch Up",
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Hey guys good news, everyone got a promotion! Ammm that’s everyone but %p0 you slacker. You now have to address everyone as if they were your boss at work. 😪",
+//             type: CardType.FreeText,
+//             settings: {
+//                 drinkingCard: true,
+//                 customColor: "violet",
+//                 customTitle: "Promotions baby!",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 6,
+//                 roundDelay: 1
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Corporate Rules: On violation %p0 has to drink one sip 🍺",
+//             followUpCardID: 6,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Promotions baby!",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 7,
+//                 roundDelay: 15
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Ah better late than never. %p0 you also got a promotion. Good work 😉",
+//             followUpCardID: 7,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Promotions baby!",
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Guys did you hear it, dabbing is still cool. Everyone please do a dab before you drink or drink again. So cool 🙃",
+//             followUpCardID: 8,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Dabbing",
+//             },
+//             followUpCardConfig: {
+//                 followUpCardID: 8,
+//                 roundDelay: 15
+//             }
+//         } as FreeTextCard,
+//         {
+//             text: "Okay i can't take it anymore. Please stop the dabbing. You are making fools of yourselfs 🤡",
+//             followUpCardID: 7,
+//             type: CardType.FreeText,
+//             settings: {
+//                 customColor: "violet",
+//                 customTitle: "Dabbing",
+//             }
+//         } as FreeTextCard
+//     ],
+//     defaultGameSettings: [
+//         {
+//             settingName: speficiPlayerIdSettingName,
+//             valueSource: DefaultGameSettingValueSource.default,
+//             requirement: DefaultGameSettingRequirement.required
+//         }
+//     ],
+//     requiredPlayers: {
+//         playerCount: 2,
+//         isExactCount: false
+//     },
+// };
 export const leggitPartyDeck: Deck = {
     icon: "🎊",
     name: "aLaCard",
@@ -483,309 +1832,309 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Who tolerates the least alcohol?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who throws up the most from too much alcohol?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather accidentally set their hair on fire?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to get a intimate piercing?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be most likely to survive on a deserted island?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be most likely to wear a Borat for a swim?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the biggest nerd?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be the most likely to slip on their own cat?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the most vain?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather grow old alone with cats?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to ride a bike to the drive-in?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather photograph naked people as a hobby?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who has the blackest sense of humor?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the biggest couch potato?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to help old people cross the street?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who nags the most as a co-driver?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the worst driver?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to use public transportation without a ticket?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the biggest peeping Tom?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who can lie the most believably?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather destroy a child's sandcastle in front of his eyes?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "With whom you can not be seen in public?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who is the easiest to entertain?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather prostitute themselves?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to buy followers?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who's on the most dating platforms?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to undergo cosmetic surgery?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who cheats the most when playing games?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the biggest \"class clown\"?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who surfs the darknet the most?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to get arrested?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would die first in an apocalypse?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is best prepared for an apocalypse?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the worst at flirting?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the best at flirting?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather go out of the house without underwear?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather steal a traffic sign?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather get a tattoo while drunk?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather get married in Las Vegas?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to go overboard with pranks?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather forget their date's name?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would accidentally spill the last sip of water on a desert trip?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is most afraid of insects?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to buy a round of drinks?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to propose on the third date?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather go to work drunk?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to push a child?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is the biggest series junkie?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Which player is the stingiest?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would rather start a philosophical conversation while drunk?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Which one of you would be the most corrupt judge?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Which one of you would be most qualified to be the lead actor/actress in a porn movie?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who of you is more likely to be arrested for harassing a police officer?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who has the funniest story about losing their virginity, do you think?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who is most likely to have a one-night stand?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who wet his/her bed the longest?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Who's the leftover eater among you?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to start a relationship with a friend's parent?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "Whose cooking skills are only good enough for finished products?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Who watches the most trash TV?",
-            type: CardType.PlayerVoting
-        } as PlayerVotingCard,
+            type: CardType.NewPlayerVotingCard
+        } as NewPlayerVotingCard,
         {
             text: "Where would you rather travel?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "200 years into the future" 
@@ -794,10 +2143,10 @@ export const leggitPartyDeck: Deck = {
                     title: "200 years into the past"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Would you rather be able to fly or teleport?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Fly" 
@@ -806,10 +2155,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Teleport"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What would you prefer to experience?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Your parents catch you having sex" 
@@ -818,10 +2167,10 @@ export const leggitPartyDeck: Deck = {
                     title: "You catch your parents having sex"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What is your favorite type of M&M's?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "🔵 Blue" 
@@ -833,10 +2182,10 @@ export const leggitPartyDeck: Deck = {
                     title: "🟤 Brown"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Where do you prefer to spend your vacation?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "In the mountains 🏞️" 
@@ -848,10 +2197,10 @@ export const leggitPartyDeck: Deck = {
                     title: "In the city 🏙️"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What do you prefer to drink?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Beer 🍺" 
@@ -860,10 +2209,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Wine 🍷"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What do you prefer to drink?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Kakao 🥛" 
@@ -872,10 +2221,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Coffee ☕"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Where would you rather be stranded?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "On a deserted island 🏝️" 
@@ -884,10 +2233,10 @@ export const leggitPartyDeck: Deck = {
                     title: "On a lonely habitable planet 🌎"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What do you prefer to drink",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Cola" 
@@ -896,10 +2245,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Pepsi"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "How do you prefer to pay?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Cash 💵" 
@@ -908,10 +2257,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Cashless 💳"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Where do you like to party most?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Disco 🪩" 
@@ -926,10 +2275,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Not at all ⛔"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What would you rather only listen to one song or to no music at all for the rest of your life?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "No longer listen to music" 
@@ -938,10 +2287,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Listen to only one song"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What item would you take with you to a desert island",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Rope 🪢" 
@@ -956,10 +2305,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Backpack 🎒"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What item would you take with you to a desert island?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Spoon 🥄" 
@@ -974,10 +2323,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Money 💵"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What would you rather give up at dinner?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Chair" 
@@ -986,10 +2335,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Table"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which mythical creature would you rather be?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Mermaid 🧜🏻‍♀️" 
@@ -1010,10 +2359,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Fairy 🧚🏿‍♂️"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What is the best movie universe?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Lord of the Rings 💍" 
@@ -1028,10 +2377,10 @@ export const leggitPartyDeck: Deck = {
                     title: "None of the above ⛔"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which team do you belong to?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Ass" 
@@ -1040,10 +2389,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Boobs"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which fast food chain is the best?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Burger King" 
@@ -1055,10 +2404,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Subway"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which tattoo would you rather get?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "An ugly one that you choose yourself" 
@@ -1067,10 +2416,10 @@ export const leggitPartyDeck: Deck = {
                     title: "A tattoo that your parents choose"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "If you had to choose one thing that will no longer exist, which one would it be?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Streaming Platforms 📼"
@@ -1082,10 +2431,10 @@ export const leggitPartyDeck: Deck = {
                     title: "YouTube and clones 💻"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which apocalypse would you rather suffer?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Zombie 🦠" 
@@ -1097,10 +2446,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Artificial intelligence 🤖"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Where would you rather suffer a strong storm?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Airplane ✈️" 
@@ -1109,10 +2458,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Ship 🛳️"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "In which desert would you rather be stranded?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Ice desert ❄️" 
@@ -1121,10 +2470,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Sand desert ☀️"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which team do you belong to?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "School/University 📚" 
@@ -1133,10 +2482,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Work 🔨"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which team do you belong to?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Vacation ✈️" 
@@ -1145,10 +2494,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Staycation 🏠"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What do you prefer to do?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Receive gifts" 
@@ -1157,10 +2506,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Present gifts"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Do you normally sleep with or without socks?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "with socks 🧦" 
@@ -1169,10 +2518,10 @@ export const leggitPartyDeck: Deck = {
                     title: "without socks 🦶"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What hairstyle would you rather have the rest of your life?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Bald (without wig) 👨🏿‍🦲" 
@@ -1181,10 +2530,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Hair down to the feet 👩‍🦰"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "If you didn't have to face the consequences, what would you choose for the rest of your life?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "No food 🍛" 
@@ -1193,10 +2542,10 @@ export const leggitPartyDeck: Deck = {
                     title: "No drinks 🥤"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Jungle Planet 🦜" 
@@ -1208,10 +2557,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Sea Planet 🐠"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What would you rather be a successful actor or musician?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Successful musician 🎹" 
@@ -1220,10 +2569,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Successful actor 🎭"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Would you rather never be sedentary or always be sedentary",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Never be sedentary" 
@@ -1232,10 +2581,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Always be sedentary"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which power would you prefer?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Recognizing every lie" 
@@ -1244,10 +2593,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Getting away with every lie"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Would you rather find true love or be rich?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "True love ❤️‍🔥" 
@@ -1256,10 +2605,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Be rich 💰"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Would you rather like to be the most intelligent or richest?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "The most intelligent 🧠" 
@@ -1268,10 +2617,10 @@ export const leggitPartyDeck: Deck = {
                     title: "The richest 💵"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "What would you rather suffer the rest of your life?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Always being stuck in traffic 🚦" 
@@ -1280,10 +2629,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Always having slow internet 🌐"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "How would you rather become a millionaire?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Lottery 🎰" 
@@ -1292,10 +2641,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Your work 🛠️"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which ice tea flavour do you prefer?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Peach 🍑" 
@@ -1304,10 +2653,10 @@ export const leggitPartyDeck: Deck = {
                     title: "Lemon 🍋"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Which side of the Twinni is better?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Green 🟢" 
@@ -1316,84 +2665,84 @@ export const leggitPartyDeck: Deck = {
                     title: "Orange 🟠"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         // ToDo: Show anonymous type in form
-        {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "Yes ✅" 
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
-            settings: {
-                sipConfig: {
-                    specificSipSubjectId: 0,
-                    distribute: false
-                }
-            }
-        } as TopicVotingCard,
-        {
-            text: "Ever taken hard drugs?",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "Yes ✅" 
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
-            settings: {
-                sipConfig: {
-                    specificSipSubjectId: 1,
-                    distribute: false
-                }
-            }
-        } as TopicVotingCard,
+        // {
+        //     text: "Ever dropped your phone in the toilet?",
+        //     type: CardType.PollCard,
+        //     subjects: [
+        //         {
+        //             title: "Yes ✅" 
+        //         },
+        //         {
+        //             title: "No ❎"
+        //         }
+        //     ],
+        //     settings: {
+        //         sipConfig: {
+        //             specificSipSubjectId: 0,
+        //             distribute: false
+        //         }
+        //     }
+        // } as PollCard,
+        // {
+        //     text: "Ever taken hard drugs?",
+        //     type: CardType.PollCard,
+        //     subjects: [
+        //         {
+        //             title: "Yes ✅" 
+        //         },
+        //         {
+        //             title: "No ❎"
+        //         }
+        //     ],
+        //     settings: {
+        //         sipConfig: {
+        //             specificSipSubjectId: 1,
+        //             distribute: false
+        //         }
+        //     }
+        // } as PollCard,
         // ------------------------------
         // - New Cards
         // ------------------------------
-        {
-            text: "Hey, remember me 🙉",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            },
-            followUpCardConfig: {
-                followUpCardID: 0,
-                roundDelay: 6
-            }
-        } as FreeTextCard,
-        {
-            followUpCardID: 0,
-            text: "Hey, do you remember me? 🍌",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "🙊"
-                },
-                {
-                    title: "🙉"
-                },
-                {
-                    title: "🙈"
-                }
-            ],
-            settings: {
-                customColor: "violet",
-                customTitle: "Follow Up Card",
-                sipConfig: {
-                    specificSipSubjectId: 1,
-                    distribute: true
-                }
-            } as TopicVotingCardSettings
-        } as TopicVotingCard,
+        // {
+        //     text: "Hey, remember me 🙉",
+        //     type: CardType.FreeText,
+        //     settings: {
+        //         drinkingCard: true,
+        //         customColor: "violet",
+        //         customTitle: "Follow Up Card"
+        //     },
+        //     followUpCardConfig: {
+        //         followUpCardID: 0,
+        //         roundDelay: 6
+        //     }
+        // } as FreeTextCard,
+        // {
+        //     followUpCardID: 0,
+        //     text: "Hey, do you remember me? 🍌",
+        //     type: CardType.PollCard,
+        //     subjects: [
+        //         {
+        //             title: "🙊"
+        //         },
+        //         {
+        //             title: "🙉"
+        //         },
+        //         {
+        //             title: "🙈"
+        //         }
+        //     ],
+        //     settings: {
+        //         customColor: "violet",
+        //         customTitle: "Follow Up Card",
+        //         sipConfig: {
+        //             specificSipSubjectId: 1,
+        //             distribute: true
+        //         }
+        //     } as PollCardSettings
+        // } as PollCard,
         {
             text: "%p0 your are crowned Thumb Master. Use your power to distribute 1 sip to those who don't follow your reign 👑",
             type: CardType.FreeText,
@@ -2525,51 +3874,51 @@ export const testingDeck: Deck = {
                 order: 0
             }
         } as FreeTextCard,
-        {
-            text: "Hey, remember me 🙉",
-            type: CardType.FreeText,
-            settings: {
-                order: 1,
-                drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            },
-            followUpCardConfig: {
-                followUpCardID: 0,
-                roundDelay: 4
-            }
-        } as FreeTextCard,
-        {
-            followUpCardID: 0,
-            text: "Hey, do you remember me? 🍌",
-            type: CardType.TopicVotingCard,
-            subjects: [
-                {
-                    title: "🙊"
-                },
-                {
-                    title: "🙉"
-                },
-                {
-                    title: "🙈"
-                }
-            ],
-            settings: {
-                customColor: "violet",
-                customTitle: "Follow Up Card",
-                sipConfig: {
-                    specificSipSubjectId: 1,
-                    distribute: true
-                }
-            } as TopicVotingCardSettings
-        } as TopicVotingCard,
+        // {
+        //     text: "Hey, remember me 🙉",
+        //     type: CardType.FreeText,
+        //     settings: {
+        //         order: 1,
+        //         drinkingCard: true,
+        //         customColor: "violet",
+        //         customTitle: "Follow Up Card"
+        //     },
+        //     followUpCardConfig: {
+        //         followUpCardID: 0,
+        //         roundDelay: 4
+        //     }
+        // } as FreeTextCard,
+        // {
+        //     followUpCardID: 0,
+        //     text: "Hey, do you remember me? 🍌",
+        //     type: CardType.TopicVotingCard,
+        //     subjects: [
+        //         {
+        //             title: "🙊"
+        //         },
+        //         {
+        //             title: "🙉"
+        //         },
+        //         {
+        //             title: "🙈"
+        //         }
+        //     ],
+        //     settings: {
+        //         customColor: "violet",
+        //         customTitle: "Follow Up Card",
+        //         sipConfig: {
+        //             specificSipSubjectId: 1,
+        //             distribute: true
+        //         }
+        //     } as TopicVotingCardSettings
+        // } as TopicVotingCard,
         {
             text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
-            type: CardType.PlayerVoting,
+            type: CardType.NewPlayerVotingCard,
             settings: {
                 order: 2
             }
-        } as PlayerVotingCard,
+        } as NewPlayerVotingCard,
         {
             text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",
             type: CardType.FreeText,
@@ -2594,7 +3943,7 @@ export const testingDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Do you think %sp is happy with his/her presents?",
-            type: CardType.TopicVotingCard,
+            type: CardType.PollCard,
             subjects: [
                 {
                     title: "Yes" 
@@ -2603,7 +3952,7 @@ export const testingDeck: Deck = {
                     title: "No"
                 }
             ]
-        } as TopicVotingCard,
+        } as PollCard,
         {
             text: "Raise your glasses to %sp and drink 2 sips!",
             type: CardType.FreeText,

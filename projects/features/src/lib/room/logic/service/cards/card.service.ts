@@ -128,10 +128,6 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
                 return this.translateService.instant("features.room.game.card.groundRules");
             case(CardType.FreeText):
                 return this.translateService.instant("features.room.game.card.freeText")
-            case(CardType.PlayerVoting):
-                return this.translateService.instant("features.room.game.card.playerVoting")
-            case(CardType.TopicVotingCard):
-                return this.translateService.instant("features.room.game.card.topic-voting")
             case(CardType.QuizCard):
                 return this.translateService.instant("features.room.game.card.quiz")
         }

@@ -22,20 +22,15 @@ import {
   ItAddOfflinePlayerBottomSheet,
   ItGameComponent,
   ItCardFormComponent,
-  ItTopicVotingFormComponent,
   ItVotingFormComponent,
   ItCardStatsComponent,
-  ItPlayerVotingStatsComponent,
-  ItTopicVotingStatsComponent,
   ItVotingStatsComponent,
   ItGameCardsComponent,
   ItGameRulesComponent,
   ItAddAccountModal,
   ItCreateRoomAsGuestModal,
   ItShareBottomSheet,
-  ItStartGameModal,
-  ItPlayerVotingFormComponent,
-  ItResultComponent
+  ItStartGameModal
 } from '@features';
 
 @NgModule({
@@ -55,12 +50,8 @@ import {
     ItAddOfflinePlayerBottomSheet,
     ItGameComponent,
     ItCardFormComponent,
-    ItPlayerVotingFormComponent,
-    ItTopicVotingFormComponent,
     ItVotingFormComponent,
     ItCardStatsComponent,
-    ItPlayerVotingStatsComponent,
-    ItTopicVotingStatsComponent,
     ItVotingStatsComponent,
     ItGameCardsComponent,
     ItGameRulesComponent,
@@ -68,7 +59,6 @@ import {
     ItDeckComponent,
     ItPlayerComponent,
     NewItResultComponent,
-    ItResultComponent,
     ItSipResultsComponent,
     ItAddAccountModal,
     ItAuthenticateModal,

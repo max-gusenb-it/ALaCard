@@ -1,5 +1,5 @@
 import { GameSettings, CardUtils } from "@features";
-import { CardType, Deck, PlayerVotingCard, playerNameWhitecard, specificPlayerNameWhitecard, Utils } from '@shared';
+import { CardType, Deck, playerNameWhitecard, specificPlayerNameWhitecard, Utils, NewPlayerVotingCard } from '@shared';
 
 export namespace StaticRoundDataUtils {
     export function isDeckPlayable(deck: Deck, activePlayerCount: number, gameSettings: GameSettings) {
@@ -13,9 +13,9 @@ export namespace StaticRoundDataUtils {
                 const card = deck.cards[ci];
                 let neededPlayerCount = Utils.countSubstrings(card.text, playerNameWhitecard) + Utils.countSubstrings(card.text, specificPlayerNameWhitecard);
                 switch(card.type) {
-                    case(CardType.PlayerVoting): {
-                        let pvCard = CardUtils.castCard<PlayerVotingCard>(card);
-                        if (neededPlayerCount < 2 && pvCard.settings?.selfVoteDisabled) {
+                    case(CardType.NewPlayerVotingCard): {
+                        const playerVotingCard = CardUtils.castCard<NewPlayerVotingCard>(card);
+                        if (neededPlayerCount < 2 && playerVotingCard.settings?.selfVoteDisabled) {
                             neededPlayerCount = 2;
                         }
                         break;

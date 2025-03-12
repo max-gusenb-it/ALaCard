@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
-    PlayerVotingCardService,
     CardService,
-    TopicVotingCardService,
     DynamicRoundData,
     Response,
     GameCardService,
@@ -15,10 +13,8 @@ import {
 import {
     Card,
     CardType,
-    PollCard,
-    TopicVotingCard
+    PollCard
 } from "@shared";
-import { QuizCardService } from "./cards/quiz-card.service";
 import { NewPlayerVotingCardService } from "./cards/new-player-voting-card.service";
 import { PollCardTranslationService } from "./cards/translation/poll-card-translation.service";
 
@@ -28,27 +24,15 @@ import { PollCardTranslationService } from "./cards/translation/poll-card-transl
 export class CardServiceFactory {
     constructor(
         private cardService: CardService<Card, Response, DynamicRoundData, Result>,
-        private plaverVotingCardService: PlayerVotingCardService,
-        private topicVotingCardService: TopicVotingCardService<TopicVotingCard>,
-        private quizCardService: QuizCardService,
         private pollCardService: PollCardService,
+        private newPlayerVotingCardService: NewPlayerVotingCardService,
         private cardTranslationService: CardTranslationService<Card>,
         private votingCardTranslationService: VotingCardTranslationService<PollCard>,
-        private newPlayerVotingCardService: NewPlayerVotingCardService,
         private pollCardTranslationService: PollCardTranslationService
     ) { }
 
     getCardService(cardType?: CardType) : GameCardService {
         switch(cardType) {
-            case(CardType.PlayerVoting): {
-                return this.plaverVotingCardService;
-            }
-            case(CardType.TopicVotingCard): {
-                return this.topicVotingCardService;
-            }
-            case(CardType.QuizCard): {
-                return this.quizCardService;
-            }
             case(CardType.PollCard): {
                 return this.pollCardService;
             }

@@ -11,6 +11,7 @@ import {
 } from '@features';
 import { 
   AngularLifecycle,
+  CardType,
   Deck
 } from '@shared';
 
@@ -19,6 +20,10 @@ import {
   templateUrl: './it-card-stats.component.html',
 })
 export class ItCardStatsComponent extends AngularLifecycle {
+
+  get cardType() {
+    return CardType;
+  }
 
   deck: Deck;
   staticRoundData: StaticRoundData;

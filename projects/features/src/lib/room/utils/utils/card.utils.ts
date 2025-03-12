@@ -10,20 +10,17 @@ export namespace CardUtils {
             return card.settings?.customColor!;
         } else {
             switch(card.type) {
-              case(CardType.GroundRule):
-              case(CardType.FreeText): {
-                return systemDefaultValue;
-              }
-              case(CardType.NewPlayerVotingCard):
-              case(CardType.PlayerVoting): {
+              case(CardType.NewPlayerVotingCard): {
                 return "red"
               }
-              case(CardType.PollCard):
-              case(CardType.TopicVotingCard): {
+              case(CardType.PollCard): {
                 return "blue"
               }
               case(CardType.QuizCard): {
                 return "green"
+              }
+              default: {
+                return systemDefaultValue;
               }
             }
         }
