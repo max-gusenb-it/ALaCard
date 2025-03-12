@@ -151,7 +151,8 @@
             "most-voted-player": "Most voted players",
             "least-voted-player": "Least voted players",
             "drink-sips": "Drink {{sipCount}} {{sips}}",
-            "most-voted-topics": "Voted top subject"
+            "most-voted-topics": "Voted top subject",
+            "least-voted-topics": "Voted least subject"
           }
         },
         "has-been-set-to-inactive": "has been set to inactive",

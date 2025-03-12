@@ -89,7 +89,7 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
                 return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topics");
             }
             case(VotingCardGroup.VotingCard_LeastVotedSubject): {
-                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topic");
+                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topics");
             }
             case(PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer): {
                 return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-player");
