@@ -64,46 +64,26 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardText() {
-    if (this.card.type === CardType.Poll || this.card.type === CardType.PlayerVoting) {
-      return this.cardTranslationService.getCardText(
-        this.card,
-        this.store.selectSnapshot(RoomState.players),
-        this.playerIds,
-        this.store.selectSnapshot(RoomState.specificPlayerId)
-      )
-    }
-    return this.cardService.getCardText(
-        this.card,
-        this.store.selectSnapshot(RoomState.players),
-        this.playerIds,
-        this.store.selectSnapshot(RoomState.specificPlayerId),
+    return this.cardTranslationService.getCardText(
+      this.card,
+      this.store.selectSnapshot(RoomState.players),
+      this.playerIds,
+      this.store.selectSnapshot(RoomState.specificPlayerId)
     );
   }
 
   getOfflineCardText() {
-    if (this.card.type === CardType.Poll || this.card.type === CardType.PlayerVoting) {
-      return this.cardTranslationService.getOfflineCardText(
-        this.card,
-        this.store.selectSnapshot(RoomState.players),
-        this.playerIds,
-        this.store.selectSnapshot(RoomState.specificPlayerId),
-        this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame
-      )
-    }
-    return this.cardService.getOfflineCardText(
+    return this.cardTranslationService.getOfflineCardText(
       this.card,
       this.store.selectSnapshot(RoomState.players),
       this.playerIds,
       this.store.selectSnapshot(RoomState.specificPlayerId),
-      this.store.selectSnapshot(RoomState.gameSettings)!
-  );
+      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame
+    );
   }
 
   getOfflineTextCSSClasses() {
-    if (this.card.type === CardType.Poll) {
-      return this.cardTranslationService.getOfflineCardTextClasses();
-    }
-    return this.cardService.getOfflineCardTextSizeClass(this.card, this.getCardText())
+    return this.cardTranslationService.getOfflineCardTextClasses();
   }
 
   cardClicked(event: MouseEvent) {

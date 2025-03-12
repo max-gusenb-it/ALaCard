@@ -23,24 +23,19 @@ import {
     PlayerState,
     Utils,
     playerNameWhitecard,
-    specificPlayerNameWhitecard,
-    CardType
+    specificPlayerNameWhitecard
 } from "@shared";
 import { TranslateService } from "@ngx-translate/core";
-
-// ToDo - structure: remove resultsConfig
 
 @Injectable({
     providedIn: 'root'
 })
 export class CardService<C extends Card, R extends Response, D extends DynamicRoundData, T extends Result> {
-
-    // ToDo - structure: fix
     constructor(
-        private _store: Store,
-        private _responseDataDataService: ResponseDataDataService,
-        private _ingameDataDataService: IngameDataDataService,
-        private _staticRoundDataDataService: StaticRoundDataDataService,
+        protected store: Store,
+        protected responseDataDataService: ResponseDataDataService,
+        protected ingameDataDataService: IngameDataDataService,
+        protected staticRoundDataDataService: StaticRoundDataDataService,
         protected translateService: TranslateService
     ) { }
 
@@ -102,79 +97,22 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     }
 
     getRoundState(): RoundState {
-        const roomSettings = this._store.selectSnapshot(RoomState.roomSettings);
-        const roundInformation = this._store.selectSnapshot(InformationState.roundInformation);
-        const dynamicRoundData = this._ingameDataDataService.getDynamicRoundData();
-        const staticRoundData = this._staticRoundDataDataService.getStaticRoundData();
+        const roomSettings = this.store.selectSnapshot(RoomState.roomSettings);
+        const roundInformation = this.store.selectSnapshot(InformationState.roundInformation);
+        const dynamicRoundData = this.ingameDataDataService.getDynamicRoundData();
+        const staticRoundData = this.staticRoundDataDataService.getStaticRoundData();
         if (
             roomSettings?.singleDeviceMode ||
-            !this._responseDataDataService.userResponded(staticRoundData!.round!.id) &&
+            !this.responseDataDataService.userResponded(staticRoundData!.round!.id) &&
             (!!!roundInformation || roundInformation.roundId !== staticRoundData!.round!.id || !roundInformation.cardAnimationSkipped) &&
-            (!!!dynamicRoundData || dynamicRoundData.roundId !== staticRoundData!.round!.id || !this._ingameDataDataService.roundProcessed(staticRoundData!.round!.id))
+            (!!!dynamicRoundData || dynamicRoundData.roundId !== staticRoundData!.round!.id || !this.ingameDataDataService.roundProcessed(staticRoundData!.round!.id))
         ) {
             return RoundState.card;
         }
-        if (!this._ingameDataDataService.roundProcessed(staticRoundData!.round!.id)) {
+        if (!this.ingameDataDataService.roundProcessed(staticRoundData!.round!.id)) {
             return RoundState.form;
         }
         return RoundState.stats;
-    }
-
-    getCardTitle(card: Card) {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
-            return card.settings!.customTitle;
-        switch(card.type) {
-            case(CardType.GroundRule):
-                return this.translateService.instant("features.room.game.card.groundRules");
-            case(CardType.FreeText):
-                return this.translateService.instant("features.room.game.card.freeText")
-            case(CardType.Quiz):
-                return this.translateService.instant("features.room.game.card.quiz")
-        }
-    }
-
-    getCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId?: string): string {
-        let text = card.text;
-
-        if (card.text.includes(specificPlayerNameWhitecard)) {
-            if (!!speficPlayerId) {
-                text = text.split(`${specificPlayerNameWhitecard}`).join(players.find(p => p.id === speficPlayerId)?.username);
-            } else {
-                text = text.replace(specificPlayerNameWhitecard, `${playerNameWhitecard}${playerIds.length - 1}`);
-            }
-        }
-
-        if (playerIds.length > 0) {
-            playerIds.forEach((playerId, index) => {
-                text = text.split(`${playerNameWhitecard}${index}`).join(players.find(p => p.id === playerId)?.username);
-            });
-        }
-        return text;
-    }
-
-    getOfflineCardText(card: Card, players: Player[], playerIds: string[] = [], speficPlayerId: string = "", gameSettings: GameSettings): string {
-        let text = this.getCardText(card, players, playerIds, speficPlayerId);
-        return text;
-    }
-
-    getOfflineCardTextSizeClass(card: Card, text: string): string {
-        return "text-xl";
-    }
-
-    getResultsHeading(results: Result[], card: Card): string {
-        return "";
-    }
-
-    getResultText(result: Result) {
-        return "";
-    }
-
-    cardHasResultSubText(card: Card): boolean {
-        return false;
-    }
-
-    getResultSubText(result: Result, players: Player[]) {
-        return "";
     }
     
     /**
@@ -188,8 +126,8 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         let sipResults = this.calculateSipResults(card, dynamicRoundData);
         return sipResults.sort((s1, s2) => {
-            if (s1.playerId === this._store.selectSnapshot(AuthenticationState.userId)) return -1;
-            if (s2.playerId !== this._store.selectSnapshot(AuthenticationState.userId)) return 1;
+            if (s1.playerId === this.store.selectSnapshot(AuthenticationState.userId)) return -1;
+            if (s2.playerId !== this.store.selectSnapshot(AuthenticationState.userId)) return 1;
             return 0;
         });
     }
@@ -206,7 +144,7 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     }
 
     getPlayerForSipResult(result: SipResult) {
-        const players = this._store.selectSnapshot(RoomState.players);
+        const players = this.store.selectSnapshot(RoomState.players);
         return players.find(p => p.id === result.playerId);
     }
 }
