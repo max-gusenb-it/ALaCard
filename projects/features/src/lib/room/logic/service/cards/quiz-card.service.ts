@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardState, DynamicRoundData, PollCardService, QuizCardStates, VotingResult } from "@features";
+import { CardState, DynamicRoundData, PollCardService, QuizCardStates, RoomState, VotingResult } from "@features";
 import { Card, QuizCard } from "@shared";
 import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
@@ -13,7 +13,8 @@ export class QuizCardService extends PollCardService<QuizCard> {
     }
 
     override hasFollowUpCard(card: Card, cardState: string): boolean {
-        if (cardState === CardState.Card_Initial) {
+        const singleDeviceModeActive = this.store.selectSnapshot(RoomState.singleDeviceModeActive);
+        if (singleDeviceModeActive && cardState === CardState.Card_Initial) {
             return true;
         } else {
             return false;

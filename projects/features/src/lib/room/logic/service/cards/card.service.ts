@@ -19,6 +19,7 @@ import {
 import {
     AuthenticationState,
     Card,
+    CardType,
     InformationState,
     PlayerState,
     Utils,
@@ -80,10 +81,9 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
     hasFollowUpCard(card: Card, cardState: string) {
         switch(cardState) {
             case(CardState.Card_Initial): {
-                const votingCard = this.castCard(card);
                 const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
                 const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
-                return votingCard.settings?.delaySipText === true && gameSettings?.drinkingGame && roomSettings.singleDeviceMode;
+                return card.settings?.delaySipText === true && gameSettings?.drinkingGame && (roomSettings.singleDeviceMode || card.type === CardType.FreeText);
             };
             default: return Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID);;
         }
