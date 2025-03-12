@@ -14,7 +14,7 @@ export class VotingCardTranslationService<C extends VotingCard> extends CardTran
 
     getDefaultSipDistributionGroup(cardType: CardType) {
         switch(cardType) {
-            case(CardType.NewPlayerVotingCard): {
+            case(CardType.PlayerVoting): {
                 return defaultPlayerVotingCardGroup;
             }
             default: return defaultVotingCardGroup;

@@ -10,13 +10,13 @@ export namespace CardUtils {
             return card.settings?.customColor!;
         } else {
             switch(card.type) {
-              case(CardType.NewPlayerVotingCard): {
+              case(CardType.PlayerVoting): {
                 return "red"
               }
-              case(CardType.PollCard): {
+              case(CardType.Poll): {
                 return "blue"
               }
-              case(CardType.QuizCard): {
+              case(CardType.Quiz): {
                 return "green"
               }
               default: {

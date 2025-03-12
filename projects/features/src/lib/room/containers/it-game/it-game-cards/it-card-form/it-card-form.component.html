@@ -3,14 +3,14 @@
   class="w-full flex flex-col gap-4 items-center"
 >
   @switch(deck.cards[staticRoundData.round.cardIndex].type) {
-    @case (cardType.PollCard) {
+    @case (cardType.Poll) {
       <it-voting-form
         class="w-full sm:w-3/5 max-w-xl"
         [card]="deck.cards[staticRoundData.round.cardIndex]"
         [round]="staticRoundData.round"
       />
     }
-    @case (cardType.NewPlayerVotingCard) {
+    @case (cardType.PlayerVoting) {
       <it-voting-form
         class="w-full sm:w-3/5 max-w-xl"
         [card]="deck.cards[staticRoundData.round.cardIndex]"

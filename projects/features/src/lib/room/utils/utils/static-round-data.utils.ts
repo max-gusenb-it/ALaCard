@@ -13,7 +13,7 @@ export namespace StaticRoundDataUtils {
                 const card = deck.cards[ci];
                 let neededPlayerCount = Utils.countSubstrings(card.text, playerNameWhitecard) + Utils.countSubstrings(card.text, specificPlayerNameWhitecard);
                 switch(card.type) {
-                    case(CardType.NewPlayerVotingCard): {
+                    case(CardType.PlayerVoting): {
                         const playerVotingCard = CardUtils.castCard<NewPlayerVotingCard>(card);
                         if (neededPlayerCount < 2 && playerVotingCard.settings?.selfVoteDisabled) {
                             neededPlayerCount = 2;

@@ -64,7 +64,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardText() {
-    if (this.card.type === CardType.PollCard || this.card.type === CardType.NewPlayerVotingCard) {
+    if (this.card.type === CardType.Poll || this.card.type === CardType.PlayerVoting) {
       return this.cardTranslationService.getCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
@@ -81,7 +81,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getOfflineCardText() {
-    if (this.card.type === CardType.PollCard || this.card.type === CardType.NewPlayerVotingCard) {
+    if (this.card.type === CardType.Poll || this.card.type === CardType.PlayerVoting) {
       return this.cardTranslationService.getOfflineCardText(
         this.card,
         this.store.selectSnapshot(RoomState.players),
@@ -100,7 +100,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getOfflineTextCSSClasses() {
-    if (this.card.type === CardType.PollCard) {
+    if (this.card.type === CardType.Poll) {
       return this.cardTranslationService.getOfflineCardTextClasses();
     }
     return this.cardService.getOfflineCardTextSizeClass(this.card, this.getCardText())

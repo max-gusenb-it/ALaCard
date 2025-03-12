@@ -17,11 +17,11 @@ export class CardTranslationService<C extends Card> {
                 return this.translateService.instant("features.room.game.card.groundRules");
             case(CardType.FreeText):
                 return this.translateService.instant("features.room.game.card.freeText")
-            case(CardType.NewPlayerVotingCard):
+            case(CardType.PlayerVoting):
                 return this.translateService.instant("features.room.game.card.playerVoting")
-            case(CardType.PollCard):
+            case(CardType.Poll):
                 return this.translateService.instant("features.room.game.card.poll")
-            case(CardType.QuizCard):
+            case(CardType.Quiz):
                 return this.translateService.instant("features.room.game.card.quiz")
         }
     }

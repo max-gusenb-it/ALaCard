@@ -11,7 +11,7 @@ export const developmentDeck: Deck = {
     cards: [
         {
             text: "Where do you prefer to spend your vacation?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "In the mountains 🏞️" 
@@ -29,7 +29,7 @@ export const developmentDeck: Deck = {
         } as PollCard,
         {
             text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 1,
                 selfVoteDisabled: true
@@ -37,7 +37,7 @@ export const developmentDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 2,
                 isAnonymous: true
@@ -45,7 +45,7 @@ export const developmentDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 3,
                 isAnonymous: true,
@@ -76,18 +76,18 @@ export const partyDeckWithRules: Deck = {
     cards: [
         {
             text: "Bitte zeige diese Karte an",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Erster :) - %p0 is a echter Wappla",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 1
             }
         } as NewPlayerVotingCard,
         {
             text: "Zweiter :)",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 2
 
@@ -119,18 +119,18 @@ export const partyDeckWithSpMandatory: Deck = {
     cards: [
         {
             text: "Bitte zeige diese Karte an",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Erster :) - %sp is a echter Wappla",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 1
             }
         } as NewPlayerVotingCard,
         {
             text: "Zweiter :)",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 2
 
@@ -156,18 +156,18 @@ export const partyDeckWithRulesAndSp: Deck = {
     cards: [
         {
             text: "Bitte zeige diese Karte an",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Erster :) - %sp und %p0 san echter Wappla",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 1
             }
         } as NewPlayerVotingCard,
         {
             text: "Zweiter :)",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 2
 
@@ -1832,39 +1832,39 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Who tolerates the least alcohol?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who throws up the most from too much alcohol?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather accidentally set their hair on fire?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to get a intimate piercing?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be most likely to survive on a deserted island?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be most likely to wear a Borat for a swim?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the biggest nerd?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be the most likely to slip on their own cat?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the most vain?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1872,7 +1872,7 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would rather grow old alone with cats?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1880,11 +1880,11 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to ride a bike to the drive-in?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather photograph naked people as a hobby?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1892,23 +1892,23 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who has the blackest sense of humor?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the biggest couch potato?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to help old people cross the street?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who nags the most as a co-driver?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the worst driver?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1916,18 +1916,18 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to use public transportation without a ticket?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the biggest peeping Tom?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true
             }
         } as NewPlayerVotingCard,
         {
             text: "Who would rather lie about themselves to get someone into bed?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1935,11 +1935,11 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who can lie the most believably?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather destroy a child's sandcastle in front of his eyes?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1947,7 +1947,7 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "With whom you can not be seen in public?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1955,11 +1955,11 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who is the easiest to entertain?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather prostitute themselves?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -1967,74 +1967,74 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to buy followers?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who's on the most dating platforms?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to undergo cosmetic surgery?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who cheats the most when playing games?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the biggest \"class clown\"?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who surfs the darknet the most?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to get arrested?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would die first in an apocalypse?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is best prepared for an apocalypse?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the worst at flirting?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the best at flirting?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather go out of the house without underwear?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather steal a traffic sign?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather get a tattoo while drunk?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather get married in Las Vegas?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to go overboard with pranks?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true
             }
         } as NewPlayerVotingCard,
         {
             text: "Who would rather forget their date's name?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -2042,19 +2042,19 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would accidentally spill the last sip of water on a desert trip?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is most afraid of insects?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to buy a round of drinks?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to propose on the third date?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -2062,43 +2062,43 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who would rather go to work drunk?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to push a child?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is the biggest series junkie?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Which player is the stingiest?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would rather start a philosophical conversation while drunk?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Which one of you would be the most corrupt judge?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Which one of you would be most qualified to be the lead actor/actress in a porn movie?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who of you is more likely to be arrested for harassing a police officer?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who has the funniest story about losing their virginity, do you think?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who is most likely to have a one-night stand?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -2106,7 +2106,7 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who wet his/her bed the longest?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -2114,11 +2114,11 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Who's the leftover eater among you?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who would be more likely to start a relationship with a friend's parent?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 isAnonymous: true,
                 payToDisplay: true
@@ -2126,15 +2126,15 @@ export const leggitPartyDeck: Deck = {
         } as NewPlayerVotingCard,
         {
             text: "Whose cooking skills are only good enough for finished products?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Who watches the most trash TV?",
-            type: CardType.NewPlayerVotingCard
+            type: CardType.PlayerVoting
         } as NewPlayerVotingCard,
         {
             text: "Where would you rather travel?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "200 years into the future" 
@@ -2146,7 +2146,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Would you rather be able to fly or teleport?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Fly" 
@@ -2158,7 +2158,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What would you prefer to experience?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Your parents catch you having sex" 
@@ -2170,7 +2170,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What is your favorite type of M&M's?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "🔵 Blue" 
@@ -2185,7 +2185,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Where do you prefer to spend your vacation?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "In the mountains 🏞️" 
@@ -2200,7 +2200,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What do you prefer to drink?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Beer 🍺" 
@@ -2212,7 +2212,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What do you prefer to drink?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Kakao 🥛" 
@@ -2224,7 +2224,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Where would you rather be stranded?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "On a deserted island 🏝️" 
@@ -2236,7 +2236,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What do you prefer to drink",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Cola" 
@@ -2248,7 +2248,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "How do you prefer to pay?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Cash 💵" 
@@ -2260,7 +2260,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Where do you like to party most?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Disco 🪩" 
@@ -2278,7 +2278,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What would you rather only listen to one song or to no music at all for the rest of your life?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "No longer listen to music" 
@@ -2290,7 +2290,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What item would you take with you to a desert island",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Rope 🪢" 
@@ -2308,7 +2308,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What item would you take with you to a desert island?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Spoon 🥄" 
@@ -2326,7 +2326,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What would you rather give up at dinner?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Chair" 
@@ -2338,7 +2338,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which mythical creature would you rather be?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Mermaid 🧜🏻‍♀️" 
@@ -2362,7 +2362,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What is the best movie universe?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Lord of the Rings 💍" 
@@ -2380,7 +2380,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which team do you belong to?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Ass" 
@@ -2392,7 +2392,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which fast food chain is the best?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Burger King" 
@@ -2407,7 +2407,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which tattoo would you rather get?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "An ugly one that you choose yourself" 
@@ -2419,7 +2419,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "If you had to choose one thing that will no longer exist, which one would it be?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Streaming Platforms 📼"
@@ -2434,7 +2434,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which apocalypse would you rather suffer?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Zombie 🦠" 
@@ -2449,7 +2449,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Where would you rather suffer a strong storm?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Airplane ✈️" 
@@ -2461,7 +2461,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "In which desert would you rather be stranded?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Ice desert ❄️" 
@@ -2473,7 +2473,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which team do you belong to?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "School/University 📚" 
@@ -2485,7 +2485,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which team do you belong to?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Vacation ✈️" 
@@ -2497,7 +2497,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What do you prefer to do?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Receive gifts" 
@@ -2509,7 +2509,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Do you normally sleep with or without socks?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "with socks 🧦" 
@@ -2521,7 +2521,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What hairstyle would you rather have the rest of your life?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Bald (without wig) 👨🏿‍🦲" 
@@ -2533,7 +2533,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "If you didn't have to face the consequences, what would you choose for the rest of your life?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "No food 🍛" 
@@ -2545,7 +2545,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "If you had to leave the Earth and live on a new civilized planet, which one would you choose?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Jungle Planet 🦜" 
@@ -2560,7 +2560,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What would you rather be a successful actor or musician?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Successful musician 🎹" 
@@ -2572,7 +2572,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Would you rather never be sedentary or always be sedentary",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Never be sedentary" 
@@ -2584,7 +2584,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which power would you prefer?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Recognizing every lie" 
@@ -2596,7 +2596,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Would you rather find true love or be rich?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "True love ❤️‍🔥" 
@@ -2608,7 +2608,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Would you rather like to be the most intelligent or richest?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "The most intelligent 🧠" 
@@ -2620,7 +2620,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "What would you rather suffer the rest of your life?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Always being stuck in traffic 🚦" 
@@ -2632,7 +2632,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "How would you rather become a millionaire?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Lottery 🎰" 
@@ -2644,7 +2644,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which ice tea flavour do you prefer?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Peach 🍑" 
@@ -2656,7 +2656,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Which side of the Twinni is better?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Green 🟢" 
@@ -3914,7 +3914,7 @@ export const testingDeck: Deck = {
         // } as TopicVotingCard,
         {
             text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
-            type: CardType.NewPlayerVotingCard,
+            type: CardType.PlayerVoting,
             settings: {
                 order: 2
             }
@@ -3943,7 +3943,7 @@ export const testingDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Do you think %sp is happy with his/her presents?",
-            type: CardType.PollCard,
+            type: CardType.Poll,
             subjects: [
                 {
                     title: "Yes" 
