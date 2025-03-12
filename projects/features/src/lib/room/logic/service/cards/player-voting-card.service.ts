@@ -9,11 +9,11 @@ import { AuthenticationState, Card, PlayerVotingCard, Subject, PlayerVotingCardG
 })
 export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard> {
     
-    override get defaultVotingGroup() : string {
+    override get defaultGroup() : string {
         return PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer;
     }
 
-    override get defaultVotingDistribution(): boolean {
+    override get defaultDistribution(): boolean {
         return false;
     }
 
@@ -52,7 +52,7 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
     override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
         const playerVotingCard = this.castCard(card);
 
-        const group = playerVotingCard.settings?.sipConfig?.group ?? this.defaultVotingGroup;
+        const group = playerVotingCard.settings?.sipConfig?.group ?? this.defaultGroup;
         if (group in VotingCardGroup) super.calculateSipResults(card, dynamicRoundData);
 
         const results = this.getResults(dynamicRoundData)
@@ -66,7 +66,7 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
         return filteredResults
             .map(r => {
                 return {
-                    distribute: playerVotingCard.settings?.sipConfig?.distribute ?? this.defaultVotingDistribution,
+                    distribute: playerVotingCard.settings?.sipConfig?.distribute ?? this.defaultDistribution,
                     playerId: r.subjectID,
                     sips: results.length > 1 ? defaultCardSips : defaultCardSips * 2
                 } as SipResult

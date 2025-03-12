@@ -13,8 +13,8 @@ export * from "./player-voting-card/player-voting-card-settings";
 
 export * from "./poll-card/poll-card";
 
-// export * from "./quiz-card/quiz-card";
-// export * from "./quiz-card/quiz-subject";
+export * from "./quiz-card/quiz-card";
+export * from "./quiz-card/quiz-subject";
 
 export * from "./voting-card/subject";
 export * from "./voting-card/voting-card-sip-config";

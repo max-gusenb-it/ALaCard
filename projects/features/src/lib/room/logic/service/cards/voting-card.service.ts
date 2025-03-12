@@ -13,11 +13,11 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         return playerVotingCardSkipValue;
     }
 
-    get defaultVotingGroup() : string {
+    get defaultGroup() : string {
         return VotingCardGroup.VotingCard_MostVotedSubject;
     }
 
-    get defaultVotingDistribution() {
+    get defaultDistribution() {
         return true;
     }
     
@@ -127,9 +127,10 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
         const votingCard = this.castCard(card);
     
         const filteredResults = this.getResultsForGroup(
-            this.getResults(dynamicRoundData)
+            this.getResults(dynamicRoundData, card)
                 .filter(r => r.subjectID !== this.skipValue),
-            votingCard.settings?.sipConfig?.group ?? this.defaultVotingGroup
+            votingCard.settings?.sipConfig?.group ?? this.defaultGroup,
+            card
         );
 
         return filteredResults
@@ -138,14 +139,14 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
                     return {
                         playerId: pID,
                         sips: defaultCardSips,
-                        distribute: votingCard.settings?.sipConfig?.distribute ?? this.defaultVotingDistribution
+                        distribute: votingCard.settings?.sipConfig?.distribute ?? this.defaultDistribution
                     } as SipResult
                 });
             })
             .flat();
     }
 
-    getResultsForGroup(results: VotingResult[], groupString: string) {
+    getResultsForGroup(results: VotingResult[], groupString: string, card?: Card) {
         if (results.length == 0) return [];
         switch(groupString) {
             case(VotingCardGroup.VotingCard_MostVotedSubject):

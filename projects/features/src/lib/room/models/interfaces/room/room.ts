@@ -3,6 +3,7 @@ import { Game, RoomSettings, Player } from "@features";
 
 export interface Room extends FirestoreBase {
     name: string;
+    // ToDo: remove description
     description: string;
     settings: RoomSettings;
     /**

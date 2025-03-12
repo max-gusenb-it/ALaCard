@@ -1,7 +1,10 @@
 export * from "./cards/translation/card-translation.service";
+export * from "./cards/translation/poll-card-translation.service";
 export * from "./cards/translation/voting-card-translation.service";
 export * from "./cards/card.service";
+export * from "./cards/player-voting-card.service";
 export * from "./cards/poll-card.service";
+export * from "./cards/quiz-card.service";
 export * from "./cards/voting-card.service";
 
 export * from "./data/ingame-data.data.service";

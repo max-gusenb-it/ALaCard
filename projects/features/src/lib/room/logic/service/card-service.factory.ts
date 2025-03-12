@@ -9,14 +9,17 @@ import {
     CardTranslationService,
     GameCardTranslationService,
     VotingCardTranslationService,
+    PlayerVotingCardService,
+    QuizCardService,
+    PollCardTranslationService
 } from "@features";
 import {
     Card,
     CardType,
     PollCard
 } from "@shared";
-import { PlayerVotingCardService } from "./cards/player-voting-card.service";
-import { PollCardTranslationService } from "./cards/translation/poll-card-translation.service";
+import {  } from "./cards/player-voting-card.service";
+import { QuizCardTranslationService } from "./cards/translation/quiz-card-translation.service";
 
 @Injectable({
     providedIn: 'root'
@@ -24,11 +27,13 @@ import { PollCardTranslationService } from "./cards/translation/poll-card-transl
 export class CardServiceFactory {
     constructor(
         private cardService: CardService<Card, Response, DynamicRoundData, Result>,
-        private pollCardService: PollCardService,
-        private newPlayerVotingCardService: PlayerVotingCardService,
+        private pollCardService: PollCardService<PollCard>,
+        private playerVotingCardService: PlayerVotingCardService,
+        private quizCardService: QuizCardService,
         private cardTranslationService: CardTranslationService<Card>,
         private votingCardTranslationService: VotingCardTranslationService<PollCard>,
-        private pollCardTranslationService: PollCardTranslationService
+        private pollCardTranslationService: PollCardTranslationService,
+        private quizCardTranslationService: QuizCardTranslationService
     ) { }
 
     getCardService(cardType?: CardType) : GameCardService {
@@ -36,7 +41,9 @@ export class CardServiceFactory {
             case(CardType.Poll):
                 return this.pollCardService;
             case(CardType.PlayerVoting):
-                return this.newPlayerVotingCardService;
+                return this.playerVotingCardService;
+            case(CardType.Quiz):
+                return this.quizCardService;
             default:
                 return this.cardService;
         }
@@ -48,6 +55,8 @@ export class CardServiceFactory {
                 return this.pollCardTranslationService;
             case(CardType.PlayerVoting):
                 return this.votingCardTranslationService;
+            case(CardType.Quiz):
+                return this.quizCardTranslationService;
             default:
                 return this.cardTranslationService;
         }
