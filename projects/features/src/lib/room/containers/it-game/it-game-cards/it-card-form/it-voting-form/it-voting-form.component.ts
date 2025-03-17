@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService, playerVotingCardSkipValue } from "@features";
-import { AngularLifecycle, Card, InformationActions, InformationState, Subject, VotingCard, } from "@shared";
+import { AngularLifecycle, Card, InformationActions, InformationState, Subject, Utils, VotingCard, } from "@shared";
 import { takeUntil } from "rxjs";
 
 @Component({
@@ -31,6 +31,10 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
 
     get cardColor()  {
         return CardUtils.getCardColor(this.card);
+    }
+
+    get drinkingGame() {
+        return this.store.selectSnapshot(RoomState.gameSettings)?.drinkingGame;
     }
     
     constructor(
@@ -76,6 +80,18 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
             this.round.playerIds,
             this.store.selectSnapshot(RoomState.specificPlayerId)
         );
+    }
+    
+    getSipText() {
+        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.settings?.sipText) && !this.card.settings?.delaySipText) {
+            return this.votingCardTranslationService.formatCardText(
+                this.card.settings!.sipText!,
+                this.store.selectSnapshot(RoomState.players),
+                this.round.playerIds,
+                this.store.selectSnapshot(RoomState.specificPlayerId)
+            );
+        }
+        return "";
     }
     
     identifySubject(index: number, subject: Subject) {

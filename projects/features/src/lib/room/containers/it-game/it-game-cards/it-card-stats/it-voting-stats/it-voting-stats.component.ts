@@ -120,6 +120,18 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
         );
     }
 
+    getSipText() {
+        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.settings?.sipText)) {
+            return this.votingCardTranslationService.formatCardText(
+                this.card.settings!.sipText!,
+                this.store.selectSnapshot(RoomState.players),
+                this.round.playerIds,
+                this.store.selectSnapshot(RoomState.specificPlayerId)
+            );
+        }
+        return "";
+    }
+
     getResultsHeading() {
         return this.votingCardTranslationService.getResultsHeading(
             this.votingCardService.getSubjects(this.card),

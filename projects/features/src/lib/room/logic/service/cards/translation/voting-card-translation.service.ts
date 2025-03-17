@@ -63,6 +63,8 @@ export class VotingCardTranslationService extends CardTranslationService {
     override getSipText(card: Card, players: Player[], playerIDs: string[] | undefined, specificPlayerID: string | undefined, cardState: string, isSingleDeviceMode?: boolean): string | undefined {
         if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return super.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
 
+        if (!isSingleDeviceMode && !Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return;
+
         if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
             return MarkdownUtils.addTagToContent(
                 this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
