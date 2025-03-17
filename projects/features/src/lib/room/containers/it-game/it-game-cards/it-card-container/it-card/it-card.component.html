@@ -13,17 +13,10 @@
   <div class="rounded-b-xl flex grow flex-col gap-1 p-2 bg-it_yellow-0">
     <div class="flex grow items-center font-semibold">
       <div
-        *ngIf="offline"
         id="markdown"
         [ngClass]="getOfflineTextCSSClasses()"
-        [innerHTML]="(getOfflineCardText() | markdown)"
+        [innerHTML]="(getNewCardText() | markdown)"
       >
-      </div>
-      <div
-        class="text-xl"
-        *ngIf="!offline"
-      >
-        {{ getCardText() }}
       </div>
     </div>
     <div class="text-end text-sm" *ngIf="!hideDeckName">

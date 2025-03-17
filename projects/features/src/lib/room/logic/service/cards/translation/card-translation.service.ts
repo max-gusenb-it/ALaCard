@@ -7,6 +7,10 @@ import { CardState, CardUtils, MarkdownUtils, Player } from "@features";
     providedIn: 'root'
 })
 export class CardTranslationService {
+    get gameSipTextBreaker() {
+        return "<br><br>\n\n";
+    }
+
     constructor(protected translateService: TranslateService) { }
 
     // ToDo: structure 
@@ -27,15 +31,13 @@ export class CardTranslationService {
         }
     }
 
-    getCardText(
-        card: Card,
+    formatCardText(
+        text: string,
         players: Player[],
         playerIds: string[] = [],
         specificPlayerID?: string
     ): string {
-        let text = card.text;
-
-        if (card.text.includes(specificPlayerNameWhitecard)) {
+        if (text.includes(specificPlayerNameWhitecard)) {
             if (Utils.isStringDefinedAndNotEmpty(specificPlayerID)) {
                 text = text.split(`${specificPlayerNameWhitecard}`).join(players.find(p => p.id === specificPlayerID)?.username);
             } else {
@@ -51,37 +53,55 @@ export class CardTranslationService {
         return text;
     }
 
-    getOfflineCardText(
+    getNewCardText(
         card: Card,
         players: Player[],
-        playerIds: string[] | undefined,
-        specificPlayerID: string = "",
-        isDrinkingGame: boolean,
-        cardState: string = CardState.Card_Initial
+        playerIDs: string[],
+        specificPlayerID: string,
+        cardState: string,
+        isSingleDeviceMode: boolean,
+        isDrinkingGame: boolean
     ): string {
-        let text = this.getCardText(card, players, playerIds, specificPlayerID);
-
-        const delaySipText = CardUtils.castCard<Card>(card).settings?.delaySipText;
+        let text = this.getGameText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
         if (isDrinkingGame) {
-            text += "<br><br>\n";
-            if (delaySipText && CardUtils.isInitialCardState(cardState)) {
-                text += MarkdownUtils.addTagToContent(
+            const sipText = this.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
+            if (Utils.isStringDefinedAndNotEmpty(sipText)) text += this.gameSipTextBreaker + sipText;
+        }
+        return text;
+    }
+
+    getGameText(
+        card: Card,
+        players: Player[],
+        playerIDs: string[],
+        specificPlayerID: string,
+        cardState: string,
+        isSingleDeviceMode: boolean
+    ) {
+        return this.formatCardText(card.text, players, playerIDs, specificPlayerID);
+    }
+
+    getSipText(
+        card: Card,
+        players: Player[],
+        playerIDs: string[] = [],
+        specificPlayerID: string = "",
+        cardState: string,
+        isSingleDeviceMode: boolean = false
+    ) {
+        if (!Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return;
+        if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
+            if (isSingleDeviceMode) {
+                return MarkdownUtils.addTagToContent(
                     this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
                     "span",
                     ["text-base"]
                 );
             } else {
-                text += this.getCardDrinkingText(card)
+                return "";
             }
         }
-        return text;
-    }
-
-    getCardDrinkingText(card: Card) : string {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) {
-            return card.settings!.sipText!;
-        }
-        return "";
+        return this.formatCardText(card.settings!.sipText!, players, playerIDs, specificPlayerID);
     }
 
     getOfflineCardTextClasses() {

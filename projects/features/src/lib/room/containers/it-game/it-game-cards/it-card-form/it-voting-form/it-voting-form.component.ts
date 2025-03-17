@@ -70,8 +70,8 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
     }
 
     getCardText() {
-        return this.votingCardTranslationService.getCardText(
-            this.card,
+        return this.votingCardTranslationService.formatCardText(
+            this.card.text,
             this.store.selectSnapshot(RoomState.players),
             this.round.playerIds,
             this.store.selectSnapshot(RoomState.specificPlayerId)

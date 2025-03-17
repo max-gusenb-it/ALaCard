@@ -60,24 +60,16 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     return ColorUtils.getBackground200CSS(color);
   }
 
-  getCardText() {
-    return this.cardTranslationService.getCardText(
+  getNewCardText() {
+    return this.cardTranslationService.getNewCardText(
       this.card,
       this.store.selectSnapshot(RoomState.players),
-      this.playerIds,
-      this.store.selectSnapshot(RoomState.specificPlayerId)
-    );
-  }
-
-  getOfflineCardText() {
-    return this.cardTranslationService.getOfflineCardText(
-      this.card,
-      this.store.selectSnapshot(RoomState.players),
-      this.playerIds,
-      this.store.selectSnapshot(RoomState.specificPlayerId),
-      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame,
-      this.cardState
-    );
+      this.playerIds ?? [],
+      this.store.selectSnapshot(RoomState.specificPlayerId) ?? "",
+      this.cardState,
+      this.store.selectSnapshot(RoomState.singleDeviceModeActive),
+      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame
+    )
   }
 
   getOfflineTextCSSClasses() {

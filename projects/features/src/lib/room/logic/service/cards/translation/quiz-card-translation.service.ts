@@ -7,6 +7,10 @@ import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-c
     providedIn: 'root'
 })
 export class QuizCardTranslationService extends PollCardTranslationService {
+    override get gameSipTextBreaker() {
+        return "<br>\n\n";
+    }
+
     override get defaultSipDistributionGroup(): string {
         return QuizCardGroup.QuizCard_AllTargets;
     }
@@ -15,17 +19,8 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         return <QuizSubject[]>subjects;
     }
 
-    override getOfflineCardText(
-        card: Card,
-        players: Player[],
-        playerIds: string[] | undefined,
-        specificPlayerID: string | undefined,
-        isDrinkingGame: boolean,
-        cardState: CardState = CardState.Card_Initial
-    ): string {
-        let text = this.getCardText(card, players, playerIds, specificPlayerID);
-        text += "<br><br>\n";
-
+    protected override getSubjectsText(card: Card, cardState: string): string {
+        let text = "<br><br>\n";
         const quizCard = CardUtils.castCard<QuizCard>(card);
         text += "<ul>";
         quizCard.subjects.forEach(subject => {
@@ -34,19 +29,6 @@ export class QuizCardTranslationService extends PollCardTranslationService {
             text += MarkdownUtils.addTagToContent(subject.title, "li", [cssClass]);
         });
         text += "</ul>";
-
-        const delaySipText = quizCard.settings?.delaySipText;
-        if (isDrinkingGame) {
-            if (delaySipText && CardUtils.isInitialCardState(cardState)) {
-                text += "<br>\n\n" + MarkdownUtils.addTagToContent(
-                    this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
-                    "span",
-                    ["text-base"]
-                );
-            } else {
-                text += "<br>\n\n" + this.getCardDrinkingText(card)
-            }
-        }
         return text;
     }
 

@@ -60,8 +60,16 @@ export class VotingCardTranslationService extends CardTranslationService {
         );
     }
 
-    override getCardDrinkingText(card: Card): string {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return super.getCardDrinkingText(card);
+    override getSipText(card: Card, players: Player[], playerIDs: string[] | undefined, specificPlayerID: string | undefined, cardState: string, isSingleDeviceMode?: boolean): string | undefined {
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return super.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
+
+        if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
+            return MarkdownUtils.addTagToContent(
+                this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
+                "span",
+                ["text-base"]
+            );
+        }
 
         let text = "";
 
