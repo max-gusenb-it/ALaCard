@@ -24,7 +24,7 @@ export class PollCardTranslationService extends VotingCardTranslationService {
 
         const delaySipText = pollCard.settings?.delaySipText;
         if (isDrinkingGame) {
-            if (delaySipText && cardState === CardState.Card_Initial) {
+            if (delaySipText && CardUtils.isInitialCardState(cardState)) {
                 text += "<br><br>\n\n" + MarkdownUtils.addTagToContent(
                     this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
                     "span",

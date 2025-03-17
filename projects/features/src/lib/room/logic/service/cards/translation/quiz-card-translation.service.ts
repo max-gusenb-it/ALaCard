@@ -30,14 +30,14 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         text += "<ul>";
         quizCard.subjects.forEach(subject => {
             let cssClass = "";
-            if (cardState !== CardState.Card_Initial) cssClass = subject.isTarget ? "target-subject" : "none-target-subject"
+            if (!CardUtils.isInitialCardState(cardState)) cssClass = subject.isTarget ? "target-subject" : "none-target-subject"
             text += MarkdownUtils.addTagToContent(subject.title, "li", [cssClass]);
         });
         text += "</ul>";
 
         const delaySipText = quizCard.settings?.delaySipText;
         if (isDrinkingGame) {
-            if (delaySipText && cardState === CardState.Card_Initial) {
+            if (delaySipText && CardUtils.isInitialCardState(cardState)) {
                 text += "<br>\n\n" + MarkdownUtils.addTagToContent(
                     this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
                     "span",

@@ -25,4 +25,8 @@ export namespace CardUtils {
             }
         }
     }
+
+    export function isInitialCardState(cardState: string) {
+      return cardState.endsWith("_Initial");
+    }
 }

@@ -64,7 +64,7 @@ export class CardTranslationService {
         const delaySipText = CardUtils.castCard<Card>(card).settings?.delaySipText;
         if (isDrinkingGame) {
             text += "<br><br>\n";
-            if (delaySipText && cardState === CardState.Card_Initial) {
+            if (delaySipText && CardUtils.isInitialCardState(cardState)) {
                 text += MarkdownUtils.addTagToContent(
                     this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
                     "span",

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { CardState, DynamicRoundData, PollCardService, QuizCardStates, RoomState, VotingResult } from "@features";
-import { Card, QuizCard } from "@shared";
+import { CardState, DynamicRoundData, PollCardService, QuizCardState, RoomState, VotingResult } from "@features";
+import { Card, QuizCard, Utils } from "@shared";
 import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
 @Injectable({
@@ -12,17 +12,21 @@ export class QuizCardService extends PollCardService<QuizCard> {
         return QuizCardGroup.QuizCard_AllTargets;
     }
 
-    override hasFollowUpCard(card: Card, cardState: string): boolean {
-        const singleDeviceModeActive = this.store.selectSnapshot(RoomState.singleDeviceModeActive);
-        if (singleDeviceModeActive && cardState === CardState.Card_Initial) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    override getNextCardState(): string {
-        return QuizCardStates.QuizCard_Targets;
+    override getNextCardState(card: Card, cardState: string): string | undefined {
+        switch(cardState) {
+            case(CardState.Card_Initial):
+            case(CardState.Card_FollowUp_Initial): {
+                const singleDeviceModeActive = this.store.selectSnapshot(RoomState.singleDeviceModeActive);
+                if (singleDeviceModeActive) {
+                    return QuizCardState.QuizCard_Targets;
+                } else if (Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID)) {
+                    return CardState.Card_FollowUp_Initial;
+                }
+                return;
+            };
+            default: return super.getNextCardState(card, cardState);
+        }
     }
 
     override getResults(dynamicRoundData: DynamicRoundData, card: Card): VotingResult[] {

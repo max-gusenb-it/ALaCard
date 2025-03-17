@@ -110,15 +110,16 @@ export class GameService {
             );
         }
         
-        if (this.getCardService(newCard.type).hasFollowUpCard(newCard!, newRound.cardState)) {
+        const newCardState = this.getCardService(newCard.type).getNextCardState(newCard, newRound.cardState);
+        if (Utils.isStringDefinedAndNotEmpty(newCardState)) {
             staticRoundData.followUpCardSchedules = [
                 {
-                    cardIndex: Utils.isNumberDefined(newCard.followUpCardConfig?.followUpCardID) ? 
-                        deck.cards.findIndex(c => c.followUpCardID === newCard.followUpCardConfig!.followUpCardID!) : 
-                        newRound.cardIndex,
+                    cardIndex: newCardState !== CardState.Card_FollowUp_Initial ? 
+                        newRound.cardIndex :
+                        deck.cards.findIndex(c => c.followUpCardID === newCard.followUpCardConfig!.followUpCardID!),
                     scheduledRoundId: newRound.id + (newCard.followUpCardConfig?.roundDelay ?? 1),
                     sourceCardPlayerIds: newRound.playerIds ?? [],
-                    cardState: this.getCardService(newCard.type).getNextCardState()
+                    cardState: newCardState!
                 },
                 ...staticRoundData.followUpCardSchedules
             ]
