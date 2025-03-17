@@ -64,12 +64,14 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
             card
         );
 
+        const sips = playerVotingCard.settings?.sipConfig?.sips ?? defaultCardSips;
+
         return filteredResults
             .map(r => {
                 return {
                     distribute: playerVotingCard.settings?.sipConfig?.distribute ?? this.defaultDistribution,
                     playerId: r.subjectID,
-                    sips: results.length > 1 ? defaultCardSips : defaultCardSips * 2
+                    sips: results.length > 1 ? sips : sips * 2
                 } as SipResult
             });
     }

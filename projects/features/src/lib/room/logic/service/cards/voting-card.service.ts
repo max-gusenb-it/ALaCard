@@ -138,7 +138,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
                 return r.playerIDs.map(pID => {
                     return {
                         playerId: pID,
-                        sips: defaultCardSips,
+                        sips: votingCard.settings?.sipConfig?.sips ?? defaultCardSips,
                         distribute: votingCard.settings?.sipConfig?.distribute ?? this.defaultDistribution
                     } as SipResult
                 });

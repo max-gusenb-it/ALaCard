@@ -82,8 +82,10 @@ export class VotingCardTranslationService extends CardTranslationService {
         text += votingCard.settings?.sipConfig?.distribute ?? this.defaultSipDistribution
             ? this.translateService.instant("shared.components.display.it-result.distribute") 
             : this.translateService.instant("shared.components.display.it-result.drink");
+
+        const sips = votingCard.settings?.sipConfig?.sips ?? defaultCardSips;
             
-        text += " " + defaultCardSips + " " + this.translateService.instant("shared.components.display.it-result.sip")
+        text += " " + sips + " " + (sips <= 1 ? this.translateService.instant("shared.components.display.it-result.sip") : this.translateService.instant("shared.components.display.it-result.sips"))
 
         return MarkdownUtils.addTagToContent(text, "span", ["text-base"]);
     }

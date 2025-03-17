@@ -25,10 +25,12 @@ export const developmentDeck: Deck = {
                 sipConfig: {
                     group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
                     distribute: false,
+                    sips: 2,
                     subjectIDs: ["0"]
                 }
             }
-        } as PollCard,{
+        } as PollCard,
+        {
             text: "Ever taken hard drugs?",
             type: CardType.Poll,
             subjects: [
@@ -40,13 +42,15 @@ export const developmentDeck: Deck = {
                 }
             ],
             settings: {
+                sipText: "Good for you, please drink some alcohol 💊",
+                delaySipText: true,
                 sipConfig: {
                     group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
                     distribute: false,
                     subjectIDs: ["1"]
                 }
             }
-        } as PollCard,
+        } as PollCard
     ],
     flags: [],
     requiredPlayers: {
@@ -1336,10 +1340,12 @@ export const leggitPartyDeck: Deck = {
                 sipConfig: {
                     group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
                     distribute: false,
+                    sips: 2,
                     subjectIDs: ["0"]
                 }
             }
-        } as PollCard,{
+        } as PollCard,
+        {
             text: "Ever taken hard drugs?",
             type: CardType.Poll,
             subjects: [
@@ -1352,6 +1358,7 @@ export const leggitPartyDeck: Deck = {
             ],
             settings: {
                 sipText: "Good for you, please drink some alcohol 💊",
+                delaySipText: true,
                 sipConfig: {
                     group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
                     distribute: false,
@@ -1562,7 +1569,7 @@ export const leggitPartyDeck: Deck = {
             type: CardType.FreeText,
             settings: {
                 customColor: "violet",
-                customTitle: "Dabbing",
+                customTitle: "Dabbing"
             }
         } as FreeTextCard
     ],
