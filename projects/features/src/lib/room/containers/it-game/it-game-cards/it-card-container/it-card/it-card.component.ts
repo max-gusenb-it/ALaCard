@@ -61,7 +61,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getNewCardText() {
-    return this.cardTranslationService.getNewCardText(
+    return this.cardTranslationService.getCardText(
       this.card,
       this.store.selectSnapshot(RoomState.players),
       this.playerIds ?? [],

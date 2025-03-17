@@ -53,7 +53,7 @@ export class CardTranslationService {
         return text;
     }
 
-    getNewCardText(
+    getCardText(
         card: Card,
         players: Player[],
         playerIDs: string[],
