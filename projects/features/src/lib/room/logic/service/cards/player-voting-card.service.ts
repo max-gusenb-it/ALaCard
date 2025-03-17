@@ -60,7 +60,8 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
 
         const filteredResults = this.getResultsForGroup(
             results,
-            group
+            group,
+            card
         );
 
         return filteredResults
@@ -73,13 +74,13 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
             });
     }
 
-    override getResultsForGroup(results: VotingResult[], groupString: string): VotingResult[] {
+    override getResultsForGroup(results: VotingResult[], groupString: string, card: Card): VotingResult[] {
         if (results.length == 0) return [];
         switch(groupString) {
             case(PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer): {
                 return this.getTopResults(results);
             }
-            default: return super.getResultsForGroup(results, groupString);
+            default: return super.getResultsForGroup(results, groupString, card);
         }
     }
 }

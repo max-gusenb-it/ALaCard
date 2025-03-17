@@ -1,4 +1,5 @@
 export * from "./cards/player-voting-card-group/player-voting-card-group";
+export * from "./cards/quiz-card/quiz-card-group";
 export * from "./cards/voting-card/voting-card-group";
 
 export * from "./deck/card-type";

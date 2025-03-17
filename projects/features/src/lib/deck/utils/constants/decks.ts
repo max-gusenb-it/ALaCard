@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCard, QuizCard } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCard, QuizCard, VotingCardGroup } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -10,40 +10,43 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Hey, remember me 🙉",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            },
-            followUpCardConfig: {
-                followUpCardID: 0
-            }
-        } as FreeTextCard,
-        {
-            followUpCardID: 0,
-            text: "Hey, do you remember me? 🍌",
-            type: CardType.Quiz,
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.Poll,
             subjects: [
                 {
-                    title: "🙊",
-                    isTarget: false
+                    title: "Yes ✅" 
                 },
                 {
-                    title: "🙉",
-                    isTarget: true
-                },
-                {
-                    title: "🙈",
-                    isTarget: false
+                    title: "No ❎"
                 }
             ],
             settings: {
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            } 
-        } as QuizCard,
+                sipText: "Everyone stupid enough do so has to drink 2 sips 🥂",
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    subjectIDs: ["0"]
+                }
+            }
+        } as PollCard,{
+            text: "Ever taken hard drugs?",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    subjectIDs: ["1"]
+                }
+            }
+        } as PollCard,
     ],
     flags: [],
     requiredPlayers: {
@@ -1317,40 +1320,45 @@ export const leggitPartyDeck: Deck = {
                 }
             ]
         } as PollCard,
-        // ToDo: Show anonymous type in form
-        // {
-        //     text: "Ever dropped your phone in the toilet?",
-        //     type: CardType.Poll,
-        //     subjects: [
-        //         {
-        //             title: "Yes ✅" 
-        //         },
-        //         {
-        //             title: "No ❎"
-        //         }
-        //     ],
-        //     settings: {
-        //         sipText: "Everyone stupid enough do so has to drink 2 sips 🥂"
-        //     }
-        // } as PollCard,
-        // {
-        //     text: "Ever taken hard drugs?",
-        //     type: CardType.Poll,
-        //     subjects: [
-        //         {
-        //             title: "Yes ✅" 
-        //         },
-        //         {
-        //             title: "No ❎"
-        //         }
-        //     ],
-        //     settings: {
-        //         // sipConfig: {
-        //         //     specificSipSubjectId: 1,
-        //         //     distribute: false
-        //         // }
-        //     }
-        // } as PollCard,
+        {
+            text: "Ever dropped your phone in the toilet?",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                sipText: "Everyone stupid enough do so has to drink 2 sips 🥂",
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    subjectIDs: ["0"]
+                }
+            }
+        } as PollCard,{
+            text: "Ever taken hard drugs?",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                sipText: "Good for you, please drink some alcohol 💊",
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    subjectIDs: ["1"]
+                }
+            }
+        } as PollCard,
         // ------------------------------
         // - New Cards
         // ------------------------------

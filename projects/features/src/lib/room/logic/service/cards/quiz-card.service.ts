@@ -81,7 +81,7 @@ export class QuizCardService extends PollCardService<QuizCard> {
                 return results
                     .filter(r => targetSubjectIDs.includes(r.subjectID) === isTarget);
             }
-            default: return super.getResultsForGroup(results, groupString);
+            default: return super.getResultsForGroup(results, groupString, card);
         }
     }
     

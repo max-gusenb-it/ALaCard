@@ -146,7 +146,7 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
             .flat();
     }
 
-    getResultsForGroup(results: VotingResult[], groupString: string, card?: Card) {
+    getResultsForGroup(results: VotingResult[], groupString: string, card: Card) {
         if (results.length == 0) return [];
         switch(groupString) {
             case(VotingCardGroup.VotingCard_MostVotedSubject):
@@ -159,6 +159,15 @@ export class VotingCardService<C extends VotingCard> extends CardService<C, Voti
                 }
                 return results
                     .filter(r => r.votes === votes);
+            }
+            case(VotingCardGroup.VotingCard_SubjectIDs): {
+                const votingCard = this.castCard(card);
+                if (!!votingCard.settings?.sipConfig?.subjectIDs && votingCard.settings.sipConfig.subjectIDs.length >= 1) {
+                    return results.filter(r => {
+                        return votingCard.settings!.sipConfig!.subjectIDs!.includes(r.subjectID);
+                    });
+                }
+                return [];
             }
             default: return [];
         }
