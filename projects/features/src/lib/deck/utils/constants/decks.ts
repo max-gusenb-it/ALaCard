@@ -10,59 +10,40 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "What was my breakfast?",
+            text: "Hey, remember me 🙉",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            },
+            followUpCardConfig: {
+                followUpCardID: 0
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 0,
+            text: "Hey, do you remember me? 🍌",
             type: CardType.Quiz,
             subjects: [
                 {
-                    title: "Soup 🍜",
+                    title: "🙊",
                     isTarget: false
                 },
                 {
-                    title: "Croissant 🥐",
+                    title: "🙉",
                     isTarget: true
                 },
                 {
-                    title: "Sandwich 🥪",
+                    title: "🙈",
                     isTarget: false
                 }
             ],
             settings: {
-                delaySipText: true,
-                sipText: "He dring a moi"
-            }
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            } 
         } as QuizCard,
-        {
-            text: "Who watches the most trash TV?",
-            type: CardType.PlayerVoting,
-            settings: {
-                delaySipText: true,
-                sipText: "He dring a moi"
-            }
-        } as PlayerVotingCard,
-        {
-            text: "Where would you rather travel?",
-            type: CardType.Poll,
-            subjects: [
-                {
-                    title: "200 years into the future" 
-                },
-                {
-                    title: "200 years into the past"
-                }
-            ],
-            settings: {
-                delaySipText: true,
-                sipText: "He dring a moi"
-            }
-        } as PollCard,
-        {
-            text: "%p0 give four sips to the player you know best",
-            type: CardType.FreeText,
-            settings: {
-                delaySipText: true,
-                sipText: "He dring a moi"
-            }
-        } as FreeTextCard
     ],
     flags: [],
     requiredPlayers: {
@@ -1339,7 +1320,7 @@ export const leggitPartyDeck: Deck = {
         // ToDo: Show anonymous type in form
         // {
         //     text: "Ever dropped your phone in the toilet?",
-        //     type: CardType.PollCard,
+        //     type: CardType.Poll,
         //     subjects: [
         //         {
         //             title: "Yes ✅" 
@@ -1349,15 +1330,12 @@ export const leggitPartyDeck: Deck = {
         //         }
         //     ],
         //     settings: {
-        //         sipConfig: {
-        //             specificSipSubjectId: 0,
-        //             distribute: false
-        //         }
+        //         sipText: "Everyone stupid enough do so has to drink 2 sips 🥂"
         //     }
         // } as PollCard,
         // {
         //     text: "Ever taken hard drugs?",
-        //     type: CardType.PollCard,
+        //     type: CardType.Poll,
         //     subjects: [
         //         {
         //             title: "Yes ✅" 
@@ -1367,52 +1345,51 @@ export const leggitPartyDeck: Deck = {
         //         }
         //     ],
         //     settings: {
-        //         sipConfig: {
-        //             specificSipSubjectId: 1,
-        //             distribute: false
-        //         }
+        //         // sipConfig: {
+        //         //     specificSipSubjectId: 1,
+        //         //     distribute: false
+        //         // }
         //     }
         // } as PollCard,
         // ------------------------------
         // - New Cards
         // ------------------------------
-        // {
-        //     text: "Hey, remember me 🙉",
-        //     type: CardType.FreeText,
-        //     settings: {
-        //         drinkingCard: true,
-        //         customColor: "violet",
-        //         customTitle: "Follow Up Card"
-        //     },
-        //     followUpCardConfig: {
-        //         followUpCardID: 0,
-        //         roundDelay: 6
-        //     }
-        // } as FreeTextCard,
-        // {
-        //     followUpCardID: 0,
-        //     text: "Hey, do you remember me? 🍌",
-        //     type: CardType.PollCard,
-        //     subjects: [
-        //         {
-        //             title: "🙊"
-        //         },
-        //         {
-        //             title: "🙉"
-        //         },
-        //         {
-        //             title: "🙈"
-        //         }
-        //     ],
-        //     settings: {
-        //         customColor: "violet",
-        //         customTitle: "Follow Up Card",
-        //         sipConfig: {
-        //             specificSipSubjectId: 1,
-        //             distribute: true
-        //         }
-        //     } as PollCardSettings
-        // } as PollCard,
+        {
+            text: "Hey, remember me 🙉",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            },
+            followUpCardConfig: {
+                followUpCardID: 0,
+                roundDelay: 6
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 0,
+            text: "Hey, do you remember me? 🍌",
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "🙊",
+                    isTarget: false
+                },
+                {
+                    title: "🙉",
+                    isTarget: true
+                },
+                {
+                    title: "🙈",
+                    isTarget: false
+                }
+            ],
+            settings: {
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            } 
+        } as QuizCard,
         {
             text: "%p0 your are crowned Thumb Master. Use your power to distribute 1 sip to those who don't follow your reign 👑",
             type: CardType.FreeText,
@@ -2544,44 +2521,43 @@ export const testingDeck: Deck = {
                 order: 0
             }
         } as FreeTextCard,
-        // {
-        //     text: "Hey, remember me 🙉",
-        //     type: CardType.FreeText,
-        //     settings: {
-        //         order: 1,
-        //         drinkingCard: true,
-        //         customColor: "violet",
-        //         customTitle: "Follow Up Card"
-        //     },
-        //     followUpCardConfig: {
-        //         followUpCardID: 0,
-        //         roundDelay: 4
-        //     }
-        // } as FreeTextCard,
-        // {
-        //     followUpCardID: 0,
-        //     text: "Hey, do you remember me? 🍌",
-        //     type: CardType.TopicVotingCard,
-        //     subjects: [
-        //         {
-        //             title: "🙊"
-        //         },
-        //         {
-        //             title: "🙉"
-        //         },
-        //         {
-        //             title: "🙈"
-        //         }
-        //     ],
-        //     settings: {
-        //         customColor: "violet",
-        //         customTitle: "Follow Up Card",
-        //         sipConfig: {
-        //             specificSipSubjectId: 1,
-        //             distribute: true
-        //         }
-        //     } as TopicVotingCardSettings
-        // } as TopicVotingCard,
+        {
+            text: "Hey, remember me 🙉",
+            type: CardType.FreeText,
+            settings: {
+                order: 1,
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            },
+            followUpCardConfig: {
+                followUpCardID: 0,
+                roundDelay: 4
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 0,
+            text: "Hey, do you remember me? 🍌",
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "🙊",
+                    isTarget: false
+                },
+                {
+                    title: "🙉",
+                    isTarget: true
+                },
+                {
+                    title: "🙈",
+                    isTarget: false
+                }
+            ],
+            settings: {
+                customColor: "violet",
+                customTitle: "Follow Up Card"
+            }
+        } as QuizCard,
         {
             text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
             type: CardType.PlayerVoting,
