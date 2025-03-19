@@ -1375,11 +1375,11 @@ export const leggitPartyDeck: Deck = {
             settings: {
                 drinkingCard: true,
                 customColor: "violet",
-                customTitle: "Follow Up Card"
-            },
-            followUpCardConfig: {
-                followUpCardID: 0,
-                roundDelay: 6
+                customTitle: "Follow Up Card",
+                followUpCardConfig: {
+                    followUpCardID: 0,
+                    roundDelay: 6
+                }
             }
         } as FreeTextCard,
         {
@@ -1412,10 +1412,10 @@ export const leggitPartyDeck: Deck = {
                 drinkingCard: true,
                 customColor: "violet",
                 customTitle: "Thumb Master 👍",
-            },
-            followUpCardConfig: {
-                followUpCardID: 1,
-                roundDelay: 15
+                followUpCardConfig: {
+                    followUpCardID: 1,
+                    roundDelay: 15
+                }
             }
         } as FreeTextCard,
         {
@@ -1434,10 +1434,10 @@ export const leggitPartyDeck: Deck = {
                 drinkingCard: true,
                 customColor: "violet",
                 customTitle: "Confusion is fun, right?",
-            },
-            followUpCardConfig: {
-                followUpCardID: 2,
-                roundDelay: 15
+                followUpCardConfig: {
+                    followUpCardID: 2,
+                    roundDelay: 15
+                }
             }
         } as FreeTextCard,
         {
@@ -1456,10 +1456,10 @@ export const leggitPartyDeck: Deck = {
                 drinkingCard: true,
                 customColor: "violet",
                 customTitle: "Mix it up 🍸",
-            },
-            followUpCardConfig: {
-                followUpCardID: 3,
-                roundDelay: 1
+                followUpCardConfig: {
+                    followUpCardID: 3,
+                    roundDelay: 1
+                }
             }
         } as FreeTextCard,
         {
@@ -1478,10 +1478,10 @@ export const leggitPartyDeck: Deck = {
                 drinkingCard: true,
                 customColor: "violet",
                 customTitle: "Question Master",
-            },
-            followUpCardConfig: {
-                followUpCardID: 4,
-                roundDelay: 15
+                followUpCardConfig: {
+                    followUpCardID: 4,
+                    roundDelay: 15
+                }
             }
         } as FreeTextCard,
         {
@@ -1500,10 +1500,10 @@ export const leggitPartyDeck: Deck = {
                 drinkingCard: true,
                 customColor: "violet",
                 customTitle: "Switch Up",
-            },
-            followUpCardConfig: {
-                followUpCardID: 5,
-                roundDelay: 15
+                followUpCardConfig: {
+                    followUpCardID: 5,
+                    roundDelay: 15
+                }
             }
         } as FreeTextCard,
         {
@@ -1522,10 +1522,10 @@ export const leggitPartyDeck: Deck = {
                 drinkingCard: true,
                 customColor: "violet",
                 customTitle: "Promotions baby!",
-            },
-            followUpCardConfig: {
-                followUpCardID: 6,
-                roundDelay: 1
+                followUpCardConfig: {
+                    followUpCardID: 6,
+                    roundDelay: 1
+                }
             }
         } as FreeTextCard,
         {
@@ -1535,10 +1535,10 @@ export const leggitPartyDeck: Deck = {
             settings: {
                 customColor: "violet",
                 customTitle: "Promotions baby!",
-            },
-            followUpCardConfig: {
-                followUpCardID: 7,
-                roundDelay: 15
+                followUpCardConfig: {
+                    followUpCardID: 7,
+                    roundDelay: 15
+                }
             }
         } as FreeTextCard,
         {
@@ -1557,10 +1557,10 @@ export const leggitPartyDeck: Deck = {
             settings: {
                 customColor: "violet",
                 customTitle: "Dabbing",
-            },
-            followUpCardConfig: {
-                followUpCardID: 8,
-                roundDelay: 15
+                followUpCardConfig: {
+                    followUpCardID: 8,
+                    roundDelay: 15
+                }
             }
         } as FreeTextCard,
         {
@@ -2543,11 +2543,11 @@ export const testingDeck: Deck = {
                 order: 1,
                 drinkingCard: true,
                 customColor: "violet",
-                customTitle: "Follow Up Card"
-            },
-            followUpCardConfig: {
-                followUpCardID: 0,
-                roundDelay: 4
+                customTitle: "Follow Up Card",
+                followUpCardConfig: {
+                    followUpCardID: 0,
+                    roundDelay: 4
+                }
             }
         } as FreeTextCard,
         {
@@ -2584,13 +2584,13 @@ export const testingDeck: Deck = {
             text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",
             type: CardType.FreeText,
             settings: {
+                order: 2,
                 customColor: "violet",
                 customTitle: "Follow Up Card",
-                order: 2,
-            },
-            followUpCardConfig: {
-                followUpCardID: 1,
-                roundDelay: 4
+                followUpCardConfig: {
+                    followUpCardID: 1,
+                    roundDelay: 4
+                }
             }
         } as FreeTextCard,
         {

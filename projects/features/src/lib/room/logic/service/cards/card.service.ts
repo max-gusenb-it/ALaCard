@@ -90,13 +90,13 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
                     (roomSettings.singleDeviceMode || card.type === CardType.FreeText)
                 ) {
                     return CardState.Card_SipText;
-                } else if (Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID)) {
+                } else if (Utils.isNumberDefined(card.settings?.followUpCardConfig?.followUpCardID)) {
                     return CardState.Card_FollowUp_Initial;
                 }
                 return;
             };
         }
-        if (Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID)) {
+        if (Utils.isNumberDefined(card.settings?.followUpCardConfig?.followUpCardID)) {
             return CardState.Card_FollowUp_Initial;
         }
         return;

@@ -20,7 +20,7 @@ export class QuizCardService extends PollCardService<QuizCard> {
                 const singleDeviceModeActive = this.store.selectSnapshot(RoomState.singleDeviceModeActive);
                 if (singleDeviceModeActive) {
                     return QuizCardState.QuizCard_Targets;
-                } else if (Utils.isNumberDefined(card.followUpCardConfig?.followUpCardID)) {
+                } else if (Utils.isNumberDefined(card.settings?.followUpCardConfig?.followUpCardID)) {
                     return CardState.Card_FollowUp_Initial;
                 }
                 return;

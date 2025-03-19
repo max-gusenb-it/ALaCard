@@ -116,8 +116,8 @@ export class GameService {
                 {
                     cardIndex: newCardState !== CardState.Card_FollowUp_Initial ? 
                         newRound.cardIndex :
-                        deck.cards.findIndex(c => c.followUpCardID === newCard.followUpCardConfig!.followUpCardID!),
-                    scheduledRoundId: newRound.id + (newCard.followUpCardConfig?.roundDelay ?? 1),
+                        deck.cards.findIndex(c => c.followUpCardID === newCard.settings!.followUpCardConfig!.followUpCardID!),
+                    scheduledRoundId: newRound.id + (newCard.settings!.followUpCardConfig!.roundDelay ?? 1),
                     sourceCardPlayerIds: newRound.playerIds ?? [],
                     cardState: newCardState!
                 },
