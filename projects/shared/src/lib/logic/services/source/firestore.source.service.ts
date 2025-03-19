@@ -37,7 +37,7 @@ export class FirestoreService<T extends FirestoreBase> {
         ) as Observable<T>;
     }
 
-    getDocVersionTwo$(
+    getMostRecentDocs(
         ref: string,
         id: string
     ) {

@@ -1,3 +1,5 @@
+// ToDo: refactor error codes
+
 export namespace RoomSourceServiceErrors {
     export const getRoomNoUser = "room-source-service.get-room.no-user-found";
     export const roomNotFound = "room-source-service.get-room.room-not-found";

@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
-import { bufferTime, catchError, firstValueFrom, map } from 'rxjs';
+import { catchError } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { RoomRefHelperService, RoomSourceServiceErrors, Player, Room, PlayerUtils } from '@features';
 import { AuthenticationState, ItError, roomsRef, usersRef, FirestoreService } from '@shared';
@@ -31,27 +31,16 @@ export class RoomSourceService {
             );
     }
 
-    async getInitialRoom$(roomId: string, creatorId: string) {
+    async getInitialRoom(roomId: string, creatorId: string) {
         const roomCollectionRef = this.roomRefService.getRoomCollectionRef(creatorId);
-        let test = await this.firestoreService.getDocVersionTwo$(roomCollectionRef, roomId);
-        console.log ("Room 2: ", test.docs.length > 0 ? test.docs[0].data() : "No docs loaded")
-        return await firstValueFrom(
-            this.getRoom$(roomId, creatorId)
-                .pipe(
-                    // Wait for 1500 ms so actuall room settings are loaded and not cached value -> singleDeviceMode join bug
-                    bufferTime(1500),
-                    map(buffer => buffer.slice(-1)[0])
-                )
-            ).then(
-                r => {
-                    console.log ("Initial load room - success: ", r);
-                    return r;
-                },
-                e => {
-                    console.log ("Initial load room - error: ", e);
-                    throw e;
-            }
-        );
+        let rooms = await this.firestoreService.getMostRecentDocs(roomCollectionRef, roomId);
+        if (rooms.docs.length <= 0) {
+            throw new ItError(
+                RoomSourceServiceErrors.roomNotFound,
+                RoomSourceService.name
+            );
+        }
+        return Promise.resolve(rooms.docs[0].data() as Room);
     }
 
     createRoom(name: string) {
