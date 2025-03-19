@@ -1,8 +1,7 @@
 import { Player } from "../../models";
 import { PlayerState, User } from "@shared";
 
-// ToDo: rename to player
-export namespace UserUtils {
+export namespace PlayerUtils {
     export function exportUserToPlayer(user: User, joinOrder: number) : Player {
         return {
             id: user.id!,

@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import { Injectable } from "@angular/core";
 import { bufferTime, catchError, firstValueFrom, map } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { RoomRefHelperService, RoomSourceServiceErrors, Player, Room, UserUtils } from '@features';
+import { RoomRefHelperService, RoomSourceServiceErrors, Player, Room, PlayerUtils } from '@features';
 import { AuthenticationState, ItError, roomsRef, usersRef, FirestoreService } from '@shared';
 
 @Injectable({
@@ -57,7 +57,7 @@ export class RoomSourceService {
     createRoom(name: string) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!user && user.id) {
-            const player = UserUtils.exportUserToPlayer(user, 0);
+            const player = PlayerUtils.exportUserToPlayer(user, 0);
             return this.firestoreService.add(
                 `${usersRef}/${user.id}/${roomsRef}`,
                 {

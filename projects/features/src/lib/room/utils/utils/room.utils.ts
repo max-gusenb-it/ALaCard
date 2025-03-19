@@ -1,6 +1,6 @@
 import { environment } from "projects/app/src/environments/environment";
 import { Player, Room } from "../../models";
-import { UserUtils } from "./user.utils";
+import { PlayerUtils } from "@features";
 import { offlinePlayerProfilePicture } from "../constants/user";
 import { PlayerState, User } from "@shared";
 
@@ -33,7 +33,7 @@ export namespace RoomUtils {
                 return null;
             }
         } else {
-            newPlayer = UserUtils.exportUserToPlayer(user, playersArray.length !== 0 ? playersArray.length : 0);
+            newPlayer = PlayerUtils.exportUserToPlayer(user, playersArray.length !== 0 ? playersArray.length : 0);
         }
         return newPlayer;
     }
@@ -101,7 +101,7 @@ export namespace RoomUtils {
             settings: {...room.settings}
         } as Room;
         newRoom.players = {
-            [host.id!]: UserUtils.exportUserToPlayer(host, 0)
+            [host.id!]: PlayerUtils.exportUserToPlayer(host, 0)
         };
         return newRoom;
     }
