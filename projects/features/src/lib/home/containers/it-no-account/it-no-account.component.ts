@@ -4,7 +4,7 @@ import { ItCreateRoomAsGuestModal } from "@features";
 import {
   ItSignInModal,
   ItSignUpModal,
-  PopupService
+  PopUpService
 } from '@shared';
 
 @Component({
@@ -15,17 +15,17 @@ export class ItNoAccountComponent {
 
   constructor(
     private navController: NavController,
-    private popupService: PopupService
+    private popUpService: PopUpService
   ) { }
 
   openSignInModal() {
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItSignInModal
     });
   }
 
   openSignUpModal() {
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItSignUpModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"
@@ -33,7 +33,7 @@ export class ItNoAccountComponent {
   }
 
   async openCreateRoomAsGuestModal() {
-    const modal = await this.popupService.openModal({
+    const modal = await this.popUpService.openModal({
       component: ItCreateRoomAsGuestModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"

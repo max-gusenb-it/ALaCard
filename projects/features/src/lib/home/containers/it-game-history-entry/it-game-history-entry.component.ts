@@ -2,8 +2,7 @@ import { Component, HostListener, Input } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
 import { firstValueFrom } from "rxjs";
-import { PopupService } from "projects/shared/src/lib/logic/services/popup.service";
-import { GameHistoryEntry } from "@shared";
+import { GameHistoryEntry, PopUpService } from "@shared";
 
 @Component({
     selector: 'it-game-history-entry',
@@ -14,13 +13,13 @@ export class ItGameHistoryEntryComponent {
 
     constructor(
         private navController: NavController,
-        private popupService: PopupService,
+        private popUpService: PopUpService,
         private translateService: TranslateService,
 
     ) {}
 
     @HostListener("click") onClick(){
-        firstValueFrom(this.popupService.openOptionBottomSheet(
+        firstValueFrom(this.popUpService.openOptionBottomSheet(
             `${this.translateService.instant("features.home.game-history-entry.join-dialog.title-1")} ${this.gameHistoryEntry.roomCreatorUsername}${this.translateService.instant("features.home.game-history-entry.join-dialog.title-2")}`,
             this.translateService.instant("actions.cancel"),
             this.translateService.instant("actions.join"),

@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
 import { environment } from 'projects/app/src/environments/environment';
-import { AuthenticationState } from '@shared';
+import { AuthenticationState, PopUpService } from '@shared';
 
 const inDevUrls = ['/test', '/store'];
 
@@ -20,14 +19,14 @@ export class ItNavigationComponent {
     public router: Router,
     private navController: NavController,
     private store: Store,
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private translateService: TranslateService
   ) { }
 
   navigate(url: string) {
     if (url !== "/home" && !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ) {
       if (environment.production || !environment.production && url !== '/test') {
-        this.popupService.openSnackbar(
+        this.popUpService.openSnackbar(
           this.translateService.instant("shared.components.buttons.it-navigation.no-account")
         );
         return;
@@ -35,7 +34,7 @@ export class ItNavigationComponent {
     }
     if (inDevUrls.includes(url)) {
       if (environment.production || !environment.production && url !== '/test') {
-        this.popupService.openSnackbar(
+        this.popUpService.openSnackbar(
           this.translateService.instant("shared.components.buttons.it-navigation.soon-in-development")
         );
         return;
@@ -45,7 +44,7 @@ export class ItNavigationComponent {
       const userId = this.store.selectSnapshot(AuthenticationState.userId)!;
       const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
       if (!roomId) {
-        this.popupService.openSnackbar(
+        this.popUpService.openSnackbar(
           this.translateService.instant("shared.components.buttons.it-navigation.no-room-owned")
         );
         return;

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
-import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
+import { CreateRoomFormData, PopUpService } from '@shared';
 import { RoomActions } from '@features';
-import { CreateRoomFormData } from '@shared';
 
 @Component({
   selector: 'it-create-room-modal',
@@ -18,11 +17,11 @@ export class ItCreateRoomModal {
 
   constructor(
     private store: Store,
-    private popupService: PopupService
+    private popUpService: PopUpService
   ) { }
 
   close() {
-    this.popupService.dismissModal();
+    this.popUpService.dismissModal();
   }
 
   setCreateRoomFormData(formData: CreateRoomFormData) {
@@ -34,7 +33,7 @@ export class ItCreateRoomModal {
     firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
       this.createRoomFormData.name
     ))).then(state => {
-      this.popupService.dismissModal({
+      this.popUpService.dismissModal({
         userId: state?.authentication?.user?.id,
         roomId: state?.authentication?.user?.roomId
       });

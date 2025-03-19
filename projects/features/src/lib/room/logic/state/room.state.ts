@@ -14,7 +14,7 @@ import {
     LoadingActions, 
     LoadingHelperService, 
     PlayerState,
-    PopupService,
+    PopUpService,
     SharedErrors
 } from '@shared';
 import { 
@@ -130,7 +130,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
         private translateService: TranslateService,
         private store: Store,
         private zone: NgZone,
-        private popupService: PopupService
+        private popUpService: PopUpService
     ) {
         super();
     }
@@ -187,7 +187,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
             let joinOffline = false;
             if (!navigator.onLine && !initialRoom.settings.singleDeviceMode) {
                 // If user is offline, ask him if eh wants to join his room in offline mode
-                joinOffline = await firstValueFrom(this.popupService.openOptionBottomSheet(
+                joinOffline = await firstValueFrom(this.popUpService.openOptionBottomSheet(
                     this.translateService.instant("features.room.join-room-offline-bottom-sheet.title"),
                     this.translateService.instant("actions.cancel"),
                     this.translateService.instant("actions.join"),

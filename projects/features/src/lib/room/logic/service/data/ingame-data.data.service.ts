@@ -3,7 +3,7 @@ import { BehaviorSubject, filter, map, takeUntil } from "rxjs";
 import { Store } from "@ngxs/store";
 import { TranslateService } from "@ngx-translate/core";
 import { 
-    PopupService,
+    PopUpService,
     Utils
 } from "@shared";
 import { 
@@ -23,7 +23,7 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
     ingameData$: BehaviorSubject<IngameData> = new BehaviorSubject(null as any);
 
     constructor(
-        private popupService: PopupService,
+        private popUpService: PopUpService,
         private translateService: TranslateService,
         private ingameDataSourceService: IngameDataSourceService,
         private store: Store
@@ -103,7 +103,7 @@ export class IngameDataDataService extends RoomPlayerLoadBaseDataService {
         if (!!unresponsivePlayerData.find(pd => pd.inactiveRoundsCount === defaultInactiveRoundCount)) {
             const newInactivePlayers = players
                 .filter(p => !!unresponsivePlayerData.find(pd => pd.playerId === p.id && pd.inactiveRoundsCount === defaultInactiveRoundCount));
-            this.popupService.openSnackbar(
+            this.popUpService.openSnackbar(
                 Utils.addComaToStringArray(
                     newInactivePlayers.map(p => p.username),
                     true

@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { PopupService } from "projects/shared/src/lib/logic/services/popup.service";
 import { filter, firstValueFrom, take } from "rxjs";
-import { AuthenticationActions, AuthenticationState, CreateRoomFormData, ProfileEditorFormData } from "@shared";
+import { AuthenticationActions, AuthenticationState, CreateRoomFormData, ProfileEditorFormData, PopUpService } from "@shared";
 import { RoomActions } from "@features";
 
 @Component({
@@ -17,13 +16,13 @@ export class ItCreateRoomAsGuestModal {
   createRoomFormData: CreateRoomFormData;
 
   constructor(
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private changeDetectorRef: ChangeDetectorRef,
     private store: Store
   ) { }
 
   close() {
-    this.popupService.dismissModal();
+    this.popUpService.dismissModal();
   }
 
   setProfileFormData(profileFormData: ProfileEditorFormData) {
@@ -82,7 +81,7 @@ export class ItCreateRoomAsGuestModal {
             )));
           }
         ).then(state => {
-          this.popupService.dismissModal({
+          this.popUpService.dismissModal({
             userId: state?.authentication?.user?.id,
             roomId: state?.authentication?.user?.roomId
           });

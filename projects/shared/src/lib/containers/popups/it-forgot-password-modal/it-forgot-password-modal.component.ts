@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
-import { AuthenticationActions } from '@shared';
+import { AuthenticationActions, PopUpService } from '@shared';
 
 @Component({
   selector: 'it-forgot-password-modal',
@@ -16,19 +15,19 @@ export class ItForgotPasswordModal {
   });
 
   constructor(
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private translateService: TranslateService,
     private store: Store
   ) { }
 
   close() {
-    this.popupService.dismissModal();
+    this.popUpService.dismissModal();
   }
 
   submit() {
     this.store.dispatch(new AuthenticationActions.ResetPassword(this.forgotPasswordForm.controls['email'].value))
       .subscribe(() => {
-        this.popupService.openSnackbar(
+        this.popUpService.openSnackbar(
           this.translateService.instant("shared.components.forms.it-forgot-password-modal.mail-sent")
         );
         this.close();

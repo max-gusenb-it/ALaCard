@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { RoomState, RoomSourceService, RoomUtils, Room, RoomSettings } from '@features';
-import { AuthenticationState, LoadingHelperService, PopupService } from '@shared';
+import { AuthenticationState, LoadingHelperService, PopUpService } from '@shared';
 
 @Component({
   selector: 'it-room-settings-bottom-sheet',
@@ -24,7 +24,7 @@ export class ItRoomSettingsBottomSheet {
   constructor(
     private dialogRef: DialogRef,
     private store: Store,
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private roomSourceService: RoomSourceService,
     private loadingHelpService: LoadingHelperService,
     private translateService: TranslateService
@@ -59,7 +59,7 @@ export class ItRoomSettingsBottomSheet {
       let newRoom = {...room} as Room;
       if (room?.settings.singleDeviceMode != this.roomSettingsForm.controls['singleDeviceMode'].value) {
         if (!this.roomSettingsForm.controls['singleDeviceMode'].value && !navigator.onLine) {
-          this.popupService.openSnackbar(this.translateService.instant('features.room.settings-bottom-sheet.only-single-device-when-offline'));
+          this.popUpService.openSnackbar(this.translateService.instant('features.room.settings-bottom-sheet.only-single-device-when-offline'));
           return;
         }
         newRoom = RoomUtils.removePlayersFromRoom(newRoom, this.store.selectSnapshot(AuthenticationState.user)!);

@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Player, SipResult } from "@features";
-import { PopupService } from "@shared";
+import { PopUpService } from "@shared";
 
 @Component({
   selector: 'it-sip-result',
@@ -14,7 +14,7 @@ export class ItSipResultComponent {
 
   constructor(
     private translateService: TranslateService,
-    private popUpService: PopupService
+    private popUpService: PopUpService
   ) { }
 
   openSnackbar() {

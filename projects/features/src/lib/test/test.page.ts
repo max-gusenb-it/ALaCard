@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
+import { PopUpService } from '@shared';
 
 @Component({
   selector: 'app-test',
@@ -51,7 +51,7 @@ export class TestPage {
     { title: "Would you rather", selected: false },
   ];
 
-  constructor(private popupService: PopupService) {}
+  constructor(private popUpService: PopUpService) {}
 
   setColor(color: string) {
     if (color) {
@@ -76,7 +76,7 @@ export class TestPage {
   }
 
   openSnackbar() {
-    this.popupService.openSnackbar("No button to continue? Swipe to the left side to resume the game", "home", true);
+    this.popUpService.openSnackbar("No button to continue? Swipe to the left side to resume the game", "home", true);
   }
 
   tabsChanged(event: boolean) {

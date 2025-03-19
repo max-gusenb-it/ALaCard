@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ItCreateRoomModal } from '@features';
-import { PopupService } from '@shared';
+import { PopUpService } from '@shared';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -11,11 +11,11 @@ export class ItNoRoomComponent {
 
   constructor(
     private navController: NavController,
-    private popupService: PopupService
+    private popUpService: PopUpService
   ) { }
 
   async openCreateRoomModal() {
-    const modal = await this.popupService.openModal({
+    const modal = await this.popUpService.openModal({
       component: ItCreateRoomModal
     });
     modal.onDidDismiss().then(modalResponse => {

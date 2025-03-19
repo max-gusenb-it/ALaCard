@@ -13,7 +13,7 @@ import {
   AuthenticationActions,
   supportedLanguages,
   supportedColors,
-  PopupService,
+  PopUpService,
   systemDefaultValue,
   SettingsService
 } from '@shared';
@@ -37,7 +37,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
     private navCtrl: NavController,
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private settingsService: SettingsService
   ) {
     super();
@@ -62,7 +62,7 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   editProfile() {
     const user = this.store.selectSnapshot(AuthenticationState.user);
 
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItEditProfileModal,
       componentProps: {
         user: user
@@ -108,19 +108,19 @@ export class ProfilePage extends AngularLifecycle implements AfterViewInit {
   }
 
   signUp() {
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItAddAccountModal
     });
   }
 
   signIn() {
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItSignInModal
     });
   }
 
   deleteAccount() {
-    const ref = this.popupService.openBottomSheet(ItDeleteAccountBottomSheetComponent);
+    const ref = this.popUpService.openBottomSheet(ItDeleteAccountBottomSheetComponent);
     firstValueFrom(ref.closed).then(del => {
       if (del) {
         this.signOut();

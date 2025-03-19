@@ -7,7 +7,7 @@ import {
   AngularLifecycle,
   Deck,
   speficiPlayerIdSettingName,
-  PopupService
+  PopUpService
 } from '@shared';
 import {
   Player,
@@ -49,7 +49,7 @@ export class ItStartGameModal extends AngularLifecycle {
 
   constructor(
     private store: Store,
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private translateService: TranslateService,
     private ingameDataDataService: IngameDataDataService
   ) {
@@ -91,7 +91,7 @@ export class ItStartGameModal extends AngularLifecycle {
 
   onSubmitOrCancel(event: boolean) {
     if (!event) {
-      this.popupService.dismissModal();
+      this.popUpService.dismissModal();
     } else {
       this.startGame();
     }
@@ -114,7 +114,7 @@ export class ItStartGameModal extends AngularLifecycle {
     }
     
     if (!StaticRoundDataUtils.isDeckPlayable(this.selectedDeck, this.ingameDataDataService.getActivePlayerIds().length, gameSettings)) {
-      this.popupService.openSnackbar(
+      this.popUpService.openSnackbar(
         this.translateService.instant("features.room.start-game-modal.deck-not-playable"),
         "check"
       );
@@ -128,7 +128,7 @@ export class ItStartGameModal extends AngularLifecycle {
         drinkingGame: this.gameSettingsForm.controls["drinkingGame"].value
       }
     ));
-    this.popupService.dismissModal();
+    this.popUpService.dismissModal();
   }
 
 }

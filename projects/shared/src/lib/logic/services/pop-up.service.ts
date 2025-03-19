@@ -5,11 +5,10 @@ import { Injectable } from '@angular/core';
 import { ModalController, ModalOptions } from '@ionic/angular';
 import { ItSnackbarComponent, ItOptionBottomSheet, OptionBottomSheetData, SnackbarData } from '@shared';
 
-// ToDo: rename to PopUp
 @Injectable({
   providedIn: 'root'
 })
-export class PopupService {
+export class PopUpService {
 
   constructor(
     private dialog: Dialog,

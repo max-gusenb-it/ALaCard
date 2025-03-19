@@ -18,7 +18,7 @@ import {
     ItError,
     PlayerState,
     UserSourceService,
-    PopupService
+    PopUpService
 } from "@shared";
 
 @Injectable({
@@ -29,14 +29,14 @@ export class RoomService {
         private store: Store,
         private roomSourceService: RoomSourceService,
         private userSourceService: UserSourceService,
-        private popupService: PopupService,
+        private popUpService: PopUpService,
         private ingameDataDataService: IngameDataDataService
     ) { }
 
     async checkIfUserExists() {
         let user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!!user) {
-            const modal = await this.popupService.openModal({
+            const modal = await this.popUpService.openModal({
                 component: ItAuthenticateModal
             });
             await modal.onDidDismiss();

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { PopupService } from "./popup.service";
+import { PopUpService } from "./pop-up.service";
 import { TranslateService } from "@ngx-translate/core";
 import { Platform } from "@ionic/angular";
 import { InformationActions, InformationState } from "@shared";
@@ -11,7 +11,7 @@ import { InformationActions, InformationState } from "@shared";
 export class TutorialService {
     constructor(
         private store: Store,
-        private popupService: PopupService,
+        private popUpService: PopUpService,
         private translateService: TranslateService,
         private platform: Platform
     ) {}
@@ -30,7 +30,7 @@ export class TutorialService {
     }
 
      private displayTutorial(labelId: string, icon?: string) {
-        this.popupService.openSnackbar(
+        this.popUpService.openSnackbar(
             this.translateService.instant(labelId),
             icon,
             false,

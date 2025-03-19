@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { ItForgotPasswordModal } from '../it-forgot-password-modal/it-forgot-password-modal.component';
-import { PopupService } from 'projects/shared/src/lib/logic/services/popup.service';
-import { AuthenticationActions } from '@shared';
+import { AuthenticationActions, PopUpService, ItForgotPasswordModal } from '@shared';
 
 @Component({
   selector: 'it-sign-in-modal',
@@ -17,16 +15,16 @@ export class ItSignInModal {
   });
 
   constructor(
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private store: Store
   ) { }
 
   close(succeeded: boolean = false) {
-    this.popupService.dismissModal(succeeded);
+    this.popUpService.dismissModal(succeeded);
   }
 
   forgotPassword() {
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItForgotPasswordModal
     });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ItSignUpModal,PopupService, ItSignInModal } from '@shared';
+import { ItSignUpModal, PopUpService, ItSignInModal } from '@shared';
 
 @Component({
   selector: 'it-authenticate-modal',
@@ -7,12 +7,12 @@ import { ItSignUpModal,PopupService, ItSignInModal } from '@shared';
 })
 export class ItAuthenticateModal implements OnInit {
 
-  constructor(private popupService: PopupService) { }
+  constructor(private popUpService: PopUpService) { }
 
   ngOnInit() {}
 
   async openSignInModal() {
-    const modal = await this.popupService.openModal({
+    const modal = await this.popUpService.openModal({
       component: ItSignInModal
     });
     const data = await modal.onDidDismiss<boolean>();
@@ -22,7 +22,7 @@ export class ItAuthenticateModal implements OnInit {
   }
 
   async openSignUpModal() {
-    const modal = await this.popupService.openModal({
+    const modal = await this.popUpService.openModal({
       component: ItSignUpModal
     });
     const data = await modal.onDidDismiss<boolean>();
@@ -32,6 +32,6 @@ export class ItAuthenticateModal implements OnInit {
   }
 
   close() {
-    this.popupService.dismissModal();
+    this.popUpService.dismissModal();
   }
 }

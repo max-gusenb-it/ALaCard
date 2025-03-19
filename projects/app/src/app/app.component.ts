@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, interval, takeUntil } from 'rxjs';
-import { PopupService } from '../../../shared/src/lib/logic/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
-import { AngularLifecycle, ErrorMonitorState, IItError, LoadingState } from '@shared';
+import { AngularLifecycle, ErrorMonitorState, IItError, LoadingState, PopUpService } from '@shared';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,7 @@ export class AppComponent extends AngularLifecycle {
   interval$ = interval(1000).pipe(takeUntil(this.destroyed$));
 
   constructor(
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private translateService: TranslateService
   ) {
     super();
@@ -26,7 +25,7 @@ export class AppComponent extends AngularLifecycle {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(e => {
         if (!!e) {
-          this.popupService.openSnackbar(
+          this.popUpService.openSnackbar(
             this.translateService.instant("errors." + e.code)
           );
         }

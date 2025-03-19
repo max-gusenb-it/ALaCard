@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadingHelperService, ProfileEditorFormData, User, UserSourceService, PopupService } from '@shared';
+import { LoadingHelperService, ProfileEditorFormData, User, UserSourceService, PopUpService } from '@shared';
 
 @Component({
   selector: 'it-edit-profile-modal',
@@ -18,7 +18,7 @@ export class ItEditProfileModal implements OnInit {
   constructor(
     private loadingHelperService: LoadingHelperService,
     private userSourceService: UserSourceService,
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private translateService: TranslateService
   ) {}
 
@@ -32,7 +32,7 @@ export class ItEditProfileModal implements OnInit {
   }
 
   close() {
-    this.popupService.dismissModal();
+    this.popUpService.dismissModal();
   }
 
   submit() {
@@ -45,7 +45,7 @@ export class ItEditProfileModal implements OnInit {
       this.userSourceService.updateUser(userCopy.id!, userCopy)
     ]).then(() => {
       this.close();
-      this.popupService.openSnackbar(this.translateService.instant("features.profile.edit-profile-modal.edited-user"))
+      this.popUpService.openSnackbar(this.translateService.instant("features.profile.edit-profile-modal.edited-user"))
     })
   }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AuthenticationActions, CreateAccountFormData, PopupService, ProfileEditorFormData } from '@shared';
+import { AuthenticationActions, CreateAccountFormData, PopUpService, ProfileEditorFormData } from '@shared';
 
 @Component({
   selector: 'it-sign-up-modal',
@@ -13,13 +13,13 @@ export class ItSignUpModal {
   createAccountFormData: CreateAccountFormData = null as any;
 
   constructor(
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private changeDetectorRef: ChangeDetectorRef,
     private store: Store
   ) { }
 
   close(succeeded: boolean = false) {
-    this.popupService.dismissModal(succeeded);
+    this.popUpService.dismissModal(succeeded);
   }
 
   setProfileFormData(profileFormData: ProfileEditorFormData) {

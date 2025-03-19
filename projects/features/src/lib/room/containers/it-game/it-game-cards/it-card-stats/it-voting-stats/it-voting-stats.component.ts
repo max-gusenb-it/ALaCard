@@ -22,7 +22,7 @@ import {
     AngularLifecycle,
     AuthenticationState,
     Card,
-    PopupService,
+    PopUpService,
     Utils,
     VotingCard
 } from "@shared";
@@ -72,7 +72,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
         private changeDetectorRef: ChangeDetectorRef,
         private roomService: RoomService,
         private gameService: GameService,
-        private popUpService: PopupService,
+        private popUpService: PopUpService,
         private translateService: TranslateService
     ) {
         super();

@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { PopupService } from "projects/shared/src/lib/logic/services/popup.service";
-import { AuthenticationActions, CreateAccountFormData } from "@shared";
+import { AuthenticationActions, CreateAccountFormData, PopUpService } from "@shared";
 
 @Component({
     selector: 'it-add-account-modal',
@@ -10,7 +9,7 @@ import { AuthenticationActions, CreateAccountFormData } from "@shared";
 export class ItAddAccountModal {
     
     constructor(
-        private popupService: PopupService,
+        private popUpService: PopUpService,
         private store: Store,
         private changeDetectionRef: ChangeDetectorRef
     ) {}
@@ -24,7 +23,7 @@ export class ItAddAccountModal {
     }
 
     close(succeeded: boolean = false) {
-        this.popupService.dismissModal(succeeded);
+        this.popUpService.dismissModal(succeeded);
     }
 
     signUp() {

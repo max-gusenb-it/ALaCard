@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { 
   AngularLifecycle,
   LoadingState,
-  PopupService,
+  PopUpService,
   AuthenticationState
 } from '@shared';
 import {
@@ -48,7 +48,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
     private store: Store,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private popupService: PopupService,
+    private popUpService: PopUpService,
     private translateService: TranslateService,
     private staticRoundDataDataService: StaticRoundDataDataService,
     private gameService: GameService,
@@ -95,7 +95,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   handleMenuAction(actionType: string) {
     switch(actionType) {
       case(leaveRoomMenuItem):
-        const ref = this.popupService.openOptionBottomSheet(
+        const ref = this.popUpService.openOptionBottomSheet(
           this.translateService.instant("features.room.leave-bottom-sheet.title"),
           this.translateService.instant("actions.cancel"),
           this.translateService.instant("features.room.leave-bottom-sheet.leave-room")
@@ -111,7 +111,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       case(shareMenuItem):
         const room = this.store.selectSnapshot(RoomState.room);
         if (!!room) {
-          this.popupService.openBottomSheet(
+          this.popUpService.openBottomSheet(
             ItShareBottomSheet,
             {
               data: RoomUtils.generateJoinLink(room)
@@ -120,7 +120,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
         }
         break;
       case(settingsMenuItem): {
-          this.popupService.openBottomSheet(ItRoomSettingsBottomSheet);
+          this.popUpService.openBottomSheet(ItRoomSettingsBottomSheet);
         }
         break;
       case(endGameMenuItem): {
@@ -135,7 +135,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   addOfflinePlayer() {
-    this.popupService.openBottomSheet(
+    this.popUpService.openBottomSheet(
       ItAddOfflinePlayerBottomSheet
     )
   }
@@ -149,7 +149,7 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   startGame() {
-    this.popupService.openModal({
+    this.popUpService.openModal({
       component: ItStartGameModal
     });
   }
