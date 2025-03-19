@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { RoomState, CardServiceFactory, GameCardService, Player, SipResult, VotingCardTranslationService, VotingResult, playerVotingCardSkipValue } from '@features';
-import { Card, VotingCard } from '@shared';
+import { RoomState, CardServiceFactory, GameCardService, Player, SipResult, VotingCardTranslationService, VotingResult, votingCardSkipValue } from '@features';
+import { Card } from '@shared';
 
 enum ResultType {
   VotingResult,
@@ -26,7 +26,7 @@ export class ItResultComponent implements AfterViewInit {
   @Input() overrideAnonymous: boolean = false;
 
   get skipped() {
-    return this.result.subjectID === playerVotingCardSkipValue;
+    return this.result.subjectID === votingCardSkipValue;
   }
 
   get cardService(): GameCardService {

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Utils, CardType, specificPlayerNameWhitecard, playerNameWhitecard } from "@shared";
-import { CardState, CardUtils, MarkdownUtils, Player } from "@features";
+import { CardUtils, MarkdownUtils, Player } from "@features";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,6 @@ export class CardTranslationService {
 
     constructor(protected translateService: TranslateService) { }
 
-    // ToDo: structure 
     getCardTitle(card: Card) {
         if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
             return card.settings!.customTitle;
@@ -21,13 +20,7 @@ export class CardTranslationService {
             case(CardType.GroundRule):
                 return this.translateService.instant("features.room.game.card.groundRules");
             case(CardType.FreeText):
-                return this.translateService.instant("features.room.game.card.freeText")
-            case(CardType.Poll):
-                return this.translateService.instant("features.room.game.card.poll")
-            case(CardType.PlayerVoting):
-                return this.translateService.instant("features.room.game.card.playerVoting")
-            case(CardType.Quiz):
-                return this.translateService.instant("features.room.game.card.quiz")
+                return this.translateService.instant("features.room.game.card.freeText");
         }
     }
 

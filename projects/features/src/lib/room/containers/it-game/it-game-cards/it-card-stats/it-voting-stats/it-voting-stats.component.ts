@@ -11,7 +11,7 @@ import {
     CardServiceFactory,
     IngameDataDataService,
     VotingResult,
-    playerVotingCardSkipValue,
+    votingCardSkipValue,
     RoomService,
     GameService,
     defaultPayToDisplaySips,
@@ -49,7 +49,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     }
 
     get skipValue() {
-        return playerVotingCardSkipValue;
+        return votingCardSkipValue;
     }
   
     get statsBackgroundCSS() {

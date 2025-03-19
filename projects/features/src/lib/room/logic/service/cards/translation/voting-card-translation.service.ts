@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardTranslationService, CardUtils, defaultCardSips, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, playerVotingCardSkipValue, VotingResult } from "@features";
+import { CardTranslationService, CardUtils, defaultCardSips, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, votingCardSkipValue, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Subject, Utils, VotingCard, VotingCardGroup } from "@shared";
 
@@ -32,7 +32,7 @@ export class VotingCardTranslationService extends CardTranslationService {
     }
 
     getResultTitle(result: VotingResult, resultIndex: number, subjects: Subject[], topResults: VotingResult[]) : string {
-        if (result.subjectID === playerVotingCardSkipValue) return this.translateService.instant("shared.components.display.it-result.skipped");
+        if (result.subjectID === votingCardSkipValue) return this.translateService.instant("shared.components.display.it-result.skipped");
         const topResultCount = topResults.length;
         if (topResultCount === 1 && resultIndex === 0) return "";
         return subjects.find(s => s.ID === result.subjectID)!.title;

@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
-import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService, playerVotingCardSkipValue } from "@features";
+import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService, votingCardSkipValue } from "@features";
 import { AngularLifecycle, Card, InformationActions, InformationState, Subject, Utils, VotingCard, } from "@shared";
 import { takeUntil } from "rxjs";
 

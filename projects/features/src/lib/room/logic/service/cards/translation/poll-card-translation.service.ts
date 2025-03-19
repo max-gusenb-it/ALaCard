@@ -1,11 +1,17 @@
 import { Injectable } from "@angular/core";
-import { CardState, CardUtils, MarkdownUtils, Player, VotingCardTranslationService } from "@features";
-import { Card, PollCard } from "@shared";
+import { CardUtils, Player, VotingCardTranslationService } from "@features";
+import { Card, PollCard, Utils } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PollCardTranslationService extends VotingCardTranslationService {
+    override getCardTitle(card: Card) {
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
+            return card.settings!.customTitle;
+        return this.translateService.instant("features.room.game.card.poll");
+    }
+
     override getGameText(
         card: Card,
         players: Player[],

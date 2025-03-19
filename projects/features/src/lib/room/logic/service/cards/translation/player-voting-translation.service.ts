@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { VotingCardTranslationService } from "@features";
-import { PlayerVotingCardGroup } from "@shared";
+import { Card, PlayerVotingCardGroup, Utils } from "@shared";
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +8,12 @@ import { PlayerVotingCardGroup } from "@shared";
 export class PlayerVotingTranslationService extends VotingCardTranslationService {
     override get defaultSipDistributionGroup() {
         return PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer;
+    }
+    
+    override getCardTitle(card: Card) {
+        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
+            return card.settings!.customTitle;
+        return this.translateService.instant("features.room.game.card.playerVoting");
     }
 
     override getSipTextForGroup(group: string) {

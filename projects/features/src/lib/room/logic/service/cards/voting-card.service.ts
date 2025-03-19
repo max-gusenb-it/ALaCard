@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, playerVotingCardSkipValue, defaultPayToDisplaySips, CardState, RoomState } from "@features";
+import { CardService, defaultCardSips, DynamicRoundData, DynamicVotingRoundData, IngameDataDataService, Response, ResponseDataDataService, Result, SipResult, StaticRoundDataDataService, VotingResult, VotingResponse, votingCardSkipValue, defaultPayToDisplaySips } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
 import { AuthenticationState, Card, Subject, VotingCard, VotingCardGroup } from "@shared";
@@ -10,7 +10,7 @@ import { AuthenticationState, Card, Subject, VotingCard, VotingCardGroup } from 
 export class VotingCardService<C extends VotingCard> extends CardService<C, VotingResponse, DynamicVotingRoundData, VotingResult> {
 
     get skipValue() {
-        return playerVotingCardSkipValue;
+        return votingCardSkipValue;
     }
 
     get defaultGroup() : string {
