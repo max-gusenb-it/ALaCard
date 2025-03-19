@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { AuthenticationActions, PopUpService, ItForgotPasswordModal } from '@shared';
+import { AuthenticationActions, PopUpService, ItForgotPasswordModal, Utils } from '@shared';
 
 @Component({
   selector: 'it-sign-in-modal',
@@ -23,9 +23,16 @@ export class ItSignInModal {
     this.popUpService.dismissModal(succeeded);
   }
 
-  forgotPassword() {
-    this.popUpService.openModal({
-      component: ItForgotPasswordModal
+  async forgotPassword() {
+    const modal = await this.popUpService.openModal({
+      component: ItForgotPasswordModal,
+      componentProps: {
+        email: this.loginForm.controls["email"].value
+      }
+    });
+    modal.onDidDismiss().then(forgotPasswortDetail => {
+      if (Utils.isStringDefinedAndNotEmpty(forgotPasswortDetail.data.email))
+        this.loginForm.controls["email"].setValue(forgotPasswortDetail.data.email);
     });
   }
 
@@ -33,8 +40,8 @@ export class ItSignInModal {
     if (this.loginForm.valid) {
       this.store.dispatch(
         new AuthenticationActions.SignInUser(
-          this.loginForm.controls['email'].value,
-          this.loginForm.controls['password'].value
+          this.loginForm.controls["email"].value,
+          this.loginForm.controls["password"].value
         )
       ).subscribe(() => this.close(true));
     }
