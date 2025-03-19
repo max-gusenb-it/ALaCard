@@ -5,7 +5,6 @@
       [subheading]="('features.room.created' | translate) + ' ' + ((room$ | async)?.creationDate | fireDate)"
       headingType="h3"
       subheadingType="sm"
-      [detail]="(room$ | async)!.description"
     />
     <!-- Content -->
     <div class="flex grow" *ngIf="!(gameStarted$ | async)">

@@ -54,7 +54,7 @@ export class RoomSourceService {
         );
     }
 
-    createRoom(name: string, description: string) {
+    createRoom(name: string) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!user && user.id) {
             const player = UserUtils.exportUserToPlayer(user, 0);
@@ -63,7 +63,6 @@ export class RoomSourceService {
                 {
                     creationDate: firebase.firestore.Timestamp.fromDate(new Date()),
                     name: name,
-                    description: description,
                     players: {
                         [player.id]: player
                     },

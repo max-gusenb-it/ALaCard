@@ -150,7 +150,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
     @Action(RoomActions.CreateRoom)
     createRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.CreateRoom) {
         return this.loadingHelperService.loadWithLoadingState([
-            this.roomSourceService.createRoom(action.name, action.description)
+            this.roomSourceService.createRoom(action.name)
         ]).then(r => {
             return firstValueFrom(ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!)));
         });

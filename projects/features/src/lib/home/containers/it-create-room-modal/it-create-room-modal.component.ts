@@ -13,7 +13,6 @@ export class ItCreateRoomModal {
   
   createRoomFormData: CreateRoomFormData = {
     name: "",
-    description: "",
     valid: false
   };
 
@@ -33,8 +32,7 @@ export class ItCreateRoomModal {
   createRoom() {
     if (!this.createRoomFormData.valid) return;
     firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
-      this.createRoomFormData.name,
-      this.createRoomFormData.description
+      this.createRoomFormData.name
     ))).then(state => {
       this.popupService.dismissModal({
         userId: state?.authentication?.user?.id,

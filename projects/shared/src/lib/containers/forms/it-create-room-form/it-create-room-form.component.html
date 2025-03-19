@@ -12,14 +12,6 @@
     >
         {{ roomForm.controls['name'].value?.length }} / 30 Signs
     </it-input>
-    <it-input
-        id="description"
-        [label]="'features.home.create-room-modal.description' | translate"
-        formControlName="description"
-        type="text"
-    >
-        {{ roomForm.controls['description'].value?.length }} / 60 Signs
-    </it-input>
     <it-button
         class="hidden"
         type="submit"

@@ -78,8 +78,7 @@ export class ItCreateRoomAsGuestModal {
           ))
           .then(() => {
             return firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
-              this.createRoomFormData.name,
-              this.createRoomFormData.description
+              this.createRoomFormData.name
             )));
           }
         ).then(state => {

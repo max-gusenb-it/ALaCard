@@ -12,7 +12,7 @@ export namespace RoomActions {
      */
     export class CreateRoom {
         static readonly type = '[No-Room] CreateRoom';
-        constructor(public name: string, public description: string) {}
+        constructor(public name: string) {}
     }
 
     export class JoinRoom {
