@@ -59,11 +59,11 @@ export class ItDrawingBoardComponent implements AfterViewInit {
   colors: string[][] = [
     [
       this.black,
-      "#844204", // ToDo: Add light skin tone color sonst is Sara hab
+      "#844204",
       "#FF2929",
       "#FF7B06",
       "#FFE10A",
-      "#37FFDB",
+      "#FBE5BA",
       "#4DBFFF",
       "#0070FF",
       "#952BFF",
@@ -75,7 +75,7 @@ export class ItDrawingBoardComponent implements AfterViewInit {
       "#DA2323",
       "#E67007",
       "#EED100",
-      "#0FCCAA",
+      "#FDDCB4",
       "#2C94CF",
       "#0260D8",
       "#6005BB",
