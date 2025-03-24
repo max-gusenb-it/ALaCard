@@ -7,8 +7,7 @@ import {
   CardType,
   FreeTextCard,
   InformationActions,
-  InformationState,
-  TutorialService
+  InformationState
 } from '@shared';
 
 const mobileRuleTutorialLabelId : string = "features.room.game.card.game-rules.mobile-tutorial";
@@ -31,8 +30,7 @@ export class ItGameRulesComponent implements AfterViewInit {
   constructor(
     private store: Store,
     private responseDataSourceService: ResponseDataSourceService,
-    private staticRoundDataDataService: StaticRoundDataDataService,
-    private tutorialService: TutorialService
+    private staticRoundDataDataService: StaticRoundDataDataService
   ) {
     this.currentRuleIndex = this.store.selectSnapshot(InformationState.gameRulesCardIndex);
   }
@@ -42,10 +40,10 @@ export class ItGameRulesComponent implements AfterViewInit {
       this.emitRulesRead();
     }
 
-    this.tutorialService.checkForDualTutorial(
+    this.store.dispatch(new InformationActions.DisplayDualTutorial(
       mobileRuleTutorialLabelId,
       desktopRuleTutorialLabelId
-    );
+    ));
   }
 
   getCard() : FreeTextCard {

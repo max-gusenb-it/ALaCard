@@ -4,7 +4,7 @@
   <p class="text-primary-0 text-sm">
     {{data.text}}
   </p>
-  <it-icon-button *ngIf="" (click)="close()" color="tertiary" iconColor="text-primary-500">
+  <it-icon-button *ngIf="!data.hideIcon" (click)="close()" color="tertiary" iconColor="text-primary-500">
     {{ data.icon ?? 'close' }}
   </it-icon-button>
 </div>

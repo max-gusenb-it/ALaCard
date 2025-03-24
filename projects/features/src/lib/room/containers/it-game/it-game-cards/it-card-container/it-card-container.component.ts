@@ -21,8 +21,7 @@ import {
   Deck,
   InformationActions,
   InformationState,
-  RoundInformation,
-  TutorialService
+  RoundInformation
 } from '@shared';
 
 const mobileCardSwipeTutorialLabelId = "features.room.game.card.game-cards.card-container.mobile-swipe-tutorial";
@@ -64,7 +63,6 @@ export class ItCardContainerComponent extends AngularLifecycle{
     private gameService: GameService,
     private staticRoundDataDataService: StaticRoundDataDataService,
     private ingameDataDataService: IngameDataDataService,
-    private tutorialService: TutorialService,
     private roomService: RoomService,
     private cardServiceFactory: CardServiceFactory
   ) {
@@ -92,7 +90,7 @@ export class ItCardContainerComponent extends AngularLifecycle{
             this.roomService.isUserAdmin() &&
             this.getRoundState() === this.getFormState()
         ) {
-          this.tutorialService.checkForTutorial(responseCountTutorialLabelId);
+          this.store.dispatch(new InformationActions.NewDisplayTutorial(responseCountTutorialLabelId));
         }
     });
 
@@ -102,10 +100,10 @@ export class ItCardContainerComponent extends AngularLifecycle{
         this.dynamicRoundData = d;
     });
 
-    this.tutorialService.checkForDualTutorial(
+    this.store.dispatch(new InformationActions.DisplayDualTutorial(
       mobileCardSwipeTutorialLabelId,
       desktopCardSwipeTutorialLabelId
-    );
+    ));
   }
 
   getCustomCardTitle() {

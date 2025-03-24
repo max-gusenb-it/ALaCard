@@ -31,8 +31,20 @@ export namespace InformationActions {
         constructor(public response: any) {};
     }
 
-    export class SetTutorialDisplayed {
-        static readonly type = "[GameRulesComponent] SetTutorialDisplayed";
-        constructor(public labelId: string)  {}
+    export class DisplayDualTutorial {
+        static readonly type = "[InformationState] DisplayDualTutorial";
+        constructor(
+            public mobileLabelID: string,
+            public desktopLabelID: string,
+            public icon?: string
+        ) {}
+    }
+
+    export class NewDisplayTutorial {
+        static readonly type = "[InformationState] NewDisplayTutorial";
+        constructor(
+            public labelID: string,
+            public icon?: string,
+        ) {}
     }
 }

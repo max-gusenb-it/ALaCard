@@ -1,4 +1,4 @@
 export interface TutorialInfo {
-    labelId: string;
+    labelID: string;
     displayDate: Date;
 }

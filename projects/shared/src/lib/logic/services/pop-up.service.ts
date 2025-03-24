@@ -56,8 +56,7 @@ export class PopUpService {
       hideIcon,
       autoClose,
       autoCloseTime
-    }
-    DialogConfig
+    };
     return this.dialog.open(ItSnackbarComponent, {
       data: snackbarData,
       positionStrategy: this.overlay

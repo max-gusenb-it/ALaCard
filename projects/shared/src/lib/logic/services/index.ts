@@ -7,4 +7,3 @@ export * from "./source/user.source.service";
 
 export * from "./pop-up.service";
 export * from "./settings.service"
-export * from "./tutorial.service";

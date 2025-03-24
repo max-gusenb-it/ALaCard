@@ -11,8 +11,11 @@ import {
     AuthenticationState,
     UserSourceService,
     InformationActions,
-    InformationStateModel
+    InformationStateModel,
+    PopUpService
 } from '@shared';
+import { Platform } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 
 export const INFORMATION_STATE_VERSION = 1;
 export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('information');
@@ -28,7 +31,13 @@ export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('in
 @Injectable()
 export class InformationState extends AngularLifecycle implements NgxsOnInit {
 
-    constructor(private store: Store, private userSourceService: UserSourceService) {
+    constructor(
+        private store: Store,
+        private userSourceService: UserSourceService,
+        private platform: Platform,
+        private popUpService: PopUpService,
+        private translateService: TranslateService
+    ) {
         super();
     }
 
@@ -71,8 +80,7 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
         const state = ctx.getState();
         this.store.select(AuthenticationState.tutorialInfos)    
             .pipe(
-                takeUntil(this.destroyed$),
-                filter(t => !!t && t.length > 0)
+                takeUntil(this.destroyed$)
             )
             .subscribe(tutorialInfos => {
                 ctx.patchState({tutorialInfos: tutorialInfos});
@@ -222,20 +230,34 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
         });
     }
 
-    @Action(InformationActions.SetTutorialDisplayed)
-    async setTutorialDisplayed(ctx: StateContext<InformationStateModel>, action: InformationActions.SetTutorialDisplayed) {
-        const state = ctx.getState();
-        if (!!state.tutorialInfos.find(t => t.labelId === action.labelId)) return;
+    @Action(InformationActions.DisplayDualTutorial)
+    async displayDualTutorial(ctx: StateContext<InformationStateModel>, action: InformationActions.DisplayDualTutorial) {
+        const labelID = this.platform.is('mobileweb') ? action.mobileLabelID : action.desktopLabelID;
+        ctx.dispatch(new InformationActions.NewDisplayTutorial(labelID, action.icon));
+    }
 
-        const tutorialInfo : TutorialInfo = {
-            displayDate: new Date(),
-            labelId: action.labelId
-        };
+    @Action(InformationActions.NewDisplayTutorial)
+    async displayTutorial(ctx: StateContext<InformationStateModel>, action: InformationActions.NewDisplayTutorial) {
+        const state = ctx.getState();
+        const wasTutorialDisplayed = !!state.tutorialInfos.find(t => t.labelID === action.labelID);
+        if(wasTutorialDisplayed) return;
+
+        this.popUpService.openSnackbar(
+            this.translateService.instant(action.labelID),
+            action.icon,
+            false,
+            true,
+            10000
+        );
+        
         ctx.patchState({
             ...state,
             tutorialInfos: [
                 ...state.tutorialInfos,
-                tutorialInfo
+                {
+                    displayDate: new Date(),
+                    labelID: action.labelID
+                }
             ]
         });
 
