@@ -13,7 +13,15 @@ import {
     ResponseDataDataService,
     StaticRoundDataDataService,
     GameServiceErros,
-    StaticRoundDataUtils
+    StaticRoundDataUtils,
+    StaticRoundDataSourceService,
+    IngameDataSourceService,
+    ResponseDataSourceService,
+    IngameDataUtils,
+    RoomUtils,
+    RoomStateErrors,
+    RoomActions,
+    GameState
 } from '@features';
 import { 
     Card,
@@ -21,7 +29,9 @@ import {
     ErrorMonitorActions,
     ItError,
     Utils,
-    CardType
+    CardType,
+    InformationActions,
+    LoadingHelperService
 } from '@shared';
 
 @Injectable({
@@ -31,9 +41,13 @@ export class GameService {
 
     constructor(
         private store: Store,
+        private loadingHelperService: LoadingHelperService,
         private ingameDataDataService: IngameDataDataService,
         private responseDataDataService: ResponseDataDataService,
         private staticRoundDataDataService: StaticRoundDataDataService,
+        private staticRoundDataSourceService: StaticRoundDataSourceService,
+        private ingameDataSourceService: IngameDataSourceService,
+        private responseDataSourceService: ResponseDataSourceService,
         private cardServiceFactory: CardServiceFactory
     ) {
         this.responseDataDataService.getAdminResponses$()
@@ -42,6 +56,85 @@ export class GameService {
                 if (!!roomSettings && roomSettings.autoContinueOnAllVotes) this.checkForAutoContinueRound();
             }
         );
+    }
+
+    startGame(deck: Deck, gameSettings: GameSettings) {
+        const compareValue = new Date().valueOf();
+        
+        this.store.dispatch(new InformationActions.SetGameInformation({
+            compareValue: compareValue,
+            rulesReadSend: false,
+            gameRulesCardIndex:  0,
+            roundInformation: undefined
+        }));
+
+        const room = this.store.selectSnapshot(RoomState.room);
+
+        if (!!!room) {
+            // ToDo: Fix errors
+            throw new ItError(
+                RoomStateErrors.startGameReadRoomNotFound,
+                RoomState.name,
+                this.startGame.name
+            )
+        };
+                
+        return this.loadingHelperService.loadWithLoadingState([
+            this.ingameDataSourceService.createIngameData(
+                IngameDataUtils.createInitialIngameData(),
+                room.id!
+            ),
+            this.responseDataSourceService.createInitialResponseData(room.id!),
+            this.staticRoundDataSourceService.createStaticRoundData(
+                this.createInitialStaticRoundData(
+                    deck,
+                    RoomUtils.mapPlayersToArray(room!.players),
+                    gameSettings
+                ),
+                room!.id!,
+            )
+        ]).then(() => {
+            return this.store.dispatch(new RoomActions.SetGame(
+                {
+                    compareValue: compareValue,
+                    state: GameState.started,
+                    deck: deck,
+                    settings: gameSettings
+                }
+            ));
+        });
+    }
+
+    continueToGame() {
+        const room = this.store.selectSnapshot(RoomState.room);
+
+        if (!!!room) {
+            throw new ItError(
+                RoomStateErrors.startGameReadRoomNotFound,
+                RoomState.name,
+                this.startGame.name
+            )
+        };
+
+        const staticRoundData = this.staticRoundDataDataService.getStaticRoundData();
+
+        if (!!!staticRoundData) return;
+
+        const round = this.createGameRound(
+            room.game!.deck,
+            staticRoundData,
+            RoomUtils.mapPlayersToArray(room.players),
+            room.game!.settings
+        );
+
+        this.staticRoundDataSourceService.updateStaticRoundData(
+            {
+                ...staticRoundData,
+                round: round,
+                playedCardIndexes: [round.cardIndex]
+            },
+            room.id!
+        )
     }
 
     getCardService(cardType: CardType) {

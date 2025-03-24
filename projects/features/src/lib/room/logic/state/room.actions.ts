@@ -1,5 +1,4 @@
-import { Deck } from "@shared";
-import { GameSettings, Room, StaticRoundData } from "@features";
+import { Game, Room } from "@features";
 
 export namespace RoomActions {
     
@@ -42,18 +41,8 @@ export namespace RoomActions {
         constructor() {}
     }
 
-    export class StartGame {
-        static readonly type = '[Start-Game-Modal] StartGame';
-        constructor(public deck: Deck, public gameSettings: GameSettings) {};
-    }
-
-    export class ContinueToGame {
-        static readonly type = '[Game-Rules] ContinueToGame';
-        constructor(public staticRoundData: StaticRoundData) {};
-    }
-
-    export class EndGame {
-        static readonly type = '[Room] EndGame';
-        constructor() {}; 
+    export class SetGame {
+        static readonly type = '[RoomState] SetGame';
+        constructor(public game: Game) {};
     }
 }

@@ -15,9 +15,9 @@ import {
   StaticRoundDataUtils,
   GameSettingsUtils,
   IngameDataDataService,
-  RoomActions,
   RoomState,
   DeckState,
+  GameService,
 } from '@features';
 
 @Component({
@@ -51,7 +51,8 @@ export class ItStartGameModal extends AngularLifecycle {
     private store: Store,
     private popUpService: PopUpService,
     private translateService: TranslateService,
-    private ingameDataDataService: IngameDataDataService
+    private ingameDataDataService: IngameDataDataService,
+    private gameService: GameService
   ) {
     super();
 
@@ -121,13 +122,13 @@ export class ItStartGameModal extends AngularLifecycle {
       return;
     }
 
-    this.store.dispatch(new RoomActions.StartGame(
+    this.gameService.startGame(
       this.selectedDeck,
       {
         speficiPlayerId: speficiPlayerId,
         drinkingGame: this.gameSettingsForm.controls["drinkingGame"].value
       }
-    ));
+    );
     this.popUpService.dismissModal();
   }
 

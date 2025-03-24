@@ -22,18 +22,13 @@ import {
     Game, 
     GameSettings, 
     GameState,
-    GameService,
     Player,
     Room,
     RoomSettings,
     RoomUtils,
-    IngameDataUtils,
     RoomActions,
     RoomConnectionData,
-    IngameDataSourceService, 
-    ResponseDataSourceService,
     RoomSourceService,
-    StaticRoundDataSourceService,
     RoomStateModel,
     RoomStateErrors
 } from "@features";
@@ -122,10 +117,6 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
         private roomService: RoomService,
         private navController: NavController,
         private roomSourceService: RoomSourceService,
-        private ingameDataSourceService: IngameDataSourceService,
-        private responseDataSourceService: ResponseDataSourceService,
-        private gameService: GameService,
-        private staticRoundDataSourceService: StaticRoundDataSourceService,
         private loadingHelperService: LoadingHelperService,
         private translateService: TranslateService,
         private store: Store,
@@ -339,8 +330,8 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
         return;
     }
 
-    @Action(RoomActions.StartGame)
-    startGame(ctx: StateContext<RoomStateModel>, action: RoomActions.StartGame) {
+    @Action(RoomActions.SetGame)
+    setGame(ctx: StateContext<RoomStateModel>, action: RoomActions.SetGame) {
         const state = ctx.getState();
 
         if (!!!state.room) {
@@ -350,89 +341,12 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
             )
         };
 
-        const compareValue = new Date().valueOf();
-
-        this.store.dispatch(new InformationActions.SetGameInformation({
-            compareValue: compareValue,
-            rulesReadSend: false,
-            gameRulesCardIndex:  0,
-            roundInformation: undefined
-        }));
-        
-        return this.loadingHelperService.loadWithLoadingState([
-            this.roomSourceService.updateRoom(
-                {
-                    ...state.room,
-                    game: {
-                        compareValue: compareValue,
-                        state: GameState.started,
-                        deck: action.deck,
-                        settings: action.gameSettings
-                    }
-                },
-                state.room.id!,
-            ),
-            this.ingameDataSourceService.createIngameData(
-                IngameDataUtils.createInitialIngameData(),
-                state.room.id!
-            ),
-            this.responseDataSourceService.createInitialResponseData(state.room.id!),
-            this.staticRoundDataSourceService.createStaticRoundData(
-                this.gameService.createInitialStaticRoundData(
-                    action.deck,
-                    RoomUtils.mapPlayersToArray(state.room!.players),
-                    action.gameSettings
-                ),
-                state.room!.id!,
-            )
-        ]);
-    }
-
-    @Action(RoomActions.ContinueToGame)
-    continueToGame(ctx: StateContext<RoomStateModel>, action: RoomActions.ContinueToGame) {
-        const state = ctx.getState();
-
-        if (!!!state.room?.game) {
-            throw new ItError(
-                RoomStateErrors.continueToGameReadGameNotFound,
-                RoomState.name
-            )
-        };
-
-        const round = this.gameService.createGameRound(
-            state.room.game!.deck,
-            action.staticRoundData,
-            RoomUtils.mapPlayersToArray(state.room.players),
-            state.room.game!.settings
-        );
-
-        this.staticRoundDataSourceService.updateStaticRoundData(
-            {
-                ...action.staticRoundData,
-                round: round,
-                playedCardIndexes: [round.cardIndex]
-            },
-            state.room.id!
-        )
-    }
-
-    @Action(RoomActions.EndGame)
-    endGame(ctx: StateContext<RoomStateModel>, action: RoomActions.EndGame) {
-        const state = ctx.getState();
-
-        if (!!!state.room?.game) {
-            throw new ItError(
-                RoomStateErrors.endGameReadGameNotFound,
-                RoomState.name
-            )
-        };
-
         this.roomSourceService.updateRoom(
             {
                 ...state.room,
-                game: null
+                game: action.game
             },
-            state.room.id!
-        )
+            state.room.id!,
+        );
     }
 }

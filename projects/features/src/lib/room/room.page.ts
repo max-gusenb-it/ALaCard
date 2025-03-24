@@ -155,13 +155,11 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   continueToGame() {
-    const staticRoundData = this.staticRoundDataDataService.getStaticRoundData();
-    if (!!!staticRoundData) return;
-    this.store.dispatch(new RoomActions.ContinueToGame(staticRoundData))
+    this.gameService.continueToGame();
   }
 
   endGame() {
-    this.store.dispatch(new RoomActions.EndGame());
+    this.store.dispatch(new RoomActions.SetGame(null as any));
   }
 
 }
