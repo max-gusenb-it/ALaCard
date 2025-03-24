@@ -376,19 +376,16 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
                 IngameDataUtils.createInitialIngameData(),
                 state.room.id!
             ),
-            this.responseDataSourceService.createInitialResponseData(state.room.id!)
-        ]).then(() => {
-            return this.loadingHelperService.loadWithLoadingState([
-                this.staticRoundDataSourceService.createStaticRoundData(
-                    this.gameService.createInitialStaticRoundData(
-                        action.deck,
-                        RoomUtils.mapPlayersToArray(state.room!.players),
-                        action.gameSettings
-                    ),
-                    state.room!.id!,
-                )
-            ])
-        });
+            this.responseDataSourceService.createInitialResponseData(state.room.id!),
+            this.staticRoundDataSourceService.createStaticRoundData(
+                this.gameService.createInitialStaticRoundData(
+                    action.deck,
+                    RoomUtils.mapPlayersToArray(state.room!.players),
+                    action.gameSettings
+                ),
+                state.room!.id!,
+            )
+        ]);
     }
 
     @Action(RoomActions.ContinueToGame)

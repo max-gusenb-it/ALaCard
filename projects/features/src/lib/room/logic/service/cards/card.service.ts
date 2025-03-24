@@ -78,11 +78,10 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
         return baseRound;
     }
 
-    getNextCardState(card: Card, cardState: string) : string | undefined {
+    getNextCardState(card: Card, cardState: string, gameSettings: GameSettings) : string | undefined {
         switch(cardState) {
             case(CardState.Card_Initial):
             case(CardState.Card_FollowUp_Initial): {
-                const gameSettings = this.store.selectSnapshot(RoomState.gameSettings)!;
                 const roomSettings = this.store.selectSnapshot(RoomState.roomSettings)!;
                 if (
                     card.settings?.delaySipText === true && 

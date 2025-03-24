@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardState, DynamicRoundData, PollCardService, QuizCardState, RoomState, VotingResult } from "@features";
+import { CardState, DynamicRoundData, GameSettings, PollCardService, QuizCardState, RoomState, VotingResult } from "@features";
 import { Card, QuizCard, Utils } from "@shared";
 import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
@@ -13,7 +13,7 @@ export class QuizCardService extends PollCardService<QuizCard> {
     }
 
 
-    override getNextCardState(card: Card, cardState: string): string | undefined {
+    override getNextCardState(card: Card, cardState: string, gameSettings: GameSettings): string | undefined {
         switch(cardState) {
             case(CardState.Card_Initial):
             case(CardState.Card_FollowUp_Initial): {
@@ -25,7 +25,7 @@ export class QuizCardService extends PollCardService<QuizCard> {
                 }
                 return;
             };
-            default: return super.getNextCardState(card, cardState);
+            default: return super.getNextCardState(card, cardState, gameSettings);
         }
     }
 
