@@ -37,13 +37,14 @@ export class FirestoreService<T extends FirestoreBase> {
         ) as Observable<T>;
     }
 
-    getMostRecentDocs(
+    getMostRecentDoc(
         ref: string
     ) {
         return firebase
             .firestore()
             .collection(ref)
             .orderBy("creationDate")
+            .limit(1)
             .get();
     }
 
