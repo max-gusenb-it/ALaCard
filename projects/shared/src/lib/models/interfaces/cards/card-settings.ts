@@ -8,7 +8,6 @@ export interface CardSettings {
     customColor?: Color;
 
     drinkingCard?: boolean;
-    sipText?: string;
     delaySipText?: boolean;
     followUpCardConfig?: FollowUpCardConfig;
 }

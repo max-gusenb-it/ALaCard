@@ -61,9 +61,9 @@ export class VotingCardTranslationService extends CardTranslationService {
     }
 
     override getSipText(card: Card, players: Player[], playerIDs: string[] | undefined, specificPlayerID: string | undefined, cardState: string, isSingleDeviceMode?: boolean): string | undefined {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return super.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
+        if (Utils.isStringDefinedAndNotEmpty(card.sipText)) return super.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
 
-        if (!isSingleDeviceMode && !Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return;
+        if (!isSingleDeviceMode && !Utils.isStringDefinedAndNotEmpty(card.sipText)) return;
 
         if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
             return MarkdownUtils.addTagToContent(

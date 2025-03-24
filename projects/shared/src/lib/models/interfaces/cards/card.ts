@@ -1,9 +1,9 @@
 import { CardSettings } from "./card-settings";
-import { FollowUpCardConfig } from "./follow-up-card-config";
 import { CardType } from "@shared";
 
 export interface Card {
     text: string;
+    sipText?: string;
     type: CardType;
     settings?: CardSettings;
     /** Special ID to track follow up Cards */

@@ -10,47 +10,13 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "Ever dropped your phone in the toilet?",
-            type: CardType.Poll,
-            subjects: [
-                {
-                    title: "Yes ✅" 
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
+            text: "He oida",
+            sipText: "He dring oida",
+            type: CardType.FreeText,
             settings: {
-                sipText: "Everyone stupid enough do so has to drink 2 sips 🥂",
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    sips: 2,
-                    subjectIDs: ["0"]
-                }
+                delaySipText: true
             }
-        } as PollCard,
-        {
-            text: "Ever taken hard drugs?",
-            type: CardType.Poll,
-            subjects: [
-                {
-                    title: "Yes ✅" 
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
-            settings: {
-                sipText: "Good for you, please drink some alcohol 💊",
-                delaySipText: true,
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    subjectIDs: ["1"]
-                }
-            }
-        } as PollCard
+        } as FreeTextCard
     ],
     flags: [],
     requiredPlayers: {
@@ -1326,6 +1292,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Ever dropped your phone in the toilet?",
+            sipText: "Everyone stupid enough do so has to drink 2 sips 🥂",
             type: CardType.Poll,
             subjects: [
                 {
@@ -1336,7 +1303,6 @@ export const leggitPartyDeck: Deck = {
                 }
             ],
             settings: {
-                sipText: "Everyone stupid enough do so has to drink 2 sips 🥂",
                 sipConfig: {
                     group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
                     distribute: false,
@@ -1347,6 +1313,7 @@ export const leggitPartyDeck: Deck = {
         } as PollCard,
         {
             text: "Ever taken hard drugs?",
+            sipText: "No? Good for you, please drink some alcohol 💊",
             type: CardType.Poll,
             subjects: [
                 {
@@ -1357,7 +1324,6 @@ export const leggitPartyDeck: Deck = {
                 }
             ],
             settings: {
-                sipText: "Good for you, please drink some alcohol 💊",
                 delaySipText: true,
                 sipConfig: {
                     group: VotingCardGroup.VotingCard_SubjectIDs.toString(),

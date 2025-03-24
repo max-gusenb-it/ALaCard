@@ -82,7 +82,7 @@ export class CardTranslationService {
         cardState: string,
         isSingleDeviceMode: boolean = false
     ) {
-        if (!Utils.isStringDefinedAndNotEmpty(card.settings?.sipText)) return;
+        if (!Utils.isStringDefinedAndNotEmpty(card.sipText)) return;
         if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
             if (isSingleDeviceMode) {
                 return MarkdownUtils.addTagToContent(
@@ -94,7 +94,7 @@ export class CardTranslationService {
                 return "";
             }
         }
-        return this.formatCardText(card.settings!.sipText!, players, playerIDs, specificPlayerID);
+        return this.formatCardText(card.sipText!, players, playerIDs, specificPlayerID);
     }
 
     getOfflineCardTextClasses() {

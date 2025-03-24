@@ -83,9 +83,9 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
     }
     
     getSipText() {
-        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.settings?.sipText) && !this.card.settings?.delaySipText) {
+        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.sipText) && !this.card.settings?.delaySipText) {
             return this.votingCardTranslationService.formatCardText(
-                this.card.settings!.sipText!,
+                this.card.sipText!,
                 this.store.selectSnapshot(RoomState.players),
                 this.round.playerIds,
                 this.store.selectSnapshot(RoomState.specificPlayerId)
