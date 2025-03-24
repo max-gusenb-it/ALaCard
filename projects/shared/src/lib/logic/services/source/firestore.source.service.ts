@@ -38,8 +38,7 @@ export class FirestoreService<T extends FirestoreBase> {
     }
 
     getMostRecentDocs(
-        ref: string,
-        id: string
+        ref: string
     ) {
         return firebase
             .firestore()

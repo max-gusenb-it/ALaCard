@@ -33,14 +33,19 @@ export class RoomSourceService {
 
     async getInitialRoom(roomId: string, creatorId: string) {
         const roomCollectionRef = this.roomRefService.getRoomCollectionRef(creatorId);
-        let rooms = await this.firestoreService.getMostRecentDocs(roomCollectionRef, roomId);
+        let rooms = await this.firestoreService.getMostRecentDocs(roomCollectionRef);
         if (rooms.docs.length <= 0) {
             throw new ItError(
                 RoomSourceServiceErrors.roomNotFound,
                 RoomSourceService.name
             );
         }
-        return Promise.resolve(rooms.docs[0].data() as Room);
+        return Promise.resolve(
+            {
+                id: roomId,
+                ...rooms.docs[0].data()
+            } as Room
+        );
     }
 
     createRoom(name: string) {

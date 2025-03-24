@@ -178,7 +178,6 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
 
             let initialRoom = await this.roomSourceService.getInitialRoom(action.roomId, action.creatorId);
 
-            if (!!!initialRoom) console.error("Initial room load fail", initialRoom);
             if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
                 throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
             }
