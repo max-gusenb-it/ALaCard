@@ -10,13 +10,49 @@ export const developmentDeck: Deck = {
     description: "Very funny Party Game for your whole family",
     cards: [
         {
-            text: "He oida",
-            sipText: "He dring oida",
-            type: CardType.FreeText,
+            text: "Who of you guys was stupid enough to drop their phone in the toilet? 🚽",
+            sipText: "You definitely earned 2 sips with that 🍻",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
             settings: {
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    sips: 2,
+                    subjectIDs: ["0"]
+                },
                 delaySipText: true
             }
-        } as FreeTextCard
+        } as PollCard,
+        {
+            text: "Who of you still pees in the shower? It's okay, i’m doing it too 🛁",
+            sipText: "Okay you disgusting pieces of shit. Everyone who voted Yes has to drink 3 sips 🤮",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    sips: 3,
+                    subjectIDs: ["0"]
+                },
+                delaySipText: true
+            }
+        } as PollCard
     ],
     flags: [],
     requiredPlayers: {
@@ -1291,8 +1327,8 @@ export const leggitPartyDeck: Deck = {
             ]
         } as PollCard,
         {
-            text: "Ever dropped your phone in the toilet?",
-            sipText: "Everyone stupid enough do so has to drink 2 sips 🥂",
+            text: "Who of you guys was stupid enough to drop their phone in the toilet? 🚽",
+            sipText: "Yes? You definitely earned 2 sips with that 🍻",
             type: CardType.Poll,
             subjects: [
                 {
@@ -1308,7 +1344,8 @@ export const leggitPartyDeck: Deck = {
                     distribute: false,
                     sips: 2,
                     subjectIDs: ["0"]
-                }
+                },
+                delaySipText: true
             }
         } as PollCard,
         {
@@ -1517,8 +1554,7 @@ export const leggitPartyDeck: Deck = {
             }
         } as FreeTextCard,
         {
-            text: "Guys did you hear it, dabbing is still cool. Everyone please do a dab before you drink or drink again. So cool 🙃",
-            followUpCardID: 8,
+            text: "Guys did you hear dabbing is still cool. Everyone please do a dab before you drink or drink again. So cool 🙃",
             type: CardType.FreeText,
             settings: {
                 customColor: "violet",
@@ -1531,13 +1567,701 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Okay i can't take it anymore. Please stop the dabbing. You are making fools of yourselfs 🤡",
-            followUpCardID: 7,
+            followUpCardID: 8,
             type: CardType.FreeText,
             settings: {
                 customColor: "violet",
                 customTitle: "Dabbing"
             }
-        } as FreeTextCard
+        } as FreeTextCard,
+        {
+            text: "Is an avocado a fruit or a vegetable? 🥑",
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "Fruit 🍓",
+                    isTarget: true
+                },
+                {
+                    title: "Vegetable 🥒"
+                }
+            ]
+        } as QuizCard,
+        {
+            text: "How many brains does an octopus have? 🐙",
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "1️⃣"
+                },
+                {
+                    title: "2️⃣"
+                },
+                {
+                    title: "5️⃣"
+                },
+                {
+                    title: "8️⃣"
+                },
+                {
+                    title: "9️⃣",
+                    isTarget: true
+                },
+                {
+                    title: "🔟"
+                }
+            ]
+        } as QuizCard,
+        {
+            text: "What is Anatidaephobia? 📖",
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "Fear of ducks watching you 🦆",
+                    isTarget: true
+                },
+                {
+                    title: "Fear of long words 🔤"
+                },
+                {
+                    title: "Fear of ballons 🎈"
+                },
+                {
+                    title: "Fear of being afraid 😨"
+                },
+                {
+                    title: "Fear of hair 💈"
+                }
+            ]
+        } as QuizCard,
+        {
+            text: "%p0, if you have ever started a fight, take one sip, Rowdy! ⚔️",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Everyone who has already been to a strip club, drink 2 sips you dirty bastards 🏩",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 chooses a category. One by one, everyone says a word that fits this category until someone runs out of ideas 🧠",
+            sipText: "That player gets to drink 4 sips 😘",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "Play a round of Chinese whispers. %p0 you start 😶",
+            sipText: "Everyone who makes a mistake has to drink 2 sips 🍺",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0, suddenly you have an urge for good humor. Everyone has to tell you a joke ✨",
+            sipText: "The best comedian gets to distribute 3 sips 🎭",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0 and %p1, show me your powers of doing absolutely nothing. A starring contest will be perfect for that 👀",
+            sipText: "Winner gets to distribute 2 sips and loser has to drink 2 😘",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "Everyone who wants to hook up today is allowed ahhh i mean required to drink 2 sips for \"better\" communication skills 🎙️ Good luck, you will need it 😘",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Hey %p0, throw a dice please. \n - First throw: Amount of sips 🍺\n - Second throw\n\t- 1 - 2: Drink your sips\n\t- 3 - 4: Distribute them\n\t- 5 - 6: Do the first throw again and sum up the amount of sips\n\nIf you don't have a dice, please continue 🎲",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customTitle: "Lucky Throw 🎲",
+                followUpCardConfig: {
+                    followUpCardID: 9
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "What do you mean, you don't have a dice? There are even apps for this. Finish your glas you lazy bastard 🦥<br><br>Just ignore this if you did the thing ☺️",
+            followUpCardID: 9,
+            type: CardType.FreeText,
+            settings: {
+                customTitle: "Lucky Throw 🎲",
+            }
+        } as FreeTextCard,{
+            text: "%p0, what's the longest distance you've walked out of your house wearing adidas Slides? 🩴",
+            sipText: "The others will judge you by that and decide if you have to drink a sip 🤔",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, have you ever dated someone that was to old/young for you in hindsight? 🔞",
+            sipText: "If so tell the story and drink to your former acquaintance 🗨️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, have you ever broken up with a text message? 📝",
+            sipText: "If so drink 2 sips. Otherwise distribute them 💋",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Everyone who has cheated on someone in their life has to drink 5 sips, you dirty bastards 😡",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 drink 2 sips if you are currently not wearing any underwear 🩲",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 drink 2 sips if you ever left the house without any underwear 👙",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, give 3 sips to the most beautiful and 3 sips to the most ugly player. Who you mean exactly can remain a secret 🦢🦋",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, find a coin and flip it. If it says heads drink 2 sips. Otherwise give the coin to the player left of you. On every player switch the sips are increased by 2. Good luck 🪙",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, who do you think is more stingy, %p1 or %p2? 🤑",
+            sipText: "They can take 2 sips 😶‍🌫️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, who do you think has more rizz, %p1 or %p2? 🫦",
+            sipText: "They can take 2 sips 🥤",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Red Flags someone in this group experienced in a relationsship. If you repeat or can’t think of something new you loose. %p0, you begin 🚩",
+            sipText: "Ah and looser takes 2 sips 😗",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Things %p0 likes in potential partners. If you repeat something, can’t think of something new or %p0 thinks you talk nonsense you loose. %p1, you begin 💄",
+            sipText: "Ah and looser takes 2 sips 😗",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0 you are planning on investing in stocks. %p1 and %p2 both know the market. Who will be your investment guru? 📈",
+            sipText: "Drink to your future profits 🥂",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0 what was the last romantic gesture you’ve made recently? 🌹",
+            sipText: "Tell or take 3 sips! 🗣️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0 what is the last thing that you came to regret? 😞",
+            sipText: "Tell or take 3 sips! 🗣️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Do you think you belong to the smarter half of the group? Everybody, count down and on the count of three, raise your hand if you are convinced of your intelligence 🧠",
+            sipText: "All the bright sparks will take a sip to even out the IQ gap 🤪",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, for every player who has spent a night at your place, you can give out a sip. But there’s a catch. If all your guests think you are a bad host, you take them yourself 🛎️",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, tell us %p1’s age or drink 2 sips 🔞",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Everyone who has ever stolen a traffic sign has to take a sip. Cheers to anarchy ⛔",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 you are in desperate need of a Wingwoman/Wingman. Would you rather choose %p1 or %p2 as your partner in crime? 🪽",
+            sipText: "Drink 2 sips to a successful night out 🌃",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Who of you was the first to start drinking? The person with the most experience demonstrates their skill and takes two sips 👀",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Every clown that has entered a drive-in with a unsuitable vehicle like bike or scooter takes one sip 🛴",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Everyone that currently wears different socks on purpose can distribute two sips 🌈",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Any beatboxers or singers among you? Please demonstrate your skills to us 🎤",
+            sipText: "If you do so, you can distribute 2 sips each. Otherwise take them yourselfs 😌",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "And as next trick the incredible %p0 will make their drink disappear 🪄",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Hey %p0, compliment the person on your right and insult the person on your left 🧚‍♀️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Drink if you ever had a pregnancy scare 🍼",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, spell your full name backwards. Drink a sip for every mistake you make 🅰️",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, get a new drink and place it in front of you. Every time a yellow card appears the cup moves one player to the right. On every Player Voting Card the person with the cup takes a sip. Continue until cup empty 🥤",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "You are teleported in a slasher horror movie. %p0 becomes the cruel monster that will kill everyone of you. Who would be the perfect candidate for your first kill? ☠️",
+            sipText: "Drink with your victim 🩸",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0 and %p1 please switch seating, drinks and ah personality as well. Try to imitate the other person as good as you can 🪪",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Time for identity theft!",
+                followUpCardConfig: {
+                    followUpCardID: 10,
+                    roundDelay: 10
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "Identity theft is bad. %p0 and %p1 you get your own seat, drink and personality back 🔙",
+            followUpCardID: 10,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Time for identity theft!",
+                followUpCardConfig: {
+                    followUpCardID: 11,
+                    roundDelay: 0
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "Bad identity theft is worse. Everyone else, who did it better? The looser has to drink 3 sips 😙",
+            followUpCardID: 11,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Time for identity theft!"
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 is only allowed to speak about themselves in the third person 🕒",
+            sipText: "For every mistake %p0 has to take a sip 🧉",
+            type: CardType.FreeText,
+            settings: {
+                customTitle: "3️⃣rd Person",
+                customColor: "violet",
+                followUpCardConfig: {
+                    followUpCardID: 12,
+                    roundDelay: 15
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 can start to talk normal again 😗",
+            followUpCardID: 12,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "3️⃣rd Person",
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 you’ve got the eye of the tiger. If someone looks you straight in the eye and you notice it, you can hand out a sip to the person in question 👀",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Eye of the Tiger",
+                followUpCardConfig: {
+                    followUpCardID: 13,
+                    roundDelay: 15
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 unfortunately you've lost the eye of the tiger and thus your powers 🍝",
+            followUpCardID: 13,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Eye of the Tiger",
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, suddenly you feel like Santa. Choose a player to sit on your lap 🎅",
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Ho Ho Ho",
+                followUpCardConfig: {
+                    followUpCardID: 14,
+                    roundDelay: 10
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "Okay Christmas is over people. Everyone can sit on their own again 🐒",
+            followUpCardID: 14,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Ho Ho Ho",
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, did you see the drinks of your friends? Yuck, disgusting. From now on you have to supply everyone with fresh and delicious beverages 😋",
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Yuck",
+                followUpCardConfig: {
+                    followUpCardID: 15,
+                    roundDelay: 15
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "Ufff %p0 didn't improve the situation with the drinks. Everyone is responsible for their own drinks again 🍹",
+            followUpCardID: 15,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Yuck",
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, i know you feel lonely sometimes but that's okay. Choose a drinking buddy. They will support you by always drinking when you have to drink 🫂",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true,
+                customColor: "violet",
+                customTitle: "Drinking Buddies!",
+                followUpCardConfig: {
+                    followUpCardID: 16,
+                    roundDelay: 20
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "All good things must end. %p0 you have to enjoy your drinks alone again 🥺",
+            followUpCardID: 16,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "Drinking Buddies!",
+            }
+        } as FreeTextCard,
+        {
+            text: "Time to get creative %p0. You can create a rule for the game. Don't get to crazy though 😘",
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "New Rule!",
+                followUpCardConfig: {
+                    followUpCardID: 17,
+                    roundDelay: 15
+                }
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 your rule is ineffective from now on. Hopefully you had some fun 📏",
+            followUpCardID: 17,
+            type: CardType.FreeText,
+            settings: {
+                customColor: "violet",
+                customTitle: "New Rule!",
+            }
+        } as FreeTextCard,
+        {
+            text: "Would you rather win a $100 million lottery and have it announced on national TV or $10 million and no one else knows about it? 💵💴💷💶",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "$100 million 📺" 
+                },
+                {
+                    title: "$10 million 🤫"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather have a horizontal butt crack or a vertical mouth? 🤔",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Horizontal butt crack 🍑" 
+                },
+                {
+                    title: "Vertical mouth 👄"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather be a door or a Window? 🚪🪟",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Door 🚪" 
+                },
+                {
+                    title: "Window 🪟"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather never enjoy music again, or never enjoy food again? 🤔",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Never enjoy music 🎶" 
+                },
+                {
+                    title: "Never enjoy food 🥘"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather be able to have sex and never orgasm, or be able to have orgasms but never have sex? 🛏️",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Sex 🏩" 
+                },
+                {
+                    title: "Orgasm 👌"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather be constantly sticky or itchy all over your entire body? 😖",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Sticky 🍯" 
+                },
+                {
+                    title: "Itchy 🌿"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather find a person or 1000 cockroaches in your attic? 🏡",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Person 🕴️" 
+                },
+                {
+                    title: "1000 cockroaches 🪳"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather be slightly thirsty no matter how much you drink or slightly tired no matter how much you sleep? 🤔",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Slightly thirsty 🚰" 
+                },
+                {
+                    title: "Slightly tired 😪"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather only need 4 hours of sleep every night or maintain a healthy weight eating 500 to 5000 calories every day? 🤔",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Only 4 hours of sleep 🛏️" 
+                },
+                {
+                    title: "Maintain a healthy weight 🍲"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather poop in the only toilet at a party, knowing that you'll clog it, or poop in the bushes in the backyard? 🚽",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Clog that toilet 🪠" 
+                },
+                {
+                    title: "Take it to the bushes 🌳"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather have Regeneration or Healing (you can't heal yourself)? ❤️‍🩹",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Regeneration 💓" 
+                },
+                {
+                    title: "Healing 💞"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Wich power would you rather have?",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Invisibility 🫥" 
+                },
+                {
+                    title: "Super strength 💪"
+                },
+                {
+                    title: "Flight 🚁"
+                },
+                {
+                    title: "Teleportation 💨"
+                },
+                {
+                    title: "Mind reading 🧠"
+                },
+                {
+                    title: "Under water breathing 🌊"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather go to hell or to heaven? Just be there for 30 minutes and see everything and someone explains everything about hell or heaven. No Torture or anything? 🛄",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Heaven 🌌" 
+                },
+                {
+                    title: "Hell 🔥"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather gain all knowledge from books by merely touching them or gain any physical skills by merely watching a video of them? 🧐",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Knowledge from books 📕" 
+                },
+                {
+                    title: "Physical skills by watching video 📼"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather be able to tell your past self one thing or be able to ask your future self one question? ❓",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Tell past self one thing 🧒" 
+                },
+                {
+                    title: "Future self one question 👵"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Would you rather be able to tell your past self one thing or be able to ask your future self one question? ❓",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Tell past self one thing 🧒" 
+                },
+                {
+                    title: "Future self one question 👵"
+                }
+            ]
+        } as PollCard,
+        {
+            text: "Who of you still pees in the shower? It's okay, i’m doing it too 🛁",
+            sipText: "Okay you disgusting pieces of shit. Everyone who voted Yes has to drink 3 sips 🤮",
+            type: CardType.Poll,
+            subjects: [
+                {
+                    title: "Yes ✅" 
+                },
+                {
+                    title: "No ❎"
+                }
+            ],
+            settings: {
+                sipConfig: {
+                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
+                    distribute: false,
+                    sips: 3,
+                    subjectIDs: ["0"]
+                },
+                delaySipText: true
+            }
+        } as PollCard
     ],
     defaultGameSettings: [
         {
