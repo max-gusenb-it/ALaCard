@@ -9,50 +9,15 @@ export const developmentDeck: Deck = {
     name: "Development Deck",
     description: "Very funny Party Game for your whole family",
     cards: [
+        
         {
-            text: "Who of you guys was stupid enough to drop their phone in the toilet? 🚽",
-            sipText: "You definitely earned 2 sips with that 🍻",
-            type: CardType.Poll,
-            subjects: [
-                {
-                    title: "Yes ✅" 
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
+            text: "💛🤍💜🖤<br>Non Binary Players, raise your glasses 🍷",
+            title: "Raise your glasses",
+            type: CardType.FreeText,
             settings: {
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    sips: 2,
-                    subjectIDs: ["0"]
-                },
-                delaySipText: true
+                drinkingCard: true
             }
-        } as PollCard,
-        {
-            text: "Who of you still pees in the shower? It's okay, i’m doing it too 🛁",
-            sipText: "Okay you disgusting pieces of shit. Everyone who voted Yes has to drink 3 sips 🤮",
-            type: CardType.Poll,
-            subjects: [
-                {
-                    title: "Yes ✅" 
-                },
-                {
-                    title: "No ❎"
-                }
-            ],
-            settings: {
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    sips: 3,
-                    subjectIDs: ["0"]
-                },
-                delaySipText: true
-            }
-        } as PollCard
+        } as FreeTextCard,
     ],
     flags: [],
     requiredPlayers: {
@@ -191,11 +156,11 @@ export const drinkingDeck: Deck = {
     cards: [
         {
             text: "%p0 trink fünf Schlücke :)",
+            title: "Dring a moi heast",
             type: CardType.FreeText,
+            color: "blue",
             settings: {
                 drinkingCard: true,
-                customColor: "blue",
-                customTitle: "Dring a moi heast"
             }
         } as FreeTextCard
     ],
@@ -249,242 +214,253 @@ export const leggitPartyDeck: Deck = {
     icon: "🎊",
     name: "aLaCard",
     description: "Very funny Party Game",
-    groundRules: [
-        "- **Reminder**  \n- The game is currently under development so the features are limited",
-        "Thanks for testing out my game btw. :)"
-    ],
     cards: [
         {
-            text: "%p0 give four sips to the player you know best",
+            text: "%p0 give out 3 sips to the player you know best! 👥",
+            title: "I know you",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "Give 3 sips to one person if you are not in a relationship.",
+            text: "Distribute 2 sips if you are not in a relationship 🪐",
+            title: "Single's",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "Let's distribute some sips! Everyone choose someone to down 3 of them :)",
+            text: "You guys look too sober. Everybody can give out 2 sips! 🍻",
+            title: "Drink up",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "%p0 a sorrow shared is a sorrow halved. Drink 2 and distribute 2",
+            text: "%p0 a sorrow shared is a sorrow halved. Choose a player and drink 2 sips each ☯️",
+            title: "Sorrow's",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "%p0 you have the chance to get really disliked by a player! Choose someone to down 6 sips!",
+            text: "%p0 you have the chance to get really disliked by a player! Choose someone to finish their drink! 💔",
+            title: "And it's gone",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "%p0 you are too sober, have three sips :)",
+            text: "%p0, you're so rational! Just take 3 sips, and you'll be all set! 🧠",
+            title: "Unrational",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "%p0, time to spin the bottle. If the person chooses dare, feel free to hand out 8 sips to them :)",
+            text: "%p0, time to spin the bottle. Play a round of truth or dare! 🔄",
+            title: "You spin my head",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
             }
         } as FreeTextCard,
         {
-            text: "%p0, you're in jail with a player? Drink 2 sips with your cellmate!",
+            text: "%p0, you're in jail with a player? Choose your cellmate! 🔒",
+            title: "Prison for me and you",
+            sipText: "Both of you drink 2 sips and remember – never drop the soap 🧼",
             type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
         } as FreeTextCard,
         {
-            text: "%p0, you accidentally killed someone at work. Drink 2 sips with the colleague who would most likely never talk about it",
+            text: "%p0, you accidentally killed someone at work. Choose your colleague who would most likely never talk about it 😶",
+            title: "Work it",
+            sipText: "Colleague, drink 2 sips with the killer or else 🔪",
             type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
         } as FreeTextCard,
         {
-            text: "%p0, drink with the person who is most likely to do weird things in public",
+            text: "%p0, who of you guys is most likely to do weird things in public? 🪠",
+            title: "Weirdo",
+            sipText: "Drink 2 sips together! 🍹",
             type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
         } as FreeTextCard,
         {
-            text: "%p0, you're robbing a supermarket. Drink with the confused player who is supposed to be in charge of security that day",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0, pick a best man or maid of honor and drink to your wedding",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0, the person to your left looks very thirsty. Pass out a 2 sips",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0, the desire to marry has taken hold of you. Make a convincing marriage proposal to the person on your left. In return you may hand out 3 sips to drink :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0, if you could do anything without suffering the consequences, what would you do right now? Tell or drink 2 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0, if you could punch someone without having to suffer the consequences, who would your choice be? Tell or drink 2 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "The smallest player badly needs 4 sips for growth.",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 swap your top or pants with %p1 for the rest of the game. For this you may distribute 5 sips each. If someone refuses the person has to drink 3 sips",
-            // ToDo: Idea for free text card. Split "If someone refuses ..." away from here. Show all players, who are not involved in this card the text.
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 distribute 2 sips to a player thinner than you. If that is not possible drink yourself :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "All those who can't manage to stand on one leg for one minute have to drink three sips",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "All who manage to do a bottle flip on the first try may distribute 4 sips :*",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 distribute 2 sips to the player who is smarter than you. If that is not possible, drink them yourself!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 if you had to leave the planning of your wedding to either %p1 or %p2, who would you choose? Drink to your wedding with this person :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 if you had to leave the planning of your next vacation to either %p1 or %p2, who would you choose? Drink with that person! :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 if you had to leave the planning of your next birthday party to either %p1 or %p2, who would you choose? Drink with that person! :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 imitate another player. The first to guess the player gets to distribute 4 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 guess the color of %p1's underwear. Are you right? Distribute 4 sips, otherwise drink them yourself :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "The player who was on vacation most recently drinks 2 sips!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "Men raise your glasses. 3 sips for you!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "Women raise your glasses. 3 sips for you!",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 do me a favor and start a waterfall :)",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "%p0 and %p1: Rock, Paper, Scissors Duel! Loser drinks 3 sips.",
-            type: CardType.FreeText,
-            settings: {
-                drinkingCard: true
-            }
-        } as FreeTextCard,
-        {
-            text: "Make a group selfie :)",
+            text: "%p0, you're robbing a supermarket. Who is supposed to be in charge of the supermarket security? 👮",
+            title: "Illegal",
+            sipText: "Share 2 sips with your enemy to decrease eye sight! 👀",
             type: CardType.FreeText
         } as FreeTextCard,
         {
-            text: "%p0 Roses are red, violets are blue ... finish the poem and give out 4 sips. Otherwise, drink them yourself!",
+            text: "%p0, pick your best man or maid of honor 💒",
+            title: "Congrats",
+            sipText: "Drink to your wedding! 💍",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0, the person to your left looks very thirsty. They have to drink 2 sips 🍾",
+            title: "Left left left",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, the desire to marry has taken hold of you. Make a convincing marriage proposal to the person on your left. 💍",
+            title: "Awww cute",
+            sipText: "If you are refused hand out 2 sips. Otherwise drink 1 with your fiance 💏",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, if you could do one thing without suffering the consequences, what would you do? 🧐",
+            title: "Just do it",
+            sipText: "Tell or drink 2 sips! 💬",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, if you could punch anyone without consequences, who would be your choice? 👊",
+            title: "Falcon Punch",
+            sipText: "Tell or drink 2 sips! 😘",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "The smallest player desperately needs 4 sips to grow 🪴",
+            title: "Grow",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 swap your shirt or pants with %p1 👖👕",
+            title: "Clothing swap party!",
+            color: "violet",
+            sipText: "For this you may distribute 5 sips each. If someone refuses, they have to drink 3 sips 🥂",
+            type: CardType.FreeText,
+            settings: {
+                followUpCardConfig: {
+                    followUpCardID: 18,
+                    roundDelay: 15
+                }
+            }
+        } as FreeTextCard,
+        {
+            followUpCardID: 18,
+            text: "Clothing swap party is over! Unless you like your new style better 💋",
+            title: "Clothing swap party!",
+            color: "violet",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0 distribute 2 sips to a player thinner than you. If that is not possible get yourself some food and drink yourself 🥪",
+            title: "Slim Shady",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Hush, do a somersault! The first person who manages to complete this very complicated task can distribute 2 sips 🤸",
+            title: "Sporty",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Do a bottle flip 🍼",
+            title: "So 2016",
+            sipText: "The legends nailing it first try can distribute 4 sips 🍬",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0 distribute 2 sips to a player smarter than you. If that's not possible, drink them yourself! 🧠",
+            title: "Brainiac",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, if you had to leave the planning of your wedding to either %p1 or %p2, who would you choose? 👰",
+            title: "Congrats!",
+            sipText: "Drink to your wedding with your person of honor 🍾",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, if you had to leave the planning of your next vacation to either %p1 or %p2, who would you choose? 🗺️",
+            title: "Trippy",
+            sipText: "Toast to your trip 🍻",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0, if you had to leave the planning of your next birthday party to either %p1 or %p2, who would you choose? 🎂",
+            title: "Happy Birthday!",
+            sipText: "Toast to your birthday 🍻",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0 imitate another player. The others have to find out who %p0 is imitating 🤡",
+            title: "Pantomime",
+            sipText: "The first person to guess the player gets to give out 2 sips! 🍾",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0 guess the color of %p1's underwear 🎨",
+            title: "Green?",
+            sipText: "Are you right? Distribute 1 sips, otherwise drink yourself 🩲",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "The last person who was on vacation drinks 2 sips! 🗾",
+            title: "Holiday",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Men, raise your glasses! 🕺",
+            title: "Raise your glasses",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Women raise your glasses! 💃",
+            title: "Raise your glasses",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 do me a favor and start a waterfall 🌩️",
+            title: "Waterfall baby",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0 and %p1, play three rounds of rock paper scissors 🪨📄✂️",
+            title: "Rock, I choose rock!",
+            sipText: "The loser suddenly gets the desire to finish their drink and does so 🫗",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "Make a group selfie 📷",
+            title: "Let us take a selfie",
+            sipText: "Otherwise, everyone has to take a sip 🍻",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "%p0, Roses are red, violets are blue ... finish the poem or 4 sips for you 🌹",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true
@@ -1374,11 +1350,11 @@ export const leggitPartyDeck: Deck = {
         // ------------------------------
         {
             text: "Hey, remember me 🙉",
+            color: "violet",
+            title: "Follow Up Card",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Follow Up Card",
                 followUpCardConfig: {
                     followUpCardID: 0,
                     roundDelay: 6
@@ -1388,6 +1364,8 @@ export const leggitPartyDeck: Deck = {
         {
             followUpCardID: 0,
             text: "Hey, do you remember me? 🍌",
+            title: "Follow Up Card",
+            color: "violet",
             type: CardType.Quiz,
             subjects: [
                 {
@@ -1402,19 +1380,15 @@ export const leggitPartyDeck: Deck = {
                     title: "🙈",
                     isTarget: false
                 }
-            ],
-            settings: {
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            } 
+            ]
         } as QuizCard,
         {
             text: "%p0 your are crowned Thumb Master. Use your power to distribute 1 sip to those who don't follow your reign 👑",
+            color: "violet",
+            title: "Thumb Master 👍",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Thumb Master 👍",
                 followUpCardConfig: {
                     followUpCardID: 1,
                     roundDelay: 15
@@ -1423,20 +1397,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "%p0 your reign as Thumb Master is over. Hopefully you used your power well 👌",
+            color: "violet",
+            title: "Thumb Master 👍",
             followUpCardID: 1,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Thumb Master 👍"
-            }
+            type: CardType.FreeText
         } as FreeTextCard, 
         {
             text: "Everyone now has the name of the person sitting to their left. You have to drink 1 sip for switching up names 🗿",
+            color: "violet",
+            title: "Confusion is fun, right?",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Confusion is fun, right?",
                 followUpCardConfig: {
                     followUpCardID: 2,
                     roundDelay: 15
@@ -1445,20 +1417,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Okay this gets boring. You get your real names back 😘",
+            color: "violet",
+            title: "Confusion is fun, right?",
             followUpCardID: 2,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Confusion is fun, right?",
-            }
+            type: CardType.FreeText
         } as FreeTextCard, 
         {
             text: "Hey gang, %p0 wants a drink. Mix up something good for them to enjoy 🧉",
+            color: "violet",
+            title: "Mix it up 🍸",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Mix it up 🍸",
                 followUpCardConfig: {
                     followUpCardID: 3,
                     roundDelay: 1
@@ -1467,20 +1437,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Now it's your turn %p0. Choose someone to share half of the good stuff with 😈",
+            color: "violet",
+            title: "Mix it up 🍸",
             followUpCardID: 3,
             type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Mix it up 🍸",
-            }
         } as FreeTextCard,
         {
             text: "%p0 it’s your lucky day! Now you are Question Master and everyone who answers one of your questions has to drink 2 sips ⁉️",
+            color: "violet",
+            title: "Question Master",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Question Master",
                 followUpCardConfig: {
                     followUpCardID: 4,
                     roundDelay: 15
@@ -1489,20 +1457,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "%p0 you are no longer Question Master 🗿",
+            color: "violet",
+            title: "Question Master",
             followUpCardID: 4,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Question Master",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "Let’s make intoxicating yourself a little harder. Everyone is only allowed to drink with their none dominant hand 🫱",
+            color: "violet",
+            title: "Switch Up",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Switch Up",
                 followUpCardConfig: {
                     followUpCardID: 5,
                     roundDelay: 15
@@ -1511,20 +1477,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Which hand you drink with is again up to you. Did anyone spill something? 🫗",
+            color: "violet",
+            title: "Switch Up",
             followUpCardID: 5,
             type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Switch Up",
-            }
         } as FreeTextCard,
         {
             text: "Hey guys good news, everyone got a promotion! Ammm that’s everyone but %p0 you slacker. You now have to address everyone as if they were your boss at work. 😪",
+            color: "violet",
+            title: "Promotions baby!",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Promotions baby!",
                 followUpCardConfig: {
                     followUpCardID: 6,
                     roundDelay: 1
@@ -1533,11 +1497,11 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Corporate Rules: On violation %p0 has to drink one sip 🍺",
+            color: "violet",
+            title: "Promotions baby!",
             followUpCardID: 6,
             type: CardType.FreeText,
             settings: {
-                customColor: "violet",
-                customTitle: "Promotions baby!",
                 followUpCardConfig: {
                     followUpCardID: 7,
                     roundDelay: 15
@@ -1546,19 +1510,17 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Ah better late than never. %p0 you also got a promotion. Good work 😉",
+            color: "violet",
+            title: "Promotions baby!",
             followUpCardID: 7,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Promotions baby!",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "Guys did you hear dabbing is still cool. Everyone please do a dab before you drink or drink again. So cool 🙃",
+            color: "violet",
+            title: "Dabbing",
             type: CardType.FreeText,
             settings: {
-                customColor: "violet",
-                customTitle: "Dabbing",
                 followUpCardConfig: {
                     followUpCardID: 8,
                     roundDelay: 15
@@ -1567,12 +1529,10 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Okay i can't take it anymore. Please stop the dabbing. You are making fools of yourselfs 🤡",
+            color: "violet",
+            title: "Dabbing",
             followUpCardID: 8,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Dabbing"
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "Is an avocado a fruit or a vegetable? 🥑",
@@ -1677,10 +1637,10 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Hey %p0, throw a dice please. \n - First throw: Amount of sips 🍺\n - Second throw\n\t- 1 - 2: Drink your sips\n\t- 3 - 4: Distribute them\n\t- 5 - 6: Do the first throw again and sum up the amount of sips\n\nIf you don't have a dice, please continue 🎲",
+            title: "Lucky Throw 🎲",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customTitle: "Lucky Throw 🎲",
                 followUpCardConfig: {
                     followUpCardID: 9
                 }
@@ -1688,11 +1648,9 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "What do you mean, you don't have a dice? There are even apps for this. Finish your glas you lazy bastard 🦥<br><br>Just ignore this if you did the thing ☺️",
+            title: "Lucky Throw 🎲",
             followUpCardID: 9,
-            type: CardType.FreeText,
-            settings: {
-                customTitle: "Lucky Throw 🎲",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,{
             text: "%p0, what's the longest distance you've walked out of your house wearing adidas Slides? 🩴",
             sipText: "The others will judge you by that and decide if you have to drink a sip 🤔",
@@ -1874,11 +1832,11 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "%p0 and %p1 please switch seating, drinks and ah personality as well. Try to imitate the other person as good as you can 🪪",
+            color: "violet",
+            title: "Time for identity theft!",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Time for identity theft!",
                 followUpCardConfig: {
                     followUpCardID: 10,
                     roundDelay: 10
@@ -1887,11 +1845,11 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Identity theft is bad. %p0 and %p1 you get your own seat, drink and personality back 🔙",
+            color: "violet",
+            title: "Time for identity theft!",
             followUpCardID: 10,
             type: CardType.FreeText,
             settings: {
-                customColor: "violet",
-                customTitle: "Time for identity theft!",
                 followUpCardConfig: {
                     followUpCardID: 11,
                     roundDelay: 0
@@ -1900,20 +1858,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Bad identity theft is worse. Everyone else, who did it better? The looser has to drink 3 sips 😙",
+            color: "violet",
+            title: "Time for identity theft!",
             followUpCardID: 11,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Time for identity theft!"
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "%p0 is only allowed to speak about themselves in the third person 🕒",
+            title: "3️⃣rd Person",
+            color: "violet",
             sipText: "For every mistake %p0 has to take a sip 🧉",
             type: CardType.FreeText,
             settings: {
-                customTitle: "3️⃣rd Person",
-                customColor: "violet",
                 followUpCardConfig: {
                     followUpCardID: 12,
                     roundDelay: 15
@@ -1922,20 +1878,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "%p0 can start to talk normal again 😗",
+            title: "3️⃣rd Person",
+            color: "violet",
             followUpCardID: 12,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "3️⃣rd Person",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "%p0 you’ve got the eye of the tiger. If someone looks you straight in the eye and you notice it, you can hand out a sip to the person in question 👀",
+            color: "violet",
+            title: "Eye of the Tiger",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Eye of the Tiger",
                 followUpCardConfig: {
                     followUpCardID: 13,
                     roundDelay: 15
@@ -1944,19 +1898,17 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "%p0 unfortunately you've lost the eye of the tiger and thus your powers 🍝",
+            color: "violet",
+            title: "Eye of the Tiger",
             followUpCardID: 13,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Eye of the Tiger",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "%p0, suddenly you feel like Santa. Choose a player to sit on your lap 🎅",
+            color: "violet",
+            title: "Ho Ho Ho",
             type: CardType.FreeText,
             settings: {
-                customColor: "violet",
-                customTitle: "Ho Ho Ho",
                 followUpCardConfig: {
                     followUpCardID: 14,
                     roundDelay: 10
@@ -1965,19 +1917,17 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Okay Christmas is over people. Everyone can sit on their own again 🐒",
+            color: "violet",
+            title: "Ho Ho Ho",
             followUpCardID: 14,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Ho Ho Ho",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "%p0, did you see the drinks of your friends? Yuck, disgusting. From now on you have to supply everyone with fresh and delicious beverages 😋",
+            color: "violet",
+            title: "Yuck",
             type: CardType.FreeText,
             settings: {
-                customColor: "violet",
-                customTitle: "Yuck",
                 followUpCardConfig: {
                     followUpCardID: 15,
                     roundDelay: 15
@@ -1986,20 +1936,18 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Ufff %p0 didn't improve the situation with the drinks. Everyone is responsible for their own drinks again 🍹",
+            color: "violet",
+            title: "Yuck",
             followUpCardID: 15,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Yuck",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "%p0, i know you feel lonely sometimes but that's okay. Choose a drinking buddy. They will support you by always drinking when you have to drink 🫂",
+            color: "violet",
+            title: "Drinking Buddies!",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Drinking Buddies!",
                 followUpCardConfig: {
                     followUpCardID: 16,
                     roundDelay: 20
@@ -2008,19 +1956,17 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "All good things must end. %p0 you have to enjoy your drinks alone again 🥺",
+            color: "violet",
+            title: "Drinking Buddies!",
             followUpCardID: 16,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "Drinking Buddies!",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "Time to get creative %p0. You can create a rule for the game. Don't get to crazy though 😘",
+            color: "violet",
+            title: "New Rule!",
             type: CardType.FreeText,
             settings: {
-                customColor: "violet",
-                customTitle: "New Rule!",
                 followUpCardConfig: {
                     followUpCardID: 17,
                     roundDelay: 15
@@ -2029,12 +1975,10 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             text: "%p0 your rule is ineffective from now on. Hopefully you had some fun 📏",
+            color: "violet",
+            title: "New Rule!",
             followUpCardID: 17,
-            type: CardType.FreeText,
-            settings: {
-                customColor: "violet",
-                customTitle: "New Rule!",
-            }
+            type: CardType.FreeText
         } as FreeTextCard,
         {
             text: "Would you rather win a $100 million lottery and have it announced on national TV or $10 million and no one else knows about it? 💵💴💷💶",
@@ -2261,7 +2205,99 @@ export const leggitPartyDeck: Deck = {
                 },
                 delaySipText: true
             }
-        } as PollCard
+        } as PollCard,
+        {
+            text: "All those who have been skinny dipping take 3 sips 🌊",
+            title: "Revealing",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Everyone who took a video of the artist on their last concert has to drink 3 sips. Enjoy the moment you idiots 🎫",
+            title: "Enjoy the moment",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Everyone who has masturbated today drinks 2 sips 🫦",
+            title: "Aha",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "Everyone who has lied today either comes clean or takes 3 sips 🤥",
+            title: "That’s ignorant",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "The person with the emptiest drink has to finish it and get a new one 🥴",
+            title: "Half empty",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, congrats on your beautiful new child. I’ve heard you need someone for babysitting. %p1 and %p2 are the perfect candidates for the job so who’s your pick? ⛏️",
+            title: "Babysitting",
+            sipText: "Toast to your newborn 🍼",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            text: "Everyone who wants or has kids takes 1 sip 🚸",
+            title: "Aww children",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "💛🤍💜🖤<br>Non Binary Players, raise your glasses 🍷",
+            title: "Raise your glasses",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "The floor is Lava. The last one to touch the ground looses 🌋",
+            title: "Ahh that’s hot",
+            sipText: "Someone please help the burn victim drink 3 sips 🫶",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            text: "%p0, count the letters of your first and last name. This is the amount of sips you are allowed to distribute 📛",
+            title: "Letters",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "The last person to have a blackout from too much alcohol drinks 2 sips. If none of you has ever had a blackout, everyone drinks 🤯",
+            title: "Blackout",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
+        {
+            text: "%p0, get a new drink and place it in the middle. If someone wants to go to the toilet, they have to finish this drink first. After the person has finished their business, they can refill the drink if they want to. 🚽🧻",
+            title: "Toilet break is over",
+            type: CardType.FreeText,
+            settings: {
+                drinkingCard: true
+            }
+        } as FreeTextCard,
     ],
     defaultGameSettings: [
         {
@@ -3228,12 +3264,12 @@ export const testingDeck: Deck = {
         } as FreeTextCard,
         {
             text: "Hey, remember me 🙉",
+            color: "violet",
+            title: "Follow Up Card",
             type: CardType.FreeText,
             settings: {
                 order: 1,
                 drinkingCard: true,
-                customColor: "violet",
-                customTitle: "Follow Up Card",
                 followUpCardConfig: {
                     followUpCardID: 0,
                     roundDelay: 4
@@ -3243,6 +3279,8 @@ export const testingDeck: Deck = {
         {
             followUpCardID: 0,
             text: "Hey, do you remember me? 🍌",
+            title: "Follow Up Card",
+            color: "violet",
             type: CardType.Quiz,
             subjects: [
                 {
@@ -3257,11 +3295,7 @@ export const testingDeck: Deck = {
                     title: "🙈",
                     isTarget: false
                 }
-            ],
-            settings: {
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            }
+            ]
         } as QuizCard,
         {
             text: "%sp won two tickets for a cruise. Who do you think will be able to come along?",
@@ -3272,11 +3306,11 @@ export const testingDeck: Deck = {
         } as PlayerVotingCard,
         {
             text: "As a small present to you %sp, you are now crowned Thumb Master of your group!",
+            title: "Follow Up Card",
+            color: "violet",
             type: CardType.FreeText,
             settings: {
                 order: 2,
-                customColor: "violet",
-                customTitle: "Follow Up Card",
                 followUpCardConfig: {
                     followUpCardID: 1,
                     roundDelay: 4
@@ -3286,10 +3320,8 @@ export const testingDeck: Deck = {
         {
             followUpCardID: 1,
             text: "%sp sadly your reign as Thumb Master must end now",
-            settings: {
-                customColor: "violet",
-                customTitle: "Follow Up Card"
-            },
+            title: "Follow Up Card",
+            color: "violet",
             type: CardType.FreeText
         } as FreeTextCard,
         {

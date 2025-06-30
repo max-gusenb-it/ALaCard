@@ -20,9 +20,9 @@ export class QuizCardTranslationService extends PollCardTranslationService {
     }
 
     override getCardTitle(card: Card) {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
-            return card.settings!.customTitle;
-        return this.translateService.instant("features.room.game.card.quiz");
+        if (!Utils.isStringDefinedAndNotEmpty(card.title))
+            return this.translateService.instant("features.room.game.card.quiz");
+        return super.getCardTitle(card);
     }
 
     protected override getSubjectsText(card: Card, cardState: string): string {

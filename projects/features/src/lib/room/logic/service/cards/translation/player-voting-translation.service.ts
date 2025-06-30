@@ -11,9 +11,9 @@ export class PlayerVotingTranslationService extends VotingCardTranslationService
     }
     
     override getCardTitle(card: Card) {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
-            return card.settings!.customTitle;
-        return this.translateService.instant("features.room.game.card.playerVoting");
+        if (!Utils.isStringDefinedAndNotEmpty(card.title))
+            return this.translateService.instant("features.room.game.card.playerVoting");
+        return super.getCardTitle(card);
     }
 
     override getSipTextForGroup(group: string) {

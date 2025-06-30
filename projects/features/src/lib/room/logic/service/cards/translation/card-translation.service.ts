@@ -14,8 +14,8 @@ export class CardTranslationService {
     constructor(protected translateService: TranslateService) { }
 
     getCardTitle(card: Card) {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
-            return card.settings!.customTitle;
+        if (Utils.isStringDefinedAndNotEmpty(card.title))
+            return card.title;
         switch(card.type) {
             case(CardType.GroundRule):
                 return this.translateService.instant("features.room.game.card.groundRules");

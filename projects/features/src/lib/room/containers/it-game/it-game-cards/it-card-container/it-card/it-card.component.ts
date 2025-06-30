@@ -45,8 +45,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (!this.customColor && this.card.settings?.customColor) this.customColor = this.card.settings.customColor;
-    if (!this.customTitle && this.card.settings?.customTitle) this.customTitle = this.card.settings.customTitle;
+    if (!this.customColor && this.card.color) this.customColor = this.card.color;
+    if (!this.customTitle && this.card.title) this.customTitle = this.card.title;
     this.changeDetectorRef.detectChanges();
   }
 

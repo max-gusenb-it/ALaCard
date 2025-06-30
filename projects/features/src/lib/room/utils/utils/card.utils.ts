@@ -6,8 +6,8 @@ export namespace CardUtils {
     }
 
     export function getCardColor(card: Card) : Color {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customColor)) {
-            return card.settings?.customColor!;
+        if (Utils.isStringDefinedAndNotEmpty(card.color)) {
+            return card.color!;
         } else {
             switch(card.type) {
               case(CardType.PlayerVoting): {

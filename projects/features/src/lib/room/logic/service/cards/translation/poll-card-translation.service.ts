@@ -7,9 +7,9 @@ import { Card, PollCard, Utils } from "@shared";
 })
 export class PollCardTranslationService extends VotingCardTranslationService {
     override getCardTitle(card: Card) {
-        if (Utils.isStringDefinedAndNotEmpty(card.settings?.customTitle))
-            return card.settings!.customTitle;
-        return this.translateService.instant("features.room.game.card.poll");
+        if (!Utils.isStringDefinedAndNotEmpty(card.title))
+            return this.translateService.instant("features.room.game.card.poll");
+        return super.getCardTitle(card);
     }
 
     override getGameText(
