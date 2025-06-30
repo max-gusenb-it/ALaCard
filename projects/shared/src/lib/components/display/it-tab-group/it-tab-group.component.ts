@@ -9,8 +9,9 @@ export class ItTabGroupComponent implements AfterContentInit {
   @ContentChildren(ItTabComponent) tabs: QueryList<ItTabComponent> = null as any;
 
   @Input() hideControls: boolean = false;
-  @Input() advanceControlDisabled: boolean = false;
-  @Input() finishControlDisabled: boolean = false;
+  @Input() advanceButtonDisabled: boolean = false;
+  @Input() finishButtonDisabled: boolean = false;
+  @Input() hideFinishButton: boolean = false;
   @Input() advanceButtonIcon?: string;
 
   @Output() onTabChange = new EventEmitter<string>();
