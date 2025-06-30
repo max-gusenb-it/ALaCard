@@ -12,6 +12,24 @@
     >
         {{ roomForm.controls['name'].value?.length }} / 30 Signs
     </it-input>
+    <it-toggle-button-group 
+        #toggleButtonGroup
+        [singleSelect]="true"
+        (selectionChanged)="modeSelectionChanged($event)"
+    >
+      <it-toggle-button 
+        value="offline"
+        icon="person"
+      >
+        Offline
+      </it-toggle-button>
+      <it-toggle-button 
+        value="online"
+        icon="group"
+      >
+        Online
+      </it-toggle-button>
+    </it-toggle-button-group>
     <it-button
         class="hidden"
         type="submit"

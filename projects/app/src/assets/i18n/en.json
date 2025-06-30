@@ -216,6 +216,10 @@
         "it-forgot-password-modal": {
           "title": "Forgot your password",
           "mail-sent": "Reset password mail successfully sent!"
+        },
+        "it-create-room-form": {
+          "offline-snackbar": "Only you need a device. Changeable in room settings",
+          "online-snackbar": "Every player needs a device. Changeable in room settings"
         }
       },
       "display": {

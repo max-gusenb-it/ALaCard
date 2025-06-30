@@ -45,7 +45,7 @@ export class RoomSourceService {
         );
     }
 
-    createRoom(name: string) {
+    createRoom(name: string, mode: number) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!user && user.id) {
             const player = PlayerUtils.exportUserToPlayer(user, 0);
@@ -58,7 +58,7 @@ export class RoomSourceService {
                         [player.id]: player
                     },
                     settings: {
-                        singleDeviceMode: false,
+                        singleDeviceMode: mode === 0 ? true : false,
                         otherAdmin: true,
                         autoContinueOnAllVotes: true
                     },

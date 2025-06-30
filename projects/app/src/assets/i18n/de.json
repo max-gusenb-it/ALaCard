@@ -216,6 +216,10 @@
         "it-forgot-password-modal": {
           "title": "Passwort vergessen",
           "mail-sent": "E-Mail zum Passwort ändern erfolgreich gesendet!"
+        },
+        "it-create-room-form": {
+          "offline-snackbar": "Nur du brauchst ein Gerät. Kann in Einstellungen geändert werden",
+          "online-snackbar": "Jeder Spieler braucht ein Gerät. Kann in Einstellungen geändert werden"
         }
       },
       "display": {

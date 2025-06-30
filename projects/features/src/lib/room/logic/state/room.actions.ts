@@ -11,7 +11,7 @@ export namespace RoomActions {
      */
     export class CreateRoom {
         static readonly type = '[No-Room] CreateRoom';
-        constructor(public name: string) {}
+        constructor(public name: string, public mode: number) {}
     }
 
     export class JoinRoom {
