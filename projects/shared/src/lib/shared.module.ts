@@ -36,6 +36,8 @@ import { ItCreateRoomForm } from './containers/forms/it-create-room-form/it-crea
 import { ItButtonHeadingComponent } from './components/buttons/it-button-heading/it-button-heading.component';
 import { ItCheckboxHeadingComponent } from './components/forms/it-checkbox-heading/it-checkbox-heading.component';
 import { ItDetailHeadingComponent } from './components/display/it-detail-heading/it-detail-heading.component';
+import { ItToggleButtonComponent } from './components/buttons/it-toggle-button/it-toggle-button.component';
+import { ItToggleButtonGroupComponent } from './components/buttons/it-toggle-button-group/it-toggle-button-group.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { ItDetailHeadingComponent } from './components/display/it-detail-heading
     ItCreateRoomForm,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
-    ItDetailHeadingComponent
+    ItDetailHeadingComponent,
+    ItToggleButtonComponent,
+    ItToggleButtonGroupComponent
   ],
   imports: [
     CommonModule,
@@ -109,7 +113,9 @@ import { ItDetailHeadingComponent } from './components/display/it-detail-heading
     ItCreateRoomForm,
     ItButtonHeadingComponent,
     ItCheckboxHeadingComponent,
-    ItDetailHeadingComponent
+    ItDetailHeadingComponent,
+    ItToggleButtonComponent,
+    ItToggleButtonGroupComponent
   ],
   providers: [
   ]
