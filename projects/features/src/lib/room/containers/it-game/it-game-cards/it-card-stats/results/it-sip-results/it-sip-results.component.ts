@@ -37,7 +37,7 @@ export class ItSipResultsComponent extends AngularLifecycle implements AfterView
     if (this.sipResults.length <= this.sipResultColumnCount) {
       return [];
     } else {
-      return this.sipResults.slice(this.sipResultColumnCount + 1, this.sipResults.length - 1);
+      return this.sipResults.slice(this.sipResultColumnCount, this.sipResults.length);
     }
   }
 
