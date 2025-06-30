@@ -60,7 +60,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     return ColorUtils.getBackground200CSS(color);
   }
 
-  getNewCardText() {
+  getCardText() {
     return this.cardTranslationService.getCardText(
       this.card,
       this.store.selectSnapshot(RoomState.players),
