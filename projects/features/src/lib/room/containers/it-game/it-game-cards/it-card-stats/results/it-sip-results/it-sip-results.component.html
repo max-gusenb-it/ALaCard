@@ -2,7 +2,6 @@
     [heading]="'features.room.game.game-cards.sips' | translate"
     [disabled]="!!!hiddenSipResults || hiddenSipResults.length <= 0"
     icon="water_loss"
-    (selectionEmitter)="selectionList.onSelectionChanged($event)"
     *ngIf="!!defaultVisibleSipResults"
 >
     <div

@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ContentChildren, Input, QueryList } from "@angular/core";
+import { AfterViewInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList } from "@angular/core";
 import { ItSelectableComponent } from "@shared";
+import { merge } from "rxjs";
 
 @Component({
     template: ''
@@ -13,6 +14,8 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
    * @type {QueryList<ItSelectableComponent>}
    */
   @ContentChildren(ItSelectableComponent) selectableContainers: QueryList<ItSelectableComponent> = null as any;
+
+  @Output() selectionChanged: EventEmitter<number> = new EventEmitter<number>();
 
    /**
     * Maps and returns the ItSelectableComponents from the nested ContentChildren 
@@ -60,16 +63,19 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
 
   mapSelectableIds() {
     this.selectables.map(s => s.id = this.selectables.indexOf(s));
+
+    const eventEmitters = this.selectables.map(s => s.selectionEmitter.asObservable());
+    merge(...eventEmitters)
+      .subscribe((selectionId: number) => {
+        this.onSelectionChanged(selectionId);
+      });
   }
 
   onSelectionChanged(selectionId: number) {
     let selectable = this.selectables.find(s => s.id === selectionId)!;
     const numberOfSelectedItem = this.selectables.filter(s => s.selected).length;
     if (selectable.selected) {
-      if (numberOfSelectedItem == 1) {
-        return;
-      }
-      else {
+      if (numberOfSelectedItem != 1) {
         if (this.singleSelect) {
           this.selectables.filter(s => s.id !== selectionId).map(s => s.quietUnselect());
         }
@@ -80,6 +86,11 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
           selectable.quietSelect();
         }
       }
+    }
+    if (numberOfSelectedItem > 0 || this.required) {
+      this.selectionChanged.emit(selectionId);
+    } else {
+      this.selectionChanged.emit(undefined);
     }
   }
 }

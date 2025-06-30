@@ -22,7 +22,6 @@
             [heading]="getResultsHeading()"
             icon="emoji_events"
             [selected]="true"
-            (selectionEmitter)="resultSelectionList.onSelectionChanged($event)"
         >
             <div collapsible class="flex flex-col gap-2 overflow-auto" style="max-height: 20vh;">
                 <it-result
