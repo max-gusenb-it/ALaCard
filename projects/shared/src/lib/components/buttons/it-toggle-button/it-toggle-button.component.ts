@@ -16,7 +16,6 @@ export class ItToggleButtonComponent extends ItSelectableComponent {
   @HostBinding('style.flex-grow')
   flexGrow = 10;
 
-  @Input() value: string;
   @Input() icon: string;
 
   override quietSelect(): void {

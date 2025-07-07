@@ -56,8 +56,10 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
       if (this.initialSelection === undefined) this.initialSelection = 0;
       const selectable = this.selectables[this.initialSelection];
       if (!!!selectable) return;
-      selectable.select();
-      selectable.detectChanges();
+      // Avoid ExpressionChangedAfterItHasBeenCheckedError
+      setTimeout(() => {
+        selectable.select();
+      });
     }
   }
 
@@ -88,7 +90,7 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
       }
     }
     if (numberOfSelectedItem > 0 || this.required) {
-      this.selectionChanged.emit(selectionId);
+      this.selectionChanged.emit(selectable.value ?? selectionId);
     } else {
       this.selectionChanged.emit(undefined);
     }
