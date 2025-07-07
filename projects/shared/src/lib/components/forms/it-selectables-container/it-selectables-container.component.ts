@@ -15,7 +15,7 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
    */
   @ContentChildren(ItSelectableComponent) selectableContainers: QueryList<ItSelectableComponent> = null as any;
 
-  @Output() selectionChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Output() selectionChanged: EventEmitter<any> = new EventEmitter<any>();
 
    /**
     * Maps and returns the ItSelectableComponents from the nested ContentChildren 
@@ -54,7 +54,12 @@ export abstract class ItSelectablesContainerComponent implements AfterViewInit {
     if ((this.initialSelection !== undefined && this.initialSelection <= this.selectables.length) || this.required) {
       // ToDo: Fix initial selection
       if (this.initialSelection === undefined) this.initialSelection = 0;
-      const selectable = this.selectables[this.initialSelection];
+      let selectable: any;
+      if (this.selectables.filter(s => s.value === undefined).length == 0) {
+        selectable = this.selectables.find(s => s.value === this.initialSelection);
+      } else {
+        selectable = this.selectables[this.initialSelection];
+      }
       if (!!!selectable) return;
       // Avoid ExpressionChangedAfterItHasBeenCheckedError
       setTimeout(() => {

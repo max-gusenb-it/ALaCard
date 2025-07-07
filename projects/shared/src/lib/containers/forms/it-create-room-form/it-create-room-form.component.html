@@ -17,13 +17,13 @@
         (selectionChanged)="modeSelectionChanged($event)"
     >
       <it-toggle-button 
-        value="offline"
+        [value]="1"
         icon="person"
       >
         Offline
       </it-toggle-button>
       <it-toggle-button 
-        value="online"
+        [value]="0"
         icon="group"
       >
         Online

@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { takeUntil } from "rxjs";
-import { AngularLifecycle, CreateRoomFormData, PopUpService } from '@shared';
+import { AngularLifecycle, CreateRoomFormData, InformationActions, PopUpService } from '@shared';
 import { TranslateService } from "@ngx-translate/core";
+import { Store } from "@ngxs/store";
 
 @Component({
     selector: 'it-create-room-form',
@@ -20,7 +21,11 @@ export class ItCreateRoomForm extends AngularLifecycle implements AfterViewInit 
         singleDeviceMode: new FormControl({ value: undefined, disabled: false }, [Validators.required]),
     });
 
-    constructor(private popUpService: PopUpService, private translateService: TranslateService) {
+    constructor(
+        private store: Store,
+        private popUpService: PopUpService,
+        private translateService: TranslateService
+    ) {
         super();
 
         this.roomForm.valueChanges
@@ -34,14 +39,15 @@ export class ItCreateRoomForm extends AngularLifecycle implements AfterViewInit 
         }
     }
 
-    modeSelectionChanged(mode: number) {
-        this.roomForm.controls['singleDeviceMode'].setValue(mode == 0);
-        if (mode === undefined) return;
-        if (mode === 0) {
+    modeSelectionChanged(singleDeviceMode: number) {
+        this.roomForm.controls['singleDeviceMode'].setValue(singleDeviceMode == 1);
+        if (singleDeviceMode === undefined) return;
+        if (singleDeviceMode === 1) {
             this.popUpService.openSnackbar(this.translateService.instant("shared.components.forms.it-create-room-form.offline-snackbar"), 'check', undefined, false);
         } else {
             this.popUpService.openSnackbar(this.translateService.instant("shared.components.forms.it-create-room-form.online-snackbar"), 'check', undefined, false);
         }
+        this.store.dispatch(new InformationActions.SetJoinedInSingleDeviceMode(singleDeviceMode === 1));
     }
 
     emitRoomFormcChanges() {

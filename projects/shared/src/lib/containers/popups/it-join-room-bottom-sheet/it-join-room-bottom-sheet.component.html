@@ -3,8 +3,9 @@
   <it-toggle-button-group
       class="min-w-[80vw]"
       [singleSelect]="true"
-      (selectionChanged)="singleDeviceMode = $event"
+      (selectionChanged)="singleDeviceModeSelectionChanged($event)"
       [required]="true"
+      [initialSelection]="singleDeviceMode"
   >
     <it-toggle-button
       [value]="1"

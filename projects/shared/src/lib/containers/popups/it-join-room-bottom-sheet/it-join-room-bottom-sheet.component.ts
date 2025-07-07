@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AuthenticationState } from '@shared';
+import { AuthenticationState, InformationActions, InformationState } from '@shared';
 
 @Component({
   selector: 'lib-it-join-room-bottom-sheet',
@@ -12,7 +12,14 @@ export class ItJoinRoomBottomSheetComponent {
 
   singleDeviceMode : number | undefined = undefined;
 
-  constructor(public dialogRef: DialogRef, private store: Store) { }
+  constructor(public dialogRef: DialogRef, private store: Store) {
+    this.singleDeviceMode = this.store.selectSnapshot(InformationState.joinedInSingleDeviceMode) ? 1 : 0;
+  }
+
+  singleDeviceModeSelectionChanged(singleDeviceMode: number) {
+    this.singleDeviceMode = singleDeviceMode;
+    this.store.dispatch(new InformationActions.SetJoinedInSingleDeviceMode(singleDeviceMode === 1));
+  }
 
   joinRoom() {
     const userId = this.store.selectSnapshot(AuthenticationState.userId)!;

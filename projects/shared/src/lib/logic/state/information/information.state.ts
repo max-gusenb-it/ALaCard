@@ -1,13 +1,12 @@
 import { Action, NgxsOnInit, Selector, State, StateContext, StateToken, Store } from "@ngxs/store";
 import { Injectable } from "@angular/core";
-import { filter, takeUntil } from "rxjs";
+import { takeUntil } from "rxjs";
 import {
     AngularLifecycle,
     GameInformation,
     InformationStateErrors,
     ItError,
     RoundInformation,
-    TutorialInfo,
     AuthenticationState,
     UserSourceService,
     InformationActions,
@@ -25,7 +24,8 @@ export const INFORMATION_STATE_TOKEN = new StateToken<InformationStateModel>('in
     defaults: {
         version: INFORMATION_STATE_VERSION,
         gameInformations: undefined,
-        tutorialInfos: []
+        tutorialInfos: [],
+        joinedInSingleDeviceMode: false
     }
 })
 @Injectable()
@@ -67,13 +67,13 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
     }
 
     @Selector()
-    static tutorialInfos(state: InformationStateModel) : TutorialInfo[] {
-        return state.tutorialInfos;
+    static cardAnimationSkipped(state: InformationStateModel) : boolean {
+        return state.gameInformations?.roundInformation?.cardAnimationSkipped ?? false;
     }
 
     @Selector()
-    static cardAnimationSkipped(state: InformationStateModel) : boolean {
-        return state.gameInformations?.roundInformation?.cardAnimationSkipped ?? false;
+    static joinedInSingleDeviceMode(state: InformationStateModel) : boolean {
+        return state.joinedInSingleDeviceMode;
     }
 
     ngxsOnInit(ctx: StateContext<InformationStateModel>): void {
@@ -272,4 +272,11 @@ export class InformationState extends AngularLifecycle implements NgxsOnInit {
             }
         );
     }
+
+    @Action(InformationActions.SetJoinedInSingleDeviceMode)
+    async setJoinedInSingleDeviceMode(ctx: StateContext<InformationStateModel>, action: InformationActions.SetJoinedInSingleDeviceMode) {
+        ctx.patchState({
+            joinedInSingleDeviceMode: action.joinedInSingleDeviceMode
+        });
+    }   
 } 

@@ -47,4 +47,9 @@ export namespace InformationActions {
             public icon?: string,
         ) {}
     }
+
+    export class SetJoinedInSingleDeviceMode {
+        static readonly type = "[InformationState] SetJoinedInSingleDeviceMode";
+        constructor(public joinedInSingleDeviceMode: boolean) {}
+    }
 }
