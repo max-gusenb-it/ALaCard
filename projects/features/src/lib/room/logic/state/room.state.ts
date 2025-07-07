@@ -141,68 +141,83 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
     @Action(RoomActions.CreateRoom)
     createRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.CreateRoom) {
         return this.loadingHelperService.loadWithLoadingState([
-            this.roomSourceService.createRoom(action.name, action.mode)
+            this.roomSourceService.createRoom(action.name, action.singleDeviceMode)
         ]).then(r => {
             return firstValueFrom(ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!)));
         });
     }
 
     @Action(RoomActions.JoinRoom)
-    async joinRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.JoinRoom) {
+    async newJoinRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.JoinRoom) {
         if (this.roomSubscription$ != null && !this.roomSubscription$.closed) {
-            // ask user if he wants to leave current room
             this.roomSubscription$.unsubscribe();
         }
 
-        // check if user exists
         try {
-            let user = await this.roomService.checkIfUserExists();
-
             ctx.dispatch(new LoadingActions.StartLoading);
 
-            // If user is not online he can only join his own room 
-            if (!navigator.onLine) {
-                if (action.creatorId !== undefined && action.creatorId !== user.id) {
-                    throw new ItError(RoomStateErrors.joinRoomOffline, RoomState.name);
-                }
-            }
-
+            let user = await this.roomService.checkIfUserExists();
             let initialRoom = await this.roomSourceService.getInitialRoom(action.roomId, action.creatorId);
 
-            if (RoomUtils.getRoomCreator(initialRoom).id !== user.id && initialRoom.settings.singleDeviceMode) {
-                throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
-            }
-            
-            let joinOffline = false;
-            if (!navigator.onLine && !initialRoom.settings.singleDeviceMode) {
-                // If user is offline, ask him if eh wants to join his room in offline mode
-                joinOffline = await firstValueFrom(this.popUpService.openOptionBottomSheet(
-                    this.translateService.instant("features.room.join-room-offline-bottom-sheet.title"),
-                    this.translateService.instant("actions.cancel"),
-                    this.translateService.instant("actions.join"),
-                    this.translateService.instant("features.room.join-room-offline-bottom-sheet.subtitle")
-                ).closed) as boolean;
-                if (!joinOffline) {
-                    throw new Error();
+            if (action.creatorId !== user.id) {
+                // User tries to join a room of another user
+                if (!navigator.onLine) {
+                    // User is offline
+                    throw new ItError(RoomStateErrors.joinRoomOffline, RoomState.name);
+                }
+
+                if (initialRoom.settings.singleDeviceMode) {
+                    // Room is in single device mode
+                    throw new ItError(RoomStateErrors.joinRoomInOffline, RoomState.name);
+                }
+            } else {
+                if (!navigator.onLine && !action.singleDeviceMode) {
+                    // If user is offline, ask him if eh really want to join in online mode
+                    const continueOnlineJoin = await firstValueFrom(this.popUpService.openOptionBottomSheet(
+                        this.translateService.instant("features.room.join-room-online-when-offline-bottom-sheet.title"),
+                        this.translateService.instant("actions.cancel"),
+                        this.translateService.instant("actions.join"),
+                        this.translateService.instant("features.room.join-room-online-when-offline-bottom-sheet.subtitle")
+                    ).closed) as boolean;
+                    if (!continueOnlineJoin) {
+                        throw new Error();
+                    }
                 }
             }
 
-            if (joinOffline) {
-                // Convert room to single device mode
-                initialRoom.settings.singleDeviceMode = true;
-                this.roomSourceService.updateRoom(
-                    RoomUtils.removePlayersFromRoom(initialRoom, user),
-                    initialRoom.id!
-                );
-            } else {
+            if (action.creatorId !== user.id || !action.singleDeviceMode) {
                 // Add user to room
                 const newPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
-                if (!!newPlayer) {
-                    this.roomSourceService.upsertPlayer(
+                let fieldData = {};
+                if (initialRoom.settings.singleDeviceMode && user.id === action.creatorId) {
+                    fieldData = {
+                        "settings.singleDeviceMode": action.singleDeviceMode
+                    };
+                }
+                if (newPlayer) {
+                    fieldData = {
+                        ...fieldData,
+                        [`players.${user.id}`]: newPlayer
+                    };
+                }
+                if (Object.keys(fieldData).length > 0) {
+                    this.roomSourceService.updateRoomFields(
                         initialRoom.id!,
-                        newPlayer.id,
-                        newPlayer,
-                        action.creatorId
+                        action.creatorId!,
+                        fieldData
+                    );
+                }
+            } else {
+                // Convert room to single device mode
+                const players = RoomUtils.mapPlayersToArray(initialRoom.players);
+                if (
+                    !initialRoom.settings.singleDeviceMode ||
+                    players.length !== 1 && players[0].id !== user.id
+                ) {
+                    initialRoom.settings.singleDeviceMode = true;
+                    this.roomSourceService.updateRoom(
+                        RoomUtils.removePlayersFromRoom(initialRoom, user),
+                        initialRoom.id!
                     );
                 }
             }
@@ -232,7 +247,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
                 });
             
             return Promise.resolve();
-        } catch(error) {
+        } catch (error) {
             ctx.dispatch(new LoadingActions.EndLoading);
             if (error instanceof ItError) {
                 ctx.dispatch(new ErrorMonitorActions.SetError(error.exportError()));

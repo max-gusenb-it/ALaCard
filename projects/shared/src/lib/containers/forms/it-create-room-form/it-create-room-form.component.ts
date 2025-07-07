@@ -17,7 +17,7 @@ export class ItCreateRoomForm extends AngularLifecycle implements AfterViewInit 
 
     roomForm: FormGroup = new FormGroup({
         name: new FormControl({ value: "", disabled: false }, [Validators.required, Validators.maxLength(30)]),
-        mode: new FormControl({ value: undefined, disabled: false }, [Validators.required]),
+        singleDeviceMode: new FormControl({ value: undefined, disabled: false }, [Validators.required]),
     });
 
     constructor(private popUpService: PopUpService, private translateService: TranslateService) {
@@ -35,7 +35,7 @@ export class ItCreateRoomForm extends AngularLifecycle implements AfterViewInit 
     }
 
     modeSelectionChanged(mode: number) {
-        this.roomForm.controls['mode'].setValue(mode);
+        this.roomForm.controls['singleDeviceMode'].setValue(mode == 0);
         if (mode === undefined) return;
         if (mode === 0) {
             this.popUpService.openSnackbar(this.translateService.instant("shared.components.forms.it-create-room-form.offline-snackbar"), 'check', undefined, false);
@@ -47,7 +47,7 @@ export class ItCreateRoomForm extends AngularLifecycle implements AfterViewInit 
     emitRoomFormcChanges() {
         this.roomFormChanged.emit({
             name: this.roomForm.controls['name'].value!,
-            mode: this.roomForm.controls['mode'].value!,
+            singleDeviceMode: this.roomForm.controls['singleDeviceMode'].value!,
             valid: this.roomForm.valid 
         });
     }

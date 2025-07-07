@@ -45,7 +45,7 @@ export class RoomSourceService {
         );
     }
 
-    createRoom(name: string, mode: number) {
+    createRoom(name: string, singleDeviceMode: boolean) {
         const user = this.store.selectSnapshot(AuthenticationState.user);
         if (!!user && user.id) {
             const player = PlayerUtils.exportUserToPlayer(user, 0);
@@ -58,7 +58,7 @@ export class RoomSourceService {
                         [player.id]: player
                     },
                     settings: {
-                        singleDeviceMode: mode === 0 ? true : false,
+                        singleDeviceMode: singleDeviceMode,
                         otherAdmin: true,
                         autoContinueOnAllVotes: true
                     },
@@ -72,6 +72,14 @@ export class RoomSourceService {
 
     updateRoom(room: Room, roomId: string) {
         return this.firestoreService.update(`${this.roomRefService.getRoomCollectionRef()}`, roomId, room);
+    }
+
+    updateRoomFields(
+        roomId: string, 
+        roomCreatorId: string,
+        fields: firebase.firestore.UpdateData
+    ) {
+        return this.firestoreService.updateFields(this.roomRefService.getRoomCollectionRef(roomCreatorId), roomId, fields);
     }
 
     upsertPlayer(roomId: string, userId: string, player: Player, roomCreatorId?: string) {

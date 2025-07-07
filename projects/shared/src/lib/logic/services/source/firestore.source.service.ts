@@ -105,4 +105,8 @@ export class FirestoreService<T extends FirestoreBase> {
             [fieldRef]: data
         });
     }
+
+    updateFields(ref: string, id: string, fieldData: firebase.firestore.UpdateData) {
+        return this.afs.collection(ref).doc(id).update(fieldData);
+    }
 }

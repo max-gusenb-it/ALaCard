@@ -38,6 +38,7 @@ import { ItCheckboxHeadingComponent } from './components/forms/it-checkbox-headi
 import { ItDetailHeadingComponent } from './components/display/it-detail-heading/it-detail-heading.component';
 import { ItToggleButtonComponent } from './components/buttons/it-toggle-button/it-toggle-button.component';
 import { ItToggleButtonGroupComponent } from './components/buttons/it-toggle-button-group/it-toggle-button-group.component';
+import { ItJoinRoomBottomSheetComponent } from './containers/popups/it-join-room-bottom-sheet/it-join-room-bottom-sheet.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ItToggleButtonGroupComponent } from './components/buttons/it-toggle-but
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
     ItToggleButtonComponent,
-    ItToggleButtonGroupComponent
+    ItToggleButtonGroupComponent,
+    ItJoinRoomBottomSheetComponent
   ],
   imports: [
     CommonModule,
@@ -115,7 +117,8 @@ import { ItToggleButtonGroupComponent } from './components/buttons/it-toggle-but
     ItCheckboxHeadingComponent,
     ItDetailHeadingComponent,
     ItToggleButtonComponent,
-    ItToggleButtonGroupComponent
+    ItToggleButtonGroupComponent,
+    ItJoinRoomBottomSheetComponent
   ],
   providers: [
   ]

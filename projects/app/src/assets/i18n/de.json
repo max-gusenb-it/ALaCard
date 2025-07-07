@@ -165,6 +165,10 @@
       "add-offline-player-sheet": {
         "title": "Spieler hinzufügen",
         "player-name": "Name"
+      },
+      "join-room-online-when-offline-bottom-sheet": {
+        "title": "Bist du offline?",
+        "subtitle": "Möchtest du deinem Raum wirklich im Online-Modus beitreten?"
       }
     }
   },

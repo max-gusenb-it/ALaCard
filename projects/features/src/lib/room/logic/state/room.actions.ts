@@ -11,12 +11,12 @@ export namespace RoomActions {
      */
     export class CreateRoom {
         static readonly type = '[No-Room] CreateRoom';
-        constructor(public name: string, public mode: number) {}
+        constructor(public name: string, public singleDeviceMode: boolean) {}
     }
 
     export class JoinRoom {
         static readonly type = '[Home] JoinRoom';
-        constructor(public creatorId: string, public roomId: string) {}
+        constructor(public creatorId: string, public roomId: string, public singleDeviceMode: boolean) {}
     }
 
     export class SetRoom {

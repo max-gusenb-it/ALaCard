@@ -1,0 +1,27 @@
+<div class="flex flex-col gap-4">
+  <h3>Join Your Room</h3>
+  <it-toggle-button-group
+      class="min-w-[80vw]"
+      [singleSelect]="true"
+      (selectionChanged)="singleDeviceMode = $event"
+      [required]="true"
+  >
+    <it-toggle-button
+      [value]="1"
+      icon="person"
+    >
+      Offline
+    </it-toggle-button>
+    <it-toggle-button
+      [value]="0"
+      icon="group"
+    >
+      Online
+    </it-toggle-button>
+  </it-toggle-button-group>
+  <div class="flex gap-4">
+    <!-- Use basis-0 to create items with equal width -->
+    <it-button class="flex grow basis-0" size="small" color="secondary" (click)="dialogRef.close()">{{ 'actions.close' | translate }}</it-button>
+    <it-button class="flex grow basis-0" size="small" (click)="joinRoom()">{{ 'actions.join' | translate }}</it-button>
+  </div>
+</div>

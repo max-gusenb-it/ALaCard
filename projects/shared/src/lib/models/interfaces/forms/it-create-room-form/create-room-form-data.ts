@@ -1,5 +1,5 @@
 export interface CreateRoomFormData {
     name: string;
-    mode: number;
+    singleDeviceMode: boolean | undefined;
     valid: boolean;
 }

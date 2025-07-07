@@ -4,7 +4,9 @@ import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { environment } from 'projects/app/src/environments/environment';
-import { AuthenticationState, PopUpService } from '@shared';
+import { AuthenticationState, PopUpService, Utils } from '@shared';
+import { ItJoinRoomBottomSheetComponent } from 'projects/shared/src/lib/containers/popups/it-join-room-bottom-sheet/it-join-room-bottom-sheet.component';
+import { firstValueFrom, Observable } from 'rxjs';
 
 const inDevUrls = ['/test', '/store'];
 
@@ -23,7 +25,7 @@ export class ItNavigationComponent {
     private translateService: TranslateService
   ) { }
 
-  navigate(url: string) {
+  async navigate(url: string) {
     if (url !== "/home" && !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ) {
       if (environment.production || !environment.production && url !== '/test') {
         this.popUpService.openSnackbar(
@@ -41,15 +43,15 @@ export class ItNavigationComponent {
       }
     }
     if (url === "/room") {
-      const userId = this.store.selectSnapshot(AuthenticationState.userId)!;
-      const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
-      if (!roomId) {
+      if (!this.store.selectSnapshot(AuthenticationState.roomId)) {
         this.popUpService.openSnackbar(
           this.translateService.instant("shared.components.buttons.it-navigation.no-room-owned")
         );
         return;
       }
-      url += `/${userId}-${roomId}`;
+      const roomNavigationProps = await firstValueFrom(this.popUpService.openBottomSheet(ItJoinRoomBottomSheetComponent).closed as Observable<string>);
+      if (!Utils.isStringDefinedAndNotEmpty(roomNavigationProps)) return;
+      url += roomNavigationProps;
     }
     if (url === "/test") {
       if (environment.production) return;
