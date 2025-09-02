@@ -201,12 +201,15 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
             if (action.creatorId === user.id) {
                 // Check if mode changed
                 if (initialRoom.settings.singleDeviceMode !== action.singleDeviceMode) {
-                    // Set Mode and update user list
+                    // Set Mode, reset players and game
                     newRoomFields = {
                         players: {
                             [user.id]: initialRoom.players[user.id]
                         },
-                        "settings.singleDeviceMode": action.singleDeviceMode
+                        settings: {
+                            singleDeviceMode: action.singleDeviceMode
+                        },
+                        game: null
                     };
                 }
             }
