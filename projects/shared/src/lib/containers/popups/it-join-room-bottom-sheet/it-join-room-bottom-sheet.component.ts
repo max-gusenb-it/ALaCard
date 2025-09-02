@@ -22,8 +22,12 @@ export class ItJoinRoomBottomSheetComponent {
   }
 
   joinRoom() {
-    const userId = this.store.selectSnapshot(AuthenticationState.userId)!;
-    const roomId = this.store.selectSnapshot(AuthenticationState.roomId);
-    this.dialogRef.close(`/${userId}-${roomId}-${this.singleDeviceMode}`);
+    const userID = this.store.selectSnapshot(AuthenticationState.userId)!;
+    const roomID = this.store.selectSnapshot(AuthenticationState.roomId);
+    this.dialogRef.close({
+      userID: userID,
+      roomID: roomID,
+      mode: this.singleDeviceMode
+    });
   }
 }

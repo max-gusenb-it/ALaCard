@@ -29,7 +29,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'room/:connectionData',
+    path: 'room',
     loadChildren: () => import('@features').then( m => m.RoomPageModule)
   },
 ];

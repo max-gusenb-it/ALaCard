@@ -54,7 +54,7 @@ export namespace Utils {
         return typeof n !== "undefined" && n !== null;
     }
 
-    export function isStringDefinedAndNotEmpty(s?: string) {
+    export function isStringDefinedAndNotEmpty(s: string | undefined | null) {
         return s && s !== "";
     }
 }

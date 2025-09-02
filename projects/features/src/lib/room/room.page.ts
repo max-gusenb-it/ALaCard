@@ -8,7 +8,8 @@ import {
   AngularLifecycle,
   LoadingState,
   PopUpService,
-  AuthenticationState
+  AuthenticationState,
+  Utils
 } from '@shared';
 import {
   ItShareBottomSheet,
@@ -60,12 +61,14 @@ export class RoomPage extends AngularLifecycle implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap
+    this.route.queryParamMap
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((paramMap) => {
-        const joinInfos = paramMap.get("connectionData")?.split("-");
-        if (joinInfos != null && joinInfos.length <= 3) {
-          this.store.dispatch(new RoomActions.JoinRoom(joinInfos[0], joinInfos[1], joinInfos[2] ? parseInt(joinInfos[2]) == 1 : false));
+      .subscribe(params => {
+        const userID = params.get("userID");
+        const roomID = params.get("roomID");
+        const mode = params.get("mode");
+        if (Utils.isStringDefinedAndNotEmpty(userID) && Utils.isStringDefinedAndNotEmpty(roomID)) {
+          this.store.dispatch(new RoomActions.JoinRoom(userID!, roomID!, mode ? parseInt(mode) == 1 : false));
         } else {
           this.navCtrl.navigateBack("home");
         }

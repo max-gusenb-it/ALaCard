@@ -26,6 +26,7 @@ export class ItNavigationComponent {
   ) { }
 
   async navigate(url: string) {
+    let queryParams: any;
     if (url !== "/home" && !this.store.selectSnapshot(AuthenticationState.isAuthenticated) ) {
       if (environment.production || !environment.production && url !== '/test') {
         this.popUpService.openSnackbar(
@@ -49,14 +50,13 @@ export class ItNavigationComponent {
         );
         return;
       }
-      const roomNavigationProps = await firstValueFrom(this.popUpService.openBottomSheet(ItJoinRoomBottomSheetComponent).closed as Observable<string>);
-      if (!Utils.isStringDefinedAndNotEmpty(roomNavigationProps)) return;
-      url += roomNavigationProps;
+      queryParams = await firstValueFrom(this.popUpService.openBottomSheet(ItJoinRoomBottomSheetComponent).closed as Observable<string>);
+      if (!queryParams) return;
     }
     if (url === "/test") {
       if (environment.production) return;
     }
-    this.navController.navigateForward(url);
+    this.navController.navigateForward(url, { queryParams: queryParams });
   }
 
 }
