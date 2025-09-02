@@ -121,6 +121,7 @@ import { ItJoinRoomBottomSheetComponent } from './containers/popups/it-join-room
     ItJoinRoomBottomSheetComponent
   ],
   providers: [
+    MarkdownPipe
   ]
 })
 export class SharedModule { }

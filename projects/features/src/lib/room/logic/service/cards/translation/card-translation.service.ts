@@ -2,16 +2,17 @@ import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Utils, CardType, specificPlayerNameWhitecard, playerNameWhitecard } from "@shared";
 import { CardUtils, MarkdownUtils, Player } from "@features";
+import { MarkdownPipe } from "projects/shared/src/lib/logic/pipes/markdown.pipe";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CardTranslationService {
-    get gameSipTextBreaker() {
+    get markdownBreak() {
         return "<br><br>\n\n";
     }
 
-    constructor(protected translateService: TranslateService) { }
+    constructor(protected translateService: TranslateService, protected markdownPipe: MarkdownPipe) { }
 
     getCardTitle(card: Card) {
         if (Utils.isStringDefinedAndNotEmpty(card.title))
@@ -58,7 +59,7 @@ export class CardTranslationService {
         let text = this.getGameText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
         if (isDrinkingGame) {
             const sipText = this.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
-            if (Utils.isStringDefinedAndNotEmpty(sipText)) text += this.gameSipTextBreaker + sipText;
+            if (Utils.isStringDefinedAndNotEmpty(sipText)) text += this.markdownBreak + sipText;
         }
         return text;
     }
@@ -97,7 +98,32 @@ export class CardTranslationService {
         return this.formatCardText(card.sipText!, players, playerIDs, specificPlayerID);
     }
 
-    getOfflineCardTextClasses() {
-        return "text-xl"
+    getTextCSSClasses(availableHeight: number, text: string) {
+        const html = this.markdownPipe.transform(text)!.toString();
+
+        const emptyLineRegex = new RegExp("<br><br>", "g");
+        const breakRegex = new RegExp("(?<!<br>)<br>(?!<br>)", "g");
+        const numerationRegex = new RegExp("<li\\b[^>]*>", "g");
+
+        const emptyLinesCount = (html.match(emptyLineRegex) || []).length;
+        const breaksCount = (html.match(breakRegex) || []).length;
+        const numerationCount = (html.match(numerationRegex) || []).length;
+
+        let letters = text.replace(new RegExp("<[^>]+>|\n", "g"), '');
+
+        const breakValue = (breaksCount + numerationCount) * 0.5;
+        const emptyLinesValue = emptyLinesCount * 1.3;
+        const lettersValue = letters.length * 0.045;
+        
+        const totalValue = breakValue + emptyLinesValue + lettersValue;
+
+        const fontFaktor = availableHeight / totalValue;
+        if (fontFaktor <= 30) {
+            return "text-base";
+        } else if (fontFaktor <= 43) {
+            return "text-lg";
+        } else {
+            return "text-xl";
+        }
     }
 }

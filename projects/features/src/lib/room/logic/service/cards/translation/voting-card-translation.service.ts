@@ -2,14 +2,15 @@ import { Injectable } from "@angular/core";
 import { CardTranslationService, CardUtils, defaultCardSips, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, votingCardSkipValue, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Subject, Utils, VotingCard, VotingCardGroup } from "@shared";
+import { MarkdownPipe } from "projects/shared/src/lib/logic/pipes/markdown.pipe";
 
 @Injectable({
     providedIn: 'root'
 })
 export class VotingCardTranslationService extends CardTranslationService {
 
-    constructor(override translateService: TranslateService) {
-        super(translateService);
+    constructor(override translateService: TranslateService, override markdownPipe: MarkdownPipe) {
+        super(translateService, markdownPipe);
     }
 
     get defaultSipDistributionGroup() : string {

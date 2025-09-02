@@ -7,7 +7,7 @@ import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-c
     providedIn: 'root'
 })
 export class QuizCardTranslationService extends PollCardTranslationService {
-    override get gameSipTextBreaker() {
+    override get markdownBreak() {
         return "<br>\n\n";
     }
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils, GameCardTranslationService } from '@features';
@@ -25,6 +25,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
   @Output() onClick: EventEmitter<boolean> = new EventEmitter();
 
+  @ViewChild('cardContent') cardContentElRef: ElementRef;
+
   touchStartX = 0;
   touchEndX = 0;
 
@@ -47,6 +49,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   ngAfterViewInit(): void {
     if (!this.customColor && this.card.color) this.customColor = this.card.color;
     if (!this.customTitle && this.card.title) this.customTitle = this.card.title;
+    console.log(this.cardContentElRef.nativeElement.offsetHeight);
     this.changeDetectorRef.detectChanges();
   }
 
@@ -72,8 +75,11 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     )
   }
 
-  getOfflineTextCSSClasses() {
-    return this.cardTranslationService.getOfflineCardTextClasses();
+  getTextCSSClasses() {
+    return this.cardTranslationService.getTextCSSClasses(
+      this.cardContentElRef?.nativeElement?.offsetHeight ?? 0,
+      this.getCardText()
+    );
   }
 
   cardClicked(event: MouseEvent) {
