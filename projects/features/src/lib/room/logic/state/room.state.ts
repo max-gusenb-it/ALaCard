@@ -185,41 +185,32 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
                 }
             }
 
-            if (action.creatorId !== user.id || !action.singleDeviceMode) {
-                // Add user to room
-                const newPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
-                let fieldData = {};
-                if (initialRoom.settings.singleDeviceMode && user.id === action.creatorId) {
-                    fieldData = {
+            let newRoomFields: any = {};
+            if (action.creatorId === user.id) {
+                // Check if mode changed
+                if (initialRoom.settings.singleDeviceMode !== action.singleDeviceMode) {
+                    // Set Mode and update user list
+                    newRoomFields = {
+                        players: {},
                         "settings.singleDeviceMode": action.singleDeviceMode
                     };
                 }
-                if (newPlayer) {
-                    fieldData = {
-                        ...fieldData,
-                        [`players.${user.id}`]: newPlayer
-                    };
+            }
+
+            const updatedUserPlayer = RoomUtils.generatePlayerForRoom(initialRoom, user);
+            if (updatedUserPlayer !== null) {
+                // Update player of user to set state to active
+                newRoomFields = {
+                    ...newRoomFields,
+                    [`players.${user.id}`]: updatedUserPlayer
                 }
-                if (Object.keys(fieldData).length > 0) {
-                    this.roomSourceService.updateRoomFields(
-                        initialRoom.id!,
-                        action.creatorId!,
-                        fieldData
-                    );
-                }
-            } else {
-                // Convert room to single device mode
-                const players = RoomUtils.mapPlayersToArray(initialRoom.players);
-                if (
-                    !initialRoom.settings.singleDeviceMode ||
-                    players.length !== 1 && players[0].id !== user.id
-                ) {
-                    initialRoom.settings.singleDeviceMode = true;
-                    this.roomSourceService.updateRoom(
-                        RoomUtils.removePlayersFromRoom(initialRoom, user),
-                        initialRoom.id!
-                    );
-                }
+            }
+            if (Object.keys(newRoomFields).length > 0) {
+                this.roomSourceService.updateRoomFields(
+                    initialRoom.id!,
+                    action.creatorId!,
+                    newRoomFields
+                );
             }
 
             this.roomSubscription$ = this.roomSourceService.getRoom$(action.roomId, action.creatorId)
