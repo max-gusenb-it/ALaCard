@@ -148,7 +148,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
     }
 
     @Action(RoomActions.JoinRoom)
-    async newJoinRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.JoinRoom) {
+    async joinRoom(ctx: StateContext<RoomStateModel>, action: RoomActions.JoinRoom) {
         if (this.roomSubscription$ != null && !this.roomSubscription$.closed) {
             this.roomSubscription$.unsubscribe();
         }
