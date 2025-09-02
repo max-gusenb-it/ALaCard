@@ -206,9 +206,7 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
                         players: {
                             [user.id]: initialRoom.players[user.id]
                         },
-                        settings: {
-                            singleDeviceMode: action.singleDeviceMode
-                        },
+                        "settings.singleDeviceMode": action.singleDeviceMode,
                         game: null
                     };
                 }
