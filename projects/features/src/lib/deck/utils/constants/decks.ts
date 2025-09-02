@@ -3839,6 +3839,267 @@ export const askhole: Deck = {
         isExactCount: false
     }
 }
+export const musicFestivalDrinkingDeck: Deck = {
+    icon: "🎶",
+    name: "Music Festival Drinking Game",
+    description: "Enjoy the new music festival themed drinking game!",
+    groundRules: [],
+    cards: [
+        {
+            title: "Early Bird",
+            text: "First person that arrived at the festival takes 3 sips 🐦",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "First things first",
+            text: "Person that started drinking first can hand out 3 sips 🍺",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Priorities",
+            text: "Everyone that started drinking before setting up their tent drinks 2 sips ⛺",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Chug",
+            text: "%p0, what's your favorite way to chug a beer? 🍺",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Story Time",
+            text: "%p0 any crazy Festival stories you can share with the group? 📰",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "New Friends",
+            text: "%p0, if you met new people at the festival and you are currently playing a drinking game with them take two sips each ♥️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Stylish",
+            text: "Take two sips if you never wore a costume at a festival 🎎",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Yummy",
+            text: "Never have i ever vomited in a tent 🤮",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Smart",
+            text: "%p0, what's your favorite festival hack way more people should now about? 👨🏻‍💻",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Hungry",
+            text: "%p0, what was the best food you brought to a festival? 🥩",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "That's illegal",
+            text: "%p0, what's the most illegal thing you ever did on a festival? ⚖️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Wow",
+            text: "What's the best place for watching your favorite artist? 🎚️",
+            subjects: [
+                {
+                    title: "Right in front of the stage 🔊"
+                },
+                {
+                    title: "In or next to the Pit 💥"
+                },
+                {
+                    title: "Behind the crowd 🔙"
+                }
+            ],
+            type: CardType.Poll
+        } as PollCard,
+        {
+            title: "That's a lot",
+            text: "The person who visited the most  festivals drinks 5 sips 🦄",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Party Hard",
+            text: "Did you ever go to a festival just for partying? If so, you are allowed to drink 3 sips 🍸",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Love at first sight ",
+            text: "Was there ever a Band/Artist you got to hear and see for the first time at a festival which stuck with you ever since? 🌹",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Aha",
+            text: "Everyone who didn't sleep in their own tent at a festival drinks 3 sips ⛺ ",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Romance",
+            text: "Everyone who has dated someone they met at a festival drinks 3 sips 💒",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Overdose",
+            text: "Everyone who had to leave a festival because of a injury, too much drugs or any other reason takes two sips 💊",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Fridge anyone",
+            text: "What's the craziest thing you brought to a festival? 🛋️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Solo Trip",
+            text: "Everyone who has been to a festival alone - tell us about the experience and drink 3 sips 🏝️",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Hard choice",
+            text: "%p0, if you had to be either totally drunk or sober at every festival, what would you choose? 🥴",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "First Time?",
+            text: "Everyone attending a festival for the first time has to take three sips. Much fun you guys 🤟",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Happens",
+            text: "Everyone who vommitted today drinks 2 sips 🤮",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Bierbong",
+            text: "Everyone who didn't Bierbong today drinks 2 sips 🚿",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: ":*",
+            text: "Everyone who didn't get kissed today drinks 1 sip 💋",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Movie Star",
+            text: "Who would rather get in the after movie of festival? 🎥",
+            type: CardType.PlayerVoting
+        } as PlayerVotingCard,
+        {
+            title: "Ahhhhhple",
+            text: "%p0, go to your tent neighbors and ask them for a fruit. If are not successful or too lazy take 5 sips 🍎",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Adventures",
+            text: "Who splits up from the group and does some side quests the most? 🧙‍♂️",
+            type: CardType.PlayerVoting
+        } as PlayerVotingCard,
+        {
+            title: "Beer with me",
+            text: "%p0, you have to get a beer from a random person in the next 3 minutes. If you can’t do that, finish your drink 🫗",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Shots",
+            text: "Everyone take a Shot 🔫",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "New Hair Style",
+            text: "%p0, let person on your left cut a part of your hair or drink 6 sips 🍻",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Fight",
+            text: "Go to one of your neighbors and challenge them to a round of thumb war. If you loose, take 3 sips 👍",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Eminem",
+            text: "Name bands that are on the festival. If you can't think of something new or repeat an artist the game ends and the looser has to take 3 sips. %p0 starts! 🎶",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Drugs",
+            text: "The person or group that brought the most kinds of drugs drinks 4 sips 💊",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Music Jockey",
+            text: "If you guys listen to music. On each song change, the person who either guesses the artist or the song name can give out 3 sips 💿",
+            color: "violet",
+            type: CardType.FreeText,
+            settings: {
+                followUpCardConfig: {
+                    followUpCardID: 0,
+                    roundDelay: 10
+                }
+            }
+        } as FreeTextCard,
+        {
+            title: "Music Jockey",
+            followUpCardID: 0,
+            text: "Artist and song title guessing is over 😘",
+            color: "violet",
+            type: CardType.FreeText,
+        } as FreeTextCard,
+        {
+            title: "Festival Chef",
+            text: "%p0, what’s the best food to bring to a festival? If the others disagree you have to drink 3 sips 🥞",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Festival Drink",
+            text: "%p0, what’s the best drink to bring to a festival? If the others disagree you have to drink 3 sips 🫖",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "The Best",
+            text: "%p0, what was the best festival you have been to? Tell or drink 2 sips  🎸",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Sounds good",
+            text: "%p0, recommend an Artist that everyone should see 🎨 ",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "I want more",
+            text: "%p0, if you could add one band to the line up, which one should it be? If the others think, it does not fit the vibe, take 3 sips 🎼",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "This sucks",
+            text: "Everyone who thinks today is a weaker day concerning the line up takes 3 sips 👎",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Clamping",
+            text: "Who would rather stay in a Hotel than on the festival camping ground? If you are not camping, everyone takes a sip 🏕️",
+            type: CardType.PlayerVoting
+        } as PlayerVotingCard
+    ],
+    defaultGameSettings: [
+        {
+            settingName: drinkingGameSettingName,
+            value: "true",
+            valueSource: DefaultGameSettingValueSource.value,
+            requirement: DefaultGameSettingRequirement.required
+        },
+        {
+            settingName: speficiPlayerIdSettingName,
+            valueSource: DefaultGameSettingValueSource.default,
+            requirement: DefaultGameSettingRequirement.required
+        }
+    ],
+    requiredPlayers: {
+        playerCount: 1,
+        isExactCount: false
+    }
+
+}
 export const testingDeck: Deck = {
     icon: "🍰",
     name: "Testing Deck",
@@ -3954,4 +4215,4 @@ export const testingDeck: Deck = {
     ]
 }
 
-export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole, testingDeck];
+export const leggitPartyDecks: Deck[] = [leggitPartyDeck, askhole, musicFestivalDrinkingDeck, testingDeck];
