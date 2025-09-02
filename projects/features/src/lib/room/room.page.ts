@@ -9,7 +9,8 @@ import {
   LoadingState,
   PopUpService,
   AuthenticationState,
-  Utils
+  Utils,
+  RoomMode
 } from '@shared';
 import {
   ItShareBottomSheet,
@@ -66,9 +67,9 @@ export class RoomPage extends AngularLifecycle implements OnInit {
       .subscribe(params => {
         const userID = params.get("userID");
         const roomID = params.get("roomID");
-        const mode = params.get("mode");
+        const mode = RoomMode[params.get("mode") as keyof typeof RoomMode] ?? RoomMode.offline;
         if (Utils.isStringDefinedAndNotEmpty(userID) && Utils.isStringDefinedAndNotEmpty(roomID)) {
-          this.store.dispatch(new RoomActions.JoinRoom(userID!, roomID!, mode ? parseInt(mode) == 1 : false));
+          this.store.dispatch(new RoomActions.JoinRoom(userID!, roomID!, mode === RoomMode.offline));
         } else {
           this.navCtrl.navigateBack("home");
         }

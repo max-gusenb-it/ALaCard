@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AuthenticationState, InformationActions, InformationState } from '@shared';
+import { AuthenticationState, InformationActions, InformationState, RoomMode } from '@shared';
 
 @Component({
   selector: 'lib-it-join-room-bottom-sheet',
@@ -27,7 +27,7 @@ export class ItJoinRoomBottomSheetComponent {
     this.dialogRef.close({
       userID: userID,
       roomID: roomID,
-      mode: this.singleDeviceMode
+      mode: this.singleDeviceMode ? RoomMode[RoomMode.offline] : RoomMode[RoomMode.online]
     });
   }
 }
