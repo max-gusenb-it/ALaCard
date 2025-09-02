@@ -34,11 +34,8 @@ export class ItCreateRoomModal {
     firstValueFrom(this.store.dispatch(new RoomActions.CreateRoom(
       this.createRoomFormData.name,
       this.createRoomFormData.singleDeviceMode ?? false
-    ))).then(state => {
-      this.popUpService.dismissModal({
-        userId: state?.authentication?.user?.id,
-        roomId: state?.authentication?.user?.roomId
-      });
+    ))).then(() => {
+      this.popUpService.dismissModal();
     })
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { ItCreateRoomAsGuestModal } from "@features";
 import {
   ItSignInModal,
@@ -14,7 +13,6 @@ import {
 export class ItNoAccountComponent {
 
   constructor(
-    private navController: NavController,
     private popUpService: PopUpService
   ) { }
 
@@ -33,15 +31,10 @@ export class ItNoAccountComponent {
   }
 
   async openCreateRoomAsGuestModal() {
-    const modal = await this.popUpService.openModal({
+    this.popUpService.openModal({
       component: ItCreateRoomAsGuestModal,
       id: "drawing-board-parent",
       cssClass: "sign-up-modal"
-    });
-    modal.onDidDismiss().then(modalResponse => {
-      if (modalResponse.data?.roomId != null) {
-        this.navController.navigateForward(`room/${modalResponse.data.userId}-${modalResponse.data.roomId}`);
-      }
     });
   }
 

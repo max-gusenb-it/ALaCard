@@ -15,6 +15,7 @@ import {
     LoadingHelperService, 
     PlayerState,
     PopUpService,
+    RoomMode,
     SharedErrors
 } from '@shared';
 import { 
@@ -143,7 +144,18 @@ export class RoomState extends AngularLifecycle implements NgxsOnInit {
         return this.loadingHelperService.loadWithLoadingState([
             this.roomSourceService.createRoom(action.name, action.singleDeviceMode)
         ]).then(r => {
-            return firstValueFrom(ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!)));
+            return firstValueFrom(ctx.dispatch(new AuthenticationActions.SetUserRoomId(r[0].id!))).then(() => r[0]);
+        }).then(r => {
+            return this.navController.navigateForward(
+                "room",
+                { 
+                    queryParams: { 
+                        "userID": RoomUtils.mapPlayersToArray(r.players)[0].id,
+                        "roomID": r.id,
+                        "mode": action.singleDeviceMode ? RoomMode[RoomMode.offline] : RoomMode[RoomMode.online]
+                    }
+                }
+            );
         });
     }
 
