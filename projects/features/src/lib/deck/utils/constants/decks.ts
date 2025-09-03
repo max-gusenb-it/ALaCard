@@ -14,89 +14,22 @@ export const developmentDeck: Deck = {
         [CardType.Quiz]: "Distribute 1 sip if you voted correctly 🍷",
     },
     cards: [
-        {
-            title: "Brainiac",
-            text: "How many brains does an octopus have? 🐙",
-            type: CardType.Quiz,
+{
+            text: "Who of you still pees in the shower? It's okay, i’m doing it too 🛁",
+            sipText: "Okay you disgusting pieces of shit. Everyone who voted Yes has to drink 3 sips 🤮",
+            type: CardType.Poll,
             subjects: [
                 {
-                    title: "1️⃣"
+                    title: "Yes ✅" 
                 },
                 {
-                    title: "2️⃣"
-                },
-                {
-                    title: "5️⃣"
-                },
-                {
-                    title: "8️⃣"
-                },
-                {
-                    title: "9️⃣",
-                    isTarget: true
-                },
-                {
-                    title: "🔟"
+                    title: "No ❎"
                 }
-            ]
-        } as QuizCard,
-        {
-            title: "Brainiac",
-            text: "How many brains does an octopus have? 🐙",
-            sipText: "Dring, foist nd richtig woast du Hund",
-            type: CardType.Quiz,
-            subjects: [
-                {
-                    title: "1️⃣"
-                },
-                {
-                    title: "2️⃣"
-                },
-                {
-                    title: "5️⃣"
-                },
-                {
-                    title: "8️⃣"
-                },
-                {
-                    title: "9️⃣",
-                    isTarget: true
-                },
-                {
-                    title: "🔟"
-                }
-            ]
-        } as QuizCard,
-        {
-            title: "Brainiac",
-            text: "How many brains does an octopus have? 🐙",
-            sipText: "Scheiße, schowida oag spod drau",
+            ],
             settings: {
                 delaySipText: true
-            },
-            type: CardType.Quiz,
-            subjects: [
-                {
-                    title: "1️⃣"
-                },
-                {
-                    title: "2️⃣"
-                },
-                {
-                    title: "5️⃣"
-                },
-                {
-                    title: "8️⃣"
-                },
-                {
-                    title: "9️⃣",
-                    isTarget: true
-                },
-                {
-                    title: "🔟"
-                }
-            ]
-        } as QuizCard,
+            }
+        } as PollCard,
     ],
     flags: [],
     requiredPlayers: {
@@ -1608,7 +1541,7 @@ export const leggitPartyDeck: Deck = {
         } as FreeTextCard,
         {
             title: "Lucky Throw 🎲",
-            text: "Hey %p0, throw a dice please. \n - First throw: Amount of sips 🍺\n - Second throw\n\t- 1 - 2: Drink your sips\n\t- 3 - 4: Distribute them\n\t- 5 - 6: Do the first throw again and sum up the amount of sips\n\nIf you don't have a dice, please continue 🎲",
+            text: "Hey %p0, throw a dice please. \n - First throw: Amount of sips 🍺\n - Second throw\n\t- 1: Drink your sips\n\t- 2: Distribute them\n\t- 3 - 6: Do the first throw again and sum up the amount of sips\n\nIf you don't have a dice, please continue 🎲",
             type: CardType.FreeText,
             settings: {
                 drinkingCard: true,
@@ -2411,21 +2344,21 @@ export const leggitPartyDeck: Deck = {
         } as QuizCard,
         {
             title: "Evolution baby",
-            text: "How hot are the bubbles that the pistol shrimp shoots from its claws? 🦐",
+            text: "How hot are the bubbles that the pistol shrimp shoots from its claws? 🦐<br>Same temperature as:",
             type: CardType.Quiz,
             subjects: [
                 {
-                    title: "Same temperature as outer earth core 🌎",
+                    title: "The outer earth core 🌎",
                     isTarget: true
                 },
                 {
-                    title: "Same temperature as Lava 🌋"
+                    title: "Lava 🌋"
                 },
                 {
-                    title: "Same temperature as boiling water 🌊"
+                    title: "Boiling water 🌊"
                 },
                 {
-                    title: "Same temperature as a oven on max 🔥"
+                    title: "Oven on max 🔥"
                 }
             ]
         } as QuizCard,
@@ -4066,6 +3999,11 @@ export const musicFestivalDrinkingDeck: Deck = {
         {
             title: "Drugs",
             text: "The person or group that brought the most kinds of drugs drinks 4 sips 💊",
+            type: CardType.FreeText
+        } as FreeTextCard,
+        {
+            title: "Smells good",
+            text: "The person who took the last shower drinks 3 sips 🚿",
             type: CardType.FreeText
         } as FreeTextCard,
         {
