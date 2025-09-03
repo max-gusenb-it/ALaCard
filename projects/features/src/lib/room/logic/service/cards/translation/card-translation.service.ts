@@ -54,11 +54,12 @@ export class CardTranslationService {
         specificPlayerID: string,
         cardState: string,
         isSingleDeviceMode: boolean,
-        isDrinkingGame: boolean
+        isDrinkingGame: boolean,
+        defaultSipText?: string
     ): string {
         let text = this.getGameText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
-        if (isDrinkingGame) {
-            const sipText = this.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
+        if (isDrinkingGame && isSingleDeviceMode) {
+            const sipText = this.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode, defaultSipText);
             if (Utils.isStringDefinedAndNotEmpty(sipText)) text += this.markdownBreak + sipText;
         }
         return text;
@@ -81,21 +82,19 @@ export class CardTranslationService {
         playerIDs: string[] = [],
         specificPlayerID: string = "",
         cardState: string,
-        isSingleDeviceMode: boolean = false
+        isSingleDeviceMode: boolean = false,
+        defaultSipText?: string
     ) {
-        if (!Utils.isStringDefinedAndNotEmpty(card.sipText)) return;
+        if (!Utils.isStringDefinedAndNotEmpty(card.sipText) && !Utils.isStringDefinedAndNotEmpty(defaultSipText)) return "";
+        let text = "";
         if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
             if (isSingleDeviceMode) {
-                return MarkdownUtils.addTagToContent(
-                    this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
-                    "span",
-                    ["text-base"]
-                );
-            } else {
-                return "";
+                text = this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
             }
+        } else {
+            text = this.formatCardText(card.sipText ?? defaultSipText!, players, playerIDs, specificPlayerID);
         }
-        return this.formatCardText(card.sipText!, players, playerIDs, specificPlayerID);
+        return text;
     }
 
     getTextCSSClasses(availableHeight: number, text: string) {

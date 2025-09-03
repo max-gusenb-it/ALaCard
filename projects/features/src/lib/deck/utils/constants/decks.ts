@@ -8,52 +8,95 @@ export const developmentDeck: Deck = {
     icon: "💻",
     name: "Development Deck",
     description: "Very funny Party Game for your whole family",
+    defaultSipTexts: {
+        [CardType.PlayerVoting]: "Most voted player drinks 1 sip 🍺",
+        [CardType.Poll]: "Distribute 1 sip if you voted the top subject 🍾",
+        [CardType.Quiz]: "Distribute 1 sip if you voted correctly 🍷",
+    },
     cards: [
         {
-            title: "Drop it",
-            text: "Who of you guys was stupid enough to drop their phone in the toilet? 🚽",
-            sipText: "Yes? You definitely earned 2 sips with that 🍻",
-            type: CardType.Poll,
+            title: "Brainiac",
+            text: "How many brains does an octopus have? 🐙",
+            type: CardType.Quiz,
             subjects: [
                 {
-                    title: "Yes ✅" 
+                    title: "1️⃣"
                 },
                 {
-                    title: "No ❎"
-                }
-            ],
-            settings: {
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    sips: 2,
-                    subjectIDs: ["0"]
+                    title: "2️⃣"
                 },
-                delaySipText: true
-            }
-        } as PollCard,
+                {
+                    title: "5️⃣"
+                },
+                {
+                    title: "8️⃣"
+                },
+                {
+                    title: "9️⃣",
+                    isTarget: true
+                },
+                {
+                    title: "🔟"
+                }
+            ]
+        } as QuizCard,
         {
-            title: "Drugs are bad, m'kay?",
-            text: "Ever taken hard drugs?",
-            sipText: "No? Good for you, please drink some alcohol 💊",
-            type: CardType.Poll,
+            title: "Brainiac",
+            text: "How many brains does an octopus have? 🐙",
+            sipText: "Dring, foist nd richtig woast du Hund",
+            type: CardType.Quiz,
             subjects: [
                 {
-                    title: "Yes ✅" 
+                    title: "1️⃣"
                 },
                 {
-                    title: "No ❎"
+                    title: "2️⃣"
+                },
+                {
+                    title: "5️⃣"
+                },
+                {
+                    title: "8️⃣"
+                },
+                {
+                    title: "9️⃣",
+                    isTarget: true
+                },
+                {
+                    title: "🔟"
                 }
-            ],
+            ]
+        } as QuizCard,
+        {
+            title: "Brainiac",
+            text: "How many brains does an octopus have? 🐙",
+            sipText: "Scheiße, schowida oag spod drau",
             settings: {
-                delaySipText: true,
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    subjectIDs: ["1"]
+                delaySipText: true
+            },
+            type: CardType.Quiz,
+            subjects: [
+                {
+                    title: "1️⃣"
+                },
+                {
+                    title: "2️⃣"
+                },
+                {
+                    title: "5️⃣"
+                },
+                {
+                    title: "8️⃣"
+                },
+                {
+                    title: "9️⃣",
+                    isTarget: true
+                },
+                {
+                    title: "🔟"
                 }
-            }
-        } as PollCard,
+            ]
+        } as QuizCard,
     ],
     flags: [],
     requiredPlayers: {
@@ -250,6 +293,11 @@ export const leggitPartyDeck: Deck = {
     icon: "🎊",
     name: "aLaCard",
     description: "Very funny Party Game",
+    defaultSipTexts: {
+        [CardType.PlayerVoting]: "Most voted player drinks 1 sip 🍺",
+        [CardType.Poll]: "Distribute 1 sip if you voted the top subject 🍾",
+        [CardType.Quiz]: "Distribute 1 sip if you voted correctly 🍷",
+    },
     cards: [
         {
             text: "%p0 give out 3 sips to the player you know best! 👥",

@@ -61,36 +61,6 @@ export class VotingCardTranslationService extends CardTranslationService {
         );
     }
 
-    override getSipText(card: Card, players: Player[], playerIDs: string[] | undefined, specificPlayerID: string | undefined, cardState: string, isSingleDeviceMode?: boolean): string | undefined {
-        if (Utils.isStringDefinedAndNotEmpty(card.sipText)) return super.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
-
-        if (!isSingleDeviceMode && !Utils.isStringDefinedAndNotEmpty(card.sipText)) return;
-
-        if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
-            return MarkdownUtils.addTagToContent(
-                this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card"),
-                "span",
-                ["text-base"]
-            );
-        }
-
-        let text = "";
-
-        const votingCard = CardUtils.castCard<VotingCard>(card);
-        const group = votingCard.settings?.sipConfig?.group ?? this.defaultSipDistributionGroup;
-
-        text += this.getSipTextForGroup(group.toString()) + "<br>";
-        text += votingCard.settings?.sipConfig?.distribute ?? this.defaultSipDistribution
-            ? this.translateService.instant("shared.components.display.it-result.distribute") 
-            : this.translateService.instant("shared.components.display.it-result.drink");
-
-        const sips = votingCard.settings?.sipConfig?.sips ?? defaultCardSips;
-            
-        text += " " + sips + " " + (sips <= 1 ? this.translateService.instant("shared.components.display.it-result.sip") : this.translateService.instant("shared.components.display.it-result.sips"))
-
-        return MarkdownUtils.addTagToContent(text, "span", ["text-base"]);
-    }
-
     getSipTextForGroup(group: string) {
         switch(group) {
             case(VotingCardGroup.VotingCard_MostVotedSubject): {

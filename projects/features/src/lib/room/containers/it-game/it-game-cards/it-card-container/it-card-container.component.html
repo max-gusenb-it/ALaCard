@@ -23,6 +23,7 @@
         [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
         [offline]="(roomSettings$ | async)!.singleDeviceMode"
         [cardState]="cardState"
+        [defaultSipText]="deck.defaultSipTexts?.[card.type]"
       />
     }
     @case (getFormState()) {

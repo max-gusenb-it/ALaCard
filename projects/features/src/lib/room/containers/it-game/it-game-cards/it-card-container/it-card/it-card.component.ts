@@ -21,6 +21,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   @Input() offline?: boolean;
   @Input() hideDeckName?: boolean;
   @Input() cardState: string;
+  @Input() defaultSipText?: string;
 
   @Output() onSwipe: EventEmitter<boolean> = new EventEmitter();
   @Output() onClick: EventEmitter<boolean> = new EventEmitter();
@@ -49,7 +50,6 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   ngAfterViewInit(): void {
     if (!this.customColor && this.card.color) this.customColor = this.card.color;
     if (!this.customTitle && this.card.title) this.customTitle = this.card.title;
-    console.log(this.cardContentElRef.nativeElement.offsetHeight);
     this.changeDetectorRef.detectChanges();
   }
 
@@ -71,7 +71,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
       this.store.selectSnapshot(RoomState.specificPlayerId) ?? "",
       this.cardState,
       this.store.selectSnapshot(RoomState.singleDeviceModeActive),
-      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame
+      this.store.selectSnapshot(RoomState.gameSettings)!.drinkingGame,
+      this.defaultSipText
     )
   }
 
