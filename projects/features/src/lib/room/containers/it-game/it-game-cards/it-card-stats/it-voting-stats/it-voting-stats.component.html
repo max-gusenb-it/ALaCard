@@ -6,10 +6,6 @@
     <h4>{{ getCardTitle() }}</h4>
     <p class="text-lg">
         {{ getCardText() }}
-        @if (!!getSipText()) {
-            <br>
-            {{ getSipText() }}
-        }
     </p>
     <it-selection-list
         [singleSelect]="true"
@@ -33,11 +29,11 @@
                 />
             </div>
         </it-accord>
-        <it-sip-results
-            *ngIf="drinkingGame"
-            [selectionList]="resultSelectionList"
-            [card]="card"
-        ></it-sip-results>
+        @if (!!getSipText()) {
+            <p class="text-lg"> 
+                {{ getSipText() }}
+            </p>
+        }
     </it-selection-list>
     <div class="flex flex-row gap-4">
         <it-button class="flex grow basis-0" [color]="cardColor" type="button" *ngIf="displayPayToDisplay()" (click)="payToDisplay()">

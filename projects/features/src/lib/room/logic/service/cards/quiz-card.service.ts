@@ -1,18 +1,11 @@
 import { Injectable } from "@angular/core";
 import { CardState, DynamicRoundData, GameSettings, PollCardService, QuizCardState, RoomState, VotingResult } from "@features";
 import { Card, QuizCard, Utils } from "@shared";
-import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
 @Injectable({
     providedIn: 'root'
 })
 export class QuizCardService extends PollCardService<QuizCard> {
-
-    override get defaultGroup() : string {
-        return QuizCardGroup.QuizCard_AllTargets;
-    }
-
-
     override getNextCardState(card: Card, cardState: string, gameSettings: GameSettings): string | undefined {
         switch(cardState) {
             case(CardState.Card_Initial):
@@ -66,23 +59,6 @@ export class QuizCardService extends PollCardService<QuizCard> {
         });
 
         return results;
-    }
-
-    override getResultsForGroup(results: VotingResult[], groupString: string, card: Card): VotingResult[] {
-        if (results.length == 0) return [];
-        switch(groupString) {
-            case(QuizCardGroup.QuizCard_NotAllTargets):
-            case(QuizCardGroup.QuizCard_AllTargets): {
-                const quizCard = this.castCard(card);
-                let isTarget = groupString === QuizCardGroup.QuizCard_AllTargets;
-                const targetSubjectIDs = quizCard.subjects
-                    .filter(s => s.isTarget)
-                    .map(s => s.ID!);
-                return results
-                    .filter(r => targetSubjectIDs.includes(r.subjectID) === isTarget);
-            }
-            default: return super.getResultsForGroup(results, groupString, card);
-        }
     }
     
 }

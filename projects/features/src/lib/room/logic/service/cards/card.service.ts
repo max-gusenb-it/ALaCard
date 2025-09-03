@@ -11,13 +11,11 @@ import {
     CardState,
     Response,
     Result,
-    SipResult,
     IngameDataDataService,
     ResponseDataDataService,
     StaticRoundDataDataService
 } from "@features";
 import {
-    AuthenticationState,
     Card,
     CardType,
     InformationState,
@@ -125,38 +123,5 @@ export class CardService<C extends Card, R extends Response, D extends DynamicRo
             return RoundState.form;
         }
         return RoundState.stats;
-    }
-    
-    /**
-     * Calculates, formats and returns sip results.
-     * If a user specific sip result is found, it is placed at the start of the result array
-     *
-     * @param {Card} card 
-     * @param {DynamicRoundData} dynamicRoundData 
-     * @returns {SipResult[]} 
-     */
-    getSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        let sipResults = this.calculateSipResults(card, dynamicRoundData);
-        return sipResults.sort((s1, s2) => {
-            if (s1.playerId === this.store.selectSnapshot(AuthenticationState.userId)) return -1;
-            if (s2.playerId !== this.store.selectSnapshot(AuthenticationState.userId)) return 1;
-            return 0;
-        });
-    }
-
-    /**
-     * Calculates sip results for the essential part of the round
-     *
-     * @protected
-     * @param {DynamicRoundData} dynamicRoundData
-     * @returns {SipResult[]}
-     */
-    calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        return [];
-    }
-
-    getPlayerForSipResult(result: SipResult) {
-        const players = this.store.selectSnapshot(RoomState.players);
-        return players.find(p => p.id === result.playerId);
     }
 }

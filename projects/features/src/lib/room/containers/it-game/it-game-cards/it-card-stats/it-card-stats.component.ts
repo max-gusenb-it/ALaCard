@@ -25,6 +25,11 @@ export class ItCardStatsComponent extends AngularLifecycle {
     return CardType;
   }
 
+  get card() {
+    if (!this.staticRoundData.round) return null;
+    return this.deck.cards[this.staticRoundData.round.cardIndex];
+  }
+
   deck: Deck;
   staticRoundData: StaticRoundData;
   dynamicRoundData: DynamicRoundData;

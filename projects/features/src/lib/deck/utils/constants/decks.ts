@@ -1,4 +1,4 @@
-import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCard, QuizCard, VotingCardGroup } from "@shared";
+import { CardType, Deck, DefaultGameSettingRequirement, DefaultGameSettingValueSource, FreeTextCard, PlayerVotingCard, PollCard, QuizCard } from "@shared";
 import { drinkingGameSettingName, speficiPlayerIdSettingName } from "@shared";
 
 const drinkingGame: string = "shared.components.buttons.it-deck.drinking-game-flag";
@@ -2183,12 +2183,6 @@ export const leggitPartyDeck: Deck = {
                 }
             ],
             settings: {
-                sipConfig: {
-                    group: VotingCardGroup.VotingCard_SubjectIDs.toString(),
-                    distribute: false,
-                    sips: 3,
-                    subjectIDs: ["0"]
-                },
                 delaySipText: true
             }
         } as PollCard,

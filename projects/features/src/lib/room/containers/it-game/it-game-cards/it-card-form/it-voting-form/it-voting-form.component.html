@@ -11,10 +11,6 @@
         <h4>{{ getCardTitle() }}</h4>
         <p class="text-lg">
             {{ getCardText() }}
-            @if (!!getSipText()) {
-                <br>
-                {{ getSipText() }}
-            }
         </p>
         <div class="flex flex-col gap-4">
             <it-select

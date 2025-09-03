@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { CardState, CardUtils, MarkdownUtils, Player, PollCardTranslationService, VotingResult } from "@features";
+import { CardUtils, MarkdownUtils, PollCardTranslationService, VotingResult } from "@features";
 import { Card, QuizCard, QuizSubject, Subject, Utils } from "@shared";
-import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-card/quiz-card-group";
 
 @Injectable({
     providedIn: 'root'
@@ -9,10 +8,6 @@ import { QuizCardGroup } from "projects/shared/src/lib/models/enums/cards/quiz-c
 export class QuizCardTranslationService extends PollCardTranslationService {
     override get markdownBreak() {
         return "<br>\n\n";
-    }
-
-    override get defaultSipDistributionGroup(): string {
-        return QuizCardGroup.QuizCard_AllTargets;
     }
 
     castSubjects(subjects: Subject[]) : QuizSubject[] {
@@ -55,15 +50,5 @@ export class QuizCardTranslationService extends PollCardTranslationService {
             .length;
         if (targetSubjectCount === 1 && resultIndex === 0) return "";
         return quizSubjects.find(s => s.ID === result.subjectID)!.title;
-    }
-
-    override getSipTextForGroup(group: string) {
-        switch(group) {
-            case(QuizCardGroup.QuizCard_AllTargets):
-                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.all_targets");
-            case(QuizCardGroup.QuizCard_NotAllTargets):
-                return  this.translateService.instant("features.room.game.game-cards.offline-sip-display.not_all_targets")
-            default: return super.getSipTextForGroup(group);
-        }
     }
 }

@@ -1,21 +1,13 @@
 import { Injectable } from "@angular/core";
-import { defaultCardSips, DynamicRoundData, IngameDataDataService, ResponseDataDataService, RoomState, SipResult, StaticRoundDataDataService, VotingCardService, VotingResult } from "@features";
+import { IngameDataDataService, ResponseDataDataService, RoomState, StaticRoundDataDataService, VotingCardService } from "@features";
 import { TranslateService } from "@ngx-translate/core";
 import { Store } from "@ngxs/store";
-import { AuthenticationState, Card, PlayerVotingCard, Subject, PlayerVotingCardGroup, VotingCardGroup } from "@shared";
+import { AuthenticationState, Card, PlayerVotingCard, Subject } from "@shared";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard> {
-    
-    override get defaultGroup() : string {
-        return PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer;
-    }
-
-    override get defaultDistribution(): boolean {
-        return false;
-    }
 
     constructor(
         override store: Store,
@@ -47,42 +39,5 @@ export class PlayerVotingCardService extends VotingCardService<PlayerVotingCard>
             subjects = subjects.filter(s => s.ID !== this.store.selectSnapshot(AuthenticationState.userId));
         }
         return subjects;
-    }
-
-    override calculateSipResults(card: Card, dynamicRoundData: DynamicRoundData): SipResult[] {
-        const playerVotingCard = this.castCard(card);
-
-        const group = playerVotingCard.settings?.sipConfig?.group ?? this.defaultGroup;
-        if (group in VotingCardGroup) super.calculateSipResults(card, dynamicRoundData);
-
-        const results = this.getResults(dynamicRoundData)
-            .filter(r => r.subjectID !== this.skipValue);
-
-        const filteredResults = this.getResultsForGroup(
-            results,
-            group,
-            card
-        );
-
-        const sips = playerVotingCard.settings?.sipConfig?.sips ?? defaultCardSips;
-
-        return filteredResults
-            .map(r => {
-                return {
-                    distribute: playerVotingCard.settings?.sipConfig?.distribute ?? this.defaultDistribution,
-                    playerId: r.subjectID,
-                    sips: results.length > 1 ? sips : sips * 2
-                } as SipResult
-            });
-    }
-
-    override getResultsForGroup(results: VotingResult[], groupString: string, card: Card): VotingResult[] {
-        if (results.length == 0) return [];
-        switch(groupString) {
-            case(PlayerVotingCardGroup.PlayerVotingCard_MostVotedPlayer): {
-                return this.getTopResults(results);
-            }
-            default: return super.getResultsForGroup(results, groupString, card);
-        }
     }
 }

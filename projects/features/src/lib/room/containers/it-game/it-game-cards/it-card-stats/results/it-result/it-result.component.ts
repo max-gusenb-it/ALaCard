@@ -1,12 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { RoomState, CardServiceFactory, GameCardService, Player, SipResult, VotingCardTranslationService, VotingResult, votingCardSkipValue } from '@features';
+import { RoomState, CardServiceFactory, GameCardService, Player, VotingCardTranslationService, VotingResult, votingCardSkipValue } from '@features';
 import { Card } from '@shared';
 
 enum ResultType {
-  VotingResult,
-  SipResult
+  VotingResult
 }
 
 @Component({
@@ -19,7 +17,6 @@ export class ItResultComponent implements AfterViewInit {
   players: Player[];
 
   @Input() result: VotingResult;
-  @Input() sipResult: SipResult;
   @Input() profilePicture?: string;
   @Input() title?: string;
   @Input() card: Card;
@@ -40,7 +37,6 @@ export class ItResultComponent implements AfterViewInit {
   constructor(
     private store: Store,
     private cardServiceFactory: CardServiceFactory,
-    private translateService: TranslateService,
     private changeDetectornRef: ChangeDetectorRef
   ) {
     this.players = this.store.selectSnapshot(RoomState.players);
@@ -55,8 +51,6 @@ export class ItResultComponent implements AfterViewInit {
   get ResultType() {
     if (!!this.result && !!this.card)
       return ResultType.VotingResult
-    if (!!this.sipResult)
-      return ResultType.SipResult;
     return null;
   }
 
@@ -65,16 +59,7 @@ export class ItResultComponent implements AfterViewInit {
       case(ResultType.VotingResult): {
         return this.cardTranslationService.getResultText(this.result);
       };
-      case(ResultType.SipResult): {
-        let text = this.sipResult.distribute ? 
-          this.translateService.instant("shared.components.display.it-result.distribute") : 
-          this.translateService.instant("shared.components.display.it-result.drink");
-        text += ` ${this.sipResult.sips} `;
-        text += this.sipResult.sips > 1 ? 
-          this.translateService.instant("shared.components.display.it-result.sips") : 
-          this.translateService.instant("shared.components.display.it-result.sip");
-        return text;
-      }
+      default: return "";
     }
   }
 

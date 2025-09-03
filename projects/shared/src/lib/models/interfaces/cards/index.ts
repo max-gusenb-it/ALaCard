@@ -17,6 +17,5 @@ export * from "./quiz-card/quiz-card";
 export * from "./quiz-card/quiz-subject";
 
 export * from "./voting-card/subject";
-export * from "./voting-card/voting-card-sip-config";
 export * from "./voting-card/voting-card";
 export * from "./voting-card/voting-card-settings";

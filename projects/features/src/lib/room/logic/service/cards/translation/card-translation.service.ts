@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Card, Utils, CardType, specificPlayerNameWhitecard, playerNameWhitecard } from "@shared";
-import { CardUtils, MarkdownUtils, Player } from "@features";
+import { CardUtils, Player } from "@features";
 import { MarkdownPipe } from "projects/shared/src/lib/logic/pipes/markdown.pipe";
 
 @Injectable({
@@ -89,6 +89,7 @@ export class CardTranslationService {
         let text = "";
         if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
             if (isSingleDeviceMode) {
+                // ToDo - return "" here
                 text = this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
             }
         } else {

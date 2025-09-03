@@ -82,18 +82,6 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
         );
     }
     
-    getSipText() {
-        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.sipText) && !this.card.settings?.delaySipText) {
-            return this.votingCardTranslationService.formatCardText(
-                this.card.sipText!,
-                this.store.selectSnapshot(RoomState.players),
-                this.round.playerIds,
-                this.store.selectSnapshot(RoomState.specificPlayerId)
-            );
-        }
-        return "";
-    }
-    
     identifySubject(index: number, subject: Subject) {
         return subject.ID;
     }

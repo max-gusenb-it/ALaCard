@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { CardTranslationService, CardUtils, defaultCardSips, defaultVotingCardDistribution, defaultVotingCardGroup, MarkdownUtils, Player, votingCardSkipValue, VotingResult } from "@features";
+import { CardTranslationService, CardUtils, Player, votingCardSkipValue, VotingResult } from "@features";
 import { TranslateService } from "@ngx-translate/core";
-import { Card, Subject, Utils, VotingCard, VotingCardGroup } from "@shared";
+import { Card, Subject, Utils, VotingCard } from "@shared";
 import { MarkdownPipe } from "projects/shared/src/lib/logic/pipes/markdown.pipe";
 
 @Injectable({
@@ -11,14 +11,6 @@ export class VotingCardTranslationService extends CardTranslationService {
 
     constructor(override translateService: TranslateService, override markdownPipe: MarkdownPipe) {
         super(translateService, markdownPipe);
-    }
-
-    get defaultSipDistributionGroup() : string {
-        return defaultVotingCardGroup;
-    }
-
-    get defaultSipDistribution() {
-        return defaultVotingCardDistribution;
     }
 
     getResultsHeading(subjects: Subject[], topResults: VotingResult[]) : string {
@@ -59,16 +51,5 @@ export class VotingCardTranslationService extends CardTranslationService {
                 .map(ID => players.find(p => p.id === ID)!.username),
             true
         );
-    }
-
-    getSipTextForGroup(group: string) {
-        switch(group) {
-            case(VotingCardGroup.VotingCard_MostVotedSubject): {
-                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.most-voted-topics");
-            }
-            case(VotingCardGroup.VotingCard_LeastVotedSubject): {
-                return this.translateService.instant("features.room.game.game-cards.offline-sip-display.least-voted-topics");
-            }
-        }
     }
 }

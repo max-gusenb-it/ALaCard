@@ -34,6 +34,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class ItVotingStatsComponent extends AngularLifecycle implements AfterViewInit {
     @Input() card: Card;
+    @Input() defaultSipText?: string; 
     @Input() round: Round;
         
     get votingCardService() {
@@ -121,9 +122,9 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     }
 
     getSipText() {
-        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.sipText)) {
+        if (this.drinkingGame && Utils.isStringDefinedAndNotEmpty(this.card.sipText ?? this.defaultSipText)) {
             return this.votingCardTranslationService.formatCardText(
-                this.card.sipText!,
+                this.card.sipText ?? this.defaultSipText!,
                 this.store.selectSnapshot(RoomState.players),
                 this.round.playerIds,
                 this.store.selectSnapshot(RoomState.specificPlayerId)
