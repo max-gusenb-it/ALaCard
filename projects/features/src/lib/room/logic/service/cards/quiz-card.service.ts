@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardState, DynamicRoundData, GameSettings, PollCardService, QuizCardState, RoomState, VotingResult } from "@features";
+import { CardState, DynamicRoundData, GameSettings, PollCardService, QuizCardState, RoomState, votingCardSkipValue, VotingResult } from "@features";
 import { Card, QuizCard, Utils } from "@shared";
 
 @Injectable({
@@ -47,6 +47,9 @@ export class QuizCardService extends PollCardService<QuizCard> {
                 .map(s => s.ID!)
         ); 
         results = results.sort((a, b) => {
+            if (a.subjectID === votingCardSkipValue) return 1;
+            if (b.subjectID === votingCardSkipValue) return -1;
+
             // 1. Sort by correctness
             const aIsTarget = targetSubjectIDsSet.has(a.subjectID);
             const bIsTarget = targetSubjectIDsSet.has(b.subjectID);

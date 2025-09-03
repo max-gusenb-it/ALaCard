@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CardUtils, MarkdownUtils, PollCardTranslationService, VotingResult } from "@features";
+import { CardUtils, MarkdownUtils, PollCardTranslationService, votingCardSkipValue, VotingResult } from "@features";
 import { Card, QuizCard, QuizSubject, Subject, Utils } from "@shared";
 
 @Injectable({
@@ -44,6 +44,7 @@ export class QuizCardTranslationService extends PollCardTranslationService {
     }
 
     override getResultTitle(result: VotingResult, resultIndex: number, subjects: Subject[], topResults: VotingResult[]): string {
+        if (result.subjectID === votingCardSkipValue) return this.translateService.instant("shared.components.display.it-result.skipped");
         const quizSubjects = this.castSubjects(subjects);
         const targetSubjectCount = quizSubjects
             .filter(s => s.isTarget)
