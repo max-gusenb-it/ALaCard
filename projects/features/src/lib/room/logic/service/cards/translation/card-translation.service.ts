@@ -59,7 +59,7 @@ export class CardTranslationService {
     ): string {
         let text = this.getGameText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode);
         if (isDrinkingGame && isSingleDeviceMode) {
-            const sipText = this.getSipText(card, players, playerIDs, specificPlayerID, cardState, isSingleDeviceMode, defaultSipText);
+            const sipText = this.getSipText(card, players, playerIDs, specificPlayerID, cardState, defaultSipText);
             if (Utils.isStringDefinedAndNotEmpty(sipText)) text += this.markdownBreak + sipText;
         }
         return text;
@@ -82,16 +82,12 @@ export class CardTranslationService {
         playerIDs: string[] = [],
         specificPlayerID: string = "",
         cardState: string,
-        isSingleDeviceMode: boolean = false,
         defaultSipText?: string
     ) {
         if (!Utils.isStringDefinedAndNotEmpty(card.sipText) && !Utils.isStringDefinedAndNotEmpty(defaultSipText)) return "";
         let text = "";
         if (card.settings?.delaySipText && CardUtils.isInitialCardState(cardState)) {
-            if (isSingleDeviceMode) {
-                // ToDo - return "" here
-                text = this.translateService.instant("features.room.game.game-cards.offline-sip-display.sips-on-next-card");
-            }
+            return text;
         } else {
             text = this.formatCardText(card.sipText ?? defaultSipText!, players, playerIDs, specificPlayerID);
         }
