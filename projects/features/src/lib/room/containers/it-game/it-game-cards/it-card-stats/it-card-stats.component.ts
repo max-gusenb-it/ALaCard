@@ -7,7 +7,8 @@ import {
   GameSettings,
   StaticRoundData,
   IngameDataDataService,
-  StaticRoundDataDataService
+  StaticRoundDataDataService,
+  Player
 } from '@features';
 import { 
   AngularLifecycle,
@@ -34,6 +35,7 @@ export class ItCardStatsComponent extends AngularLifecycle {
   staticRoundData: StaticRoundData;
   dynamicRoundData: DynamicRoundData;
   @Select(RoomState.gameSettings) gameSettings$: Observable<GameSettings>;
+  @Select(RoomState.players) players$: Observable<Player[]>;
 
   constructor(
     private store: Store,

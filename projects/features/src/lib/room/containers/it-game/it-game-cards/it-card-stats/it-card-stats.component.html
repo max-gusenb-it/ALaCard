@@ -8,5 +8,6 @@
     [round]="staticRoundData.round!"
     [defaultSipText]="deck.defaultSipTexts?.[card.type]"
     [styleSettings]="deck.styleSettings"
+    [players]="(players$ | async) ?? []"
   />
 </div>

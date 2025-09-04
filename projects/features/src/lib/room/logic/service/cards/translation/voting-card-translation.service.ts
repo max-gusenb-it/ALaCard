@@ -24,11 +24,13 @@ export class VotingCardTranslationService extends CardTranslationService {
         }
     }
 
-    getResultTitle(result: VotingResult, resultIndex: number, subjects: Subject[], topResults: VotingResult[]) : string {
+    getResultTitle(result: VotingResult, subjects: Subject[]) : string {
         if (result.subjectID === votingCardSkipValue) return this.translateService.instant("shared.components.display.it-result.skipped");
-        const topResultCount = topResults.length;
-        if (topResultCount === 1 && resultIndex === 0) return "";
         return subjects.find(s => s.ID === result.subjectID)!.title;
+    }
+
+    getResultProfilePicture(result: VotingResult, players: Player[]) : string {
+        return "";
     }
 
     getResultText(result: VotingResult) {

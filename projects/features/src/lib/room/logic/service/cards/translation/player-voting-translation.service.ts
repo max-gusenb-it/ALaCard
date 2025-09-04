@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
-import { VotingCardTranslationService } from "@features";
-import { Card, Utils } from "@shared";
+import { Player, VotingCardTranslationService, VotingResult } from "@features";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlayerVotingTranslationService extends VotingCardTranslationService {
-    // ToDo: remove if not needed
+    override getResultProfilePicture(result: VotingResult, players: Player[]) : string {
+        return players.find(p => p.id === result.subjectID)?.profilePicture ?? "";
+    }
 }

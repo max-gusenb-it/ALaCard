@@ -23,11 +23,12 @@
                 <it-result
                     *ngFor="let result of results; index as i"
                     [result]="result"
+                    [profilePicture]="getResultProfilePicture(result)"
                     [title]="getResultTitle(result, i)"
                     [card]="card"
                     [overrideAnonymous]="!!payToDisplayPlayerId"
-                />
-            </div>
+                    />
+                </div>
         </it-accord>
         @if (!!getSipText()) {
             <p class="text-lg"> 

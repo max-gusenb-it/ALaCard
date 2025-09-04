@@ -37,13 +37,9 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         );
     }
 
-    override getResultTitle(result: VotingResult, resultIndex: number, subjects: Subject[], topResults: VotingResult[]): string {
+    override getResultTitle(result: VotingResult, subjects: Subject[]): string {
         if (result.subjectID === votingCardSkipValue) return this.translateService.instant("shared.components.display.it-result.skipped");
         const quizSubjects = this.castSubjects(subjects);
-        const targetSubjectCount = quizSubjects
-            .filter(s => s.isTarget)
-            .length;
-        if (targetSubjectCount === 1 && resultIndex === 0) return "";
         return quizSubjects.find(s => s.ID === result.subjectID)!.title;
     }
 }

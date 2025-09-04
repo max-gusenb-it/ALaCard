@@ -16,7 +16,8 @@ import {
     GameService,
     defaultPayToDisplaySips,
     IngameDataSourceService,
-    DynamicVotingRoundData
+    DynamicVotingRoundData,
+    Player
 } from "@features";
 import {
     AngularLifecycle,
@@ -38,6 +39,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     @Input() defaultSipText?: string; 
     @Input() round: Round;
     @Input() styleSettings?: StyleSettings;
+    @Input() players: Player[] = [];
         
     get votingCardService() {
         return <VotingCardService<VotingCard>>this.cardServiceFactory.getCardService(this.card.type);
@@ -145,10 +147,12 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     getResultTitle(result: VotingResult, resultIndex: number) {
         return this.votingCardTranslationService.getResultTitle(
             result,
-            resultIndex,
-            this.votingCardService.getSubjects(this.card),
-            this.votingCardService.getTopResults(this.results)
+            this.votingCardService.getSubjects(this.card)
         );
+    }
+
+    getResultProfilePicture(result: VotingResult) {
+        return this.votingCardTranslationService.getResultProfilePicture(result, this.players)
     }
 
     displayPayToDisplay() {

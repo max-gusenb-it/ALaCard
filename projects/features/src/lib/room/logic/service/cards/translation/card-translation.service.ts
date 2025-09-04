@@ -101,6 +101,7 @@ export class CardTranslationService {
     }
 
     getTextCSSClasses(availableHeight: number, text: string) {
+        // Improvement idea => Height is currently read from wrong element (cardContent instead of cardText)
         const html = this.markdownPipe.transform(text)!.toString();
 
         const emptyLineRegex = new RegExp("<br><br>", "g");
