@@ -14,12 +14,6 @@ export class QuizCardTranslationService extends PollCardTranslationService {
         return <QuizSubject[]>subjects;
     }
 
-    override getCardTitle(card: Card) {
-        if (!Utils.isStringDefinedAndNotEmpty(card.title))
-            return this.translateService.instant("features.room.game.card.quiz");
-        return super.getCardTitle(card);
-    }
-
     protected override getSubjectsText(card: Card, cardState: string): string {
         let text = "<br><br>\n";
         const quizCard = CardUtils.castCard<QuizCard>(card);

@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { Store } from '@ngxs/store';
 import { takeUntil } from 'rxjs';
 import { RoomState, CardServiceFactory, Player, CardUtils, ColorUtils, GameCardTranslationService } from '@features';
-import { AngularLifecycle, Card, Color } from '@shared';
+import { AngularLifecycle, Card, Color, StyleSettings } from '@shared';
 
 @Component({
   selector: 'it-card',
@@ -17,7 +17,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   @Input() deckname: string = "";
   @Input() playerIds?: string[];
   @Input() customColor?: Color;
-  @Input() customTitle?: string;
+  @Input() styleSettings?: StyleSettings;
   @Input() offline?: boolean;
   @Input() hideDeckName?: boolean;
   @Input() cardState: string;
@@ -49,7 +49,6 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!this.customColor && this.card.color) this.customColor = this.card.color;
-    if (!this.customTitle && this.card.title) this.customTitle = this.card.title;
     this.changeDetectorRef.detectChanges();
   }
 
@@ -102,7 +101,7 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   getCardTitle() {
-    return this.cardTranslationService.getCardTitle(this.card);
+    return this.cardTranslationService.getCardTitle(this.card, this.styleSettings?.globalCardTitle);
   }
 
 }

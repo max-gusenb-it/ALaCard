@@ -6,12 +6,6 @@ import { Card, PollCard, Utils } from "@shared";
     providedIn: 'root'
 })
 export class PollCardTranslationService extends VotingCardTranslationService {
-    override getCardTitle(card: Card) {
-        if (!Utils.isStringDefinedAndNotEmpty(card.title))
-            return this.translateService.instant("features.room.game.card.poll");
-        return super.getCardTitle(card);
-    }
-
     override getGameText(
         card: Card,
         players: Player[],

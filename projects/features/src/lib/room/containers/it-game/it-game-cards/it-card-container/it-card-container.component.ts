@@ -106,14 +106,6 @@ export class ItCardContainerComponent extends AngularLifecycle{
     ));
   }
 
-  getCustomCardTitle() {
-    // ToDo: Brauch ma des?
-    if (!!this.deck.styleSettings) {
-      if (this.deck.styleSettings.globalCardTitle) return this.deck.styleSettings.globalCardTitle;
-    }
-    return undefined;
-  }
-
   roundState: RoundState = undefined as any;
 
   getRoundState() : RoundState {

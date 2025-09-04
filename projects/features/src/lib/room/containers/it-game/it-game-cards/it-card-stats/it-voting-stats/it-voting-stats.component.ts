@@ -23,6 +23,7 @@ import {
     AuthenticationState,
     Card,
     PopUpService,
+    StyleSettings,
     Utils,
     VotingCard
 } from "@shared";
@@ -36,6 +37,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     @Input() card: Card;
     @Input() defaultSipText?: string; 
     @Input() round: Round;
+    @Input() styleSettings?: StyleSettings;
         
     get votingCardService() {
         return <VotingCardService<VotingCard>>this.cardServiceFactory.getCardService(this.card.type);
@@ -109,7 +111,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     }
 
     getCardTitle() {
-        return this.votingCardTranslationService.getCardTitle(this.card);
+        return this.votingCardTranslationService.getCardTitle(this.card, this.styleSettings?.globalCardTitle);
     }
 
     getCardText() {

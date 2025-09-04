@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from "@angular/cor
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngxs/store";
 import { Round, CardServiceFactory, VotingCardService, ColorUtils, CardUtils, RoomState, ResponseDataDataService, ResponseDataSourceService, RoomService, GameService, votingCardSkipValue } from "@features";
-import { AngularLifecycle, Card, InformationActions, InformationState, Subject, Utils, VotingCard, } from "@shared";
+import { AngularLifecycle, Card, InformationActions, InformationState, StyleSettings, Subject, Utils, VotingCard, } from "@shared";
 import { takeUntil } from "rxjs";
 
 @Component({
@@ -12,6 +12,7 @@ import { takeUntil } from "rxjs";
 export class ItVotingFormComponent extends AngularLifecycle implements AfterViewInit {
     @Input() card: Card;
     @Input() round: Round;
+    @Input() styleSettings?: StyleSettings;
     
     get votingCardService() {
         return <VotingCardService<VotingCard>>this.cardServiceFactory.getCardService(this.card.type);
@@ -70,7 +71,7 @@ export class ItVotingFormComponent extends AngularLifecycle implements AfterView
     });
 
     getCardTitle() {
-        return this.votingCardTranslationService.getCardTitle(this.card);
+        return this.votingCardTranslationService.getCardTitle(this.card, this.styleSettings?.globalCardTitle);
     }
 
     getCardText() {

@@ -14,14 +14,20 @@ export class CardTranslationService {
 
     constructor(protected translateService: TranslateService, protected markdownPipe: MarkdownPipe) { }
 
-    getCardTitle(card: Card) {
-        if (Utils.isStringDefinedAndNotEmpty(card.title))
-            return card.title;
+    getCardTitle(card: Card, globalCardTitle?: string) {
+        if (Utils.isStringDefinedAndNotEmpty(globalCardTitle ?? card.title))
+            return globalCardTitle ?? card.title;
         switch(card.type) {
             case(CardType.GroundRule):
                 return this.translateService.instant("features.room.game.card.groundRules");
             case(CardType.FreeText):
                 return this.translateService.instant("features.room.game.card.freeText");
+            case(CardType.PlayerVoting):
+                return this.translateService.instant("features.room.game.card.playerVoting");
+            case(CardType.Poll):
+                return this.translateService.instant("features.room.game.card.poll");
+            case(CardType.Quiz):
+                return this.translateService.instant("features.room.game.card.quiz");
         }
     }
 
