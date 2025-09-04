@@ -19,7 +19,7 @@
         [playerIds]="staticRoundData.round.playerIds"
         [deckname]="deck.name"
         [customTitle]="getCustomCardTitle()"
-        [customColor]="deck.styleSettings?.cardOverwriteColor"
+        [customColor]="deck.styleSettings?.globalCardColor"
         [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
         [offline]="(roomSettings$ | async)!.singleDeviceMode"
         [cardState]="cardState"

@@ -3808,8 +3808,8 @@ export const askhole: Deck = {
         } as FreeTextCard
     ],
     styleSettings: {
-        cardOverwriteColor: "pink",
-        customCardTitle: "Askhole",
+        globalCardColor: "pink",
+        globalCardTitle: "Askhole",
         hideDeckNameOnCard: true
     },
     defaultGameSettings: [
