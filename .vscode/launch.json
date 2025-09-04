@@ -11,7 +11,7 @@
             "name": "Brave",
             "runtimeExecutable": "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe",
             "userDataDir": true,        
-            "url": "http://localhost:8100",
+            "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}"
         }
     ]
