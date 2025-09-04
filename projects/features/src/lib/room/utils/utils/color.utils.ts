@@ -33,6 +33,10 @@ export namespace ColorUtils {
                 {
                     color: "red",
                     value: "bg-red-100"
+                },
+                {
+                    color: "pink",
+                    value: "bg-pink-100"
                 }
             ]
         );
@@ -65,6 +69,10 @@ export namespace ColorUtils {
                 {
                     color: "red",
                     value: "bg-red-200"
+                },
+                {
+                    color: "pink",
+                    value: "bg-pink-200"
                 }
             ]
         );
@@ -97,6 +105,10 @@ export namespace ColorUtils {
                 {
                     color: "red",
                     value: "border-red-500 bg-red-500"
+                },
+                {
+                    color: "pink",
+                    value: "border-pink-500 bg-pink-500"
                 }
             ]
         );
@@ -129,6 +141,10 @@ export namespace ColorUtils {
                 {
                     color: "violet",
                     value: "bg-violet-200 border-violet-200 hover:border-b-violet-500 focus:border-violet-500 disabled:bg-violet-100 disabled:border-violet-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-violet-500"
+                },
+                {
+                    color: "pink",
+                    value: "bg-pink-200 border-pink-200 hover:border-b-pink-500 focus:border-pink-500 disabled:bg-pink-100 disabled:border-pink-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-pink-500"
                 }
             ]
         );

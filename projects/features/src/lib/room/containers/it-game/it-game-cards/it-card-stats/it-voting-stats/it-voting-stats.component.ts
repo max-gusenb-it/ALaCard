@@ -60,7 +60,7 @@ export class ItVotingStatsComponent extends AngularLifecycle implements AfterVie
     }
     
     get cardColor()  {
-        return CardUtils.getCardColor(this.card);
+        return this.styleSettings?.globalCardColor ?? CardUtils.getCardColor(this.card);
     }
 
     get drinkingGame() {

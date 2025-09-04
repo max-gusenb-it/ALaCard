@@ -16,10 +16,8 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   @Input() card: Card;
   @Input() deckname: string = "";
   @Input() playerIds?: string[];
-  @Input() customColor?: Color;
   @Input() styleSettings?: StyleSettings;
   @Input() offline?: boolean;
-  @Input() hideDeckName?: boolean;
   @Input() cardState: string;
   @Input() defaultSipText?: string;
 
@@ -35,6 +33,10 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
     return this.cardServiceFactory.getCardTranslationService(this.card.type);
   }
 
+  get cardColor() : Color {
+    return this.styleSettings?.globalCardColor ?? CardUtils.getCardColor(this.card);
+  }
+
   constructor(
     private store: Store,
     private cardServiceFactory: CardServiceFactory,
@@ -48,18 +50,15 @@ export class ItCardComponent extends AngularLifecycle implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (!this.customColor && this.card.color) this.customColor = this.card.color;
     this.changeDetectorRef.detectChanges();
   }
 
   getBorderCSSClasses() {
-    const color = CardUtils.getCardColor(this.card);
-    return ColorUtils.getCardBorderCSS(color);
+    return ColorUtils.getCardBorderCSS(this.cardColor);
   }
 
   getTitleBackgroundCSSClasses() {
-    const color = CardUtils.getCardColor(this.card);
-    return ColorUtils.getBackground200CSS(color);
+    return ColorUtils.getBackground200CSS(this.cardColor);
   }
 
   getCardText() {

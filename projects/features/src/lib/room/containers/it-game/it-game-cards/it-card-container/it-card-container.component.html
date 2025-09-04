@@ -19,8 +19,6 @@
         [playerIds]="staticRoundData.round.playerIds"
         [deckname]="deck.name"
         [styleSettings]="deck.styleSettings"
-        [customColor]="deck.styleSettings?.globalCardColor"
-        [hideDeckName]="deck.styleSettings?.hideDeckNameOnCard"
         [offline]="(roomSettings$ | async)!.singleDeviceMode"
         [cardState]="cardState"
         [defaultSipText]="deck.defaultSipTexts?.[card.type]"

@@ -72,3 +72,9 @@
     @extend .button-states;
     @apply bg-orange-500 text-white; 
 }
+
+.pink-button {
+    @extend #button;
+    @extend .button-states;
+    @apply bg-pink-500 text-white; 
+}
