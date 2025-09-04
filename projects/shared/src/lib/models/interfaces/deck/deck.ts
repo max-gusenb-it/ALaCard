@@ -1,4 +1,5 @@
 import { DefaultGameSetting } from "./default-game-setting";
+import { GroundRule } from "./ground-rule";
 import { StyleSettings } from "./style-settings";
 import { Card, CardType } from "@shared";
 
@@ -7,7 +8,7 @@ export interface Deck {
     description: string;
     icon: string;
 
-    groundRules?: string[];
+    groundRules?: GroundRule[];
     cards: Card[];
     defaultSipTexts?: { [key in CardType]?: string };
 

@@ -3,7 +3,7 @@
     class="flex grow"
     *ngIf="staticRoundData.round === null"
     [deckname]="(deckname$ | async)!"
-    [groundRules]="room.game!.deck!.groundRules!"
+    [groundRules]="groundRules"
   ></it-game-rules>
   <it-game-cards
     class="flex grow"

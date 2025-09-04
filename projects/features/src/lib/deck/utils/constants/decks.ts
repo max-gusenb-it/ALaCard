@@ -8,6 +8,15 @@ export const developmentDeck: Deck = {
     icon: "💻",
     name: "Development Deck",
     description: "Very funny Party Game for your whole family",
+    groundRules: [
+        {
+            text: "Saufts eich gscheid au",
+            drinkingRule: true
+        },
+        {
+            text: "Viel Spaß beim Spielen :*"
+        }
+    ],
     defaultSipTexts: {
         [CardType.PlayerVoting]: "Most voted player drinks 1 sip 🍺",
         [CardType.Poll]: "Distribute 1 sip if you voted the top subject 🍾",
@@ -17,10 +26,11 @@ export const developmentDeck: Deck = {
 {
             text: "Who of you still pees in the shower? It's okay, i’m doing it too 🛁",
             sipText: "Okay you disgusting pieces of shit. Everyone who voted Yes has to drink 3 sips 🤮",
-            type: CardType.Poll,
+            type: CardType.Quiz,
             subjects: [
                 {
-                    title: "Yes ✅" 
+                    title: "Yes ✅",
+                    isTarget: true
                 },
                 {
                     title: "No ❎"
@@ -29,7 +39,7 @@ export const developmentDeck: Deck = {
             settings: {
                 delaySipText: true
             }
-        } as PollCard,
+        } as QuizCard,
     ],
     flags: [],
     requiredPlayers: {
@@ -69,12 +79,6 @@ export const partyDeckWithRules: Deck = {
 
             }
         } as PlayerVotingCard
-    ],
-    groundRules: [
-        "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
-        "The winner is the last one standing :*",
-        "Don't drink too much ;)",
-        "Don't forget to **have fun** :)"
     ],
     requiredPlayers: {
         playerCount: 1,
@@ -150,12 +154,6 @@ export const partyDeckWithRulesAndSp: Deck = {
             }
         } as PlayerVotingCard
     ],
-    groundRules: [
-        "- No drinking with the left hand  \n- No one is allowed to say the words: ’yes’, ‘no’ and ‘you’  \n- Rule violation = 1 sip",
-        "The winner is the last one standing :*",
-        "Don't drink too much ;)",
-        "Don't forget to **have fun** :)"
-    ],
     requiredPlayers: {
         playerCount: 2,
         isExactCount: false
@@ -226,6 +224,16 @@ export const leggitPartyDeck: Deck = {
     icon: "🎊",
     name: "aLaCard",
     description: "Very funny Party Game",
+    groundRules: [
+        {
+            text: "**Player Voting Cards**  \nIf the same player is voted by everyone, the sips are doubled! ✌️",
+            drinkingRule: true
+        },
+        {
+            text: "**General**  \nIf everyone skips, everyone has to take one sip 😘",
+            drinkingRule: true
+        }
+    ],
     defaultSipTexts: {
         [CardType.PlayerVoting]: "Most voted player drinks 1 sip 🍺",
         [CardType.Poll]: "Distribute 1 sip if you voted the top subject 🍾",
@@ -2884,10 +2892,18 @@ export const askhole: Deck = {
     name: "askhole",
     description: "Talk about things you normally wouldn't by answering questions ranging from interesting to very weird",
     groundRules: [
-        "Each round a new question is drawn from the deck",
-        "Every player can answer the question but it is not mandatory",
-        "After that a new card is drawn. There is no winner, it's just about fun :)",
-        "Be sure to support the original askhole creators!  \nhttp://web.askhole.io/"
+        { 
+            text: "Each round a new question is drawn from the deck"
+        },
+        { 
+            text: "Every player can answer the question but it is not mandatory"
+        },
+        { 
+            text: "After that a new card is drawn. There is no winner, it's just about fun :)"
+        },
+        { 
+            text: "Be sure to support the original askhole creators!  \nhttp://web.askhole.io/"
+        },
     ],
     cards: [
         {
@@ -4085,8 +4101,12 @@ export const testingDeck: Deck = {
     name: "Testing Deck",
     description: "Test the new specific player functionality & follow up card in a birthday themed deck",
     groundRules: [
-        "**Specific Player**  \nChoose a player of your party to fill a specific spot in the cards",
-        "**Follow Up Cards**  \nCards that consist of multiple cards which can accour with a delay",
+        {
+            text: "**Specific Player**  \nChoose a player of your party to fill a specific spot in the cards",
+        },
+        {
+            text: "**Follow Up Cards**  \nCards that consist of multiple cards which can accour with a delay",
+        }
     ],
     cards: [
         {

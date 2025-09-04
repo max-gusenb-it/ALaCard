@@ -16,6 +16,14 @@ export class ItGameComponent extends AngularLifecycle {
   @Select(RoomState.deckname) deckname$: Observable<string>;
   @Select(RoomState.room) room$: Observable<Room>;
 
+  get groundRules() {
+    let rules = this.room.game?.deck?.groundRules ?? [];
+    if (!this.room.game?.settings.drinkingGame) {
+      rules = rules.filter(r => !r.drinkingRule);
+    }
+    return rules.map(r => r.text) ?? [];
+  }
+
   constructor(
     private staticRoundDataDataService: StaticRoundDataDataService
   ) {

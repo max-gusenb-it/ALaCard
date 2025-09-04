@@ -148,7 +148,13 @@ export class GameService {
             playedCardIndexes: [],
             followUpCardSchedules: []
         };
-        if (!!!deck.groundRules || deck.groundRules.length === 0) {
+        let rulesExist = false;
+        if (gameSettings.drinkingGame) {
+            rulesExist = !!deck.groundRules && deck.groundRules.length > 0;
+        } else {
+            rulesExist = !!deck.groundRules?.find(r => !r.drinkingRule);
+        }
+        if (!rulesExist) {
             staticRoundData.round = this.createGameRound(deck, staticRoundData, players, gameSettings);
             staticRoundData.playedCardIndexes = [staticRoundData.round.cardIndex]
         }
