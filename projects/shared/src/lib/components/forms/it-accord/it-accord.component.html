@@ -4,7 +4,8 @@
     (click)="toggleState()"
     *ngIf="heading"
   >
-    <h4 [innerHTML]="heading"></h4>
+    @if(headingType === 'h4') { <h4 [innerHTML]="heading"></h4> }
+    @if(headingType === 'h3') { <h3 [innerHTML]="heading"></h3> }
     <it-icon
       class="transition-all ease-out"
       [ngClass]="{

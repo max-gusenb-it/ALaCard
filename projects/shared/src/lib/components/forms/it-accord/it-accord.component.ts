@@ -12,6 +12,7 @@ export class ItAccordComponent extends ItSelectableComponent implements AfterVie
 
   @Input() heading: string = "";
   @Input() icon?: string;
+  @Input() headingType: 'h3' | 'h4' = 'h4';
 
   ngAfterViewInit(): void {
     setTimeout(() => {
